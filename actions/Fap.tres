@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://ca8rrxibg12sg"]
+
+[ext_resource type="Texture2D" uid="uid://ccyi8n3i3daxa" path="res://actions/actiontexture/heal.png" id="1_5vclh"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_qeekn"]
+
+[resource]
+script = ExtResource("2_qeekn")
+name = "Fap"
+description = "Inflige des dégâts à un ennemi."
+icon = ExtResource("1_5vclh")
+cost_action_points = -2
+Dmg = 1
+target_type = "enemy"
+usable_when_horny = true
+needtarget = false
+Actiontype = "attack"
+cost = 10
+cooldown = 2
+currentcooldown = 0
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

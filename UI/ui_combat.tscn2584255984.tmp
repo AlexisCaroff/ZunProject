@@ -1,0 +1,110 @@
+[gd_scene load_steps=5 format=3 uid="uid://h8pqs7tabdxj"]
+
+[ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_8flqu"]
+[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="1_32lil"]
+[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="1_j6rr1"]
+[ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="10_x8qlv"]
+
+[node name="CombatInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8flqu")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -165.0
+offset_top = 660.0
+offset_right = 1969.0
+offset_bottom = 1096.0
+mouse_filter = 2
+color = Color(0.196078, 0.196078, 0.196078, 0.654902)
+
+[node name="ActionPanel" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 761.0
+offset_right = 603.84
+offset_bottom = 950.0
+scale = Vector2(1.245, 1.245)
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Action1" type="Button" parent="ActionPanel"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_j6rr1")
+theme_override_font_sizes/font_size = 40
+text = "Action"
+icon = ExtResource("1_32lil")
+icon_alignment = 1
+vertical_icon_alignment = 2
+
+[node name="Action2" type="Button" parent="ActionPanel"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_j6rr1")
+theme_override_font_sizes/font_size = 40
+text = "Action"
+icon = ExtResource("1_32lil")
+icon_alignment = 1
+vertical_icon_alignment = 2
+
+[node name="Action3" type="Button" parent="ActionPanel"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_j6rr1")
+theme_override_font_sizes/font_size = 40
+text = "Action"
+icon = ExtResource("1_32lil")
+icon_alignment = 1
+vertical_icon_alignment = 2
+
+[node name="Action4" type="Button" parent="ActionPanel"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_j6rr1")
+theme_override_font_sizes/font_size = 40
+text = "Action"
+icon = ExtResource("1_32lil")
+icon_alignment = 1
+vertical_icon_alignment = 2
+
+[node name="HeroesPanel" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 340.0
+offset_right = 1092.0
+offset_bottom = 597.0
+mouse_filter = 2
+
+[node name="TurnOrderPanel" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 28.0
+offset_right = 1921.0
+offset_bottom = 93.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Charaname" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 680.0
+offset_right = 660.0
+offset_bottom = 760.0
+theme_override_font_sizes/font_size = 40
+text = "Hero Name"
+
+[node name="contexte" type="Label" parent="."]
+layout_mode = 0
+offset_left = 997.0
+offset_top = 680.0
+offset_right = 1641.0
+offset_bottom = 760.0
+theme_override_font_sizes/font_size = 40
+text = "ce qu'il se passe"
+
+[node name="CombatManager" parent="." instance=ExtResource("10_x8qlv")]
+
+[connection signal="pressed" from="ActionPanel/Action1" to="CombatManager" method="_on_action_1_pressed"]

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bna2dtafe0scg"]
+
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="1_27lg1"]
+
+[node name="Skill" type="Node2D"]
+script = ExtResource("1_27lg1")
+target_type = "ally"

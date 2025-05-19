@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bpsapqkry8g3q"]
+
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="1_jdsf0"]
+[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="1_uywaa"]
+
+[resource]
+script = ExtResource("1_jdsf0")
+name = "Attaque basique"
+description = "Inflige des dégâts à un ennemi."
+icon = ExtResource("1_uywaa")
+cost_action_points = 1
+Dmg = 20
+target_type = "enemy"
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://coo7xgbptegeh"]
+
+[ext_resource type="Script" uid="uid://bdqvtejbbclo5" path="res://Spawner.gd" id="1_q6r6c"]
+[ext_resource type="Texture2D" uid="uid://cucac842tuxe5" path="res://fulltest2.png" id="1_wtcfe"]
+[ext_resource type="Texture2D" uid="uid://ckl4flgwvepqd" path="res://fulltest11.png" id="2_0e48y"]
+[ext_resource type="PackedScene" uid="uid://bywdomk2q0ugr" path="res://combat_manager.tscn" id="6_kdubu"]
+
+[node name="SceneCombat" type="Node2D"]
+script = ExtResource("1_q6r6c")
+
+[node name="Fulltest2" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_wtcfe")
+
+[node name="Fulltest11" type="Sprite2D" parent="."]
+modulate = Color(0.629675, 0.629675, 0.629675, 1)
+position = Vector2(960, 540)
+texture = ExtResource("2_0e48y")
+
+[node name="combatManager" parent="." instance=ExtResource("6_kdubu")]
+
+[node name="Button" type="Button" parent="."]
+offset_left = 855.0
+offset_top = 237.0
+offset_right = 1313.0
+offset_bottom = 357.0
+theme_override_font_sizes/font_size = 40
+text = "Action"
