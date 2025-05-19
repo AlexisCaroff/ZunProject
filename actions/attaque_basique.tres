@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bpsapqkry8g3q"]
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://bpsapqkry8g3q"]
 
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="1_jdsf0"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="1_uywaa"]
@@ -14,4 +14,7 @@ target_type = "enemy"
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"
+cost = 0
+cooldown = 2
+currentcooldown = 0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

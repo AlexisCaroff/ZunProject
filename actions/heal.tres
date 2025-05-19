@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bptddsqeaq28h"]
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://bptddsqeaq28h"]
 
 [ext_resource type="Texture2D" uid="uid://ccyi8n3i3daxa" path="res://actions/actiontexture/heal.png" id="1_1rdmq"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_bcdhv"]
@@ -14,4 +14,7 @@ target_type = "ally"
 usable_when_horny = false
 needtarget = true
 Actiontype = "heal"
+cost = 0
+cooldown = 2
+currentcooldown = 0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
