@@ -10,7 +10,7 @@ var ui: Control = null
 @export var ENEMY_START_POS = Vector2(1200, 600)
 @export var SPACING_Y = 250
 var pending_skill: Skill = null
-
+@onready var ResultScreen_label= $"../ResultScreen"
 
 const HERO_SCENES = [
 	preload("res://characters/CharacterTestHero1.tscn"),
@@ -65,6 +65,7 @@ func build_turn_queue(characters: Array[Character]) -> Array[Character]:
 	return queue
 
 func next_turn():
+	_check_victory()
 	if turn_queue.is_empty():
 		turn_queue = build_turn_queue(heroes + enemies)
 		ui.update_turn_queue_ui(turn_queue)
@@ -73,6 +74,12 @@ func next_turn():
 	
 	if current_character.is_dead():
 		next_turn()
+		return
+	if current_character.stun==true:
+		current_character.stun=false
+		current_character.sprite.self_modulate=Color(1,1,1,)
+		next_turn()
+		
 		return
 	if current_character.is_player_controlled:
 		await get_tree().process_frame
@@ -85,6 +92,18 @@ func next_turn():
 		current_character.play_ai_turn(heroes,enemies)
 		
 		next_turn()
+func _check_victory():
+	for enemy in enemies:
+		if not enemy.dead:
+			return # au moins un ennemi vivant, on sort
+	# Tous les ennemis sont morts
+	_show_victory()
+	
+func _show_victory():
+	ResultScreen_label.text = "Victoire !"
+	ResultScreen_label.modulate = Color(1,1,1,1)
+	print("Tous les ennemis sont vaincus.")
+	
 
 func use_skill(index: int):
 	var skill = current_character.get_skill(index)
@@ -102,7 +121,7 @@ func get_current_character() -> Character:
 	
 func start_target_selection(skill: Skill):
 	ui.log("Sélectionnez une cible pour %s" % skill.name)
-	if skill.target_type == "enemy":
+	if skill.the_target_type == skill.target_type.ENNEMY:
 		for enemy in enemies:
 			enemy.set_targetable(true)
 		
@@ -110,7 +129,18 @@ func start_target_selection(skill: Skill):
 			if enemy.target_selected.is_connected(self._on_target_selected):
 				enemy.target_selected.disconnect(self._on_target_selected)
 			enemy.target_selected.connect(_on_target_selected)
-	elif skill.target_type == "ally":
+	
+	elif skill.the_target_type == skill.target_type.All_ENNEMY:
+		for enemy in enemies:
+			await current_character.animate_attack(enemy)
+			pending_skill.use(enemy)
+			enemy.update_ui()
+			ui.log("%s utilise %s sur %s" % [current_character.name, pending_skill.name, enemy.name])
+		pending_skill = null
+		next_turn()
+	
+	
+	elif skill.the_target_type == skill.target_type.ALLY:
 		for ally in heroes:
 			ally.set_targetable(true)
 		
@@ -118,6 +148,22 @@ func start_target_selection(skill: Skill):
 			if ally.target_selected.is_connected(self._on_target_selected):
 				ally.target_selected.disconnect(self._on_target_selected)
 			ally.target_selected.connect(_on_target_selected)
+	
+	elif skill.the_target_type == skill.target_type.ALL_ALLY:
+		for ally in heroes:
+			await current_character.animate_attack(ally)
+			pending_skill.use(ally)
+			ally.update_ui()
+			ui.log("%s utilise %s sur %s" % [current_character.name, pending_skill.name, ally.name])
+		pending_skill = null
+		next_turn()
+	
+	elif skill.the_target_type == skill.target_type.SELF:
+		pending_skill.use(current_character)
+		current_character.update_ui()
+		ui.log("%s utilise %s sur %s" % [current_character.name, pending_skill.name, current_character.name])
+		pending_skill = null
+		next_turn()
 		
 func _on_target_selected(target: Character):
 	await current_character.animate_attack(target)
@@ -127,8 +173,8 @@ func _on_target_selected(target: Character):
 	pending_skill = null
 	next_turn()
 	stop_target_selection()
-	
-	
+
+
 func stop_target_selection():
 	for enemy in enemies:
 		enemy.set_targetable(false)

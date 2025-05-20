@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://cyqcgi4xvqvk2"]
+
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_r0oxv"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_r0oxv"]
+[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="3_yk0rw"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_xfd55"]
+
+[sub_resource type="Resource" id="Resource_mdx25"]
+script = ExtResource("2_r0oxv")
+affected_stat = 0
+amount = 100
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[resource]
+script = ExtResource("4_xfd55")
+name = "Buff attack"
+description = "buff l'attaque du porteur"
+icon = ExtResource("3_yk0rw")
+cost_action_points = 1
+Dmg = 20
+the_target_type = 2
+two_target_Type = false
+the_second_target_type = 0
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+currentcooldown = 0
+effects = Array[ExtResource("1_r0oxv")]([SubResource("Resource_mdx25")])
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

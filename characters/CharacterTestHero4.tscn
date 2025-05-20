@@ -1,21 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbtxyhyysj65n"]
+[gd_scene load_steps=11 format=3 uid="uid://dbtxyhyysj65n"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i8qvq"]
 [ext_resource type="Texture2D" uid="uid://cvcdlt3vbbkqj" path="res://characters/charatexture/CroiséBody.png" id="2_i8qvq"]
 [ext_resource type="Texture2D" uid="uid://b23pftdqkb2it" path="res://characters/characterInitiative/croiséIni.png" id="3_3re6g"]
+[ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_eg61m"]
 [ext_resource type="Resource" uid="uid://bpsapqkry8g3q" path="res://actions/attaque_basique.tres" id="4_dj1ax"]
 [ext_resource type="Resource" uid="uid://ca8rrxibg12sg" path="res://actions/Fap.tres" id="4_ghs3y"]
 [ext_resource type="Texture2D" uid="uid://j0hygaxu62ja" path="res://characters/charatexture/PriestBody.png" id="5_3re6g"]
 [ext_resource type="Resource" uid="uid://bptddsqeaq28h" path="res://actions/heal.tres" id="5_hcyg2"]
+[ext_resource type="Resource" uid="uid://doydfjjogegnd" path="res://actions/StunAttaque.tres" id="6_y4wav"]
 [ext_resource type="Texture2D" uid="uid://bbonm2lf1barv" path="res://UI/selector.png" id="7_dj1ax"]
 
 [node name="CharacterTestHero4" type="Node2D"]
 script = ExtResource("1_i8qvq")
 portrait_texture = ExtResource("2_i8qvq")
+dead_portrait_texture = ExtResource("3_eg61m")
 initiative_icon = ExtResource("3_3re6g")
 Charaname = "Tank"
 initiative = 4
-skill_resources = Array[Resource]([ExtResource("4_ghs3y"), ExtResource("4_dj1ax"), ExtResource("4_dj1ax"), ExtResource("5_hcyg2")])
+skill_resources = Array[Resource]([ExtResource("4_ghs3y"), ExtResource("6_y4wav"), ExtResource("4_dj1ax"), ExtResource("5_hcyg2")])
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
 offset_left = -133.0

@@ -10,7 +10,12 @@ extends Control
 @onready var log_panel = $contexte
 @onready var combat_manager = $CombatManager 
 @onready var turnOrderPanel = $TurnOrderPanel
-
+@onready var cooldownLabel = [
+	$ActionPanel/Action1/cooldownA1, 
+	$ActionPanel/Action2/cooldownA2,
+	$ActionPanel/Action3/cooldownA3,
+	$ActionPanel/Action4/cooldownA4
+]
 
 func _ready():
 	var current_character = combat_manager.get_current_character()
@@ -45,11 +50,15 @@ func update_ui_for_current_character(character: Character):
 	for i in range(skill_buttons.size()):
 		var button = skill_buttons[i]
 		var skill = character.get_skill(i)
-
+		var cooldownlabel = cooldownLabel[i]
 		if skill != null:
 			button.text = skill.name
 			button.disabled = !skill.can_use()
 			button.icon = skill.icon
+			if skill.current_cooldown > 0:
+				cooldownlabel.text = "%d" % [skill.current_cooldown]
+			else :
+				cooldownlabel.text = " "
 
 			var index = i  # capture locale de la bonne valeur
 			button.pressed.connect(

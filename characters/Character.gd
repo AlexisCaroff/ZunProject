@@ -4,6 +4,7 @@ class_name Character
 
 # --- Données visuelles
 @export var portrait_texture: Texture2D
+@export var dead_portrait_texture: Texture2D
 @export var initiative_icon: Texture2D
 @onready var name_label = $name
 @onready var hp_label = $HP
@@ -14,13 +15,24 @@ var combat_manager: Node = null
 
 @export var Charaname: String = "name"
 # --- Stats de combat
+@export var base_attack: int = 10
+@export var base_defense: int = 5
+@export var base_willpower: int = 5
+@export var base_initiative: int = 1
 @export var attack: int = 10
 @export var defense: int = 5
 @export var willpower: int = 5
 @export var initiative: int = 1
-@export var evasion: int = 5
+
+@export var base_evasion: int = 5
 @export var action_points: int = 2
 @onready var Selector:TextureRect =$Selector
+
+#etat
+@export var stun : bool = false
+
+var buffs: Array[Buff] = []
+
 # --- Jauges
 @export var max_stamina: int = 100
 @export var max_stress: int = 100
@@ -60,13 +72,48 @@ func _ready():
 		inst.owner = self
 		skills.append(inst)
 		#print("Compétence chargée : ", inst.name)
+func update_stats():
+	# Reset des stats modifiées
+	attack = base_attack
+	defense = base_defense
+	initiative = base_initiative
+	willpower = base_willpower
 
+	# Appliquer les buffs actifs
+	for buff in buffs:
+		buff.apply_to(self)
+	# Tu peux ajouter d'autres stats ici
 func update_ui():
 	hp_label.text = "HP: %d / %d" % [current_stamina, max_stamina]
 	stress_label.text = "Stress: %d / %d" % [current_stress, max_stress]
 	horny_label.text = "Horny: %d / %d" % [current_horniness, max_horniness]
 	
+func add_buff(buff: Buff):
+	buffs.append(buff.duplicate()) # On duplique pour éviter de modifier l’original
+	update_stats()
 	
+func update_buffs() -> void:
+	for buff in buffs:
+		buff.duration -= 1
+	buffs = buffs.filter(func(b): return b.duration > 0)
+	update_stats()
+	
+
+func get_stat(stat_enum: int) -> int:
+	var base_value = 0
+	match stat_enum:
+		Buff.Stat.ATTACK: base_value = base_attack
+		Buff.Stat.DEFENSE: base_value = base_defense
+		Buff.Stat.SPEED: base_value = base_initiative
+		_:
+			print("Stat inconnue : ", stat_enum)
+	
+	for buff in buffs:
+		if buff.stat == stat_enum:
+			base_value += buff.amount
+	
+	return base_value
+		
 func get_skill(index: int) -> Skill:
 	if index >= 0 and index < skills.size():
 		return skills[index]
@@ -74,7 +121,7 @@ func get_skill(index: int) -> Skill:
 		push_error("Skill index %d out of bounds for character %s" % [index, name])
 		return null
 func is_dead() -> bool:
-	return current_stamina <= 0
+	return dead
 
 func can_act() -> bool:
 	return not is_dead() and current_stress < 100 and current_horniness < 100
@@ -96,8 +143,21 @@ func play_ai_turn(heroes : Array, ennemies :Array):
 		skills[0].use(heroes[0])
 		animate_attack(heroes[0])
 
+func reduce_cooldowns() -> void:
+	for skill in skills:
+		if skill.current_cooldown > 0:
+			skill.current_cooldown -= 1	
 	
-
+func end_turn():
+	for buff in buffs:
+		buff.duration -= 1
+	buffs = buffs.filter(func(b): return b.duration > 0)
+	update_buffs()
+	reduce_cooldowns()
+	update_stats()
+	
+	
+	
 		
 func select_as_target():
 	print("Cible sélectionnée : ", self.name)

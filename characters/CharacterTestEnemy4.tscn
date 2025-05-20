@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://jc1bbpflus0q"]
+[gd_scene load_steps=8 format=3 uid="uid://jc1bbpflus0q"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_gjeux"]
 [ext_resource type="Texture2D" uid="uid://frq4grv1dvoo" path="res://characters/charatexture/cultisteBody.png" id="2_a2buf"]
+[ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_8umix"]
 [ext_resource type="Texture2D" uid="uid://b0q8mhrqooms" path="res://characters/characterInitiative/cultisteIni.png" id="3_yaddt"]
 [ext_resource type="Resource" uid="uid://bpsapqkry8g3q" path="res://actions/attaque_basique.tres" id="4_8umix"]
 [ext_resource type="Texture2D" uid="uid://j0hygaxu62ja" path="res://characters/charatexture/PriestBody.png" id="5_a2buf"]
@@ -10,6 +11,7 @@
 [node name="CharacterTestennemie4" type="Node2D"]
 script = ExtResource("1_gjeux")
 portrait_texture = ExtResource("2_a2buf")
+dead_portrait_texture = ExtResource("3_8umix")
 initiative_icon = ExtResource("3_yaddt")
 skill_resources = Array[Resource]([ExtResource("4_8umix"), ExtResource("4_8umix"), ExtResource("4_8umix"), ExtResource("5_yaddt")])
 is_player_controlled = false

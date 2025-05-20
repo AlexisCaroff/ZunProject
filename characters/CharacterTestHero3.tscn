@@ -1,23 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8lhes1w5ga1t"]
+[gd_scene load_steps=10 format=3 uid="uid://b8lhes1w5ga1t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_0i81g"]
 [ext_resource type="Texture2D" uid="uid://cvcdlt3vbbkqj" path="res://characters/charatexture/CroiséBody.png" id="2_0i81g"]
+[ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_jldwf"]
 [ext_resource type="Texture2D" uid="uid://b23pftdqkb2it" path="res://characters/characterInitiative/croiséIni.png" id="3_q73b6"]
 [ext_resource type="Resource" uid="uid://ca8rrxibg12sg" path="res://actions/Fap.tres" id="4_bd0xg"]
 [ext_resource type="Resource" uid="uid://bpsapqkry8g3q" path="res://actions/attaque_basique.tres" id="4_p7vrs"]
+[ext_resource type="Resource" uid="uid://cyqcgi4xvqvk2" path="res://actions/buffAttack.tres" id="5_bd0xg"]
 [ext_resource type="Texture2D" uid="uid://j0hygaxu62ja" path="res://characters/charatexture/PriestBody.png" id="5_q73b6"]
 [ext_resource type="Texture2D" uid="uid://bbonm2lf1barv" path="res://UI/selector.png" id="7_p7vrs"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbsfb"]
-size = Vector2(176, 270)
 
 [node name="CharacterTestHero3" type="Node2D"]
 script = ExtResource("1_0i81g")
 portrait_texture = ExtResource("2_0i81g")
+dead_portrait_texture = ExtResource("3_jldwf")
 initiative_icon = ExtResource("3_q73b6")
 Charaname = "Warrior1"
 attack = 12
-skill_resources = Array[Resource]([ExtResource("4_bd0xg"), ExtResource("4_p7vrs"), ExtResource("4_p7vrs"), ExtResource("4_p7vrs")])
+skill_resources = Array[Resource]([ExtResource("4_bd0xg"), ExtResource("5_bd0xg"), ExtResource("4_p7vrs"), ExtResource("4_p7vrs")])
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
 offset_left = -133.0
@@ -64,12 +64,6 @@ mouse_filter = 2
 texture = ExtResource("7_p7vrs")
 expand_mode = 1
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-5, -125)
-shape = SubResource("RectangleShape2D_jbsfb")
-
 [node name="Button" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
 offset_left = -123.0
@@ -77,8 +71,6 @@ offset_top = -325.0
 offset_right = 110.0
 offset_bottom = 57.0
 
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]

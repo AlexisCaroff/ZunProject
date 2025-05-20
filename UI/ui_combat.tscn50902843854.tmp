@@ -42,11 +42,6 @@ icon = ExtResource("1_32lil")
 icon_alignment = 1
 vertical_icon_alignment = 2
 
-[node name="cooldownA1" type="Label" parent="ActionPanel/Action1"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="Action2" type="Button" parent="ActionPanel"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_j6rr1")
@@ -55,12 +50,6 @@ text = "Action"
 icon = ExtResource("1_32lil")
 icon_alignment = 1
 vertical_icon_alignment = 2
-
-[node name="cooldownA2" type="Label" parent="ActionPanel/Action2"]
-layout_mode = 0
-offset_left = 0.413666
-offset_right = 40.4137
-offset_bottom = 23.0
 
 [node name="Action3" type="Button" parent="ActionPanel"]
 layout_mode = 2
@@ -71,12 +60,6 @@ icon = ExtResource("1_32lil")
 icon_alignment = 1
 vertical_icon_alignment = 2
 
-[node name="cooldownA3" type="Label" parent="ActionPanel/Action3"]
-layout_mode = 0
-offset_left = 1.5502
-offset_right = 41.5502
-offset_bottom = 23.0
-
 [node name="Action4" type="Button" parent="ActionPanel"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_j6rr1")
@@ -85,12 +68,6 @@ text = "Action"
 icon = ExtResource("1_32lil")
 icon_alignment = 1
 vertical_icon_alignment = 2
-
-[node name="cooldownA4" type="Label" parent="ActionPanel/Action4"]
-layout_mode = 0
-offset_left = 0.2771
-offset_right = 40.2771
-offset_bottom = 23.0
 
 [node name="HeroesPanel" type="HBoxContainer" parent="."]
 visible = false
