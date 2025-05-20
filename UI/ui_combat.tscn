@@ -141,4 +141,11 @@ text = "Victoire !"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="charaPortrait" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 549.0
+offset_right = 184.0
+offset_bottom = 683.0
+
 [connection signal="pressed" from="ActionPanel/Action1" to="CombatManager" method="_on_action_1_pressed"]

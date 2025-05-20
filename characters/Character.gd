@@ -128,9 +128,13 @@ func can_act() -> bool:
 	
 	
 func set_targetable(state: bool):
-		is_targetable = state
-		modulate = Color(1, 1, 1) if state else Color(0.5, 0.5, 0.5)
-		
+	is_targetable = state
+	if state :
+		sprite.modulate = Color(1, 1, 1)
+	else:
+		sprite.modulate = Color(0.5, 0.5, 0.5)
+		print(self.name+"not targetable")
+	
 		
 func _input_event(viewport, event, shape_idx):
 	if is_targetable and event is InputEventMouseButton and event.pressed:
@@ -142,6 +146,7 @@ func play_ai_turn(heroes : Array, ennemies :Array):
 	if skills.size() > 0:
 		skills[0].use(heroes[0])
 		animate_attack(heroes[0])
+	resetVisuel()
 
 func reduce_cooldowns() -> void:
 	for skill in skills:
@@ -152,8 +157,10 @@ func end_turn():
 	for buff in buffs:
 		buff.duration -= 1
 	buffs = buffs.filter(func(b): return b.duration > 0)
+	resetVisuel()
 	update_buffs()
 	reduce_cooldowns()
+	
 	update_stats()
 	
 	
@@ -177,23 +184,44 @@ func _on_button_mouse_entered() -> void:
 
 
 func _on_button_mouse_exited() -> void:
-		Selector.self_modulate= Color(1.0,1.0,1.0,0.0)
+	Selector.self_modulate= Color(.0,1.0,1.0,0.0)
 
-
+func resetVisuel()-> void:
+	sprite.modulate=Color(1.0,1.0,1.0,1.0)
+	self.scale = Vector2(1.0, 1.0)
+	self.z_index = 1
+	
+	
+func animate_start_Turn():
+	var tween := create_tween() as Tween
+	var normal_size = self.scale
+	var big_size= Vector2(1.0,1.1) 
+	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
+	tween.tween_property(self, "scale", normal_size, 0.2)
+	
+	await tween.finished
+	
 func animate_attack(target: Character):
 
 
 	# Création d'un nouveau Tween
 	var tween := create_tween() as Tween
+	var scaletween := create_tween() as Tween
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
+	self.z_index = 10 
 
 	var start_pos = position
 	var direction = (target.global_position - global_position).normalized()
-	var offset = direction * 50
+	var offset = direction * 100
 	var attack_pos = start_pos + offset
+	var normal_size = self.scale
+	var big_size= Vector2(1.2,1.2) 
 
+	scaletween.tween_property(self, "scale", big_size, 0.2)
 	tween.tween_property(self, "position", attack_pos, 0.2)
+	
 	tween.tween_property(self, "position", start_pos, 0.2).set_delay(0.2)
+	scaletween.tween_property(self, "scale", normal_size, 0.2).set_delay(0.2)
 
 	await tween.finished

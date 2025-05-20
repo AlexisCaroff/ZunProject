@@ -27,6 +27,6 @@ needtarget = true
 Actiontype = "attack"
 cost = 0
 cooldown = 2
-currentcooldown = 0
+current_cooldown = 0
 effects = Array[ExtResource("1_r0oxv")]([SubResource("Resource_mdx25")])
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

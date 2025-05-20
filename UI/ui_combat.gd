@@ -7,6 +7,7 @@ extends Control
 	$ActionPanel/Action4
 ]
 @onready var Charaname_panel = $Charaname
+@onready var charaPortrait= $charaPortrait
 @onready var log_panel = $contexte
 @onready var combat_manager = $CombatManager 
 @onready var turnOrderPanel = $TurnOrderPanel
@@ -39,9 +40,10 @@ func update_ui_for_current_character(character: Character):
 	if skill_buttons == null:
 		push_error("skill_buttons est null pour %s" % character.Charaname)
 		return
-	
+	character.animate_start_Turn()
+	character.sprite.modulate = Color(1.8, 1.8, 1.8)
 	Charaname_panel.text = character.Charaname
-
+	charaPortrait.texture=character.initiative_icon
 	# Déconnexion de tous les anciens signaux pour éviter les doublons
 	for button in skill_buttons:
 		for conn in button.pressed.get_connections():
@@ -69,4 +71,8 @@ func update_ui_for_current_character(character: Character):
 			button.disabled = true
 
 func log(text):
-	log_panel.text =  text
+	if log_panel==null:
+		log_panel=$contexte
+		log_panel.text =  text
+	else:
+		log_panel.text =  text

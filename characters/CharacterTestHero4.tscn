@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dbtxyhyysj65n"]
+[gd_scene load_steps=10 format=3 uid="uid://dbtxyhyysj65n"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i8qvq"]
 [ext_resource type="Texture2D" uid="uid://cvcdlt3vbbkqj" path="res://characters/charatexture/CroiséBody.png" id="2_i8qvq"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://j0hygaxu62ja" path="res://characters/charatexture/PriestBody.png" id="5_3re6g"]
 [ext_resource type="Resource" uid="uid://bptddsqeaq28h" path="res://actions/heal.tres" id="5_hcyg2"]
 [ext_resource type="Resource" uid="uid://doydfjjogegnd" path="res://actions/StunAttaque.tres" id="6_y4wav"]
-[ext_resource type="Texture2D" uid="uid://bbonm2lf1barv" path="res://UI/selector.png" id="7_dj1ax"]
 
 [node name="CharacterTestHero4" type="Node2D"]
 script = ExtResource("1_i8qvq")
@@ -21,6 +20,14 @@ initiative = 4
 skill_resources = Array[Resource]([ExtResource("4_ghs3y"), ExtResource("6_y4wav"), ExtResource("4_dj1ax"), ExtResource("5_hcyg2")])
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
+offset_left = -133.0
+offset_top = -259.0
+offset_right = 133.0
+offset_bottom = -2.0
+texture = ExtResource("5_3re6g")
+
+[node name="Selector" type="TextureRect" parent="."]
+self_modulate = Color(2, 2, 2, 0)
 offset_left = -133.0
 offset_top = -259.0
 offset_right = 133.0
@@ -54,16 +61,6 @@ offset_top = 35.0
 offset_right = -45.0
 offset_bottom = 58.0
 text = "horny"
-
-[node name="Selector" type="TextureRect" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-offset_left = -96.0
-offset_top = -51.0
-offset_right = 75.0
-offset_bottom = -5.0
-mouse_filter = 2
-texture = ExtResource("7_dj1ax")
-expand_mode = 1
 
 [node name="Button" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
