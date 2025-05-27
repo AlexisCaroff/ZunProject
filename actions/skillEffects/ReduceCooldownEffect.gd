@@ -6,4 +6,4 @@ class_name ReduceCooldownEffect
 func apply(user: Character, target: Character) -> void:
 	for skill in target.skills:
 		skill.current_cooldown = max(0, skill.current_cooldown - amount)
-	print("Cooldown réduit de %d pour %s" % [amount, target.name])
+		print("Cooldown  %s pour %s réduit" % [skill.name, target.Charaname])

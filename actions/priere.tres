@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://cswp6nkwg6iwu"]
+
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_hd7w4"]
+[ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="2_rrrrh"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="3_rrrrh"]
+[ext_resource type="Texture2D" uid="uid://c8y2xrtwi8euj" path="res://characters/characterInitiative/priestIni.png" id="3_yt4kq"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_yqqrb"]
+
+[sub_resource type="Resource" id="Resource_k0qpg"]
+script = ExtResource("2_rrrrh")
+amount = 3
+metadata/_custom_type_script = "uid://2vsqpp6jqiow"
+
+[sub_resource type="Resource" id="Resource_yt4kq"]
+script = ExtResource("3_rrrrh")
+affected_stat = 0
+amount = 5
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[resource]
+script = ExtResource("4_yqqrb")
+name = "priere"
+description = "resset cooldown"
+icon = ExtResource("3_yt4kq")
+the_target_type = 3
+effects = Array[ExtResource("1_hd7w4")]([SubResource("Resource_k0qpg"), SubResource("Resource_yt4kq")])
+two_target_Type = false
+the_second_target_type = 3
+second_effects = Array[ExtResource("1_hd7w4")]([])
+usable_when_horny = true
+needtarget = true
+Actiontype = "attack"
+cost = 10
+cooldown = 2
+current_cooldown = 0
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

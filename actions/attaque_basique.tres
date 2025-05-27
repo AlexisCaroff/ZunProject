@@ -13,19 +13,18 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [resource]
 script = ExtResource("1_jdsf0")
-name = "Attaque basique"
+name = "coup de hache"
 description = "Inflige des dégâts à un ennemi."
 icon = ExtResource("1_uywaa")
-cost_action_points = 1
-Dmg = 20
 the_target_type = 0
+effects = Array[ExtResource("1_8u6nw")]([SubResource("Resource_i4eos")])
 two_target_Type = false
-the_second_target_type = 0
+the_second_target_type = 3
+second_effects = Array[ExtResource("1_8u6nw")]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"
 cost = 0
 cooldown = 4
 current_cooldown = 0
-effects = Array[ExtResource("1_8u6nw")]([SubResource("Resource_i4eos")])
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

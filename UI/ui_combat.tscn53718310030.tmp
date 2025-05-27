@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://h8pqs7tabdxj"]
+[gd_scene load_steps=5 format=3 uid="uid://h8pqs7tabdxj"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_8flqu"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="1_32lil"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="1_j6rr1"]
-[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="5_xibqh"]
 [ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="10_x8qlv"]
 
 [node name="CombatInterface" type="Control"]
@@ -154,10 +153,5 @@ offset_left = 50.0
 offset_top = 549.0
 offset_right = 184.0
 offset_bottom = 683.0
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(955, 538)
-ignore_rotation = false
-script = ExtResource("5_xibqh")
 
 [connection signal="pressed" from="ActionPanel/Action1" to="CombatManager" method="_on_action_1_pressed"]

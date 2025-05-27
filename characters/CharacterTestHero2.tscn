@@ -1,28 +1,57 @@
-[gd_scene load_steps=8 format=3 uid="uid://qi68oagp06kg"]
+[gd_scene load_steps=14 format=3 uid="uid://qi68oagp06kg"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_q3w66"]
 [ext_resource type="Texture2D" uid="uid://j0hygaxu62ja" path="res://characters/charatexture/PriestBody.png" id="2_3jc8x"]
+[ext_resource type="Texture2D" uid="uid://irsd0dsojt2t" path="res://characters/charatexture/hunter.png" id="2_wrjt1"]
 [ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_ejq0a"]
-[ext_resource type="Texture2D" uid="uid://c8y2xrtwi8euj" path="res://characters/characterInitiative/priestIni.png" id="3_o35hh"]
+[ext_resource type="Texture2D" uid="uid://byy2w1dik22x8" path="res://characters/characterInitiative/hunterIni.png" id="4_5lneg"]
 [ext_resource type="Resource" uid="uid://ca8rrxibg12sg" path="res://actions/Fap.tres" id="4_o35hh"]
 [ext_resource type="Resource" uid="uid://bptddsqeaq28h" path="res://actions/heal.tres" id="5_3jc8x"]
-[ext_resource type="Resource" uid="uid://bpsapqkry8g3q" path="res://actions/attaque_basique.tres" id="5_o35hh"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="6_6qnei"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="6_lacfs"]
+[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="7_lacfs"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="8_wrjt1"]
+
+[sub_resource type="Resource" id="Resource_i4eos"]
+script = ExtResource("6_6qnei")
+amount = 20
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[sub_resource type="Resource" id="Resource_1s6rd"]
+script = ExtResource("8_wrjt1")
+name = "Attaque basique"
+description = "Inflige des dégâts à un ennemi."
+icon = ExtResource("7_lacfs")
+the_target_type = 0
+effects = Array[ExtResource("6_lacfs")]([SubResource("Resource_i4eos")])
+two_target_Type = false
+the_second_target_type = 3
+second_effects = Array[ExtResource("6_lacfs")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 4
+current_cooldown = 0
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
 
 [node name="CharacterTestHero2" type="Node2D"]
 script = ExtResource("1_q3w66")
-portrait_texture = ExtResource("2_3jc8x")
+portrait_texture = ExtResource("2_wrjt1")
 dead_portrait_texture = ExtResource("3_ejq0a")
-initiative_icon = ExtResource("3_o35hh")
-Charaname = "Priest2"
-skill_resources = Array[Resource]([ExtResource("4_o35hh"), ExtResource("5_o35hh"), ExtResource("5_3jc8x"), ExtResource("5_3jc8x")])
+initiative_icon = ExtResource("4_5lneg")
+Charaname = "hunter"
+skill_resources = Array[Resource]([ExtResource("4_o35hh"), SubResource("Resource_1s6rd"), ExtResource("5_3jc8x"), ExtResource("5_3jc8x")])
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
-offset_left = -133.0
-offset_top = -259.0
-offset_right = 133.0
-offset_bottom = -2.0
+offset_left = -76.0
+offset_top = -311.0
+offset_right = 189.0
+offset_bottom = 280.0
+scale = Vector2(0.5, 0.5)
 mouse_filter = 2
-texture = ExtResource("2_3jc8x")
+texture = ExtResource("2_wrjt1")
 
 [node name="Selector" type="TextureRect" parent="."]
 modulate = Color(2, 2, 2, 1)
@@ -35,10 +64,10 @@ mouse_filter = 2
 texture = ExtResource("2_3jc8x")
 
 [node name="name" type="Label" parent="."]
-offset_left = -35.0
-offset_top = -261.0
-offset_right = 9.0
-offset_bottom = -238.0
+offset_left = -57.0
+offset_top = -258.0
+offset_right = -13.0
+offset_bottom = -235.0
 text = "name"
 
 [node name="HP" type="Label" parent="."]

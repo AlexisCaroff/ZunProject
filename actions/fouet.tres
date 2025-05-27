@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://sahrc1c16ogi"]
+
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_hgl7v"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_2julc"]
+[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="3_28per"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_7e8mt"]
+
+[sub_resource type="Resource" id="Resource_i4eos"]
+script = ExtResource("2_2julc")
+amount = 20
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[resource]
+script = ExtResource("4_7e8mt")
+name = "Attaque basique"
+description = "Inflige des dégâts à un ennemi."
+icon = ExtResource("3_28per")
+the_target_type = 0
+effects = Array[ExtResource("1_hgl7v")]([SubResource("Resource_i4eos")])
+two_target_Type = false
+the_second_target_type = 3
+second_effects = Array[ExtResource("1_hgl7v")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 4
+current_cooldown = 0
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
