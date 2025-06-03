@@ -16,6 +16,7 @@ dead_portrait_texture = ExtResource("3_eg61m")
 initiative_icon = ExtResource("4_07x3b")
 Charaname = "Tank"
 initiative = 4
+Chara_position = 3
 skill_resources = Array[Resource]([ExtResource("5_b6mpb"), ExtResource("6_y4wav"), ExtResource("11_y4wav"), ExtResource("8_ghs3y")])
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
@@ -43,6 +44,7 @@ offset_bottom = -274.0
 text = "name"
 
 [node name="name" type="Label" parent="name"]
+layout_mode = 0
 offset_left = -53.0
 offset_top = -297.0
 offset_right = -9.0

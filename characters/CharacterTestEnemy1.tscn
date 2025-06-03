@@ -7,11 +7,13 @@
 [ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/Ennemi_attaque_basique.tres" id="4_61pjh"]
 
 [node name="CharacterTestennemie1" type="Node2D"]
+modulate = Color(0.801126, 0.738995, 1.15514e-06, 1)
 script = ExtResource("1_61pjh")
 portrait_texture = ExtResource("2_61pjh")
 dead_portrait_texture = ExtResource("3_0go71")
 initiative_icon = ExtResource("3_mruho")
 Charaname = "ennemie1"
+Chara_position = 1
 skill_resources = Array[Resource]([ExtResource("4_61pjh"), ExtResource("4_61pjh"), ExtResource("4_61pjh"), ExtResource("4_61pjh")])
 is_player_controlled = false
 

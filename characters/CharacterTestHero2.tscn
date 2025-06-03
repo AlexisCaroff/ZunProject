@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://qi68oagp06kg"]
+[gd_scene load_steps=13 format=3 uid="uid://qi68oagp06kg"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_q3w66"]
-[ext_resource type="Texture2D" uid="uid://j0hygaxu62ja" path="res://characters/charatexture/PriestBody.png" id="2_3jc8x"]
 [ext_resource type="Texture2D" uid="uid://irsd0dsojt2t" path="res://characters/charatexture/hunter.png" id="2_wrjt1"]
 [ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_ejq0a"]
 [ext_resource type="Texture2D" uid="uid://byy2w1dik22x8" path="res://characters/characterInitiative/hunterIni.png" id="4_5lneg"]
@@ -42,6 +41,7 @@ portrait_texture = ExtResource("2_wrjt1")
 dead_portrait_texture = ExtResource("3_ejq0a")
 initiative_icon = ExtResource("4_5lneg")
 Charaname = "hunter"
+Chara_position = 1
 skill_resources = Array[Resource]([ExtResource("4_o35hh"), SubResource("Resource_1s6rd"), ExtResource("5_3jc8x"), ExtResource("5_3jc8x")])
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
@@ -56,12 +56,13 @@ texture = ExtResource("2_wrjt1")
 [node name="Selector" type="TextureRect" parent="."]
 modulate = Color(2, 2, 2, 1)
 self_modulate = Color(1, 1, 1, 0)
-offset_left = -133.0
-offset_top = -259.0
-offset_right = 133.0
-offset_bottom = -2.0
+offset_left = -76.0
+offset_top = -311.0
+offset_right = 189.0
+offset_bottom = 280.0
+scale = Vector2(0.5, 0.5)
 mouse_filter = 2
-texture = ExtResource("2_3jc8x")
+texture = ExtResource("2_wrjt1")
 
 [node name="name" type="Label" parent="."]
 offset_left = -57.0

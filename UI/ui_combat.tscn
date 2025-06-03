@@ -1,10 +1,68 @@
-[gd_scene load_steps=6 format=3 uid="uid://h8pqs7tabdxj"]
+[gd_scene load_steps=16 format=3 uid="uid://h8pqs7tabdxj"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_8flqu"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="1_32lil"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="1_j6rr1"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="5_xibqh"]
+[ext_resource type="Script" uid="uid://igdjgbcqg1d6" path="res://UI/PositionSlot.gd" id="6_j6rr1"]
+[ext_resource type="Script" uid="uid://b3l4l88c3b65c" path="res://PositionData.gd" id="7_i1s1q"]
 [ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="10_x8qlv"]
+
+[sub_resource type="Resource" id="Resource_i1s1q"]
+script = ExtResource("7_i1s1q")
+index = 0
+scale = Vector2(1, 1)
+is_enemy = false
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="Resource" id="Resource_8flqu"]
+script = ExtResource("7_i1s1q")
+index = 1
+scale = Vector2(0.8, 0.8)
+is_enemy = false
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="Resource" id="Resource_x8qlv"]
+script = ExtResource("7_i1s1q")
+index = 2
+scale = Vector2(1, 1)
+is_enemy = false
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="Resource" id="Resource_t7hjh"]
+script = ExtResource("7_i1s1q")
+index = 3
+scale = Vector2(0.8, 0.8)
+is_enemy = false
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="Resource" id="Resource_fs52m"]
+script = ExtResource("7_i1s1q")
+index = 0
+scale = Vector2(1, 1)
+is_enemy = true
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="Resource" id="Resource_ehgg6"]
+script = ExtResource("7_i1s1q")
+index = 1
+scale = Vector2(0.8, 0.8)
+is_enemy = true
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="Resource" id="Resource_if0a6"]
+script = ExtResource("7_i1s1q")
+index = 2
+scale = Vector2(1, 1)
+is_enemy = true
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="Resource" id="Resource_ktp8g"]
+script = ExtResource("7_i1s1q")
+index = 3
+scale = Vector2(0.8, 0.8)
+is_enemy = true
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [node name="CombatInterface" type="Control"]
 layout_mode = 3
@@ -97,15 +155,6 @@ offset_left = 0.2771
 offset_right = 40.2771
 offset_bottom = 23.0
 
-[node name="HeroesPanel" type="HBoxContainer" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 16.0
-offset_top = 340.0
-offset_right = 1092.0
-offset_bottom = 597.0
-mouse_filter = 2
-
 [node name="TurnOrderPanel" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 5.0
@@ -159,5 +208,51 @@ offset_bottom = 683.0
 position = Vector2(955, 538)
 ignore_rotation = false
 script = ExtResource("5_xibqh")
+
+[node name="HeroPosition" type="Node2D" parent="."]
+position = Vector2(151, 530)
+
+[node name="position1" type="Node2D" parent="HeroPosition"]
+position = Vector2(0, 2)
+script = ExtResource("6_j6rr1")
+position_data = SubResource("Resource_i1s1q")
+
+[node name="position2" type="Node2D" parent="HeroPosition"]
+position = Vector2(173, -13)
+script = ExtResource("6_j6rr1")
+position_data = SubResource("Resource_8flqu")
+
+[node name="position3" type="Node2D" parent="HeroPosition"]
+position = Vector2(366, 2)
+script = ExtResource("6_j6rr1")
+position_data = SubResource("Resource_x8qlv")
+
+[node name="position4" type="Node2D" parent="HeroPosition"]
+position = Vector2(537, -13)
+script = ExtResource("6_j6rr1")
+position_data = SubResource("Resource_t7hjh")
+
+[node name="ennemiePosition" type="Node2D" parent="."]
+position = Vector2(1259, 530)
+
+[node name="position1" type="Node2D" parent="ennemiePosition"]
+position = Vector2(0, 2)
+script = ExtResource("6_j6rr1")
+position_data = SubResource("Resource_fs52m")
+
+[node name="position2" type="Node2D" parent="ennemiePosition"]
+position = Vector2(169, -16)
+script = ExtResource("6_j6rr1")
+position_data = SubResource("Resource_ehgg6")
+
+[node name="position3" type="Node2D" parent="ennemiePosition"]
+position = Vector2(366, 2)
+script = ExtResource("6_j6rr1")
+position_data = SubResource("Resource_if0a6")
+
+[node name="position4" type="Node2D" parent="ennemiePosition"]
+position = Vector2(533, -16)
+script = ExtResource("6_j6rr1")
+position_data = SubResource("Resource_ktp8g")
 
 [connection signal="pressed" from="ActionPanel/Action1" to="CombatManager" method="_on_action_1_pressed"]

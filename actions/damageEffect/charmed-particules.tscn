@@ -15,7 +15,7 @@ gradient = SubResource("Gradient_lnhv2")
 _data = [Vector2(0, 0.356952), 0.0, 0.0, 0, 0, Vector2(1, 0.678476), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_jjclw"]
+[sub_resource type="CurveTexture" id="CurveTexture_jsytc"]
 curve = SubResource("Curve_jsytc")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ob8fu"]
@@ -38,7 +38,7 @@ orbit_velocity_max = 9.49949e-08
 radial_velocity_min = 20.0
 radial_velocity_max = 50.0
 gravity = Vector3(0, 0, 0)
-scale_curve = SubResource("CurveTexture_jjclw")
+scale_curve = SubResource("CurveTexture_jsytc")
 color_ramp = SubResource("GradientTexture1D_gqb8d")
 hue_variation_min = -2.23517e-08
 hue_variation_max = 0.02

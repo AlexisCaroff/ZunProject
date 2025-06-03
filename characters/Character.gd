@@ -33,6 +33,9 @@ var combat_manager: Node = null
 var taunted_by: Character = null
 var taunt_duration: int = 0
 var buffs: Array[Buff] = []
+@export var Chara_position:int = 0 
+var current_slot: PositionSlot = null
+var CharaScale:Vector2 = Vector2(1.0, 1.0)
 
 # --- Jauges
 @export var max_stamina: int = 100
@@ -51,7 +54,9 @@ var tags: Array[String] = []
 
 # --- Contrôle
 @export var is_player_controlled: bool = true
-const DamageEffectScene := preload("res://actions/damageEffect/charmed-particules.tscn")
+const HornyEffectScene := preload("res://actions/damageEffect/charmed-particules.tscn")
+const DamageEffectScene := preload("res://actions/damageEffect/HitVFX.tscn")
+
 signal target_selected(target: Character)
 var is_targetable: bool = false
 
@@ -264,7 +269,7 @@ func take_damage(source: Character, stat: int, amount: int) -> void:
 		DamageEffect.Stat.STRESS:
 			damage = max(0, amount - willpower)
 			current_stress = max(0, current_stress + damage)
-
+	shake_camera(20.0)
 	print("%s inflige %d de %s à %s" % [
 		source.name, damage, DamageEffect.Stat.keys()[stat], name
 	])
@@ -274,7 +279,7 @@ func take_damage(source: Character, stat: int, amount: int) -> void:
 	
 func resetVisuel()-> void:
 	sprite.modulate=Color(1.0,1.0,1.0,1.0)
-	self.scale = Vector2(1.0, 1.0)
+	self.scale = CharaScale
 	self.z_index = 0
 	
 	
@@ -288,7 +293,7 @@ func animate_start_Turn():
 	await tween.finished
 
 func animate_get_horny(damage:int):
-	var effect_instance = DamageEffectScene.instantiate()
+	var effect_instance = HornyEffectScene.instantiate()
 	get_tree().current_scene.add_child(effect_instance)
 
 	effect_instance.global_position = global_position + Vector2(0, -30)
@@ -301,6 +306,13 @@ func animate_get_horny(damage:int):
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	
 func animate_take_damage(damage:int, source:Character):
+	var effect_instance = DamageEffectScene.instantiate()
+	get_tree().current_scene.add_child(effect_instance)
+
+	effect_instance.global_position = global_position + Vector2(0, -140)
+	if effect_instance.has_method("setup"):
+		effect_instance.setup(damage)
+		
 	var tween := create_tween() as Tween
 	var tween2 := create_tween() as Tween
 	var normal_size = self.scale
