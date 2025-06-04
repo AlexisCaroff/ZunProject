@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8lhes1w5ga1t"]
+[gd_scene load_steps=15 format=3 uid="uid://b8lhes1w5ga1t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_0i81g"]
 [ext_resource type="Texture2D" uid="uid://dv2p7bp8auvbe" path="res://characters/charatexture/occultiste.png" id="2_1uy8h"]
@@ -35,6 +35,8 @@ cooldown = 4
 current_cooldown = 0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0vb8e"]
+
 [node name="CharacterTestHero3" type="Node2D"]
 script = ExtResource("1_0i81g")
 portrait_texture = ExtResource("2_1uy8h")
@@ -55,7 +57,8 @@ texture = ExtResource("2_1uy8h")
 
 [node name="Selector" type="TextureRect" parent="."]
 modulate = Color(2, 2, 2, 1)
-self_modulate = Color(2, 2, 2, 0)
+self_modulate = Color(2, 1, 2, 1)
+material = SubResource("ShaderMaterial_0vb8e")
 offset_left = -66.0
 offset_top = -233.0
 offset_right = 206.0
