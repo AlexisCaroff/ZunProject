@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbtxyhyysj65n"]
+[gd_scene load_steps=10 format=3 uid="uid://dbtxyhyysj65n"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i8qvq"]
 [ext_resource type="Texture2D" uid="uid://cvcdlt3vbbkqj" path="res://characters/charatexture/CroiséBody.png" id="2_b6mpb"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://behrtqotkyvnx" path="res://actions/Taunt.tres" id="5_b6mpb"]
 [ext_resource type="Resource" uid="uid://doydfjjogegnd" path="res://actions/StunAttaque.tres" id="6_y4wav"]
 [ext_resource type="Resource" uid="uid://bpsapqkry8g3q" path="res://actions/attaque_basique.tres" id="8_ghs3y"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="9_4h21c"]
 [ext_resource type="Resource" uid="uid://clw258vbo2rq1" path="res://actions/Charge.tres" id="11_y4wav"]
 
 [node name="CharacterTestHero4" type="Node2D"]
@@ -17,7 +18,7 @@ initiative_icon = ExtResource("4_07x3b")
 Charaname = "Tank"
 initiative = 4
 Chara_position = 3
-skill_resources = Array[Resource]([ExtResource("5_b6mpb"), ExtResource("6_y4wav"), ExtResource("11_y4wav"), ExtResource("8_ghs3y")])
+skill_resources = Array[Resource]([ExtResource("5_b6mpb"), ExtResource("6_y4wav"), ExtResource("11_y4wav"), ExtResource("8_ghs3y"), ExtResource("9_4h21c")])
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
 offset_left = -108.0

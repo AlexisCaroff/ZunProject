@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b8lhes1w5ga1t"]
+[gd_scene load_steps=16 format=3 uid="uid://b8lhes1w5ga1t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_0i81g"]
 [ext_resource type="Texture2D" uid="uid://dv2p7bp8auvbe" path="res://characters/charatexture/occultiste.png" id="2_1uy8h"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="8_0vb8e"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="9_gnpc2"]
 [ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="10_gnpc2"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="12_gnpc2"]
 
 [sub_resource type="Resource" id="Resource_b71cp"]
 script = ExtResource("10_gnpc2")
@@ -45,7 +46,7 @@ initiative_icon = ExtResource("4_0vb8e")
 Charaname = "Warrior1"
 attack = 12
 Chara_position = 2
-skill_resources = Array[Resource]([ExtResource("5_jldwf"), ExtResource("5_bd0xg"), ExtResource("7_gnpc2"), SubResource("Resource_1s6rd")])
+skill_resources = Array[Resource]([ExtResource("5_jldwf"), ExtResource("5_bd0xg"), ExtResource("7_gnpc2"), SubResource("Resource_1s6rd"), ExtResource("12_gnpc2")])
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
 offset_left = -67.0

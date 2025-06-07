@@ -275,35 +275,19 @@ position = Vector2(0, 2)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_fs52m")
 
-[node name="ColorRect" type="ColorRect" parent="ennemiePosition/position1"]
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="position2" type="Node2D" parent="ennemiePosition"]
 position = Vector2(169, -16)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_ehgg6")
-
-[node name="ColorRect" type="ColorRect" parent="ennemiePosition/position2"]
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="position3" type="Node2D" parent="ennemiePosition"]
 position = Vector2(366, 2)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_if0a6")
 
-[node name="ColorRect" type="ColorRect" parent="ennemiePosition/position3"]
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="position4" type="Node2D" parent="ennemiePosition"]
 position = Vector2(533, -16)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_ktp8g")
-
-[node name="ColorRect" type="ColorRect" parent="ennemiePosition/position4"]
-offset_right = 40.0
-offset_bottom = 40.0
 
 [connection signal="pressed" from="ActionPanel/Action1" to="CombatManager" method="_on_action_1_pressed"]

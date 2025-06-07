@@ -40,7 +40,7 @@ func _ready():
 		# Place dans la bonne PositionSlot
 		var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() )
 		var slot = hero_positions[slot_index]
-		move_character_to(chara, slot)
+		move_character_to(chara, slot,0.0)
 	
 	# Spawn ennemis
 	for i in ENEMY_SCENES.size():
@@ -52,8 +52,8 @@ func _ready():
 		# Place dans la bonne PositionSlot
 		var slot_index = clamp(chara.Chara_position, 0, enemy_positions.size() - 1)
 		var slot = enemy_positions[slot_index]
-		move_character_to(chara, slot)
-	
+		move_character_to(chara, slot,0.0)
+	ui.log("start Combat")
 	start_combat()
 func setup_positions():
 	# Remplace ces chemins par les bons si besoin
@@ -79,7 +79,7 @@ func start_combat():
 	next_turn()
 
 func build_turn_queue(characters: Array[Character]) -> Array[Character]:
-	var queue: Array[Character] = characters.duplicate()  # Duplique le tableau pour ne pas modifier l'original
+	var queue: Array[Character] = characters.duplicate()  
 	queue.sort_custom(func(a: Character, b: Character) -> bool:
 		return a.initiative > b.initiative
 	)
@@ -118,8 +118,8 @@ func next_turn():
 func _check_victory():
 	for enemy in enemies:
 		if not enemy.dead:
-			return # au moins un ennemi vivant, on sort
-	# Tous les ennemis sont morts
+			return 
+	
 	_show_victory()
 	
 func _show_victory():
@@ -184,19 +184,19 @@ func stop_target_selection():
 func get_positions(is_playercontroled: bool) -> Array[PositionSlot]:
 	return hero_positions if is_playercontroled else enemy_positions
 
-func move_character_to(character: Character, slot: PositionSlot):
+func move_character_to(character: Character, slot: PositionSlot, movetime: int):
 	if slot.occupant == character:
-		return  # Déjà au bon endroit
+		return  
 	if slot.is_occupied():
 		push_warning("move_character_to() appelé sur une position occupée sans swap.")
 		return
-	slot.assign_character(character)
+	slot.assign_character(character,movetime)
 		
-func swap_characters(slot_a: PositionSlot, slot_b: PositionSlot):
+func swap_characters(slot_a: PositionSlot, slot_b: PositionSlot,movetime: int):
 	var char_a = slot_a.occupant
 	var char_b = slot_b.occupant
 
 	if char_a != null:
-		slot_b.assign_character(char_a)
+		slot_b.assign_character(char_a,movetime)
 	if char_b != null:
-		slot_a.assign_character(char_b)
+		slot_a.assign_character(char_b,movetime)

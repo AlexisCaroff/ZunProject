@@ -4,7 +4,8 @@ extends Control
 	$ActionPanel/Action1,
 	$ActionPanel/Action2,
 	$ActionPanel/Action3,
-	$ActionPanel/Action4
+	$ActionPanel/Action4,
+	$ActionPanel/Action5
 ]
 @onready var Charaname_panel = $Charaname
 @onready var charaPortrait= $charaPortrait
@@ -15,7 +16,8 @@ extends Control
 	$ActionPanel/Action1/cooldownA1, 
 	$ActionPanel/Action2/cooldownA2,
 	$ActionPanel/Action3/cooldownA3,
-	$ActionPanel/Action4/cooldownA4
+	$ActionPanel/Action4/cooldownA4,
+	$ActionPanel/Action5/cooldownA5
 ]
 
 func _ready():

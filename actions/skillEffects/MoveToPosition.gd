@@ -21,8 +21,8 @@ func apply(user: Character, target: Character):
 		if target_current_slot == null:
 			push_error("Le personnage cible n'a pas de slot assigné.")
 			return
-		cm.swap_characters(target_current_slot, target_slot)
+		cm.swap_characters(target_current_slot, target_slot,1.7)
 	else:
-		cm.move_character_to(target, target_slot)
+		cm.move_character_to(target, target_slot,1.7)
 
 	
