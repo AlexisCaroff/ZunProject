@@ -189,10 +189,10 @@ _data = {
 script = ExtResource("1_ktxfw")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 20.197
-offset_top = -125.973
-offset_right = 106.197
-offset_bottom = -6.9731
+offset_left = 78.7072
+offset_top = -195.69
+offset_right = 164.707
+offset_bottom = -76.6899
 theme_override_fonts/font = ExtResource("2_nu7he")
 theme_override_font_sizes/font_size = 50
 text = "14"

@@ -23,6 +23,7 @@ var combat_manager: Node = null
 @export var attack: int = 10
 @export var defense: int = 5
 @export var willpower: int = 5
+@export var evasion: int = 5
 @export var initiative: int = 1
 @export var base_evasion: int = 5
 @export var action_points: int = 2
@@ -56,6 +57,7 @@ var tags: Array[String] = []
 @export var is_player_controlled: bool = true
 const HornyEffectScene := preload("res://actions/damageEffect/charmed-particules.tscn")
 const DamageEffectScene := preload("res://actions/damageEffect/HitVFX.tscn")
+const MissEffectScene:= preload("res://actions/damageEffect/miss_vfx.tscn")
 
 signal target_selected(target: Character)
 var is_targetable: bool = false
@@ -285,11 +287,12 @@ func resetVisuel()-> void:
 	
 func animate_start_Turn():
 	var tween := create_tween() as Tween
-	var normal_size = self.scale
+	CharaScale = current_slot.position_data.scale
+	var normal_size = CharaScale
 	var big_size= Vector2(1.0,1.1) 
 	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.4)
 	tween.tween_property(self, "scale", normal_size, 0.2)
-	
+	combat_manager.ui.log( str(normal_size))
 	await tween.finished
 
 func animate_get_horny(damage:int):
@@ -300,7 +303,7 @@ func animate_get_horny(damage:int):
 	if effect_instance.has_method("setup"):
 		effect_instance.setup(damage)
 	var tween := create_tween() as Tween
-	var normal_size = self.scale
+	var normal_size = CharaScale
 	var big_size= Vector2(1.0,1.1) 
 	tween.tween_property(self, "scale", big_size, 0.2)
 	tween.tween_property(self, "scale", normal_size, 0.2)
@@ -315,7 +318,7 @@ func animate_take_damage(damage:int, source:Character):
 		
 	var tween := create_tween() as Tween
 	var tween2 := create_tween() as Tween
-	var normal_size = self.scale
+	var normal_size = CharaScale
 	var big_size= Vector2(1.0,1.05) 
 	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
 	tween.tween_property(self, "scale", normal_size, 0.2)
@@ -323,7 +326,7 @@ func animate_take_damage(damage:int, source:Character):
 	var direction = (source.global_position + global_position).normalized()
 	var offset = direction * 10
 	var attack_pos = start_pos + offset
-	tween2.tween_property(self, "position", attack_pos, 0.02).set_delay(0.2)
+	tween2.tween_property(self, "position", attack_pos, 0.02).set_delay(0.02)
 	tween2.tween_property(self, "position", start_pos, 0.2)
 	await tween.finished
 	
@@ -345,12 +348,28 @@ func animate_attack(target: Character):
 
 	scaletween.tween_property(self, "scale", big_size, 0.2)
 	tween.tween_property(self, "position", attack_pos, 0.2)
-	
 	tween.tween_property(self, "position", start_pos, 0.2).set_delay(0.2)
 
 	scaletween.tween_property(self, "scale", normal_size, 0.2).set_delay(0.2)
 
 	#await tween.finished
+	
+func miss_animation(target: Character):
+	var Misseffect_instance= MissEffectScene.instantiate()
+	get_tree().current_scene.add_child(Misseffect_instance)
+
+	Misseffect_instance.global_position = global_position + Vector2(0, -140)
+	if Misseffect_instance.has_method("setup"):
+		Misseffect_instance.setup()
+	var tween := create_tween() as Tween
+	
+	var start_pose = position
+	var direction = (target.global_position - global_position).normalized()
+	var offset = direction * -50
+	var esquiv_pose= start_pose + offset
+	
+	tween.tween_property(self, "position", esquiv_pose, 0.05)
+	tween.tween_property(self, "position", start_pose, 0.2).set_delay(0.2)
 	
 	
 func shake_camera(strength := 5.0):

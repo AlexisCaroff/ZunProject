@@ -33,6 +33,8 @@ Actiontype = "attack"
 cost = 0
 cooldown = 4
 current_cooldown = 0
+precision = 100
+allways_hit = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
 
 [node name="CharacterTestennemie4" type="Node2D"]

@@ -6,14 +6,15 @@ enum Stat {
 	ATTACK,
 	DEFENSE,
 	SPEED,
-	WILL_POWER
+	WILL_POWER,
+	EVASION
 }
 
 @export var name: String = "Buff"
 @export var description: String = "Effet temporaire sur les statistiques."
 @export var icon: Texture2D
 
-@export_enum("ATTACK", "DEFENSE", "SPEED", "WILL_POWER")
+@export_enum("ATTACK", "DEFENSE", "SPEED", "WILL_POWER", "EVASION")
 var stat: int = Stat.ATTACK
 
 @export var amount: int = 1
@@ -30,4 +31,6 @@ func apply_to(target: Character) -> void:
 			target.initiative += amount
 		Stat.WILL_POWER:
 			target.willpower += amount
+		Stat.EVASION:
+			target.evasion +=amount
 	

@@ -147,7 +147,8 @@ func start_target_selection(skill: Skill):
 	skill.select_targets(self)
 		
 func _on_target_selected(target: Character):
-	await current_character.animate_attack(target)
+	if pending_skill.name != "move":
+		await current_character.animate_attack(target)
 	ui.log(pending_skill.name)
 	pending_skill.use(target)
 	

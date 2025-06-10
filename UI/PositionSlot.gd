@@ -2,17 +2,12 @@ extends Node2D
 class_name PositionSlot
 
 @export var position_data: PositionData
-@onready var isfull : ColorRect =  $ColorRect
+
 var occupant: Character = null
 
 func is_occupied() -> bool:
 	return occupant != null
 	
-func _process(delta):
-	if is_occupied():
-		isfull.modulate= Color.AQUAMARINE
-	else:
-		isfull.modulate= Color.CRIMSON
 
 func assign_character(character: Character, movetime:float):
 	#if occupant:
@@ -25,7 +20,7 @@ func assign_character(character: Character, movetime:float):
 	tween.tween_property(character, "global_position", global_position, movetime)
 	
 	await tween.finished
-	
+	character.CharaScale= position_data.scale
 	character.set_scale(position_data.scale)
 	
 

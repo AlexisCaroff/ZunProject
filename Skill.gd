@@ -34,8 +34,8 @@ var the_second_target_type: int = second_target_type.ENNEMY
 @export var cost : int =0
 @export var cooldown : int=2
 @export var current_cooldown: int = 0
-
-
+@export var precision: int = 100
+@export var allways_hit: bool = false
 var owner: Character
 
 func can_use() -> bool:
@@ -46,6 +46,13 @@ func can_use() -> bool:
 func use(target: Character = null, effects_array: Array[SkillEffect] = effects):
 	if not can_use():
 		return
+	if not allways_hit:
+		var chance = precision - target.evasion
+		var rand = randi() % 100
+		if rand >= chance:
+			target.miss_animation(owner)
+			return
+		
 	_apply_effect(target, effects_array)
 
 func pay_cost():

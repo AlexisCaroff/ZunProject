@@ -32,4 +32,6 @@ Actiontype = "attack"
 cost = 5
 cooldown = 5
 current_cooldown = 0
+precision = 100
+allways_hit = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
