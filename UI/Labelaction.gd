@@ -12,9 +12,9 @@ func _on_action_1_mouse_entered() -> void:
 	self.set_pivot_offset(size / 2)
 	var big_size = Vector2(1.2, 1.2)
 	tweenpos.tween_property(self, "position", startposition, 0.05)
-	tween.tween_property(self, "scale", startsize,0.02)
+	tween.tween_property(self, "scale", startsize,0.00)
 	tween.tween_property(self, "scale", big_size, 0.2)
-	tweenpos.tween_property(self, "position", end_pose, 0.1)
+	#tweenpos.tween_property(self, "position", end_pose, 0.2)
 
 
 func _on_action_1_mouse_exited() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://qi68oagp06kg"]
+[gd_scene load_steps=15 format=3 uid="uid://qi68oagp06kg"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_q3w66"]
 [ext_resource type="Texture2D" uid="uid://irsd0dsojt2t" path="res://characters/charatexture/hunter.png" id="2_wrjt1"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="7_lacfs"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="8_wrjt1"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="11_wrjt1"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="12_5lneg"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("6_6qnei")
@@ -73,6 +74,7 @@ offset_left = -57.0
 offset_top = -258.0
 offset_right = -13.0
 offset_bottom = -235.0
+theme_override_fonts/font = ExtResource("12_5lneg")
 text = "name"
 
 [node name="HP" type="Label" parent="."]

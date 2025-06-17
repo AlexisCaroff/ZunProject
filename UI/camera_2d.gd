@@ -9,6 +9,11 @@ var noise := FastNoiseLite.new()
 var original_offset := Vector2.ZERO
 
 func _ready():
+	
+	var screen_size = get_viewport_rect().size
+	var base_size = Vector2(1920, 1080)  # résolution de base
+	var zoom_factor = screen_size / base_size
+	self.zoom = Vector2( zoom_factor.x,  zoom_factor.y)
 	original_offset = offset
 	noise.seed = randi()
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX

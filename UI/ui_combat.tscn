@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://h8pqs7tabdxj"]
+[gd_scene load_steps=25 format=3 uid="uid://h8pqs7tabdxj"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_8flqu"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="1_32lil"]
@@ -8,8 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="4_fs52m"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="5_xibqh"]
 [ext_resource type="Script" uid="uid://igdjgbcqg1d6" path="res://UI/PositionSlot.gd" id="6_j6rr1"]
-[ext_resource type="Script" uid="uid://b81hh7laqegme" path="res://UI/Labelaction.gd" id="6_x8qlv"]
 [ext_resource type="Script" uid="uid://b3l4l88c3b65c" path="res://PositionData.gd" id="7_i1s1q"]
+[ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="7_roj6a"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="8_roj6a"]
 [ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="10_x8qlv"]
 [ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterTestEnemy1.tscn" id="12_ktp8g"]
 [ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharacterTestEnemy2.tscn" id="13_euc7u"]
@@ -89,7 +90,7 @@ texture = ExtResource("2_x8qlv")
 position = Vector2(2, 352)
 
 [node name="FightUi" type="Sprite2D" parent="."]
-position = Vector2(965, 546)
+position = Vector2(960, 545)
 texture = ExtResource("4_fs52m")
 
 [node name="ActionPanel" type="HBoxContainer" parent="."]
@@ -113,25 +114,12 @@ icon = ExtResource("1_32lil")
 flat = true
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("7_roj6a")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action1"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-
-[node name="LabelA" type="Label" parent="ActionPanel/Action1"]
-visible = false
-layout_mode = 0
-offset_left = -26.3815
-offset_top = 105.221
-offset_right = 117.618
-offset_bottom = 169.221
-theme_override_font_sizes/font_size = 10
-text = "Attaque1 
-et truc et bidule"
-horizontal_alignment = 1
-autowrap_mode = 3
-script = ExtResource("6_x8qlv")
 
 [node name="Action2" type="Button" parent="ActionPanel"]
 custom_minimum_size = Vector2(90, 90)
@@ -143,25 +131,12 @@ icon = ExtResource("1_32lil")
 flat = true
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("7_roj6a")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action2"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-
-[node name="LabelA" type="Label" parent="ActionPanel/Action2"]
-visible = false
-layout_mode = 0
-offset_left = -26.3815
-offset_top = 105.221
-offset_right = 117.618
-offset_bottom = 169.221
-theme_override_font_sizes/font_size = 10
-text = "Attaque1 
-et truc et bidule"
-horizontal_alignment = 1
-autowrap_mode = 3
-script = ExtResource("6_x8qlv")
 
 [node name="Action3" type="Button" parent="ActionPanel"]
 custom_minimum_size = Vector2(90, 90)
@@ -173,25 +148,12 @@ icon = ExtResource("1_32lil")
 flat = true
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("7_roj6a")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action3"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-
-[node name="LabelA" type="Label" parent="ActionPanel/Action3"]
-visible = false
-layout_mode = 0
-offset_left = -26.3815
-offset_top = 105.221
-offset_right = 117.618
-offset_bottom = 169.221
-theme_override_font_sizes/font_size = 10
-text = "Attaque1 
-et truc et bidule"
-horizontal_alignment = 1
-autowrap_mode = 3
-script = ExtResource("6_x8qlv")
 
 [node name="Action4" type="Button" parent="ActionPanel"]
 custom_minimum_size = Vector2(90, 90)
@@ -203,25 +165,12 @@ icon = ExtResource("1_32lil")
 flat = true
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("7_roj6a")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action4"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-
-[node name="LabelA" type="Label" parent="ActionPanel/Action4"]
-visible = false
-layout_mode = 0
-offset_left = -26.3815
-offset_top = 105.221
-offset_right = 117.618
-offset_bottom = 169.221
-theme_override_font_sizes/font_size = 10
-text = "Attaque1 
-et truc et bidule"
-horizontal_alignment = 1
-autowrap_mode = 3
-script = ExtResource("6_x8qlv")
 
 [node name="Action5" type="Button" parent="ActionPanel"]
 custom_minimum_size = Vector2(90, 90)
@@ -233,25 +182,25 @@ icon = ExtResource("1_32lil")
 flat = true
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("7_roj6a")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action5"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="LabelA" type="Label" parent="ActionPanel/Action5"]
-visible = false
+[node name="LabelAction" type="Label" parent="."]
 layout_mode = 0
-offset_left = -26.3815
-offset_top = 105.221
-offset_right = 117.618
-offset_bottom = 169.221
-theme_override_font_sizes/font_size = 10
+offset_left = 762.0
+offset_top = 982.0
+offset_right = 1159.0
+offset_bottom = 1066.0
+theme_override_fonts/font = ExtResource("8_roj6a")
+theme_override_font_sizes/font_size = 30
 text = "Attaque1 
 et truc et bidule"
 horizontal_alignment = 1
 autowrap_mode = 3
-script = ExtResource("6_x8qlv")
 
 [node name="TurnOrderPanel" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -305,7 +254,7 @@ offset_right = 183.0
 offset_bottom = 909.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(955, 538)
+position = Vector2(960, 540)
 ignore_rotation = false
 script = ExtResource("5_xibqh")
 
@@ -367,18 +316,18 @@ offset_right = 1265.0
 offset_bottom = 975.0
 color = Color(0.501961, 0.407843, 0.207843, 1)
 
-[connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1/LabelA" method="_on_action_1_mouse_entered"]
-[connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1/LabelA" method="_on_action_1_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]
 [connection signal="pressed" from="ActionPanel/Action1" to="CombatManager" method="_on_action_1_pressed"]
-[connection signal="mouse_entered" from="ActionPanel/Action2" to="ActionPanel/Action2/LabelA" method="_on_action_1_mouse_entered"]
-[connection signal="mouse_exited" from="ActionPanel/Action2" to="ActionPanel/Action2/LabelA" method="_on_action_1_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action2" to="ActionPanel/Action2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action2" to="ActionPanel/Action2" method="_on_mouse_exited"]
 [connection signal="pressed" from="ActionPanel/Action2" to="CombatManager" method="_on_action_1_pressed"]
-[connection signal="mouse_entered" from="ActionPanel/Action3" to="ActionPanel/Action3/LabelA" method="_on_action_1_mouse_entered"]
-[connection signal="mouse_exited" from="ActionPanel/Action3" to="ActionPanel/Action3/LabelA" method="_on_action_1_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action3" to="ActionPanel/Action3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action3" to="ActionPanel/Action3" method="_on_mouse_exited"]
 [connection signal="pressed" from="ActionPanel/Action3" to="CombatManager" method="_on_action_1_pressed"]
-[connection signal="mouse_entered" from="ActionPanel/Action4" to="ActionPanel/Action4/LabelA" method="_on_action_1_mouse_entered"]
-[connection signal="mouse_exited" from="ActionPanel/Action4" to="ActionPanel/Action4/LabelA" method="_on_action_1_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action4" to="ActionPanel/Action4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action4" to="ActionPanel/Action4" method="_on_mouse_exited"]
 [connection signal="pressed" from="ActionPanel/Action4" to="CombatManager" method="_on_action_1_pressed"]
-[connection signal="mouse_entered" from="ActionPanel/Action5" to="ActionPanel/Action5/LabelA" method="_on_action_1_mouse_entered"]
-[connection signal="mouse_exited" from="ActionPanel/Action5" to="ActionPanel/Action5/LabelA" method="_on_action_1_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action5" to="ActionPanel/Action5" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action5" to="ActionPanel/Action5" method="_on_mouse_exited"]
 [connection signal="pressed" from="ActionPanel/Action5" to="CombatManager" method="_on_action_1_pressed"]
