@@ -12,7 +12,7 @@ class_name Character
 @onready var horny_label = $horny
 @onready var sprite = $HerosTexture1
 var combat_manager: Node = null 
-
+@onready var buff_bar = $HBoxContainer
 @export var Charaname: String = "name"
 
 # --- Stats de combat
@@ -97,7 +97,12 @@ func update_ui():
 	horny_label.text = "Horny: %d / %d" % [current_horniness, max_horniness]
 	
 func add_buff(buff: Buff):
-	buffs.append(buff.duplicate()) # On duplique pour éviter de modifier l’original
+	buffs.append(buff.duplicate()) 
+	var icon = TextureRect.new()
+	icon.texture = buff.icon
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.custom_minimum_size = Vector2(32, 32)  # taille d'icône
+	buff_bar.add_child(icon)
 	update_stats()
 
 func process_taunt():

@@ -1,5 +1,5 @@
 extends Node
-#combat manager
+class_name CombatManager
 var heroes: Array[Character] = []
 var enemies: Array[Character] = []
 var turn_queue: Array[Character] = []
@@ -55,6 +55,8 @@ func _ready():
 		move_character_to(chara, slot,0.0)
 	ui.log("start Combat")
 	start_combat()
+	
+	
 func setup_positions():
 	# Remplace ces chemins par les bons si besoin
 	hero_positions = [

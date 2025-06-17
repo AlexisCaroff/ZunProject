@@ -6,6 +6,7 @@ extends Control
 	$ActionPanel/Action3,
 	$ActionPanel/Action4,
 	$ActionPanel/Action5
+
 ]
 @onready var Charaname_panel = $Charaname
 @onready var charaPortrait= $charaPortrait
@@ -13,17 +14,26 @@ extends Control
 @onready var combat_manager = $CombatManager 
 @onready var turnOrderPanel = $TurnOrderPanel
 @onready var cooldownLabel = [
-	$ActionPanel/Action1/cooldownA1, 
-	$ActionPanel/Action2/cooldownA2,
-	$ActionPanel/Action3/cooldownA3,
-	$ActionPanel/Action4/cooldownA4,
-	$ActionPanel/Action5/cooldownA5
+	$ActionPanel/Action1/cooldownA, 
+	$ActionPanel/Action2/cooldownA,
+	$ActionPanel/Action3/cooldownA,
+	$ActionPanel/Action4/cooldownA,
+	$ActionPanel/Action5/cooldownA
+
+]
+@onready var ActionLabel = [
+	$ActionPanel/Action1/LabelA,
+	$ActionPanel/Action2/LabelA,
+	$ActionPanel/Action3/LabelA,
+	$ActionPanel/Action4/LabelA,
+	$ActionPanel/Action5/LabelA
 ]
 
 func _ready():
 	var current_character = combat_manager.get_current_character()
-	print(turnOrderPanel)
+
 	call_deferred("update_ui_for_current_character", current_character)
+	
 func update_turn_queue_ui(queue: Array[Character]):
 	if turnOrderPanel == null:
 		turnOrderPanel=$TurnOrderPanel
@@ -55,8 +65,9 @@ func update_ui_for_current_character(character: Character):
 		var button = skill_buttons[i]
 		var skill = character.get_skill(i)
 		var cooldownlabel = cooldownLabel[i]
+		var Actiontext = ActionLabel[i]
 		if skill != null:
-			button.text = skill.name
+			Actiontext.text = skill.descriptionName + "\n" + skill.description
 			button.disabled = !skill.can_use()
 			button.icon = skill.icon
 			if skill.current_cooldown > 0:

@@ -19,7 +19,8 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 [sub_resource type="Resource" id="Resource_1s6rd"]
 script = ExtResource("7_wprb4")
 name = "Attaque basique"
-description = "Inflige des dégâts à un ennemi."
+descriptionName = "Attaque"
+description = "Inflige des dégâts à un ennemi"
 icon = ExtResource("6_jx27m")
 the_target_type = 0
 effects = Array[ExtResource("5_jx27m")]([SubResource("Resource_i4eos")])
@@ -96,6 +97,12 @@ offset_left = -123.0
 offset_top = -325.0
 offset_right = 110.0
 offset_bottom = 57.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 22.0
+offset_top = -252.0
+offset_right = 62.0
+offset_bottom = -233.0
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

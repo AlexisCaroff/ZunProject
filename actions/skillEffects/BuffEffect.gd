@@ -8,7 +8,7 @@ enum Stat {
 	STRESS_RESIST,
 	HORNY_RESIST
 }
-
+@export var uitexture: Texture2D = null
 @export_enum("ATTACK", "DEFENSE", "SPEED", "STRESS_RESIST", "HORNY_RESIST")
 var affected_stat: int = Stat.ATTACK
 
@@ -18,6 +18,7 @@ var affected_stat: int = Stat.ATTACK
 func apply(user: Character, target: Character) -> void:
 	var buff := Buff.new()
 	buff.stat = affected_stat
+	buff.icon=uitexture
 	buff.amount = amount
 	buff.duration = duration
 	buff.name = "Bonus de %s" % Buff.Stat.keys()[affected_stat]

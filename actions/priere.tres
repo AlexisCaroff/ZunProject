@@ -21,6 +21,7 @@ metadata/_custom_type_script = "uid://c3dw018knk8mk"
 [resource]
 script = ExtResource("4_yqqrb")
 name = "priere"
+descriptionName = "Attaque"
 description = "resset cooldown"
 icon = ExtResource("3_yt4kq")
 the_target_type = 3

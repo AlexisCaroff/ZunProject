@@ -2,7 +2,8 @@ extends Resource
 class_name Skill
 
 @export var name: String = "Attaque"
-@export var description: String = "Inflige des dégâts à un ennemi."
+@export var descriptionName: String = "Attaque"
+@export var description: String = "Inflige des dégâts à un ennemi"
 @export var icon: Texture2D
 enum target_type {
 	ENNEMY, 

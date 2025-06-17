@@ -44,14 +44,6 @@ offset_right = -9.0
 offset_bottom = -274.0
 text = "name"
 
-[node name="name" type="Label" parent="name"]
-layout_mode = 0
-offset_left = -53.0
-offset_top = -297.0
-offset_right = -9.0
-offset_bottom = -274.0
-text = "name"
-
 [node name="HP" type="Label" parent="."]
 offset_left = -91.0
 offset_top = -19.0
@@ -79,6 +71,12 @@ offset_left = -123.0
 offset_top = -325.0
 offset_right = 110.0
 offset_bottom = 57.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 19.0
+offset_top = -283.0
+offset_right = 59.0
+offset_bottom = -264.0
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

@@ -14,6 +14,7 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 [resource]
 script = ExtResource("4_mane8")
 name = "exorcisme"
+descriptionName = "Attaque"
 description = "exorcisme"
 icon = ExtResource("3_dxqn5")
 the_target_type = 0

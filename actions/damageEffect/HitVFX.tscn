@@ -189,10 +189,10 @@ _data = {
 script = ExtResource("1_ktxfw")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 78.7072
-offset_top = -195.69
-offset_right = 164.707
-offset_bottom = -76.6899
+offset_left = -25.0
+offset_top = -72.0
+offset_right = 60.9998
+offset_bottom = 47.0001
 theme_override_fonts/font = ExtResource("2_nu7he")
 theme_override_font_sizes/font_size = 50
 text = "14"
@@ -212,3 +212,5 @@ texture = ExtResource("4_wc85t")
 libraries = {
 &"": SubResource("AnimationLibrary_yc7u8")
 }
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

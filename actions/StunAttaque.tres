@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_lxb6k"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_lxb6k"]
 [ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="3_lxb6k"]
-[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="3_slxy4"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_abm4e"]
+[ext_resource type="Texture2D" uid="uid://crbfh0ppjt6lh" path="res://actions/actiontexture/shieldbash.png" id="4_lxb6k"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("2_lxb6k")
@@ -19,8 +19,9 @@ metadata/_custom_type_script = "uid://tjywmaoy4ejj"
 [resource]
 script = ExtResource("4_abm4e")
 name = "Shield Bash"
-description = "Inflige des dégâts à un ennemi."
-icon = ExtResource("3_slxy4")
+descriptionName = "Shield Bash"
+description = "Stun the ennemy"
+icon = ExtResource("4_lxb6k")
 the_target_type = 0
 effects = Array[ExtResource("1_lxb6k")]([SubResource("Resource_i4eos"), SubResource("Resource_slxy4")])
 two_target_Type = false

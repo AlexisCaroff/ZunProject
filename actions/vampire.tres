@@ -21,6 +21,7 @@ metadata/_custom_type_script = "uid://bp8u5at2ojgse"
 [resource]
 script = ExtResource("4_jbp84")
 name = "Vampire"
+descriptionName = "Attaque"
 description = "deal psy dmg and steal stamina"
 icon = ExtResource("3_4lsex")
 the_target_type = 0

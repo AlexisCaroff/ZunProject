@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxnw2d4wwdegc"]
+
+[ext_resource type="Texture2D" uid="uid://k10dyj6s4n5i" path="res://vfx/noiseA.png" id="1_u75om"]
+
+[sub_resource type="Gradient" id="Gradient_yhkjj"]
+colors = PackedColorArray(0.864675, 0.864675, 0.864675, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1g4e0"]
+gradient = SubResource("Gradient_yhkjj")
+
+[sub_resource type="Gradient" id="Gradient_p8h6u"]
+offsets = PackedFloat32Array(0, 0.0679245, 0.339623, 0.449057, 0.588679, 0.90566, 0.984906)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.525, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oa6yd"]
+gradient = SubResource("Gradient_p8h6u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2ngnm"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1, 40, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1.3, 1)
+angle_min = -9.99999
+angle_max = 10.0
+direction = Vector3(4000, 0, 0)
+spread = 0.0
+initial_velocity_min = 20.0
+initial_velocity_max = 60.0
+gravity = Vector3(1, 0, 0)
+scale_min = 0.5
+scale_max = 0.7
+color = Color(0.646, 0.646, 0.646, 0.099)
+color_ramp = SubResource("GradientTexture1D_oa6yd")
+color_initial_ramp = SubResource("GradientTexture1D_1g4e0")
+anim_speed_max = 10.89
+
+[node name="atmosphere" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 60
+texture = ExtResource("1_u75om")
+lifetime = 60.0
+preprocess = 60.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_2ngnm")
