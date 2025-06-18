@@ -12,8 +12,8 @@ metadata/_custom_type_script = "uid://cy3v0dypme7n7"
 [resource]
 script = ExtResource("4_2hsmt")
 name = "move"
-descriptionName = "Attaque"
-description = "Inflige des dégâts à un ennemi."
+descriptionName = "Move"
+description = "Move the character"
 icon = ExtResource("3_y3d0p")
 the_target_type = 1
 effects = Array[ExtResource("1_y3d0p")]([SubResource("Resource_r05c5")])

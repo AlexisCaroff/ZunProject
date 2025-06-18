@@ -24,6 +24,7 @@ func _on_mouse_entered() -> void:
 
 
 func _on_mouse_exited() -> void:
+	label.visible=false
 	var tween := create_tween() as Tween
 	label.text = Actiontext
 	var tweenbutton := create_tween() as Tween
