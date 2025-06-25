@@ -295,7 +295,7 @@ func animate_start_Turn():
 	CharaScale = current_slot.position_data.scale
 	var normal_size = CharaScale
 	var big_size= Vector2(1.0,1.1) 
-	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.4)
+	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	combat_manager.ui.log( str(normal_size))
 	await tween.finished

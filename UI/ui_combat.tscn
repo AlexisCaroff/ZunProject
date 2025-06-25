@@ -13,9 +13,9 @@
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="8_roj6a"]
 [ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="10_x8qlv"]
 [ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterTestEnemy1.tscn" id="12_ktp8g"]
+[ext_resource type="PackedScene" uid="uid://jc1bbpflus0q" path="res://characters/CharacterTestEnemy4.tscn" id="12_roj6a"]
 [ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharacterTestEnemy2.tscn" id="13_euc7u"]
 [ext_resource type="PackedScene" uid="uid://jg7klanpwhgj" path="res://characters/CharacterTestEnemy3.tscn" id="14_roj6a"]
-[ext_resource type="PackedScene" uid="uid://jc1bbpflus0q" path="res://characters/CharacterTestEnemy4.tscn" id="15_euc7u"]
 
 [sub_resource type="Resource" id="Resource_i1s1q"]
 script = ExtResource("7_i1s1q")
@@ -66,7 +66,7 @@ scale = Vector2(1, 1)
 is_enemy = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
-[sub_resource type="Resource" id="Resource_ktp8g"]
+[sub_resource type="Resource" id="Resource_euc7u"]
 script = ExtResource("7_i1s1q")
 index = 3
 scale = Vector2(0.8, 0.8)
@@ -233,6 +233,7 @@ autowrap_mode = 3
 [node name="CombatManager" parent="." instance=ExtResource("10_x8qlv")]
 HERO_START_POS = Vector2(100, 500)
 ENEMY_START_POS = Vector2(1200, 500)
+ENEMY_SCENES = [ExtResource("12_ktp8g"), ExtResource("12_ktp8g"), ExtResource("14_roj6a"), ExtResource("12_roj6a")]
 
 [node name="ResultScreen" type="Label" parent="."]
 visible = false
@@ -265,25 +266,21 @@ position = Vector2(151, 621)
 position = Vector2(0, 28)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_i1s1q")
-enemy_scene = ExtResource("12_ktp8g")
 
 [node name="position2" type="Node2D" parent="HeroPosition"]
 position = Vector2(173, -13)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_8flqu")
-enemy_scene = ExtResource("13_euc7u")
 
 [node name="position3" type="Node2D" parent="HeroPosition"]
 position = Vector2(366, 25)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_x8qlv")
-enemy_scene = ExtResource("14_roj6a")
 
 [node name="position4" type="Node2D" parent="HeroPosition"]
 position = Vector2(537, -13)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_t7hjh")
-enemy_scene = ExtResource("15_euc7u")
 
 [node name="ennemiePosition" type="Node2D" parent="."]
 position = Vector2(1259, 621)
@@ -292,21 +289,24 @@ position = Vector2(1259, 621)
 position = Vector2(0, 23)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_fs52m")
+enemy_scene = ExtResource("12_ktp8g")
 
 [node name="position2" type="Node2D" parent="ennemiePosition"]
 position = Vector2(169, -16)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_ehgg6")
+enemy_scene = ExtResource("13_euc7u")
 
 [node name="position3" type="Node2D" parent="ennemiePosition"]
 position = Vector2(366, 23)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_if0a6")
+enemy_scene = ExtResource("14_roj6a")
 
 [node name="position4" type="Node2D" parent="ennemiePosition"]
-position = Vector2(533, -16)
+position = Vector2(523, -10)
 script = ExtResource("6_j6rr1")
-position_data = SubResource("Resource_ktp8g")
+position_data = SubResource("Resource_euc7u")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0

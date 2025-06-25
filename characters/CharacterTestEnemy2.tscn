@@ -38,6 +38,7 @@ allways_hit = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
 
 [node name="CharacterTestennemie2" type="Node2D"]
+position = Vector2(316, 258)
 script = ExtResource("1_52n4a")
 portrait_texture = ExtResource("2_ab0ni")
 dead_portrait_texture = ExtResource("3_4a20v")

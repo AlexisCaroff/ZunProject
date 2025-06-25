@@ -4,17 +4,19 @@ class_name PositionSlot
 @export var position_data: PositionData
 @export var enemy_scene: PackedScene
 var occupant: Character = null
+@export var spawner : bool= false
 
 func is_occupied() -> bool:
 	return occupant != null
 	
 func _ready():
 	print("%s ready, enemy_scene = %s" % [name, str(enemy_scene)])
-	
+	if spawner:
+		spawn_enemy_if_needed($"../../CombatManager")
 	
 func assign_character(character: Character, movetime:float):
-	#if occupant:
-	#	occupant.current_slot = null
+	if occupant:
+		occupant.current_slot = null
 	occupant = character
 	
 	character.current_slot = self
@@ -43,4 +45,4 @@ func spawn_enemy_if_needed(combat_manager: CombatManager):
 		get_tree().get_root().add_child(enemy)
 		combat_manager.enemies.append(enemy)
 		print("try spawn")
-		assign_character(enemy, 0.1)
+		assign_character(enemy, 4.0)
