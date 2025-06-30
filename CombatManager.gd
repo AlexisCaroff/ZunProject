@@ -50,7 +50,7 @@ func _ready():
 		# Place dans la bonne PositionSlot
 		var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() )
 		var slot = hero_positions[slot_index]
-		move_character_to(chara, slot,0.0)
+		move_character_to(chara, slot,2.0)
 	
 	
 	# Spawn ennemis

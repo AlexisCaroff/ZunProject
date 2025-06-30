@@ -5,7 +5,14 @@ class_name PositionSlot
 @export var enemy_scene: PackedScene
 var occupant: Character = null
 @export var spawner : bool= false
+@onready var button = $Button
+@onready var imageinside = $TextureRect
 
+func inside() -> Character:
+	if occupant == null:
+		push_error("Erreur : nobody inside"+name)
+	return occupant
+	
 func is_occupied() -> bool:
 	return occupant != null
 	
@@ -18,7 +25,7 @@ func assign_character(character: Character, movetime:float):
 	if occupant:
 		occupant.current_slot = null
 	occupant = character
-	
+	#imageinside.texture=character.portrait_texture
 	character.current_slot = self
 	print("%s assigné à %s" % [character.name, name])
 	var tween = get_tree().create_tween()

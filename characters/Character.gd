@@ -81,16 +81,16 @@ func _ready():
 		skills.append(inst)
 		#print("Compétence chargée : ", inst.name)
 func update_stats():
-	# Reset des stats modifiées
+
 	attack = base_attack
 	defense = base_defense
 	initiative = base_initiative
 	willpower = base_willpower
 
-	# Appliquer les buffs actifs
+	
 	for buff in buffs:
 		buff.apply_to(self)
-	# Tu peux ajouter d'autres stats ici
+
 func update_ui():
 	hp_label.text = "HP: %d / %d" % [current_stamina, max_stamina]
 	stress_label.text = "Stress: %d / %d" % [current_stress, max_stress]
