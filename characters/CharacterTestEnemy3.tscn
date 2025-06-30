@@ -12,6 +12,7 @@ script = ExtResource("1_40et0")
 portrait_texture = ExtResource("2_k5y2r")
 dead_portrait_texture = ExtResource("3_fyqbi")
 initiative_icon = ExtResource("3_bvgko")
+Charaname = "Bulub"
 Chara_position = 2
 skill_resources = Array[Resource]([ExtResource("4_k5y2r"), ExtResource("4_k5y2r"), ExtResource("4_k5y2r"), ExtResource("4_k5y2r")])
 is_player_controlled = false

@@ -38,6 +38,8 @@ var the_second_target_type: int = second_target_type.ENNEMY
 @export var precision: int = 100
 @export var allways_hit: bool = false
 var owner: Character
+var target1 : Character
+var target2 : Character
 
 func can_use() -> bool:
 	if owner == null:
@@ -66,14 +68,15 @@ func _apply_effect(target: Character, effects_array: Array[SkillEffect] = effect
 	for effect in effects_array:
 		effect.apply(owner, target)
 
-func _apply_second_effect(target: Character):
-	_apply_effect(target, second_effects)
+func _apply_second_effect(target2: Character):
+	_apply_effect(target2, second_effects)
 
 func select_targets(combat_manager):
 	combat_manager.ui.log("Sélectionnez une cible pour %s" % name)
 
 	match the_target_type:
 		target_type.SELF:
+			combat_manager.current_character.set_targetable(true)
 			use(combat_manager.current_character, effects)
 			combat_manager.current_character.update_ui()
 			combat_manager.ui.log("%s utilise %s sur lui-même" % [owner.name, name])

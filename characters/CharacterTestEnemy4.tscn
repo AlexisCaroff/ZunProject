@@ -39,10 +39,13 @@ allways_hit = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
 
 [node name="CharacterTestennemie4" type="Node2D"]
+position = Vector2(260, 321)
 script = ExtResource("1_gjeux")
 portrait_texture = ExtResource("2_a2buf")
 dead_portrait_texture = ExtResource("3_8umix")
 initiative_icon = ExtResource("3_yaddt")
+Charaname = "Glarg"
+Chara_position = 3
 skill_resources = Array[Resource]([SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), ExtResource("5_yaddt")])
 is_player_controlled = false
 

@@ -3,7 +3,6 @@ class_name CombatManager
 var heroes: Array[Character] = []
 var enemies: Array[Character] = []
 var turn_queue: Array[Character] = []
-var combat_manager: Node = null 
 var current_character: Character = null
 var ui: Control = null
 @export var HERO_START_POS = Vector2(100, 600)
@@ -11,25 +10,36 @@ var ui: Control = null
 @export var SPACING_Y = 250
 @export var pending_skill: Skill = null
 @onready var ResultScreen_label= $"../ResultScreen"
-var hero_positions: Array[PositionSlot]
-var enemy_positions: Array[PositionSlot]
-const HERO_SCENES = [
+@onready var hero_positions: Array[PositionSlot]=[
+		$"../HeroPosition/position1",
+		$"../HeroPosition/position2",
+		$"../HeroPosition/position3",
+		$"../HeroPosition/position4"
+	
+]
+@onready var enemy_positions: Array[PositionSlot] =[
+		$"../ennemiePosition/position1",
+		$"../ennemiePosition/position2",
+		$"../ennemiePosition/position3",
+		$"../ennemiePosition/position4",
+]
+var HERO_SCENES = [
 	preload("res://characters/CharacterTestHero1.tscn"),
 	preload("res://characters/CharacterTestHero2.tscn"),
 	preload("res://characters/CharacterTestHero3.tscn"),
 	preload("res://characters/CharacterTestHero4.tscn")
 ]
 
-const ENEMY_SCENES = [
+@export var ENEMY_SCENES = [
 	preload("res://characters/CharacterTestEnemy1.tscn"),
 	preload("res://characters/CharacterTestEnemy2.tscn"),
 	preload("res://characters/CharacterTestEnemy3.tscn"),
-	
+	preload("res://characters/CharacterTestEnemy4.tscn")
 ]
 
 func _ready():
 	ui = get_parent()
-	setup_positions() 
+
 	# Spawn héros
 	for i in HERO_SCENES.size():
 		var chara = HERO_SCENES[i].instantiate()
@@ -40,7 +50,8 @@ func _ready():
 		# Place dans la bonne PositionSlot
 		var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() )
 		var slot = hero_positions[slot_index]
-		move_character_to(chara, slot,0.0)
+		move_character_to(chara, slot,2.0)
+	
 	
 	# Spawn ennemis
 	for i in ENEMY_SCENES.size():
@@ -48,29 +59,15 @@ func _ready():
 		add_child(chara)
 		chara.combat_manager = self
 		enemies.append(chara)
-
-		# Place dans la bonne PositionSlot
-		var slot_index = clamp(chara.Chara_position, 0, enemy_positions.size() - 1)
+		
+		var slot_index = i
 		var slot = enemy_positions[slot_index]
-		move_character_to(chara, slot,0.0)
+		move_character_to(chara, slot,2.0)
 	ui.log("start Combat")
 	start_combat()
 	
 	
-func setup_positions():
-	# Remplace ces chemins par les bons si besoin
-	hero_positions = [
-		$"../HeroPosition/position1",
-		$"../HeroPosition/position2",
-		$"../HeroPosition/position3",
-		$"../HeroPosition/position4"
-	]
-	enemy_positions = [
-		$"../ennemiePosition/position1",
-		$"../ennemiePosition/position2",
-		$"../ennemiePosition/position3",
-		$"../ennemiePosition/position4",
-	]
+
 	
 func start_combat():
 	var all_characters: Array[Character] = []
@@ -190,9 +187,7 @@ func get_positions(is_playercontroled: bool) -> Array[PositionSlot]:
 func move_character_to(character: Character, slot: PositionSlot, movetime: int):
 	if slot.occupant == character:
 		return  
-	if slot.is_occupied():
-		push_warning("move_character_to() appelé sur une position occupée sans swap.")
-		return
+
 	slot.assign_character(character,movetime)
 		
 func swap_characters(slot_a: PositionSlot, slot_b: PositionSlot,movetime: int):

@@ -35,7 +35,13 @@ var taunted_by: Character = null
 var taunt_duration: int = 0
 var buffs: Array[Buff] = []
 @export var Chara_position:int = 0 
-var current_slot: PositionSlot = null
+
+var _current_slot: PositionSlot = null
+var current_slot:
+	get: return _current_slot
+	set(value):
+		print(Charaname, " → current_slot changé :", value)
+		_current_slot = value
 var CharaScale:Vector2 = Vector2(1.0, 1.0)
 
 # --- Jauges
@@ -81,16 +87,16 @@ func _ready():
 		skills.append(inst)
 		#print("Compétence chargée : ", inst.name)
 func update_stats():
-	# Reset des stats modifiées
+
 	attack = base_attack
 	defense = base_defense
 	initiative = base_initiative
 	willpower = base_willpower
 
-	# Appliquer les buffs actifs
+	
 	for buff in buffs:
 		buff.apply_to(self)
-	# Tu peux ajouter d'autres stats ici
+
 func update_ui():
 	hp_label.text = "HP: %d / %d" % [current_stamina, max_stamina]
 	stress_label.text = "Stress: %d / %d" % [current_stress, max_stress]
@@ -152,7 +158,7 @@ func set_targetable(state: bool):
 		sprite.modulate = Color(1, 1, 1)
 	else:
 		sprite.modulate = Color(0.5, 0.5, 0.5)
-		print(self.name+"not targetable")
+		#print(self.name+"not targetable")
 	
 		
 func _input_event(viewport, event, shape_idx):
@@ -295,7 +301,7 @@ func animate_start_Turn():
 	CharaScale = current_slot.position_data.scale
 	var normal_size = CharaScale
 	var big_size= Vector2(1.0,1.1) 
-	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.4)
+	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	combat_manager.ui.log( str(normal_size))
 	await tween.finished

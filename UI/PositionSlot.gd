@@ -4,21 +4,35 @@ class_name PositionSlot
 @export var position_data: PositionData
 @export var enemy_scene: PackedScene
 var occupant: Character = null
+@export var spawner : bool= false
+@onready var button = $Button
+@onready var imageinside = $TextureRect
+var is_ready: bool = false
 
+
+func inside() -> Character:
+	if occupant == null:
+		push_error("Erreur : nobody inside"+name)
+	return occupant
+	
 func is_occupied() -> bool:
 	return occupant != null
 	
 func _ready():
-	print("%s ready, enemy_scene = %s" % [name, str(enemy_scene)])
-	
+
+	is_ready= true
+
 	
 func assign_character(character: Character, movetime:float):
-	#if occupant:
-	#	occupant.current_slot = null
+
 	occupant = character
 	
+	if not is_ready:
+		await ready
+	imageinside.texture=character.initiative_icon
 	character.current_slot = self
-	print("%s assigné à %s" % [character.name, name])
+	print(character.Charaname,"→ current_slot défini à ", self.name)
+	
 	var tween = get_tree().create_tween()
 	tween.tween_property(character, "global_position", global_position, movetime)
 	
@@ -35,12 +49,6 @@ func remove_character():
 		occupant.resetVisuel()
 		occupant = null
 		
-func spawn_enemy_if_needed(combat_manager: CombatManager):
-	print("try in %s, enemy_scene = %s" % [name, str(enemy_scene)])
-	if enemy_scene:
-		var enemy: Character = enemy_scene.instantiate()
-		enemy.combat_manager = combat_manager
-		get_tree().get_root().add_child(enemy)
-		combat_manager.enemies.append(enemy)
-		print("try spawn")
-		assign_character(enemy, 0.1)
+
+func _on_button_button_down() -> void:
+	pass # Replace with function body.

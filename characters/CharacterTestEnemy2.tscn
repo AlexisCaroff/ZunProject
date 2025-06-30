@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cr7722t3ktcl4"]
+[gd_scene load_steps=13 format=3 uid="uid://cr7722t3ktcl4"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_52n4a"]
 [ext_resource type="Texture2D" uid="uid://frq4grv1dvoo" path="res://characters/charatexture/cultisteBody.png" id="2_ab0ni"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="5_jx27m"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="6_jx27m"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="7_wprb4"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="9_wprb4"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("5_4ovvk")
@@ -38,11 +39,12 @@ allways_hit = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
 
 [node name="CharacterTestennemie2" type="Node2D"]
+position = Vector2(316, 258)
 script = ExtResource("1_52n4a")
 portrait_texture = ExtResource("2_ab0ni")
 dead_portrait_texture = ExtResource("3_4a20v")
 initiative_icon = ExtResource("3_0k1kv")
-skill_resources = Array[Resource]([SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd")])
+skill_resources = Array[Resource]([SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), ExtResource("9_wprb4")])
 is_player_controlled = false
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
