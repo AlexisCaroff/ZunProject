@@ -187,9 +187,7 @@ func get_positions(is_playercontroled: bool) -> Array[PositionSlot]:
 func move_character_to(character: Character, slot: PositionSlot, movetime: int):
 	if slot.occupant == character:
 		return  
-	#if slot.is_occupied():
-	#	push_warning("move_character_to() appelé sur une position occupée sans swap.")
-	#	return
+
 	slot.assign_character(character,movetime)
 		
 func swap_characters(slot_a: PositionSlot, slot_b: PositionSlot,movetime: int):

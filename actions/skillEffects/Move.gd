@@ -3,7 +3,7 @@ extends SkillEffect
 func apply(user: Character, target: Character):
 	var cm = user.combat_manager
 	var slots = cm.get_positions(target.is_player_controlled)
-
+	print("Move "+user.Charaname+" to "+target.Charaname+" position")
 
 	var user_slot = user.current_slot
 

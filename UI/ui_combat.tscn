@@ -270,6 +270,7 @@ script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_i1s1q")
 
 [node name="Button" type="Button" parent="HeroPosition/position1"]
+visible = false
 offset_left = -95.0
 offset_top = -271.0
 offset_right = 87.0
@@ -282,6 +283,7 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
+texture = ExtResource("1_32lil")
 
 [node name="position2" type="Node2D" parent="HeroPosition"]
 position = Vector2(173, -13)
@@ -289,6 +291,7 @@ script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_8flqu")
 
 [node name="Button" type="Button" parent="HeroPosition/position2"]
+visible = false
 offset_left = -95.0
 offset_top = -271.0
 offset_right = 87.0
@@ -301,6 +304,7 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
+texture = ExtResource("1_32lil")
 
 [node name="position3" type="Node2D" parent="HeroPosition"]
 position = Vector2(355, 27)
@@ -308,6 +312,7 @@ script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_x8qlv")
 
 [node name="Button" type="Button" parent="HeroPosition/position3"]
+visible = false
 offset_left = -95.0
 offset_top = -271.0
 offset_right = 87.0
@@ -320,6 +325,7 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
+texture = ExtResource("1_32lil")
 
 [node name="position4" type="Node2D" parent="HeroPosition"]
 position = Vector2(537, -13)
@@ -327,6 +333,7 @@ script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_t7hjh")
 
 [node name="Button" type="Button" parent="HeroPosition/position4"]
+visible = false
 offset_left = -95.0
 offset_top = -271.0
 offset_right = 87.0
@@ -339,6 +346,7 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
+texture = ExtResource("1_32lil")
 
 [node name="ennemiePosition" type="Node2D" parent="."]
 position = Vector2(1259, 621)
@@ -362,6 +370,7 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
+texture = ExtResource("1_32lil")
 
 [node name="position2" type="Node2D" parent="ennemiePosition"]
 position = Vector2(169, -16)
@@ -382,6 +391,7 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
+texture = ExtResource("1_32lil")
 
 [node name="position3" type="Node2D" parent="ennemiePosition"]
 position = Vector2(366, 23)
@@ -402,17 +412,12 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
+texture = ExtResource("1_32lil")
 
 [node name="position4" type="Node2D" parent="ennemiePosition"]
 position = Vector2(523, -10)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_euc7u")
-
-[node name="TextureRect" type="TextureRect" parent="ennemiePosition/position4"]
-offset_left = -47.0
-offset_top = -334.0
-offset_right = 19.0
-offset_bottom = -274.0
 
 [node name="Button" type="Button" parent="ennemiePosition/position4"]
 offset_left = -95.0
@@ -421,6 +426,13 @@ offset_right = 87.0
 offset_bottom = 18.0
 theme_override_styles/focus = SubResource("StyleBoxTexture_roj6a")
 button_mask = 0
+
+[node name="TextureRect" type="TextureRect" parent="ennemiePosition/position4"]
+offset_left = -47.0
+offset_top = -334.0
+offset_right = 19.0
+offset_bottom = -274.0
+texture = ExtResource("1_32lil")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -445,3 +457,5 @@ color = Color(0.501961, 0.407843, 0.207843, 1)
 [connection signal="mouse_entered" from="ActionPanel/Action5" to="ActionPanel/Action5" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action5" to="ActionPanel/Action5" method="_on_mouse_exited"]
 [connection signal="pressed" from="ActionPanel/Action5" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
+[connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]

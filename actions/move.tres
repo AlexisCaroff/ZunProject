@@ -27,5 +27,5 @@ cost = 0
 cooldown = 0
 current_cooldown = 0
 precision = 100
-allways_hit = false
+allways_hit = true
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
