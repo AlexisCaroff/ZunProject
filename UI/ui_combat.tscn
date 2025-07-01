@@ -24,8 +24,6 @@ scale = Vector2(1, 1)
 is_enemy = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_roj6a"]
-
 [sub_resource type="Resource" id="Resource_8flqu"]
 script = ExtResource("7_i1s1q")
 index = 1
@@ -46,6 +44,8 @@ index = 3
 scale = Vector2(0.8, 0.8)
 is_enemy = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_roj6a"]
 
 [sub_resource type="Resource" id="Resource_fs52m"]
 script = ExtResource("7_i1s1q")
@@ -94,6 +94,14 @@ position = Vector2(2, 352)
 [node name="FightUi" type="Sprite2D" parent="."]
 position = Vector2(960, 545)
 texture = ExtResource("4_fs52m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 681.0
+offset_top = 974.0
+offset_right = 1265.0
+offset_bottom = 975.0
+color = Color(0.501961, 0.407843, 0.207843, 1)
 
 [node name="ActionPanel" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(90, 90)
@@ -269,35 +277,25 @@ position = Vector2(0, 28)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_i1s1q")
 
-[node name="Button" type="Button" parent="HeroPosition/position1"]
-visible = false
-offset_left = -95.0
-offset_top = -271.0
-offset_right = 87.0
-offset_bottom = 18.0
-theme_override_styles/focus = SubResource("StyleBoxTexture_roj6a")
-button_mask = 0
-
 [node name="TextureRect" type="TextureRect" parent="HeroPosition/position1"]
 offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
+mouse_filter = 2
 texture = ExtResource("1_32lil")
+
+[node name="Button" type="Button" parent="HeroPosition/position1"]
+offset_left = -62.0
+offset_top = -509.0
+offset_right = 56.0
+offset_bottom = 11.0
+flat = true
 
 [node name="position2" type="Node2D" parent="HeroPosition"]
 position = Vector2(173, -13)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_8flqu")
-
-[node name="Button" type="Button" parent="HeroPosition/position2"]
-visible = false
-offset_left = -95.0
-offset_top = -271.0
-offset_right = 87.0
-offset_bottom = 18.0
-theme_override_styles/focus = SubResource("StyleBoxTexture_roj6a")
-button_mask = 0
 
 [node name="TextureRect" type="TextureRect" parent="HeroPosition/position2"]
 offset_left = -47.0
@@ -306,19 +304,16 @@ offset_right = 19.0
 offset_bottom = -274.0
 texture = ExtResource("1_32lil")
 
+[node name="Button" type="Button" parent="HeroPosition/position2"]
+offset_left = -62.0
+offset_top = -210.0
+offset_right = 56.0
+offset_bottom = 11.0
+
 [node name="position3" type="Node2D" parent="HeroPosition"]
 position = Vector2(355, 27)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_x8qlv")
-
-[node name="Button" type="Button" parent="HeroPosition/position3"]
-visible = false
-offset_left = -95.0
-offset_top = -271.0
-offset_right = 87.0
-offset_bottom = 18.0
-theme_override_styles/focus = SubResource("StyleBoxTexture_roj6a")
-button_mask = 0
 
 [node name="TextureRect" type="TextureRect" parent="HeroPosition/position3"]
 offset_left = -47.0
@@ -326,6 +321,12 @@ offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
 texture = ExtResource("1_32lil")
+
+[node name="Button" type="Button" parent="HeroPosition/position3"]
+offset_left = -62.0
+offset_top = -210.0
+offset_right = 56.0
+offset_bottom = 11.0
 
 [node name="position4" type="Node2D" parent="HeroPosition"]
 position = Vector2(537, -13)
@@ -434,14 +435,6 @@ offset_right = 19.0
 offset_bottom = -274.0
 texture = ExtResource("1_32lil")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = 681.0
-offset_top = 974.0
-offset_right = 1265.0
-offset_bottom = 975.0
-color = Color(0.501961, 0.407843, 0.207843, 1)
-
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]
 [connection signal="pressed" from="ActionPanel/Action1" to="CombatManager" method="_on_action_1_pressed"]
@@ -459,3 +452,4 @@ color = Color(0.501961, 0.407843, 0.207843, 1)
 [connection signal="pressed" from="ActionPanel/Action5" to="CombatManager" method="_on_action_1_pressed"]
 [connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]
+[connection signal="button_down" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_button_down"]

@@ -40,7 +40,6 @@ var _current_slot: PositionSlot = null
 var current_slot:
 	get: return _current_slot
 	set(value):
-		print(Charaname, " → current_slot changé :", value)
 		_current_slot = value
 var CharaScale:Vector2 = Vector2(1.0, 1.0)
 

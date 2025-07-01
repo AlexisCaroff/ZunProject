@@ -5,10 +5,21 @@ class_name PositionSlot
 @export var enemy_scene: PackedScene
 var occupant: Character = null
 @export var spawner : bool= false
-@onready var button = $Button
+
 @onready var imageinside = $TextureRect
 var is_ready: bool = false
 
+signal slot_selected(slot: PositionSlot)
+
+#@onready var click_button = $Button  # ou le nom de ton bouton dans le slot
+
+
+func _on_click():
+	print("blip"+ self.name)
+	if occupant and occupant.is_targetable:
+		
+		emit_signal("slot_selected", self)
+		
 
 func inside() -> Character:
 	if occupant == null:
@@ -31,7 +42,7 @@ func assign_character(character: Character, movetime:float):
 		await ready
 	imageinside.texture=character.initiative_icon
 	character.current_slot = self
-	print(character.Charaname,"→ current_slot défini à ", self.name)
+	#print(character.Charaname,"→ current_slot défini à ", self.name)
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property(character, "global_position", global_position, movetime)
@@ -50,5 +61,17 @@ func remove_character():
 		occupant = null
 		
 
+
+
+
+
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	print("blip " + self.name)
+	if event is InputEventMouseButton and event.pressed:
+		
+		if occupant and occupant.is_targetable:
+			emit_signal("slot_selected", self)
+
+
 func _on_button_button_down() -> void:
-	pass # Replace with function body.
+		print("blip " + self.name)
