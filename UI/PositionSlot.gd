@@ -5,21 +5,16 @@ class_name PositionSlot
 @export var enemy_scene: PackedScene
 var occupant: Character = null
 @export var spawner : bool= false
-
+@onready var combat_manager = $"../../CombatManager"
 @onready var imageinside = $TextureRect
+var selfposition: Array[PositionSlot] = []
+
 var is_ready: bool = false
 
 signal slot_selected(slot: PositionSlot)
 
 #@onready var click_button = $Button  # ou le nom de ton bouton dans le slot
 
-
-func _on_click():
-	print("blip"+ self.name)
-	if occupant and occupant.is_targetable:
-		
-		emit_signal("slot_selected", self)
-		
 
 func inside() -> Character:
 	if occupant == null:
@@ -30,7 +25,7 @@ func is_occupied() -> bool:
 	return occupant != null
 	
 func _ready():
-
+	selfposition.append(self)
 	is_ready= true
 
 	
@@ -65,13 +60,40 @@ func remove_character():
 
 
 
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	print("blip " + self.name)
-	if event is InputEventMouseButton and event.pressed:
-		
-		if occupant and occupant.is_targetable:
-			emit_signal("slot_selected", self)
-
-
 func _on_button_button_down() -> void:
-		print("blip " + self.name)
+
+	
+	if occupant and occupant.is_targetable:
+		if combat_manager.pending_skill.target_type.SELF:
+			combat_manager._on_target_selected(selfposition)
+			print("clic")
+
+		else:
+			if combat_manager.pending_skill.target_type.ALLY:
+				combat_manager._on_target_selected(selfposition)
+				print("clic")
+			else:
+				if combat_manager.pending_skill.target_type.ENNEMY:
+					combat_manager._on_target_selected(selfposition)
+					print("clic")
+
+				else:
+						if combat_manager.pending_skill.target_type.ALL_ALLY:
+							for position in combat_manager.heros_positions:
+								combat_manager._on_target_selected(position)
+							
+							print("clic")
+						else:
+							if combat_manager.pending_skill.target_type.ALL_ENNEMY:
+								for position in combat_manager.enemy_positions:
+									combat_manager._on_target_selected(position)
+								print("clic")
+		
+
+
+func _on_button_mouse_entered() -> void:
+	occupant.Selector.self_modulate= Color(1.0,1.0,1.0,0.5)
+
+
+func _on_button_mouse_exited() -> void:
+	occupant.Selector.self_modulate= Color(.0,1.0,1.0,0.0)

@@ -8,7 +8,20 @@ var ui: Control = null
 @export var HERO_START_POS = Vector2(100, 600)
 @export var ENEMY_START_POS = Vector2(1200, 600)
 @export var SPACING_Y = 250
-@export var pending_skill: Skill = null
+@export var _pending_skill: Skill = null  # Stockage interne
+
+# Propriété publique avec accesseurs
+var pending_skill: Skill:
+	get:
+		print("GET pending_skill →", _pending_skill)
+		return _pending_skill
+	set(value):
+		print("SET pending_skill →", value)
+		if value == null:
+			print_stack()  # Affiche la pile d'appels GDScript
+		_pending_skill = value
+
+
 @onready var ResultScreen_label= $"../ResultScreen"
 @onready var hero_positions: Array[PositionSlot]=[
 		$"../HeroPosition/position1",
@@ -145,22 +158,24 @@ func get_current_character() -> Character:
 func start_target_selection(skill: Skill):
 	skill.select_targets(self)
 		
-func _on_target_selected(target: Character):
+func _on_target_selected(targets: Array[PositionSlot]):
 	if pending_skill.name != "move":
-		await current_character.animate_attack(target)
-	ui.log(pending_skill.name)
-	pending_skill.use(target)
+		await current_character.animate_attack(targets[0].occupant)  # anime sur la première cible
 	
-	target.update_ui()
+	ui.log(pending_skill.name)
+
+	for target in targets:
+		pending_skill.use(target)
+		target.occupant.update_ui()
+
 	if pending_skill.two_target_Type:
 		pending_skill.select_second_target(self)
 	else:
 		pending_skill.end_turn(self)
-	
 
 	stop_target_selection()
 	
-func _on_second_target_selected(target: Character):
+func _on_second_target_selected(target: PositionSlot):
 	#await current_character.animate_attack(target)
 	ui.log(pending_skill.name)
 	pending_skill._apply_second_effect(target)
@@ -169,6 +184,7 @@ func _on_second_target_selected(target: Character):
 	stop_target_selection()
 
 func stop_target_selection():
+	pending_skill=null
 	for enemy in enemies:
 		enemy.set_targetable(false)
 		enemy.resetVisuel()

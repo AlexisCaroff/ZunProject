@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://bptddsqeaq28h" path="res://actions/heal.tres" id="5_d5532"]
 [ext_resource type="Resource" uid="uid://cswp6nkwg6iwu" path="res://actions/priere.tres" id="5_lhvcf"]
 [ext_resource type="Resource" uid="uid://b4f6tt51qrg3o" path="res://actions/exorcisme.tres" id="6_es7ke"]
-[ext_resource type="Resource" uid="uid://nlgjloh75gki" path="res://actions/hymneEncouragement.tres" id="8_uhc5d"]
+[ext_resource type="Resource" uid="uid://sahrc1c16ogi" path="res://actions/fouet.tres" id="6_uhc5d"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="9_uhc5d"]
 
 [node name="CharacterTestHero1" type="Node2D"]
@@ -16,7 +16,7 @@ portrait_texture = ExtResource("2_6t7nn")
 dead_portrait_texture = ExtResource("3_r5yom")
 initiative_icon = ExtResource("3_lj1d3")
 Charaname = "priest"
-skill_resources = Array[Resource]([ExtResource("5_lhvcf"), ExtResource("6_es7ke"), ExtResource("5_d5532"), ExtResource("8_uhc5d"), ExtResource("9_uhc5d")])
+skill_resources = Array[Resource]([ExtResource("5_lhvcf"), ExtResource("6_uhc5d"), ExtResource("5_d5532"), ExtResource("6_es7ke"), ExtResource("9_uhc5d")])
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
 offset_left = -133.0

@@ -182,7 +182,7 @@ func play_ai_turn(heroes : Array, ennemies :Array):
 
 	match skill.the_target_type:
 		skill.target_type.SELF:
-			skill.use(self)
+			skill.use(self.current_slot)
 			update_ui()
 			resetVisuel()
 			return
@@ -208,7 +208,7 @@ func play_ai_turn(heroes : Array, ennemies :Array):
 
 	# Étape 5 : animer et appliquer le sort
 	await animate_attack(target)
-	skill.use(target)
+	skill.use(target.current_slot)
 	target.update_ui()
 	resetVisuel()
 

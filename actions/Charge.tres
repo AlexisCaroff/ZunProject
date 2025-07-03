@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://clw258vbo2rq1"]
 
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_067qx"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_acaj7"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_acaj7"]
 [ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="3_acaj7"]
 [ext_resource type="Texture2D" uid="uid://cn8mh7x1j6vs" path="res://actions/actiontexture/charge.png" id="4_acaj7"]
@@ -24,10 +24,10 @@ descriptionName = "Attaque"
 description = "Inflige des dégâts à un ennemi."
 icon = ExtResource("4_acaj7")
 the_target_type = 0
-effects = Array[ExtResource("1_067qx")]([SubResource("Resource_i4eos"), SubResource("Resource_0evjx")])
+effects = Array[ExtResource("1_acaj7")]([SubResource("Resource_i4eos"), SubResource("Resource_0evjx")])
 two_target_Type = false
 the_second_target_type = 3
-second_effects = Array[ExtResource("1_067qx")]([])
+second_effects = Array[ExtResource("1_acaj7")]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

@@ -9,6 +9,9 @@ enum Stat {
 }
 @export_enum("STAMINA", "HORNY", "STRESS")
 var damage_target_stat: int = Stat.STAMINA
+var Chartarget:Character
 
-func apply(user: Character, target: Character) -> void:
-	target.take_damage(user, damage_target_stat, amount)
+
+func apply(user: Character, target: PositionSlot) -> void:
+	Chartarget = target.occupant
+	Chartarget.take_damage(user, damage_target_stat, amount)
