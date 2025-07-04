@@ -61,35 +61,31 @@ func remove_character():
 
 
 func _on_button_button_down() -> void:
-
-	
 	if occupant and occupant.is_targetable:
-		if combat_manager.pending_skill.target_type.SELF:
-			combat_manager._on_target_selected(selfposition)
-			print("clic")
+		var skill = combat_manager.pending_skill
 
-		else:
-			if combat_manager.pending_skill.target_type.ALLY:
+		match skill.the_target_type:
+			Skill.target_type.SELF:
 				combat_manager._on_target_selected(selfposition)
-				print("clic")
-			else:
-				if combat_manager.pending_skill.target_type.ENNEMY:
-					combat_manager._on_target_selected(selfposition)
-					print("clic")
+				print("self targeted")
 
-				else:
-						if combat_manager.pending_skill.target_type.ALL_ALLY:
-							for position in combat_manager.heros_positions:
-								combat_manager._on_target_selected(position)
-							
-							print("clic")
-						else:
-							if combat_manager.pending_skill.target_type.ALL_ENNEMY:
-								for position in combat_manager.enemy_positions:
-									combat_manager._on_target_selected(position)
-								print("clic")
-		
+			Skill.target_type.ALLY:
+				combat_manager._on_target_selected(selfposition)
+				print("one ally targeted")
 
+			Skill.target_type.ENNEMY:
+				combat_manager._on_target_selected(selfposition)
+				print("one enemy targeted")
+
+			Skill.target_type.ALL_ALLY:
+
+				combat_manager._on_target_selected(combat_manager.hero_positions)
+				print("all allies targeted")
+
+			Skill.target_type.ALL_ENNEMY:
+
+				combat_manager._on_target_selected(combat_manager.enemy_positions)
+				print("all enemies targeted")
 
 func _on_button_mouse_entered() -> void:
 	occupant.Selector.self_modulate= Color(1.0,1.0,1.0,0.5)

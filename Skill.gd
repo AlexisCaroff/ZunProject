@@ -5,6 +5,7 @@ class_name Skill
 @export var descriptionName: String = "Attaque"
 @export var description: String = "Inflige des dégâts à un ennemi"
 @export var icon: Texture2D
+@export var attack_sound: AudioStream 
 enum target_type {
 	ENNEMY, 
 	ALLY, 
@@ -78,7 +79,6 @@ func select_targets(combat_manager):
 		target_type.SELF:
 			combat_manager.current_character.set_targetable(true)
 
-
 		target_type.ALLY:
 			combat_manager.pending_skill=self
 			for ally in combat_manager.heroes:
@@ -102,24 +102,13 @@ func select_targets(combat_manager):
 		target_type.ALL_ALLY:
 			for ally in combat_manager.heroes:
 				ally.set_targetable(true)
-				
-			if two_target_Type:
-				select_second_target(combat_manager)
-			else:
-				end_turn(combat_manager)
 
 		target_type.ALL_ENNEMY:
 			for enemy in combat_manager.enemies:
 				enemy.set_targetable(true)
-			if two_target_Type:
-				select_second_target(combat_manager)
-			else:
-				end_turn(combat_manager)
 				
 func select_second_target(combat_manager):
 	match the_second_target_type:
-
-
 
 		second_target_type.SELF:
 			combat_manager.current_character.set_targetable(true)

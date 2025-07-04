@@ -227,32 +227,13 @@ func end_turn():
 	reduce_cooldowns()
 	
 	update_stats()
-	
-	
-	
+
 
 
 func select_as_target():
 	print("Cible sélectionnée : ", self.name)
 	combat_manager.select_target(self)
 
-
-
-func _on_button_button_down() -> void:
-	
-	if combat_manager != null && is_targetable:
-		Selector.self_modulate= Color(1.0,1.0,1.0,1.0)
-		#emit_signal("target_selected", self)
-		combat_manager._on_target_selected(self)
-
-
-func _on_button_mouse_entered() -> void:
-	Selector.self_modulate= Color(1.0,1.0,1.0,0.5)
-
-func _on_button_mouse_exited() -> void:
-	Selector.self_modulate= Color(.0,1.0,1.0,0.0)
-	
-	
 func take_damage(source: Character, stat: int, amount: int) -> void:
 	var damage := 0
 	

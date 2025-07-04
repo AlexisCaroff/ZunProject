@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://h8pqs7tabdxj"]
+[gd_scene load_steps=26 format=3 uid="uid://h8pqs7tabdxj"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_8flqu"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="1_32lil"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterTestEnemy1.tscn" id="12_ktp8g"]
 [ext_resource type="PackedScene" uid="uid://jc1bbpflus0q" path="res://characters/CharacterTestEnemy4.tscn" id="12_roj6a"]
 [ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharacterTestEnemy2.tscn" id="13_euc7u"]
+[ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="13_s6b88"]
 [ext_resource type="PackedScene" uid="uid://jg7klanpwhgj" path="res://characters/CharacterTestEnemy3.tscn" id="14_roj6a"]
 
 [sub_resource type="Resource" id="Resource_i1s1q"]
@@ -250,6 +251,11 @@ autowrap_mode = 3
 HERO_START_POS = Vector2(100, 500)
 ENEMY_START_POS = Vector2(1200, 500)
 ENEMY_SCENES = [ExtResource("12_ktp8g"), ExtResource("12_ktp8g"), ExtResource("14_roj6a"), ExtResource("12_roj6a")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CombatManager"]
+stream = ExtResource("13_s6b88")
+volume_db = 4.455
+pitch_scale = 0.67
 
 [node name="ResultScreen" type="Label" parent="."]
 visible = false

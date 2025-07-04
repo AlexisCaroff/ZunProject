@@ -13,12 +13,10 @@ var ui: Control = null
 # Propriété publique avec accesseurs
 var pending_skill: Skill:
 	get:
-		print("GET pending_skill →", _pending_skill)
+		#print("GET pending_skill →", _pending_skill)
 		return _pending_skill
 	set(value):
-		print("SET pending_skill →", value)
-		if value == null:
-			print_stack()  # Affiche la pile d'appels GDScript
+		#print("SET pending_skill →", value)
 		_pending_skill = value
 
 
@@ -49,6 +47,8 @@ var HERO_SCENES = [
 	preload("res://characters/CharacterTestEnemy3.tscn"),
 	preload("res://characters/CharacterTestEnemy4.tscn")
 ]
+@onready var audio = $AudioStreamPlayer2D
+
 
 func _ready():
 	ui = get_parent()
@@ -161,27 +161,21 @@ func start_target_selection(skill: Skill):
 func _on_target_selected(targets: Array[PositionSlot]):
 	if pending_skill.name != "move":
 		await current_character.animate_attack(targets[0].occupant)  # anime sur la première cible
-	
+	if pending_skill.attack_sound != null:
+		audio.stream= pending_skill.attack_sound
+		audio.pitch_scale = randf_range(0.3, 0.5)
+		audio.play()
 	ui.log(pending_skill.name)
 
 	for target in targets:
 		pending_skill.use(target)
+		print(target.occupant.Charaname)
 		target.occupant.update_ui()
 
-	if pending_skill.two_target_Type:
-		pending_skill.select_second_target(self)
-	else:
-		pending_skill.end_turn(self)
+	pending_skill.end_turn(self)
 
 	stop_target_selection()
 	
-func _on_second_target_selected(target: PositionSlot):
-	#await current_character.animate_attack(target)
-	ui.log(pending_skill.name)
-	pending_skill._apply_second_effect(target)
-	pending_skill.end_turn(self)
-	target.update_ui()
-	stop_target_selection()
 
 func stop_target_selection():
 	pending_skill=null
