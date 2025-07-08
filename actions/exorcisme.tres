@@ -7,8 +7,9 @@
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("2_wh88t")
+psyDMG = true
 amount = 20
-damage_target_stat = 1
+damage_target_stat = 0
 metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [resource]

@@ -16,7 +16,7 @@ var pending_skill: Skill:
 		#print("GET pending_skill →", _pending_skill)
 		return _pending_skill
 	set(value):
-		#print("SET pending_skill →", value)
+		print("SET pending_skill →", value)
 		_pending_skill = value
 
 
@@ -48,7 +48,13 @@ var HERO_SCENES = [
 	preload("res://characters/CharacterTestEnemy4.tscn")
 ]
 @onready var audio = $AudioStreamPlayer2D
+enum CombatState {
+	IDLE,
+	SELECTING_FIRST_TARGET,
+	SELECTING_SECOND_TARGET
+}
 
+var combat_state: CombatState = CombatState.IDLE
 
 func _ready():
 	ui = get_parent()
@@ -83,6 +89,7 @@ func _ready():
 
 	
 func start_combat():
+	combat_state = CombatState.IDLE
 	var all_characters: Array[Character] = []
 	all_characters.append_array(heroes)
 	all_characters.append_array(enemies)
@@ -143,38 +150,72 @@ func _show_victory():
 func use_skill(index: int):
 	var skill = current_character.get_skill(index)
 	pending_skill=skill
+	combat_state = CombatState.SELECTING_FIRST_TARGET
 	if skill.can_use():
-		if skill.needtarget:
-			pending_skill = skill
-			start_target_selection(skill)
-		else:
-			skill.use()
-			ui.log("%s utilise %s" % [current_character.name, skill.name])
-			next_turn()
+		
+		pending_skill = skill
+		start_target_selection(skill)
+		
 func get_current_character() -> Character:
 	return current_character
 	
 	
 func start_target_selection(skill: Skill):
-	skill.select_targets(self)
+	match combat_state: 
+		CombatState.SELECTING_FIRST_TARGET :
+			print("selecting first target")
+			skill.select_targets(self)
+		CombatState.SELECTING_SECOND_TARGET :
+			print("selecting second target")
+			skill.select_second_target(self)
+			
 		
 func _on_target_selected(targets: Array[PositionSlot]):
-	if pending_skill.name != "move":
-		await current_character.animate_attack(targets[0].occupant)  # anime sur la première cible
-	if pending_skill.attack_sound != null:
-		audio.stream= pending_skill.attack_sound
-		audio.pitch_scale = randf_range(0.3, 0.5)
-		audio.play()
-	ui.log(pending_skill.name)
+	match combat_state: 
+		CombatState.SELECTING_FIRST_TARGET :
+			if !pending_skill.two_target_Type:
+				if pending_skill.name != "move":
+					await current_character.animate_attack(targets[0].occupant)  # anime sur la première cible
+				if pending_skill.attack_sound != null:
+					audio.stream= pending_skill.attack_sound
+					audio.pitch_scale = randf_range(0.3, 0.5)
+					audio.play()
+				ui.log(pending_skill.name)
 
-	for target in targets:
-		pending_skill.use(target)
-		print(target.occupant.Charaname)
-		target.occupant.update_ui()
+				for target in targets:
+					pending_skill.use(target)
+					print(target.occupant.Charaname)
+					target.occupant.update_ui()
 
-	pending_skill.end_turn(self)
+				pending_skill.end_turn(self)
+				stop_target_selection()
+			else:
+				pending_skill.target1 = targets
+				combat_state = CombatState.SELECTING_SECOND_TARGET
+				start_target_selection(pending_skill)
 
-	stop_target_selection()
+		CombatState.SELECTING_SECOND_TARGET :
+			if pending_skill.name != "move":
+				await current_character.animate_attack(pending_skill.target1[0].occupant)  # anime sur la première cible
+			if pending_skill.attack_sound != null:
+				audio.stream= pending_skill.attack_sound
+				audio.pitch_scale = randf_range(0.3, 0.5)
+				audio.play()
+			ui.log(pending_skill.name)
+
+			for target in pending_skill.target1:
+				pending_skill.use(target)
+				print(target.occupant.Charaname)
+				target.occupant.update_ui()
+			for target2 in targets:
+				pending_skill.use(target2,true)
+				print(target2.occupant.Charaname)
+				target2.occupant.update_ui()
+			stop_target_selection()
+
+
+
+
 	
 
 func stop_target_selection():

@@ -14,6 +14,7 @@ portrait_texture = ExtResource("2_61pjh")
 dead_portrait_texture = ExtResource("3_0go71")
 initiative_icon = ExtResource("3_mruho")
 Charaname = "ennemie1"
+IsDemon = true
 Chara_position = 1
 skill_resources = Array[Resource]([ExtResource("4_61pjh"), ExtResource("4_61pjh"), ExtResource("4_61pjh"), ExtResource("4_61pjh"), ExtResource("6_0go71")])
 is_player_controlled = false

@@ -13,6 +13,7 @@
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("5_4ovvk")
+psyDMG = false
 amount = 20
 damage_target_stat = 0
 metadata/_custom_type_script = "uid://bjsbovfjff2wo"
@@ -44,6 +45,8 @@ script = ExtResource("1_52n4a")
 portrait_texture = ExtResource("2_ab0ni")
 dead_portrait_texture = ExtResource("3_4a20v")
 initiative_icon = ExtResource("3_0k1kv")
+Charaname = "sucubbus"
+IsDemon = true
 skill_resources = Array[Resource]([SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), ExtResource("9_wprb4")])
 is_player_controlled = false
 

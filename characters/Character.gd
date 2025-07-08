@@ -14,7 +14,7 @@ class_name Character
 var combat_manager: Node = null 
 @onready var buff_bar = $HBoxContainer
 @export var Charaname: String = "name"
-
+@export var IsDemon: bool = false
 # --- Stats de combat
 @export var base_attack: int = 10
 @export var base_defense: int = 5
@@ -155,9 +155,10 @@ func set_targetable(state: bool):
 	is_targetable = state
 	if state :
 		sprite.modulate = Color(1, 1, 1)
+		print(Charaname+" is targetable")
 	else:
 		sprite.modulate = Color(0.5, 0.5, 0.5)
-		#print(self.name+"not targetable")
+		print(Charaname+" absolutly no a target")
 	
 		
 func _input_event(viewport, event, shape_idx):

@@ -39,25 +39,30 @@ var the_second_target_type: int = second_target_type.ENNEMY
 @export var precision: int = 100
 @export var allways_hit: bool = false
 var owner: Character
-var target1 : PositionSlot
-var target2 : PositionSlot
+var target1 : Array[PositionSlot]
+var target2 : Array[PositionSlot]
 
 func can_use() -> bool:
 	if owner == null:
 		return false
 	return current_cooldown == 0
 
-func use(target: PositionSlot = null, effects_array: Array[SkillEffect] = effects):
+func use(target: PositionSlot = null, secondtarget : bool=false):
+	
+		
 	if not can_use():
 		return
+	
 	if not allways_hit:
 		var chance = precision - target.occupant.evasion
 		var rand = randi() % 100
 		if rand >= chance:
 			target.occupant.miss_animation(owner)
 			return
-		
-	_apply_effect(target, effects_array)
+	if secondtarget:
+		_apply_second_effect(target)
+	else:
+		_apply_effect(target, effects)
 
 func pay_cost():
 	owner.current_stamina-= cost
@@ -70,17 +75,22 @@ func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = eff
 		effect.apply(owner, target)
 
 func _apply_second_effect(target2: PositionSlot):
+	print("apply second effect")
 	_apply_effect(target2, second_effects)
 
-func select_targets(combat_manager):
+func select_targets(combat_manager:CombatManager):
 	combat_manager.ui.log("Sélectionnez une cible pour %s" % name)
 
 	match the_target_type:
 		target_type.SELF:
+			for enemy in combat_manager.enemies:
+				enemy.set_targetable(false)
+			for ally in combat_manager.heroes:
+				ally.set_targetable(false)
 			combat_manager.current_character.set_targetable(true)
 
 		target_type.ALLY:
-			combat_manager.pending_skill=self
+			
 			for ally in combat_manager.heroes:
 				ally.set_targetable(true)
 				if ally.target_selected.is_connected(combat_manager._on_target_selected):
@@ -90,7 +100,7 @@ func select_targets(combat_manager):
 				enemy.set_targetable(false)
 
 		target_type.ENNEMY:
-			combat_manager.pending_skill=self
+		
 			for enemy in combat_manager.enemies:
 				enemy.set_targetable(true)
 				if enemy.target_selected.is_connected(combat_manager._on_target_selected):
@@ -100,22 +110,30 @@ func select_targets(combat_manager):
 				ally.set_targetable(false)
 
 		target_type.ALL_ALLY:
+			
 			for ally in combat_manager.heroes:
 				ally.set_targetable(true)
 
 		target_type.ALL_ENNEMY:
+			
 			for enemy in combat_manager.enemies:
 				enemy.set_targetable(true)
 				
-func select_second_target(combat_manager):
-	match the_second_target_type:
+func select_second_target(combat_manager:CombatManager):
+	
 
+	
+	match the_second_target_type:
 		second_target_type.SELF:
+			combat_manager.ui.log("Select second target")
+			for enemy in combat_manager.enemies:
+				enemy.set_targetable(false)
+			for hero in combat_manager.heroes:
+				hero.set_targetable(false)
 			combat_manager.current_character.set_targetable(true)
 
-
 		second_target_type.ALLY:
-			combat_manager.pending_skill=self
+			combat_manager.ui.log("Now select an ally")
 			for ally in combat_manager.heroes:
 				ally.set_targetable(true)
 				if ally.target_selected.is_connected(combat_manager._on_target_selected):
@@ -125,7 +143,7 @@ func select_second_target(combat_manager):
 				enemy.set_targetable(false)
 
 		second_target_type.ENNEMY:
-			combat_manager.pending_skill=self
+			
 			for enemy in combat_manager.enemies:
 				enemy.set_targetable(true)
 				if enemy.target_selected.is_connected(combat_manager._on_target_selected):
@@ -137,13 +155,10 @@ func select_second_target(combat_manager):
 		second_target_type.ALL_ALLY:
 			for ally in combat_manager.heroes:
 				ally.set_targetable(true)
-				
-				end_turn(combat_manager)
 
 		second_target_type.ALL_ENNEMY:
 			for enemy in combat_manager.enemies:
 				enemy.set_targetable(true)
-				end_turn(combat_manager)
 
 func end_turn(combat_manager):
 	pay_cost()

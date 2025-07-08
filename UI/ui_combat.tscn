@@ -476,7 +476,7 @@ flat = true
 [connection signal="button_down" from="ennemiePosition/position2/Button" to="ennemiePosition/position2" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="ennemiePosition/position2/Button" to="ennemiePosition/position2" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="ennemiePosition/position2/Button" to="ennemiePosition/position2" method="_on_button_mouse_exited"]
-[connection signal="button_down" from="ennemiePosition/position3/Button" to="HeroPosition/position3" method="_on_button_button_down"]
+[connection signal="button_down" from="ennemiePosition/position3/Button" to="ennemiePosition/position3" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="ennemiePosition/position3/Button" to="ennemiePosition/position3" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="ennemiePosition/position3/Button" to="ennemiePosition/position3" method="_on_button_mouse_exited"]
 [connection signal="button_down" from="ennemiePosition/position4/Button" to="ennemiePosition/position4" method="_on_button_button_down"]

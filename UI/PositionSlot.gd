@@ -62,30 +62,57 @@ func remove_character():
 
 func _on_button_button_down() -> void:
 	if occupant and occupant.is_targetable:
+		print("clic")
 		var skill = combat_manager.pending_skill
+		match combat_manager.combat_state:
+			combat_manager.CombatState.SELECTING_FIRST_TARGET:
+				match skill.the_target_type:
+					Skill.target_type.SELF:
+						combat_manager._on_target_selected(selfposition)
+						print("self targeted")
 
-		match skill.the_target_type:
-			Skill.target_type.SELF:
-				combat_manager._on_target_selected(selfposition)
-				print("self targeted")
+					Skill.target_type.ALLY:
+						combat_manager._on_target_selected(selfposition)
+						print("one ally targeted")
 
-			Skill.target_type.ALLY:
-				combat_manager._on_target_selected(selfposition)
-				print("one ally targeted")
+					Skill.target_type.ENNEMY:
+						combat_manager._on_target_selected(selfposition)
+						print("one enemy targeted")
 
-			Skill.target_type.ENNEMY:
-				combat_manager._on_target_selected(selfposition)
-				print("one enemy targeted")
+					Skill.target_type.ALL_ALLY:
 
-			Skill.target_type.ALL_ALLY:
+						combat_manager._on_target_selected(combat_manager.hero_positions)
+						print("all allies targeted")
 
-				combat_manager._on_target_selected(combat_manager.hero_positions)
-				print("all allies targeted")
+					Skill.target_type.ALL_ENNEMY:
 
-			Skill.target_type.ALL_ENNEMY:
+						combat_manager._on_target_selected(combat_manager.enemy_positions)
+						print("all enemies targeted")
+						
+			combat_manager.CombatState.SELECTING_SECOND_TARGET:
+				match skill.the_second_target_type:
+					Skill.second_target_type.SELF:
+						combat_manager._on_target_selected(selfposition)
+						print("2 self targeted")
 
-				combat_manager._on_target_selected(combat_manager.enemy_positions)
-				print("all enemies targeted")
+					Skill.second_target_type.ALLY:
+						combat_manager._on_target_selected(selfposition)
+						print("2 one ally targeted")
+
+					Skill.second_target_type.ENNEMY:
+						combat_manager._on_target_selected(selfposition)
+						print("2 one enemy targeted")
+
+					Skill.second_target_type.ALL_ALLY:
+
+						combat_manager._on_target_selected(combat_manager.hero_positions)
+						print("2 all allies targeted")
+
+					Skill.second_target_type.ALL_ENNEMY:
+
+						combat_manager._on_target_selected(combat_manager.enemy_positions)
+						print("2 all enemies targeted")
+				
 
 func _on_button_mouse_entered() -> void:
 	occupant.Selector.self_modulate= Color(1.0,1.0,1.0,0.5)

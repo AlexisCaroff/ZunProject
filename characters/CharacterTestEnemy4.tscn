@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://jc1bbpflus0q"]
+[gd_scene load_steps=14 format=3 uid="uid://jc1bbpflus0q"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_gjeux"]
 [ext_resource type="Texture2D" uid="uid://frq4grv1dvoo" path="res://characters/charatexture/cultisteBody.png" id="2_a2buf"]
@@ -10,9 +10,11 @@
 [ext_resource type="Resource" uid="uid://bptddsqeaq28h" path="res://actions/heal.tres" id="5_yaddt"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="6_lper1"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="7_1nlnd"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="10_1nlnd"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("5_vwr1h")
+psyDMG = false
 amount = 20
 damage_target_stat = 0
 metadata/_custom_type_script = "uid://bjsbovfjff2wo"
@@ -45,8 +47,9 @@ portrait_texture = ExtResource("2_a2buf")
 dead_portrait_texture = ExtResource("3_8umix")
 initiative_icon = ExtResource("3_yaddt")
 Charaname = "Glarg"
+IsDemon = true
 Chara_position = 3
-skill_resources = Array[Resource]([SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), ExtResource("5_yaddt")])
+skill_resources = Array[Resource]([SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), ExtResource("5_yaddt"), ExtResource("10_1nlnd")])
 is_player_controlled = false
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
