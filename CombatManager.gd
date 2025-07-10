@@ -16,7 +16,7 @@ var pending_skill: Skill:
 		#print("GET pending_skill →", _pending_skill)
 		return _pending_skill
 	set(value):
-		print("SET pending_skill →", value)
+		#print("SET pending_skill →", value)
 		_pending_skill = value
 
 
@@ -69,7 +69,7 @@ func _ready():
 		# Place dans la bonne PositionSlot
 		var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() )
 		var slot = hero_positions[slot_index]
-		move_character_to(chara, slot,2.0)
+		move_character_to(chara, slot,0.0)
 	
 	
 	# Spawn ennemis
@@ -81,7 +81,7 @@ func _ready():
 		
 		var slot_index = i
 		var slot = enemy_positions[slot_index]
-		move_character_to(chara, slot,2.0)
+		move_character_to(chara, slot,0.0)
 	ui.log("start Combat")
 	start_combat()
 	
@@ -211,7 +211,9 @@ func _on_target_selected(targets: Array[PositionSlot]):
 				pending_skill.use(target2,true)
 				print(target2.occupant.Charaname)
 				target2.occupant.update_ui()
+			pending_skill.end_turn(self)
 			stop_target_selection()
+			
 
 
 

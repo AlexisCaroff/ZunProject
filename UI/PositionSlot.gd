@@ -38,11 +38,12 @@ func assign_character(character: Character, movetime:float):
 	imageinside.texture=character.initiative_icon
 	character.current_slot = self
 	#print(character.Charaname,"→ current_slot défini à ", self.name)
-	
+	var tween2 = get_tree().create_tween()
 	var tween = get_tree().create_tween()
 	tween.tween_property(character, "global_position", global_position, movetime)
-	
+	tween2.tween_property(character, "scale", position_data.scale, movetime)
 	await tween.finished
+	await tween2.finished
 	character.CharaScale= position_data.scale
 	character.set_scale(position_data.scale)
 	
@@ -115,8 +116,8 @@ func _on_button_button_down() -> void:
 				
 
 func _on_button_mouse_entered() -> void:
-	occupant.Selector.self_modulate= Color(1.0,1.0,1.0,0.5)
+	occupant.Selector.self_modulate.a= 1.0
 
 
 func _on_button_mouse_exited() -> void:
-	occupant.Selector.self_modulate= Color(.0,1.0,1.0,0.0)
+	occupant.Selector.self_modulate.a= 0.0

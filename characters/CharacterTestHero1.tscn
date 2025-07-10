@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://csp2iaxa3prf"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_3tpjq"]
-[ext_resource type="Texture2D" uid="uid://j0hygaxu62ja" path="res://characters/charatexture/PriestBody.png" id="2_6t7nn"]
+[ext_resource type="Texture2D" uid="uid://c8rp0k1fogimi" path="res://characters/charatexture/char priest.png" id="2_0a2fh"]
 [ext_resource type="Texture2D" uid="uid://c8y2xrtwi8euj" path="res://characters/characterInitiative/priestIni.png" id="3_lj1d3"]
 [ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_r5yom"]
 [ext_resource type="Resource" uid="uid://bptddsqeaq28h" path="res://actions/heal.tres" id="5_d5532"]
@@ -12,29 +12,30 @@
 
 [node name="CharacterTestHero1" type="Node2D"]
 script = ExtResource("1_3tpjq")
-portrait_texture = ExtResource("2_6t7nn")
+portrait_texture = ExtResource("2_0a2fh")
 dead_portrait_texture = ExtResource("3_r5yom")
 initiative_icon = ExtResource("3_lj1d3")
 Charaname = "priest"
 skill_resources = Array[Resource]([ExtResource("5_lhvcf"), ExtResource("6_uhc5d"), ExtResource("5_d5532"), ExtResource("6_es7ke"), ExtResource("9_uhc5d")])
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
-offset_left = -133.0
-offset_top = -259.0
-offset_right = 133.0
-offset_bottom = -2.0
+offset_left = -124.0
+offset_top = -256.0
+offset_right = 65.0
+offset_bottom = -15.0
 mouse_filter = 2
-texture = ExtResource("2_6t7nn")
+texture = ExtResource("2_0a2fh")
+expand_mode = 1
 
 [node name="Selector" type="TextureRect" parent="."]
-modulate = Color(2, 2, 2, 1)
-self_modulate = Color(1, 1, 1, 0)
-offset_left = -133.0
-offset_top = -259.0
-offset_right = 133.0
-offset_bottom = -2.0
+self_modulate = Color(2, 2, 2, 0)
+offset_left = -124.0
+offset_top = -256.0
+offset_right = 65.0
+offset_bottom = -15.0
 mouse_filter = 2
-texture = ExtResource("2_6t7nn")
+texture = ExtResource("2_0a2fh")
+expand_mode = 1
 
 [node name="name" type="Label" parent="."]
 offset_left = -35.0
@@ -64,19 +65,8 @@ offset_right = -45.0
 offset_bottom = 58.0
 text = "horny"
 
-[node name="Button" type="Button" parent="."]
-modulate = Color(1, 1, 1, 0)
-offset_left = -123.0
-offset_top = -325.0
-offset_right = 110.0
-offset_bottom = 57.0
-
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = 22.0
 offset_top = -252.0
 offset_right = 112.0
 offset_bottom = -161.0
-
-[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
-[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]

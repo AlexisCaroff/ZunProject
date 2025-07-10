@@ -1,16 +1,17 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://duo5wcnmn0qo2"]
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://duo5wcnmn0qo2"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_rn6hm"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_rn6hm"]
 [ext_resource type="Texture2D" uid="uid://ccyi8n3i3daxa" path="res://actions/actiontexture/heal.png" id="3_4lsex"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_jbp84"]
 [ext_resource type="Script" uid="uid://bp8u5at2ojgse" path="res://actions/skillEffects/healEffect.gd" id="5_rn6hm"]
+[ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="6_4lsex"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("2_rn6hm")
-psyDMG = false
+MagicDMG = true
 amount = 20
-damage_target_stat = 1
+damage_target_stat = 0
 metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [sub_resource type="Resource" id="Resource_4lsex"]
@@ -18,6 +19,11 @@ script = ExtResource("5_rn6hm")
 heal_target_stat = 0
 amount = 20
 metadata/_custom_type_script = "uid://bp8u5at2ojgse"
+
+[sub_resource type="Resource" id="Resource_jbp84"]
+script = ExtResource("6_4lsex")
+amount = 1
+metadata/_custom_type_script = "uid://2vsqpp6jqiow"
 
 [resource]
 script = ExtResource("4_jbp84")
@@ -28,8 +34,8 @@ icon = ExtResource("3_4lsex")
 the_target_type = 0
 effects = Array[ExtResource("1_rn6hm")]([SubResource("Resource_i4eos")])
 two_target_Type = true
-the_second_target_type = 3
-second_effects = Array[ExtResource("1_rn6hm")]([SubResource("Resource_4lsex")])
+the_second_target_type = 2
+second_effects = Array[ExtResource("1_rn6hm")]([SubResource("Resource_4lsex"), SubResource("Resource_jbp84")])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

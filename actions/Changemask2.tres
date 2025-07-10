@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=13 format=3 uid="uid://3t46ub40cdqx"]
+
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_agiil"]
+[ext_resource type="Script" uid="uid://cy3v0dypme7n7" path="res://actions/skillEffects/Move.gd" id="2_clpgp"]
+[ext_resource type="Script" uid="uid://c0arbc0klbc6c" path="res://actions/skillEffects/ChangeSkill.gd" id="2_kovjd"]
+[ext_resource type="Resource" uid="uid://bpsapqkry8g3q" path="res://actions/attaque_basique.tres" id="3_clpgp"]
+[ext_resource type="Texture2D" uid="uid://ctv5fhwuig06" path="res://actions/actiontexture/exorcisme.png" id="3_kovjd"]
+[ext_resource type="Resource" uid="uid://duo5wcnmn0qo2" path="res://actions/vampire.tres" id="5_clsbb"]
+[ext_resource type="Resource" uid="uid://bcvrdy48sagwa" path="res://actions/hook.tres" id="6_2k455"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="7_1l2vo"]
+[ext_resource type="Resource" uid="uid://dopuwtv1moav3" path="res://actions/Shield.tres" id="7_gcx06"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="9_rttfw"]
+
+[sub_resource type="Resource" id="Resource_clsbb"]
+script = ExtResource("2_clpgp")
+metadata/_custom_type_script = "uid://cy3v0dypme7n7"
+
+[sub_resource type="Resource" id="Resource_q2veb"]
+script = ExtResource("2_kovjd")
+updated_skills = Array[Resource]([ExtResource("3_clpgp"), ExtResource("7_gcx06"), ExtResource("5_clsbb"), ExtResource("6_2k455"), ExtResource("7_1l2vo")])
+metadata/_custom_type_script = "uid://c0arbc0klbc6c"
+
+[resource]
+script = ExtResource("9_rttfw")
+name = "ChangeMask2"
+descriptionName = "ChangeMask2"
+description = "ChangeMask and skills to contact"
+icon = ExtResource("3_kovjd")
+the_target_type = 2
+effects = Array[ExtResource("1_agiil")]([SubResource("Resource_clsbb")])
+two_target_Type = true
+the_second_target_type = 2
+second_effects = Array[ExtResource("1_agiil")]([SubResource("Resource_q2veb")])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 5
+cooldown = 5
+current_cooldown = 0
+precision = 100
+allways_hit = true
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

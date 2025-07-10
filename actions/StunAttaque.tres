@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("2_lxb6k")
-psyDMG = false
+MagicDMG = false
 amount = 5
 damage_target_stat = 0
 metadata/_custom_type_script = "uid://bjsbovfjff2wo"
@@ -21,7 +21,7 @@ metadata/_custom_type_script = "uid://tjywmaoy4ejj"
 script = ExtResource("4_abm4e")
 name = "Shield Bash"
 descriptionName = "Shield Bash"
-description = "Stun the ennemy"
+description = "Stun one ennemy"
 icon = ExtResource("4_lxb6k")
 the_target_type = 0
 effects = Array[ExtResource("1_lxb6k")]([SubResource("Resource_i4eos"), SubResource("Resource_slxy4")])

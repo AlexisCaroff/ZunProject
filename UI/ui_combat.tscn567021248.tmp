@@ -29,23 +29,23 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="Resource" id="Resource_8flqu"]
 script = ExtResource("7_i1s1q")
 index = 1
-scale = Vector2(0.9, 0.9)
+scale = Vector2(0.8, 0.8)
 is_enemy = false
 isFront = false
-metadata/_custom_type_script = "uid://b3l4l88c3b65c"
-
-[sub_resource type="Resource" id="Resource_t7hjh"]
-script = ExtResource("7_i1s1q")
-index = 3
-scale = Vector2(0.9, 0.9)
-is_enemy = false
-isFront = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="Resource" id="Resource_x8qlv"]
 script = ExtResource("7_i1s1q")
 index = 2
 scale = Vector2(1, 1)
+is_enemy = false
+isFront = true
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="Resource" id="Resource_t7hjh"]
+script = ExtResource("7_i1s1q")
+index = 3
+scale = Vector2(0.8, 0.8)
 is_enemy = false
 isFront = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -61,7 +61,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="Resource" id="Resource_ehgg6"]
 script = ExtResource("7_i1s1q")
 index = 1
-scale = Vector2(0.9, 0.9)
+scale = Vector2(0.8, 0.8)
 is_enemy = true
 isFront = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -77,7 +77,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="Resource" id="Resource_euc7u"]
 script = ExtResource("7_i1s1q")
 index = 3
-scale = Vector2(0.9, 0.9)
+scale = Vector2(0.8, 0.8)
 is_enemy = true
 isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -208,12 +208,12 @@ offset_bottom = 23.0
 
 [node name="LabelAction" type="Label" parent="."]
 layout_mode = 0
-offset_left = 681.0
+offset_left = 762.0
 offset_top = 982.0
-offset_right = 1260.0
+offset_right = 1159.0
 offset_bottom = 1066.0
 theme_override_fonts/font = ExtResource("8_roj6a")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 30
 text = "Attaque1 
 et truc et bidule"
 horizontal_alignment = 1
@@ -282,7 +282,7 @@ ignore_rotation = false
 script = ExtResource("5_xibqh")
 
 [node name="HeroPosition" type="Node2D" parent="."]
-position = Vector2(151, 642)
+position = Vector2(151, 621)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
 position = Vector2(0, 28)
@@ -290,7 +290,6 @@ script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_i1s1q")
 
 [node name="TextureRect" type="TextureRect" parent="HeroPosition/position1"]
-visible = false
 offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
@@ -311,7 +310,6 @@ script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_8flqu")
 
 [node name="TextureRect" type="TextureRect" parent="HeroPosition/position2"]
-visible = false
 offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
@@ -325,33 +323,12 @@ offset_right = 78.0
 offset_bottom = 11.0
 flat = true
 
-[node name="position4" type="Node2D" parent="HeroPosition"]
-position = Vector2(537, -13)
-script = ExtResource("6_j6rr1")
-position_data = SubResource("Resource_t7hjh")
-
-[node name="TextureRect" type="TextureRect" parent="HeroPosition/position4"]
-visible = false
-offset_left = -47.0
-offset_top = -334.0
-offset_right = 19.0
-offset_bottom = -274.0
-texture = ExtResource("1_32lil")
-
-[node name="Button" type="Button" parent="HeroPosition/position4"]
-offset_left = -92.0
-offset_top = -304.0
-offset_right = 78.0
-offset_bottom = 11.0
-flat = true
-
 [node name="position3" type="Node2D" parent="HeroPosition"]
 position = Vector2(355, 27)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_x8qlv")
 
 [node name="TextureRect" type="TextureRect" parent="HeroPosition/position3"]
-visible = false
 offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
@@ -365,8 +342,27 @@ offset_right = 78.0
 offset_bottom = 11.0
 flat = true
 
+[node name="position4" type="Node2D" parent="HeroPosition"]
+position = Vector2(537, -13)
+script = ExtResource("6_j6rr1")
+position_data = SubResource("Resource_t7hjh")
+
+[node name="TextureRect" type="TextureRect" parent="HeroPosition/position4"]
+offset_left = -47.0
+offset_top = -334.0
+offset_right = 19.0
+offset_bottom = -274.0
+texture = ExtResource("1_32lil")
+
+[node name="Button" type="Button" parent="HeroPosition/position4"]
+offset_left = -92.0
+offset_top = -304.0
+offset_right = 78.0
+offset_bottom = 11.0
+flat = true
+
 [node name="ennemiePosition" type="Node2D" parent="."]
-position = Vector2(1259, 642)
+position = Vector2(1259, 621)
 
 [node name="position1" type="Node2D" parent="ennemiePosition"]
 position = Vector2(0, 23)
@@ -375,7 +371,6 @@ position_data = SubResource("Resource_fs52m")
 enemy_scene = ExtResource("12_ktp8g")
 
 [node name="TextureRect" type="TextureRect" parent="ennemiePosition/position1"]
-visible = false
 offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
@@ -396,7 +391,6 @@ position_data = SubResource("Resource_ehgg6")
 enemy_scene = ExtResource("13_euc7u")
 
 [node name="TextureRect" type="TextureRect" parent="ennemiePosition/position2"]
-visible = false
 offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
@@ -417,7 +411,6 @@ position_data = SubResource("Resource_if0a6")
 enemy_scene = ExtResource("14_roj6a")
 
 [node name="TextureRect" type="TextureRect" parent="ennemiePosition/position3"]
-visible = false
 offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
@@ -437,7 +430,6 @@ script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_euc7u")
 
 [node name="TextureRect" type="TextureRect" parent="ennemiePosition/position4"]
-visible = false
 offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
@@ -472,12 +464,12 @@ flat = true
 [connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_mouse_exited"]
-[connection signal="button_down" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_button_down"]
-[connection signal="mouse_entered" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_mouse_exited"]
 [connection signal="button_down" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_button_down"]
+[connection signal="mouse_entered" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_mouse_exited"]
 [connection signal="button_down" from="ennemiePosition/position1/Button" to="ennemiePosition/position1" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="ennemiePosition/position1/Button" to="ennemiePosition/position1" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="ennemiePosition/position1/Button" to="ennemiePosition/position1" method="_on_button_mouse_exited"]

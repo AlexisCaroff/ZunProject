@@ -1,16 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://jg7klanpwhgj"]
+[gd_scene load_steps=7 format=3 uid="uid://jg7klanpwhgj"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_40et0"]
-[ext_resource type="Texture2D" uid="uid://frq4grv1dvoo" path="res://characters/charatexture/cultisteBody.png" id="2_k5y2r"]
+[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="2_fyqbi"]
 [ext_resource type="Texture2D" uid="uid://b0q8mhrqooms" path="res://characters/characterInitiative/cultisteIni.png" id="3_bvgko"]
 [ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_fyqbi"]
 [ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/Ennemi_attaque_basique.tres" id="4_k5y2r"]
-[ext_resource type="Texture2D" uid="uid://j0hygaxu62ja" path="res://characters/charatexture/PriestBody.png" id="5_k5y2r"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="6_fyqbi"]
 
 [node name="CharacterTestennemie3" type="Node2D"]
 script = ExtResource("1_40et0")
-portrait_texture = ExtResource("2_k5y2r")
+portrait_texture = ExtResource("2_fyqbi")
 dead_portrait_texture = ExtResource("3_fyqbi")
 initiative_icon = ExtResource("3_bvgko")
 Charaname = "Bulub"
@@ -20,12 +19,22 @@ skill_resources = Array[Resource]([ExtResource("4_k5y2r"), ExtResource("4_k5y2r"
 is_player_controlled = false
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
-offset_left = -133.0
+modulate = Color(0.490196, 1, 0.458824, 1)
+offset_left = -118.0
 offset_top = -259.0
-offset_right = 133.0
-offset_bottom = -2.0
-mouse_filter = 2
-texture = ExtResource("5_k5y2r")
+offset_right = 66.0
+offset_bottom = -10.0
+texture = ExtResource("2_fyqbi")
+expand_mode = 1
+
+[node name="Selector" type="TextureRect" parent="."]
+self_modulate = Color(2, 2, 2, 0)
+offset_left = -118.0
+offset_top = -259.0
+offset_right = 66.0
+offset_bottom = -10.0
+texture = ExtResource("2_fyqbi")
+expand_mode = 1
 
 [node name="name" type="Label" parent="."]
 offset_left = -35.0
@@ -61,16 +70,6 @@ offset_left = -123.0
 offset_top = -325.0
 offset_right = 110.0
 offset_bottom = 57.0
-
-[node name="Selector" type="TextureRect" parent="."]
-modulate = Color(2, 2, 2, 1)
-self_modulate = Color(1, 1, 1, 0)
-offset_left = -132.0
-offset_top = -259.0
-offset_right = 134.0
-offset_bottom = -2.0
-mouse_filter = 2
-texture = ExtResource("5_k5y2r")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = 22.0

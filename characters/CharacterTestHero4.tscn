@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dbtxyhyysj65n"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i8qvq"]
-[ext_resource type="Texture2D" uid="uid://cvcdlt3vbbkqj" path="res://characters/charatexture/CroiséBody.png" id="2_b6mpb"]
+[ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="2_eg61m"]
 [ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_eg61m"]
 [ext_resource type="Texture2D" uid="uid://b23pftdqkb2it" path="res://characters/characterInitiative/croiséIni.png" id="4_07x3b"]
 [ext_resource type="Resource" uid="uid://behrtqotkyvnx" path="res://actions/Taunt.tres" id="5_b6mpb"]
@@ -12,7 +12,7 @@
 
 [node name="CharacterTestHero4" type="Node2D"]
 script = ExtResource("1_i8qvq")
-portrait_texture = ExtResource("2_b6mpb")
+portrait_texture = ExtResource("2_eg61m")
 dead_portrait_texture = ExtResource("3_eg61m")
 initiative_icon = ExtResource("4_07x3b")
 Charaname = "Tank"
@@ -21,21 +21,21 @@ Chara_position = 3
 skill_resources = Array[Resource]([ExtResource("5_b6mpb"), ExtResource("6_y4wav"), ExtResource("11_y4wav"), ExtResource("8_ghs3y"), ExtResource("9_4h21c")])
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
-offset_left = -108.0
-offset_top = -275.0
-offset_right = 244.0
-offset_bottom = 237.0
+offset_left = -123.0
+offset_top = -289.0
+offset_right = 399.0
+offset_bottom = 251.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_b6mpb")
+texture = ExtResource("2_eg61m")
 
 [node name="Selector" type="TextureRect" parent="."]
 self_modulate = Color(2, 2, 2, 0)
-offset_left = -107.0
-offset_top = -276.0
-offset_right = 241.0
-offset_bottom = 238.0
+offset_left = -123.0
+offset_top = -289.0
+offset_right = 399.0
+offset_bottom = 251.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_b6mpb")
+texture = ExtResource("2_eg61m")
 
 [node name="name" type="Label" parent="."]
 offset_left = -53.0

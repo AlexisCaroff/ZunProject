@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d3jx7ce6fpdr1"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_61pjh"]
-[ext_resource type="Texture2D" uid="uid://frq4grv1dvoo" path="res://characters/charatexture/cultisteBody.png" id="2_61pjh"]
+[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="2_i0xeg"]
 [ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_0go71"]
 [ext_resource type="Texture2D" uid="uid://b0q8mhrqooms" path="res://characters/characterInitiative/cultisteIni.png" id="3_mruho"]
 [ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/Ennemi_attaque_basique.tres" id="4_61pjh"]
@@ -10,7 +10,7 @@
 [node name="CharacterTestennemie1" type="Node2D"]
 modulate = Color(0.801126, 0.738995, 1.15514e-06, 1)
 script = ExtResource("1_61pjh")
-portrait_texture = ExtResource("2_61pjh")
+portrait_texture = ExtResource("2_i0xeg")
 dead_portrait_texture = ExtResource("3_0go71")
 initiative_icon = ExtResource("3_mruho")
 Charaname = "ennemie1"
@@ -21,20 +21,21 @@ is_player_controlled = false
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
 modulate = Color(0.490196, 1, 0.458824, 1)
-offset_left = -133.0
+offset_left = -118.0
 offset_top = -259.0
-offset_right = 133.0
-offset_bottom = -2.0
-texture = ExtResource("2_61pjh")
+offset_right = 66.0
+offset_bottom = -10.0
+texture = ExtResource("2_i0xeg")
+expand_mode = 1
 
 [node name="Selector" type="TextureRect" parent="."]
-modulate = Color(2, 2, 2, 1)
-self_modulate = Color(1, 1, 1, 0)
-offset_left = -133.0
+self_modulate = Color(2, 2, 2, 0)
+offset_left = -118.0
 offset_top = -259.0
-offset_right = 133.0
-offset_bottom = -2.0
-texture = ExtResource("2_61pjh")
+offset_right = 66.0
+offset_bottom = -10.0
+texture = ExtResource("2_i0xeg")
+expand_mode = 1
 
 [node name="name" type="Label" parent="."]
 offset_left = -35.0

@@ -80,7 +80,6 @@ func _apply_second_effect(target2: PositionSlot):
 
 func select_targets(combat_manager:CombatManager):
 	combat_manager.ui.log("Sélectionnez une cible pour %s" % name)
-
 	match the_target_type:
 		target_type.SELF:
 			for enemy in combat_manager.enemies:
@@ -90,7 +89,6 @@ func select_targets(combat_manager:CombatManager):
 			combat_manager.current_character.set_targetable(true)
 
 		target_type.ALLY:
-			
 			for ally in combat_manager.heroes:
 				ally.set_targetable(true)
 				if ally.target_selected.is_connected(combat_manager._on_target_selected):
@@ -100,7 +98,6 @@ func select_targets(combat_manager:CombatManager):
 				enemy.set_targetable(false)
 
 		target_type.ENNEMY:
-		
 			for enemy in combat_manager.enemies:
 				enemy.set_targetable(true)
 				if enemy.target_selected.is_connected(combat_manager._on_target_selected):
@@ -110,27 +107,21 @@ func select_targets(combat_manager:CombatManager):
 				ally.set_targetable(false)
 
 		target_type.ALL_ALLY:
-			
 			for ally in combat_manager.heroes:
 				ally.set_targetable(true)
 
 		target_type.ALL_ENNEMY:
-			
 			for enemy in combat_manager.enemies:
 				enemy.set_targetable(true)
-				
-func select_second_target(combat_manager:CombatManager):
-	
 
+func select_second_target(combat_manager:CombatManager):
 	
 	match the_second_target_type:
 		second_target_type.SELF:
-			combat_manager.ui.log("Select second target")
-			for enemy in combat_manager.enemies:
-				enemy.set_targetable(false)
-			for hero in combat_manager.heroes:
-				hero.set_targetable(false)
-			combat_manager.current_character.set_targetable(true)
+			var selfposition: Array[PositionSlot]
+			selfposition.append(combat_manager.current_character.current_slot)
+			print("affect self")
+			combat_manager._on_target_selected(selfposition)
 
 		second_target_type.ALLY:
 			combat_manager.ui.log("Now select an ally")

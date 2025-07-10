@@ -1,74 +1,41 @@
-[gd_scene load_steps=16 format=3 uid="uid://b8lhes1w5ga1t"]
+[gd_scene load_steps=10 format=3 uid="uid://b8lhes1w5ga1t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_0i81g"]
-[ext_resource type="Texture2D" uid="uid://dv2p7bp8auvbe" path="res://characters/charatexture/occultiste.png" id="2_1uy8h"]
+[ext_resource type="Texture2D" uid="uid://df5ltgoqyf2jw" path="res://characters/charatexture/char mystic.png" id="2_0vb8e"]
 [ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_jldwf"]
 [ext_resource type="Texture2D" uid="uid://cxgtaq54g42pp" path="res://characters/characterInitiative/occultisteIni.png" id="4_0vb8e"]
-[ext_resource type="Resource" uid="uid://cyqcgi4xvqvk2" path="res://actions/buffAttack.tres" id="5_bd0xg"]
-[ext_resource type="Resource" uid="uid://behrtqotkyvnx" path="res://actions/Taunt.tres" id="5_jldwf"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="7_0vb8e"]
+[ext_resource type="Resource" uid="uid://m6nw8l2ax4to" path="res://actions/ChangeMask.tres" id="5_jldwf"]
+[ext_resource type="Resource" uid="uid://dopuwtv1moav3" path="res://actions/Shield.tres" id="6_jldwf"]
 [ext_resource type="Resource" uid="uid://duo5wcnmn0qo2" path="res://actions/vampire.tres" id="7_gnpc2"]
-[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="8_0vb8e"]
-[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="9_gnpc2"]
-[ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="10_gnpc2"]
+[ext_resource type="Resource" uid="uid://bcvrdy48sagwa" path="res://actions/hook.tres" id="8_1uy8h"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="12_gnpc2"]
-
-[sub_resource type="Resource" id="Resource_b71cp"]
-script = ExtResource("10_gnpc2")
-target_index = 0
-metadata/_custom_type_script = "uid://cxxxcftffxxjh"
-
-[sub_resource type="Resource" id="Resource_1s6rd"]
-script = ExtResource("9_gnpc2")
-name = "hook"
-descriptionName = "Attaque"
-description = "Inflige des dégâts à un ennemi"
-icon = ExtResource("8_0vb8e")
-the_target_type = 0
-effects = Array[ExtResource("7_0vb8e")]([SubResource("Resource_b71cp")])
-two_target_Type = false
-the_second_target_type = 3
-second_effects = Array[ExtResource("7_0vb8e")]([])
-usable_when_horny = false
-needtarget = true
-Actiontype = "attack"
-cost = 0
-cooldown = 4
-current_cooldown = 0
-precision = 100
-allways_hit = false
-metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0vb8e"]
 
 [node name="CharacterTestHero3" type="Node2D"]
 script = ExtResource("1_0i81g")
-portrait_texture = ExtResource("2_1uy8h")
+portrait_texture = ExtResource("2_0vb8e")
 dead_portrait_texture = ExtResource("3_jldwf")
 initiative_icon = ExtResource("4_0vb8e")
 Charaname = "Warrior1"
 attack = 12
 Chara_position = 2
-skill_resources = Array[Resource]([ExtResource("5_jldwf"), ExtResource("5_bd0xg"), ExtResource("7_gnpc2"), SubResource("Resource_1s6rd"), ExtResource("12_gnpc2")])
+skill_resources = Array[Resource]([ExtResource("5_jldwf"), ExtResource("6_jldwf"), ExtResource("7_gnpc2"), ExtResource("8_1uy8h"), ExtResource("12_gnpc2")])
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
-offset_left = -67.0
+offset_left = -78.0
 offset_top = -233.0
-offset_right = 205.0
+offset_right = 305.0
 offset_bottom = 191.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_1uy8h")
+texture = ExtResource("2_0vb8e")
 
 [node name="Selector" type="TextureRect" parent="."]
-modulate = Color(2, 2, 2, 1)
 self_modulate = Color(2, 2, 2, 0)
-material = SubResource("ShaderMaterial_0vb8e")
-offset_left = -66.0
+offset_left = -78.0
 offset_top = -233.0
-offset_right = 206.0
+offset_right = 305.0
 offset_bottom = 191.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_1uy8h")
+texture = ExtResource("2_0vb8e")
 
 [node name="name" type="Label" parent="."]
 offset_left = -35.0

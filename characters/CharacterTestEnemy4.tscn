@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://jc1bbpflus0q"]
+[gd_scene load_steps=13 format=3 uid="uid://jc1bbpflus0q"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_gjeux"]
-[ext_resource type="Texture2D" uid="uid://frq4grv1dvoo" path="res://characters/charatexture/cultisteBody.png" id="2_a2buf"]
+[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="2_1nlnd"]
 [ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_8umix"]
 [ext_resource type="Texture2D" uid="uid://b0q8mhrqooms" path="res://characters/characterInitiative/cultisteIni.png" id="3_yaddt"]
-[ext_resource type="Texture2D" uid="uid://j0hygaxu62ja" path="res://characters/charatexture/PriestBody.png" id="5_a2buf"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="5_lper1"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="5_vwr1h"]
 [ext_resource type="Resource" uid="uid://bptddsqeaq28h" path="res://actions/heal.tres" id="5_yaddt"]
@@ -14,7 +13,7 @@
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("5_vwr1h")
-psyDMG = false
+MagicDMG = false
 amount = 20
 damage_target_stat = 0
 metadata/_custom_type_script = "uid://bjsbovfjff2wo"
@@ -37,13 +36,12 @@ cost = 0
 cooldown = 4
 current_cooldown = 0
 precision = 100
-allways_hit = false
+allways_hit = true
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
 
 [node name="CharacterTestennemie4" type="Node2D"]
-position = Vector2(260, 321)
 script = ExtResource("1_gjeux")
-portrait_texture = ExtResource("2_a2buf")
+portrait_texture = ExtResource("2_1nlnd")
 dead_portrait_texture = ExtResource("3_8umix")
 initiative_icon = ExtResource("3_yaddt")
 Charaname = "Glarg"
@@ -55,10 +53,21 @@ is_player_controlled = false
 [node name="HerosTexture1" type="TextureRect" parent="."]
 offset_left = -133.0
 offset_top = -259.0
-offset_right = 133.0
-offset_bottom = -2.0
+offset_right = 38.0
+offset_bottom = -28.0
 mouse_filter = 2
-texture = ExtResource("5_a2buf")
+texture = ExtResource("2_1nlnd")
+expand_mode = 1
+
+[node name="Selector" type="TextureRect" parent="."]
+self_modulate = Color(2, 2, 2, 0)
+offset_left = -133.0
+offset_top = -259.0
+offset_right = 38.0
+offset_bottom = -28.0
+mouse_filter = 2
+texture = ExtResource("2_1nlnd")
+expand_mode = 1
 
 [node name="name" type="Label" parent="."]
 offset_left = -35.0
@@ -87,23 +96,6 @@ offset_top = 35.0
 offset_right = -45.0
 offset_bottom = 58.0
 text = "horny"
-
-[node name="Button" type="Button" parent="."]
-modulate = Color(1, 1, 1, 0)
-offset_left = -123.0
-offset_top = -325.0
-offset_right = 110.0
-offset_bottom = 57.0
-
-[node name="Selector" type="TextureRect" parent="."]
-modulate = Color(2, 2, 2, 1)
-self_modulate = Color(1, 1, 1, 0)
-offset_left = -134.0
-offset_top = -259.0
-offset_right = 132.0
-offset_bottom = -2.0
-mouse_filter = 2
-texture = ExtResource("5_a2buf")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = 22.0

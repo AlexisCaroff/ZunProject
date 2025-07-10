@@ -85,6 +85,17 @@ func _ready():
 		inst.owner = self
 		skills.append(inst)
 		#print("Compétence chargée : ", inst.name)
+
+func _updateSkills(updated_skills: Array[Resource] ):
+	skills.clear()
+	for s in updated_skills:
+	#print("Contenu de skill_resource :", s)
+		if s == null:
+			push_error("Une ressource de compétence est nulle dans %s" % name)
+			continue
+		var inst= s.duplicate()
+		inst.owner = self
+		skills.append(inst)
 func update_stats():
 
 	attack = base_attack
@@ -155,10 +166,10 @@ func set_targetable(state: bool):
 	is_targetable = state
 	if state :
 		sprite.modulate = Color(1, 1, 1)
-		print(Charaname+" is targetable")
+		#print(Charaname+" is targetable")
 	else:
 		sprite.modulate = Color(0.5, 0.5, 0.5)
-		print(Charaname+" absolutly no a target")
+		#print(Charaname+" absolutly no a target")
 	
 		
 func _input_event(viewport, event, shape_idx):

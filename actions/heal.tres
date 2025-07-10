@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://bp8u5at2ojgse"
 [resource]
 script = ExtResource("2_bcdhv")
 name = "Heal"
-descriptionName = "Attaque"
+descriptionName = "Heal"
 description = "heal for some amount"
 icon = ExtResource("1_1rdmq")
 the_target_type = 1
