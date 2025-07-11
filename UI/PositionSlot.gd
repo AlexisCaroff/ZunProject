@@ -81,15 +81,21 @@ func _on_button_button_down() -> void:
 						print("one enemy targeted")
 
 					Skill.target_type.ALL_ALLY:
-
 						combat_manager._on_target_selected(combat_manager.hero_positions)
 						print("all allies targeted")
 
 					Skill.target_type.ALL_ENNEMY:
-
 						combat_manager._on_target_selected(combat_manager.enemy_positions)
 						print("all enemies targeted")
-						
+					Skill.target_type.BACK_ENNEMY:
+						combat_manager._on_target_selected(selfposition)
+					Skill.target_type.FRONT_ENNEMY:
+						combat_manager._on_target_selected(selfposition)
+					Skill.target_type.BACK_ALLY:
+						combat_manager._on_target_selected(selfposition)
+					Skill.target_type.FRONT_ALLY:
+						combat_manager._on_target_selected(selfposition)
+							
 			combat_manager.CombatState.SELECTING_SECOND_TARGET:
 				match skill.the_second_target_type:
 					Skill.second_target_type.SELF:
@@ -105,15 +111,20 @@ func _on_button_button_down() -> void:
 						print("2 one enemy targeted")
 
 					Skill.second_target_type.ALL_ALLY:
-
 						combat_manager._on_target_selected(combat_manager.hero_positions)
 						print("2 all allies targeted")
 
 					Skill.second_target_type.ALL_ENNEMY:
-
 						combat_manager._on_target_selected(combat_manager.enemy_positions)
 						print("2 all enemies targeted")
-				
+					Skill.second_target_type.BACK_ENNEMY:
+						combat_manager._on_target_selected(selfposition)
+					Skill.second_target_type.FRONT_ENNEMY:
+						combat_manager._on_target_selected(selfposition)
+					Skill.target_type.BACK_ALLY:
+						combat_manager._on_target_selected(selfposition)
+					Skill.target_type.FRONT_ALLY:
+						combat_manager._on_target_selected(selfposition)
 
 func _on_button_mouse_entered() -> void:
 	occupant.Selector.self_modulate.a= 1.0

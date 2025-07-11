@@ -257,8 +257,14 @@ stream = ExtResource("13_s6b88")
 volume_db = 4.455
 pitch_scale = 0.67
 
+[node name="charaPortrait" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 806.0
+offset_right = 183.0
+offset_bottom = 909.0
+
 [node name="ResultScreen" type="Label" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 1920.0
@@ -268,13 +274,6 @@ theme_override_font_sizes/font_size = 450
 text = "Victoire !"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="charaPortrait" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 77.0
-offset_top = 806.0
-offset_right = 183.0
-offset_bottom = 909.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)

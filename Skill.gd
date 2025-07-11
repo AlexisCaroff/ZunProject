@@ -11,10 +11,15 @@ enum target_type {
 	ALLY, 
 	SELF,
 	ALL_ALLY,
-	ALL_ENNEMY
+	ALL_ENNEMY,
+	FRONT_ENNEMY,
+	BACK_ENNEMY,
+	FRONT_ALLY,
+	BACK_ALLY,
+	
 }
 
-@export_enum("enemy", "ally", "self", "all ally", "all ennemy")
+@export_enum("enemy", "ally", "self", "all ally", "all ennemy", "front ennemy","back ennemy","front ally","back ally")
 var the_target_type: int = target_type.ENNEMY
 @export var effects: Array[SkillEffect] = []
 @export var two_target_Type: bool = false 
@@ -24,10 +29,14 @@ enum second_target_type {
 	ALLY, 
 	SELF,
 	ALL_ALLY,
-	ALL_ENNEMY
+	ALL_ENNEMY,
+	FRONT_ENNEMY,
+	BACK_ENNEMY,
+	FRONT_ALLY,
+	BACK_ALLY,
 }
 
-@export_enum("enemy", "ally", "self", "all ally", "all ennemy")
+@export_enum("enemy", "ally", "self", "all ally", "all ennemy", "front ennemy","back ennemy","front ally","back ally")
 var the_second_target_type: int = second_target_type.ENNEMY
 @export var second_effects: Array[SkillEffect] = []
 @export var usable_when_horny: bool = false
@@ -113,6 +122,24 @@ func select_targets(combat_manager:CombatManager):
 		target_type.ALL_ENNEMY:
 			for enemy in combat_manager.enemies:
 				enemy.set_targetable(true)
+		target_type.BACK_ALLY:
+			for ally in combat_manager.heroes:
+				if !ally.current_slot.position_data.isFront:
+					ally.set_targetable(true)
+
+		target_type.FRONT_ALLY:
+			for ally in combat_manager.heroes:
+				if ally.current_slot.position_data.isFront:
+					ally.set_targetable(true)
+		target_type.BACK_ENNEMY:
+			for enemy in combat_manager.enemies:
+				if !enemy.current_slot.position_data.isFront:
+					enemy.set_targetable(true)
+
+		target_type.FRONT_ENNEMY:
+			for enemy in combat_manager.enemies:
+				if enemy.current_slot.position_data.isFront:
+					enemy.set_targetable(true)
 
 func select_second_target(combat_manager:CombatManager):
 	
@@ -150,6 +177,25 @@ func select_second_target(combat_manager:CombatManager):
 		second_target_type.ALL_ENNEMY:
 			for enemy in combat_manager.enemies:
 				enemy.set_targetable(true)
+				
+		second_target_type.BACK_ALLY:
+			for ally in combat_manager.heroes:
+				if !ally.current_slot.position_data.isFront:
+					ally.set_targetable(true)
+
+		second_target_type.FRONT_ALLY:
+			for ally in combat_manager.heroes:
+				if ally.current_slot.position_data.isFront:
+					ally.set_targetable(true)
+		second_target_type.BACK_ENNEMY:
+			for enemy in combat_manager.enemies:
+				if !enemy.current_slot.position_data.isFront:
+					enemy.set_targetable(true)
+
+		second_target_type.FRONT_ENNEMY:
+			for enemy in combat_manager.enemies:
+				if enemy.current_slot.position_data.isFront:
+					enemy.set_targetable(true)
 
 func end_turn(combat_manager):
 	pay_cost()
