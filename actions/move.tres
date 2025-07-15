@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://1nlu038uhsvj"]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://1nlu038uhsvj"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_y3d0p"]
 [ext_resource type="Script" uid="uid://cy3v0dypme7n7" path="res://actions/skillEffects/Move.gd" id="2_y3d0p"]

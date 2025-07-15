@@ -8,7 +8,23 @@ var ui: Control = null
 @export var HERO_START_POS = Vector2(100, 600)
 @export var ENEMY_START_POS = Vector2(1200, 600)
 @export var SPACING_Y = 250
+<<<<<<< Updated upstream
 @export var pending_skill: Skill = null
+=======
+@export var _pending_skill: Skill = null  # Stockage interne
+@export var next_scene_path: String = "res://scenes/WorldMap.tscn"  # Exemple
+@export var transition_delay: float = 2.0
+# Propriété publique avec accesseurs
+var pending_skill: Skill:
+	get:
+		#print("GET pending_skill →", _pending_skill)
+		return _pending_skill
+	set(value):
+		#print("SET pending_skill →", value)
+		_pending_skill = value
+
+
+>>>>>>> Stashed changes
 @onready var ResultScreen_label= $"../ResultScreen"
 @onready var hero_positions: Array[PositionSlot]=[
 		$"../HeroPosition/position1",
@@ -40,19 +56,21 @@ var HERO_SCENES = [
 func _ready():
 	ui = get_parent()
 
-	# Spawn héros
-	for i in HERO_SCENES.size():
-		var chara = HERO_SCENES[i].instantiate()
-		add_child(chara)
-		chara.combat_manager = self
-		heroes.append(chara)
+	if Game_Manager.surviving_heroes.size() > 0:
+		load_surviving_heroes()
+	else:
+		spawn_default_heroes() 
 
+
+<<<<<<< Updated upstream
 		# Place dans la bonne PositionSlot
 		var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() )
 		var slot = hero_positions[slot_index]
 		move_character_to(chara, slot,2.0)
 	
 	
+=======
+>>>>>>> Stashed changes
 	# Spawn ennemis
 	for i in ENEMY_SCENES.size():
 		var chara = ENEMY_SCENES[i].instantiate()
@@ -66,8 +84,46 @@ func _ready():
 	ui.log("start Combat")
 	start_combat()
 	
-	
+func spawn_default_heroes() :
+	for i in HERO_SCENES.size():
+		var packed_scene = HERO_SCENES[i]
+		var chara = packed_scene.instantiate()
+		chara.set_meta("scene_file_path", packed_scene.resource_path)  # 🔧 AJOUT ICI !
+		add_child(chara)
+		chara.combat_manager = self
+		heroes.append(chara)
 
+		# Place dans la bonne PositionSlot
+		var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() )
+		var slot = hero_positions[slot_index]
+		move_character_to(chara, slot,0.0)
+		
+func load_surviving_heroes():
+	heroes.clear()
+	for saved_data in Game_Manager.surviving_heroes:
+		if saved_data.resource_path == "":
+			push_warning("Chemin de scène vide pour " + saved_data.chara_name)
+			continue
+
+		var packed_scene = load(saved_data.resource_path)
+		if packed_scene == null:
+			push_error("Impossible de charger : " + saved_data.resource_path)
+			continue
+
+		var hero: Character = packed_scene.instantiate()
+		hero.set_meta("scene_file_path", saved_data.resource_path)
+		hero.Charaname = saved_data.chara_name
+		hero.current_stamina = saved_data.current_stamina
+		hero.current_stress = saved_data.current_stress
+		hero.current_horniness = saved_data.current_horniness
+		hero.Chara_position = saved_data.position_index
+		hero.combat_manager = self
+		add_child(hero)
+		heroes.append(hero)
+
+		if saved_data.position_index < hero_positions.size():
+			var slot = hero_positions[saved_data.position_index]
+			move_character_to(hero, slot, 0.0)
 	
 func start_combat():
 	var all_characters: Array[Character] = []
@@ -108,7 +164,7 @@ func next_turn():
 		ui.update_ui_for_current_character(current_character)
 	else:
 		ui.log("Enemie's turn")
-		var random_index = randi() % heroes.size()
+
 		ui.update_ui_for_current_character(current_character)
 		await get_tree().create_timer(1.0).timeout
 		current_character.play_ai_turn(heroes,enemies)
@@ -120,12 +176,34 @@ func _check_victory():
 			return 
 	
 	_show_victory()
-	
+func save_surviving_heroes():
+	Game_Manager.surviving_heroes.clear()
+	for hero in heroes:
+		if not hero.is_dead():
+			var save_data = Game_Manager.CharacterSaveData.new(hero)
+			Game_Manager.surviving_heroes.append(save_data)
+			
+			
 func _show_victory():
 	ResultScreen_label.text = "Victoire !"
-	ResultScreen_label.modulate = Color(1,1,1,1)
+	ResultScreen_label.modulate = Color(1, 1, 1, 1)
 	print("Tous les ennemis sont vaincus.")
+
+	await get_tree().create_timer(transition_delay).timeout
+	save_surviving_heroes()
+	transition_to_next_scene()
 	
+func transition_to_next_scene():
+	if next_scene_path == "":
+		push_error("Aucune scène suivante définie pour la transition.")
+		return
+
+	var transition := preload("res://scene_transition_fade.tscn").instantiate()
+	get_tree().current_scene.add_child(transition)
+	await transition.fade_out() 
+	 # Nécessite une méthode fade_out() dans ton node
+
+	get_tree().change_scene_to_file(next_scene_path)
 
 func use_skill(index: int):
 	var skill = current_character.get_skill(index)

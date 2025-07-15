@@ -89,7 +89,7 @@ position = Vector2(961, 402)
 texture = ExtResource("2_x8qlv")
 
 [node name="atmosphere" parent="." instance=ExtResource("2_8flqu")]
-position = Vector2(2, 352)
+position = Vector2(1919, 336)
 
 [node name="FightUi" type="Sprite2D" parent="."]
 position = Vector2(960, 545)
@@ -235,6 +235,7 @@ autowrap_mode = 3
 [node name="CombatManager" parent="." instance=ExtResource("10_x8qlv")]
 HERO_START_POS = Vector2(100, 500)
 ENEMY_START_POS = Vector2(1200, 500)
+next_scene_path = "res://scenes/combat2.tscn"
 ENEMY_SCENES = [ExtResource("12_ktp8g"), ExtResource("12_ktp8g"), ExtResource("14_roj6a"), ExtResource("12_roj6a")]
 
 [node name="ResultScreen" type="Label" parent="."]

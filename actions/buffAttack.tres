@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://cyqcgi4xvqvk2"]
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://cyqcgi4xvqvk2"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_r0oxv"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_r0oxv"]

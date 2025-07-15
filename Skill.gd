@@ -68,8 +68,12 @@ func _apply_effect(target: Character, effects_array: Array[SkillEffect] = effect
 	for effect in effects_array:
 		effect.apply(owner, target)
 
-func _apply_second_effect(target2: Character):
-	_apply_effect(target2, second_effects)
+
+
+func _apply_second_effect(thetarget2: PositionSlot):
+	print("apply second effect")
+	_apply_effect(thetarget2, second_effects)
+
 
 func select_targets(combat_manager):
 	combat_manager.ui.log("Sélectionnez une cible pour %s" % name)

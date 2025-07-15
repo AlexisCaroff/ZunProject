@@ -161,7 +161,7 @@ func set_targetable(state: bool):
 		#print(self.name+"not targetable")
 	
 		
-func _input_event(viewport, event, shape_idx):
+func _input_event( event):
 	if is_targetable and event is InputEventMouseButton and event.pressed:
 		emit_signal("target_selected", self)
 		

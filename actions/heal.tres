@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://bptddsqeaq28h"]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://bptddsqeaq28h"]
 
 [ext_resource type="Texture2D" uid="uid://ccyi8n3i3daxa" path="res://actions/actiontexture/heal.png" id="1_1rdmq"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_svn31"]
