@@ -9,7 +9,7 @@ var ui: Control = null
 @export var ENEMY_START_POS = Vector2(1200, 600)
 @export var SPACING_Y = 250
 @export var _pending_skill: Skill = null  # Stockage interne
-
+@export var exploration_scene: PackedScene 
 # Propriété publique avec accesseurs
 var pending_skill: Skill:
 	get:
@@ -61,10 +61,13 @@ func _ready():
 
 	# Spawn héros
 	for i in HERO_SCENES.size():
+		var chara_scene = HERO_SCENES[i]
 		var chara = HERO_SCENES[i].instantiate()
+		chara.source_scene_path = chara_scene.resource_path
 		add_child(chara)
 		chara.combat_manager = self
 		heroes.append(chara)
+		load_saved_heroes_into_slots(chara.current_slot)
 
 		# Place dans la bonne PositionSlot
 		var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() )
@@ -86,7 +89,24 @@ func _ready():
 	start_combat()
 	
 	
+func load_saved_heroes_into_slots(slots: Array[PositionSlot]):
+	for hero_data in GameState.saved_heroes_data:
+		var scene = load(hero_data["scene_path"])
+		var hero: Character = scene.instantiate()
+		hero.is_saved_instance = true
 
+		hero.Charaname = hero_data["name"]
+		hero.current_stamina = hero_data["stamina"]
+		hero.current_stress = hero_data["stress"]
+		hero.current_horniness = hero_data["horniness"]
+		hero.dead = hero_data["dead"]
+		hero.skill_resources = hero_data["skills"]
+		hero._updateSkills(hero.skill_resources)
+		hero.update_ui()
+
+		var pos_index = hero_data.get("position", -1)
+		if pos_index >= 0 and pos_index < slots.size():
+			slots[pos_index].put(hero)  # place correctement
 	
 func start_combat():
 	combat_state = CombatState.IDLE
@@ -143,10 +163,36 @@ func _check_victory():
 	
 func _show_victory():
 	ResultScreen_label.text = "Victoire !"
-	ResultScreen_label.modulate = Color(1,1,1,1)
-	print("Tous les ennemis sont vaincus.")
-	
+	ResultScreen_label.modulate = Color(1, 1, 1, 1)
+	await get_tree().create_timer(2.0).timeout
+	save_heroes_state()
+	call_deferred("change_to_exploration_scene")
 
+func save_heroes_state():
+	var saved_data := []
+	for hero in heroes:
+		var data = {
+			"scene_path": hero.scene_file_path,
+			"name": hero.Charaname,
+			"stamina": hero.current_stamina,
+			"stress": hero.current_stress,
+			"horniness": hero.current_horniness,
+			"dead": hero.dead,
+			"buffs": hero.buffs.map(func(b): return b.duplicate()),  # optionnel
+			"skills": hero.skill_resources,
+			"position": hero.Chara_position
+		}
+		saved_data.append(data)
+	GameState.saved_heroes_data = saved_data
+
+func change_to_exploration_scene():
+	if get_tree():
+		get_tree().change_scene_to_packed(exploration_scene)
+	else:
+		print("Erreur : get_tree() est null.")
+	
+	
+	
 func use_skill(index: int):
 	var skill = current_character.get_skill(index)
 	pending_skill=skill

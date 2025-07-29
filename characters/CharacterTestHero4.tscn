@@ -16,6 +16,7 @@ portrait_texture = ExtResource("2_eg61m")
 dead_portrait_texture = ExtResource("3_eg61m")
 initiative_icon = ExtResource("4_07x3b")
 Charaname = "Tank"
+base_attack = 10000
 initiative = 4
 Chara_position = 3
 skill_resources = Array[Resource]([ExtResource("5_b6mpb"), ExtResource("6_y4wav"), ExtResource("11_y4wav"), ExtResource("8_ghs3y"), ExtResource("9_4h21c")])

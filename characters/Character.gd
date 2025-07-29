@@ -1,7 +1,9 @@
 extends Node2D
 
 class_name Character
-
+#save
+@export var source_scene_path: String = "" 
+@export var is_saved_instance: bool = false
 # --- Données visuelles
 @export var portrait_texture: Texture2D
 @export var dead_portrait_texture: Texture2D
@@ -69,6 +71,7 @@ var is_targetable: bool = false
 
 
 func _ready():
+
 	name_label.text = Charaname
 	sprite.texture = portrait_texture
 	Selector.texture = portrait_texture
@@ -85,6 +88,7 @@ func _ready():
 		inst.owner = self
 		skills.append(inst)
 		#print("Compétence chargée : ", inst.name)
+
 
 func _updateSkills(updated_skills: Array[Resource] ):
 	skills.clear()
