@@ -2,8 +2,7 @@ extends Node2D
 
 class_name Character
 #save
-@export var source_scene_path: String = "" 
-@export var is_saved_instance: bool = false
+
 # --- Données visuelles
 @export var portrait_texture: Texture2D
 @export var dead_portrait_texture: Texture2D
@@ -159,6 +158,7 @@ func get_skill(index: int) -> Skill:
 	else:
 		push_error("Skill index %d out of bounds for character %s" % [index, name])
 		return null
+
 func is_dead() -> bool:
 	return dead
 
@@ -180,7 +180,8 @@ func _input_event(viewport, event, shape_idx):
 	if is_targetable and event is InputEventMouseButton and event.pressed:
 		emit_signal("target_selected", self)
 		
-		
+
+
 func play_ai_turn(heroes : Array, ennemies :Array):
 	var usable_skills := skills.filter(func(s): return s.can_use())
 
@@ -189,11 +190,11 @@ func play_ai_turn(heroes : Array, ennemies :Array):
 		resetVisuel()
 		return
 
-	# Étape 2 : choisir une compétence au hasard
+
 	var skill: Skill = usable_skills[randi() % usable_skills.size()]
 	skill.owner = self  # important !
 
-	# Étape 3 : choisir une cible selon le type de compétence
+	
 	var possible_targets: Array[Character] = []
 
 	match skill.the_target_type:
@@ -204,25 +205,25 @@ func play_ai_turn(heroes : Array, ennemies :Array):
 			return
 
 		skill.target_type.ALLY:
-			possible_targets = ennemies  # les alliés pour l'ennemi, donc ennemies du joueur
+			possible_targets = ennemies  
 		skill.target_type.ENNEMY:
 			possible_targets = heroes
 		skill.target_type.ALL_ALLY, skill.target_type.ALL_ENNEMY:
-			skill.use()  # le skill se charge lui-même de cibler tous
+			skill.use()  #
 			resetVisuel()
 			return
 
-	# Étape 4 : forcer la cible si provoqué
+	
 	var target: Character
 	if taunted_by != null:
 		if skill.the_target_type == skill.target_type.ENNEMY:
 			target = taunted_by
 		else:
-			target = self  # skill d'auto-soin ou allié, pas affecté par la provocation
+			target = self  
 	else:
 		target = possible_targets[randi() % possible_targets.size()]
 
-	# Étape 5 : animer et appliquer le sort
+	
 	await animate_attack(target)
 	skill.use(target.current_slot)
 	target.update_ui()

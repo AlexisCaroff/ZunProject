@@ -10,6 +10,9 @@ var ui: Control = null
 @export var SPACING_Y = 250
 @export var _pending_skill: Skill = null  # Stockage interne
 @export var exploration_scene: PackedScene 
+
+#save
+var saved_data : Array = []
 # Propriété publique avec accesseurs
 var pending_skill: Skill:
 	get:
@@ -62,18 +65,28 @@ func _ready():
 	# Spawn héros
 	for i in HERO_SCENES.size():
 		var chara_scene = HERO_SCENES[i]
-		var chara = HERO_SCENES[i].instantiate()
-		chara.source_scene_path = chara_scene.resource_path
+		var chara: Character = chara_scene.instantiate()
+
+		# Si on a des données sauvegardées, les appliquer
+		if i < saved_data.size():
+			var saved_chara_data = saved_data[i]
+			
+			chara.source_scene_path = saved_chara_data.get("source_scene_path", chara_scene.resource_path)
+			chara.Chara_position = saved_chara_data.get("Chara_position", i)
+			chara.load_from_dict(saved_chara_data)
+		else:
+			# Nouvelle instance sans sauvegarde
+			chara.source_scene_path = chara_scene.resource_path
+			chara.Chara_position = i  # ou une autre logique de placement par défaut
+		
 		add_child(chara)
 		chara.combat_manager = self
 		heroes.append(chara)
-		load_saved_heroes_into_slots(chara.current_slot)
 
-		# Place dans la bonne PositionSlot
-		var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() )
+		# Placement dans le bon slot
+		var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() - 1)
 		var slot = hero_positions[slot_index]
-		move_character_to(chara, slot,0.0)
-	
+		move_character_to(chara, slot, 0.0)
 	
 	# Spawn ennemis
 	for i in ENEMY_SCENES.size():
@@ -165,25 +178,10 @@ func _show_victory():
 	ResultScreen_label.text = "Victoire !"
 	ResultScreen_label.modulate = Color(1, 1, 1, 1)
 	await get_tree().create_timer(2.0).timeout
-	save_heroes_state()
+
 	call_deferred("change_to_exploration_scene")
 
-func save_heroes_state():
-	var saved_data := []
-	for hero in heroes:
-		var data = {
-			"scene_path": hero.scene_file_path,
-			"name": hero.Charaname,
-			"stamina": hero.current_stamina,
-			"stress": hero.current_stress,
-			"horniness": hero.current_horniness,
-			"dead": hero.dead,
-			"buffs": hero.buffs.map(func(b): return b.duplicate()),  # optionnel
-			"skills": hero.skill_resources,
-			"position": hero.Chara_position
-		}
-		saved_data.append(data)
-	GameState.saved_heroes_data = saved_data
+
 
 func change_to_exploration_scene():
 	if get_tree():
