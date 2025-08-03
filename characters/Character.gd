@@ -65,7 +65,7 @@ const HornyEffectScene := preload("res://actions/damageEffect/charmed-particules
 const DamageEffectScene := preload("res://actions/damageEffect/HitVFX.tscn")
 const MissEffectScene:= preload("res://actions/damageEffect/miss_vfx.tscn")
 
-signal target_selected(target: Character)
+signal target_selected()
 var is_targetable: bool = false
 
 
@@ -111,6 +111,9 @@ func update_stats():
 		buff.apply_to(self)
 
 func update_ui():
+	if not hp_label or not stress_label or not horny_label:
+		push_warning("update_ui() appelé mais les labels ne sont pas prêts")
+		return
 	hp_label.text = "HP: %d / %d" % [current_stamina, max_stamina]
 	stress_label.text = "Stress: %d / %d" % [current_stress, max_stress]
 	horny_label.text = "Horny: %d / %d" % [current_horniness, max_horniness]
@@ -236,9 +239,7 @@ func reduce_cooldowns() -> void:
 	
 func end_turn():
 	
-	for buff in buffs:
-		buff.duration -= 1
-	buffs = buffs.filter(func(b): return b.duration > 0)
+	
 	resetVisuel()
 	update_buffs()
 	reduce_cooldowns()

@@ -63,30 +63,23 @@ func _ready():
 	ui = get_parent()
 
 	# Spawn héros
-	for i in HERO_SCENES.size():
-		var chara_scene = HERO_SCENES[i]
-		var chara: Character = chara_scene.instantiate()
-
-		# Si on a des données sauvegardées, les appliquer
-		if i < saved_data.size():
-			var saved_chara_data = saved_data[i]
+	if not GameState.saved_heroes_data.is_empty():
+		print("Chargement des héros sauvegardés...")
+		load_saved_heroes_into_slots(hero_positions)
+	else:
+		print("Aucune sauvegarde -> Spawn des héros par défaut")
+		for i in HERO_SCENES.size():
+			var chara_scene = HERO_SCENES[i]
+			var chara: Character = chara_scene.instantiate()
 			
-			chara.source_scene_path = saved_chara_data.get("source_scene_path", chara_scene.resource_path)
-			chara.Chara_position = saved_chara_data.get("Chara_position", i)
-			chara.load_from_dict(saved_chara_data)
-		else:
-			# Nouvelle instance sans sauvegarde
-			chara.source_scene_path = chara_scene.resource_path
-			chara.Chara_position = i  # ou une autre logique de placement par défaut
-		
-		add_child(chara)
-		chara.combat_manager = self
-		heroes.append(chara)
+			chara.Chara_position = i
+			add_child(chara)
+			chara.combat_manager = self
+			heroes.append(chara)
 
-		# Placement dans le bon slot
-		var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() - 1)
-		var slot = hero_positions[slot_index]
-		move_character_to(chara, slot, 0.0)
+			var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() - 1)
+			var slot = hero_positions[slot_index]
+			move_character_to(chara, slot, 0.0)
 	
 	# Spawn ennemis
 	for i in ENEMY_SCENES.size():
@@ -106,8 +99,6 @@ func load_saved_heroes_into_slots(slots: Array[PositionSlot]):
 	for hero_data in GameState.saved_heroes_data:
 		var scene = load(hero_data["scene_path"])
 		var hero: Character = scene.instantiate()
-		hero.is_saved_instance = true
-
 		hero.Charaname = hero_data["name"]
 		hero.current_stamina = hero_data["stamina"]
 		hero.current_stress = hero_data["stress"]
@@ -117,9 +108,14 @@ func load_saved_heroes_into_slots(slots: Array[PositionSlot]):
 		hero._updateSkills(hero.skill_resources)
 		hero.update_ui()
 
+		add_child(hero)
+		hero.combat_manager = self
+		heroes.append(hero)
+
+		
 		var pos_index = hero_data.get("position", -1)
 		if pos_index >= 0 and pos_index < slots.size():
-			slots[pos_index].put(hero)  # place correctement
+			slots[pos_index].assign_character(hero, 0.0)
 	
 func start_combat():
 	combat_state = CombatState.IDLE
@@ -178,6 +174,10 @@ func _show_victory():
 	ResultScreen_label.text = "Victoire !"
 	ResultScreen_label.modulate = Color(1, 1, 1, 1)
 	await get_tree().create_timer(2.0).timeout
+
+	# --- Sauvegarder l'équipe avant de changer de scène
+	GameState.save_party_from_nodes(heroes)
+	GameState.current_phase = GameStat.GamePhase.EXPLORATION
 
 	call_deferred("change_to_exploration_scene")
 
