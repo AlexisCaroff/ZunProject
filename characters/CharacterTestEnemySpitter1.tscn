@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://doitrlqhfja4t"]
+[gd_scene load_steps=13 format=3 uid="uid://doitrlqhfja4t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_1rndn"]
 [ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_sbu2r"]
+[ext_resource type="Texture2D" uid="uid://cgnrms5owdhet" path="res://characters/characterInitiative/slimportini.png" id="4_1rndn"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="5_e7hg0"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="6_3o24a"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="7_bbnup"]
@@ -42,7 +43,7 @@ metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
 script = ExtResource("1_1rndn")
 portrait_texture = ExtResource("11_2uqc5")
 dead_portrait_texture = ExtResource("3_sbu2r")
-initiative_icon = ExtResource("11_2uqc5")
+initiative_icon = ExtResource("4_1rndn")
 Charaname = "Glarg"
 IsDemon = true
 Chara_position = 3
