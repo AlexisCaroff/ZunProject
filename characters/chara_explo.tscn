@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq282vipchnbq"]
+
+[ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="1_nyqc8"]
+[ext_resource type="Script" uid="uid://c6af0cosunkf2" path="res://scripts/exploration/chara_explo.gd" id="1_rk6hn"]
+
+[node name="chara_explo" type="Node2D"]
+script = ExtResource("1_rk6hn")
+
+[node name="HerosTexture1" type="TextureRect" parent="."]
+offset_left = -123.0
+offset_top = -289.0
+offset_right = 399.0
+offset_bottom = 251.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_nyqc8")
+
+[node name="name" type="Label" parent="."]
+offset_left = -53.0
+offset_top = -297.0
+offset_right = -9.0
+offset_bottom = -274.0
+text = "name"
+
+[node name="HP" type="Label" parent="."]
+offset_left = -91.0
+offset_top = -19.0
+offset_right = -45.0
+offset_bottom = 4.0
+text = "Hp"
+
+[node name="Stress" type="Label" parent="."]
+offset_left = -91.0
+offset_top = 8.0
+offset_right = -45.0
+offset_bottom = 31.0
+text = "stress"
+
+[node name="horny" type="Label" parent="."]
+offset_left = -91.0
+offset_top = 35.0
+offset_right = -45.0
+offset_bottom = 58.0
+text = "horny"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 19.0
+offset_top = -283.0
+offset_right = 59.0
+offset_bottom = -264.0

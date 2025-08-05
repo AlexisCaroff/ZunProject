@@ -2,14 +2,15 @@ extends Button
 
 var big_size = Vector2(1.2, 1.2)
 var startsize = Vector2(1.0,1.0)
-@onready var label = get_node("../../LabelAction")
-@onready var startposition = label.position
+
 var Actiontext : String = "Move"
 var current_tween: Tween = null
 var current_tween_button: Tween = null
 
 
 func _on_mouse_entered() -> void:
+	var label = $"../LabelAction"
+	var startposition = label.position
 	label.scale = startsize 
 	label.visible = true
 	label.text = Actiontext
@@ -29,6 +30,8 @@ func _on_mouse_entered() -> void:
 
 
 func _on_mouse_exited() -> void:
+	var label = $"../LabelAction"
+	var startposition = label.position
 	label.visible = false
 	label.text = Actiontext
 

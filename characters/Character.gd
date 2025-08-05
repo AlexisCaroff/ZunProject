@@ -12,7 +12,7 @@ class_name Character
 @onready var stress_label = $Stress
 @onready var horny_label = $horny
 @onready var sprite = $HerosTexture1
-var combat_manager: Node = null 
+
 @onready var buff_bar = $HBoxContainer
 @export var Charaname: String = "name"
 @export var IsDemon: bool = false
@@ -27,7 +27,7 @@ var combat_manager: Node = null
 @export var evasion: int = 5
 @export var initiative: int = 1
 @export var base_evasion: int = 5
-@export var action_points: int = 2
+
 @onready var Selector:TextureRect =$Selector
 
 #etat
@@ -58,7 +58,8 @@ var skills: Array[Skill] = []
 @export var skill_resources: Array[Resource] = []
 # --- Tags (type, classe, etc.)
 var tags: Array[String] = []
-
+#combat
+var combat_manager: Node = null 
 # --- Contrôle
 @export var is_player_controlled: bool = true
 const HornyEffectScene := preload("res://actions/damageEffect/charmed-particules.tscn")

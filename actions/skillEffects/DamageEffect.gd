@@ -18,5 +18,5 @@ func apply(user: Character, target: PositionSlot) -> void:
 	if Chartarget.IsDemon && MagicDMG:
 		amount= amount*2
 	if Chartarget.IsDemon && !MagicDMG:
-		amount= amount/2
+		amount= amount/2.0
 	Chartarget.take_damage(user, damage_target_stat, amount+user.base_attack)

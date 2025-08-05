@@ -1,0 +1,266 @@
+[gd_scene load_steps=15 format=3 uid="uid://dv04v6jagn4q1"]
+
+[ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_jsxd4"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_3jjrq"]
+[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="5_binui"]
+[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="6_kr4kf"]
+[ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="7_5jtdq"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="8_hl2k6"]
+[ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="10_7like"]
+[ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="10_pdgfs"]
+[ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="11_7like"]
+[ext_resource type="Script" uid="uid://6edfrm0jkjqe" path="res://lvl/back.gd" id="11_k2ttn"]
+[ext_resource type="PackedScene" uid="uid://xte1y0iv32n8" path="res://lvl/combat1.tscn" id="11_ohhde"]
+[ext_resource type="Texture2D" uid="uid://bqmj6euxhil4t" path="res://UI/back.png" id="12_25mlo"]
+[ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="12_ohhde"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="14_wq7ot"]
+
+[node name="CombatInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ZunBg" type="Sprite2D" parent="."]
+position = Vector2(960.5, 542)
+scale = Vector2(0.781352, 0.79562)
+texture = ExtResource("1_jsxd4")
+
+[node name="atmosphere" parent="." instance=ExtResource("3_3jjrq")]
+position = Vector2(19, 447)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 681.0
+offset_top = 974.0
+offset_right = 1265.0
+offset_bottom = 975.0
+color = Color(0.501961, 0.407843, 0.207843, 1)
+
+[node name="ActionPanel" type="HBoxContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 0
+offset_left = 579.0
+offset_top = 845.0
+offset_right = 1202.0
+offset_bottom = 945.0
+scale = Vector2(1.245, 1.245)
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Action1" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("5_binui")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("6_kr4kf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_5jtdq")
+
+[node name="cooldownA" type="Label" parent="ActionPanel/Action1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action2" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("5_binui")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("6_kr4kf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_5jtdq")
+
+[node name="cooldownA" type="Label" parent="ActionPanel/Action2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action3" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("5_binui")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("6_kr4kf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_5jtdq")
+
+[node name="cooldownA" type="Label" parent="ActionPanel/Action3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action4" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("5_binui")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("6_kr4kf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_5jtdq")
+
+[node name="cooldownA" type="Label" parent="ActionPanel/Action4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action5" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("5_binui")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("6_kr4kf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_5jtdq")
+
+[node name="cooldownA" type="Label" parent="ActionPanel/Action5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="LabelAction" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 681.0
+offset_top = 982.0
+offset_right = 1260.0
+offset_bottom = 1066.0
+theme_override_fonts/font = ExtResource("8_hl2k6")
+theme_override_font_sizes/font_size = 25
+text = "Attaque1 
+et truc et bidule"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TurnOrderPanel" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 28.0
+offset_right = 1921.0
+offset_bottom = 93.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Charaname" type="Label" parent="."]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 821.0
+offset_right = 848.0
+offset_bottom = 901.0
+theme_override_font_sizes/font_size = 40
+text = "Hero Name"
+
+[node name="contexte" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1503.0
+offset_top = 846.0
+offset_right = 1813.0
+offset_bottom = 1008.0
+theme_override_font_sizes/font_size = 40
+text = "ce qu'il se passe"
+autowrap_mode = 3
+
+[node name="charaPortrait" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 806.0
+offset_right = 183.0
+offset_bottom = 909.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+ignore_rotation = false
+script = ExtResource("14_wq7ot")
+
+[node name="Door" type="Button" parent="."]
+layout_mode = 0
+offset_left = 803.0
+offset_top = 232.0
+offset_right = 1075.0
+offset_bottom = 635.0
+flat = true
+script = ExtResource("10_7like")
+next_scene = ExtResource("11_ohhde")
+
+[node name="DoorText" type="TextureRect" parent="Door"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 251.0
+offset_right = 311.0
+offset_bottom = 373.0
+texture = ExtResource("10_pdgfs")
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 361.0
+offset_top = 650.0
+offset_right = 1550.0
+offset_bottom = 759.0
+flat = true
+script = ExtResource("11_k2ttn")
+
+[node name="BackText" type="TextureRect" parent="Back"]
+modulate = Color(1, 1, 1, 0.513726)
+layout_mode = 0
+offset_left = 675.0
+offset_top = 16.0
+offset_right = 1212.0
+offset_bottom = 96.0
+texture = ExtResource("12_25mlo")
+expand_mode = 1
+
+[node name="peekButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1102.0
+offset_top = 280.0
+offset_right = 1317.0
+offset_bottom = 481.0
+flat = true
+script = ExtResource("11_7like")
+
+[node name="peek_texture" type="TextureRect" parent="peekButton"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 200.0
+offset_bottom = 193.0
+texture = ExtResource("12_ohhde")
+
+[connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action2" to="ActionPanel/Action2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action2" to="ActionPanel/Action2" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action3" to="ActionPanel/Action3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action3" to="ActionPanel/Action3" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action4" to="ActionPanel/Action4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action4" to="ActionPanel/Action4" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action5" to="ActionPanel/Action5" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action5" to="ActionPanel/Action5" method="_on_mouse_exited"]
+[connection signal="button_down" from="Door" to="Door" method="_on_button_down"]
+[connection signal="mouse_entered" from="Door" to="Door" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Door" to="Door" method="_on_mouse_exited"]
+[connection signal="button_down" from="Back" to="Back" method="_on_button_down"]
+[connection signal="mouse_entered" from="Back" to="Back" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Back" to="Back" method="_on_mouse_exited"]
+[connection signal="button_down" from="peekButton" to="peekButton" method="_on_button_down"]
+[connection signal="mouse_entered" from="peekButton" to="peekButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="peekButton" to="peekButton" method="_on_mouse_exited"]

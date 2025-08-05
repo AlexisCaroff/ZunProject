@@ -1,30 +1,17 @@
 extends Node
 class_name GameStat
 
-# Phase de jeu
 enum GamePhase { EXPLORATION, COMBAT }
-var current_phase: GamePhase = GamePhase.EXPLORATION
+var current_phase: GamePhase = GamePhase.COMBAT
 
-# Équipe du joueur
-var saved_heroes_data: Array = []  
-# Structure d'un héros :
-# {
-#     "scene_path": String,
-#     "name": String,
-#     "stamina": int,
-#     "stress": int,
-#     "horniness": int,
-#     "dead": bool,
-#     "position": int,
-#     "skills": Array[Resource]
-# }
+var saved_heroes_data: Array = []
 
-# --- Sauvegarde l'état actuel de tous les héros
 func save_party_from_nodes(heroes: Array) -> void:
 	saved_heroes_data.clear()
 	for hero in heroes:
 		if not hero is Character:
 			continue
+
 		saved_heroes_data.append({
 			"scene_path": hero.scene_file_path,
 			"name": hero.Charaname,
@@ -33,12 +20,23 @@ func save_party_from_nodes(heroes: Array) -> void:
 			"horniness": hero.current_horniness,
 			"dead": hero.dead,
 			"position": hero.Chara_position,
-			"skills": hero.skill_resources.duplicate(true)
-		})
-	print("Party saved: ", saved_heroes_data)
+			"skills": hero.skill_resources.duplicate(true),
 
+
+			# Nouvelles données de textures
+			"portrait_texture_path": hero.portrait_texture.resource_path,
+			"dead_portrait_texture_path": hero.dead_portrait_texture.resource_path,
+			"initiative_icon_path": hero.initiative_icon.resource_path
+		})
+	#print("Party saved: ", saved_heroes_data)
+func update_hero_stat(name: String, stat_key: String, value):
+	for hero in saved_heroes_data:
+		if hero["name"] == name:
+			hero[stat_key] = value
+			print("change "+name + " "+ stat_key + str(value))
+			return
 # --- Recharge l'équipe dans les slots de la scène
-func load_party_into_scene(slots: Array) -> void:
+func load_party_into_combat(slots: Array) -> void:
 	for hero_data in saved_heroes_data:
 		var scene = load(hero_data["scene_path"])
 		var hero: Character = scene.instantiate()
@@ -48,6 +46,7 @@ func load_party_into_scene(slots: Array) -> void:
 		hero.current_stress = hero_data["stress"]
 		hero.current_horniness = hero_data["horniness"]
 		hero.dead = hero_data["dead"]
+		hero.Chara_position = hero_data["position"]
 		hero.skill_resources = hero_data["skills"]
 		hero._updateSkills(hero.skill_resources)
 		hero.update_ui()

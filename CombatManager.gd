@@ -32,10 +32,7 @@ var pending_skill: Skill:
 	
 ]
 @onready var enemy_positions: Array[PositionSlot] =[
-		$"../ennemiePosition/position1",
-		$"../ennemiePosition/position2",
-		$"../ennemiePosition/position3",
-		$"../ennemiePosition/position4",
+
 ]
 var HERO_SCENES = [
 	preload("res://characters/CharacterTestHero1.tscn"),
@@ -60,40 +57,46 @@ enum CombatState {
 var combat_state: CombatState = CombatState.IDLE
 
 func _ready():
-	ui = get_parent()
+	if GameState.current_phase == GameStat.GamePhase.COMBAT:
+		ui = get_parent()
+		enemy_positions=[
+			$"../ennemiePosition/position1",
+			$"../ennemiePosition/position2",
+			$"../ennemiePosition/position3",
+			$"../ennemiePosition/position4",]
 
-	# Spawn héros
-	if not GameState.saved_heroes_data.is_empty():
-		print("Chargement des héros sauvegardés...")
-		load_saved_heroes_into_slots(hero_positions)
-	else:
-		print("Aucune sauvegarde -> Spawn des héros par défaut")
-		for i in HERO_SCENES.size():
-			var chara_scene = HERO_SCENES[i]
-			var chara: Character = chara_scene.instantiate()
-			
-			chara.Chara_position = i
+		# Spawn héros
+		if not GameState.saved_heroes_data.is_empty():
+			print("Chargement des héros sauvegardés...")
+			load_saved_heroes_into_slots(hero_positions)
+		else:
+			print("Aucune sauvegarde -> Spawn des héros par défaut")
+			for i in HERO_SCENES.size():
+				var chara_scene = HERO_SCENES[i]
+				var chara: Character = chara_scene.instantiate()
+				
+				chara.Chara_position = i
+				add_child(chara)
+				chara.combat_manager = self
+				heroes.append(chara)
+
+				var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() - 1)
+				var slot = hero_positions[slot_index]
+				move_character_to(chara, slot, 0.0)
+		
+		# Spawn ennemis
+		for i in ENEMY_SCENES.size():
+			var chara = ENEMY_SCENES[i].instantiate()
 			add_child(chara)
 			chara.combat_manager = self
-			heroes.append(chara)
-
-			var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() - 1)
-			var slot = hero_positions[slot_index]
-			move_character_to(chara, slot, 0.0)
-	
-	# Spawn ennemis
-	for i in ENEMY_SCENES.size():
-		var chara = ENEMY_SCENES[i].instantiate()
-		add_child(chara)
-		chara.combat_manager = self
-		enemies.append(chara)
+			enemies.append(chara)
+			
+			var slot_index = i
+			var slot = enemy_positions[slot_index]
+			move_character_to(chara, slot,0.0)
+		ui.log("start Combat")
+		start_combat()
 		
-		var slot_index = i
-		var slot = enemy_positions[slot_index]
-		move_character_to(chara, slot,0.0)
-	ui.log("start Combat")
-	start_combat()
-	
 	
 func load_saved_heroes_into_slots(slots: Array[PositionSlot]):
 	for hero_data in GameState.saved_heroes_data:

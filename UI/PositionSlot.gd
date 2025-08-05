@@ -5,7 +5,7 @@ class_name PositionSlot
 @export var enemy_scene: PackedScene
 var occupant: Character = null
 @export var spawner : bool= false
-@onready var combat_manager = $"../../CombatManager"
+var combat_manager 
 @onready var imageinside = $TextureRect
 var selfposition: Array[PositionSlot] = []
 
@@ -27,6 +27,8 @@ func is_occupied() -> bool:
 func _ready():
 	selfposition.append(self)
 	is_ready= true
+	if GameState.current_phase == GameStat.GamePhase.COMBAT:
+		combat_manager = $"../../CombatManager"
 
 	
 func assign_character(character: Character, movetime:float):
