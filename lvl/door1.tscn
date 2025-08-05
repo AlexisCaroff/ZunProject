@@ -256,6 +256,7 @@ position = Vector2(791, 374)
 
 [node name="peek_texture2" type="TextureRect" parent="."]
 visible = false
+layout_mode = 0
 offset_left = 305.0
 offset_top = 19.0
 offset_right = 1653.0

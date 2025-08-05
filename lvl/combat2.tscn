@@ -92,6 +92,7 @@ grow_vertical = 2
 script = ExtResource("1_xbpgw")
 
 [node name="ZunBg" type="Sprite2D" parent="."]
+self_modulate = Color(0.996211, 0.422388, 1, 1)
 position = Vector2(961, 402)
 texture = ExtResource("2_doweg")
 

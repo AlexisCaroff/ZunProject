@@ -114,7 +114,10 @@ func update_stats():
 func update_ui():
 	if not hp_label or not stress_label or not horny_label:
 		push_warning("update_ui() appelé mais les labels ne sont pas prêts")
-		return
+		hp_label=$HP
+		stress_label=$Stress
+		horny_label=$horny
+		#return
 	hp_label.text = "HP: %d / %d" % [current_stamina, max_stamina]
 	stress_label.text = "Stress: %d / %d" % [current_stress, max_stress]
 	horny_label.text = "Horny: %d / %d" % [current_horniness, max_horniness]

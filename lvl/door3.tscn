@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dninh1e6hhpct"]
+[gd_scene load_steps=17 format=3 uid="uid://ddeftvbfs77xq"]
 
 [ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_fct4x"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_4jaj8"]
@@ -8,10 +8,9 @@
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="6_2xwsl"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="7_giedy"]
 [ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="8_c2bo2"]
-[ext_resource type="PackedScene" uid="uid://h8pqs7tabdxj" path="res://UI/ui_combat.tscn" id="9_fct4x"]
+[ext_resource type="PackedScene" uid="uid://xte1y0iv32n8" path="res://lvl/combat1.tscn" id="9_bv5np"]
 [ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="10_cllhu"]
 [ext_resource type="Script" uid="uid://6edfrm0jkjqe" path="res://lvl/back.gd" id="11_xnbel"]
-[ext_resource type="PackedScene" uid="uid://6y0rn5xg45h3" path="res://lvl/combat2.tscn" id="12_yv86w"]
 [ext_resource type="Texture2D" uid="uid://bqmj6euxhil4t" path="res://UI/back.png" id="13_qcvwd"]
 [ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="14_hov0b"]
 [ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="15_k4gfe"]
@@ -164,10 +163,10 @@ alignment = 1
 
 [node name="Charaname" type="Label" parent="."]
 layout_mode = 0
-offset_left = 626.0
-offset_top = 817.0
-offset_right = 952.0
-offset_bottom = 897.0
+offset_left = 204.0
+offset_top = 821.0
+offset_right = 848.0
+offset_bottom = 901.0
 theme_override_font_sizes/font_size = 40
 text = "Hero Name"
 
@@ -195,15 +194,15 @@ ignore_rotation = false
 script = ExtResource("7_giedy")
 
 [node name="Door" type="Button" parent="."]
-z_index = 1
+z_index = 3
 layout_mode = 0
-offset_left = 795.0
-offset_top = 229.0
-offset_right = 1067.0
-offset_bottom = 632.0
+offset_left = 799.0
+offset_top = 254.0
+offset_right = 1071.0
+offset_bottom = 657.0
 flat = true
 script = ExtResource("8_c2bo2")
-next_scene = ExtResource("9_fct4x")
+next_scene = ExtResource("9_bv5np")
 
 [node name="DoorText" type="TextureRect" parent="Door"]
 layout_mode = 0
@@ -214,7 +213,6 @@ offset_bottom = 373.0
 texture = ExtResource("10_cllhu")
 
 [node name="Back" type="Button" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 361.0
 offset_top = 650.0
@@ -222,7 +220,6 @@ offset_right = 1550.0
 offset_bottom = 759.0
 flat = true
 script = ExtResource("11_xnbel")
-next_scene = ExtResource("12_yv86w")
 
 [node name="BackText" type="TextureRect" parent="Back"]
 modulate = Color(1, 1, 1, 0.513726)
@@ -252,27 +249,26 @@ offset_bottom = 193.0
 texture = ExtResource("15_k4gfe")
 
 [node name="pose1" type="Node2D" parent="."]
-position = Vector2(795, 244)
+position = Vector2(791, 286)
 
 [node name="pose2" type="Node2D" parent="."]
-position = Vector2(794, 334)
+position = Vector2(791, 374)
 
 [node name="peek_texture2" type="TextureRect" parent="."]
 visible = false
-layout_mode = 0
-offset_left = 317.0
-offset_top = 24.0
-offset_right = 1613.0
-offset_bottom = 657.0
+offset_left = 305.0
+offset_top = 19.0
+offset_right = 1653.0
+offset_bottom = 717.0
 texture = ExtResource("16_rpvnt")
 script = ExtResource("17_4ywvb")
 
 [node name="Button" type="Button" parent="peek_texture2"]
 layout_mode = 0
-offset_left = 1224.0
-offset_top = 1.0
-offset_right = 1302.0
-offset_bottom = 56.0
+offset_left = 1288.0
+offset_top = 4.0
+offset_right = 1342.0
+offset_bottom = 59.0
 
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]

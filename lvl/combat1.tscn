@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://xte1y0iv32n8"]
+[gd_scene load_steps=27 format=3 uid="uid://xte1y0iv32n8"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_cu5ul"]
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_um574"]
@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="8_lew8v"]
 [ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="9_x6qdw"]
 [ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterTestEnemy1.tscn" id="10_cb7x5"]
+[ext_resource type="PackedScene" uid="uid://13geudvutsbj" path="res://lvl/exploration2.tscn" id="10_um574"]
 [ext_resource type="PackedScene" uid="uid://jg7klanpwhgj" path="res://characters/CharacterTestEnemy3.tscn" id="11_e5gjl"]
 [ext_resource type="PackedScene" uid="uid://doitrlqhfja4t" path="res://characters/CharacterTestEnemySpitter1.tscn" id="12_0qkyj"]
 [ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="13_7qr0a"]
@@ -92,6 +93,7 @@ grow_vertical = 2
 script = ExtResource("1_cu5ul")
 
 [node name="ZunBg" type="Sprite2D" parent="."]
+modulate = Color(0.443, 1.4, 1.1, 1)
 position = Vector2(961, 402)
 texture = ExtResource("2_um574")
 
@@ -250,6 +252,7 @@ autowrap_mode = 3
 [node name="CombatManager" parent="." instance=ExtResource("9_x6qdw")]
 HERO_START_POS = Vector2(100, 500)
 ENEMY_START_POS = Vector2(1200, 500)
+exploration_scene = ExtResource("10_um574")
 ENEMY_SCENES = [ExtResource("10_cb7x5"), ExtResource("10_cb7x5"), ExtResource("11_e5gjl"), ExtResource("12_0qkyj")]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CombatManager"]

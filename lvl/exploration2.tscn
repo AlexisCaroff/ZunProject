@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://km54mxly4gk4" path="res://lvl/exploration_manager.gd" id="9_ojlhc"]
 [ext_resource type="PackedScene" uid="uid://dq282vipchnbq" path="res://characters/chara_explo.tscn" id="10_2efmd"]
 [ext_resource type="Texture2D" uid="uid://5xrrcl7rnx6w" path="res://Enviro/door.png" id="11_j16cq"]
-[ext_resource type="PackedScene" uid="uid://dv04v6jagn4q1" path="res://lvl/door1.tscn" id="11_ux281"]
+[ext_resource type="PackedScene" uid="uid://cihlo1w7o4nvn" path="res://lvl/door2.tscn" id="12_h7fpj"]
 [ext_resource type="Texture2D" uid="uid://djit2m4icvw0k" path="res://Enviro/kairn.png" id="13_ygw1o"]
 [ext_resource type="Script" uid="uid://cvdsxgbtufa4g" path="res://lvl/interactible.gd" id="14_li52l"]
 
@@ -24,8 +24,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ZunBg" type="Sprite2D" parent="."]
-position = Vector2(961, 402)
+[node name="ZunBg2" type="Sprite2D" parent="."]
+modulate = Color(0.443, 1.4, 1.1, 1)
+position = Vector2(957, 397)
 texture = ExtResource("2_h3yc3")
 
 [node name="atmosphere" parent="." instance=ExtResource("2_h7fpj")]
@@ -142,6 +143,7 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -522.0
 offset_right = 67.0
+flat = true
 
 [node name="position2" type="Node2D" parent="HeroPosition"]
 z_index = 1
@@ -155,6 +157,7 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -525.0
 offset_right = 67.0
+flat = true
 
 [node name="position3" type="Node2D" parent="HeroPosition"]
 z_index = 1
@@ -167,6 +170,7 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -505.0
 offset_right = 67.0
+flat = true
 
 [node name="position4" type="Node2D" parent="HeroPosition"]
 z_index = 1
@@ -179,11 +183,12 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -539.0
 offset_right = 67.0
+flat = true
 
 [node name="ExplorationManager" type="Node2D" parent="."]
 script = ExtResource("9_ojlhc")
 chara_explo_scene = ExtResource("10_2efmd")
-door_scene = ExtResource("11_ux281")
+door_scene = ExtResource("12_h7fpj")
 
 [node name="Button" type="Button" parent="ExplorationManager"]
 z_index = 10
@@ -195,6 +200,7 @@ flat = true
 expand_icon = true
 
 [node name="Doortext" type="TextureRect" parent="ExplorationManager/Button"]
+self_modulate = Color(0.6, 1, 1, 1)
 layout_mode = 0
 offset_top = 6.0
 offset_right = 385.0
