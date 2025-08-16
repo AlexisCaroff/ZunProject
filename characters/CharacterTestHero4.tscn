@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbtxyhyysj65n"]
+[gd_scene load_steps=12 format=3 uid="uid://dbtxyhyysj65n"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i8qvq"]
 [ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="2_eg61m"]
@@ -8,6 +8,8 @@
 [ext_resource type="Resource" uid="uid://doydfjjogegnd" path="res://actions/StunAttaque.tres" id="6_y4wav"]
 [ext_resource type="Resource" uid="uid://bpsapqkry8g3q" path="res://actions/attaque_basique.tres" id="8_ghs3y"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="9_4h21c"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="10_y4wav"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="11_b6mpb"]
 [ext_resource type="Resource" uid="uid://clw258vbo2rq1" path="res://actions/Charge.tres" id="11_y4wav"]
 
 [node name="CharacterTestHero4" type="Node2D"]
@@ -77,6 +79,16 @@ offset_left = 19.0
 offset_top = -283.0
 offset_right = 59.0
 offset_bottom = -264.0
+
+[node name="Skill" type="TextureRect" parent="."]
+visible = false
+offset_left = -95.0
+offset_top = -319.0
+offset_right = 481.0
+offset_bottom = 257.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_y4wav")
+script = ExtResource("11_b6mpb")
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

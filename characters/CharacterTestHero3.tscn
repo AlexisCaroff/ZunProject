@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8lhes1w5ga1t"]
+[gd_scene load_steps=12 format=3 uid="uid://b8lhes1w5ga1t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_0i81g"]
 [ext_resource type="Texture2D" uid="uid://df5ltgoqyf2jw" path="res://characters/charatexture/char mystic.png" id="2_0vb8e"]
@@ -8,6 +8,8 @@
 [ext_resource type="Resource" uid="uid://dopuwtv1moav3" path="res://actions/Shield.tres" id="6_jldwf"]
 [ext_resource type="Resource" uid="uid://duo5wcnmn0qo2" path="res://actions/vampire.tres" id="7_gnpc2"]
 [ext_resource type="Resource" uid="uid://bcvrdy48sagwa" path="res://actions/hook.tres" id="8_1uy8h"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="10_1uy8h"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="11_0vb8e"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="12_gnpc2"]
 
 [node name="CharacterTestHero3" type="Node2D"]
@@ -21,19 +23,19 @@ Chara_position = 2
 skill_resources = Array[Resource]([ExtResource("5_jldwf"), ExtResource("6_jldwf"), ExtResource("7_gnpc2"), ExtResource("8_1uy8h"), ExtResource("12_gnpc2")])
 
 [node name="HerosTexture1" type="TextureRect" parent="."]
-offset_left = -78.0
-offset_top = -233.0
-offset_right = 305.0
-offset_bottom = 191.0
+offset_left = -129.0
+offset_top = -259.0
+offset_right = 383.0
+offset_bottom = 254.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_0vb8e")
 
 [node name="Selector" type="TextureRect" parent="."]
 self_modulate = Color(2, 2, 2, 0)
-offset_left = -78.0
-offset_top = -233.0
-offset_right = 305.0
-offset_bottom = 191.0
+offset_left = -129.0
+offset_top = -259.0
+offset_right = 383.0
+offset_bottom = 254.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_0vb8e")
 
@@ -77,6 +79,16 @@ offset_left = 22.0
 offset_top = -252.0
 offset_right = 62.0
 offset_bottom = -233.0
+
+[node name="Skill" type="TextureRect" parent="."]
+visible = false
+offset_left = -130.0
+offset_top = -296.0
+offset_right = 446.0
+offset_bottom = 280.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_1uy8h")
+script = ExtResource("11_0vb8e")
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

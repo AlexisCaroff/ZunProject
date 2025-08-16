@@ -12,7 +12,7 @@ class_name Character
 @onready var stress_label = $Stress
 @onready var horny_label = $horny
 @onready var sprite = $HerosTexture1
-
+@onready var SkillText = $Skill
 @onready var buff_bar = $HBoxContainer
 @export var Charaname: String = "name"
 @export var IsDemon: bool = false

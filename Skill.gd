@@ -47,7 +47,7 @@ var the_second_target_type: int = second_target_type.ENNEMY
 @export var current_cooldown: int = 0
 @export var precision: int = 100
 @export var allways_hit: bool = false
-@export var duration : float =1.0
+@export var duration : float =0.3
 var owner: Character
 var target1 : Array[PositionSlot]
 var target2 : Array[PositionSlot]
@@ -58,7 +58,7 @@ func can_use() -> bool:
 	return current_cooldown == 0
 
 func use(target: PositionSlot = null, secondtarget : bool=false):
-	target.occupant.combat_manager.imageAction.activate(ImageSkill,duration) 
+	owner.SkillText.activate(ImageSkill,duration) 
 	if not can_use():
 		return
 	

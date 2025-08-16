@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3jx7ce6fpdr1"]
+[gd_scene load_steps=9 format=3 uid="uid://d3jx7ce6fpdr1"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_61pjh"]
 [ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="2_i0xeg"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://b0q8mhrqooms" path="res://characters/characterInitiative/cultisteIni.png" id="3_mruho"]
 [ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/Ennemi_attaque_basique.tres" id="4_61pjh"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="6_0go71"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="7_xwnr5"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="8_065j3"]
 
 [node name="CharacterTestennemie1" type="Node2D"]
 modulate = Color(0.801126, 0.738995, 1.15514e-06, 1)
@@ -77,6 +79,16 @@ offset_left = 22.0
 offset_top = -252.0
 offset_right = 62.0
 offset_bottom = -233.0
+
+[node name="Skill" type="TextureRect" parent="."]
+visible = false
+offset_left = -182.0
+offset_top = -318.0
+offset_right = 394.0
+offset_bottom = 258.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_xwnr5")
+script = ExtResource("8_065j3")
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

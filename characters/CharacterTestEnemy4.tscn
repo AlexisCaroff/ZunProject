@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://jc1bbpflus0q"]
+[gd_scene load_steps=16 format=3 uid="uid://jc1bbpflus0q"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_gjeux"]
 [ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="2_1nlnd"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="6_lper1"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="7_1nlnd"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="10_1nlnd"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="12_mlliq"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="13_mmobe"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("5_vwr1h")
@@ -39,7 +41,7 @@ cooldown = 4
 current_cooldown = 0
 precision = 100
 allways_hit = true
-duration = 1.0
+duration = 0.3
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
 
 [node name="CharacterTestennemie4" type="Node2D"]
@@ -105,3 +107,13 @@ offset_left = 22.0
 offset_top = -252.0
 offset_right = 62.0
 offset_bottom = -233.0
+
+[node name="Skill" type="TextureRect" parent="."]
+visible = false
+offset_left = -209.0
+offset_top = -326.0
+offset_right = 367.0
+offset_bottom = 250.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_mlliq")
+script = ExtResource("13_mmobe")

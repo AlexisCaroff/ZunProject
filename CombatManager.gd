@@ -55,8 +55,12 @@ enum CombatState {
 }
 
 var combat_state: CombatState = CombatState.IDLE
+var startcombat = true
 
 func _ready():
+	if startcombat ==true:
+		_start()
+func _start():
 	if GameState.current_phase == GameStat.GamePhase.COMBAT:
 		ui = get_parent()
 		enemy_positions=[
