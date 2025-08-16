@@ -33,6 +33,7 @@ texture = ExtResource("1_li52l")
 
 [node name="Doortext" type="TextureRect" parent="."]
 self_modulate = Color(0.6, 1, 1, 1)
+layout_mode = 0
 offset_left = 750.0
 offset_top = 84.0
 offset_right = 1152.0
@@ -41,6 +42,7 @@ texture = ExtResource("2_if3bc")
 expand_mode = 1
 
 [node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -67.0
 offset_top = -6.0
 offset_right = 1946.0

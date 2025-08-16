@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_3tpjq"]
 [ext_resource type="Texture2D" uid="uid://c8rp0k1fogimi" path="res://characters/charatexture/char priest.png" id="2_0a2fh"]
 [ext_resource type="Texture2D" uid="uid://c8y2xrtwi8euj" path="res://characters/characterInitiative/priestIni.png" id="3_lj1d3"]
-[ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_r5yom"]
+[ext_resource type="Texture2D" uid="uid://cynjnle30vnj0" path="res://characters/charatexture/char priestDead.png" id="3_uhc5d"]
 [ext_resource type="Resource" uid="uid://bptddsqeaq28h" path="res://actions/heal.tres" id="5_d5532"]
 [ext_resource type="Resource" uid="uid://cswp6nkwg6iwu" path="res://actions/priere.tres" id="5_lhvcf"]
 [ext_resource type="Resource" uid="uid://b4f6tt51qrg3o" path="res://actions/exorcisme.tres" id="6_es7ke"]
@@ -13,7 +13,7 @@
 [node name="CharacterTestHero1" type="Node2D"]
 script = ExtResource("1_3tpjq")
 portrait_texture = ExtResource("2_0a2fh")
-dead_portrait_texture = ExtResource("3_r5yom")
+dead_portrait_texture = ExtResource("3_uhc5d")
 initiative_icon = ExtResource("3_lj1d3")
 Charaname = "priest"
 skill_resources = Array[Resource]([ExtResource("5_lhvcf"), ExtResource("6_uhc5d"), ExtResource("5_d5532"), ExtResource("6_es7ke"), ExtResource("9_uhc5d")])

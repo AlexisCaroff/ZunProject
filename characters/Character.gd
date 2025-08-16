@@ -71,7 +71,7 @@ var is_targetable: bool = false
 
 
 func _ready():
-
+	
 	name_label.text = Charaname
 	sprite.texture = portrait_texture
 	Selector.texture = portrait_texture
@@ -117,7 +117,7 @@ func update_ui():
 		hp_label=$HP
 		stress_label=$Stress
 		horny_label=$horny
-		#return
+		# return
 	hp_label.text = "HP: %d / %d" % [current_stamina, max_stamina]
 	stress_label.text = "Stress: %d / %d" % [current_stress, max_stress]
 	horny_label.text = "Horny: %d / %d" % [current_horniness, max_horniness]
@@ -220,7 +220,10 @@ func play_ai_turn(heroes : Array, ennemies :Array):
 			resetVisuel()
 			return
 
-	
+	for Chara in possible_targets:
+		if Chara.is_dead():
+			possible_targets.erase(Chara)
+		
 	var target: Character
 	if taunted_by != null:
 		if skill.the_target_type == skill.target_type.ENNEMY:

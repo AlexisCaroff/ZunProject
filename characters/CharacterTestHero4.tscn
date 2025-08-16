@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i8qvq"]
 [ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="2_eg61m"]
-[ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_eg61m"]
+[ext_resource type="Texture2D" uid="uid://b1gqe0n366p7t" path="res://characters/charatexture/char tankdead.png" id="3_4h21c"]
 [ext_resource type="Texture2D" uid="uid://b23pftdqkb2it" path="res://characters/characterInitiative/croiséIni.png" id="4_07x3b"]
 [ext_resource type="Resource" uid="uid://behrtqotkyvnx" path="res://actions/Taunt.tres" id="5_b6mpb"]
 [ext_resource type="Resource" uid="uid://doydfjjogegnd" path="res://actions/StunAttaque.tres" id="6_y4wav"]
@@ -13,7 +13,7 @@
 [node name="CharacterTestHero4" type="Node2D"]
 script = ExtResource("1_i8qvq")
 portrait_texture = ExtResource("2_eg61m")
-dead_portrait_texture = ExtResource("3_eg61m")
+dead_portrait_texture = ExtResource("3_4h21c")
 initiative_icon = ExtResource("4_07x3b")
 Charaname = "Tank"
 initiative = 4

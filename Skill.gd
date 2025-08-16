@@ -18,7 +18,7 @@ enum target_type {
 	BACK_ALLY,
 	
 }
-
+@export var ImageSkill : Texture2D 
 @export_enum("enemy", "ally", "self", "all ally", "all ennemy", "front ennemy","back ennemy","front ally","back ally")
 var the_target_type: int = target_type.ENNEMY
 @export var effects: Array[SkillEffect] = []
@@ -47,6 +47,7 @@ var the_second_target_type: int = second_target_type.ENNEMY
 @export var current_cooldown: int = 0
 @export var precision: int = 100
 @export var allways_hit: bool = false
+@export var duration : float =1.0
 var owner: Character
 var target1 : Array[PositionSlot]
 var target2 : Array[PositionSlot]
@@ -57,8 +58,7 @@ func can_use() -> bool:
 	return current_cooldown == 0
 
 func use(target: PositionSlot = null, secondtarget : bool=false):
-	
-		
+	target.occupant.combat_manager.imageAction.activate(ImageSkill,duration) 
 	if not can_use():
 		return
 	

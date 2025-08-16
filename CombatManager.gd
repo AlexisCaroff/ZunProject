@@ -10,7 +10,7 @@ var ui: Control = null
 @export var SPACING_Y = 250
 @export var _pending_skill: Skill = null  # Stockage interne
 @export var exploration_scene: PackedScene 
-
+@onready var imageAction :TextureRect= $"../ImageAction"
 #save
 var saved_data : Array = []
 # Propriété publique avec accesseurs
@@ -138,7 +138,7 @@ func build_turn_queue(characters: Array[Character]) -> Array[Character]:
 
 func next_turn():
 	_check_victory()
-	
+	_check_defeat()
 	if turn_queue.is_empty():
 		turn_queue = build_turn_queue(heroes + enemies)
 		ui.update_turn_queue_ui(turn_queue)
@@ -172,6 +172,16 @@ func _check_victory():
 			return 
 	
 	_show_victory()
+	
+func _check_defeat():
+	for ally in heroes:
+		if not ally.dead:
+			return 
+	_show_defeat()
+	
+func _show_defeat():
+	ResultScreen_label.text = "Defeat !"
+	ResultScreen_label.modulate = Color(1, 1, 1, 1)
 	
 func _show_victory():
 	ResultScreen_label.text = "Victoire !"

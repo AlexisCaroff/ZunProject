@@ -33,4 +33,5 @@ cooldown = 4
 current_cooldown = 0
 precision = 100
 allways_hit = false
+duration = 1.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

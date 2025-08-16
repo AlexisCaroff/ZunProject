@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_52n4a"]
 [ext_resource type="Texture2D" uid="uid://frq4grv1dvoo" path="res://characters/charatexture/cultisteBody.png" id="2_ab0ni"]
 [ext_resource type="Texture2D" uid="uid://b0q8mhrqooms" path="res://characters/characterInitiative/cultisteIni.png" id="3_0k1kv"]
-[ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_4a20v"]
+[ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="3_wprb4"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="5_4ovvk"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="5_jx27m"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="6_jx27m"]
@@ -37,13 +37,14 @@ cooldown = 4
 current_cooldown = 0
 precision = 100
 allways_hit = false
+duration = 1.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
 
 [node name="CharacterTestennemie2" type="Node2D"]
 position = Vector2(316, 258)
 script = ExtResource("1_52n4a")
 portrait_texture = ExtResource("2_ab0ni")
-dead_portrait_texture = ExtResource("3_4a20v")
+dead_portrait_texture = ExtResource("3_wprb4")
 initiative_icon = ExtResource("3_0k1kv")
 Charaname = "sucubbus"
 IsDemon = true

@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://dopuwtv1moav3"]
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://dopuwtv1moav3"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_1tf15"]
+[ext_resource type="Texture2D" uid="uid://cehik0642stvx" path="res://actions/actiontexture/SkillImage/Hero_Mystique_Bouclier.png" id="1_r53j6"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_r53j6"]
 [ext_resource type="Texture2D" uid="uid://b8ii3bd7eltui" path="res://actions/damageEffect/damageeffecttexture/charmetexture.png" id="3_48161"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="4_upuql"]
@@ -20,6 +21,7 @@ name = "Shield"
 descriptionName = "Shield"
 description = "buff defence"
 icon = ExtResource("4_upuql")
+ImageSkill = ExtResource("1_r53j6")
 the_target_type = 2
 effects = Array[ExtResource("1_1tf15")]([SubResource("Resource_mdx25")])
 two_target_Type = false
@@ -33,4 +35,5 @@ cooldown = 2
 current_cooldown = 0
 precision = 100
 allways_hit = true
+duration = 1.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

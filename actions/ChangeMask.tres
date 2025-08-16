@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=13 format=3 uid="uid://m6nw8l2ax4to"]
+[gd_resource type="Resource" script_class="Skill" load_steps=14 format=3 uid="uid://m6nw8l2ax4to"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_fex6w"]
+[ext_resource type="Texture2D" uid="uid://nkqxi0lx03ny" path="res://actions/actiontexture/SkillImage/Hero_Mystique_ChangeMask.png" id="1_vricj"]
 [ext_resource type="Script" uid="uid://cy3v0dypme7n7" path="res://actions/skillEffects/Move.gd" id="2_kkbb7"]
 [ext_resource type="Script" uid="uid://c0arbc0klbc6c" path="res://actions/skillEffects/ChangeSkill.gd" id="2_tr7ti"]
 [ext_resource type="Texture2D" uid="uid://sb35k7bfa5ry" path="res://actions/actiontexture/priere.png" id="3_kkbb7"]
@@ -26,6 +27,7 @@ name = "ChangeMask"
 descriptionName = "ChangeMask"
 description = "ChangeMask and skills"
 icon = ExtResource("3_kkbb7")
+ImageSkill = ExtResource("1_vricj")
 the_target_type = 2
 effects = Array[ExtResource("1_fex6w")]([SubResource("Resource_vricj")])
 two_target_Type = true
@@ -39,4 +41,5 @@ cooldown = 5
 current_cooldown = 0
 precision = 100
 allways_hit = true
+duration = 1.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
