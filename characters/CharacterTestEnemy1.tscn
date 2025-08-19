@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3jx7ce6fpdr1"]
+[gd_scene load_steps=12 format=3 uid="uid://d3jx7ce6fpdr1"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_61pjh"]
 [ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="2_i0xeg"]
@@ -6,11 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://b0q8mhrqooms" path="res://characters/characterInitiative/cultisteIni.png" id="3_mruho"]
 [ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/Ennemi_attaque_basique.tres" id="4_61pjh"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="6_0go71"]
+[ext_resource type="Resource" uid="uid://cvpggc0yt3l4o" path="res://actions/Ennemi_charme.tres" id="6_r4har"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="7_065j3"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="7_xwnr5"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="8_0ot4w"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="8_065j3"]
 
 [node name="CharacterTestennemie1" type="Node2D"]
-modulate = Color(0.801126, 0.738995, 1.15514e-06, 1)
 script = ExtResource("1_61pjh")
 portrait_texture = ExtResource("2_i0xeg")
 dead_portrait_texture = ExtResource("3_0go71")
@@ -18,32 +20,42 @@ initiative_icon = ExtResource("3_mruho")
 Charaname = "ennemie1"
 IsDemon = true
 Chara_position = 1
-skill_resources = Array[Resource]([ExtResource("4_61pjh"), ExtResource("4_61pjh"), ExtResource("4_61pjh"), ExtResource("4_61pjh"), ExtResource("6_0go71")])
+skill_resources = Array[Resource]([ExtResource("4_61pjh"), ExtResource("6_r4har"), ExtResource("4_61pjh"), ExtResource("6_r4har"), ExtResource("6_0go71")])
 is_player_controlled = false
 
-[node name="HerosTexture1" type="TextureRect" parent="."]
-modulate = Color(0.490196, 1, 0.458824, 1)
-offset_left = -118.0
-offset_top = -259.0
-offset_right = 66.0
-offset_bottom = -10.0
-texture = ExtResource("2_i0xeg")
-expand_mode = 1
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(0, -21)
+script = ExtResource("7_065j3")
+min_scale = 1.0
+scalemini = 0.95
 
-[node name="Selector" type="TextureRect" parent="."]
-self_modulate = Color(2, 2, 2, 0)
-offset_left = -118.0
-offset_top = -259.0
-offset_right = 66.0
-offset_bottom = -10.0
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+offset_left = -133.0
+offset_top = -229.0
+offset_right = 38.0
+offset_bottom = 2.0
+mouse_filter = 2
 texture = ExtResource("2_i0xeg")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Selector" type="TextureRect" parent="pivot"]
+self_modulate = Color(2, 2, 2, 0)
+offset_left = -133.0
+offset_top = -229.0
+offset_right = 38.0
+offset_bottom = 2.0
+mouse_filter = 2
+texture = ExtResource("2_i0xeg")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="name" type="Label" parent="."]
-offset_left = -35.0
-offset_top = -261.0
-offset_right = 9.0
-offset_bottom = -238.0
+visible = false
+offset_left = -46.0
+offset_top = -267.0
+offset_right = -2.0
+offset_bottom = -244.0
 text = "name"
 
 [node name="HP" type="Label" parent="."]
@@ -89,6 +101,18 @@ offset_bottom = 258.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_xwnr5")
 script = ExtResource("8_065j3")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(-41, -354)
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("8_0ot4w")
+offset = Vector2(0, 115.375)
+script = ExtResource("7_065j3")
+min_scale = 0.38
+max_scale = 0.38
+scalemini = 0.3
+min_duration = 0.5
+max_duration = 0.5
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

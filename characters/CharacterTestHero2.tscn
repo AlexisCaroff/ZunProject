@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://qi68oagp06kg"]
+[gd_scene load_steps=16 format=3 uid="uid://qi68oagp06kg"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_q3w66"]
 [ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="2_5lneg"]
@@ -12,6 +12,9 @@
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="11_wrjt1"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="12_5lneg"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="12_fj1an"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="13_wu8lj"]
+[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="14_gno5x"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="15_gno5x"]
 
 [node name="CharacterTestHero2" type="Node2D"]
 script = ExtResource("1_q3w66")
@@ -22,32 +25,11 @@ Charaname = "hunter"
 Chara_position = 1
 skill_resources = Array[Resource]([ExtResource("4_o35hh"), ExtResource("6_6qnei"), ExtResource("7_lacfs"), ExtResource("8_lacfs"), ExtResource("11_wrjt1")])
 
-[node name="HerosTexture1" type="TextureRect" parent="."]
-offset_left = -122.0
-offset_top = -295.0
-offset_right = 539.0
-offset_bottom = 296.0
-scale = Vector2(0.5, 0.5)
-mouse_filter = 2
-texture = ExtResource("2_5lneg")
-expand_mode = 1
-
-[node name="Selector" type="TextureRect" parent="."]
-self_modulate = Color(2, 2, 2, 1)
-offset_left = -122.0
-offset_top = -295.0
-offset_right = 539.0
-offset_bottom = 296.0
-scale = Vector2(0.5, 0.5)
-mouse_filter = 2
-texture = ExtResource("2_5lneg")
-expand_mode = 1
-
 [node name="name" type="Label" parent="."]
-offset_left = -57.0
-offset_top = -258.0
-offset_right = -13.0
-offset_bottom = -235.0
+offset_left = -70.0
+offset_top = -241.0
+offset_right = -26.0
+offset_bottom = -218.0
 theme_override_fonts/font = ExtResource("12_5lneg")
 text = "name"
 
@@ -85,15 +67,60 @@ offset_top = -252.0
 offset_right = 62.0
 offset_bottom = -233.0
 
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(15, -24)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("13_wu8lj")
+min_scale = 1.2
+max_scale = 1.2
+scalemini = 1.1
+min_duration = 1.0
+max_duration = 1.2
+
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+offset_left = -129.0
+offset_top = -213.0
+offset_right = 42.0
+offset_bottom = 18.0
+scale = Vector2(1.2, 1)
+mouse_filter = 2
+texture = ExtResource("2_5lneg")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Selector" type="TextureRect" parent="pivot"]
+self_modulate = Color(2, 2, 2, 0)
+offset_left = -129.0
+offset_top = -213.0
+offset_right = 42.0
+offset_bottom = 18.0
+scale = Vector2(1.2, 1)
+mouse_filter = 2
+texture = ExtResource("14_gno5x")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="Skill" type="TextureRect" parent="."]
 visible = false
-offset_left = -118.0
-offset_top = -321.0
-offset_right = 458.0
-offset_bottom = 255.0
+offset_left = -148.0
+offset_top = -286.0
+offset_right = 428.0
+offset_bottom = 290.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11_5lneg")
 script = ExtResource("12_fj1an")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(-52, -340)
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("15_gno5x")
+offset = Vector2(0, 115.375)
+script = ExtResource("13_wu8lj")
+min_scale = 0.38
+max_scale = 0.38
+scalemini = 0.3
+min_duration = 0.5
+max_duration = 0.5
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

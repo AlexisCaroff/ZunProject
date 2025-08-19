@@ -11,7 +11,7 @@ class_name Character
 @onready var hp_label = $HP
 @onready var stress_label = $Stress
 @onready var horny_label = $horny
-@onready var sprite = $HerosTexture1
+@onready var sprite = $pivot/HerosTexture1
 @onready var SkillText = $Skill
 @onready var buff_bar = $HBoxContainer
 @export var Charaname: String = "name"
@@ -28,7 +28,7 @@ class_name Character
 @export var initiative: int = 1
 @export var base_evasion: int = 5
 
-@onready var Selector:TextureRect =$Selector
+@onready var Selector:TextureRect =$pivot/Selector
 
 #etat
 @export var stun : bool = false
@@ -65,17 +65,20 @@ var combat_manager: Node = null
 const HornyEffectScene := preload("res://actions/damageEffect/charmed-particules.tscn")
 const DamageEffectScene := preload("res://actions/damageEffect/HitVFX.tscn")
 const MissEffectScene:= preload("res://actions/damageEffect/miss_vfx.tscn")
-
+@export var min_durationIddle: float = 0.6
+@export var max_durationIddle: float = 1.0
+@export var min_scale: float = 0.95
+@export var max_scale: float = 1.0
 signal target_selected()
 var is_targetable: bool = false
-
+@onready var arrow = $Arrow
 
 func _ready():
-	
+	arrow.visible=false
 	name_label.text = Charaname
 	sprite.texture = portrait_texture
 	Selector.texture = portrait_texture
-	#sprite.mouse_filter=2
+	
 
 	update_ui()
 	
@@ -175,6 +178,7 @@ func can_act() -> bool:
 	
 func set_targetable(state: bool):
 	is_targetable = state
+	arrow.visible= state
 	if state :
 		sprite.modulate = Color(1, 1, 1)
 		#print(Charaname+" is targetable")
@@ -258,6 +262,7 @@ func end_turn():
 func select_as_target():
 	print("Cible sélectionnée : ", self.name)
 	combat_manager.select_target(self)
+	arrow.visible=false
 
 func take_damage(source: Character, stat: int, amount: int) -> void:
 	var damage := 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://csp2iaxa3prf"]
+[gd_scene load_steps=16 format=3 uid="uid://csp2iaxa3prf"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_3tpjq"]
 [ext_resource type="Texture2D" uid="uid://c8rp0k1fogimi" path="res://characters/charatexture/char priest.png" id="2_0a2fh"]
@@ -11,6 +11,10 @@
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="9_uhc5d"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="10_lhvcf"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="11_1etg5"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="12_1yer4"]
+[ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="13_fj746"]
+[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="14_pkjwt"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="15_fj746"]
 
 [node name="CharacterTestHero1" type="Node2D"]
 script = ExtResource("1_3tpjq")
@@ -20,30 +24,11 @@ initiative_icon = ExtResource("3_lj1d3")
 Charaname = "priest"
 skill_resources = Array[Resource]([ExtResource("5_lhvcf"), ExtResource("6_uhc5d"), ExtResource("5_d5532"), ExtResource("6_es7ke"), ExtResource("9_uhc5d")])
 
-[node name="HerosTexture1" type="TextureRect" parent="."]
-offset_left = -124.0
-offset_top = -249.0
-offset_right = 156.0
-offset_bottom = -8.0
-mouse_filter = 2
-texture = ExtResource("2_0a2fh")
-expand_mode = 1
-
-[node name="Selector" type="TextureRect" parent="."]
-self_modulate = Color(2, 2, 2, 0)
-offset_left = -124.0
-offset_top = -249.0
-offset_right = 157.0
-offset_bottom = -8.0
-mouse_filter = 2
-texture = ExtResource("2_0a2fh")
-expand_mode = 1
-
 [node name="name" type="Label" parent="."]
-offset_left = -35.0
-offset_top = -261.0
-offset_right = 9.0
-offset_bottom = -238.0
+offset_left = -55.0
+offset_top = -250.0
+offset_right = -11.0
+offset_bottom = -227.0
 text = "name"
 
 [node name="HP" type="Label" parent="."]
@@ -73,12 +58,55 @@ offset_top = -252.0
 offset_right = 112.0
 offset_bottom = -161.0
 
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(3, -35)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("12_1yer4")
+min_scale = 1.1
+max_scale = 1.2
+min_duration = 0.9
+
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+offset_left = -96.6667
+offset_top = -211.667
+offset_right = 74.3333
+offset_bottom = 19.3333
+scale = Vector2(1.2, 1)
+mouse_filter = 2
+texture = ExtResource("13_fj746")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Selector" type="TextureRect" parent="pivot"]
+self_modulate = Color(2, 2, 2, 0)
+offset_left = -96.6667
+offset_top = -211.667
+offset_right = 74.3333
+offset_bottom = 19.3333
+scale = Vector2(1.2, 1)
+mouse_filter = 2
+texture = ExtResource("14_pkjwt")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="Skill" type="TextureRect" parent="."]
 visible = false
-offset_left = -131.0
-offset_top = -293.0
-offset_right = 445.0
-offset_bottom = 283.0
+offset_left = -113.0
+offset_top = -290.0
+offset_right = 463.0
+offset_bottom = 286.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("10_lhvcf")
 script = ExtResource("11_1etg5")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(-45, -338)
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("15_fj746")
+offset = Vector2(0, 115.375)
+script = ExtResource("12_1yer4")
+min_scale = 0.38
+max_scale = 0.38
+scalemini = 0.3
+min_duration = 0.5
+max_duration = 0.5

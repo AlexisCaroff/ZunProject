@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://jg7klanpwhgj"]
+[gd_scene load_steps=11 format=3 uid="uid://jg7klanpwhgj"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_40et0"]
 [ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="2_fyqbi"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="3_fyqbi"]
 [ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/Ennemi_attaque_basique.tres" id="4_k5y2r"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="6_fyqbi"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="7_qs4ct"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="7_v32pq"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="8_8h53a"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="8_qs4ct"]
 
 [node name="CharacterTestennemie3" type="Node2D"]
@@ -20,29 +22,36 @@ Chara_position = 2
 skill_resources = Array[Resource]([ExtResource("4_k5y2r"), ExtResource("4_k5y2r"), ExtResource("4_k5y2r"), ExtResource("4_k5y2r"), ExtResource("6_fyqbi")])
 is_player_controlled = false
 
-[node name="HerosTexture1" type="TextureRect" parent="."]
-modulate = Color(0.490196, 1, 0.458824, 1)
-offset_left = -118.0
-offset_top = -259.0
-offset_right = 66.0
-offset_bottom = -10.0
-texture = ExtResource("2_fyqbi")
-expand_mode = 1
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(0, -21)
+script = ExtResource("7_qs4ct")
 
-[node name="Selector" type="TextureRect" parent="."]
-self_modulate = Color(2, 2, 2, 0)
-offset_left = -118.0
-offset_top = -259.0
-offset_right = 66.0
-offset_bottom = -10.0
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+offset_left = -133.0
+offset_top = -229.0
+offset_right = 38.0
+offset_bottom = 2.0
+mouse_filter = 2
 texture = ExtResource("2_fyqbi")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Selector" type="TextureRect" parent="pivot"]
+self_modulate = Color(2, 2, 2, 0)
+offset_left = -133.0
+offset_top = -229.0
+offset_right = 38.0
+offset_bottom = 2.0
+mouse_filter = 2
+texture = ExtResource("2_fyqbi")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="name" type="Label" parent="."]
-offset_left = -35.0
-offset_top = -261.0
-offset_right = 9.0
-offset_bottom = -238.0
+offset_left = -82.0
+offset_top = -265.0
+offset_right = -38.0
+offset_bottom = -242.0
 text = "name"
 
 [node name="HP" type="Label" parent="."]
@@ -88,6 +97,18 @@ offset_bottom = 271.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_v32pq")
 script = ExtResource("8_qs4ct")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(-52, -351)
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("8_8h53a")
+offset = Vector2(0, 117.335)
+script = ExtResource("7_qs4ct")
+min_scale = 0.38
+max_scale = 0.38
+scalemini = 0.3
+min_duration = 0.5
+max_duration = 0.5
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
