@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://dg3aat08m30vy"]
+
+[ext_resource type="Script" uid="uid://blgghrqrf6qji" path="res://peek.gd" id="1_2c73c"]
+[ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://lvl/combat1/encounter1.tres" id="2_amsrx"]
+[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_cxl0a"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_amsrx"]
+[ext_resource type="Texture2D" uid="uid://dmywh27l7sqm1" path="res://UI/mask.png" id="5_4c7x2"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="5_knem7"]
+[ext_resource type="Script" uid="uid://wv6mo6dmik54" path="res://UI/doorshadows.gd" id="6_knem7"]
+
+[node name="peek" type="Node2D"]
+script = ExtResource("1_2c73c")
+ennemies = ExtResource("2_amsrx")
+
+[node name="ZunBg" type="Sprite2D" parent="."]
+position = Vector2(994, 475.625)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("2_cxl0a")
+
+[node name="atmosphere" parent="." instance=ExtResource("3_amsrx")]
+position = Vector2(2, 515)
+
+[node name="PortraitSlot1" type="Node2D" parent="."]
+position = Vector2(495, 628)
+script = ExtResource("5_knem7")
+
+[node name="PortraitSlot2" type="Node2D" parent="."]
+position = Vector2(770, 647)
+script = ExtResource("5_knem7")
+
+[node name="PortraitSlot3" type="Node2D" parent="."]
+position = Vector2(1113, 622)
+script = ExtResource("5_knem7")
+
+[node name="PortraitSlot4" type="Node2D" parent="."]
+position = Vector2(1450, 702)
+script = ExtResource("5_knem7")
+
+[node name="doorshadows" type="Sprite2D" parent="."]
+position = Vector2(936.5, 484)
+scale = Vector2(1.14323, 1.14167)
+texture = ExtResource("5_4c7x2")
+script = ExtResource("6_knem7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(988, 487)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1920, 1080)

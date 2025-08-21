@@ -42,12 +42,7 @@ var HERO_SCENES = [
 	preload("res://characters/CharacterTestHero4.tscn")
 ]
 
-@export var ENEMY_SCENES = [
-	preload("res://characters/CharacterTestEnemy1.tscn"),
-	preload("res://characters/CharacterTestEnemy2.tscn"),
-	preload("res://characters/CharacterTestEnemy3.tscn"),
-	preload("res://characters/CharacterTestEnemy4.tscn")
-]
+@export var encounter: CombatEncounter
 
 #stat combat manager
 @onready var audio = $AudioStreamPlayer2D
@@ -92,15 +87,15 @@ func _start():
 				move_character_to(chara, slot, 0.0)
 		
 		# Spawn ennemis
-		for i in ENEMY_SCENES.size():
-			var chara = ENEMY_SCENES[i].instantiate()
+		for i in encounter.enemy_scenes.size():
+			var chara = encounter.enemy_scenes[i].instantiate()
 			add_child(chara)
 			chara.combat_manager = self
 			enemies.append(chara)
-			
+
 			var slot_index = i
 			var slot = enemy_positions[slot_index]
-			move_character_to(chara, slot,0.0)
+			move_character_to(chara, slot, 0.0)
 		ui.log("start Combat")
 		start_combat()
 		

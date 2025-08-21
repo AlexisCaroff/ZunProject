@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="5_h3yc3"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="6_irgbs"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="7_edpx3"]
-[ext_resource type="PackedScene" uid="uid://6y0rn5xg45h3" path="res://lvl/combat2.tscn" id="10_if3bc"]
+[ext_resource type="PackedScene" uid="uid://6y0rn5xg45h3" path="res://lvl/combat3.tscn" id="10_if3bc"]
 [ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="10_vxvdq"]
 [ext_resource type="Script" uid="uid://6edfrm0jkjqe" path="res://lvl/back.gd" id="11_ibvin"]
 [ext_resource type="Texture2D" uid="uid://bqmj6euxhil4t" path="res://UI/back.png" id="12_if3bc"]

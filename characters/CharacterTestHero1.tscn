@@ -65,7 +65,9 @@ scale = Vector2(1.2, 1.2)
 script = ExtResource("12_1yer4")
 min_scale = 1.1
 max_scale = 1.1
+scalemini = 1.05
 min_duration = 1.0
+max_duration = 1.5
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
 offset_left = -96.6667
