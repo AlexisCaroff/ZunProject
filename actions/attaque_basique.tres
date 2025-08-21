@@ -21,6 +21,7 @@ descriptionName = "large swing"
 description = "attaquetout les enneimes"
 icon = ExtResource("3_8u6nw")
 attack_sound = ExtResource("1_qkv4v")
+required_position = 1
 ImageSkill = ExtResource("1_i4eos")
 the_target_type = 4
 effects = Array[ExtResource("1_8u6nw")]([SubResource("Resource_i4eos")])

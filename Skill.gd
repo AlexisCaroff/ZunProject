@@ -6,6 +6,13 @@ class_name Skill
 @export var description: String = "Inflige des dégâts à un ennemi"
 @export var icon: Texture2D
 @export var attack_sound: AudioStream 
+enum position_requirement {
+	ANY,       # peut être lancé de n'importe où
+	FRONT,     # uniquement depuis l'avant
+	BACK       # uniquement depuis l'arrière
+}
+@export var required_position: position_requirement = position_requirement.ANY
+
 enum target_type {
 	ENNEMY, 
 	ALLY, 
@@ -52,10 +59,18 @@ var owner: Character
 var target1 : Array[PositionSlot]
 var target2 : Array[PositionSlot]
 
+
 func can_use() -> bool:
 	if owner == null:
 		return false
-	return current_cooldown == 0
+	if current_cooldown > 0:
+		return false
+	if required_position == position_requirement.FRONT and not owner.current_slot.position_data.isFront:
+		return false
+	if required_position == position_requirement.BACK and owner.current_slot.position_data.isFront:
+		return false
+	
+	return true
 
 func use(target: PositionSlot = null, secondtarget : bool=false):
 	owner.SkillText.activate(ImageSkill,duration) 
@@ -84,7 +99,7 @@ func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = eff
 		effect.apply(owner, target)
 
 func _apply_second_effect(target2: PositionSlot):
-	print("apply second effect")
+	#print("apply second effect")
 	_apply_effect(target2, second_effects)
 
 func select_targets(combat_manager:CombatManager):

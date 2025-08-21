@@ -304,9 +304,17 @@ func resetVisuel()-> void:
 	sprite.modulate=Color(1.0,1.0,1.0,1.0)
 	self.scale = CharaScale
 	self.z_index = 0
-	
+
+#------------------------------- Animation ------------------------------------------------
+
+
+
+signal skill_animation_started
+signal skill_animation_finished
+
 	
 func animate_start_Turn():
+	emit_signal("skill_animation_started")
 	var tween := create_tween() as Tween
 	CharaScale = current_slot.position_data.scale
 	var normal_size = CharaScale
@@ -315,8 +323,10 @@ func animate_start_Turn():
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	combat_manager.ui.log( str(normal_size))
 	await tween.finished
+	emit_signal("skill_animation_finished")
 
 func animate_get_horny(damage:int):
+	emit_signal("skill_animation_started")
 	var effect_instance = HornyEffectScene.instantiate()
 	get_tree().current_scene.add_child(effect_instance)
 
@@ -328,11 +338,13 @@ func animate_get_horny(damage:int):
 	var big_size= Vector2(1.0,1.1) 
 	tween.tween_property(self, "scale", big_size, 0.2)
 	tween.tween_property(self, "scale", normal_size, 0.2)
+	await tween.finished
+	emit_signal("skill_animation_finished")
 	
 func animate_take_damage(damage:int, source:Character):
+	emit_signal("skill_animation_started")
 	var effect_instance = DamageEffectScene.instantiate()
 	get_tree().current_scene.add_child(effect_instance)
-
 	effect_instance.global_position = global_position + Vector2(0, -140)
 	if effect_instance.has_method("setup"):
 		effect_instance.setup(damage)
@@ -350,10 +362,10 @@ func animate_take_damage(damage:int, source:Character):
 	tween2.tween_property(self, "position", attack_pos, 0.02).set_delay(0.02)
 	tween2.tween_property(self, "position", start_pos, 0.2)
 	await tween.finished
+	emit_signal("skill_animation_finished")
 	
 func animate_attack(target: Character):
-
-	# Création d'un nouveau Tween
+	emit_signal("skill_animation_started")
 	var tween := create_tween() as Tween
 	var scaletween := create_tween() as Tween
 	tween.set_trans(Tween.TRANS_SINE)
@@ -372,10 +384,11 @@ func animate_attack(target: Character):
 	tween.tween_property(self, "position", start_pos, 0.2).set_delay(0.2)
 
 	scaletween.tween_property(self, "scale", normal_size, 0.2).set_delay(0.2)
-
-	#await tween.finished
+	await tween.finished	
+	emit_signal("skill_animation_finished")
 	
 func miss_animation(target: Character):
+	emit_signal("skill_animation_started")
 	var Misseffect_instance= MissEffectScene.instantiate()
 	get_tree().current_scene.add_child(Misseffect_instance)
 
@@ -391,7 +404,8 @@ func miss_animation(target: Character):
 	
 	tween.tween_property(self, "position", esquiv_pose, 0.05)
 	tween.tween_property(self, "position", start_pose, 0.2).set_delay(0.2)
-	
+	await tween.finished
+	emit_signal("skill_animation_finished")
 	
 func shake_camera(strength := 5.0):
 	var cam := get_viewport().get_camera_2d()

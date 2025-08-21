@@ -3,8 +3,7 @@ extends Node
 var big_size = Vector2(1.2, 1.2)
 var startsize = Vector2(1.0,1.0)
 var current_tween: Tween = null
-@export var next_scene: PackedScene 
-
+@export_file("*.tscn") var target_scene : String
 
 func _on_mouse_exited() -> void:
 	Doortext.scale = big_size	
@@ -39,8 +38,8 @@ func _on_button_down() -> void:
 
 
 func change_to_next_scene():
-	if get_tree():
-		get_tree().change_scene_to_packed(next_scene)
-	else:
-		print("Erreur : get_tree() est null.")
+	
+	if target_scene != "":
+		get_tree().change_scene_to_file(target_scene)
+	
 	

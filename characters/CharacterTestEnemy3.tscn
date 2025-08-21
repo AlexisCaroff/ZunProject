@@ -48,6 +48,7 @@ expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="name" type="Label" parent="."]
+visible = false
 offset_left = -82.0
 offset_top = -265.0
 offset_right = -38.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://h8pqs7tabdxj"]
+[gd_scene load_steps=36 format=3 uid="uid://h8pqs7tabdxj"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_8flqu"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="1_32lil"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://b3l4l88c3b65c" path="res://PositionData.gd" id="7_i1s1q"]
 [ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="7_roj6a"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="8_roj6a"]
-[ext_resource type="PackedScene" uid="uid://dqnjuxw77ebnb" path="res://lvl/exploration1.tscn" id="10_vtu61"]
 [ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="10_x8qlv"]
 [ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterTestEnemy1.tscn" id="12_ktp8g"]
 [ext_resource type="PackedScene" uid="uid://jc1bbpflus0q" path="res://characters/CharacterTestEnemy4.tscn" id="12_roj6a"]
@@ -24,7 +23,7 @@
 [sub_resource type="Resource" id="Resource_i1s1q"]
 script = ExtResource("7_i1s1q")
 index = 0
-scale = Vector2(1, 1)
+scale = Vector2(1.2, 1.2)
 is_enemy = false
 isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -34,32 +33,32 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="Resource" id="Resource_8flqu"]
 script = ExtResource("7_i1s1q")
 index = 1
-scale = Vector2(0.9, 0.9)
+scale = Vector2(1, 1)
 is_enemy = false
 isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hxbks"]
 
-[sub_resource type="Resource" id="Resource_t7hjh"]
-script = ExtResource("7_i1s1q")
-index = 3
-scale = Vector2(0.9, 0.9)
-is_enemy = false
-isFront = true
-metadata/_custom_type_script = "uid://b3l4l88c3b65c"
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m2l43"]
-
 [sub_resource type="Resource" id="Resource_x8qlv"]
 script = ExtResource("7_i1s1q")
 index = 2
-scale = Vector2(1, 1)
+scale = Vector2(1.2, 1.2)
 is_enemy = false
 isFront = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtu61"]
+
+[sub_resource type="Resource" id="Resource_t7hjh"]
+script = ExtResource("7_i1s1q")
+index = 3
+scale = Vector2(1, 1)
+is_enemy = false
+isFront = true
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m2l43"]
 
 [sub_resource type="Resource" id="Resource_fs52m"]
 script = ExtResource("7_i1s1q")
@@ -269,7 +268,7 @@ autowrap_mode = 3
 [node name="CombatManager" parent="." instance=ExtResource("10_x8qlv")]
 HERO_START_POS = Vector2(100, 500)
 ENEMY_START_POS = Vector2(1200, 500)
-exploration_scene = ExtResource("10_vtu61")
+target_scene = "uid://dqnjuxw77ebnb"
 ENEMY_SCENES = [ExtResource("12_ktp8g"), ExtResource("12_ktp8g"), ExtResource("14_roj6a"), ExtResource("12_roj6a")]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CombatManager"]
@@ -301,7 +300,7 @@ ignore_rotation = false
 script = ExtResource("5_xibqh")
 
 [node name="HeroPosition" type="Node2D" parent="."]
-position = Vector2(151, 642)
+position = Vector2(288, 642)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
 position = Vector2(0, 28)
@@ -346,29 +345,8 @@ offset_bottom = 11.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_hxbks")
 flat = true
 
-[node name="position4" type="Node2D" parent="HeroPosition"]
-position = Vector2(537, -13)
-script = ExtResource("6_j6rr1")
-position_data = SubResource("Resource_t7hjh")
-
-[node name="TextureRect" type="TextureRect" parent="HeroPosition/position4"]
-visible = false
-offset_left = -47.0
-offset_top = -334.0
-offset_right = 19.0
-offset_bottom = -274.0
-texture = ExtResource("1_32lil")
-
-[node name="Button" type="Button" parent="HeroPosition/position4"]
-offset_left = -92.0
-offset_top = -304.0
-offset_right = 78.0
-offset_bottom = 11.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_m2l43")
-flat = true
-
 [node name="position3" type="Node2D" parent="HeroPosition"]
-position = Vector2(355, 27)
+position = Vector2(354, 33)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_x8qlv")
 
@@ -388,8 +366,29 @@ offset_bottom = 11.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_vtu61")
 flat = true
 
+[node name="position4" type="Node2D" parent="HeroPosition"]
+position = Vector2(572, -3)
+script = ExtResource("6_j6rr1")
+position_data = SubResource("Resource_t7hjh")
+
+[node name="TextureRect" type="TextureRect" parent="HeroPosition/position4"]
+visible = false
+offset_left = -47.0
+offset_top = -334.0
+offset_right = 19.0
+offset_bottom = -274.0
+texture = ExtResource("1_32lil")
+
+[node name="Button" type="Button" parent="HeroPosition/position4"]
+offset_left = -92.0
+offset_top = -304.0
+offset_right = 78.0
+offset_bottom = 11.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m2l43")
+flat = true
+
 [node name="ennemiePosition" type="Node2D" parent="."]
-position = Vector2(1259, 642)
+position = Vector2(1209, 642)
 
 [node name="position1" type="Node2D" parent="ennemiePosition"]
 position = Vector2(0, 23)
@@ -508,12 +507,12 @@ script = ExtResource("19_m2l43")
 [connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_mouse_exited"]
-[connection signal="button_down" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_button_down"]
-[connection signal="mouse_entered" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_mouse_exited"]
 [connection signal="button_down" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_button_down"]
+[connection signal="mouse_entered" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_mouse_exited"]
 [connection signal="button_down" from="ennemiePosition/position1/Button" to="ennemiePosition/position1" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="ennemiePosition/position1/Button" to="ennemiePosition/position1" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="ennemiePosition/position1/Button" to="ennemiePosition/position1" method="_on_button_mouse_exited"]

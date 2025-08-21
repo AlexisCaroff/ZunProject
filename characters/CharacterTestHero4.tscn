@@ -25,6 +25,7 @@ Chara_position = 3
 skill_resources = Array[Resource]([ExtResource("5_b6mpb"), ExtResource("6_y4wav"), ExtResource("11_y4wav"), ExtResource("8_ghs3y"), ExtResource("9_4h21c")])
 
 [node name="name" type="Label" parent="."]
+visible = false
 offset_left = -89.0
 offset_top = -253.0
 offset_right = -45.0

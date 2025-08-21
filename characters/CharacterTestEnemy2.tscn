@@ -28,6 +28,7 @@ name = "Attaque basique"
 descriptionName = "Attaque"
 description = "Inflige des dégâts à un ennemi"
 icon = ExtResource("6_jx27m")
+required_position = 0
 the_target_type = 0
 effects = Array[ExtResource("5_jx27m")]([SubResource("Resource_i4eos")])
 two_target_Type = false
@@ -81,6 +82,7 @@ expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="name" type="Label" parent="."]
+visible = false
 offset_left = -76.0
 offset_top = -256.0
 offset_right = -32.0

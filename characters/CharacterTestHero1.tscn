@@ -25,6 +25,7 @@ Charaname = "priest"
 skill_resources = Array[Resource]([ExtResource("5_lhvcf"), ExtResource("6_uhc5d"), ExtResource("5_d5532"), ExtResource("6_es7ke"), ExtResource("9_uhc5d")])
 
 [node name="name" type="Label" parent="."]
+visible = false
 offset_left = -55.0
 offset_top = -250.0
 offset_right = -11.0
@@ -63,8 +64,8 @@ position = Vector2(3, -35)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("12_1yer4")
 min_scale = 1.1
-max_scale = 1.2
-min_duration = 0.9
+max_scale = 1.1
+min_duration = 1.0
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
 offset_left = -96.6667

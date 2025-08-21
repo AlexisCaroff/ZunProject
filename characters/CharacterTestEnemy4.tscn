@@ -29,6 +29,7 @@ name = "Attaque basique"
 descriptionName = "Attaque"
 description = "Inflige des dégâts à un ennemi"
 icon = ExtResource("6_lper1")
+required_position = 0
 ImageSkill = ExtResource("5_1nlnd")
 the_target_type = 0
 effects = Array[ExtResource("5_lper1")]([SubResource("Resource_i4eos")])
@@ -83,6 +84,7 @@ expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="name" type="Label" parent="."]
+visible = false
 offset_left = -70.0
 offset_top = -260.0
 offset_right = -26.0

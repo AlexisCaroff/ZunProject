@@ -1,5 +1,7 @@
 extends Node
 class_name CombatManager
+
+# characters combat
 var heroes: Array[Character] = []
 var enemies: Array[Character] = []
 var turn_queue: Array[Character] = []
@@ -8,12 +10,13 @@ var ui: Control = null
 @export var HERO_START_POS = Vector2(100, 600)
 @export var ENEMY_START_POS = Vector2(1200, 600)
 @export var SPACING_Y = 250
-@export var _pending_skill: Skill = null  # Stockage interne
-@export var exploration_scene: PackedScene 
-@onready var imageAction :TextureRect= $"../ImageAction"
+@export var _pending_skill: Skill = null  
+
+@export_file("*.tscn") var target_scene : String
+
 #save
 var saved_data : Array = []
-# Propriété publique avec accesseurs
+
 var pending_skill: Skill:
 	get:
 		#print("GET pending_skill →", _pending_skill)
@@ -22,8 +25,6 @@ var pending_skill: Skill:
 		#print("SET pending_skill →", value)
 		_pending_skill = value
 
-
-@onready var ResultScreen_label= $"../ResultScreen"
 @onready var hero_positions: Array[PositionSlot]=[
 		$"../HeroPosition/position1",
 		$"../HeroPosition/position2",
@@ -47,13 +48,15 @@ var HERO_SCENES = [
 	preload("res://characters/CharacterTestEnemy3.tscn"),
 	preload("res://characters/CharacterTestEnemy4.tscn")
 ]
+
+#stat combat manager
 @onready var audio = $AudioStreamPlayer2D
+@onready var ResultScreen_label= $"../ResultScreen"
 enum CombatState {
 	IDLE,
 	SELECTING_FIRST_TARGET,
 	SELECTING_SECOND_TARGET
 }
-
 var combat_state: CombatState = CombatState.IDLE
 var startcombat = true
 
@@ -101,6 +104,9 @@ func _start():
 		ui.log("start Combat")
 		start_combat()
 		
+	for char in heroes + enemies:
+		char.skill_animation_started.connect(_on_skill_animation_started)
+		char.skill_animation_finished.connect(_on_skill_animation_finished)
 	
 func load_saved_heroes_into_slots(slots: Array[PositionSlot]):
 	for hero_data in GameState.saved_heroes_data:
@@ -151,11 +157,15 @@ func next_turn():
 	
 		
 	if current_character.is_dead():
+		while is_animation_playing():
+			await get_tree().process_frame
 		next_turn()
 		return
 	if current_character.stun==true:
 		current_character.stun=false
 		current_character.sprite.self_modulate=Color(1,1,1,1)
+		while is_animation_playing():
+			await get_tree().process_frame
 		next_turn()
 		
 		return
@@ -168,8 +178,23 @@ func next_turn():
 		ui.update_ui_for_current_character(current_character)
 		await get_tree().create_timer(1.0).timeout
 		current_character.play_ai_turn(heroes,enemies)
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(1.5).timeout
+		while is_animation_playing():
+			await get_tree().process_frame
 		next_turn()
+
+
+var active_animations := 0
+
+func _on_skill_animation_started():
+	active_animations += 1
+
+func _on_skill_animation_finished():
+	active_animations -= 1
+
+func is_animation_playing() -> bool:
+	return active_animations > 0
+
 func _check_victory():
 	for enemy in enemies:
 		if not enemy.dead:
@@ -201,13 +226,9 @@ func _show_victory():
 
 
 func change_to_exploration_scene():
-	if get_tree():
-		get_tree().change_scene_to_packed(exploration_scene)
-	else:
-		print("Erreur : get_tree() est null.")
-	
-	
-	
+	if target_scene != "":
+		get_tree().change_scene_to_file(target_scene)
+
 func use_skill(index: int):
 	var skill = current_character.get_skill(index)
 	pending_skill=skill
@@ -235,18 +256,21 @@ func _on_target_selected(targets: Array[PositionSlot]):
 	match combat_state: 
 		CombatState.SELECTING_FIRST_TARGET :
 			if !pending_skill.two_target_Type:
-				if pending_skill.name != "move":
-					await current_character.animate_attack(targets[0].occupant)  # anime sur la première cible
-				if pending_skill.attack_sound != null:
-					audio.stream= pending_skill.attack_sound
-					audio.pitch_scale = randf_range(0.3, 0.5)
-					audio.play()
-				ui.log(pending_skill.name)
-
 				for target in targets:
 					pending_skill.use(target)
 					print(target.occupant.Charaname)
 					target.occupant.update_ui()
+					ui.update_cooldown(current_character)
+				if pending_skill.attack_sound != null:
+					audio.stream= pending_skill.attack_sound
+					audio.pitch_scale = randf_range(0.3, 0.5)
+					audio.play()
+				if pending_skill.name != "move" && pending_skill.name != "ChangeMask" :
+					await current_character.animate_attack(targets[0].occupant)  # anime sur la première cible
+				
+				ui.log(pending_skill.name)
+
+				
 
 				pending_skill.end_turn(self)
 				stop_target_selection()
@@ -256,7 +280,7 @@ func _on_target_selected(targets: Array[PositionSlot]):
 				start_target_selection(pending_skill)
 
 		CombatState.SELECTING_SECOND_TARGET :
-			if pending_skill.name != "move":
+			if pending_skill.name != "move" && pending_skill.name != "ChangeMask" :
 				await current_character.animate_attack(pending_skill.target1[0].occupant)  # anime sur la première cible
 			if pending_skill.attack_sound != null:
 				audio.stream= pending_skill.attack_sound
@@ -278,8 +302,6 @@ func _on_target_selected(targets: Array[PositionSlot]):
 
 
 
-
-	
 
 func stop_target_selection():
 	pending_skill=null

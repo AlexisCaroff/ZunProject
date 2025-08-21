@@ -27,6 +27,7 @@ Chara_position = 2
 skill_resources = Array[Resource]([ExtResource("5_jldwf"), ExtResource("6_jldwf"), ExtResource("7_gnpc2"), ExtResource("8_1uy8h"), ExtResource("12_gnpc2")])
 
 [node name="name" type="Label" parent="."]
+visible = false
 offset_left = -59.0
 offset_top = -227.0
 offset_right = -15.0
@@ -67,16 +68,6 @@ offset_top = -252.0
 offset_right = 62.0
 offset_bottom = -233.0
 
-[node name="Skill" type="TextureRect" parent="."]
-visible = false
-offset_left = -130.0
-offset_top = -296.0
-offset_right = 446.0
-offset_bottom = 280.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("10_1uy8h")
-script = ExtResource("11_0vb8e")
-
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2(-3, -32)
 scale = Vector2(1.2, 1.2)
@@ -108,6 +99,16 @@ mouse_filter = 2
 texture = ExtResource("14_wsc18")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Skill" type="TextureRect" parent="."]
+visible = false
+offset_left = -130.0
+offset_top = -296.0
+offset_right = 446.0
+offset_bottom = 280.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_1uy8h")
+script = ExtResource("11_0vb8e")
 
 [node name="Arrow" type="Sprite2D" parent="."]
 position = Vector2(-45, -330)

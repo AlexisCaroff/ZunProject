@@ -77,6 +77,29 @@ func update_ui_for_current_character(character: Character):
 			button.text = "—"
 			button.disabled = true
 
+func update_cooldown(character:Character):
+	for i in range(skill_buttons.size()):
+		var button = skill_buttons[i]
+		var skill = character.get_skill(i)
+		var cooldownlabel = cooldownLabel[i]
+		
+		if skill != null:
+			skill_buttons[i].Actiontext = skill.descriptionName + "\n" + skill.description
+			button.disabled = !skill.can_use()
+			button.icon = skill.icon
+			if skill.current_cooldown > 0:
+				cooldownlabel.text = "%d" % [skill.current_cooldown]
+			else :
+				cooldownlabel.text = " "
+
+			var index = i  # capture locale de la bonne valeur
+			button.pressed.connect(
+				func(): combat_manager.use_skill(index)
+			)
+		else:
+			button.text = "—"
+			button.disabled = true
+
 func log(text):
 	if log_panel==null:
 		log_panel=$contexte

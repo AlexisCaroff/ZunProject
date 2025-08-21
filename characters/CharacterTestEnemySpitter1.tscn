@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://doitrlqhfja4t"]
+[gd_scene load_steps=18 format=3 uid="uid://doitrlqhfja4t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_1rndn"]
 [ext_resource type="Texture2D" uid="uid://dlcmqtbjarl35" path="res://characters/charatexture/enemy spitterDead.png" id="3_1rndn"]
@@ -10,6 +10,11 @@
 [ext_resource type="Resource" uid="uid://bptddsqeaq28h" path="res://actions/heal.tres" id="9_j4qgo"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="10_2prdw"]
 [ext_resource type="Texture2D" uid="uid://bwlcc7mlf1iwx" path="res://characters/charatexture/enemy spitter.png" id="11_2uqc5"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="11_ih6kd"]
+[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="12_e7hg0"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="13_3o24a"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="14_3o24a"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="15_bbnup"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("6_3o24a")
@@ -24,6 +29,7 @@ name = "Attaque basique"
 descriptionName = "Attaque"
 description = "Inflige des dégâts à un ennemi"
 icon = ExtResource("7_bbnup")
+required_position = 0
 the_target_type = 1
 effects = Array[ExtResource("5_e7hg0")]([SubResource("Resource_i4eos")])
 two_target_Type = false
@@ -50,25 +56,6 @@ IsDemon = true
 Chara_position = 3
 skill_resources = Array[Resource]([SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), ExtResource("9_j4qgo"), ExtResource("10_2prdw")])
 is_player_controlled = false
-
-[node name="HerosTexture1" type="TextureRect" parent="."]
-offset_left = -133.0
-offset_top = -206.0
-offset_right = 38.0
-offset_bottom = -28.0
-mouse_filter = 2
-texture = ExtResource("11_2uqc5")
-expand_mode = 1
-
-[node name="Selector" type="TextureRect" parent="."]
-self_modulate = Color(2, 2, 2, 0)
-offset_left = -133.0
-offset_top = -207.0
-offset_right = 38.0
-offset_bottom = -28.0
-mouse_filter = 2
-texture = ExtResource("11_2uqc5")
-expand_mode = 1
 
 [node name="name" type="Label" parent="."]
 offset_left = -35.0
@@ -103,3 +90,50 @@ offset_left = 22.0
 offset_top = -252.0
 offset_right = 62.0
 offset_bottom = -233.0
+
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(0, -21)
+script = ExtResource("11_ih6kd")
+
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+offset_left = -133.0
+offset_top = -229.0
+offset_right = 38.0
+offset_bottom = 2.0
+mouse_filter = 2
+texture = ExtResource("12_e7hg0")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Selector" type="TextureRect" parent="pivot"]
+self_modulate = Color(2, 2, 2, 0)
+offset_left = -133.0
+offset_top = -229.0
+offset_right = 38.0
+offset_bottom = 2.0
+mouse_filter = 2
+texture = ExtResource("12_e7hg0")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(-52, -351)
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("13_3o24a")
+offset = Vector2(0, 117.335)
+script = ExtResource("11_ih6kd")
+min_scale = 0.38
+max_scale = 0.38
+scalemini = 0.3
+min_duration = 0.5
+max_duration = 0.5
+
+[node name="Skill" type="TextureRect" parent="."]
+visible = false
+offset_left = -133.0
+offset_top = -316.0
+offset_right = 443.0
+offset_bottom = 260.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("14_3o24a")
+script = ExtResource("15_bbnup")

@@ -32,6 +32,7 @@ name = "Vampire"
 descriptionName = "Attaque"
 description = "deal psy dmg and steal stamina"
 icon = ExtResource("3_4lsex")
+required_position = 2
 ImageSkill = ExtResource("1_jbp84")
 the_target_type = 0
 effects = Array[ExtResource("1_rn6hm")]([SubResource("Resource_i4eos")])
