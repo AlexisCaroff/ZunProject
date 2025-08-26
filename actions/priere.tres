@@ -25,6 +25,7 @@ name = "priere"
 descriptionName = "priere"
 description = "buff and resset cooldown of all allies"
 icon = ExtResource("4_hd7w4")
+required_position = 0
 ImageSkill = ExtResource("1_rrrrh")
 the_target_type = 3
 effects = Array[ExtResource("1_hd7w4")]([SubResource("Resource_k0qpg"), SubResource("Resource_yt4kq")])

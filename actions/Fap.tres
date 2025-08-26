@@ -38,6 +38,7 @@ name = "meditation"
 descriptionName = "meditation"
 description = "remoce horny remove cooldown buff"
 icon = ExtResource("3_il0b8")
+required_position = 0
 the_target_type = 2
 effects = Array[ExtResource("1_xtfia")]([SubResource("Resource_k0qpg"), SubResource("Resource_uknl3"), SubResource("Resource_pmsdg")])
 two_target_Type = false

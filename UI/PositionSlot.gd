@@ -30,9 +30,7 @@ func _ready():
 	if GameState.current_phase == GameStat.GamePhase.COMBAT:
 		combat_manager = $"../../CombatManager"
 
-	
 func assign_character(character: Character, movetime:float):
-
 	occupant = character
 	
 	if not is_ready:
@@ -49,7 +47,6 @@ func assign_character(character: Character, movetime:float):
 	character.CharaScale= position_data.scale
 	character.set_scale(position_data.scale)
 	
-
 	if position_data.buff:
 		position_data.buff.apply(character, character)
 
@@ -58,10 +55,6 @@ func remove_character():
 		occupant.resetVisuel()
 		occupant = null
 		
-
-
-
-
 
 func _on_button_button_down() -> void:
 	if occupant and occupant.is_targetable:
@@ -97,6 +90,8 @@ func _on_button_button_down() -> void:
 						combat_manager._on_target_selected(selfposition)
 					Skill.target_type.FRONT_ALLY:
 						combat_manager._on_target_selected(selfposition)
+					Skill.target_type.EVERYONE:
+						combat_manager._on_target_selected(selfposition)
 							
 			combat_manager.CombatState.SELECTING_SECOND_TARGET:
 				match skill.the_second_target_type:
@@ -126,6 +121,8 @@ func _on_button_button_down() -> void:
 					Skill.target_type.BACK_ALLY:
 						combat_manager._on_target_selected(selfposition)
 					Skill.target_type.FRONT_ALLY:
+						combat_manager._on_target_selected(selfposition)
+					Skill.second_target_type.EVERYONE:
 						combat_manager._on_target_selected(selfposition)
 
 func _on_button_mouse_entered() -> void:

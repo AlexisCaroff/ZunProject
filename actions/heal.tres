@@ -18,6 +18,7 @@ name = "Heal"
 descriptionName = "Heal"
 description = "heal for some amount"
 icon = ExtResource("1_1rdmq")
+required_position = 0
 ImageSkill = ExtResource("1_j3stq")
 the_target_type = 1
 effects = Array[ExtResource("1_svn31")]([SubResource("Resource_svn31")])

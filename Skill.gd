@@ -7,9 +7,9 @@ class_name Skill
 @export var icon: Texture2D
 @export var attack_sound: AudioStream 
 enum position_requirement {
-	ANY,       # peut être lancé de n'importe où
-	FRONT,     # uniquement depuis l'avant
-	BACK       # uniquement depuis l'arrière
+	ANY,      
+	FRONT,    
+	BACK     
 }
 @export var required_position: position_requirement = position_requirement.ANY
 
@@ -23,10 +23,10 @@ enum target_type {
 	BACK_ENNEMY,
 	FRONT_ALLY,
 	BACK_ALLY,
-	
+	EVERYONE
 }
 @export var ImageSkill : Texture2D 
-@export_enum("enemy", "ally", "self", "all ally", "all ennemy", "front ennemy","back ennemy","front ally","back ally")
+@export_enum("enemy", "ally", "self", "all ally", "all ennemy", "front ennemy","back ennemy","front ally","back ally","everyone")
 var the_target_type: int = target_type.ENNEMY
 @export var effects: Array[SkillEffect] = []
 @export var two_target_Type: bool = false 
@@ -41,9 +41,10 @@ enum second_target_type {
 	BACK_ENNEMY,
 	FRONT_ALLY,
 	BACK_ALLY,
+	EVERYONE
 }
 
-@export_enum("enemy", "ally", "self", "all ally", "all ennemy", "front ennemy","back ennemy","front ally","back ally")
+@export_enum("enemy", "ally", "self", "all ally", "all ennemy", "front ennemy","back ennemy","front ally","back ally","everyone")
 var the_second_target_type: int = second_target_type.ENNEMY
 @export var second_effects: Array[SkillEffect] = []
 @export var usable_when_horny: bool = false
@@ -163,6 +164,11 @@ func select_targets(combat_manager:CombatManager):
 					enemy.set_targetable(true)
 				else:
 					enemy.set_targetable(false)
+		target_type.EVERYONE:
+			for enemy in combat_manager.enemies:
+				enemy.set_targetable(true)
+			for ally in combat_manager.heroes:
+				ally.set_targetable(true)
 
 func select_second_target(combat_manager:CombatManager):
 	

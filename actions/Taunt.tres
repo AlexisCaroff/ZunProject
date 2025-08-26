@@ -31,6 +31,7 @@ name = "Taunt"
 descriptionName = "Taunt"
 description = "taunt one ennemi and reset cooldown"
 icon = ExtResource("3_ukosw")
+required_position = 0
 ImageSkill = ExtResource("1_aki42")
 the_target_type = 0
 effects = Array[ExtResource("1_wwy36")]([SubResource("Resource_yu2gj")])

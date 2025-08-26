@@ -19,6 +19,7 @@ name = "Charme"
 descriptionName = "Charme"
 description = "incrase horny"
 icon = ExtResource("3_dtdks")
+required_position = 0
 ImageSkill = ExtResource("1_vv7ew")
 the_target_type = 0
 effects = Array[ExtResource("1_cweso")]([SubResource("Resource_d6f35")])

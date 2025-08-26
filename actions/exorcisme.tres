@@ -19,6 +19,7 @@ name = "exorcisme"
 descriptionName = "exorcisme"
 description = "deal magic dmg "
 icon = ExtResource("3_dxqn5")
+required_position = 0
 ImageSkill = ExtResource("1_wh88t")
 the_target_type = 0
 effects = Array[ExtResource("1_dxqn5")]([SubResource("Resource_i4eos")])

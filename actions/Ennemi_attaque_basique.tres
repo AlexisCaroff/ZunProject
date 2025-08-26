@@ -18,6 +18,7 @@ name = "Attaque basique"
 descriptionName = "Attaque"
 description = "Inflige des dégâts à un ennemi."
 icon = ExtResource("1_8ewjb")
+required_position = 0
 the_target_type = 0
 effects = Array[ExtResource("1_m75ut")]([SubResource("Resource_d6f35")])
 two_target_Type = false

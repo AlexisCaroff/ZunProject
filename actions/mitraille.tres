@@ -20,6 +20,7 @@ descriptionName = "mitaille"
 description = "attaquetout les enneimes"
 icon = ExtResource("4_g166n")
 attack_sound = ExtResource("1_54gp4")
+required_position = 0
 the_target_type = 4
 effects = Array[ExtResource("2_885x2")]([SubResource("Resource_i4eos")])
 two_target_Type = false

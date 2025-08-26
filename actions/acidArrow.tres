@@ -20,6 +20,7 @@ descriptionName = "Acid Arrow"
 description = "attaque,un ennemi"
 icon = ExtResource("4_jens0")
 attack_sound = ExtResource("1_j6ayg")
+required_position = 0
 the_target_type = 0
 effects = Array[ExtResource("2_rqjl8")]([SubResource("Resource_i4eos")])
 two_target_Type = false

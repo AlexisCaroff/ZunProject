@@ -20,8 +20,10 @@ portrait_texture = ExtResource("2_eg61m")
 dead_portrait_texture = ExtResource("3_4h21c")
 initiative_icon = ExtResource("4_07x3b")
 Charaname = "Tank"
-initiative = 4
+base_defense = 10
+initiative = 2
 Chara_position = 3
+max_stamina = 120
 skill_resources = Array[Resource]([ExtResource("5_b6mpb"), ExtResource("6_y4wav"), ExtResource("11_y4wav"), ExtResource("8_ghs3y"), ExtResource("9_4h21c")])
 
 [node name="name" type="Label" parent="."]

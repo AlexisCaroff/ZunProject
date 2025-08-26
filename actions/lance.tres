@@ -21,6 +21,7 @@ descriptionName = "Spear"
 description = "attaque un ennemi"
 icon = ExtResource("4_y1v2a")
 attack_sound = ExtResource("1_x8kf7")
+required_position = 0
 ImageSkill = ExtResource("1_uogve")
 the_target_type = 0
 effects = Array[ExtResource("2_uogve")]([SubResource("Resource_i4eos")])

@@ -30,7 +30,7 @@ descriptionName = "Attaque"
 description = "Inflige des dégâts à un ennemi"
 icon = ExtResource("7_bbnup")
 required_position = 0
-the_target_type = 1
+the_target_type = 0
 effects = Array[ExtResource("5_e7hg0")]([SubResource("Resource_i4eos")])
 two_target_Type = false
 the_second_target_type = 3
@@ -58,6 +58,7 @@ skill_resources = Array[Resource]([SubResource("Resource_1s6rd"), SubResource("R
 is_player_controlled = false
 
 [node name="name" type="Label" parent="."]
+visible = false
 offset_left = -35.0
 offset_top = -261.0
 offset_right = 9.0

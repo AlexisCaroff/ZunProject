@@ -15,6 +15,7 @@ name = "move"
 descriptionName = "Move"
 description = "Move the character"
 icon = ExtResource("3_y3d0p")
+required_position = 0
 the_target_type = 1
 effects = Array[ExtResource("1_y3d0p")]([SubResource("Resource_r05c5")])
 two_target_Type = false

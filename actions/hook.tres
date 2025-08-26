@@ -25,6 +25,7 @@ name = "hook"
 descriptionName = "tentacle grabe"
 description = "Inflige des dégâts à un ennemi et le tire vers l'avnt"
 icon = ExtResource("4_1g6qw")
+required_position = 0
 ImageSkill = ExtResource("1_d2e5p")
 the_target_type = 0
 effects = Array[ExtResource("1_vawsh")]([SubResource("Resource_i4eos"), SubResource("Resource_0evjx")])
