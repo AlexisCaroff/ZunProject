@@ -22,7 +22,11 @@ extends Control
 
 ]
 
-
+@onready var AttLabel = $AttLabel
+@onready var DefLabel = $DefLabel
+@onready var Stamina = $Stamina
+@onready var guilt= $Guilt
+@onready var horny = $Horny
 func _ready():
 	var current_character = combat_manager.get_current_character()
 
@@ -76,6 +80,12 @@ func update_ui_for_current_character(character: Character):
 		else:
 			button.text = "—"
 			button.disabled = true
+		AttLabel.text = "Attaque: %d" % [character.attack]
+		DefLabel.text = "Defence: %d" % [character.defense]
+		Stamina.text = "Stamina: %d / %d" % [character.current_stamina, character.max_stamina]
+		guilt.text = "Guilt: %d / %d" % [character.current_stress, character.max_stress]
+		horny.text = "Horny: %d / %d" % [character.current_horniness, character.max_horniness]
+		
 
 func update_cooldown(character:Character):
 	for i in range(skill_buttons.size()):

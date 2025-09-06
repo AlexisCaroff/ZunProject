@@ -134,10 +134,14 @@ func select_targets(combat_manager:CombatManager):
 		target_type.ALL_ALLY:
 			for ally in combat_manager.heroes:
 				ally.set_targetable(true)
+			for enemy in combat_manager.enemies:
+				enemy.set_targetable(false)
 
 		target_type.ALL_ENNEMY:
 			for enemy in combat_manager.enemies:
 				enemy.set_targetable(true)
+			for ally in combat_manager.heroes:
+				ally.set_targetable(false)
 		target_type.BACK_ALLY:
 			for ally in combat_manager.heroes:
 				if !ally.current_slot.position_data.isFront:
@@ -151,12 +155,16 @@ func select_targets(combat_manager:CombatManager):
 					ally.set_targetable(true)
 				else: 
 					ally.set_targetable(false)
+			for enemy in combat_manager.enemies:
+				enemy.set_targetable(false)
 		target_type.BACK_ENNEMY:
 			for enemy in combat_manager.enemies:
 				if !enemy.current_slot.position_data.isFront:
 					enemy.set_targetable(true)
 				else:
 					enemy.set_targetable(false)
+			for ally in combat_manager.heroes:
+				ally.set_targetable(false)
 
 		target_type.FRONT_ENNEMY:
 			for enemy in combat_manager.enemies:
@@ -164,6 +172,9 @@ func select_targets(combat_manager:CombatManager):
 					enemy.set_targetable(true)
 				else:
 					enemy.set_targetable(false)
+			for ally in combat_manager.heroes:
+				ally.set_targetable(false)
+			
 		target_type.EVERYONE:
 			for enemy in combat_manager.enemies:
 				enemy.set_targetable(true)

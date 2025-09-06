@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dqnjuxw77ebnb"]
+[gd_scene load_steps=17 format=3 uid="uid://dqnjuxw77ebnb"]
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_ohhde"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_5rnso"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://5xrrcl7rnx6w" path="res://Enviro/door.png" id="13_1nxlp"]
 [ext_resource type="Texture2D" uid="uid://djit2m4icvw0k" path="res://Enviro/kairn.png" id="14_0oifh"]
 [ext_resource type="Script" uid="uid://cvdsxgbtufa4g" path="res://lvl/interactible.gd" id="15_ay18u"]
+[ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="16_dtf2f"]
 
 [node name="CombatInterface" type="Control"]
 layout_mode = 3
@@ -219,6 +220,19 @@ offset_top = -179.0
 offset_right = 201.0
 offset_bottom = 165.0
 flat = true
+
+[node name="etiquette" type="Sprite2D" parent="Kairn"]
+position = Vector2(193.333, 6.66667)
+texture = ExtResource("16_dtf2f")
+
+[node name="Label" type="Label" parent="Kairn/etiquette"]
+offset_left = -92.0
+offset_top = -23.0
+offset_right = 125.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("4_ngelb")
+theme_override_font_sizes/font_size = 40
+text = "EXPLORE"
 
 [connection signal="button_down" from="moveButton" to="ExplorationManager" method="_on_move_button_button_down"]
 [connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]

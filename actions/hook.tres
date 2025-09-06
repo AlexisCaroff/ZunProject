@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://bcvrdy48sagwa"]
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://bcvrdy48sagwa"]
 
 [ext_resource type="Texture2D" uid="uid://drjq0ow6855jc" path="res://actions/actiontexture/SkillImage/Hero_Mystique_Tentacle.png" id="1_d2e5p"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_vawsh"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_d2e5p"]
 [ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="3_e3o77"]
 [ext_resource type="Texture2D" uid="uid://cn8mh7x1j6vs" path="res://actions/actiontexture/charge.png" id="4_1g6qw"]
@@ -28,10 +27,10 @@ icon = ExtResource("4_1g6qw")
 required_position = 0
 ImageSkill = ExtResource("1_d2e5p")
 the_target_type = 0
-effects = Array[ExtResource("1_vawsh")]([SubResource("Resource_i4eos"), SubResource("Resource_0evjx")])
+effects = [SubResource("Resource_i4eos"), SubResource("Resource_0evjx")]
 two_target_Type = false
 the_second_target_type = 3
-second_effects = Array[ExtResource("1_vawsh")]([])
+second_effects = []
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

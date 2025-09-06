@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://cmfdbxt7xktta"]
+[gd_resource type="Resource" script_class="Skill" load_steps=5 format=3 uid="uid://cmfdbxt7xktta"]
 
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="1_8ewjb"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_m75ut"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_kfjb5"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_paqs2"]
 
@@ -20,10 +19,10 @@ description = "Inflige des dégâts à un ennemi."
 icon = ExtResource("1_8ewjb")
 required_position = 0
 the_target_type = 0
-effects = Array[ExtResource("1_m75ut")]([SubResource("Resource_d6f35")])
+effects = [SubResource("Resource_d6f35")]
 two_target_Type = false
 the_second_target_type = 0
-second_effects = Array[ExtResource("1_m75ut")]([])
+second_effects = []
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

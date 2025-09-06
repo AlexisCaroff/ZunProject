@@ -452,6 +452,59 @@ offset_right = 78.0
 offset_bottom = 11.0
 flat = true
 
+[node name="AttLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 928.0
+offset_right = 325.0
+offset_bottom = 983.0
+theme_override_fonts/font = ExtResource("5_hydjd")
+theme_override_font_sizes/font_size = 20
+text = "Attaque :"
+
+[node name="DefLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 961.0
+offset_right = 272.0
+offset_bottom = 1016.0
+theme_override_fonts/font = ExtResource("5_hydjd")
+theme_override_font_sizes/font_size = 20
+text = "Defence:"
+
+[node name="Stamina" type="Label" parent="."]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 988.0
+offset_right = 278.0
+offset_bottom = 1043.0
+theme_override_fonts/font = ExtResource("5_hydjd")
+theme_override_font_sizes/font_size = 20
+text = "Stamina :	
+"
+
+[node name="Horny" type="Label" parent="."]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 1015.0
+offset_right = 278.0
+offset_bottom = 1070.0
+theme_override_fonts/font = ExtResource("5_hydjd")
+theme_override_font_sizes/font_size = 20
+text = "Horny
+"
+
+[node name="Guilt" type="Label" parent="."]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 1043.0
+offset_right = 278.0
+offset_bottom = 1098.0
+theme_override_fonts/font = ExtResource("5_hydjd")
+theme_override_font_sizes/font_size = 20
+text = "Guilt:
+"
+
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]
 [connection signal="pressed" from="ActionPanel/Action1" to="CombatManager" method="_on_action_1_pressed"]

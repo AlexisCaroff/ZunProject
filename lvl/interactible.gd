@@ -1,9 +1,10 @@
 extends Sprite2D
 @onready var  explomanage = $"../ExplorationManager"
-var big_size = Vector2(0.7, 0.7)
-var startsize = Vector2(0.6,0.6)
+var big_size = Vector2(1.5, 1.5)
+var startsize = Vector2(1.0,1.0)
 var current_tween: Tween = null
 @export var amount:int = 30
+@onready var  etiquette = $etiquette
 
 func _on_button_button_down() -> void:
 	
@@ -14,21 +15,19 @@ func _on_button_button_down() -> void:
 
 
 func _on_button_mouse_entered() -> void:
-	self .scale = startsize 	
-	
-
+	etiquette .scale = startsize 	
 
 	if current_tween:
 		current_tween.kill()
 	current_tween = create_tween()
-	current_tween.tween_property(self , "scale", big_size, 0.2)
+	current_tween.tween_property(etiquette , "scale", big_size, 0.2)
 	
 
 func _on_button_mouse_exited() -> void:
-	self .scale = big_size	
+	etiquette.scale = big_size	
 	
 	if current_tween:
 		current_tween.kill()
 
 	current_tween = create_tween()
-	current_tween.tween_property(self, "scale", startsize, 0.2)
+	current_tween.tween_property(etiquette, "scale", startsize, 0.2)

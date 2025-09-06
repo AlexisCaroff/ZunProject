@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://bpsapqkry8g3q"]
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://bpsapqkry8g3q"]
 
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_8u6nw"]
 [ext_resource type="Texture2D" uid="uid://mcandkrudvhh" path="res://actions/actiontexture/SkillImage/HERO_WARRIOR_axe.png" id="1_i4eos"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="1_jdsf0"]
 [ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="1_qkv4v"]
@@ -24,10 +23,10 @@ attack_sound = ExtResource("1_qkv4v")
 required_position = 1
 ImageSkill = ExtResource("1_i4eos")
 the_target_type = 0
-effects = Array[ExtResource("1_8u6nw")]([SubResource("Resource_i4eos")])
+effects = [SubResource("Resource_i4eos")]
 two_target_Type = false
 the_second_target_type = 1
-second_effects = Array[ExtResource("1_8u6nw")]([])
+second_effects = []
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

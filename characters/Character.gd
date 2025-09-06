@@ -53,6 +53,8 @@ var current_stamina: int = max_stamina
 var current_stress: int = 0
 var current_horniness: int = 0
 
+var buff_icons: Array = []
+
 # --- Compétences
 var skills: Array[Skill] = []
 @export var skill_resources: Array[Resource] = []
@@ -72,6 +74,7 @@ const MissEffectScene:= preload("res://actions/damageEffect/miss_vfx.tscn")
 signal target_selected()
 var is_targetable: bool = false
 @onready var arrow = $Arrow
+
 
 func _ready():
 	arrow.visible=false
@@ -126,12 +129,14 @@ func update_ui():
 	horny_label.text = "Horny: %d / %d" % [current_horniness, max_horniness]
 	
 func add_buff(buff: Buff):
-	buffs.append(buff.duplicate()) 
+	var new_buff = buff.duplicate()
+	buffs.append(new_buff)
 	var icon = TextureRect.new()
 	icon.texture = buff.icon
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	icon.custom_minimum_size = Vector2(32, 32)  # taille d'icône
+	icon.custom_minimum_size = Vector2(20, 20)
 	buff_bar.add_child(icon)
+	buff_icons.append(icon)  # on stocke l’icône au même index
 	update_stats()
 
 func process_taunt():
@@ -143,9 +148,22 @@ func process_taunt():
 func update_buffs() -> void:
 	for buff in buffs:
 		buff.duration -= 1
-	buffs = buffs.filter(func(b): return b.duration > 0)
+		if buff.duration<=0:
+			remove_buff(buff)
+			
 	update_stats()
-	
+
+func remove_buff(buff: Buff):
+	var index := buffs.find(buff)
+	if index != -1:
+		buffs.remove_at(index)
+
+		var icon = buff_icons[index]
+		if is_instance_valid(icon):
+			icon.queue_free()
+		buff_icons.remove_at(index)
+
+	update_stats()
 
 func get_stat(stat_enum: int) -> int:
 	var base_value = 0

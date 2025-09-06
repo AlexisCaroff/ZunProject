@@ -62,12 +62,6 @@ offset_top = -325.0
 offset_right = 110.0
 offset_bottom = 57.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 22.0
-offset_top = -252.0
-offset_right = 62.0
-offset_bottom = -233.0
-
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2(15, -24)
 scale = Vector2(1.2, 1.2)
@@ -122,6 +116,12 @@ max_scale = 0.38
 scalemini = 0.3
 min_duration = 0.5
 max_duration = 0.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 4.0
+offset_top = -227.0
+offset_right = 52.0
+offset_bottom = -186.0
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

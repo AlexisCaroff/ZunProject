@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://b4f6tt51qrg3o"]
+[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://b4f6tt51qrg3o"]
 
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_dxqn5"]
 [ext_resource type="Texture2D" uid="uid://dwkeuco1nwct0" path="res://actions/actiontexture/SkillImage/chant.png" id="1_wh88t"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_wh88t"]
 [ext_resource type="Texture2D" uid="uid://ctv5fhwuig06" path="res://actions/actiontexture/exorcisme.png" id="3_dxqn5"]
@@ -22,10 +21,10 @@ icon = ExtResource("3_dxqn5")
 required_position = 0
 ImageSkill = ExtResource("1_wh88t")
 the_target_type = 0
-effects = Array[ExtResource("1_dxqn5")]([SubResource("Resource_i4eos")])
+effects = [SubResource("Resource_i4eos")]
 two_target_Type = false
 the_second_target_type = 3
-second_effects = Array[ExtResource("1_dxqn5")]([])
+second_effects = []
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"
