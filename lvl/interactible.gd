@@ -5,9 +5,17 @@ var startsize = Vector2(1.0,1.0)
 var current_tween: Tween = null
 @export var amount:int = 30
 @onready var  etiquette = $etiquette
+@onready var dialogue_manager := $DialogueManager
+@export var dialoguePass :String
 
-func _on_button_button_down() -> void:
 	
+func _on_button_button_down() -> void:
+	dialogue_manager.load_dialogue(dialoguePass)
+	# Lancer le dialogue
+	dialogue_manager.start_dialogue()
+
+	
+func use_cairn():
 	var target :CharaExplo = explomanage.characters[randi() % explomanage.characters.size()]
 	target.current_stamina = min(target.max_stamina, target.current_stamina + amount)
 	target.update_display()

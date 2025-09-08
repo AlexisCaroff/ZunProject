@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://dhh17qt8y66hk"]
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://dhh17qt8y66hk"]
 
 [ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="1_54gp4"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="2_54gp4"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_62wbe"]
 [ext_resource type="Texture2D" uid="uid://dfeafue752ymx" path="res://actions/actiontexture/actionCharge.png" id="4_g166n"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_bfp37"]
@@ -21,10 +22,10 @@ icon = ExtResource("4_g166n")
 attack_sound = ExtResource("1_54gp4")
 required_position = 0
 the_target_type = 4
-effects = [SubResource("Resource_i4eos")]
+effects = Array[ExtResource("2_54gp4")]([SubResource("Resource_i4eos")])
 two_target_Type = false
 the_second_target_type = 1
-second_effects = []
+second_effects = Array[ExtResource("2_54gp4")]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

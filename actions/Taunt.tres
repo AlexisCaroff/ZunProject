@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://behrtqotkyvnx"]
+[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://behrtqotkyvnx"]
 
 [ext_resource type="Texture2D" uid="uid://dmd71tk5hpefb" path="res://actions/actiontexture/SkillImage/HERO_WARRIOR_Taunt.png" id="1_aki42"]
 [ext_resource type="Script" uid="uid://cjfkha61akav3" path="res://actions/skillEffects/TauntEffect.gd" id="2_wwy36"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="2_yu2gj"]
 [ext_resource type="Texture2D" uid="uid://b4a5l81b2i8a5" path="res://actions/actiontexture/taunt.png" id="3_ukosw"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="3_wwy36"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="6_aki42"]
@@ -35,10 +36,10 @@ icon = ExtResource("3_ukosw")
 required_position = 0
 ImageSkill = ExtResource("1_aki42")
 the_target_type = 0
-effects = [SubResource("Resource_yu2gj")]
+effects = Array[ExtResource("2_yu2gj")]([SubResource("Resource_yu2gj")])
 two_target_Type = true
 the_second_target_type = 2
-second_effects = [SubResource("Resource_5uy07"), SubResource("Resource_qng7d")]
+second_effects = Array[ExtResource("2_yu2gj")]([SubResource("Resource_5uy07"), SubResource("Resource_qng7d")])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

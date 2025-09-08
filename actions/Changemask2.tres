@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://3t46ub40cdqx"]
+[gd_resource type="Resource" script_class="Skill" load_steps=13 format=3 uid="uid://3t46ub40cdqx"]
 
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_kovjd"]
 [ext_resource type="Script" uid="uid://cy3v0dypme7n7" path="res://actions/skillEffects/Move.gd" id="2_clpgp"]
 [ext_resource type="Script" uid="uid://c0arbc0klbc6c" path="res://actions/skillEffects/ChangeSkill.gd" id="2_kovjd"]
 [ext_resource type="Resource" uid="uid://bpsapqkry8g3q" path="res://actions/attaque_basique.tres" id="3_clpgp"]
@@ -27,10 +28,10 @@ description = "Change skills and move character"
 icon = ExtResource("3_kovjd")
 required_position = 0
 the_target_type = 2
-effects = [SubResource("Resource_clsbb")]
+effects = Array[ExtResource("1_kovjd")]([SubResource("Resource_clsbb")])
 two_target_Type = true
 the_second_target_type = 2
-second_effects = [SubResource("Resource_q2veb")]
+second_effects = Array[ExtResource("1_kovjd")]([SubResource("Resource_q2veb")])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

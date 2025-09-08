@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://doitrlqhfja4t"]
+[gd_scene load_steps=18 format=3 uid="uid://doitrlqhfja4t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_1rndn"]
 [ext_resource type="Texture2D" uid="uid://dlcmqtbjarl35" path="res://characters/charatexture/enemy spitterDead.png" id="3_1rndn"]
 [ext_resource type="Texture2D" uid="uid://cgnrms5owdhet" path="res://characters/characterInitiative/slimportini.png" id="4_1rndn"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="5_3o24a"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="6_3o24a"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="7_bbnup"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="8_y1ii6"]
@@ -30,10 +31,10 @@ description = "Inflige des dégâts à un ennemi"
 icon = ExtResource("7_bbnup")
 required_position = 0
 the_target_type = 0
-effects = [SubResource("Resource_i4eos")]
+effects = Array[ExtResource("5_3o24a")]([SubResource("Resource_i4eos")])
 two_target_Type = false
 the_second_target_type = 3
-second_effects = []
+second_effects = Array[ExtResource("5_3o24a")]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

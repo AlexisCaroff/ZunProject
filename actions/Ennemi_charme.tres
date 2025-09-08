@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://cvpggc0yt3l4o"]
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://cvpggc0yt3l4o"]
 
 [ext_resource type="Texture2D" uid="uid://cx5momixgm1ey" path="res://actions/actiontexture/SkillImage/nymphShoot.png" id="1_vv7ew"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="2_dtdks"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_vv7ew"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="3_dtdks"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_ni5be"]
@@ -21,10 +22,10 @@ icon = ExtResource("3_dtdks")
 required_position = 0
 ImageSkill = ExtResource("1_vv7ew")
 the_target_type = 0
-effects = [SubResource("Resource_d6f35")]
+effects = Array[ExtResource("2_dtdks")]([SubResource("Resource_d6f35")])
 two_target_Type = false
 the_second_target_type = 0
-second_effects = []
+second_effects = Array[ExtResource("2_dtdks")]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

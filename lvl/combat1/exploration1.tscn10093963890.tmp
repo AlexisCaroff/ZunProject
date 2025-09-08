@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dqnjuxw77ebnb"]
+[gd_scene load_steps=23 format=3 uid="uid://dqnjuxw77ebnb"]
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_ohhde"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_5rnso"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://df5ltgoqyf2jw" path="res://characters/charatexture/char mystic.png" id="19_fyasy"]
 [ext_resource type="Script" uid="uid://2yw45k1rwvdf" path="res://DialogueUI.gd" id="20_e3ant"]
 [ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="21_80na2"]
+[ext_resource type="Script" uid="uid://cspa2tuof385o" path="res://lvl/combat1/ChoiceUI.gd" id="22_1rqfr"]
 
 [node name="CombatInterface" type="Control"]
 layout_mode = 3
@@ -196,7 +197,7 @@ chara_explo_scene = ExtResource("11_y08b0")
 door_scene = ExtResource("12_tf6oh")
 
 [node name="Button" type="Button" parent="ExplorationManager"]
-z_index = 2
+z_index = 10
 offset_left = 1323.0
 offset_top = 62.0
 offset_right = 1698.0
@@ -218,7 +219,6 @@ position = Vector2(254, 508)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("14_0oifh")
 script = ExtResource("15_ay18u")
-dialoguePass = "res://dialogue/dialogueTeste.txt"
 
 [node name="Button" type="Button" parent="Kairn"]
 offset_left = -170.0
@@ -241,7 +241,6 @@ theme_override_font_sizes/font_size = 40
 text = "EXPLORE"
 
 [node name="DialogueManager" type="Node2D" parent="Kairn"]
-z_index = 4
 position = Vector2(-400, -800)
 scale = Vector2(1.6, 1.6)
 script = ExtResource("17_3g6r7")
@@ -259,12 +258,11 @@ offset_bottom = 40.0
 script = ExtResource("20_e3ant")
 
 [node name="ColorRect2" type="ColorRect" parent="Kairn/DialogueManager/DialogueUI"]
-offset_left = -29.1667
-offset_top = -32.2916
-offset_right = 1118.83
-offset_bottom = 228.708
-scale = Vector2(1.73113, 4.64797)
-color = Color(0, 0, 0, 0.568627)
+offset_left = 446.0
+offset_top = 1544.0
+offset_right = 1594.0
+offset_bottom = 1805.0
+color = Color(0, 0, 0, 1)
 
 [node name="Portrait" type="TextureRect" parent="Kairn/DialogueManager/DialogueUI"]
 layout_mode = 0
@@ -273,7 +271,6 @@ offset_top = 239.0
 offset_right = 925.0
 offset_bottom = 945.0
 texture = ExtResource("21_80na2")
-metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="Kairn/DialogueManager/DialogueUI"]
 layout_mode = 0
@@ -305,31 +302,11 @@ text = "tetxt"
 autowrap_mode = 3
 
 [node name="ChoiceUI" type="Control" parent="Kairn/DialogueManager"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="Button" type="Button" parent="Kairn/DialogueManager/ChoiceUI"]
-layout_mode = 0
-offset_left = 193.75
-offset_top = 409.375
-offset_right = 569.75
-offset_bottom = 500.375
-scale = Vector2(1.77235, 1.77235)
-theme_override_font_sizes/font_size = 60
-text = "use the stele"
-
-[node name="Button2" type="Button" parent="Kairn/DialogueManager/ChoiceUI"]
-layout_mode = 0
-offset_left = 939.583
-offset_top = 409.375
-offset_right = 1432.58
-offset_bottom = 500.375
-scale = Vector2(1.77235, 1.77235)
-theme_override_font_sizes/font_size = 60
-text = "Destroy the stele"
+script = ExtResource("22_1rqfr")
 
 [connection signal="button_down" from="moveButton" to="ExplorationManager" method="_on_move_button_button_down"]
 [connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]

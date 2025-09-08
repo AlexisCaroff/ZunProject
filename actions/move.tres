@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=5 format=3 uid="uid://1nlu038uhsvj"]
+[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://1nlu038uhsvj"]
 
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_y3d0p"]
 [ext_resource type="Script" uid="uid://cy3v0dypme7n7" path="res://actions/skillEffects/Move.gd" id="2_y3d0p"]
 [ext_resource type="Texture2D" uid="uid://jhd7rid3c1c1" path="res://actions/actiontexture/moveIcon.png" id="3_y3d0p"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_2hsmt"]
@@ -16,10 +17,10 @@ description = "Move the character"
 icon = ExtResource("3_y3d0p")
 required_position = 0
 the_target_type = 1
-effects = [SubResource("Resource_r05c5")]
+effects = Array[ExtResource("1_y3d0p")]([SubResource("Resource_r05c5")])
 two_target_Type = false
 the_second_target_type = 3
-second_effects = []
+second_effects = Array[ExtResource("1_y3d0p")]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"
