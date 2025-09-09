@@ -251,7 +251,6 @@ portraits = {
 "Priest": ExtResource("18_1rqfr"),
 "Warrior": ExtResource("21_80na2")
 }
-is_Choice = true
 
 [node name="DialogueUI" type="Control" parent="Kairn/DialogueManager"]
 visible = false
