@@ -4,7 +4,7 @@ extends Sprite2D
 @export var min_y: float = 400
 @export var max_y: float = 500
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var viewport_size = get_viewport().get_visible_rect().size
 	var mouse_pos = get_global_mouse_position()
 	

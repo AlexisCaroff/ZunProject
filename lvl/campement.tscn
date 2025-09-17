@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c63m6eq381xm1"]
+
+[ext_resource type="Script" uid="uid://w6xjpbgh5xei" path="res://campement.gd" id="1_7mjgo"]
+[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_dks4i"]
+
+[node name="Campement" type="Node2D"]
+script = ExtResource("1_7mjgo")
+
+[node name="ZunBg" type="Sprite2D" parent="."]
+position = Vector2(961, 402)
+texture = ExtResource("2_dks4i")

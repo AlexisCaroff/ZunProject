@@ -55,6 +55,7 @@ enum CombatState {
 var combat_state: CombatState = CombatState.IDLE
 var startcombat = true
 
+
 func _ready():
 	if startcombat ==true:
 		_start()
@@ -215,14 +216,18 @@ func _show_victory():
 	# --- Sauvegarder l'équipe avant de changer de scène
 	GameState.save_party_from_nodes(heroes)
 	GameState.current_phase = GameStat.GamePhase.EXPLORATION
+	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
+	if gm and gm.current_room_Ressource:
+		# On lui demande d’entrer dans la scène exploration de la salle actuelle
+		if gm.current_room_Ressource.exploration_scene:
+			gm._enter_scene_in_current_room(gm.current_room_Ressource.exploration_scene)
+		else:
+			push_error("Pas de scene exploration définie pour cette salle")
+	else:
+		push_error("GameManager introuvable ou current_room vide")
 
-	call_deferred("change_to_exploration_scene")
 
 
-
-func change_to_exploration_scene():
-	if target_scene != "":
-		get_tree().change_scene_to_file(target_scene)
 
 func use_skill(index: int):
 	var skill = current_character.get_skill(index)

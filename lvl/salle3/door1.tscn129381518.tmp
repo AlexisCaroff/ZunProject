@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="9_7l14n"]
 [ext_resource type="Script" uid="uid://6edfrm0jkjqe" path="res://lvl/back.gd" id="10_1jugk"]
 [ext_resource type="Texture2D" uid="uid://bqmj6euxhil4t" path="res://UI/back.png" id="11_crknv"]
-[ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/buttonexitepeek.gd" id="12_6jptd"]
+[ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/combat1/buttonexitepeek.gd" id="12_6jptd"]
 [ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="12_013hq"]
 [ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="13_njmpn"]
 
@@ -216,6 +216,7 @@ offset_right = 1550.0
 offset_bottom = 759.0
 flat = true
 script = ExtResource("10_1jugk")
+target_scene = "uid://dqnjuxw77ebnb"
 
 [node name="BackText" type="TextureRect" parent="Back"]
 modulate = Color(1, 1, 1, 0.513726)

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CombatEncounter" load_steps=4 format=3 uid="uid://dum04r5du6nss"]
+
+[ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterTestEnemy1.tscn" id="1_fu7jr"]
+[ext_resource type="PackedScene" uid="uid://doitrlqhfja4t" path="res://characters/CharacterTestEnemySpitter1.tscn" id="2_puyy8"]
+[ext_resource type="Script" uid="uid://dmxcru3ra8jg" path="res://lvl/CombatEncounter.gd" id="3_07unr"]
+
+[resource]
+script = ExtResource("3_07unr")
+enemy_scenes = Array[PackedScene]([ExtResource("1_fu7jr"), ExtResource("2_puyy8"), ExtResource("1_fu7jr"), ExtResource("2_puyy8")])
+description = ""
+metadata/_custom_type_script = "uid://dmxcru3ra8jg"

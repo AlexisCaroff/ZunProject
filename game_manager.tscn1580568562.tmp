@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dg0coy6r6f1ww"]
+
+[ext_resource type="Script" uid="uid://d12jn42j03tgg" path="res://GameManager.gd" id="1_70yv6"]
+[ext_resource type="Resource" uid="uid://s8e4ueu4heq3" path="res://lvl/Donjon1.tres" id="2_smx3j"]
+
+[node name="GameManager" type="Node2D" node_paths=PackedStringArray("room_container")]
+script = ExtResource("1_70yv6")
+donjon = ExtResource("2_smx3j")
+room_container = NodePath("RoomContainer")
+
+[node name="RoomContainer" type="Node2D" parent="."]

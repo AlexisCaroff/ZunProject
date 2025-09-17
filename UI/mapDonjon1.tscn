@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://cl2ysrfuwgkhh"]
+
+[ext_resource type="Script" uid="uid://c318tknfh3cm2" path="res://Map.gd" id="1_mkjtd"]
+[ext_resource type="Texture2D" uid="uid://ddnq058als7ov" path="res://lvl/donjonMap1.png" id="2_i0fkf"]
+[ext_resource type="Texture2D" uid="uid://dpb4et0d3bipa" path="res://UI/position.png" id="3_poicj"]
+[ext_resource type="Script" uid="uid://xgcdntldtp3u" path="res://UI/rotateSprite.gd" id="4_gmmoh"]
+
+[node name="map1" type="Node2D"]
+script = ExtResource("1_mkjtd")
+
+[node name="DonjonMap1" type="Sprite2D" parent="."]
+texture = ExtResource("2_i0fkf")
+
+[node name="Room1" type="Node2D" parent="DonjonMap1"]
+position = Vector2(-11, 404)
+
+[node name="Room2" type="Node2D" parent="DonjonMap1"]
+position = Vector2(-12, 225)
+
+[node name="Room3" type="Node2D" parent="DonjonMap1"]
+position = Vector2(134, 376)
+
+[node name="Room4" type="Node2D" parent="DonjonMap1"]
+position = Vector2(110, 74)
+
+[node name="Room5" type="Node2D" parent="DonjonMap1"]
+position = Vector2(-138, 69)
+
+[node name="Room6" type="Node2D" parent="DonjonMap1"]
+position = Vector2(-319, 245)
+
+[node name="Room7" type="Node2D" parent="DonjonMap1"]
+position = Vector2(-187, -64)
+
+[node name="Room8" type="Node2D" parent="DonjonMap1"]
+position = Vector2(61, -119)
+
+[node name="Room9" type="Node2D" parent="DonjonMap1"]
+position = Vector2(259, -38)
+
+[node name="Room10" type="Node2D" parent="DonjonMap1"]
+position = Vector2(302, 196)
+
+[node name="Position" type="Sprite2D" parent="."]
+position = Vector2(270, 270)
+texture = ExtResource("3_poicj")
+script = ExtResource("4_gmmoh")
+vitesse = 0.5
+scale_amplitude = 0.1
+
+[node name="Camera2D" type="Camera2D" parent="."]

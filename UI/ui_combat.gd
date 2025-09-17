@@ -27,11 +27,29 @@ extends Control
 @onready var Stamina = $Stamina
 @onready var guilt= $Guilt
 @onready var horny = $Horny
+@onready var viewport: Viewport = $SubViewportContainer/SubViewport
+@onready var donjon_map: Map = $SubViewportContainer/SubViewport/map
+
 func _ready():
 	var current_character = combat_manager.get_current_character()
+	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
 
 	call_deferred("update_ui_for_current_character", current_character)
+	await get_tree().process_frame  # attendre que la frame d'instanciation soit finie
+	donjon_map.curentposition = donjon_map.positions[gm.current_room_Ressource.position_on_map]
+	if donjon_map:
+		focus_on_room(donjon_map.curentposition)
+
+
 	
+func focus_on_room(room: Node2D):
+	var vp_size: Vector2 = viewport.size
+	var target_pos = room.position
+	var tween = create_tween()
+	tween.tween_property(donjon_map.camera, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	print("try to move")
+	
+
 func update_turn_queue_ui(queue: Array[Character]):
 	if turnOrderPanel == null:
 		turnOrderPanel=$TurnOrderPanel
@@ -47,6 +65,7 @@ func update_turn_queue_ui(queue: Array[Character]):
 		
 	
 func update_ui_for_current_character(character: Character):
+	
 	if skill_buttons == null:
 		push_error("skill_buttons est null pour %s" % character.Charaname)
 		return
@@ -110,9 +129,11 @@ func update_cooldown(character:Character):
 			button.text = "—"
 			button.disabled = true
 
+
 func log(text):
 	if log_panel==null:
 		log_panel=$contexte
 		log_panel.text =  text
 	else:
 		log_panel.text =  text
+		

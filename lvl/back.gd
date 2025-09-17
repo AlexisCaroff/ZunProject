@@ -3,7 +3,7 @@ extends Node
 var big_size = Vector2(1.2, 1.2)
 var startsize = Vector2(1.0,1.0)
 var current_tween: Tween = null
-@export_file("*.tscn") var target_scene : String
+@onready var DoorManager = $"../Door"
 
 
 func _on_mouse_exited() -> void:
@@ -35,13 +35,10 @@ func _on_mouse_entered() -> void:
 
 
 func _on_button_down() -> void:
-	call_deferred("change_to_next_scene")
+	call_deferred("change_to_last_scene")
 
 
 
-func change_to_next_scene():
-	if target_scene != "":
-		get_tree().change_scene_to_file(target_scene)
-	else:
-		push_warning("Aucun chemin de scène défini pour " + str(self))
+func change_to_last_scene():
+	DoorManager.Game_Manager.go_back()
 	

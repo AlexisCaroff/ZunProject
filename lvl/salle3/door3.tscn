@@ -1,19 +1,19 @@
-[gd_scene load_steps=15 format=3 uid="uid://dv04v6jagn4q1"]
+[gd_scene load_steps=15 format=3 uid="uid://evnfnlympfqp"]
 
-[ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_o6m4w"]
-[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_puy7d"]
-[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="3_6jptd"]
-[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="4_betcj"]
-[ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="5_lps75"]
-[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="6_nju53"]
-[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="7_mdkvs"]
-[ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="8_r3s01"]
-[ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="9_7l14n"]
-[ext_resource type="Script" uid="uid://6edfrm0jkjqe" path="res://lvl/back.gd" id="10_1jugk"]
-[ext_resource type="Texture2D" uid="uid://bqmj6euxhil4t" path="res://UI/back.png" id="11_crknv"]
-[ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/buttonexitepeek.gd" id="12_6jptd"]
-[ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="12_013hq"]
-[ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="13_njmpn"]
+[ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_ykj4o"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_en5va"]
+[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="3_ba68l"]
+[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="4_4uxx4"]
+[ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="5_rnhwa"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="6_a68pm"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="7_8qtmb"]
+[ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="8_nto58"]
+[ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="9_pul6h"]
+[ext_resource type="Script" uid="uid://6edfrm0jkjqe" path="res://lvl/back.gd" id="10_ad0gu"]
+[ext_resource type="Texture2D" uid="uid://bqmj6euxhil4t" path="res://UI/back.png" id="11_y3vx4"]
+[ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/buttonexitepeek.gd" id="12_t41rb"]
+[ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="13_5t4ov"]
+[ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="14_k2q80"]
 
 [node name="Door" type="Control"]
 layout_mode = 3
@@ -26,9 +26,9 @@ grow_vertical = 2
 [node name="DoorBg" type="Sprite2D" parent="."]
 position = Vector2(960.5, 542)
 scale = Vector2(0.781352, 0.79562)
-texture = ExtResource("1_o6m4w")
+texture = ExtResource("1_ykj4o")
 
-[node name="atmosphere" parent="." instance=ExtResource("2_puy7d")]
+[node name="atmosphere" parent="." instance=ExtResource("2_en5va")]
 position = Vector2(19, 447)
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -55,13 +55,13 @@ alignment = 1
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_6jptd")
+theme_override_fonts/font = ExtResource("3_ba68l")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("4_betcj")
+icon = ExtResource("4_4uxx4")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("5_lps75")
+script = ExtResource("5_rnhwa")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action1"]
 layout_mode = 0
@@ -72,13 +72,13 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_6jptd")
+theme_override_fonts/font = ExtResource("3_ba68l")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("4_betcj")
+icon = ExtResource("4_4uxx4")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("5_lps75")
+script = ExtResource("5_rnhwa")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action2"]
 layout_mode = 0
@@ -89,13 +89,13 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_6jptd")
+theme_override_fonts/font = ExtResource("3_ba68l")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("4_betcj")
+icon = ExtResource("4_4uxx4")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("5_lps75")
+script = ExtResource("5_rnhwa")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action3"]
 layout_mode = 0
@@ -106,13 +106,13 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_6jptd")
+theme_override_fonts/font = ExtResource("3_ba68l")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("4_betcj")
+icon = ExtResource("4_4uxx4")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("5_lps75")
+script = ExtResource("5_rnhwa")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action4"]
 layout_mode = 0
@@ -123,13 +123,13 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_6jptd")
+theme_override_fonts/font = ExtResource("3_ba68l")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("4_betcj")
+icon = ExtResource("4_4uxx4")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("5_lps75")
+script = ExtResource("5_rnhwa")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action5"]
 layout_mode = 0
@@ -143,7 +143,7 @@ offset_left = 681.0
 offset_top = 982.0
 offset_right = 1260.0
 offset_bottom = 1066.0
-theme_override_fonts/font = ExtResource("6_nju53")
+theme_override_fonts/font = ExtResource("6_a68pm")
 theme_override_font_sizes/font_size = 25
 text = "Attaque1 
 et truc et bidule"
@@ -189,7 +189,7 @@ offset_bottom = 909.0
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
 ignore_rotation = false
-script = ExtResource("7_mdkvs")
+script = ExtResource("7_8qtmb")
 
 [node name="peekButton" type="Button" parent="."]
 layout_mode = 0
@@ -198,7 +198,7 @@ offset_top = 280.0
 offset_right = 1317.0
 offset_bottom = 481.0
 flat = true
-script = ExtResource("12_013hq")
+script = ExtResource("8_nto58")
 
 [node name="peek_texture" type="TextureRect" parent="peekButton"]
 layout_mode = 0
@@ -206,7 +206,7 @@ offset_left = 10.0
 offset_top = 5.0
 offset_right = 200.0
 offset_bottom = 193.0
-texture = ExtResource("13_njmpn")
+texture = ExtResource("9_pul6h")
 
 [node name="Back" type="Button" parent="."]
 layout_mode = 0
@@ -215,7 +215,7 @@ offset_top = 650.0
 offset_right = 1550.0
 offset_bottom = 759.0
 flat = true
-script = ExtResource("10_1jugk")
+script = ExtResource("10_ad0gu")
 
 [node name="BackText" type="TextureRect" parent="Back"]
 modulate = Color(1, 1, 1, 0.513726)
@@ -224,7 +224,7 @@ offset_left = 675.0
 offset_top = 16.0
 offset_right = 1212.0
 offset_bottom = 96.0
-texture = ExtResource("11_crknv")
+texture = ExtResource("11_y3vx4")
 expand_mode = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
@@ -248,7 +248,7 @@ offset_top = 87.0
 offset_right = 1902.0
 offset_bottom = 749.0
 text = "exit"
-script = ExtResource("12_6jptd")
+script = ExtResource("12_t41rb")
 
 [node name="Door" type="Button" parent="."]
 z_index = 7
@@ -258,7 +258,7 @@ offset_top = 254.0
 offset_right = 1071.0
 offset_bottom = 657.0
 flat = true
-script = ExtResource("8_r3s01")
+script = ExtResource("13_5t4ov")
 
 [node name="DoorText" type="TextureRect" parent="Door"]
 layout_mode = 0
@@ -266,7 +266,7 @@ offset_left = -3.0
 offset_top = 251.0
 offset_right = 311.0
 offset_bottom = 373.0
-texture = ExtResource("9_7l14n")
+texture = ExtResource("14_k2q80")
 
 [node name="pose1" type="Node2D" parent="."]
 position = Vector2(791, 286)

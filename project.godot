@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Nouveau projet de jeu"
-run/main_scene="uid://h8pqs7tabdxj"
+run/main_scene="uid://dg0coy6r6f1ww"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -25,6 +25,7 @@ Utils="*res://scripts/utils.gd"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
+window/size/initial_position=Vector2i(-1920, 0)
 
 [rendering]
 

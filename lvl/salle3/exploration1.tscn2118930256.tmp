@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_ohhde"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_5rnso"]
-[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="3_fyasy"]
 [ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="3_ldoi1"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="4_ngelb"]
 [ext_resource type="Texture2D" uid="uid://jhd7rid3c1c1" path="res://actions/actiontexture/moveIcon.png" id="5_l58pu"]
@@ -12,6 +11,7 @@
 [ext_resource type="Script" uid="uid://tq0nr5tg2b3k" path="res://lvl/positionexplo.gd" id="9_r435j"]
 [ext_resource type="Script" uid="uid://km54mxly4gk4" path="res://lvl/exploration_manager.gd" id="10_4cboy"]
 [ext_resource type="PackedScene" uid="uid://dq282vipchnbq" path="res://characters/chara_explo.tscn" id="11_y08b0"]
+[ext_resource type="PackedScene" uid="uid://dv04v6jagn4q1" path="res://lvl/combat1/door1.tscn" id="12_tf6oh"]
 [ext_resource type="Texture2D" uid="uid://5xrrcl7rnx6w" path="res://Enviro/door.png" id="13_1nxlp"]
 [ext_resource type="Texture2D" uid="uid://djit2m4icvw0k" path="res://Enviro/kairn.png" id="14_0oifh"]
 [ext_resource type="Script" uid="uid://cvdsxgbtufa4g" path="res://lvl/interactible.gd" id="15_ay18u"]
@@ -23,7 +23,7 @@
 [ext_resource type="Script" uid="uid://2yw45k1rwvdf" path="res://DialogueUI.gd" id="20_e3ant"]
 [ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="21_80na2"]
 
-[node name="ExploInterface" type="Control"]
+[node name="CombatInterface" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,20 +37,6 @@ texture = ExtResource("1_ohhde")
 
 [node name="atmosphere" parent="." instance=ExtResource("2_5rnso")]
 position = Vector2(2, 352)
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-layout_mode = 0
-offset_left = 1457.0
-offset_top = 774.0
-offset_right = 1857.0
-offset_bottom = 1174.0
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(400, 400)
-render_target_update_mode = 4
-
-[node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_fyasy")]
 
 [node name="FightUi" type="Sprite2D" parent="."]
 position = Vector2(960, 545)
@@ -116,12 +102,11 @@ theme_override_font_sizes/font_size = 40
 text = "Hero Name"
 
 [node name="contexte" type="Label" parent="."]
-visible = false
 layout_mode = 0
-offset_left = 1517.0
-offset_top = 736.0
-offset_right = 1827.0
-offset_bottom = 898.0
+offset_left = 1503.0
+offset_top = 846.0
+offset_right = 1813.0
+offset_bottom = 1008.0
 theme_override_font_sizes/font_size = 40
 text = "ce qu'il se passe"
 autowrap_mode = 3
@@ -209,6 +194,7 @@ flat = true
 [node name="ExplorationManager" type="Node2D" parent="."]
 script = ExtResource("10_4cboy")
 chara_explo_scene = ExtResource("11_y08b0")
+door_scene = ExtResource("12_tf6oh")
 
 [node name="Button" type="Button" parent="ExplorationManager"]
 z_index = 2
@@ -265,7 +251,6 @@ portraits = {
 "Priest": ExtResource("18_1rqfr"),
 "Warrior": ExtResource("21_80na2")
 }
-is_Choice = true
 
 [node name="DialogueUI" type="Control" parent="Kairn/DialogueManager"]
 visible = false
@@ -279,7 +264,6 @@ scale = Vector2(1.75383, 1.75383)
 script = ExtResource("20_e3ant")
 
 [node name="ColorRect2" type="ColorRect" parent="Kairn/DialogueManager/DialogueUI"]
-layout_mode = 0
 offset_left = -315.499
 offset_top = -57.018
 offset_right = 832.501
