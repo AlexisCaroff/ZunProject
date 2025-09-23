@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://doitrlqhfja4t"]
+[gd_scene load_steps=19 format=3 uid="uid://doitrlqhfja4t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_1rndn"]
 [ext_resource type="Texture2D" uid="uid://dlcmqtbjarl35" path="res://characters/charatexture/enemy spitterDead.png" id="3_1rndn"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="13_3o24a"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="14_3o24a"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="15_bbnup"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="16_bbnup"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("6_3o24a")
@@ -64,27 +65,6 @@ offset_top = -261.0
 offset_right = 9.0
 offset_bottom = -238.0
 text = "name"
-
-[node name="HP" type="Label" parent="."]
-offset_left = -91.0
-offset_top = -19.0
-offset_right = -45.0
-offset_bottom = 4.0
-text = "Hp"
-
-[node name="Stress" type="Label" parent="."]
-offset_left = -91.0
-offset_top = 8.0
-offset_right = -45.0
-offset_bottom = 31.0
-text = "stress"
-
-[node name="horny" type="Label" parent="."]
-offset_left = -91.0
-offset_top = 35.0
-offset_right = -45.0
-offset_bottom = 58.0
-text = "horny"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = 22.0
@@ -143,3 +123,58 @@ offset_bottom = 260.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("14_3o24a")
 script = ExtResource("15_bbnup")
+
+[node name="HP" type="Label" parent="."]
+offset_left = -108.0
+offset_top = -26.0
+offset_right = -61.0
+offset_bottom = -7.0
+theme_override_fonts/font = ExtResource("16_bbnup")
+theme_override_font_sizes/font_size = 15
+text = "Stamina:"
+
+[node name="HPProgressBar" type="ProgressBar" parent="HP"]
+modulate = Color(1, 0.714937, 0, 1)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 7.0
+offset_right = 146.0
+offset_bottom = 17.0
+value = 100.0
+show_percentage = false
+
+[node name="Stress" type="Label" parent="."]
+offset_left = -91.0
+offset_top = -8.0
+offset_right = -62.0
+offset_bottom = 11.0
+theme_override_fonts/font = ExtResource("16_bbnup")
+theme_override_font_sizes/font_size = 15
+text = "Guilt:"
+
+[node name="GuiltrogressBar" type="ProgressBar" parent="Stress"]
+modulate = Color(1, 0.257036, 0, 1)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 7.0
+offset_right = 128.0
+offset_bottom = 17.0
+show_percentage = false
+
+[node name="horny" type="Label" parent="."]
+offset_left = -99.0
+offset_top = 9.0
+offset_right = -63.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("16_bbnup")
+theme_override_font_sizes/font_size = 15
+text = "Horny:"
+
+[node name="HornyProgressBar" type="ProgressBar" parent="horny"]
+modulate = Color(0.905484, 0, 1, 1)
+layout_mode = 0
+offset_left = 39.0
+offset_top = 7.0
+offset_right = 135.0
+offset_bottom = 17.0
+show_percentage = false

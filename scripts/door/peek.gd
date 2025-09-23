@@ -37,4 +37,6 @@ func _on_mouse_exited() -> void:
 func _on_button_down() -> void:
 	peekscene.visible=true
 	doorbutton.position=pose2.position
+	doorbutton.peeking=true
+	doorbutton.startpeeking()
 	ExitPeekButton.visible=true

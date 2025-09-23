@@ -1,10 +1,9 @@
 extends Node2D
-class_name CharaExplo
-
-# --- Données d'affichage
+class_name CharaCamp
 @export var portrait_texture: Texture2D
 @export var dead_portrait_texture: Texture2D
 @export var initiative_icon: Texture2D
+var campSkills: Array[CampSkill] = []
 var portrait_path: String = ""
 var dead_portrait_path: String = ""
 var initiative_icon_path: String = ""
@@ -21,7 +20,7 @@ var initiative_icon_path: String = ""
 # --- Infos de base
 @export var Charaname: String = "name"
 @export var IsDemon: bool = false
-
+var camp_skill_resources: Array[CampSkill] = []
 # --- Stats de combat
 @export var base_attack: int = 10
 @export var base_defense: int = 5
@@ -43,6 +42,8 @@ var max_stress: int =100
 var current_horny: int = 0 
 var max_horniness: int = 100
 var current_position: int =0
+
+
 
 func _ready() -> void:
 	print("chara ready")
@@ -83,9 +84,10 @@ func load_from_dict(data: Dictionary) -> void:
 	if data.has("position"):
 		var position= data["position"]
 		current_position=position
+	if data.has("camp_skills"):
+		camp_skill_resources = data["camp_skills"]
 		
 	
-
 func update_display() -> void:
 	if not hp_Jauge or not guilt_Jauge or not horny_Jauge:
 		hp_Jauge=$HP/HPProgressBar

@@ -42,7 +42,7 @@ position = Vector2(259, -38)
 position = Vector2(302, 196)
 
 [node name="Position" type="Sprite2D" parent="."]
-position = Vector2(270, 270)
+position = Vector2(-9, 229)
 texture = ExtResource("3_poicj")
 script = ExtResource("4_gmmoh")
 vitesse = 0.5

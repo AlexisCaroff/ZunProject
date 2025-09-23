@@ -9,8 +9,11 @@ class_name Character
 @export var initiative_icon: Texture2D
 @onready var name_label = $name
 @onready var hp_label = $HP
+@onready var hp_Jauge =$HP/HPProgressBar
 @onready var stress_label = $Stress
+@onready var guilt_Jauge=$Stress/GuiltrogressBar
 @onready var horny_label = $horny
+@onready var horny_Jauge = $horny/HornyProgressBar
 @onready var sprite = $pivot/HerosTexture1
 @onready var SkillText = $Skill
 @onready var buff_bar = $HBoxContainer
@@ -74,7 +77,7 @@ const MissEffectScene:= preload("res://actions/damageEffect/miss_vfx.tscn")
 signal target_selected()
 var is_targetable: bool = false
 @onready var arrow = $Arrow
-
+@export var camp_skill_resources: Array[CampSkill] = []
 
 func _ready():
 	arrow.visible=false
@@ -123,10 +126,18 @@ func update_ui():
 		hp_label=$HP
 		stress_label=$Stress
 		horny_label=$horny
+	if not hp_Jauge or not guilt_Jauge or not horny_Jauge:
+		hp_Jauge=$HP/HPProgressBar
+		guilt_Jauge=$Stress/GuiltrogressBar
+		horny_Jauge=$horny/HornyProgressBar
 		# return
-	hp_label.text = "HP: %d / %d" % [current_stamina, max_stamina]
-	stress_label.text = "Stress: %d / %d" % [current_stress, max_stress]
-	horny_label.text = "Horny: %d / %d" % [current_horniness, max_horniness]
+	hp_Jauge.value=current_stamina
+	guilt_Jauge.value=current_stress
+	horny_Jauge.value=current_horniness
+	#hp_label.text = "Stamina: %d / %d" % [current_stamina, max_stamina]
+	#stress_label.text = "Guilt: %d / %d" % [current_stress, max_stress]
+	#horny_label.text = "Horny: %d / %d" % [current_horniness, max_horniness]
+	
 	
 func add_buff(buff: Buff):
 	var new_buff = buff.duplicate()

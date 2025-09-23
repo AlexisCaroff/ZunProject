@@ -1,11 +1,165 @@
-[gd_scene load_steps=3 format=3 uid="uid://c63m6eq381xm1"]
+[gd_scene load_steps=9 format=3 uid="uid://c63m6eq381xm1"]
 
 [ext_resource type="Script" uid="uid://w6xjpbgh5xei" path="res://campement.gd" id="1_7mjgo"]
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_dks4i"]
+[ext_resource type="PackedScene" uid="uid://c2rn6c4jc5dlf" path="res://UI/chara_camp.tscn" id="2_ofeuf"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="5_o6ov4"]
+[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="6_8yx0u"]
+[ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="6_adv8w"]
+[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="7_adv8w"]
+[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="9_b18pc"]
 
 [node name="Campement" type="Node2D"]
 script = ExtResource("1_7mjgo")
+chara_Camp_scene = ExtResource("2_ofeuf")
 
 [node name="ZunBg" type="Sprite2D" parent="."]
 position = Vector2(961, 402)
 texture = ExtResource("2_dks4i")
+
+[node name="HeroPosition" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(568, 642)
+
+[node name="position1" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(-22, 1)
+
+[node name="Button" type="Button" parent="HeroPosition/position1"]
+z_index = 10
+y_sort_enabled = true
+offset_left = -82.0
+offset_top = -522.0
+offset_right = 67.0
+flat = true
+
+[node name="position2" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(243, -28)
+
+[node name="Button" type="Button" parent="HeroPosition/position2"]
+z_index = 10
+y_sort_enabled = true
+offset_left = -82.0
+offset_top = -522.0
+offset_right = 67.0
+flat = true
+
+[node name="position3" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(550, -26)
+
+[node name="Button" type="Button" parent="HeroPosition/position3"]
+z_index = 10
+y_sort_enabled = true
+offset_left = -82.0
+offset_top = -522.0
+offset_right = 67.0
+flat = true
+
+[node name="position4" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(798, 1)
+
+[node name="Button" type="Button" parent="HeroPosition/position4"]
+z_index = 10
+y_sort_enabled = true
+offset_left = -82.0
+offset_top = -522.0
+offset_right = 67.0
+flat = true
+
+[node name="atmosphere" parent="." instance=ExtResource("5_o6ov4")]
+position = Vector2(2, 352)
+
+[node name="FightUi" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("6_adv8w")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = 1457.0
+offset_top = 774.0
+offset_right = 1857.0
+offset_bottom = 1174.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(400, 400)
+render_target_update_mode = 4
+
+[node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("6_8yx0u")]
+position = Vector2(204, 22)
+scale = Vector2(0.6, 0.6)
+
+[node name="Charaname" type="Label" parent="."]
+offset_left = 204.0
+offset_top = 821.0
+offset_right = 848.0
+offset_bottom = 901.0
+theme_override_font_sizes/font_size = 40
+text = "Hero Name"
+
+[node name="contexte" type="Label" parent="."]
+visible = false
+offset_left = 1517.0
+offset_top = 736.0
+offset_right = 1827.0
+offset_bottom = 898.0
+theme_override_font_sizes/font_size = 40
+text = "ce qu'il se passe"
+autowrap_mode = 3
+
+[node name="charaPortrait" type="TextureRect" parent="."]
+offset_left = 66.0
+offset_top = 756.0
+offset_right = 183.0
+offset_bottom = 872.0
+
+[node name="ResultScreen" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_right = 1920.0
+offset_bottom = 1000.0
+theme_override_fonts/font = ExtResource("7_adv8w")
+theme_override_font_sizes/font_size = 450
+text = "Victoire !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ActionPanel" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(90, 90)
+offset_left = 579.0
+offset_top = 845.0
+offset_right = 1202.0
+offset_bottom = 945.0
+scale = Vector2(1.245, 1.245)
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Action1" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("7_adv8w")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("9_b18pc")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="pointcost" type="HBoxContainer" parent="ActionPanel/Action1"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 0
+offset_left = 579.0
+offset_top = 845.0
+offset_right = 1202.0
+offset_bottom = 945.0
+scale = Vector2(1.245, 1.245)
+theme_override_constants/separation = 10
+alignment = 1
+
+[connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
+[connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]
+[connection signal="button_down" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_button_down"]
+[connection signal="button_down" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_button_down"]
+[connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]

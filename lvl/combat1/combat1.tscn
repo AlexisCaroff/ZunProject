@@ -23,7 +23,7 @@
 [sub_resource type="Resource" id="Resource_i1s1q"]
 script = ExtResource("14_8rvme")
 index = 0
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.3, 1.3)
 is_enemy = false
 isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -33,7 +33,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="Resource" id="Resource_8flqu"]
 script = ExtResource("14_8rvme")
 index = 1
-scale = Vector2(1, 1)
+scale = Vector2(1.1, 1.1)
 is_enemy = false
 isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -43,7 +43,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="Resource" id="Resource_x8qlv"]
 script = ExtResource("14_8rvme")
 index = 2
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.3, 1.3)
 is_enemy = false
 isFront = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -63,7 +63,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="Resource" id="Resource_fs52m"]
 script = ExtResource("14_8rvme")
 index = 0
-scale = Vector2(1, 1)
+scale = Vector2(1.1, 1.1)
 is_enemy = true
 isFront = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -83,7 +83,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="Resource" id="Resource_if0a6"]
 script = ExtResource("14_8rvme")
 index = 2
-scale = Vector2(1, 1)
+scale = Vector2(1.1, 1.1)
 is_enemy = true
 isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -93,7 +93,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="Resource" id="Resource_euc7u"]
 script = ExtResource("14_8rvme")
 index = 3
-scale = Vector2(0.9, 0.9)
+scale = Vector2(0.8, 0.8)
 is_enemy = true
 isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -368,10 +368,10 @@ ignore_rotation = false
 script = ExtResource("12_kiw3p")
 
 [node name="HeroPosition" type="Node2D" parent="."]
-position = Vector2(288, 642)
+position = Vector2(240, 664)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
-position = Vector2(0, 28)
+position = Vector2(-15, 41)
 script = ExtResource("13_qk00q")
 position_data = SubResource("Resource_i1s1q")
 
@@ -393,7 +393,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_s6b88")
 flat = true
 
 [node name="position2" type="Node2D" parent="HeroPosition"]
-position = Vector2(173, -13)
+position = Vector2(173, -35)
 script = ExtResource("13_qk00q")
 position_data = SubResource("Resource_8flqu")
 
@@ -435,7 +435,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_vtu61")
 flat = true
 
 [node name="position4" type="Node2D" parent="HeroPosition"]
-position = Vector2(572, -3)
+position = Vector2(572, -29)
 script = ExtResource("13_qk00q")
 position_data = SubResource("Resource_t7hjh")
 
@@ -459,7 +459,7 @@ flat = true
 position = Vector2(1209, 642)
 
 [node name="position1" type="Node2D" parent="ennemiePosition"]
-position = Vector2(0, 23)
+position = Vector2(-3, 38)
 script = ExtResource("13_qk00q")
 position_data = SubResource("Resource_fs52m")
 enemy_scene = ExtResource("15_uwmmy")
@@ -481,7 +481,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_xtuat")
 flat = true
 
 [node name="position2" type="Node2D" parent="ennemiePosition"]
-position = Vector2(169, -16)
+position = Vector2(169, -25)
 script = ExtResource("13_qk00q")
 position_data = SubResource("Resource_ehgg6")
 enemy_scene = ExtResource("16_boe0j")
@@ -525,7 +525,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_c7ruu")
 flat = true
 
 [node name="position4" type="Node2D" parent="ennemiePosition"]
-position = Vector2(523, -10)
+position = Vector2(523, -35)
 script = ExtResource("13_qk00q")
 position_data = SubResource("Resource_euc7u")
 

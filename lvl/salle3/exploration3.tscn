@@ -141,7 +141,7 @@ ignore_rotation = false
 script = ExtResource("9_uv58n")
 
 [node name="HeroPosition" type="Node2D" parent="."]
-z_index = 1
+z_index = 22
 position = Vector2(196, 607)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
@@ -220,10 +220,10 @@ expand_mode = 1
 
 [node name="Button2" type="Button" parent="ExplorationManager"]
 z_index = 2
-offset_left = 597.0
-offset_top = 62.0
-offset_right = 972.0
-offset_bottom = 650.0
+offset_left = 589.0
+offset_top = 65.0
+offset_right = 964.0
+offset_bottom = 653.0
 flat = true
 expand_icon = true
 

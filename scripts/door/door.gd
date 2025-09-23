@@ -4,10 +4,11 @@ var big_size = Vector2(1.2, 1.2)
 var startsize = Vector2(1.0,1.0)
 var current_tween: Tween = null
 var Game_Manager:GameManager
-
+var timePeeking : float = 0.0
+var peeking: bool = true
 @onready var sub_viewport : Viewport= $"../SubViewportContainer/SubViewport"
 var encounter_for_this_door: CombatEncounter
-
+@onready var embuscadeUI: TextureRect = $"../EmbuscadeUI"
 func _ready():
 	Game_Manager = get_tree().root.get_node("GameManager") 
 	if Game_Manager:
@@ -73,8 +74,29 @@ func _advance_in_room():
 	# Demander au GameManager d'entrer dans la bonne scène
 	Game_Manager._enter_scene_in_current_room(scene_to_load)
 
+func startpeeking():
+	check_detection()
 
+func stop_peekink():
+	peeking = false
 
+func check_detection() -> void:
+	# On lance une boucle tant que peek est vrai
+	await get_tree().create_timer(0.5).timeout
 	
+	if peeking:
+		var rand = randi_range(1, 100)
+		print("Jet de détection :", rand)
+		if rand > 90:
+			print("Tu es repéré ! Combat déclenché.")
+			_start_combat()
+			peeking = false # on stoppe la boucle si le combat démarre
+			return
+		check_detection()
 
+func _start_combat():
+	embuscadeUI.texture = encounter_for_this_door.imageEmbuscade
+	embuscadeUI.visible = true
+	await get_tree().create_timer(1.0).timeout
+	_advance_in_room()
 	

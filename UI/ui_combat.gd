@@ -39,6 +39,7 @@ func _ready():
 	donjon_map.curentposition = donjon_map.positions[gm.current_room_Ressource.position_on_map]
 	if donjon_map:
 		focus_on_room(donjon_map.curentposition)
+		donjon_map.move_to_position(donjon_map.curentposition)
 
 
 	
