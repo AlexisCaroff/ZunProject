@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dqnjuxw77ebnb"]
+[gd_scene load_steps=20 format=3 uid="uid://dqnjuxw77ebnb"]
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_ohhde"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_5rnso"]
@@ -17,9 +17,6 @@
 [ext_resource type="Script" uid="uid://cvdsxgbtufa4g" path="res://lvl/interactible.gd" id="15_ay18u"]
 [ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="16_dtf2f"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="17_3g6r7"]
-[ext_resource type="Texture2D" uid="uid://c8rp0k1fogimi" path="res://characters/charatexture/char priest.png" id="18_1rqfr"]
-[ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="18_fyasy"]
-[ext_resource type="Texture2D" uid="uid://df5ltgoqyf2jw" path="res://characters/charatexture/char mystic.png" id="19_fyasy"]
 [ext_resource type="Script" uid="uid://2yw45k1rwvdf" path="res://DialogueUI.gd" id="20_e3ant"]
 [ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="21_80na2"]
 
@@ -52,7 +49,7 @@ render_target_update_mode = 4
 
 [node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_fyasy")]
 position = Vector2(0, 60)
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.5, 0.5)
 
 [node name="FightUi" type="Sprite2D" parent="."]
 position = Vector2(960, 545)
@@ -261,12 +258,6 @@ text = "EXPLORE"
 z_index = 6
 position = Vector2(-401.667, -825)
 script = ExtResource("17_3g6r7")
-portraits = {
-"Hunter": ExtResource("18_fyasy"),
-&"Mystic": ExtResource("19_fyasy"),
-"Priest": ExtResource("18_1rqfr"),
-"Warrior": ExtResource("21_80na2")
-}
 is_Choice = true
 
 [node name="DialogueUI" type="Control" parent="Kairn/DialogueManager"]
@@ -341,6 +332,7 @@ text = "(space to continue )"
 autowrap_mode = 3
 
 [node name="Choix" type="Control" parent="Kairn/DialogueManager"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

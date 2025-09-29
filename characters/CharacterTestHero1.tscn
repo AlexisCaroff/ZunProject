@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://csp2iaxa3prf"]
+[gd_scene load_steps=20 format=3 uid="uid://csp2iaxa3prf"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_3tpjq"]
 [ext_resource type="Texture2D" uid="uid://c8rp0k1fogimi" path="res://characters/charatexture/char priest.png" id="2_0a2fh"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="11_1etg5"]
 [ext_resource type="Resource" uid="uid://do1xqbabe8r4b" path="res://scripts/camp/CampsSkills/new_resource.tres" id="11_8v15o"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="12_1yer4"]
+[ext_resource type="Resource" uid="uid://cd4m2bk1ikodm" path="res://actions/CampSkill/dialogue.tres" id="12_8v15o"]
 [ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="13_fj746"]
 [ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="14_pkjwt"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="15_fj746"]
@@ -24,9 +25,9 @@ script = ExtResource("1_3tpjq")
 portrait_texture = ExtResource("2_0a2fh")
 dead_portrait_texture = ExtResource("3_uhc5d")
 initiative_icon = ExtResource("3_lj1d3")
-Charaname = "priest"
+Charaname = "Priest"
 skill_resources = Array[Resource]([ExtResource("5_lhvcf"), ExtResource("6_uhc5d"), ExtResource("5_d5532"), ExtResource("6_es7ke"), ExtResource("9_uhc5d")])
-camp_skill_resources = Array[ExtResource("10_cc2ua")]([ExtResource("11_8v15o")])
+camp_skill_resources = Array[ExtResource("10_cc2ua")]([ExtResource("11_8v15o"), ExtResource("12_8v15o")])
 
 [node name="name" type="Label" parent="."]
 visible = false

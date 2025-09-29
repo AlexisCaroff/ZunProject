@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CampEffect" load_steps=2 format=3 uid="uid://dr3jspq8mgsin"]
+
+[ext_resource type="Script" uid="uid://brw6jmbngkbbu" path="res://scripts/camp/CampEffect.gd" id="1_8cv00"]
+
+[resource]
+script = ExtResource("1_8cv00")
+name = "Soin"
+amount = 10
+type = "heal"
+metadata/_custom_type_script = "uid://brw6jmbngkbbu"

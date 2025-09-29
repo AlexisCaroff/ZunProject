@@ -1,13 +1,29 @@
-[gd_scene load_steps=9 format=3 uid="uid://c63m6eq381xm1"]
+[gd_scene load_steps=21 format=3 uid="uid://c63m6eq381xm1"]
 
 [ext_resource type="Script" uid="uid://w6xjpbgh5xei" path="res://campement.gd" id="1_7mjgo"]
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_dks4i"]
 [ext_resource type="PackedScene" uid="uid://c2rn6c4jc5dlf" path="res://UI/chara_camp.tscn" id="2_ofeuf"]
+[ext_resource type="Script" uid="uid://bkiu5du6eeu5b" path="res://lvl/CampPosition.gd" id="4_adv8w"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="5_o6ov4"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="6_8yx0u"]
 [ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="6_adv8w"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="7_adv8w"]
+[ext_resource type="Texture2D" uid="uid://vxig1dgne8it" path="res://UI/box2.png" id="7_hfsnk"]
+[ext_resource type="Texture2D" uid="uid://cnxub0g557exn" path="res://UI/box.png" id="8_7788d"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="9_b18pc"]
+[ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="10_orkqx"]
+[ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="13_ktrs2"]
+[ext_resource type="Texture2D" uid="uid://d162na82h3g2m" path="res://UI/exite.png" id="15_udo4k"]
+[ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="16_ktrs2"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="17_luaer"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_luaer"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1blth"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hfsnk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7788d"]
 
 [node name="Campement" type="Node2D"]
 script = ExtResource("1_7mjgo")
@@ -24,6 +40,7 @@ position = Vector2(568, 642)
 [node name="position1" type="Node2D" parent="HeroPosition"]
 z_index = 1
 position = Vector2(-22, 1)
+script = ExtResource("4_adv8w")
 
 [node name="Button" type="Button" parent="HeroPosition/position1"]
 z_index = 10
@@ -31,11 +48,13 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -522.0
 offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_luaer")
 flat = true
 
 [node name="position2" type="Node2D" parent="HeroPosition"]
 z_index = 1
-position = Vector2(243, -28)
+position = Vector2(239, -28)
+script = ExtResource("4_adv8w")
 
 [node name="Button" type="Button" parent="HeroPosition/position2"]
 z_index = 10
@@ -43,11 +62,13 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -522.0
 offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1blth")
 flat = true
 
 [node name="position3" type="Node2D" parent="HeroPosition"]
 z_index = 1
-position = Vector2(550, -26)
+position = Vector2(506, -32)
+script = ExtResource("4_adv8w")
 
 [node name="Button" type="Button" parent="HeroPosition/position3"]
 z_index = 10
@@ -55,11 +76,13 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -522.0
 offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hfsnk")
 flat = true
 
 [node name="position4" type="Node2D" parent="HeroPosition"]
 z_index = 1
-position = Vector2(798, 1)
+position = Vector2(728, 7)
+script = ExtResource("4_adv8w")
 
 [node name="Button" type="Button" parent="HeroPosition/position4"]
 z_index = 10
@@ -67,6 +90,7 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -522.0
 offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7788d")
 flat = true
 
 [node name="atmosphere" parent="." instance=ExtResource("5_o6ov4")]
@@ -75,6 +99,16 @@ position = Vector2(2, 352)
 [node name="FightUi" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
 texture = ExtResource("6_adv8w")
+
+[node name="Box2" type="Sprite2D" parent="."]
+position = Vector2(961, 114)
+texture = ExtResource("7_hfsnk")
+
+[node name="Box" type="Sprite2D" parent="."]
+position = Vector2(962, 73)
+scale = Vector2(1, 0.667057)
+texture = ExtResource("8_7788d")
+region_rect = Rect2(9.945, 4.41, 238.562, 54.1445)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_left = 1457.0
@@ -94,7 +128,7 @@ scale = Vector2(0.6, 0.6)
 [node name="Charaname" type="Label" parent="."]
 offset_left = 204.0
 offset_top = 821.0
-offset_right = 848.0
+offset_right = 442.0
 offset_bottom = 901.0
 theme_override_font_sizes/font_size = 40
 text = "Hero Name"
@@ -114,16 +148,6 @@ offset_left = 66.0
 offset_top = 756.0
 offset_right = 183.0
 offset_bottom = 872.0
-
-[node name="ResultScreen" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0)
-offset_right = 1920.0
-offset_bottom = 1000.0
-theme_override_fonts/font = ExtResource("7_adv8w")
-theme_override_font_sizes/font_size = 450
-text = "Victoire !"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="ActionPanel" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(90, 90)
@@ -157,9 +181,117 @@ scale = Vector2(1.245, 1.245)
 theme_override_constants/separation = 10
 alignment = 1
 
+[node name="DialogueManager" type="Node2D" parent="."]
+z_index = 6
+position = Vector2(2, 1)
+script = ExtResource("10_orkqx")
+portraits_resource = ExtResource("13_ktrs2")
+
+[node name="ExitButton" type="Button" parent="."]
+visible = false
+z_index = 10
+y_sort_enabled = true
+offset_left = 1295.0
+offset_top = 759.0
+offset_right = 1367.0
+offset_bottom = 831.0
+icon = ExtResource("15_udo4k")
+flat = true
+script = ExtResource("16_ktrs2")
+hover_color = Color(2, 2, 2, 1)
+
+[node name="LabelAction" type="Label" parent="."]
+offset_left = 681.0
+offset_top = 982.0
+offset_right = 1260.0
+offset_bottom = 1066.0
+theme_override_fonts/font = ExtResource("17_luaer")
+theme_override_font_sizes/font_size = 25
+text = "Attaque1 
+et truc et bidule"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="campPointText" type="Label" parent="."]
+offset_left = 888.0
+offset_top = 55.0
+offset_right = 1039.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("17_luaer")
+theme_override_font_sizes/font_size = 25
+text = "Camp points "
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CampPoint" type="Label" parent="."]
+offset_left = 886.0
+offset_top = 108.0
+offset_right = 1037.0
+offset_bottom = 152.0
+theme_override_fonts/font = ExtResource("17_luaer")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="AttLabel" type="Label" parent="."]
+offset_left = 59.0
+offset_top = 928.0
+offset_right = 325.0
+offset_bottom = 983.0
+theme_override_fonts/font = ExtResource("7_adv8w")
+theme_override_font_sizes/font_size = 20
+text = "Attaque :"
+
+[node name="DefLabel" type="Label" parent="."]
+offset_left = 59.0
+offset_top = 961.0
+offset_right = 272.0
+offset_bottom = 1016.0
+theme_override_fonts/font = ExtResource("7_adv8w")
+theme_override_font_sizes/font_size = 20
+text = "Defence:"
+
+[node name="Stamina" type="Label" parent="."]
+offset_left = 59.0
+offset_top = 988.0
+offset_right = 278.0
+offset_bottom = 1043.0
+theme_override_fonts/font = ExtResource("7_adv8w")
+theme_override_font_sizes/font_size = 20
+text = "Stamina :	
+"
+
+[node name="Horny" type="Label" parent="."]
+offset_left = 59.0
+offset_top = 1015.0
+offset_right = 278.0
+offset_bottom = 1070.0
+theme_override_fonts/font = ExtResource("7_adv8w")
+theme_override_font_sizes/font_size = 20
+text = "Horny
+"
+
+[node name="Guilt" type="Label" parent="."]
+offset_left = 59.0
+offset_top = 1043.0
+offset_right = 278.0
+offset_bottom = 1098.0
+theme_override_fonts/font = ExtResource("7_adv8w")
+theme_override_font_sizes/font_size = 20
+text = "Guilt:
+"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 681.0
+offset_top = 974.0
+offset_right = 1265.0
+offset_bottom = 975.0
+color = Color(0.501961, 0.407843, 0.207843, 1)
+
 [connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]
+[connection signal="button_down" from="ExitButton" to="." method="_on_exit_button_button_down"]

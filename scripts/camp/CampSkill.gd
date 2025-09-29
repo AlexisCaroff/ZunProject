@@ -1,8 +1,8 @@
 extends Resource
 class_name CampSkill
 
-@export var name: String = "Repos"
-@export var description: String = "Permet au héros de se reposer et de récupérer un peu de PV."
+@export var name: String = "Dialogue"
+@export var description: String = "engage une discution"
 @export var icon: Texture2D
 @export var cost: int = 1   # coût en points de camp / ressources
 
@@ -17,6 +17,8 @@ var target_type: int = TargetType.SELF
 @export var effects: Array[CampEffect] = []   # une liste d’effets appliqués
 
 func use(user: CharaCamp, targets: Array[CharaCamp]):
+	user.camp.campPoints = user.camp.campPoints-cost
 	for effect in effects:
 		for target in targets:
 			effect.apply(user, target)
+	

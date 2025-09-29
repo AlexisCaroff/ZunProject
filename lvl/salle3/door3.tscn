@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://evnfnlympfqp"]
+[gd_scene load_steps=16 format=3 uid="uid://evnfnlympfqp"]
 
 [ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_ykj4o"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_en5va"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/buttonexitepeek.gd" id="12_t41rb"]
 [ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="13_5t4ov"]
 [ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="14_k2q80"]
+[ext_resource type="Texture2D" uid="uid://drp4vk52vgk74" path="res://UI/doorebuscade/DOOR_caught_nymph.png" id="15_28ike"]
 
 [node name="Door" type="Control"]
 layout_mode = 3
@@ -273,6 +274,15 @@ position = Vector2(791, 286)
 
 [node name="pose2" type="Node2D" parent="."]
 position = Vector2(791, 374)
+
+[node name="EmbuscadeUI" type="TextureRect" parent="."]
+visible = false
+z_index = 12
+offset_left = 567.0
+offset_top = -7.0
+offset_right = 1463.0
+offset_bottom = 1051.0
+texture = ExtResource("15_28ike")
 
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]

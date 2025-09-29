@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cec8xfskuaorp"]
+[gd_scene load_steps=36 format=3 uid="uid://cec8xfskuaorp"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_81med"]
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_nh036"]
@@ -19,8 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharacterTestEnemy2.tscn" id="17_qdfir"]
 [ext_resource type="PackedScene" uid="uid://jg7klanpwhgj" path="res://characters/CharacterTestEnemy3.tscn" id="18_mi26p"]
 [ext_resource type="Script" uid="uid://bqnn7n8kuofir" path="res://UI/buttonSkipCombat.gd" id="19_2u5uo"]
-[ext_resource type="Texture2D" uid="uid://dpb4et0d3bipa" path="res://UI/position.png" id="20_iulr7"]
-[ext_resource type="Script" uid="uid://xgcdntldtp3u" path="res://UI/rotateSprite.gd" id="21_xvrvb"]
 
 [sub_resource type="Resource" id="Resource_i1s1q"]
 script = ExtResource("15_lt2sy")
@@ -131,6 +129,7 @@ size = Vector2i(400, 400)
 render_target_update_mode = 4
 
 [node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_vboy3")]
+scale = Vector2(0.5, 0.5)
 
 [node name="FightUi" type="Sprite2D" parent="."]
 position = Vector2(960, 545)
@@ -354,6 +353,7 @@ offset_right = 183.0
 offset_bottom = 909.0
 
 [node name="ResultScreen" type="Label" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 1920.0
@@ -555,13 +555,6 @@ offset_right = 1858.0
 offset_bottom = 153.0
 text = "next"
 script = ExtResource("19_2u5uo")
-
-[node name="Position" type="Sprite2D" parent="."]
-position = Vector2(1656, 977)
-texture = ExtResource("20_iulr7")
-script = ExtResource("21_xvrvb")
-vitesse = 0.5
-scale_amplitude = 0.1
 
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]

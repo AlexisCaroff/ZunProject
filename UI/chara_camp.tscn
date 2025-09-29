@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2rn6c4jc5dlf"]
+[gd_scene load_steps=6 format=3 uid="uid://c2rn6c4jc5dlf"]
 
 [ext_resource type="Script" uid="uid://jtrtg026w4al" path="res://UI/chara_camp.gd" id="1_n0x3i"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="1_tajnv"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="2_n0x3i"]
 [ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="3_8qacs"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="5_8qacs"]
 
 [node name="CharaCamp" type="Node2D"]
 script = ExtResource("1_n0x3i")
@@ -18,15 +19,15 @@ text = "name"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = 19.0
-offset_top = -283.0
+offset_top = -249.0
 offset_right = 59.0
-offset_bottom = -264.0
+offset_bottom = -230.0
 
 [node name="HP" type="Label" parent="."]
 offset_left = -99.0
-offset_top = -283.0
+offset_top = -249.0
 offset_right = -52.0
-offset_bottom = -264.0
+offset_bottom = -230.0
 theme_override_fonts/font = ExtResource("1_tajnv")
 theme_override_font_sizes/font_size = 15
 text = "Stamina:"
@@ -43,9 +44,9 @@ show_percentage = false
 
 [node name="Stress" type="Label" parent="."]
 offset_left = -82.0
-offset_top = -265.0
+offset_top = -231.0
 offset_right = -53.0
-offset_bottom = -246.0
+offset_bottom = -212.0
 theme_override_fonts/font = ExtResource("1_tajnv")
 theme_override_font_sizes/font_size = 15
 text = "Guilt:"
@@ -61,9 +62,9 @@ show_percentage = false
 
 [node name="horny" type="Label" parent="."]
 offset_left = -90.0
-offset_top = -248.0
+offset_top = -214.0
 offset_right = -54.0
-offset_bottom = -229.0
+offset_bottom = -195.0
 theme_override_fonts/font = ExtResource("1_tajnv")
 theme_override_font_sizes/font_size = 15
 text = "Horny:"
@@ -109,3 +110,16 @@ mouse_filter = 2
 texture = ExtResource("3_8qacs")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Arrow" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-14, -353)
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("5_8qacs")
+offset = Vector2(0, 112.61)
+script = ExtResource("2_n0x3i")
+min_scale = 0.38
+max_scale = 0.38
+scalemini = 0.3
+min_duration = 0.5
+max_duration = 0.5

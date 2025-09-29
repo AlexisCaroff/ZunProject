@@ -16,7 +16,7 @@ var initiative_icon_path: String = ""
 @onready var hp_Jauge=$HP/HPProgressBar
 @onready var guilt_Jauge=$Stress/GuiltrogressBar
 @onready var horny_Jauge=$horny/HornyProgressBar
-
+@onready var Arrow = $Arrow
 # --- Infos de base
 @export var Charaname: String = "name"
 @export var IsDemon: bool = false
@@ -42,8 +42,9 @@ var max_stress: int =100
 var current_horny: int = 0 
 var max_horniness: int = 100
 var current_position: int =0
-
-
+var targetable : bool = false 
+var CharaCampPoints : int = 2
+var camp : Campement
 
 func _ready() -> void:
 	print("chara ready")
@@ -87,6 +88,9 @@ func load_from_dict(data: Dictionary) -> void:
 	if data.has("camp_skills"):
 		camp_skill_resources = data["camp_skills"]
 		
+func set_targetable(targe : bool):
+	targetable = targe 
+	Arrow.visible= targe
 	
 func update_display() -> void:
 	if not hp_Jauge or not guilt_Jauge or not horny_Jauge:

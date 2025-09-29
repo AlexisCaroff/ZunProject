@@ -1,27 +1,44 @@
 extends Node
-
 class_name DialogueManager
 
 signal dialogue_finished
 
 var dialogue_lines: Array = []
 var current_index: int = 0
-@export var portraits: Dictionary = {} # assigne dans l’inspecteur : { "Hero": Texture2D, "Guide": Texture2D }
-var choix 
-@export var is_Choice :bool = false
-@onready var ui := $DialogueUI
+@export var portraits_resource:  PortraitsResource # { "Hero": Texture2D, "Guide": Texture2D }
+var choix: Control
+@export var is_Choice : bool = false
+
+var ui: Node =null
 
 func _ready():
-	ui.visible = false
-	if is_Choice:
-		choix=$Choix
-		choix.visible=false
-		print (choix)
+	# Crée automatiquement l'UI si elle n'existe pas déjà
+	if ui==null:
+		var scene: PackedScene = preload("res://UI/dialogue_ui.tscn") # à adapter à ton projet
+		ui = scene.instantiate()
+		add_child(ui)
+	else:
+		ui = $DialogueUI
 
-func _unhandled_input(event):
-	if event.is_action_pressed("ui_accept"):
+	ui.visible = false
+
+	# Gestion des choix
+	if is_Choice:
+		if choix==null:
+			var choix_scene: PackedScene = preload("res://UI/Choix.tscn") # idem à adapter
+			choix = choix_scene.instantiate()
+			add_child(choix)
+		else:
+			choix = $Choix
+		choix.visible = false
+
+
+
+func _input(event):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		next_line()
-		
+
+
 func load_dialogue(file_path: String):
 	dialogue_lines.clear()
 	current_index = 0
@@ -43,48 +60,51 @@ func load_dialogue(file_path: String):
 			})
 	file.close()
 
+
 func start_dialogue():
 	if dialogue_lines.is_empty():
 		emit_signal("dialogue_finished")
-		if is_Choice:
-			choix.visible=true 
-			print ("dialog end, show choices")
+		if is_Choice and choix:
+			choix.visible = true
 		return
+
 	ui.visible = true
 	show_line()
+
 
 func show_line():
 	if current_index >= dialogue_lines.size():
 		ui.visible = false
 		emit_signal("dialogue_finished")
-		if is_Choice:
-			choix.visible=true 
-			print ("dialog end, show choices")
+		if is_Choice and choix:
+			choix.visible = true
 		return
 
 	var line = dialogue_lines[current_index]
 	var speaker = line["speaker"]
 	var text = line["text"]
 
-	# Mettre à jour l'UI
-	if portraits.has(speaker):
-		ui.set_portrait(portraits[speaker])
+	if portraits_resource and portraits_resource.portraits.has(speaker):
+		ui.set_portrait(portraits_resource.portraits[speaker])
 	else:
 		ui.set_portrait(null)
 
 	ui.set_text(speaker, text)
 
+
+
 func next_line():
 	current_index += 1
 	show_line()
-	
+
+
 func hideChoix():
-	choix.visible=false
+	if choix:
+		choix.visible = false
 
 
 func _on_use_button_down() -> void:
 	hideChoix()
-
 
 func _on_destroy_button_down() -> void:
 	hideChoix()

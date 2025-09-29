@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cop2b1h4dmg4f"]
+[gd_scene load_steps=21 format=3 uid="uid://cop2b1h4dmg4f"]
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_f8dfn"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_uymsn"]
@@ -17,11 +17,7 @@
 [ext_resource type="Script" uid="uid://cvdsxgbtufa4g" path="res://lvl/interactible.gd" id="15_ehroj"]
 [ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="16_ye4oi"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="17_58emc"]
-[ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="18_1qbp1"]
-[ext_resource type="Texture2D" uid="uid://df5ltgoqyf2jw" path="res://characters/charatexture/char mystic.png" id="19_aty61"]
-[ext_resource type="Texture2D" uid="uid://c8rp0k1fogimi" path="res://characters/charatexture/char priest.png" id="20_3wx2l"]
-[ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="21_36d0b"]
-[ext_resource type="Script" uid="uid://2yw45k1rwvdf" path="res://DialogueUI.gd" id="22_lepto"]
+[ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="18_hntux"]
 [ext_resource type="Texture2D" uid="uid://dpb4et0d3bipa" path="res://UI/position.png" id="23_umack"]
 [ext_resource type="Script" uid="uid://xgcdntldtp3u" path="res://UI/rotateSprite.gd" id="24_y231p"]
 
@@ -53,6 +49,7 @@ size = Vector2i(400, 400)
 render_target_update_mode = 4
 
 [node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_ugroo")]
+scale = Vector2(0.5, 0.5)
 
 [node name="FightUi" type="Sprite2D" parent="."]
 position = Vector2(960, 545)
@@ -261,108 +258,8 @@ text = "EXPLORE"
 z_index = 6
 position = Vector2(-401.667, -825)
 script = ExtResource("17_58emc")
-portraits = {
-"Hunter": ExtResource("18_1qbp1"),
-&"Mystic": ExtResource("19_aty61"),
-"Priest": ExtResource("20_3wx2l"),
-"Warrior": ExtResource("21_36d0b")
-}
+portraits_resource = ExtResource("18_hntux")
 is_Choice = true
-
-[node name="DialogueUI" type="Control" parent="Kairn/DialogueManager"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_left = 143.333
-offset_top = -111.667
-offset_right = 183.333
-offset_bottom = -71.6666
-scale = Vector2(1.75383, 1.75383)
-script = ExtResource("22_lepto")
-
-[node name="ColorRect2" type="ColorRect" parent="Kairn/DialogueManager/DialogueUI"]
-layout_mode = 0
-offset_left = -315.499
-offset_top = -57.018
-offset_right = 832.501
-offset_bottom = 203.982
-scale = Vector2(2.07695, 4.90172)
-color = Color(0, 0, 0, 0.580392)
-
-[node name="Portrait" type="TextureRect" parent="Kairn/DialogueManager/DialogueUI"]
-layout_mode = 0
-offset_left = 246.0
-offset_top = 239.0
-offset_right = 925.0
-offset_bottom = 945.0
-texture = ExtResource("21_36d0b")
-
-[node name="ColorRect" type="ColorRect" parent="Kairn/DialogueManager/DialogueUI"]
-layout_mode = 0
-offset_left = 223.0
-offset_top = 772.0
-offset_right = 1371.0
-offset_bottom = 1033.0
-color = Color(0.832031, 0.746592, 0.613619, 1)
-
-[node name="Speaker" type="Label" parent="Kairn/DialogueManager/DialogueUI"]
-layout_mode = 0
-offset_left = 256.0
-offset_top = 783.0
-offset_right = 498.0
-offset_bottom = 884.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_4ofby")
-theme_override_font_sizes/font_size = 50
-text = "Nom"
-
-[node name="Text" type="Label" parent="Kairn/DialogueManager/DialogueUI"]
-layout_mode = 0
-offset_left = 278.0
-offset_top = 844.0
-offset_right = 1302.0
-offset_bottom = 1022.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_4ofby")
-theme_override_font_sizes/font_size = 40
-text = "tetxt"
-autowrap_mode = 3
-
-[node name="indication" type="Label" parent="Kairn/DialogueManager/DialogueUI"]
-layout_mode = 0
-offset_left = 680.0
-offset_top = 998.0
-offset_right = 1001.0
-offset_bottom = 1046.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_4ofby")
-theme_override_font_sizes/font_size = 30
-text = "(space to continue )"
-autowrap_mode = 3
-
-[node name="Choix" type="Control" parent="Kairn/DialogueManager"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="use" type="Button" parent="Kairn/DialogueManager/Choix"]
-layout_mode = 0
-offset_left = 1123.33
-offset_top = 616.667
-offset_right = 1505.33
-offset_bottom = 707.667
-theme_override_font_sizes/font_size = 60
-text = "Use the stele"
-
-[node name="destroy" type="Button" parent="Kairn/DialogueManager/Choix"]
-layout_mode = 0
-offset_left = 1660.0
-offset_top = 616.667
-offset_right = 1800.0
-offset_bottom = 647.667
-theme_override_font_sizes/font_size = 60
-text = "Destroy the stele"
 
 [node name="Position" type="Sprite2D" parent="."]
 position = Vector2(1656, 977)
@@ -384,7 +281,3 @@ scale_amplitude = 0.1
 [connection signal="button_down" from="Kairn/Button" to="Kairn" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Kairn/Button" to="Kairn" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Kairn/Button" to="Kairn" method="_on_button_mouse_exited"]
-[connection signal="button_down" from="Kairn/DialogueManager/Choix/use" to="Kairn" method="_on_use_button_down"]
-[connection signal="button_down" from="Kairn/DialogueManager/Choix/use" to="Kairn/DialogueManager" method="_on_use_button_down"]
-[connection signal="button_down" from="Kairn/DialogueManager/Choix/destroy" to="Kairn" method="_on_destroy_button_down"]
-[connection signal="button_down" from="Kairn/DialogueManager/Choix/destroy" to="Kairn/DialogueManager" method="_on_destroy_button_down"]

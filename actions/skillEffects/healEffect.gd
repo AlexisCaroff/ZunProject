@@ -16,9 +16,12 @@ func apply(user: Character, target: PositionSlot) -> void:
 	match heal_target_stat:
 			Stat.STAMINA:
 				Chartarget.current_stamina = min(Chartarget.max_stamina, Chartarget.current_stamina + amount)
+				Chartarget.animate_heal(amount,user)
 			Stat.HORNY:
 				Chartarget.current_horniness = max(0, Chartarget.current_horniness - amount)
+				Chartarget.animate_heal(amount,user)
 			Stat.STRESS:
 				Chartarget.current_stress = max(0, Chartarget.current_stress - amount)
+				Chartarget.animate_heal(amount,user)
 	Chartarget.update_ui()
 	print("%s soigne %s de %s à %s" % [user.name, amount, heal_target_stat, Chartarget.name])

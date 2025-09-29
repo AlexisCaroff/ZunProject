@@ -20,10 +20,10 @@ func _ready():
 	load_characters_from_gamestat()
 	selected_character = characters[0]
 	portraitCharaselect.texture = characters[0].initiative_icon
-	
+	donjon_map.curentposition = donjon_map.positions[gm.current_room_Ressource.position_on_map]
 	if donjon_map:
-		donjon_map.curentposition=donjon_map.positions[gm.current_room_Ressource.position_on_map]
 		focus_on_room(donjon_map.curentposition)
+		donjon_map.move_to_position(donjon_map.curentposition)
 
 func focus_on_room(room: Node2D):
 	var vp_size: Vector2 = viewport.size

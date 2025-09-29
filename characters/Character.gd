@@ -69,6 +69,7 @@ var combat_manager: Node = null
 @export var is_player_controlled: bool = true
 const HornyEffectScene := preload("res://actions/damageEffect/charmed-particules.tscn")
 const DamageEffectScene := preload("res://actions/damageEffect/HitVFX.tscn")
+const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
 const MissEffectScene:= preload("res://actions/damageEffect/miss_vfx.tscn")
 @export var min_durationIddle: float = 0.6
 @export var max_durationIddle: float = 1.0
@@ -122,7 +123,7 @@ func update_stats():
 
 func update_ui():
 	if not hp_label or not stress_label or not horny_label:
-		push_warning("update_ui() appelé mais les labels ne sont pas prêts")
+	
 		hp_label=$HP
 		stress_label=$Stress
 		horny_label=$horny
@@ -393,6 +394,24 @@ func animate_take_damage(damage:int, source:Character):
 	await tween.finished
 	emit_signal("skill_animation_finished")
 	
+	
+func animate_heal(damage:int, source:Character, color=null):
+	emit_signal("skill_animation_started")
+	var effect_instance = healEffectScene.instantiate()
+	get_tree().current_scene.add_child(effect_instance)
+	effect_instance.global_position = global_position + Vector2(0, -140)
+	if effect_instance.has_method("setup"):
+		effect_instance.setup(damage,color)
+		
+	var tween := create_tween() as Tween
+	var tween2 := create_tween() as Tween
+	var normal_size = CharaScale
+	var big_size= Vector2(1.0,1.05) 
+	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
+	tween.tween_property(self, "scale", normal_size, 0.2)
+	await tween.finished
+	emit_signal("skill_animation_finished")
+	
 func animate_attack(target: Character):
 	emit_signal("skill_animation_started")
 	var tween := create_tween() as Tween
@@ -403,10 +422,10 @@ func animate_attack(target: Character):
 
 	var start_pos = position
 	var direction = (target.global_position - global_position).normalized()
-	var offset = direction * 100
+	var offset = direction * 150
 	var attack_pos = start_pos + offset
 	var normal_size = self.scale
-	var big_size= Vector2(1.2,1.2) 
+	var big_size= Vector2(1.6,1.6) 
 
 	scaletween.tween_property(self, "scale", big_size, 0.2)
 	tween.tween_property(self, "position", attack_pos, 0.2)

@@ -26,10 +26,13 @@ func apply(user: Character, target: PositionSlot) -> void:
 	if Chartarget.is_player_controlled:
 		match heal_target_stat:
 			healStat.STAMINA:
+				Chartarget.animate_heal(healamount,user)
 				Chartarget.current_stamina = min(Chartarget.max_stamina, Chartarget.current_stamina + healamount)
 			healStat.HORNY:
+				Chartarget.animate_heal(healamount,user, Color.PURPLE)
 				Chartarget.current_horniness = max(0, Chartarget.current_horniness - healamount)
 			healStat.STRESS:
+				Chartarget.animate_heal(healamount,user)
 				Chartarget.current_stress = max(0, Chartarget.current_stress - healamount)
 		Chartarget.update_ui()
 	else:

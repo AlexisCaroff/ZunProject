@@ -10,6 +10,7 @@ var current_tween_button: Tween = null
 
 
 func _on_mouse_entered() -> void:
+	
 	label.scale = startsize 
 	label.visible = true
 	label.text = Actiontext

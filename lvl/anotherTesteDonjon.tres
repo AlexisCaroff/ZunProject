@@ -10,5 +10,5 @@
 script = ExtResource("2_xl35e")
 name = "Nouveau donjon"
 rooms = Array[ExtResource("1_md64w")]([ExtResource("2_312yi"), ExtResource("3_4tkwk"), ExtResource("4_vxj8r")])
-start_room = ExtResource("2_312yi")
+start_room = ExtResource("3_4tkwk")
 metadata/_custom_type_script = "uid://cm44dout6mc4v"

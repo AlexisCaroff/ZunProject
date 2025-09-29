@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b8lhes1w5ga1t"]
+[gd_scene load_steps=18 format=3 uid="uid://b8lhes1w5ga1t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_0i81g"]
 [ext_resource type="Texture2D" uid="uid://df5ltgoqyf2jw" path="res://characters/charatexture/char mystic.png" id="2_0vb8e"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="10_1uy8h"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="10_wsc18"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="11_0vb8e"]
-[ext_resource type="Resource" uid="uid://do1xqbabe8r4b" path="res://scripts/camp/CampsSkills/new_resource.tres" id="11_qxw8h"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="12_ahwxm"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="12_gnpc2"]
 [ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="13_7s17v"]
@@ -24,11 +23,11 @@ script = ExtResource("1_0i81g")
 portrait_texture = ExtResource("2_0vb8e")
 dead_portrait_texture = ExtResource("3_jldwf")
 initiative_icon = ExtResource("4_0vb8e")
-Charaname = "Warrior1"
+Charaname = "Mystic"
 attack = 12
 Chara_position = 2
 skill_resources = Array[Resource]([ExtResource("5_jldwf"), ExtResource("6_jldwf"), ExtResource("7_gnpc2"), ExtResource("8_1uy8h"), ExtResource("12_gnpc2")])
-camp_skill_resources = Array[ExtResource("10_0k8kf")]([ExtResource("11_qxw8h")])
+camp_skill_resources = Array[ExtResource("10_0k8kf")]([null])
 
 [node name="name" type="Label" parent="."]
 visible = false
