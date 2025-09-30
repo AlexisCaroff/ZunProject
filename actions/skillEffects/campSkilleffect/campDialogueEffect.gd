@@ -24,16 +24,16 @@ func apply(user: CharaCamp, target: CharaCamp):
 			print("⚠️ Aucun dialogue défini pour ", target.Charaname)
 			return
 
-	# ⚡ lance le DialogueManager avec une seule ligne de dialogue
+
 	var dialogue_manager: DialogueManager = camp.get_node_or_null("DialogueManager")
 
 
-	# on construit le dialogue directement en mémoire
+	
 	if dialogue_manager and file_path != "":
 			dialogue_manager.load_dialogue(file_path)
 			dialogue_manager.start_dialogue()
 
-			# se déconnecte tout seul pour éviter doublons
+		
 			dialogue_manager.dialogue_finished.connect(func():
 				camp.After_camp_skill(user.camp.skillused),
 				CONNECT_ONE_SHOT

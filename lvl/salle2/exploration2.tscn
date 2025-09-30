@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cop2b1h4dmg4f"]
+[gd_scene load_steps=19 format=3 uid="uid://cop2b1h4dmg4f"]
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_f8dfn"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_uymsn"]
@@ -18,8 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="16_ye4oi"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="17_58emc"]
 [ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="18_hntux"]
-[ext_resource type="Texture2D" uid="uid://dpb4et0d3bipa" path="res://UI/position.png" id="23_umack"]
-[ext_resource type="Script" uid="uid://xgcdntldtp3u" path="res://UI/rotateSprite.gd" id="24_y231p"]
 
 [node name="ExploInterface" type="Control"]
 layout_mode = 3
@@ -260,13 +258,6 @@ position = Vector2(-401.667, -825)
 script = ExtResource("17_58emc")
 portraits_resource = ExtResource("18_hntux")
 is_Choice = true
-
-[node name="Position" type="Sprite2D" parent="."]
-position = Vector2(1656, 977)
-texture = ExtResource("23_umack")
-script = ExtResource("24_y231p")
-vitesse = 0.5
-scale_amplitude = 0.1
 
 [connection signal="button_down" from="moveButton" to="ExplorationManager" method="_on_move_button_button_down"]
 [connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]

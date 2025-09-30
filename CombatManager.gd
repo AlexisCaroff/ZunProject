@@ -211,7 +211,7 @@ func _show_defeat():
 func _show_victory():
 	ResultScreen_label.text = "Victoire !"
 	ResultScreen_label.modulate = Color(1, 1, 1, 1)
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(1.0).timeout
 
 	# --- Sauvegarder l'équipe avant de changer de scène
 	GameState.save_party_from_nodes(heroes)

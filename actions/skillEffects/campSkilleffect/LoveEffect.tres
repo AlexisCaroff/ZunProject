@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="CampSkill" load_steps=6 format=3 uid="uid://bw3xbx65ggbtl"]
+
+[ext_resource type="Script" uid="uid://brw6jmbngkbbu" path="res://scripts/camp/CampEffect.gd" id="1_vrnum"]
+[ext_resource type="Script" uid="uid://bjysq2c5802md" path="res://actions/skillEffects/campSkilleffect/loveEffect.gd" id="2_4mowf"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_s3ehv"]
+[ext_resource type="Texture2D" uid="uid://cnxbiel8xwww5" path="res://actions/CampSkill/love.png" id="3_racfd"]
+
+[sub_resource type="Resource" id="Resource_71lud"]
+script = ExtResource("2_4mowf")
+name = ""
+love_images = {
+"Hunter+Warrior": "res://LoveScene/HunterxWarrior.jpg",
+"Mystic+Hunter": "res://LoveScene/MysticxHunter.jpg",
+"Mystic+Warrior": "res://LoveScene/WarriorxMystic.jpg",
+"Priest+Mystic": "res://LoveScene/PriestxMystic.jpg",
+"Priest+Warrior": "res://LoveScene/PriestxWarrior.jpg"
+}
+metadata/_custom_type_script = "uid://bjysq2c5802md"
+
+[resource]
+script = ExtResource("2_s3ehv")
+name = "Flirt"
+description = "engage une discution"
+icon = ExtResource("3_racfd")
+cost = 1
+target_type = 1
+effects = Array[ExtResource("1_vrnum")]([SubResource("Resource_71lud")])
+metadata/_custom_type_script = "uid://dmwb4vh0ycukv"

@@ -325,11 +325,12 @@ text = "Guilt:
 "
 
 [node name="contexte" type="Label" parent="."]
+visible = false
 layout_mode = 0
-offset_left = 1503.0
-offset_top = 846.0
-offset_right = 1813.0
-offset_bottom = 1008.0
+offset_left = 1512.0
+offset_top = 754.0
+offset_right = 1822.0
+offset_bottom = 916.0
 theme_override_font_sizes/font_size = 40
 text = "ce qu'il se passe"
 autowrap_mode = 3
@@ -353,7 +354,6 @@ offset_right = 183.0
 offset_bottom = 909.0
 
 [node name="ResultScreen" type="Label" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 1920.0

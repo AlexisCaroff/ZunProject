@@ -22,6 +22,7 @@ var current_tween: Tween = null
 var move_mode: bool = false
 @onready var viewport: Viewport = $SubViewportContainer/SubViewport
 @onready var donjon_map: Map = $SubViewportContainer/SubViewport/map
+@onready var loveimage=$Loveimage
 var DoorNumber:int =0
 var gm : GameManager
 var skillused : CampSkill =null
@@ -34,11 +35,12 @@ func _ready():
 	gm = get_tree().root.get_node("GameManager") as GameManager
 	load_characters_from_gamestat()
 	selected_chara = characters[0]
-	
-	
+
+	donjon_map.curentposition = donjon_map.positions[gm.current_room_Ressource.position_on_map]
 	if donjon_map:
-		donjon_map.curentposition=donjon_map.positions[gm.current_room_Ressource.position_on_map]
 		focus_on_room(donjon_map.curentposition)
+		donjon_map.move_to_position(donjon_map.curentposition)
+	
 	changeSelectedCharacter(selected_chara)
 	campPointLabel = $CampPoint
 	campPointLabel.text= str(campPoints)
@@ -168,7 +170,7 @@ func focus_on_room(room: Node2D):
 	var target_pos = room.position
 	var tween = create_tween()
 	donjon_map.move_to_position(donjon_map.curentposition)
-	tween.tween_property(donjon_map.camera, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(donjon_map.camera, "position", target_pos, 0.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 
 func _on_exit_button_button_down() -> void:
