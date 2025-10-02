@@ -1,102 +1,96 @@
-[gd_scene load_steps=15 format=3 uid="uid://qi68oagp06kg"]
+[gd_scene load_steps=18 format=3 uid="uid://qi68oagp06kg"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_q3w66"]
-[ext_resource type="Texture2D" uid="uid://irsd0dsojt2t" path="res://characters/charatexture/hunter.png" id="2_wrjt1"]
-[ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_ejq0a"]
+[ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="2_5lneg"]
+[ext_resource type="Texture2D" uid="uid://dltxnrwlxmjd7" path="res://characters/charatexture/char hunterDead.png" id="3_lacfs"]
 [ext_resource type="Texture2D" uid="uid://byy2w1dik22x8" path="res://characters/characterInitiative/hunterIni.png" id="4_5lneg"]
 [ext_resource type="Resource" uid="uid://ca8rrxibg12sg" path="res://actions/Fap.tres" id="4_o35hh"]
-[ext_resource type="Resource" uid="uid://bptddsqeaq28h" path="res://actions/heal.tres" id="5_3jc8x"]
-[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="6_6qnei"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="6_lacfs"]
-[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="7_lacfs"]
-[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="8_wrjt1"]
+[ext_resource type="Resource" uid="uid://dn00l75vs5ctm" path="res://actions/Sel.tres" id="6_6qnei"]
+[ext_resource type="Resource" uid="uid://cbakapyjnht36" path="res://actions/lance.tres" id="7_lacfs"]
+[ext_resource type="Resource" uid="uid://bmkp0brav8l87" path="res://actions/bollas.tres" id="8_lacfs"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="10_0byuf"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="11_5lneg"]
+[ext_resource type="Resource" uid="uid://do1xqbabe8r4b" path="res://scripts/camp/CampsSkills/new_resource.tres" id="11_77vgn"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="11_wrjt1"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="12_5lneg"]
-
-[sub_resource type="Resource" id="Resource_i4eos"]
-script = ExtResource("6_6qnei")
-amount = 20
-damage_target_stat = 0
-metadata/_custom_type_script = "uid://bjsbovfjff2wo"
-
-[sub_resource type="Resource" id="Resource_1s6rd"]
-script = ExtResource("8_wrjt1")
-name = "Attaque basique"
-descriptionName = "Attaque"
-description = "Inflige des dégâts à un ennemi"
-icon = ExtResource("7_lacfs")
-the_target_type = 0
-effects = Array[ExtResource("6_lacfs")]([SubResource("Resource_i4eos")])
-two_target_Type = false
-the_second_target_type = 3
-second_effects = Array[ExtResource("6_lacfs")]([])
-usable_when_horny = false
-needtarget = true
-Actiontype = "attack"
-cost = 0
-cooldown = 4
-current_cooldown = 0
-precision = 100
-allways_hit = false
-metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="12_fj1an"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="13_wu8lj"]
+[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="14_gno5x"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="15_gno5x"]
 
 [node name="CharacterTestHero2" type="Node2D"]
 script = ExtResource("1_q3w66")
-portrait_texture = ExtResource("2_wrjt1")
-dead_portrait_texture = ExtResource("3_ejq0a")
+portrait_texture = ExtResource("2_5lneg")
+dead_portrait_texture = ExtResource("3_lacfs")
 initiative_icon = ExtResource("4_5lneg")
-Charaname = "hunter"
+Charaname = "Hunter"
 Chara_position = 1
-skill_resources = Array[Resource]([ExtResource("4_o35hh"), SubResource("Resource_1s6rd"), ExtResource("5_3jc8x"), ExtResource("5_3jc8x"), ExtResource("11_wrjt1")])
-
-[node name="HerosTexture1" type="TextureRect" parent="."]
-offset_left = -76.0
-offset_top = -311.0
-offset_right = 189.0
-offset_bottom = 280.0
-scale = Vector2(0.5, 0.5)
-mouse_filter = 2
-texture = ExtResource("2_wrjt1")
-
-[node name="Selector" type="TextureRect" parent="."]
-modulate = Color(2, 2, 2, 1)
-self_modulate = Color(1, 1, 1, 0)
-offset_left = -76.0
-offset_top = -311.0
-offset_right = 189.0
-offset_bottom = 280.0
-scale = Vector2(0.5, 0.5)
-mouse_filter = 2
-texture = ExtResource("2_wrjt1")
+skill_resources = Array[Resource]([ExtResource("4_o35hh"), ExtResource("6_6qnei"), ExtResource("7_lacfs"), ExtResource("8_lacfs"), ExtResource("11_wrjt1")])
+camp_skill_resources = Array[ExtResource("10_0byuf")]([ExtResource("11_77vgn")])
 
 [node name="name" type="Label" parent="."]
-offset_left = -57.0
-offset_top = -258.0
-offset_right = -13.0
-offset_bottom = -235.0
+visible = false
+offset_left = -70.0
+offset_top = -241.0
+offset_right = -26.0
+offset_bottom = -218.0
 theme_override_fonts/font = ExtResource("12_5lneg")
 text = "name"
 
 [node name="HP" type="Label" parent="."]
-offset_left = -91.0
-offset_top = -19.0
-offset_right = -45.0
-offset_bottom = 4.0
-text = "Hp"
+offset_left = -108.0
+offset_top = -33.0
+offset_right = -61.0
+offset_bottom = -14.0
+theme_override_fonts/font = ExtResource("12_5lneg")
+theme_override_font_sizes/font_size = 15
+text = "Stamina:"
+
+[node name="HPProgressBar" type="ProgressBar" parent="HP"]
+modulate = Color(1, 0.714937, 0, 1)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 7.0
+offset_right = 146.0
+offset_bottom = 17.0
+value = 100.0
+show_percentage = false
 
 [node name="Stress" type="Label" parent="."]
 offset_left = -91.0
-offset_top = 8.0
-offset_right = -45.0
-offset_bottom = 31.0
-text = "stress"
+offset_top = -15.0
+offset_right = -62.0
+offset_bottom = 4.0
+theme_override_fonts/font = ExtResource("12_5lneg")
+theme_override_font_sizes/font_size = 15
+text = "Guilt:"
+
+[node name="GuiltrogressBar" type="ProgressBar" parent="Stress"]
+modulate = Color(1, 0.257036, 0, 1)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 7.0
+offset_right = 128.0
+offset_bottom = 17.0
+show_percentage = false
 
 [node name="horny" type="Label" parent="."]
-offset_left = -91.0
-offset_top = 35.0
-offset_right = -45.0
-offset_bottom = 58.0
-text = "horny"
+offset_left = -99.0
+offset_top = 2.0
+offset_right = -63.0
+offset_bottom = 21.0
+theme_override_fonts/font = ExtResource("12_5lneg")
+theme_override_font_sizes/font_size = 15
+text = "Horny:"
+
+[node name="HornyProgressBar" type="ProgressBar" parent="horny"]
+modulate = Color(0.905484, 0, 1, 1)
+layout_mode = 0
+offset_left = 39.0
+offset_top = 7.0
+offset_right = 135.0
+offset_bottom = 17.0
+show_percentage = false
 
 [node name="Button" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -105,11 +99,66 @@ offset_top = -325.0
 offset_right = 110.0
 offset_bottom = 57.0
 
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(24, -29)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("13_wu8lj")
+min_scale = 1.15
+max_scale = 1.15
+scalemini = 1.1
+min_duration = 1.2
+max_duration = 1.5
+
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+offset_left = -129.0
+offset_top = -213.0
+offset_right = 42.0
+offset_bottom = 18.0
+scale = Vector2(1.2, 1)
+mouse_filter = 2
+texture = ExtResource("2_5lneg")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Selector" type="TextureRect" parent="pivot"]
+self_modulate = Color(2, 2, 2, 0)
+offset_left = -129.0
+offset_top = -213.0
+offset_right = 42.0
+offset_bottom = 18.0
+scale = Vector2(1.2, 1)
+mouse_filter = 2
+texture = ExtResource("14_gno5x")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Skill" type="TextureRect" parent="."]
+visible = false
+offset_left = -148.0
+offset_top = -286.0
+offset_right = 428.0
+offset_bottom = 290.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_5lneg")
+script = ExtResource("12_fj1an")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(-52, -340)
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("15_gno5x")
+offset = Vector2(0, 115.375)
+script = ExtResource("13_wu8lj")
+min_scale = 0.38
+max_scale = 0.38
+scalemini = 0.3
+min_duration = 0.5
+max_duration = 0.5
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 22.0
-offset_top = -252.0
-offset_right = 62.0
-offset_bottom = -233.0
+offset_left = 4.0
+offset_top = -227.0
+offset_right = 52.0
+offset_bottom = -186.0
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

@@ -1,18 +1,24 @@
-[gd_scene load_steps=13 format=3 uid="uid://cr7722t3ktcl4"]
+[gd_scene load_steps=18 format=3 uid="uid://cr7722t3ktcl4"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_52n4a"]
 [ext_resource type="Texture2D" uid="uid://frq4grv1dvoo" path="res://characters/charatexture/cultisteBody.png" id="2_ab0ni"]
 [ext_resource type="Texture2D" uid="uid://b0q8mhrqooms" path="res://characters/characterInitiative/cultisteIni.png" id="3_0k1kv"]
-[ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_4a20v"]
+[ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="3_wprb4"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="5_1jmi2"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="5_4ovvk"]
-[ext_resource type="Texture2D" uid="uid://j0hygaxu62ja" path="res://characters/charatexture/PriestBody.png" id="5_ab0ni"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="5_jx27m"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="6_jx27m"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="7_wprb4"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="9_wprb4"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="10_e5x2y"]
+[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="10_wprb4"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="11_nk0oi"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="12_e5x2y"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="14_2rqtk"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="15_s50vq"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("5_4ovvk")
+MagicDMG = false
 amount = 20
 damage_target_stat = 0
 metadata/_custom_type_script = "uid://bjsbovfjff2wo"
@@ -23,11 +29,12 @@ name = "Attaque basique"
 descriptionName = "Attaque"
 description = "Inflige des dégâts à un ennemi"
 icon = ExtResource("6_jx27m")
+required_position = 0
 the_target_type = 0
-effects = Array[ExtResource("5_jx27m")]([SubResource("Resource_i4eos")])
+effects = Array[ExtResource("5_1jmi2")]([SubResource("Resource_i4eos")])
 two_target_Type = false
 the_second_target_type = 3
-second_effects = Array[ExtResource("5_jx27m")]([])
+second_effects = Array[ExtResource("5_1jmi2")]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"
@@ -36,62 +43,52 @@ cooldown = 4
 current_cooldown = 0
 precision = 100
 allways_hit = false
+duration = 0.3
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
 
 [node name="CharacterTestennemie2" type="Node2D"]
-position = Vector2(316, 258)
+position = Vector2(-3, -1)
 script = ExtResource("1_52n4a")
 portrait_texture = ExtResource("2_ab0ni")
-dead_portrait_texture = ExtResource("3_4a20v")
+dead_portrait_texture = ExtResource("3_wprb4")
 initiative_icon = ExtResource("3_0k1kv")
+Charaname = "sucubbus"
+IsDemon = true
 skill_resources = Array[Resource]([SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), ExtResource("9_wprb4")])
 is_player_controlled = false
 
-[node name="HerosTexture1" type="TextureRect" parent="."]
-offset_left = -133.0
-offset_top = -259.0
-offset_right = 133.0
-offset_bottom = -2.0
-mouse_filter = 2
-texture = ExtResource("5_ab0ni")
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(0, -21)
+script = ExtResource("10_e5x2y")
 
-[node name="Selector" type="TextureRect" parent="."]
-modulate = Color(2, 2, 2, 1)
-self_modulate = Color(1, 1, 1, 0)
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
 offset_left = -133.0
-offset_top = -259.0
-offset_right = 133.0
-offset_bottom = -2.0
+offset_top = -229.0
+offset_right = 38.0
+offset_bottom = 2.0
 mouse_filter = 2
-texture = ExtResource("5_ab0ni")
+texture = ExtResource("10_wprb4")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Selector" type="TextureRect" parent="pivot"]
+self_modulate = Color(2, 2, 2, 0)
+offset_left = -133.0
+offset_top = -229.0
+offset_right = 38.0
+offset_bottom = 2.0
+mouse_filter = 2
+texture = ExtResource("10_wprb4")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="name" type="Label" parent="."]
-offset_left = -35.0
-offset_top = -261.0
-offset_right = 9.0
-offset_bottom = -238.0
+visible = false
+offset_left = -76.0
+offset_top = -256.0
+offset_right = -32.0
+offset_bottom = -233.0
 text = "name"
-
-[node name="HP" type="Label" parent="."]
-offset_left = -91.0
-offset_top = -19.0
-offset_right = -45.0
-offset_bottom = 4.0
-text = "Hp"
-
-[node name="Stress" type="Label" parent="."]
-offset_left = -91.0
-offset_top = 8.0
-offset_right = -45.0
-offset_bottom = 31.0
-text = "stress"
-
-[node name="horny" type="Label" parent="."]
-offset_left = -91.0
-offset_top = 35.0
-offset_right = -45.0
-offset_bottom = 58.0
-text = "horny"
 
 [node name="Button" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -105,6 +102,83 @@ offset_left = 22.0
 offset_top = -252.0
 offset_right = 62.0
 offset_bottom = -233.0
+
+[node name="Skill" type="TextureRect" parent="."]
+visible = false
+offset_left = -199.0
+offset_top = -312.0
+offset_right = 377.0
+offset_bottom = 264.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_nk0oi")
+script = ExtResource("12_e5x2y")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(-52, -340)
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("14_2rqtk")
+offset = Vector2(0, 107.08)
+script = ExtResource("10_e5x2y")
+min_scale = 0.38
+max_scale = 0.38
+scalemini = 0.3
+min_duration = 0.5
+max_duration = 0.5
+
+[node name="HP" type="Label" parent="."]
+offset_left = -108.0
+offset_top = -33.0
+offset_right = -65.0
+offset_bottom = -14.0
+theme_override_fonts/font = ExtResource("15_s50vq")
+theme_override_font_sizes/font_size = 15
+text = "Stamina:"
+
+[node name="HPProgressBar" type="ProgressBar" parent="HP"]
+modulate = Color(0.690751, 1, 0, 1)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 7.0
+offset_right = 146.0
+offset_bottom = 17.0
+value = 100.0
+show_percentage = false
+
+[node name="Stress" type="Label" parent="."]
+offset_left = -91.0
+offset_top = -15.0
+offset_right = -66.0
+offset_bottom = 4.0
+theme_override_fonts/font = ExtResource("15_s50vq")
+theme_override_font_sizes/font_size = 15
+text = "Guilt:"
+
+[node name="GuiltrogressBar" type="ProgressBar" parent="Stress"]
+modulate = Color(1, 0.257036, 0, 1)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 7.0
+offset_right = 128.0
+offset_bottom = 17.0
+show_percentage = false
+
+[node name="horny" type="Label" parent="."]
+offset_left = -99.0
+offset_top = 2.0
+offset_right = -67.0
+offset_bottom = 21.0
+theme_override_fonts/font = ExtResource("15_s50vq")
+theme_override_font_sizes/font_size = 15
+text = "Horny:"
+
+[node name="HornyProgressBar" type="ProgressBar" parent="horny"]
+modulate = Color(0.905484, 0, 1, 1)
+layout_mode = 0
+offset_left = 39.0
+offset_top = 7.0
+offset_right = 135.0
+offset_bottom = 17.0
+show_percentage = false
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

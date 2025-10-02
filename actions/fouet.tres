@@ -1,30 +1,40 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://sahrc1c16ogi"]
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://sahrc1c16ogi"]
 
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_hgl7v"]
-[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_2julc"]
-[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="3_28per"]
+[ext_resource type="Texture2D" uid="uid://bfo0jfbakie52" path="res://actions/actiontexture/SkillImage/whipe.png" id="1_28per"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="2_2julc"]
+[ext_resource type="Script" uid="uid://13cgpeuxvpoa" path="res://actions/skillEffects/PainAndAbsolution.gd" id="3_2julc"]
+[ext_resource type="Texture2D" uid="uid://qhiqy0qukc0e" path="res://actions/actiontexture/fouet.png" id="4_2julc"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_7e8mt"]
 
-[sub_resource type="Resource" id="Resource_i4eos"]
-script = ExtResource("2_2julc")
-amount = 20
+[sub_resource type="Resource" id="Resource_28per"]
+script = ExtResource("3_2julc")
+MagicDMG = false
+DMGamount = 20
+healamount = 15
 damage_target_stat = 0
-metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+heal_target_stat = 1
+metadata/_custom_type_script = "uid://13cgpeuxvpoa"
 
 [resource]
 script = ExtResource("4_7e8mt")
-name = "Attaque basique"
-description = "Inflige des dégâts à un ennemi."
-icon = ExtResource("3_28per")
-the_target_type = 0
-effects = Array[ExtResource("1_hgl7v")]([SubResource("Resource_i4eos")])
+name = "fouet"
+descriptionName = "fouet"
+description = "remove horny"
+icon = ExtResource("4_2julc")
+required_position = 0
+ImageSkill = ExtResource("1_28per")
+the_target_type = 9
+effects = Array[ExtResource("2_2julc")]([SubResource("Resource_28per")])
 two_target_Type = false
-the_second_target_type = 3
-second_effects = Array[ExtResource("1_hgl7v")]([])
+the_second_target_type = 2
+second_effects = Array[ExtResource("2_2julc")]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"
 cost = 0
 cooldown = 4
 current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 1.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

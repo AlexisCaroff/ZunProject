@@ -1,0 +1,180 @@
+[gd_scene load_steps=19 format=3 uid="uid://doitrlqhfja4t"]
+
+[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_1rndn"]
+[ext_resource type="Texture2D" uid="uid://dlcmqtbjarl35" path="res://characters/charatexture/enemy spitterDead.png" id="3_1rndn"]
+[ext_resource type="Texture2D" uid="uid://cgnrms5owdhet" path="res://characters/characterInitiative/slimportini.png" id="4_1rndn"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="5_3o24a"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="6_3o24a"]
+[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="7_bbnup"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="8_y1ii6"]
+[ext_resource type="Resource" uid="uid://bptddsqeaq28h" path="res://actions/heal.tres" id="9_j4qgo"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="10_2prdw"]
+[ext_resource type="Texture2D" uid="uid://bwlcc7mlf1iwx" path="res://characters/charatexture/enemy spitter.png" id="11_2uqc5"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="11_ih6kd"]
+[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="12_e7hg0"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="13_3o24a"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="14_3o24a"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="15_bbnup"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="16_bbnup"]
+
+[sub_resource type="Resource" id="Resource_i4eos"]
+script = ExtResource("6_3o24a")
+MagicDMG = false
+amount = 20
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[sub_resource type="Resource" id="Resource_1s6rd"]
+script = ExtResource("8_y1ii6")
+name = "Attaque basique"
+descriptionName = "Attaque"
+description = "Inflige des dégâts à un ennemi"
+icon = ExtResource("7_bbnup")
+required_position = 0
+the_target_type = 0
+effects = Array[ExtResource("5_3o24a")]([SubResource("Resource_i4eos")])
+two_target_Type = false
+the_second_target_type = 3
+second_effects = Array[ExtResource("5_3o24a")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 4
+current_cooldown = 0
+precision = 100
+allways_hit = true
+duration = 0.3
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
+
+[node name="CharacterTestennemie4" type="Node2D"]
+script = ExtResource("1_1rndn")
+portrait_texture = ExtResource("11_2uqc5")
+dead_portrait_texture = ExtResource("3_1rndn")
+initiative_icon = ExtResource("4_1rndn")
+Charaname = "Glarg"
+IsDemon = true
+Chara_position = 3
+skill_resources = Array[Resource]([SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), ExtResource("9_j4qgo"), ExtResource("10_2prdw")])
+is_player_controlled = false
+
+[node name="name" type="Label" parent="."]
+visible = false
+offset_left = -35.0
+offset_top = -261.0
+offset_right = 9.0
+offset_bottom = -238.0
+text = "name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 22.0
+offset_top = -252.0
+offset_right = 62.0
+offset_bottom = -233.0
+
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(0, -21)
+script = ExtResource("11_ih6kd")
+min_scale = 1.0
+scalemini = 0.9
+max_duration = 0.7
+
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+offset_left = -107.0
+offset_top = -155.0
+offset_right = 64.0
+offset_bottom = 76.0
+scale = Vector2(1, 0.7)
+mouse_filter = 2
+texture = ExtResource("11_2uqc5")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Selector" type="TextureRect" parent="pivot"]
+self_modulate = Color(2, 2, 2, 0)
+offset_left = -107.0
+offset_top = -155.0
+offset_right = 64.0
+offset_bottom = 76.0
+scale = Vector2(1, 0.7)
+mouse_filter = 2
+texture = ExtResource("12_e7hg0")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(-52, -351)
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("13_3o24a")
+offset = Vector2(0, 117.335)
+script = ExtResource("11_ih6kd")
+min_scale = 0.38
+max_scale = 0.38
+scalemini = 0.3
+min_duration = 0.5
+max_duration = 0.5
+
+[node name="Skill" type="TextureRect" parent="."]
+visible = false
+offset_left = -133.0
+offset_top = -316.0
+offset_right = 443.0
+offset_bottom = 260.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("14_3o24a")
+script = ExtResource("15_bbnup")
+
+[node name="HP" type="Label" parent="."]
+offset_left = -108.0
+offset_top = -26.0
+offset_right = -61.0
+offset_bottom = -7.0
+theme_override_fonts/font = ExtResource("16_bbnup")
+theme_override_font_sizes/font_size = 15
+text = "Stamina:"
+
+[node name="HPProgressBar" type="ProgressBar" parent="HP"]
+modulate = Color(1, 0.714937, 0, 1)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 7.0
+offset_right = 146.0
+offset_bottom = 17.0
+value = 100.0
+show_percentage = false
+
+[node name="Stress" type="Label" parent="."]
+offset_left = -91.0
+offset_top = -8.0
+offset_right = -62.0
+offset_bottom = 11.0
+theme_override_fonts/font = ExtResource("16_bbnup")
+theme_override_font_sizes/font_size = 15
+text = "Guilt:"
+
+[node name="GuiltrogressBar" type="ProgressBar" parent="Stress"]
+modulate = Color(1, 0.257036, 0, 1)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 7.0
+offset_right = 128.0
+offset_bottom = 17.0
+show_percentage = false
+
+[node name="horny" type="Label" parent="."]
+offset_left = -99.0
+offset_top = 9.0
+offset_right = -63.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("16_bbnup")
+theme_override_font_sizes/font_size = 15
+text = "Horny:"
+
+[node name="HornyProgressBar" type="ProgressBar" parent="horny"]
+modulate = Color(0.905484, 0, 1, 1)
+layout_mode = 0
+offset_left = 39.0
+offset_top = 7.0
+offset_right = 135.0
+offset_bottom = 17.0
+show_percentage = false

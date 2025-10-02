@@ -1,0 +1,306 @@
+[gd_scene load_steps=16 format=3 uid="uid://evnfnlympfqp"]
+
+[ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_ykj4o"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_en5va"]
+[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="3_ba68l"]
+[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="4_4uxx4"]
+[ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="5_rnhwa"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="6_a68pm"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="7_8qtmb"]
+[ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="8_nto58"]
+[ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="9_pul6h"]
+[ext_resource type="Script" uid="uid://6edfrm0jkjqe" path="res://lvl/back.gd" id="10_ad0gu"]
+[ext_resource type="Texture2D" uid="uid://bqmj6euxhil4t" path="res://UI/back.png" id="11_y3vx4"]
+[ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/buttonexitepeek.gd" id="12_t41rb"]
+[ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="13_5t4ov"]
+[ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="14_k2q80"]
+[ext_resource type="Texture2D" uid="uid://drp4vk52vgk74" path="res://UI/doorebuscade/DOOR_caught_nymph.png" id="15_28ike"]
+
+[node name="Door" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DoorBg" type="Sprite2D" parent="."]
+position = Vector2(960.5, 542)
+scale = Vector2(0.781352, 0.79562)
+texture = ExtResource("1_ykj4o")
+
+[node name="atmosphere" parent="." instance=ExtResource("2_en5va")]
+position = Vector2(19, 447)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 681.0
+offset_top = 974.0
+offset_right = 1265.0
+offset_bottom = 975.0
+color = Color(0.501961, 0.407843, 0.207843, 1)
+
+[node name="ActionPanel" type="HBoxContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 0
+offset_left = 579.0
+offset_top = 845.0
+offset_right = 1202.0
+offset_bottom = 945.0
+scale = Vector2(1.245, 1.245)
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Action1" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("3_ba68l")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("4_4uxx4")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_rnhwa")
+
+[node name="cooldownA" type="Label" parent="ActionPanel/Action1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action2" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("3_ba68l")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("4_4uxx4")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_rnhwa")
+
+[node name="cooldownA" type="Label" parent="ActionPanel/Action2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action3" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("3_ba68l")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("4_4uxx4")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_rnhwa")
+
+[node name="cooldownA" type="Label" parent="ActionPanel/Action3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action4" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("3_ba68l")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("4_4uxx4")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_rnhwa")
+
+[node name="cooldownA" type="Label" parent="ActionPanel/Action4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action5" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("3_ba68l")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("4_4uxx4")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_rnhwa")
+
+[node name="cooldownA" type="Label" parent="ActionPanel/Action5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="LabelAction" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 681.0
+offset_top = 982.0
+offset_right = 1260.0
+offset_bottom = 1066.0
+theme_override_fonts/font = ExtResource("6_a68pm")
+theme_override_font_sizes/font_size = 25
+text = "Attaque1 
+et truc et bidule"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TurnOrderPanel" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 28.0
+offset_right = 1921.0
+offset_bottom = 93.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Charaname" type="Label" parent="."]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 821.0
+offset_right = 848.0
+offset_bottom = 901.0
+theme_override_font_sizes/font_size = 40
+text = "Hero Name"
+
+[node name="contexte" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1503.0
+offset_top = 846.0
+offset_right = 1813.0
+offset_bottom = 1008.0
+theme_override_font_sizes/font_size = 40
+text = "ce qu'il se passe"
+autowrap_mode = 3
+
+[node name="charaPortrait" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 806.0
+offset_right = 183.0
+offset_bottom = 909.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+ignore_rotation = false
+script = ExtResource("7_8qtmb")
+
+[node name="peekButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1102.0
+offset_top = 280.0
+offset_right = 1317.0
+offset_bottom = 481.0
+flat = true
+script = ExtResource("8_nto58")
+
+[node name="peek_texture" type="TextureRect" parent="peekButton"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 200.0
+offset_bottom = 193.0
+texture = ExtResource("9_pul6h")
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 361.0
+offset_top = 650.0
+offset_right = 1550.0
+offset_bottom = 759.0
+flat = true
+script = ExtResource("10_ad0gu")
+
+[node name="BackText" type="TextureRect" parent="Back"]
+modulate = Color(1, 1, 1, 0.513726)
+layout_mode = 0
+offset_left = 675.0
+offset_top = 16.0
+offset_right = 1212.0
+offset_bottom = 96.0
+texture = ExtResource("11_y3vx4")
+expand_mode = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 331.0
+offset_top = 27.0
+offset_right = 1611.0
+offset_bottom = 747.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 0
+
+[node name="ExitPeek" type="Button" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 1598.0
+offset_top = 87.0
+offset_right = 1902.0
+offset_bottom = 749.0
+text = "exit"
+script = ExtResource("12_t41rb")
+
+[node name="Door" type="Button" parent="."]
+z_index = 7
+layout_mode = 0
+offset_left = 799.0
+offset_top = 254.0
+offset_right = 1071.0
+offset_bottom = 657.0
+flat = true
+script = ExtResource("13_5t4ov")
+
+[node name="DoorText" type="TextureRect" parent="Door"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 251.0
+offset_right = 311.0
+offset_bottom = 373.0
+texture = ExtResource("14_k2q80")
+
+[node name="pose1" type="Node2D" parent="."]
+position = Vector2(791, 286)
+
+[node name="pose2" type="Node2D" parent="."]
+position = Vector2(791, 374)
+
+[node name="EmbuscadeUI" type="TextureRect" parent="."]
+visible = false
+z_index = 12
+offset_left = 567.0
+offset_top = -7.0
+offset_right = 1463.0
+offset_bottom = 1051.0
+texture = ExtResource("15_28ike")
+
+[connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action2" to="ActionPanel/Action2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action2" to="ActionPanel/Action2" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action3" to="ActionPanel/Action3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action3" to="ActionPanel/Action3" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action4" to="ActionPanel/Action4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action4" to="ActionPanel/Action4" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action5" to="ActionPanel/Action5" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action5" to="ActionPanel/Action5" method="_on_mouse_exited"]
+[connection signal="button_down" from="peekButton" to="peekButton" method="_on_button_down"]
+[connection signal="mouse_entered" from="peekButton" to="peekButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="peekButton" to="peekButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="Back" to="Back" method="_on_button_down"]
+[connection signal="mouse_entered" from="Back" to="Back" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Back" to="Back" method="_on_mouse_exited"]
+[connection signal="button_down" from="ExitPeek" to="ExitPeek" method="_on_button_down"]
+[connection signal="button_down" from="Door" to="Door" method="_on_button_down"]
+[connection signal="mouse_entered" from="Door" to="Door" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Door" to="Door" method="_on_mouse_exited"]

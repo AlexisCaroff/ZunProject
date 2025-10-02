@@ -1,26 +1,46 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://cswp6nkwg6iwu"]
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://cswp6nkwg6iwu"]
 
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_hd7w4"]
-[ext_resource type="Texture2D" uid="uid://c8y2xrtwi8euj" path="res://characters/characterInitiative/priestIni.png" id="3_yt4kq"]
+[ext_resource type="Texture2D" uid="uid://dwkeuco1nwct0" path="res://actions/actiontexture/SkillImage/chant.png" id="1_rrrrh"]
+[ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="2_rrrrh"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="2_yt4kq"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="3_rrrrh"]
+[ext_resource type="Texture2D" uid="uid://sb35k7bfa5ry" path="res://actions/actiontexture/priere.png" id="4_hd7w4"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_yqqrb"]
+[ext_resource type="Texture2D" uid="uid://bplqm5b3bso4j" path="res://actions/bufftexture/buffAtt.png" id="5_yt4kq"]
+
+[sub_resource type="Resource" id="Resource_k0qpg"]
+script = ExtResource("2_rrrrh")
+amount = 2
+metadata/_custom_type_script = "uid://2vsqpp6jqiow"
+
+[sub_resource type="Resource" id="Resource_yt4kq"]
+script = ExtResource("3_rrrrh")
+uitexture = ExtResource("5_yt4kq")
+affected_stat = 0
+amount = 5
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [resource]
 script = ExtResource("4_yqqrb")
 name = "priere"
-descriptionName = "Attaque"
-description = "resset cooldown"
-icon = ExtResource("3_yt4kq")
+descriptionName = "priere"
+description = "buff and resset cooldown of all allies"
+icon = ExtResource("4_hd7w4")
+required_position = 0
+ImageSkill = ExtResource("1_rrrrh")
 the_target_type = 3
-effects = Array[ExtResource("1_hd7w4")]([])
+effects = Array[ExtResource("2_yt4kq")]([SubResource("Resource_k0qpg"), SubResource("Resource_yt4kq")])
 two_target_Type = false
 the_second_target_type = 3
-second_effects = Array[ExtResource("1_hd7w4")]([])
+second_effects = Array[ExtResource("2_yt4kq")]([])
 usable_when_horny = true
 needtarget = true
 Actiontype = "attack"
-cost = 10
+cost = 5
 cooldown = 2
 current_cooldown = 0
 precision = 100
-allways_hit = false
+allways_hit = true
+duration = 1.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

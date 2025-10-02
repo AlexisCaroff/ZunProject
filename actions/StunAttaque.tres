@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://doydfjjogegnd"]
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://doydfjjogegnd"]
 
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_lxb6k"]
+[ext_resource type="Texture2D" uid="uid://dsdl2j23anx4u" path="res://actions/actiontexture/SkillImage/HERO_WARRIOR_Shield.png" id="1_slxy4"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_lxb6k"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="2_slxy4"]
 [ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="3_lxb6k"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_abm4e"]
 [ext_resource type="Texture2D" uid="uid://crbfh0ppjt6lh" path="res://actions/actiontexture/shieldbash.png" id="4_lxb6k"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("2_lxb6k")
+MagicDMG = false
 amount = 5
 damage_target_stat = 0
 metadata/_custom_type_script = "uid://bjsbovfjff2wo"
@@ -20,13 +22,15 @@ metadata/_custom_type_script = "uid://tjywmaoy4ejj"
 script = ExtResource("4_abm4e")
 name = "Shield Bash"
 descriptionName = "Shield Bash"
-description = "Stun the ennemy"
+description = "Stun one ennemy"
 icon = ExtResource("4_lxb6k")
-the_target_type = 0
-effects = Array[ExtResource("1_lxb6k")]([SubResource("Resource_i4eos"), SubResource("Resource_slxy4")])
+required_position = 1
+ImageSkill = ExtResource("1_slxy4")
+the_target_type = 5
+effects = Array[ExtResource("2_slxy4")]([SubResource("Resource_i4eos"), SubResource("Resource_slxy4")])
 two_target_Type = false
 the_second_target_type = 0
-second_effects = Array[ExtResource("1_lxb6k")]([])
+second_effects = Array[ExtResource("2_slxy4")]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"
@@ -35,4 +39,5 @@ cooldown = 4
 current_cooldown = 0
 precision = 100
 allways_hit = false
+duration = 1.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

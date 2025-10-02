@@ -15,7 +15,7 @@ var affected_stat: int = Stat.ATTACK
 @export var amount: int = 5
 @export var duration: int = 3  # en tours
 
-func apply(user: Character, target: Character) -> void:
+func apply(user: Character, target: PositionSlot) -> void:
 	var buff := Buff.new()
 	buff.stat = affected_stat
 	buff.icon=uitexture
@@ -28,7 +28,7 @@ func apply(user: Character, target: Character) -> void:
 		duration
 	]
 
-	target.add_buff(buff)
+	target.occupant.add_buff(buff)
 
 	print("%s reçoit +%d %s pendant %d tours" % [
 		target.name,

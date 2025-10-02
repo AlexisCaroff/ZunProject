@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://bcvrdy48sagwa"]
+
+[ext_resource type="Texture2D" uid="uid://drjq0ow6855jc" path="res://actions/actiontexture/SkillImage/Hero_Mystique_Tentacle.png" id="1_d2e5p"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_d2e5p"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="2_e3o77"]
+[ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="3_e3o77"]
+[ext_resource type="Texture2D" uid="uid://cn8mh7x1j6vs" path="res://actions/actiontexture/charge.png" id="4_1g6qw"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_c83rg"]
+
+[sub_resource type="Resource" id="Resource_i4eos"]
+script = ExtResource("2_d2e5p")
+MagicDMG = false
+amount = 40
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[sub_resource type="Resource" id="Resource_0evjx"]
+script = ExtResource("3_e3o77")
+target_index = 0
+metadata/_custom_type_script = "uid://cxxxcftffxxjh"
+
+[resource]
+script = ExtResource("5_c83rg")
+name = "hook"
+descriptionName = "tentacle grabe"
+description = "Inflige des dégâts à un ennemi et le tire vers l'avnt"
+icon = ExtResource("4_1g6qw")
+required_position = 0
+ImageSkill = ExtResource("1_d2e5p")
+the_target_type = 0
+effects = Array[ExtResource("2_e3o77")]([SubResource("Resource_i4eos"), SubResource("Resource_0evjx")])
+two_target_Type = false
+the_second_target_type = 3
+second_effects = Array[ExtResource("2_e3o77")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 10
+cooldown = 4
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 1.0
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

@@ -1,0 +1,375 @@
+[gd_scene load_steps=20 format=3 uid="uid://dqnjuxw77ebnb"]
+
+[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_ohhde"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_5rnso"]
+[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="3_fyasy"]
+[ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="3_ldoi1"]
+[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="4_ngelb"]
+[ext_resource type="Texture2D" uid="uid://jhd7rid3c1c1" path="res://actions/actiontexture/moveIcon.png" id="5_l58pu"]
+[ext_resource type="Script" uid="uid://conijhbkctdj2" path="res://lvl/moveExplo.gd" id="6_ss0qx"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="7_186o0"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="8_m4q63"]
+[ext_resource type="Script" uid="uid://tq0nr5tg2b3k" path="res://lvl/positionexplo.gd" id="9_r435j"]
+[ext_resource type="Script" uid="uid://km54mxly4gk4" path="res://lvl/exploration_manager.gd" id="10_4cboy"]
+[ext_resource type="PackedScene" uid="uid://dq282vipchnbq" path="res://characters/chara_explo.tscn" id="11_y08b0"]
+[ext_resource type="Texture2D" uid="uid://5xrrcl7rnx6w" path="res://Enviro/door.png" id="13_1nxlp"]
+[ext_resource type="Texture2D" uid="uid://djit2m4icvw0k" path="res://Enviro/kairn.png" id="14_0oifh"]
+[ext_resource type="Script" uid="uid://cvdsxgbtufa4g" path="res://lvl/interactible.gd" id="15_ay18u"]
+[ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="16_dtf2f"]
+[ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="17_3g6r7"]
+[ext_resource type="Script" uid="uid://2yw45k1rwvdf" path="res://DialogueUI.gd" id="20_e3ant"]
+[ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="21_80na2"]
+
+[node name="ExploInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ZunBg" type="Sprite2D" parent="."]
+position = Vector2(961, 402)
+texture = ExtResource("1_ohhde")
+
+[node name="atmosphere" parent="." instance=ExtResource("2_5rnso")]
+position = Vector2(2, 352)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_left = 1454.0
+offset_top = 804.0
+offset_right = 1854.0
+offset_bottom = 1204.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(400, 400)
+render_target_update_mode = 4
+
+[node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_fyasy")]
+position = Vector2(0, 60)
+scale = Vector2(0.5, 0.5)
+
+[node name="FightUi" type="Sprite2D" parent="."]
+position = Vector2(960, 545)
+texture = ExtResource("3_ldoi1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 681.0
+offset_top = 974.0
+offset_right = 1265.0
+offset_bottom = 975.0
+color = Color(0.501961, 0.407843, 0.207843, 1)
+
+[node name="moveButton" type="Button" parent="."]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+offset_left = 917.0
+offset_top = 854.0
+offset_right = 1007.0
+offset_bottom = 954.0
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("4_ngelb")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("5_l58pu")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("6_ss0qx")
+
+[node name="cooldownA" type="Label" parent="moveButton"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="LabelAction" type="Label" parent="."]
+layout_mode = 0
+offset_left = 681.0
+offset_top = 982.0
+offset_right = 1260.0
+offset_bottom = 1066.0
+theme_override_fonts/font = ExtResource("7_186o0")
+theme_override_font_sizes/font_size = 25
+text = "Move"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TurnOrderPanel" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 28.0
+offset_right = 1921.0
+offset_bottom = 93.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Charaname" type="Label" parent="."]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 821.0
+offset_right = 848.0
+offset_bottom = 901.0
+theme_override_font_sizes/font_size = 40
+text = "Hero Name"
+
+[node name="contexte" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1517.0
+offset_top = 736.0
+offset_right = 1827.0
+offset_bottom = 898.0
+theme_override_font_sizes/font_size = 40
+text = "ce qu'il se passe"
+autowrap_mode = 3
+
+[node name="charaPortrait" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 756.0
+offset_right = 183.0
+offset_bottom = 872.0
+
+[node name="ResultScreen" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1000.0
+theme_override_fonts/font = ExtResource("4_ngelb")
+theme_override_font_sizes/font_size = 450
+text = "Victoire !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+ignore_rotation = false
+script = ExtResource("8_m4q63")
+
+[node name="HeroPosition" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(568, 642)
+
+[node name="position1" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(-22, 1)
+script = ExtResource("9_r435j")
+
+[node name="Button" type="Button" parent="HeroPosition/position1"]
+z_index = 10
+y_sort_enabled = true
+offset_left = -82.0
+offset_top = -522.0
+offset_right = 67.0
+flat = true
+
+[node name="position2" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(132, 24)
+script = ExtResource("9_r435j")
+
+[node name="Button" type="Button" parent="HeroPosition/position2"]
+z_index = 14
+z_as_relative = false
+y_sort_enabled = true
+offset_left = -82.0
+offset_top = -525.0
+offset_right = 67.0
+flat = true
+
+[node name="position3" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(298, 2)
+script = ExtResource("9_r435j")
+
+[node name="Button" type="Button" parent="HeroPosition/position3"]
+z_index = 10
+y_sort_enabled = true
+offset_left = -82.0
+offset_top = -505.0
+offset_right = 67.0
+flat = true
+
+[node name="position4" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(479, 24)
+script = ExtResource("9_r435j")
+
+[node name="Button" type="Button" parent="HeroPosition/position4"]
+z_index = 10
+y_sort_enabled = true
+offset_left = -82.0
+offset_top = -539.0
+offset_right = 67.0
+flat = true
+
+[node name="ExplorationManager" type="Node2D" parent="."]
+script = ExtResource("10_4cboy")
+chara_explo_scene = ExtResource("11_y08b0")
+
+[node name="Button" type="Button" parent="ExplorationManager"]
+z_index = 2
+offset_left = 1323.0
+offset_top = 62.0
+offset_right = 1698.0
+offset_bottom = 650.0
+flat = true
+expand_icon = true
+
+[node name="Doortext" type="TextureRect" parent="ExplorationManager/Button"]
+layout_mode = 0
+offset_top = 6.0
+offset_right = 385.0
+offset_bottom = 543.0
+texture = ExtResource("13_1nxlp")
+expand_mode = 1
+
+[node name="Kairn" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1.2, 1)
+position = Vector2(254, 508)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("14_0oifh")
+script = ExtResource("15_ay18u")
+dialoguePass = "res://dialogue/dialogueTeste.txt"
+
+[node name="Button" type="Button" parent="Kairn"]
+offset_left = -170.0
+offset_top = -179.0
+offset_right = 201.0
+offset_bottom = 165.0
+flat = true
+
+[node name="etiquette" type="Sprite2D" parent="Kairn"]
+position = Vector2(193.333, 6.66667)
+texture = ExtResource("16_dtf2f")
+
+[node name="Label" type="Label" parent="Kairn/etiquette"]
+offset_left = -92.0
+offset_top = -23.0
+offset_right = 125.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("4_ngelb")
+theme_override_font_sizes/font_size = 40
+text = "EXPLORE"
+
+[node name="DialogueManager" type="Node2D" parent="Kairn"]
+z_index = 6
+position = Vector2(-401.667, -825)
+script = ExtResource("17_3g6r7")
+is_Choice = true
+
+[node name="DialogueUI" type="Control" parent="Kairn/DialogueManager"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 143.333
+offset_top = -111.667
+offset_right = 183.333
+offset_bottom = -71.6666
+scale = Vector2(1.75383, 1.75383)
+script = ExtResource("20_e3ant")
+
+[node name="ColorRect2" type="ColorRect" parent="Kairn/DialogueManager/DialogueUI"]
+layout_mode = 0
+offset_left = -315.499
+offset_top = -57.018
+offset_right = 832.501
+offset_bottom = 203.982
+scale = Vector2(2.07695, 4.90172)
+color = Color(0, 0, 0, 0.580392)
+
+[node name="Portrait" type="TextureRect" parent="Kairn/DialogueManager/DialogueUI"]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 239.0
+offset_right = 925.0
+offset_bottom = 945.0
+texture = ExtResource("21_80na2")
+
+[node name="ColorRect" type="ColorRect" parent="Kairn/DialogueManager/DialogueUI"]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 772.0
+offset_right = 1371.0
+offset_bottom = 1033.0
+color = Color(0.832031, 0.746592, 0.613619, 1)
+
+[node name="Speaker" type="Label" parent="Kairn/DialogueManager/DialogueUI"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 783.0
+offset_right = 498.0
+offset_bottom = 884.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ngelb")
+theme_override_font_sizes/font_size = 50
+text = "Nom"
+
+[node name="Text" type="Label" parent="Kairn/DialogueManager/DialogueUI"]
+layout_mode = 0
+offset_left = 278.0
+offset_top = 844.0
+offset_right = 1302.0
+offset_bottom = 1022.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ngelb")
+theme_override_font_sizes/font_size = 40
+text = "tetxt"
+autowrap_mode = 3
+
+[node name="indication" type="Label" parent="Kairn/DialogueManager/DialogueUI"]
+layout_mode = 0
+offset_left = 680.0
+offset_top = 998.0
+offset_right = 1001.0
+offset_bottom = 1046.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ngelb")
+theme_override_font_sizes/font_size = 30
+text = "(space to continue )"
+autowrap_mode = 3
+
+[node name="Choix" type="Control" parent="Kairn/DialogueManager"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="use" type="Button" parent="Kairn/DialogueManager/Choix"]
+layout_mode = 0
+offset_left = 1123.33
+offset_top = 616.667
+offset_right = 1505.33
+offset_bottom = 707.667
+theme_override_font_sizes/font_size = 60
+text = "Use the stele"
+
+[node name="destroy" type="Button" parent="Kairn/DialogueManager/Choix"]
+layout_mode = 0
+offset_left = 1660.0
+offset_top = 616.667
+offset_right = 1800.0
+offset_bottom = 647.667
+theme_override_font_sizes/font_size = 60
+text = "Destroy the stele"
+
+[connection signal="button_down" from="moveButton" to="ExplorationManager" method="_on_move_button_button_down"]
+[connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="moveButton" to="moveButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
+[connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]
+[connection signal="button_down" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_button_down"]
+[connection signal="button_down" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_button_down"]
+[connection signal="button_down" from="ExplorationManager/Button" to="ExplorationManager" method="_on_button_button_down"]
+[connection signal="mouse_entered" from="ExplorationManager/Button" to="ExplorationManager" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="ExplorationManager/Button" to="ExplorationManager" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="Kairn/Button" to="Kairn" method="_on_button_button_down"]
+[connection signal="mouse_entered" from="Kairn/Button" to="Kairn" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Kairn/Button" to="Kairn" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="Kairn/DialogueManager/Choix/use" to="Kairn" method="_on_use_button_down"]
+[connection signal="button_down" from="Kairn/DialogueManager/Choix/use" to="Kairn/DialogueManager" method="_on_use_button_down"]
+[connection signal="button_down" from="Kairn/DialogueManager/Choix/destroy" to="Kairn" method="_on_destroy_button_down"]
+[connection signal="button_down" from="Kairn/DialogueManager/Choix/destroy" to="Kairn/DialogueManager" method="_on_destroy_button_down"]

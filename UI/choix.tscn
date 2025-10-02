@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://fvl38cdlmapy"]
+
+[node name="Choix" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.601257, 0.601257)
+
+[node name="use" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1123.33
+offset_top = 616.667
+offset_right = 1505.33
+offset_bottom = 707.667
+theme_override_font_sizes/font_size = 60
+text = "Use the stele"
+
+[node name="destroy" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1660.0
+offset_top = 616.667
+offset_right = 1800.0
+offset_bottom = 647.667
+theme_override_font_sizes/font_size = 60
+text = "Destroy the stele"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

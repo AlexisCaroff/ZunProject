@@ -1,14 +1,31 @@
-[gd_resource type="Resource" load_steps=6 format=3 uid="uid://behrtqotkyvnx"]
+[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://behrtqotkyvnx"]
 
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_i7i4j"]
+[ext_resource type="Texture2D" uid="uid://dmd71tk5hpefb" path="res://actions/actiontexture/SkillImage/HERO_WARRIOR_Taunt.png" id="1_aki42"]
 [ext_resource type="Script" uid="uid://cjfkha61akav3" path="res://actions/skillEffects/TauntEffect.gd" id="2_wwy36"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="2_yu2gj"]
 [ext_resource type="Texture2D" uid="uid://b4a5l81b2i8a5" path="res://actions/actiontexture/taunt.png" id="3_ukosw"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="3_wwy36"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="6_aki42"]
+[ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="6_ukosw"]
+[ext_resource type="Texture2D" uid="uid://2u65ql48338r" path="res://actions/bufftexture/buffDeff.png" id="8_yu2gj"]
 
-[sub_resource type="Resource" id="Resource_ukosw"]
+[sub_resource type="Resource" id="Resource_yu2gj"]
 script = ExtResource("2_wwy36")
 duration = 1
 metadata/_custom_type_script = "uid://cjfkha61akav3"
+
+[sub_resource type="Resource" id="Resource_5uy07"]
+script = ExtResource("6_ukosw")
+amount = 2
+metadata/_custom_type_script = "uid://2vsqpp6jqiow"
+
+[sub_resource type="Resource" id="Resource_qng7d"]
+script = ExtResource("6_aki42")
+uitexture = ExtResource("8_yu2gj")
+affected_stat = 1
+amount = 5000
+duration = 2
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [resource]
 script = ExtResource("3_wwy36")
@@ -16,11 +33,13 @@ name = "Taunt"
 descriptionName = "Taunt"
 description = "taunt one ennemi and reset cooldown"
 icon = ExtResource("3_ukosw")
-the_target_type = 2
-effects = Array[ExtResource("1_i7i4j")]([])
+required_position = 0
+ImageSkill = ExtResource("1_aki42")
+the_target_type = 0
+effects = Array[ExtResource("2_yu2gj")]([SubResource("Resource_yu2gj")])
 two_target_Type = true
-the_second_target_type = 0
-second_effects = Array[ExtResource("1_i7i4j")]([SubResource("Resource_ukosw")])
+the_second_target_type = 2
+second_effects = Array[ExtResource("2_yu2gj")]([SubResource("Resource_5uy07"), SubResource("Resource_qng7d")])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"
@@ -29,4 +48,5 @@ cooldown = 5
 current_cooldown = 0
 precision = 100
 allways_hit = false
+duration = 1.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

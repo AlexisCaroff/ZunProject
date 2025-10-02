@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=6 format=3 uid="uid://1nlu038uhsvj"]
+[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://1nlu038uhsvj"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_y3d0p"]
 [ext_resource type="Script" uid="uid://cy3v0dypme7n7" path="res://actions/skillEffects/Move.gd" id="2_y3d0p"]
@@ -15,6 +15,7 @@ name = "move"
 descriptionName = "Move"
 description = "Move the character"
 icon = ExtResource("3_y3d0p")
+required_position = 0
 the_target_type = 1
 effects = Array[ExtResource("1_y3d0p")]([SubResource("Resource_r05c5")])
 two_target_Type = false
@@ -28,4 +29,5 @@ cooldown = 0
 current_cooldown = 0
 precision = 100
 allways_hit = true
+duration = 1.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

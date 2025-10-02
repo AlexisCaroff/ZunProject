@@ -1,18 +1,25 @@
-[gd_scene load_steps=13 format=3 uid="uid://jc1bbpflus0q"]
+[gd_scene load_steps=19 format=3 uid="uid://jc1bbpflus0q"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_gjeux"]
-[ext_resource type="Texture2D" uid="uid://frq4grv1dvoo" path="res://characters/charatexture/cultisteBody.png" id="2_a2buf"]
-[ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_8umix"]
+[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="2_1nlnd"]
+[ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="3_lper1"]
 [ext_resource type="Texture2D" uid="uid://b0q8mhrqooms" path="res://characters/characterInitiative/cultisteIni.png" id="3_yaddt"]
-[ext_resource type="Texture2D" uid="uid://j0hygaxu62ja" path="res://characters/charatexture/PriestBody.png" id="5_a2buf"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="5_lper1"]
+[ext_resource type="Texture2D" uid="uid://cx5momixgm1ey" path="res://actions/actiontexture/SkillImage/nymphShoot.png" id="5_1nlnd"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="5_vwr1h"]
 [ext_resource type="Resource" uid="uid://bptddsqeaq28h" path="res://actions/heal.tres" id="5_yaddt"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="6_fglvl"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="6_lper1"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="7_1nlnd"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="10_1nlnd"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="12_mlliq"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="12_mmobe"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="13_mmobe"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="15_20eh8"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="16_kia6w"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("5_vwr1h")
+MagicDMG = false
 amount = 20
 damage_target_stat = 0
 metadata/_custom_type_script = "uid://bjsbovfjff2wo"
@@ -23,11 +30,13 @@ name = "Attaque basique"
 descriptionName = "Attaque"
 description = "Inflige des dégâts à un ennemi"
 icon = ExtResource("6_lper1")
+required_position = 0
+ImageSkill = ExtResource("5_1nlnd")
 the_target_type = 0
-effects = Array[ExtResource("5_lper1")]([SubResource("Resource_i4eos")])
+effects = Array[ExtResource("6_fglvl")]([SubResource("Resource_i4eos")])
 two_target_Type = false
 the_second_target_type = 3
-second_effects = Array[ExtResource("5_lper1")]([])
+second_effects = Array[ExtResource("6_fglvl")]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"
@@ -35,75 +44,135 @@ cost = 0
 cooldown = 4
 current_cooldown = 0
 precision = 100
-allways_hit = false
+allways_hit = true
+duration = 0.3
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
 
 [node name="CharacterTestennemie4" type="Node2D"]
-position = Vector2(260, 321)
 script = ExtResource("1_gjeux")
-portrait_texture = ExtResource("2_a2buf")
-dead_portrait_texture = ExtResource("3_8umix")
+portrait_texture = ExtResource("2_1nlnd")
+dead_portrait_texture = ExtResource("3_lper1")
 initiative_icon = ExtResource("3_yaddt")
 Charaname = "Glarg"
+IsDemon = true
 Chara_position = 3
-skill_resources = Array[Resource]([SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), ExtResource("5_yaddt")])
+skill_resources = Array[Resource]([SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), SubResource("Resource_1s6rd"), ExtResource("5_yaddt"), ExtResource("10_1nlnd")])
 is_player_controlled = false
 
-[node name="HerosTexture1" type="TextureRect" parent="."]
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(0, -21)
+script = ExtResource("12_mmobe")
+
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
 offset_left = -133.0
-offset_top = -259.0
-offset_right = 133.0
-offset_bottom = -2.0
+offset_top = -229.0
+offset_right = 38.0
+offset_bottom = 2.0
 mouse_filter = 2
-texture = ExtResource("5_a2buf")
+texture = ExtResource("2_1nlnd")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Selector" type="TextureRect" parent="pivot"]
+self_modulate = Color(2, 2, 2, 0)
+offset_left = -133.0
+offset_top = -229.0
+offset_right = 38.0
+offset_bottom = 2.0
+mouse_filter = 2
+texture = ExtResource("2_1nlnd")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="name" type="Label" parent="."]
-offset_left = -35.0
-offset_top = -261.0
-offset_right = 9.0
-offset_bottom = -238.0
+visible = false
+offset_left = -70.0
+offset_top = -260.0
+offset_right = -26.0
+offset_bottom = -237.0
 text = "name"
-
-[node name="HP" type="Label" parent="."]
-offset_left = -91.0
-offset_top = -19.0
-offset_right = -45.0
-offset_bottom = 4.0
-text = "Hp"
-
-[node name="Stress" type="Label" parent="."]
-offset_left = -91.0
-offset_top = 8.0
-offset_right = -45.0
-offset_bottom = 31.0
-text = "stress"
-
-[node name="horny" type="Label" parent="."]
-offset_left = -91.0
-offset_top = 35.0
-offset_right = -45.0
-offset_bottom = 58.0
-text = "horny"
-
-[node name="Button" type="Button" parent="."]
-modulate = Color(1, 1, 1, 0)
-offset_left = -123.0
-offset_top = -325.0
-offset_right = 110.0
-offset_bottom = 57.0
-
-[node name="Selector" type="TextureRect" parent="."]
-modulate = Color(2, 2, 2, 1)
-self_modulate = Color(1, 1, 1, 0)
-offset_left = -134.0
-offset_top = -259.0
-offset_right = 132.0
-offset_bottom = -2.0
-mouse_filter = 2
-texture = ExtResource("5_a2buf")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = 22.0
 offset_top = -252.0
 offset_right = 62.0
 offset_bottom = -233.0
+
+[node name="Skill" type="TextureRect" parent="."]
+visible = false
+offset_left = -209.0
+offset_top = -326.0
+offset_right = 367.0
+offset_bottom = 250.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_mlliq")
+script = ExtResource("13_mmobe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(-52, -355)
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("15_20eh8")
+offset = Vector2(0, 112.61)
+script = ExtResource("12_mmobe")
+min_scale = 0.38
+max_scale = 0.38
+scalemini = 0.3
+min_duration = 0.5
+max_duration = 0.5
+
+[node name="HP" type="Label" parent="."]
+offset_left = -108.0
+offset_top = -33.0
+offset_right = -65.0
+offset_bottom = -14.0
+theme_override_fonts/font = ExtResource("16_kia6w")
+theme_override_font_sizes/font_size = 15
+text = "Stamina:"
+
+[node name="HPProgressBar" type="ProgressBar" parent="HP"]
+modulate = Color(0.690751, 1, 0, 1)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 7.0
+offset_right = 146.0
+offset_bottom = 17.0
+value = 100.0
+show_percentage = false
+
+[node name="Stress" type="Label" parent="."]
+offset_left = -91.0
+offset_top = -15.0
+offset_right = -66.0
+offset_bottom = 4.0
+theme_override_fonts/font = ExtResource("16_kia6w")
+theme_override_font_sizes/font_size = 15
+text = "Guilt:"
+
+[node name="GuiltrogressBar" type="ProgressBar" parent="Stress"]
+modulate = Color(1, 0.257036, 0, 1)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 7.0
+offset_right = 128.0
+offset_bottom = 17.0
+show_percentage = false
+
+[node name="horny" type="Label" parent="."]
+offset_left = -99.0
+offset_top = 2.0
+offset_right = -67.0
+offset_bottom = 21.0
+theme_override_fonts/font = ExtResource("16_kia6w")
+theme_override_font_sizes/font_size = 15
+text = "Horny:"
+
+[node name="HornyProgressBar" type="ProgressBar" parent="horny"]
+modulate = Color(0.905484, 0, 1, 1)
+layout_mode = 0
+offset_left = 39.0
+offset_top = 7.0
+offset_right = 135.0
+offset_bottom = 17.0
+show_percentage = false

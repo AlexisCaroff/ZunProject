@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PortraitsResource" load_steps=6 format=3 uid="uid://dpejhug6a0i4d"]
+
+[ext_resource type="Texture2D" uid="uid://c8rp0k1fogimi" path="res://characters/charatexture/char priest.png" id="1_g5hor"]
+[ext_resource type="Script" uid="uid://bckoqne0r03nj" path="res://dialogue/dialoguescripte/PortraitsResource.gd" id="1_q5l30"]
+[ext_resource type="Texture2D" uid="uid://df5ltgoqyf2jw" path="res://characters/charatexture/char mystic.png" id="2_hsate"]
+[ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="3_n0cmy"]
+[ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="4_hsate"]
+
+[resource]
+script = ExtResource("1_q5l30")
+portraits = {
+"Hunter": ExtResource("4_hsate"),
+"Mystic": ExtResource("2_hsate"),
+"Priest": ExtResource("1_g5hor"),
+"Warrior": ExtResource("3_n0cmy")
+}
+metadata/_custom_type_script = "uid://bckoqne0r03nj"

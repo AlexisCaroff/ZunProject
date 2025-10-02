@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CampSkillHeal" load_steps=5 format=3 uid="uid://do1xqbabe8r4b"]
+
+[ext_resource type="Script" uid="uid://brw6jmbngkbbu" path="res://scripts/camp/CampEffect.gd" id="1_f4rjp"]
+[ext_resource type="Script" uid="uid://p5e0p5tqo2hw" path="res://scripts/camp/CampsSkills/CampSkillHeal.gd" id="2_8ufad"]
+[ext_resource type="Texture2D" uid="uid://ccyi8n3i3daxa" path="res://actions/actiontexture/heal.png" id="2_g4hdb"]
+[ext_resource type="Resource" uid="uid://dr3jspq8mgsin" path="res://scripts/camp/CampsSkills/dialogue.tres" id="2_uc2qn"]
+
+[resource]
+script = ExtResource("2_8ufad")
+name = "Repos"
+description = "Permet au héros de se reposer et de récupérer un peu de PV."
+icon = ExtResource("2_g4hdb")
+cost = 1
+target_type = 1
+effects = Array[ExtResource("1_f4rjp")]([ExtResource("2_uc2qn")])
+metadata/_custom_type_script = "uid://p5e0p5tqo2hw"

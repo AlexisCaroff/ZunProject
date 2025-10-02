@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=6 format=3 uid="uid://cmfdbxt7xktta"]
+[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://cmfdbxt7xktta"]
 
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="1_8ewjb"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/SkillEffect.gd" id="1_m75ut"]
@@ -7,6 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_d6f35"]
 script = ExtResource("2_kfjb5")
+MagicDMG = false
 amount = 20
 damage_target_stat = 0
 metadata/_custom_type_script = "uid://bjsbovfjff2wo"
@@ -17,6 +18,7 @@ name = "Attaque basique"
 descriptionName = "Attaque"
 description = "Inflige des dégâts à un ennemi."
 icon = ExtResource("1_8ewjb")
+required_position = 0
 the_target_type = 0
 effects = Array[ExtResource("1_m75ut")]([SubResource("Resource_d6f35")])
 two_target_Type = false
@@ -30,4 +32,5 @@ cooldown = 2
 current_cooldown = 0
 precision = 100
 allways_hit = false
+duration = 1.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

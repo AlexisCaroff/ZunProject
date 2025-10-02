@@ -8,14 +8,20 @@ enum Stat {
 @export_enum("STAMINA", "HORNY", "STRESS")
 var heal_target_stat: int = Stat.STAMINA
 @export var amount: int = 20
+var Chartarget:Character
 
-func apply(user: Character, target: Character) -> void:
+
+func apply(user: Character, target: PositionSlot) -> void:
+	Chartarget = target.occupant
 	match heal_target_stat:
 			Stat.STAMINA:
-				target.current_stamina = min(target.max_stamina, target.current_stamina + amount)
+				Chartarget.current_stamina = min(Chartarget.max_stamina, Chartarget.current_stamina + amount)
+				Chartarget.animate_heal(amount,user)
 			Stat.HORNY:
-				target.current_horniness = max(0, target.current_horniness - amount)
+				Chartarget.current_horniness = max(0, Chartarget.current_horniness - amount)
+				Chartarget.animate_heal(amount,user)
 			Stat.STRESS:
-				target.current_stress = max(0, target.current_stress - amount)
-	target.update_ui()
-	print("%s soigne %s de %s à %s" % [user.name, amount, heal_target_stat, target.name])
+				Chartarget.current_stress = max(0, Chartarget.current_stress - amount)
+				Chartarget.animate_heal(amount,user)
+	Chartarget.update_ui()
+	print("%s soigne %s de %s à %s" % [user.name, amount, heal_target_stat, Chartarget.name])
