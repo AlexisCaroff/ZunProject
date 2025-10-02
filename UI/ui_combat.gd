@@ -64,7 +64,7 @@ func update_turn_queue_ui(queue: Array[Character]):
 		portraitChara.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		turnOrderPanel.add_child(portraitChara)
 		
-	
+
 func update_ui_for_current_character(character: Character):
 	
 	if skill_buttons == null:

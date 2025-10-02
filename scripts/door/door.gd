@@ -82,12 +82,12 @@ func stop_peekink():
 
 func check_detection() -> void:
 	# On lance une boucle tant que peek est vrai
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(1.0).timeout
 	
 	if peeking:
 		var rand = randi_range(1, 100)
 		print("Jet de détection :", rand)
-		if rand > 90:
+		if rand > 99:
 			print("Tu es repéré ! Combat déclenché.")
 			_start_combat()
 			peeking = false # on stoppe la boucle si le combat démarre

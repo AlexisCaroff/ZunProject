@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d03bcp7xtqcnt"]
+[gd_scene load_steps=16 format=3 uid="uid://d03bcp7xtqcnt"]
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_tegn2"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_if4eq"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://tq0nr5tg2b3k" path="res://lvl/positionexplo.gd" id="9_qhw0f"]
 [ext_resource type="Script" uid="uid://km54mxly4gk4" path="res://lvl/exploration_manager.gd" id="10_u2c6y"]
 [ext_resource type="PackedScene" uid="uid://dq282vipchnbq" path="res://characters/chara_explo.tscn" id="11_e6fy8"]
-[ext_resource type="PackedScene" uid="uid://dv04v6jagn4q1" path="res://lvl/combat1/door1.tscn" id="12_tegn2"]
 [ext_resource type="Texture2D" uid="uid://5xrrcl7rnx6w" path="res://Enviro/door.png" id="13_820fb"]
 [ext_resource type="Texture2D" uid="uid://djit2m4icvw0k" path="res://Enviro/kairn.png" id="14_0l321"]
 [ext_resource type="Script" uid="uid://cvdsxgbtufa4g" path="res://lvl/interactible.gd" id="15_17xqf"]
@@ -188,7 +187,6 @@ flat = true
 [node name="ExplorationManager" type="Node2D" parent="."]
 script = ExtResource("10_u2c6y")
 chara_explo_scene = ExtResource("11_e6fy8")
-door_scene = ExtResource("12_tegn2")
 
 [node name="Button" type="Button" parent="ExplorationManager"]
 z_index = 10
