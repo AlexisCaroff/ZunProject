@@ -22,7 +22,8 @@ func save_party_from_nodes(heroes: Array) -> void:
 			"dead": hero.dead,
 			"position": hero.Chara_position,
 			"skills": hero.skill_resources.duplicate(true),
-			"camp_skills": hero.camp_skill_resources.duplicate(true),   # 👈 nouveau
+			"camp_skills": hero.camp_skill_resources.duplicate(true),  
+			"buffs": hero.buffs.duplicate(true),
 
 			# Nouvelles données de textures
 			"portrait_texture_path": hero.portrait_texture.resource_path,
@@ -54,8 +55,10 @@ func load_party_into_combat(slots: Array) -> void:
 		hero.Chara_position = hero_data["position"]
 		hero.skill_resources = hero_data["skills"]
 		hero._updateSkills(hero.skill_resources)
+		if hero_data.has("buffs"):
+			for buff in hero_data["buffs"]:
+				hero.add_buff(buff)
 
-		# 👇 si tu veux aussi transmettre les CampSkills côté combat (pas obligatoire ici)
 		if hero_data.has("camp_skills"):
 			hero.camp_skill_resources = hero_data["camp_skills"]
 

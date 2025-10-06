@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="CampSkill" load_steps=9 format=3 uid="uid://cryoy3w5uet08"]
+
+[ext_resource type="Script" uid="uid://brw6jmbngkbbu" path="res://scripts/camp/CampEffect.gd" id="1_sdqav"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_6mda8"]
+[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="2_eipr8"]
+[ext_resource type="Script" uid="uid://gi5vwildn2qs" path="res://actions/skillEffects/campSkilleffect/CampBuffEffet.gd" id="2_uh0fl"]
+[ext_resource type="Script" uid="uid://bkvdwvrmdt5aw" path="res://actions/skillEffects/Buff.gd" id="3_gktvk"]
+[ext_resource type="Texture2D" uid="uid://dbuugeey6c5y4" path="res://UI/buffAtt.png" id="4_wdmoq"]
+
+[sub_resource type="Resource" id="Resource_dicsy"]
+script = ExtResource("3_gktvk")
+name = "Buff"
+description = "Effet temporaire sur les statistiques."
+icon = ExtResource("4_wdmoq")
+stat = 0
+amount = 4
+duration = 3
+metadata/_custom_type_script = "uid://bkvdwvrmdt5aw"
+
+[sub_resource type="Resource" id="Resource_4wt56"]
+script = ExtResource("2_uh0fl")
+thebuffs = Array[ExtResource("3_gktvk")]([SubResource("Resource_dicsy")])
+metadata/_custom_type_script = "uid://gi5vwildn2qs"
+
+[resource]
+script = ExtResource("2_6mda8")
+name = "Dialogue"
+description = "engage une discution"
+icon = ExtResource("2_eipr8")
+cost = 1
+standarEnd = true
+target_type = 2
+effects = Array[ExtResource("1_sdqav")]([SubResource("Resource_4wt56")])
+metadata/_custom_type_script = "uid://dmwb4vh0ycukv"

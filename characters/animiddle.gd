@@ -5,7 +5,7 @@ extends Node2D
 @export var scalemini: float = 1.0
 @export var min_duration: float = 0.6
 @export var max_duration: float = 1.0
-
+@export var play : bool = true
 func _ready():
 	randomize()
 

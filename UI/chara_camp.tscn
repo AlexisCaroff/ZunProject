@@ -17,7 +17,7 @@ offset_right = -9.0
 offset_bottom = -274.0
 text = "name"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBuffsContainer" type="HBoxContainer" parent="."]
 offset_left = 19.0
 offset_top = -249.0
 offset_right = 59.0

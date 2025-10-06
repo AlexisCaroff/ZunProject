@@ -211,6 +211,7 @@ position = Vector2(254, 508)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("14_0l321")
 script = ExtResource("15_17xqf")
+dialoguePass = "res://dialogue/dialogueTeste.txt"
 
 [node name="Button" type="Button" parent="Kairn"]
 offset_left = -170.0

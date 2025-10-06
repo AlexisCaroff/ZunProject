@@ -11,6 +11,7 @@ name = "Dialogue"
 description = "engage une discution"
 icon = ExtResource("3_y4bdg")
 cost = 1
+standarEnd = false
 target_type = 1
 effects = Array[ExtResource("1_5mlkv")]([ExtResource("2_rdeer")])
 metadata/_custom_type_script = "uid://dmwb4vh0ycukv"

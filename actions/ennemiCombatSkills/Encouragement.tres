@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://xgqxannip7id"]
+
+[ext_resource type="Texture2D" uid="uid://cnxbiel8xwww5" path="res://actions/CampSkill/love.png" id="1_6mx7l"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_y651m"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_bd3d6"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="3_52cyf"]
+[ext_resource type="Texture2D" uid="uid://bplqm5b3bso4j" path="res://actions/bufftexture/buffAtt.png" id="4_wxop1"]
+
+[sub_resource type="Resource" id="Resource_0ex5m"]
+script = ExtResource("3_52cyf")
+uitexture = ExtResource("4_wxop1")
+affected_stat = 0
+amount = 10
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[resource]
+script = ExtResource("2_bd3d6")
+name = "Encouragement"
+descriptionName = "Encouragement"
+description = ""
+icon = ExtResource("1_6mx7l")
+required_position = 0
+the_target_type = 1
+effects = Array[ExtResource("1_y651m")]([SubResource("Resource_0ex5m")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("1_y651m")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = true
+duration = 0.3
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

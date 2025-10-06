@@ -126,8 +126,50 @@ func _on_button_button_down() -> void:
 						combat_manager._on_target_selected(selfposition)
 
 func _on_button_mouse_entered() -> void:
-	occupant.Selector.self_modulate.a= 1.0
+	
+	if combat_manager.pending_skill:
+		var skill = combat_manager.pending_skill
+		match combat_manager.combat_state:
+			combat_manager.CombatState.SELECTING_FIRST_TARGET:
+				match skill.the_target_type:
+					Skill.target_type.ALLY:
+						if occupant.is_player_controlled:
+							occupant.Selector.self_modulate.a= 1.0
+					Skill.target_type.FRONT_ALLY:
+						if occupant.is_player_controlled:
+							occupant.Selector.self_modulate.a= 1.0
+					Skill.target_type.FRONT_ENNEMY:
+						if !occupant.is_player_controlled:
+							occupant.Selector.self_modulate.a= 1.0
+					Skill.target_type.BACK_ALLY:
+						occupant.Selector.self_modulate.a= 1.0
+					Skill.target_type.BACK_ENNEMY:
+						if !occupant.is_player_controlled:
+							occupant.Selector.self_modulate.a= 1.0
+					Skill.target_type.ENNEMY:
+						if !occupant.is_player_controlled:
+							occupant.Selector.self_modulate.a= 1.0
+					Skill.target_type.ALL_ALLY:
+						for chara in combat_manager.hero_positions:
+							print ("try modulate")
+							chara.occupant.Selector.self_modulate.a= 1.0
+					Skill.target_type.ALL_ENNEMY:
+						for chara in combat_manager.enemy_positions:
+							chara.occupant.Selector.self_modulate.a=1.0
+	else :
+		occupant.Selector.self_modulate.a= 1.0
 
 
 func _on_button_mouse_exited() -> void:
 	occupant.Selector.self_modulate.a= 0.0
+	if combat_manager.pending_skill:
+		var skill = combat_manager.pending_skill
+		match combat_manager.combat_state:
+			combat_manager.CombatState.SELECTING_FIRST_TARGET:
+				match skill.the_target_type:
+					Skill.target_type.ALL_ALLY:
+						for chara in combat_manager.hero_positions:
+							chara.occupant.Selector.self_modulate.a= 0.0
+					Skill.target_type.ALL_ENNEMY:
+						for chara in combat_manager.enemy_positions:
+							chara.occupant.Selector.self_modulate.a= 0.0

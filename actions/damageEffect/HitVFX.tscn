@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://n3dvhwwiawh4" path="res://HitVFX.gd" id="1_ktxfw"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="2_nu7he"]
-[ext_resource type="Texture2D" uid="uid://ck4b75iyuey2c" path="res://actions/hit.png" id="3_nu7he"]
+[ext_resource type="Texture2D" uid="uid://ck4b75iyuey2c" path="res://actions/HerosCombatSkills/hit.png" id="3_nu7he"]
 [ext_resource type="Texture2D" uid="uid://c6qss13x88o50" path="res://actions/damageEffect/damageeffecttexture/hit.png" id="4_wc85t"]
 
 [sub_resource type="Animation" id="Animation_dam0d"]

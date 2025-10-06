@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BuffCampskill" load_steps=5 format=3 uid="uid://cxdyj7ag4e25a"]
+
+[ext_resource type="Script" uid="uid://gi5vwildn2qs" path="res://actions/skillEffects/campSkilleffect/CampBuffEffet.gd" id="1_qqlrh"]
+[ext_resource type="Script" uid="uid://bkvdwvrmdt5aw" path="res://actions/skillEffects/Buff.gd" id="2_6ydy5"]
+[ext_resource type="Texture2D" uid="uid://dbuugeey6c5y4" path="res://UI/buffAtt.png" id="3_6ydy5"]
+
+[sub_resource type="Resource" id="Resource_mg4lo"]
+script = ExtResource("2_6ydy5")
+name = "Buff"
+description = "Effet temporaire sur les statistiques."
+icon = ExtResource("3_6ydy5")
+stat = 0
+amount = 5
+duration = 3
+metadata/_custom_type_script = "uid://bkvdwvrmdt5aw"
+
+[resource]
+script = ExtResource("1_qqlrh")
+thebuffs = Array[ExtResource("2_6ydy5")]([SubResource("Resource_mg4lo")])
+metadata/_custom_type_script = "uid://gi5vwildn2qs"

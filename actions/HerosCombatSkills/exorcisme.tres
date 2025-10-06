@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://b4f6tt51qrg3o"]
+
+[ext_resource type="Texture2D" uid="uid://dwkeuco1nwct0" path="res://actions/actiontexture/SkillImage/chant.png" id="1_wh88t"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_ar1fo"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_wh88t"]
+[ext_resource type="Texture2D" uid="uid://ctv5fhwuig06" path="res://actions/actiontexture/exorcisme.png" id="3_dxqn5"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_mane8"]
+
+[sub_resource type="Resource" id="Resource_i4eos"]
+script = ExtResource("2_wh88t")
+MagicDMG = true
+amount = 20
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[resource]
+script = ExtResource("4_mane8")
+name = "exorcisme"
+descriptionName = "exorcisme"
+description = "deal magic dmg "
+icon = ExtResource("3_dxqn5")
+required_position = 0
+ImageSkill = ExtResource("1_wh88t")
+the_target_type = 0
+effects = Array[ExtResource("2_ar1fo")]([SubResource("Resource_i4eos")])
+two_target_Type = false
+the_second_target_type = 3
+second_effects = Array[ExtResource("2_ar1fo")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 4
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

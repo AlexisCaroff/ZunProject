@@ -5,7 +5,7 @@ class_name CampSkill
 @export var description: String = "engage une discution"
 @export var icon: Texture2D
 @export var cost: int = 1   # coût en points de camp / ressources
-
+@export var standarEnd: bool = true
 enum TargetType {
 	SELF,
 	ALLY,
@@ -17,8 +17,9 @@ var target_type: int = TargetType.SELF
 @export var effects: Array[CampEffect] = []   # une liste d’effets appliqués
 
 func use(user: CharaCamp, targets: Array[CharaCamp]):
-	user.camp.campPoints = user.camp.campPoints-cost
+	
 	for effect in effects:
 		for target in targets:
 			effect.apply(user, target)
-	
+	if standarEnd:
+		user.camp.After_camp_skill(user.camp.skillused)

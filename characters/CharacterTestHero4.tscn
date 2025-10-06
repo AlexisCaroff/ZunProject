@@ -1,21 +1,22 @@
-[gd_scene load_steps=17 format=3 uid="uid://dbtxyhyysj65n"]
+[gd_scene load_steps=18 format=3 uid="uid://dbtxyhyysj65n"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i8qvq"]
 [ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="2_eg61m"]
 [ext_resource type="Texture2D" uid="uid://b1gqe0n366p7t" path="res://characters/charatexture/char tankdead.png" id="3_4h21c"]
 [ext_resource type="Texture2D" uid="uid://b23pftdqkb2it" path="res://characters/characterInitiative/croiséIni.png" id="4_07x3b"]
-[ext_resource type="Resource" uid="uid://behrtqotkyvnx" path="res://actions/Taunt.tres" id="5_b6mpb"]
-[ext_resource type="Resource" uid="uid://doydfjjogegnd" path="res://actions/StunAttaque.tres" id="6_y4wav"]
-[ext_resource type="Resource" uid="uid://bpsapqkry8g3q" path="res://actions/attaque_basique.tres" id="8_ghs3y"]
-[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/move.tres" id="9_4h21c"]
+[ext_resource type="Resource" uid="uid://behrtqotkyvnx" path="res://actions/HerosCombatSkills/Taunt.tres" id="5_b6mpb"]
+[ext_resource type="Resource" uid="uid://doydfjjogegnd" path="res://actions/HerosCombatSkills/StunAttaque.tres" id="6_y4wav"]
+[ext_resource type="Resource" uid="uid://bpsapqkry8g3q" path="res://actions/HerosCombatSkills/attaque_basique.tres" id="8_ghs3y"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="9_4h21c"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="10_1e8ai"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="10_kmmps"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="10_y4wav"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="11_b6mpb"]
 [ext_resource type="Resource" uid="uid://do1xqbabe8r4b" path="res://scripts/camp/CampsSkills/new_resource.tres" id="11_lhysv"]
-[ext_resource type="Resource" uid="uid://clw258vbo2rq1" path="res://actions/Charge.tres" id="11_y4wav"]
+[ext_resource type="Resource" uid="uid://clw258vbo2rq1" path="res://actions/HerosCombatSkills/Charge.tres" id="11_y4wav"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="12_1e8ai"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="15_5alxs"]
+[ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="17_lhysv"]
 
 [node name="CharacterTestHero4" type="Node2D"]
 script = ExtResource("1_i8qvq")
@@ -58,6 +59,7 @@ value = 100.0
 show_percentage = false
 
 [node name="Stress" type="Label" parent="."]
+visible = false
 offset_left = -91.0
 offset_top = -15.0
 offset_right = -62.0
@@ -76,6 +78,7 @@ offset_bottom = 17.0
 show_percentage = false
 
 [node name="horny" type="Label" parent="."]
+visible = false
 offset_left = -99.0
 offset_top = 2.0
 offset_right = -63.0
@@ -159,6 +162,38 @@ offset_left = -30.0
 offset_top = -243.0
 offset_right = 10.0
 offset_bottom = -224.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+offset_left = -101.0
+offset_top = -9.0
+offset_right = 33.0
+offset_bottom = 8.0
+alignment = 1
+
+[node name="DotAction1" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(0.642019, 0.561016, 0.364715, 1)
+layout_mode = 2
+texture = ExtResource("17_lhysv")
+
+[node name="DotAction2" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(0.642019, 0.561016, 0.364715, 1)
+layout_mode = 2
+texture = ExtResource("17_lhysv")
+
+[node name="DotAction3" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(0.642019, 0.561016, 0.364715, 1)
+layout_mode = 2
+texture = ExtResource("17_lhysv")
+
+[node name="DotAction4" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(0.14, 0.14, 0.14, 1)
+layout_mode = 2
+texture = ExtResource("17_lhysv")
+
+[node name="DotAction5" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(0.642019, 0.561016, 0.364715, 1)
+layout_mode = 2
+texture = ExtResource("17_lhysv")
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

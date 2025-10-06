@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://ca8rrxibg12sg"]
+
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_xfomo"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_qeekn"]
+[ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="2_xtfia"]
+[ext_resource type="Texture2D" uid="uid://c8y2xrtwi8euj" path="res://characters/characterInitiative/priestIni.png" id="3_il0b8"]
+[ext_resource type="Script" uid="uid://bp8u5at2ojgse" path="res://actions/skillEffects/healEffect.gd" id="3_k0qpg"]
+[ext_resource type="Texture2D" uid="uid://bplqm5b3bso4j" path="res://actions/bufftexture/buffAtt.png" id="5_xfomo"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="5_xtfia"]
+
+[sub_resource type="Resource" id="Resource_k0qpg"]
+script = ExtResource("2_xtfia")
+amount = 3
+metadata/_custom_type_script = "uid://2vsqpp6jqiow"
+
+[sub_resource type="Resource" id="Resource_uknl3"]
+script = ExtResource("3_k0qpg")
+heal_target_stat = 1
+amount = 10
+metadata/_custom_type_script = "uid://bp8u5at2ojgse"
+
+[sub_resource type="Resource" id="Resource_pmsdg"]
+script = ExtResource("5_xtfia")
+uitexture = ExtResource("5_xfomo")
+affected_stat = 0
+amount = 5
+duration = 2
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[sub_resource type="Resource" id="Resource_xfomo"]
+script = ExtResource("5_xtfia")
+affected_stat = 0
+amount = 5
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[resource]
+script = ExtResource("2_qeekn")
+name = "meditation"
+descriptionName = "meditation"
+description = "remoce horny remove cooldown buff"
+icon = ExtResource("3_il0b8")
+required_position = 0
+the_target_type = 2
+effects = Array[ExtResource("1_xfomo")]([SubResource("Resource_k0qpg"), SubResource("Resource_uknl3"), SubResource("Resource_pmsdg")])
+two_target_Type = false
+the_second_target_type = 3
+second_effects = Array[ExtResource("1_xfomo")]([SubResource("Resource_xfomo")])
+usable_when_horny = true
+needtarget = true
+Actiontype = "attack"
+cost = 10
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 1.0
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

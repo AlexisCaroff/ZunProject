@@ -47,6 +47,8 @@ var HERO_SCENES = [
 #stat combat manager
 @onready var audio = $AudioStreamPlayer2D
 @onready var ResultScreen_label= $"../ResultScreen"
+@onready var SpriteHeros=$"../SpriteHeros"
+@onready var SpriteEnnemies=$"../SpriteEnnemies"
 enum CombatState {
 	IDLE,
 	SELECTING_FIRST_TARGET,
@@ -86,6 +88,7 @@ func _start():
 				var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() - 1)
 				var slot = hero_positions[slot_index]
 				move_character_to(chara, slot, 0.0)
+				chara.update_ui()
 		
 		# Spawn ennemis
 		for i in encounter.enemy_scenes.size():
@@ -97,6 +100,7 @@ func _start():
 			var slot_index = i
 			var slot = enemy_positions[slot_index]
 			move_character_to(chara, slot, 0.0)
+			chara.update_ui()
 		ui.log("start Combat")
 		start_combat()
 		
@@ -120,7 +124,7 @@ func load_saved_heroes_into_slots(slots: Array[PositionSlot]):
 		add_child(hero)
 		hero.combat_manager = self
 		heroes.append(hero)
-
+		hero.update_ui()
 		
 		var pos_index = hero_data.get("position", -1)
 		if pos_index >= 0 and pos_index < slots.size():
@@ -151,10 +155,11 @@ func next_turn():
 	ui.update_turn_queue_ui(turn_queue)
 	current_character = turn_queue.pop_front()
 	
-		
-	if current_character.is_dead():
+	
+	if current_character.current_stamina<=0: # look if tired
 		while is_animation_playing():
 			await get_tree().process_frame
+		turn_queue.append(current_character)
 		next_turn()
 		return
 	if current_character.stun==true:
@@ -162,6 +167,7 @@ func next_turn():
 		current_character.sprite.self_modulate=Color(1,1,1,1)
 		while is_animation_playing():
 			await get_tree().process_frame
+		turn_queue.append(current_character)
 		next_turn()
 		
 		return
@@ -177,6 +183,7 @@ func next_turn():
 		await get_tree().create_timer(1.5).timeout
 		while is_animation_playing():
 			await get_tree().process_frame
+		turn_queue.append(current_character)
 		next_turn()
 
 

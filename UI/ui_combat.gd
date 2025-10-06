@@ -41,8 +41,6 @@ func _ready():
 		focus_on_room(donjon_map.curentposition)
 		donjon_map.move_to_position(donjon_map.curentposition)
 
-
-	
 func focus_on_room(room: Node2D):
 	var vp_size: Vector2 = viewport.size
 	var target_pos = room.position
@@ -68,10 +66,18 @@ func update_turn_queue_ui(queue: Array[Character]):
 func update_ui_for_current_character(character: Character):
 	
 	if skill_buttons == null:
-		push_error("skill_buttons est null pour %s" % character.Charaname)
+		#push_error("skill_buttons est null pour %s" % character.Charaname)
+		skill_buttons = [
+		$ActionPanel/Action1,
+		$ActionPanel/Action2,
+		$ActionPanel/Action3,
+		$ActionPanel/Action4,
+		$ActionPanel/Action5
+		]
 		return
 	character.animate_start_Turn()
 	character.sprite.modulate = Color(1.8, 1.8, 1.8)
+	
 	Charaname_panel.text = character.Charaname
 	charaPortrait.texture=character.initiative_icon
 	# Déconnexion de tous les anciens signaux pour éviter les doublons
@@ -110,17 +116,20 @@ func update_ui_for_current_character(character: Character):
 func update_cooldown(character:Character):
 	for i in range(skill_buttons.size()):
 		var button = skill_buttons[i]
+		var dot = character.dotsActions[i-1]
 		var skill = character.get_skill(i)
 		var cooldownlabel = cooldownLabel[i]
-		
+		print ("update skill"+skill.name+str(skill.current_cooldown))
 		if skill != null:
 			skill_buttons[i].Actiontext = skill.descriptionName + "\n" + skill.description
 			button.disabled = !skill.can_use()
 			button.icon = skill.icon
 			if skill.current_cooldown > 0:
 				cooldownlabel.text = "%d" % [skill.current_cooldown]
+				dot.modulate = Color(0.0,0.0,0.0) 
 			else :
 				cooldownlabel.text = " "
+				dot.modulate = Color(0.8,0.78,0.7)
 
 			var index = i  # capture locale de la bonne valeur
 			button.pressed.connect(

@@ -43,6 +43,11 @@ func enter_room(room: RoomResource):
 		room_container.add_child(new_scene)
 		current_room_node = new_scene
 func go_back():
+	if current_room_node and is_instance_valid(current_room_node):
+		
+		current_room_node.queue_free()
+		current_room_node = null
+	
 	var scene_to_load: PackedScene = null
 	if last_room_Ressource.exploration_scene:
 		scene_to_load = last_room_Ressource.exploration_scene
@@ -78,6 +83,7 @@ func _enter_scene_in_current_room(scene:PackedScene):
 func go_to_campement():
 	# Nettoyer l’ancienne scène si besoin
 	if current_room_node and is_instance_valid(current_room_node):
+		
 		current_room_node.queue_free()
 		current_room_node = null
 	
@@ -93,9 +99,13 @@ func return_to_exploration():
 	if campement_node and is_instance_valid(campement_node):
 		campement_node.queue_free()
 		campement_node = null
-	
-	# Recharger la salle d’exploration courante
-	if current_room_Ressource:
-		var exploration_scene: PackedScene = load(current_room_Ressource.exploration_scene_path)
-		current_room_node = exploration_scene.instantiate()
-		room_container.add_child(current_room_node)
+
+	var scene_to_load: PackedScene = null
+	if current_room_Ressource.exploration_scene:
+		scene_to_load = current_room_Ressource.exploration_scene
+
+			
+	if scene_to_load:
+		var new_scene = scene_to_load.instantiate()
+		room_container.add_child(new_scene)
+		current_room_node = new_scene

@@ -71,6 +71,7 @@ const HornyEffectScene := preload("res://actions/damageEffect/charmed-particules
 const DamageEffectScene := preload("res://actions/damageEffect/HitVFX.tscn")
 const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
 const MissEffectScene:= preload("res://actions/damageEffect/miss_vfx.tscn")
+const DebuffEffectScene:= preload("res://actions/damageEffect/debuffVfx.tscn")
 @export var min_durationIddle: float = 0.6
 @export var max_durationIddle: float = 1.0
 @export var min_scale: float = 0.95
@@ -79,6 +80,14 @@ signal target_selected()
 var is_targetable: bool = false
 @onready var arrow = $Arrow
 @export var camp_skill_resources: Array[CampSkill] = []
+@onready var dotsActions : Array[TextureRect] = [
+	$HBoxContainer2/DotAction1,
+	$HBoxContainer2/DotAction2,
+	$HBoxContainer2/DotAction3,
+	$HBoxContainer2/DotAction4,
+	$HBoxContainer2/DotAction5,
+]
+
 
 func _ready():
 	arrow.visible=false
@@ -86,7 +95,6 @@ func _ready():
 	sprite.texture = portrait_texture
 	Selector.texture = portrait_texture
 	
-
 	update_ui()
 	
 	for s in skill_resources:
@@ -117,13 +125,11 @@ func update_stats():
 	initiative = base_initiative
 	willpower = base_willpower
 
-	
 	for buff in buffs:
 		buff.apply_to(self)
 
 func update_ui():
 	if not hp_label or not stress_label or not horny_label:
-	
 		hp_label=$HP
 		stress_label=$Stress
 		horny_label=$horny
@@ -135,6 +141,14 @@ func update_ui():
 	hp_Jauge.value=current_stamina
 	guilt_Jauge.value=current_stress
 	horny_Jauge.value=current_horniness
+	
+	for i in range(skills.size()):
+		var dot = dotsActions[i]
+		var skill= skills[i]
+		if skill.current_cooldown == 0:
+			dot.modulate = Color(0.8,0.78,0.7)
+		else:
+			dot.modulate = Color(0.1,0.1,0.1)
 	#hp_label.text = "Stamina: %d / %d" % [current_stamina, max_stamina]
 	#stress_label.text = "Guilt: %d / %d" % [current_stress, max_stress]
 	#horny_label.text = "Horny: %d / %d" % [current_horniness, max_horniness]
@@ -412,8 +426,19 @@ func animate_heal(damage:int, source:Character, color=null):
 	await tween.finished
 	emit_signal("skill_animation_finished")
 	
+func DebuffAnim(text):
+	emit_signal("skill_animation_started")
+	var effect_instance = DebuffEffectScene.instantiate()
+	get_tree().current_scene.add_child(effect_instance)
+	effect_instance.global_position = global_position + Vector2(0, -210)
+	if effect_instance.has_method("setup"):
+		effect_instance.setup(text)
+	
+	emit_signal("skill_animation_finished")
+	
 func animate_attack(target: Character):
 	emit_signal("skill_animation_started")
+	combat_manager.SpriteHeros.attackAnim(self)
 	var tween := create_tween() as Tween
 	var scaletween := create_tween() as Tween
 	tween.set_trans(Tween.TRANS_SINE)

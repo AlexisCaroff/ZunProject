@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://rxp2q7eq2hr5"]
+
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_0d46u"]
+[ext_resource type="Texture2D" uid="uid://c6ptbylmpvkdy" path="res://actions/CampSkill/masturbIcon.png" id="1_lqogb"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_vyqw8"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_0w17e"]
+
+[sub_resource type="Resource" id="Resource_lqogb"]
+script = ExtResource("3_0w17e")
+MagicDMG = false
+amount = 15
+damage_target_stat = 1
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[resource]
+script = ExtResource("2_vyqw8")
+name = "Charme"
+descriptionName = "Charme"
+description = "get an ennemi Horny"
+icon = ExtResource("1_lqogb")
+required_position = 0
+the_target_type = 0
+effects = Array[ExtResource("1_0d46u")]([SubResource("Resource_lqogb")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("1_0d46u")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

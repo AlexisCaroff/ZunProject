@@ -74,11 +74,12 @@ func can_use() -> bool:
 	return true
 
 func use(target: PositionSlot = null, secondtarget : bool=false):
+	print(owner.Charaname+ " use "+ self.name)
 	owner.SkillText.activate(ImageSkill,duration) 
 	if not can_use():
 		return
 	
-	if not allways_hit:
+	if !allways_hit:
 		var chance = precision - target.occupant.evasion
 		var rand = randi() % 100
 		if rand >= chance:
@@ -241,4 +242,5 @@ func end_turn(combat_manager):
 	pay_cost()
 	combat_manager.current_character.end_turn()
 	#combat_manager.pending_skill = null
+	combat_manager.turn_queue.append(combat_manager.current_character)
 	combat_manager.next_turn()

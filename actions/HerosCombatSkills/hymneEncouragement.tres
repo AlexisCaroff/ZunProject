@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://nlgjloh75gki"]
+
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_rr7qo"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_rr7qo"]
+[ext_resource type="Texture2D" uid="uid://c8y2xrtwi8euj" path="res://characters/characterInitiative/priestIni.png" id="3_n05yo"]
+[ext_resource type="Texture2D" uid="uid://bplqm5b3bso4j" path="res://actions/bufftexture/buffAtt.png" id="3_rr7qo"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_2l0hw"]
+
+[sub_resource type="Resource" id="Resource_mdx25"]
+script = ExtResource("2_rr7qo")
+uitexture = ExtResource("3_rr7qo")
+affected_stat = 0
+amount = 400
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[resource]
+script = ExtResource("4_2l0hw")
+name = "Buff attack"
+descriptionName = "Attaque"
+description = "buff l'attaque du porteur"
+icon = ExtResource("3_n05yo")
+required_position = 0
+the_target_type = 3
+effects = Array[ExtResource("1_rr7qo")]([SubResource("Resource_mdx25")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("1_rr7qo")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = true
+duration = 0.3
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
