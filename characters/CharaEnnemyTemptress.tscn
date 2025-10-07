@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="14_b3y7k"]
 
 [node name="CharacterTestennemie2" type="Node2D"]
-position = Vector2(-3, -1)
 script = ExtResource("1_qghsa")
 portrait_texture = ExtResource("2_7s1lw")
 dead_portrait_texture = ExtResource("3_pders")
@@ -27,7 +26,7 @@ skill_resources = Array[Resource]([ExtResource("5_pders"), ExtResource("5_pders"
 is_player_controlled = false
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(0, -21)
+position = Vector2(52, 91.9496)
 script = ExtResource("5_gg7eq")
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
@@ -61,16 +60,16 @@ text = "name"
 
 [node name="Button" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
-offset_left = -123.0
-offset_top = -325.0
-offset_right = 110.0
-offset_bottom = 57.0
+offset_left = -71.0
+offset_top = -212.05
+offset_right = 162.0
+offset_bottom = 169.95
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 22.0
-offset_top = -252.0
-offset_right = 62.0
-offset_bottom = -233.0
+offset_left = 74.0
+offset_top = -139.05
+offset_right = 114.0
+offset_bottom = -120.05
 
 [node name="Skill" type="TextureRect" parent="."]
 visible = false
@@ -83,7 +82,7 @@ texture = ExtResource("6_b3y7k")
 script = ExtResource("7_u54kx")
 
 [node name="Arrow" type="Sprite2D" parent="."]
-position = Vector2(-52, -340)
+position = Vector2(0, -227.05)
 scale = Vector2(0.38, 0.38)
 texture = ExtResource("8_7pso5")
 offset = Vector2(0, 107.08)
@@ -95,10 +94,10 @@ min_duration = 0.5
 max_duration = 0.5
 
 [node name="HP" type="Label" parent="."]
-offset_left = -108.0
-offset_top = -33.0
-offset_right = -65.0
-offset_bottom = -14.0
+offset_left = -56.0
+offset_top = 79.9496
+offset_right = -9.0
+offset_bottom = 98.9496
 theme_override_fonts/font = ExtResource("9_rhaxp")
 theme_override_font_sizes/font_size = 15
 text = "Stamina:"
@@ -152,10 +151,10 @@ offset_bottom = 17.0
 show_percentage = false
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
-offset_left = -101.0
-offset_top = -9.0
-offset_right = 33.0
-offset_bottom = 8.0
+offset_left = -49.0
+offset_top = 103.95
+offset_right = 85.0
+offset_bottom = 120.95
 alignment = 1
 
 [node name="DotAction1" type="TextureRect" parent="HBoxContainer2"]

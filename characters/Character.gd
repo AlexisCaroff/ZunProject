@@ -15,7 +15,7 @@ class_name Character
 @onready var horny_label = $horny
 @onready var horny_Jauge = $horny/HornyProgressBar
 @onready var sprite = $pivot/HerosTexture1
-@onready var SkillText = $Skill
+
 @onready var buff_bar = $HBoxContainer
 @export var Charaname: String = "name"
 @export var IsDemon: bool = false
@@ -60,6 +60,7 @@ var buff_icons: Array = []
 
 # --- Compétences
 var skills: Array[Skill] = []
+@onready var skillText =$Skill
 @export var skill_resources: Array[Resource] = []
 # --- Tags (type, classe, etc.)
 var tags: Array[String] = []
@@ -143,12 +144,14 @@ func update_ui():
 	horny_Jauge.value=current_horniness
 	
 	for i in range(skills.size()):
-		var dot = dotsActions[i]
+		#var dot = dotsActions[i]
 		var skill= skills[i]
-		if skill.current_cooldown == 0:
-			dot.modulate = Color(0.8,0.78,0.7)
-		else:
-			dot.modulate = Color(0.1,0.1,0.1)
+		#if skill.current_cooldown == 0:
+		#	dot.modulate = Color(0.642,0.561,0.365)
+		#	dot.size = Vector2(0.8,0.8)
+		#else:
+		#	dot.modulate = Color(0.1,0.1,0.1)
+		#	dot.size = Vector2(0.7, 0.7)
 	#hp_label.text = "Stamina: %d / %d" % [current_stamina, max_stamina]
 	#stress_label.text = "Guilt: %d / %d" % [current_stress, max_stress]
 	#horny_label.text = "Horny: %d / %d" % [current_horniness, max_horniness]
@@ -247,6 +250,7 @@ func play_ai_turn(heroes : Array, ennemies :Array):
 
 
 	var skill: Skill = usable_skills[randi() % usable_skills.size()]
+	combat_manager.pending_skill=skill
 	skill.owner = self  # important !
 
 	
@@ -438,25 +442,31 @@ func DebuffAnim(text):
 	
 func animate_attack(target: Character):
 	emit_signal("skill_animation_started")
-	combat_manager.SpriteHeros.attackAnim(self)
+	if is_player_controlled:
+		combat_manager.SpriteHeros.attack_anim(self)
+	else:
+		combat_manager.SpriteEnnemies.attack_anim(self)
 	var tween := create_tween() as Tween
-	var scaletween := create_tween() as Tween
+
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	self.z_index = 10 
 
 	var start_pos = position
 	var direction = (target.global_position - global_position).normalized()
-	var offset = direction * 150
+	var offset = direction * -50
 	var attack_pos = start_pos + offset
 	var normal_size = self.scale
-	var big_size= Vector2(1.6,1.6) 
+	var big_size= Vector2(2,2) 
 
-	scaletween.tween_property(self, "scale", big_size, 0.2)
-	tween.tween_property(self, "position", attack_pos, 0.2)
-	tween.tween_property(self, "position", start_pos, 0.2).set_delay(0.2)
-
-	scaletween.tween_property(self, "scale", normal_size, 0.2).set_delay(0.2)
+	
+	tween.parallel().tween_property(self, "position", attack_pos, 0.1)
+	tween.parallel().tween_property(self, "scale", big_size, 0.1)
+	tween.parallel().tween_property(self, "modulate:a", 0.0, 0.15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_interval(1.0)
+	tween.parallel().tween_property(self, "position", start_pos, 0.2).set_delay(1.0)
+	tween.parallel().tween_property(self, "scale", normal_size, 0.2).set_delay(1.0)
+	tween.parallel().tween_property(self, "modulate:a", 1.0, 0.15).set_delay(1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	await tween.finished	
 	emit_signal("skill_animation_finished")
 	

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://igdjgbcqg1d6" path="res://UI/PositionSlot.gd" id="1_dn535"]
 [ext_resource type="Script" uid="uid://djdoocg7j13gy" path="res://CombatManager.gd" id="1_wdbpb"]
 [ext_resource type="Script" uid="uid://b3l4l88c3b65c" path="res://PositionData.gd" id="2_wdbpb"]
-[ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterTestEnemy1.tscn" id="3_o83ov"]
+[ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterEnemyNymphe.tscn" id="3_o83ov"]
 
 [sub_resource type="Resource" id="Resource_2d17p"]
 script = ExtResource("2_wdbpb")

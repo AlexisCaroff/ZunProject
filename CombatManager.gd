@@ -36,10 +36,10 @@ var pending_skill: Skill:
 
 ]
 var HERO_SCENES = [
-	preload("res://characters/CharacterTestHero1.tscn"),
-	preload("res://characters/CharacterTestHero2.tscn"),
-	preload("res://characters/CharacterTestHero3.tscn"),
-	preload("res://characters/CharacterTestHero4.tscn")
+	preload("res://characters/CharaPriest.tscn"),
+	preload("res://characters/CharaHunter.tscn"),
+	preload("res://characters/CharaMystic.tscn"),
+	preload("res://characters/CharaWarrior.tscn")
 ]
 
 @export var encounter: CombatEncounter
@@ -281,10 +281,12 @@ func _on_target_selected(targets: Array[PositionSlot]):
 
 				pending_skill.end_turn(self)
 				stop_target_selection()
+				pending_skill=null
 			else:
 				pending_skill.target1 = targets
 				combat_state = CombatState.SELECTING_SECOND_TARGET
 				start_target_selection(pending_skill)
+				
 
 		CombatState.SELECTING_SECOND_TARGET :
 			if pending_skill.name != "move" && pending_skill.name != "ChangeMask" :
@@ -304,6 +306,7 @@ func _on_target_selected(targets: Array[PositionSlot]):
 				print(target2.occupant.Charaname)
 				target2.occupant.update_ui()
 			pending_skill.end_turn(self)
+			pending_skill=null
 			stop_target_selection()
 			
 
@@ -311,7 +314,7 @@ func _on_target_selected(targets: Array[PositionSlot]):
 
 
 func stop_target_selection():
-	pending_skill=null
+	
 	for enemy in enemies:
 		enemy.set_targetable(false)
 		enemy.resetVisuel()

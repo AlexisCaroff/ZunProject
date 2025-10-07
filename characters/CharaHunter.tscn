@@ -1,33 +1,33 @@
 [gd_scene load_steps=19 format=3 uid="uid://qi68oagp06kg"]
 
-[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_q3w66"]
-[ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="2_5lneg"]
-[ext_resource type="Texture2D" uid="uid://dltxnrwlxmjd7" path="res://characters/charatexture/char hunterDead.png" id="3_lacfs"]
-[ext_resource type="Texture2D" uid="uid://byy2w1dik22x8" path="res://characters/characterInitiative/hunterIni.png" id="4_5lneg"]
-[ext_resource type="Resource" uid="uid://ca8rrxibg12sg" path="res://actions/HerosCombatSkills/Fap.tres" id="4_o35hh"]
-[ext_resource type="Resource" uid="uid://dn00l75vs5ctm" path="res://actions/HerosCombatSkills/Sel.tres" id="6_6qnei"]
-[ext_resource type="Resource" uid="uid://cbakapyjnht36" path="res://actions/HerosCombatSkills/lance.tres" id="7_lacfs"]
-[ext_resource type="Resource" uid="uid://bmkp0brav8l87" path="res://actions/HerosCombatSkills/bollas.tres" id="8_lacfs"]
-[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="10_0byuf"]
-[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="11_5lneg"]
-[ext_resource type="Resource" uid="uid://do1xqbabe8r4b" path="res://scripts/camp/CampsSkills/new_resource.tres" id="11_77vgn"]
-[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="11_wrjt1"]
-[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="12_5lneg"]
-[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="12_fj1an"]
-[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="13_wu8lj"]
-[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="14_gno5x"]
-[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="15_gno5x"]
-[ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="18_77vgn"]
+[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i4uyy"]
+[ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="2_papga"]
+[ext_resource type="Texture2D" uid="uid://dltxnrwlxmjd7" path="res://characters/charatexture/char hunterDead.png" id="3_xn63r"]
+[ext_resource type="Texture2D" uid="uid://byy2w1dik22x8" path="res://characters/characterInitiative/hunterIni.png" id="4_6h38a"]
+[ext_resource type="Resource" uid="uid://ca8rrxibg12sg" path="res://actions/HerosCombatSkills/Fap.tres" id="5_184h1"]
+[ext_resource type="Resource" uid="uid://dn00l75vs5ctm" path="res://actions/HerosCombatSkills/Sel.tres" id="6_7u4xn"]
+[ext_resource type="Resource" uid="uid://cbakapyjnht36" path="res://actions/HerosCombatSkills/lance.tres" id="7_kj6ch"]
+[ext_resource type="Resource" uid="uid://bmkp0brav8l87" path="res://actions/HerosCombatSkills/bollas.tres" id="8_1t7b8"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="9_rwkgt"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="10_cegev"]
+[ext_resource type="Resource" uid="uid://do1xqbabe8r4b" path="res://scripts/camp/CampsSkills/new_resource.tres" id="11_n2k53"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="12_0iyuo"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="13_172yo"]
+[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="14_oilqr"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="15_8hpy0"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="16_qhpv8"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="17_34cm8"]
+[ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="18_etx73"]
 
 [node name="CharacterTestHero2" type="Node2D"]
-script = ExtResource("1_q3w66")
-portrait_texture = ExtResource("2_5lneg")
-dead_portrait_texture = ExtResource("3_lacfs")
-initiative_icon = ExtResource("4_5lneg")
+script = ExtResource("1_i4uyy")
+portrait_texture = ExtResource("2_papga")
+dead_portrait_texture = ExtResource("3_xn63r")
+initiative_icon = ExtResource("4_6h38a")
 Charaname = "Hunter"
 Chara_position = 1
-skill_resources = Array[Resource]([ExtResource("4_o35hh"), ExtResource("6_6qnei"), ExtResource("7_lacfs"), ExtResource("8_lacfs"), ExtResource("11_wrjt1")])
-camp_skill_resources = Array[ExtResource("10_0byuf")]([ExtResource("11_77vgn")])
+skill_resources = Array[Resource]([ExtResource("5_184h1"), ExtResource("6_7u4xn"), ExtResource("7_kj6ch"), ExtResource("8_1t7b8"), ExtResource("9_rwkgt")])
+camp_skill_resources = Array[ExtResource("10_cegev")]([ExtResource("11_n2k53")])
 
 [node name="name" type="Label" parent="."]
 visible = false
@@ -35,15 +35,15 @@ offset_left = -70.0
 offset_top = -241.0
 offset_right = -26.0
 offset_bottom = -218.0
-theme_override_fonts/font = ExtResource("12_5lneg")
+theme_override_fonts/font = ExtResource("12_0iyuo")
 text = "name"
 
 [node name="HP" type="Label" parent="."]
-offset_left = -108.0
-offset_top = -33.0
-offset_right = -61.0
-offset_bottom = -14.0
-theme_override_fonts/font = ExtResource("12_5lneg")
+offset_left = -63.0
+offset_top = 56.7975
+offset_right = -16.0
+offset_bottom = 75.7975
+theme_override_fonts/font = ExtResource("12_0iyuo")
 theme_override_font_sizes/font_size = 15
 text = "Stamina:"
 
@@ -63,7 +63,7 @@ offset_left = -91.0
 offset_top = -15.0
 offset_right = -62.0
 offset_bottom = 4.0
-theme_override_fonts/font = ExtResource("12_5lneg")
+theme_override_fonts/font = ExtResource("12_0iyuo")
 theme_override_font_sizes/font_size = 15
 text = "Guilt:"
 
@@ -82,7 +82,7 @@ offset_left = -99.0
 offset_top = 2.0
 offset_right = -63.0
 offset_bottom = 21.0
-theme_override_fonts/font = ExtResource("12_5lneg")
+theme_override_fonts/font = ExtResource("12_0iyuo")
 theme_override_font_sizes/font_size = 15
 text = "Horny:"
 
@@ -97,15 +97,15 @@ show_percentage = false
 
 [node name="Button" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
-offset_left = -123.0
-offset_top = -325.0
-offset_right = 110.0
-offset_bottom = 57.0
+offset_left = -78.0
+offset_top = -235.203
+offset_right = 155.0
+offset_bottom = 146.797
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(24, -29)
+position = Vector2(69, 60.7975)
 scale = Vector2(1.2, 1.2)
-script = ExtResource("13_wu8lj")
+script = ExtResource("13_172yo")
 min_scale = 1.15
 max_scale = 1.15
 scalemini = 1.1
@@ -119,7 +119,7 @@ offset_right = 42.0
 offset_bottom = 18.0
 scale = Vector2(1.2, 1)
 mouse_filter = 2
-texture = ExtResource("2_5lneg")
+texture = ExtResource("2_papga")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -131,7 +131,7 @@ offset_right = 42.0
 offset_bottom = 18.0
 scale = Vector2(1.2, 1)
 mouse_filter = 2
-texture = ExtResource("14_gno5x")
+texture = ExtResource("14_oilqr")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -142,15 +142,15 @@ offset_top = -286.0
 offset_right = 428.0
 offset_bottom = 290.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("11_5lneg")
-script = ExtResource("12_fj1an")
+texture = ExtResource("15_8hpy0")
+script = ExtResource("16_qhpv8")
 
 [node name="Arrow" type="Sprite2D" parent="."]
-position = Vector2(-52, -340)
+position = Vector2(-7, -250.203)
 scale = Vector2(0.38, 0.38)
-texture = ExtResource("15_gno5x")
+texture = ExtResource("17_34cm8")
 offset = Vector2(0, 115.375)
-script = ExtResource("13_wu8lj")
+script = ExtResource("13_172yo")
 min_scale = 0.38
 max_scale = 0.38
 scalemini = 0.3
@@ -158,42 +158,42 @@ min_duration = 0.5
 max_duration = 0.5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 4.0
-offset_top = -227.0
-offset_right = 52.0
-offset_bottom = -186.0
+offset_left = 49.0
+offset_top = -137.203
+offset_right = 97.0
+offset_bottom = -96.2025
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
-offset_left = -101.0
-offset_top = -9.0
-offset_right = 33.0
-offset_bottom = 8.0
+offset_left = -56.0
+offset_top = 80.7975
+offset_right = 78.0
+offset_bottom = 97.7975
 alignment = 1
 
 [node name="DotAction1" type="TextureRect" parent="HBoxContainer2"]
 modulate = Color(0.642019, 0.561016, 0.364715, 1)
 layout_mode = 2
-texture = ExtResource("18_77vgn")
+texture = ExtResource("18_etx73")
 
 [node name="DotAction2" type="TextureRect" parent="HBoxContainer2"]
 modulate = Color(0.642019, 0.561016, 0.364715, 1)
 layout_mode = 2
-texture = ExtResource("18_77vgn")
+texture = ExtResource("18_etx73")
 
 [node name="DotAction3" type="TextureRect" parent="HBoxContainer2"]
 modulate = Color(0.642019, 0.561016, 0.364715, 1)
 layout_mode = 2
-texture = ExtResource("18_77vgn")
+texture = ExtResource("18_etx73")
 
 [node name="DotAction4" type="TextureRect" parent="HBoxContainer2"]
 modulate = Color(0.14, 0.14, 0.14, 1)
 layout_mode = 2
-texture = ExtResource("18_77vgn")
+texture = ExtResource("18_etx73")
 
 [node name="DotAction5" type="TextureRect" parent="HBoxContainer2"]
 modulate = Color(0.642019, 0.561016, 0.364715, 1)
 layout_mode = 2
-texture = ExtResource("18_77vgn")
+texture = ExtResource("18_etx73")
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

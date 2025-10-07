@@ -1,27 +1,29 @@
-[gd_scene load_steps=36 format=3 uid="uid://cec8xfskuaorp"]
+[gd_scene load_steps=38 format=3 uid="uid://dsjjyh5whu6im"]
 
-[ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_81med"]
-[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_nh036"]
-[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_tcd6m"]
-[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="4_vboy3"]
-[ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="5_vgu64"]
-[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="6_iin8a"]
-[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="7_l3wlu"]
-[ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="8_fh6h7"]
-[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="9_svqxm"]
-[ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="10_xva3j"]
-[ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://lvl/combat1/encounter1.tres" id="11_j0uve"]
-[ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="12_tegig"]
-[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="13_ow63s"]
-[ext_resource type="Script" uid="uid://igdjgbcqg1d6" path="res://UI/PositionSlot.gd" id="14_ku83v"]
-[ext_resource type="Script" uid="uid://b3l4l88c3b65c" path="res://PositionData.gd" id="15_lt2sy"]
-[ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterTestEnemy1.tscn" id="16_qrpb6"]
-[ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharaEnnemyTemptress.tscn" id="17_qdfir"]
-[ext_resource type="PackedScene" uid="uid://jg7klanpwhgj" path="res://characters/CharacterTestEnemy3.tscn" id="18_mi26p"]
-[ext_resource type="Script" uid="uid://bqnn7n8kuofir" path="res://UI/buttonSkipCombat.gd" id="19_2u5uo"]
+[ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_u3ti6"]
+[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_ucvp2"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_eawyw"]
+[ext_resource type="Texture2D" uid="uid://b1t6ygc3nxo7c" path="res://characters/charatexture/warriorHit.png" id="4_jmibc"]
+[ext_resource type="Script" uid="uid://ds3vigal0aygx" path="res://lvl/combat1/SpriteActionCombat.gd" id="5_i40dl"]
+[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="6_ov3h8"]
+[ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="7_fko1d"]
+[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="8_kai0j"]
+[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="9_pr6vk"]
+[ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="10_hi45r"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="11_56n5u"]
+[ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="12_4sw3e"]
+[ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://lvl/combat1/encounter1.tres" id="13_n184l"]
+[ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="14_ptev3"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="15_ssuj2"]
+[ext_resource type="Script" uid="uid://igdjgbcqg1d6" path="res://UI/PositionSlot.gd" id="16_b6nyf"]
+[ext_resource type="Script" uid="uid://b3l4l88c3b65c" path="res://PositionData.gd" id="17_h6iln"]
+[ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterEnemyNymphe.tscn" id="18_mk0s0"]
+[ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharaEnnemyTemptress.tscn" id="19_plvru"]
+[ext_resource type="PackedScene" uid="uid://jg7klanpwhgj" path="res://characters/CharacterTestEnemy3.tscn" id="20_fj73k"]
+[ext_resource type="Script" uid="uid://bqnn7n8kuofir" path="res://UI/buttonSkipCombat.gd" id="21_82q4f"]
 
 [sub_resource type="Resource" id="Resource_i1s1q"]
-script = ExtResource("15_lt2sy")
+script = ExtResource("17_h6iln")
 index = 0
 scale = Vector2(1.2, 1.2)
 is_enemy = false
@@ -31,7 +33,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s6b88"]
 
 [sub_resource type="Resource" id="Resource_8flqu"]
-script = ExtResource("15_lt2sy")
+script = ExtResource("17_h6iln")
 index = 1
 scale = Vector2(1, 1)
 is_enemy = false
@@ -41,7 +43,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hxbks"]
 
 [sub_resource type="Resource" id="Resource_x8qlv"]
-script = ExtResource("15_lt2sy")
+script = ExtResource("17_h6iln")
 index = 2
 scale = Vector2(1.2, 1.2)
 is_enemy = false
@@ -51,7 +53,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtu61"]
 
 [sub_resource type="Resource" id="Resource_t7hjh"]
-script = ExtResource("15_lt2sy")
+script = ExtResource("17_h6iln")
 index = 3
 scale = Vector2(1, 1)
 is_enemy = false
@@ -61,7 +63,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m2l43"]
 
 [sub_resource type="Resource" id="Resource_fs52m"]
-script = ExtResource("15_lt2sy")
+script = ExtResource("17_h6iln")
 index = 0
 scale = Vector2(1, 1)
 is_enemy = true
@@ -71,7 +73,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xtuat"]
 
 [sub_resource type="Resource" id="Resource_ehgg6"]
-script = ExtResource("15_lt2sy")
+script = ExtResource("17_h6iln")
 index = 1
 scale = Vector2(0.9, 0.9)
 is_enemy = true
@@ -81,7 +83,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xwqlg"]
 
 [sub_resource type="Resource" id="Resource_if0a6"]
-script = ExtResource("15_lt2sy")
+script = ExtResource("17_h6iln")
 index = 2
 scale = Vector2(1, 1)
 is_enemy = true
@@ -91,7 +93,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c7ruu"]
 
 [sub_resource type="Resource" id="Resource_euc7u"]
-script = ExtResource("15_lt2sy")
+script = ExtResource("17_h6iln")
 index = 3
 scale = Vector2(0.9, 0.9)
 is_enemy = true
@@ -107,13 +109,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_81med")
+script = ExtResource("1_u3ti6")
 
 [node name="ZunBg" type="Sprite2D" parent="."]
 position = Vector2(961, 402)
-texture = ExtResource("2_nh036")
+texture = ExtResource("2_ucvp2")
 
-[node name="atmosphere" parent="." instance=ExtResource("3_tcd6m")]
+[node name="atmosphere" parent="." instance=ExtResource("3_eawyw")]
 position = Vector2(2, 352)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
@@ -128,12 +130,12 @@ handle_input_locally = false
 size = Vector2i(400, 400)
 render_target_update_mode = 4
 
-[node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_vboy3")]
+[node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("6_ov3h8")]
 scale = Vector2(0.5, 0.5)
 
 [node name="FightUi" type="Sprite2D" parent="."]
 position = Vector2(960, 545)
-texture = ExtResource("5_vgu64")
+texture = ExtResource("7_fko1d")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -158,13 +160,13 @@ alignment = 1
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("6_iin8a")
+theme_override_fonts/font = ExtResource("8_kai0j")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("7_l3wlu")
+icon = ExtResource("9_pr6vk")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("8_fh6h7")
+script = ExtResource("10_hi45r")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action1"]
 layout_mode = 0
@@ -175,13 +177,13 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("6_iin8a")
+theme_override_fonts/font = ExtResource("8_kai0j")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("7_l3wlu")
+icon = ExtResource("9_pr6vk")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("8_fh6h7")
+script = ExtResource("10_hi45r")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action2"]
 layout_mode = 0
@@ -192,13 +194,13 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("6_iin8a")
+theme_override_fonts/font = ExtResource("8_kai0j")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("7_l3wlu")
+icon = ExtResource("9_pr6vk")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("8_fh6h7")
+script = ExtResource("10_hi45r")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action3"]
 layout_mode = 0
@@ -209,13 +211,13 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("6_iin8a")
+theme_override_fonts/font = ExtResource("8_kai0j")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("7_l3wlu")
+icon = ExtResource("9_pr6vk")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("8_fh6h7")
+script = ExtResource("10_hi45r")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action4"]
 layout_mode = 0
@@ -226,13 +228,13 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("6_iin8a")
+theme_override_fonts/font = ExtResource("8_kai0j")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("7_l3wlu")
+icon = ExtResource("9_pr6vk")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("8_fh6h7")
+script = ExtResource("10_hi45r")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action5"]
 layout_mode = 0
@@ -245,7 +247,7 @@ offset_left = 681.0
 offset_top = 982.0
 offset_right = 1260.0
 offset_bottom = 1066.0
-theme_override_fonts/font = ExtResource("9_svqxm")
+theme_override_fonts/font = ExtResource("11_56n5u")
 theme_override_font_sizes/font_size = 25
 text = "Attaque1 
 et truc et bidule"
@@ -267,7 +269,7 @@ offset_left = 204.0
 offset_top = 821.0
 offset_right = 848.0
 offset_bottom = 901.0
-theme_override_fonts/font = ExtResource("6_iin8a")
+theme_override_fonts/font = ExtResource("8_kai0j")
 theme_override_font_sizes/font_size = 40
 text = "Hero Name"
 
@@ -277,7 +279,7 @@ offset_left = 59.0
 offset_top = 928.0
 offset_right = 325.0
 offset_bottom = 983.0
-theme_override_fonts/font = ExtResource("6_iin8a")
+theme_override_fonts/font = ExtResource("8_kai0j")
 theme_override_font_sizes/font_size = 20
 text = "Attaque :"
 
@@ -287,7 +289,7 @@ offset_left = 59.0
 offset_top = 961.0
 offset_right = 272.0
 offset_bottom = 1016.0
-theme_override_fonts/font = ExtResource("6_iin8a")
+theme_override_fonts/font = ExtResource("8_kai0j")
 theme_override_font_sizes/font_size = 20
 text = "Defence:"
 
@@ -297,7 +299,7 @@ offset_left = 59.0
 offset_top = 988.0
 offset_right = 278.0
 offset_bottom = 1043.0
-theme_override_fonts/font = ExtResource("6_iin8a")
+theme_override_fonts/font = ExtResource("8_kai0j")
 theme_override_font_sizes/font_size = 20
 text = "Stamina :	
 "
@@ -308,7 +310,7 @@ offset_left = 59.0
 offset_top = 1015.0
 offset_right = 278.0
 offset_bottom = 1070.0
-theme_override_fonts/font = ExtResource("6_iin8a")
+theme_override_fonts/font = ExtResource("8_kai0j")
 theme_override_font_sizes/font_size = 20
 text = "Horny
 "
@@ -319,7 +321,7 @@ offset_left = 59.0
 offset_top = 1043.0
 offset_right = 278.0
 offset_bottom = 1098.0
-theme_override_fonts/font = ExtResource("6_iin8a")
+theme_override_fonts/font = ExtResource("8_kai0j")
 theme_override_font_sizes/font_size = 20
 text = "Guilt:
 "
@@ -335,14 +337,14 @@ theme_override_font_sizes/font_size = 40
 text = "ce qu'il se passe"
 autowrap_mode = 3
 
-[node name="CombatManager" parent="." instance=ExtResource("10_xva3j")]
+[node name="CombatManager" parent="." instance=ExtResource("12_4sw3e")]
 HERO_START_POS = Vector2(100, 500)
 ENEMY_START_POS = Vector2(1200, 500)
 target_scene = "uid://dqnjuxw77ebnb"
-encounter = ExtResource("11_j0uve")
+encounter = ExtResource("13_n184l")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CombatManager"]
-stream = ExtResource("12_tegig")
+stream = ExtResource("14_ptev3")
 volume_db = 4.455
 pitch_scale = 0.67
 
@@ -358,7 +360,7 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1000.0
-theme_override_fonts/font = ExtResource("6_iin8a")
+theme_override_fonts/font = ExtResource("8_kai0j")
 theme_override_font_sizes/font_size = 450
 text = "Victoire !"
 horizontal_alignment = 1
@@ -367,14 +369,14 @@ vertical_alignment = 1
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
 ignore_rotation = false
-script = ExtResource("13_ow63s")
+script = ExtResource("15_ssuj2")
 
 [node name="HeroPosition" type="Node2D" parent="."]
 position = Vector2(288, 642)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
 position = Vector2(0, 28)
-script = ExtResource("14_ku83v")
+script = ExtResource("16_b6nyf")
 position_data = SubResource("Resource_i1s1q")
 
 [node name="TextureRect" type="TextureRect" parent="HeroPosition/position1"]
@@ -384,7 +386,7 @@ offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
 mouse_filter = 2
-texture = ExtResource("7_l3wlu")
+texture = ExtResource("9_pr6vk")
 
 [node name="Button" type="Button" parent="HeroPosition/position1"]
 offset_left = -92.0
@@ -396,7 +398,7 @@ flat = true
 
 [node name="position2" type="Node2D" parent="HeroPosition"]
 position = Vector2(173, -13)
-script = ExtResource("14_ku83v")
+script = ExtResource("16_b6nyf")
 position_data = SubResource("Resource_8flqu")
 
 [node name="TextureRect" type="TextureRect" parent="HeroPosition/position2"]
@@ -405,7 +407,7 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
-texture = ExtResource("7_l3wlu")
+texture = ExtResource("9_pr6vk")
 
 [node name="Button" type="Button" parent="HeroPosition/position2"]
 offset_left = -92.0
@@ -417,7 +419,7 @@ flat = true
 
 [node name="position3" type="Node2D" parent="HeroPosition"]
 position = Vector2(354, 33)
-script = ExtResource("14_ku83v")
+script = ExtResource("16_b6nyf")
 position_data = SubResource("Resource_x8qlv")
 
 [node name="TextureRect" type="TextureRect" parent="HeroPosition/position3"]
@@ -426,7 +428,7 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
-texture = ExtResource("7_l3wlu")
+texture = ExtResource("9_pr6vk")
 
 [node name="Button" type="Button" parent="HeroPosition/position3"]
 offset_left = -92.0
@@ -438,7 +440,7 @@ flat = true
 
 [node name="position4" type="Node2D" parent="HeroPosition"]
 position = Vector2(572, -3)
-script = ExtResource("14_ku83v")
+script = ExtResource("16_b6nyf")
 position_data = SubResource("Resource_t7hjh")
 
 [node name="TextureRect" type="TextureRect" parent="HeroPosition/position4"]
@@ -447,7 +449,7 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
-texture = ExtResource("7_l3wlu")
+texture = ExtResource("9_pr6vk")
 
 [node name="Button" type="Button" parent="HeroPosition/position4"]
 offset_left = -92.0
@@ -462,9 +464,9 @@ position = Vector2(1209, 642)
 
 [node name="position1" type="Node2D" parent="ennemiePosition"]
 position = Vector2(0, 23)
-script = ExtResource("14_ku83v")
+script = ExtResource("16_b6nyf")
 position_data = SubResource("Resource_fs52m")
-enemy_scene = ExtResource("16_qrpb6")
+enemy_scene = ExtResource("18_mk0s0")
 
 [node name="TextureRect" type="TextureRect" parent="ennemiePosition/position1"]
 visible = false
@@ -472,7 +474,7 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
-texture = ExtResource("7_l3wlu")
+texture = ExtResource("9_pr6vk")
 
 [node name="Button" type="Button" parent="ennemiePosition/position1"]
 offset_left = -90.0
@@ -484,9 +486,9 @@ flat = true
 
 [node name="position2" type="Node2D" parent="ennemiePosition"]
 position = Vector2(169, -16)
-script = ExtResource("14_ku83v")
+script = ExtResource("16_b6nyf")
 position_data = SubResource("Resource_ehgg6")
-enemy_scene = ExtResource("17_qdfir")
+enemy_scene = ExtResource("19_plvru")
 
 [node name="TextureRect" type="TextureRect" parent="ennemiePosition/position2"]
 visible = false
@@ -494,7 +496,7 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
-texture = ExtResource("7_l3wlu")
+texture = ExtResource("9_pr6vk")
 
 [node name="Button" type="Button" parent="ennemiePosition/position2"]
 offset_left = -92.0
@@ -506,9 +508,9 @@ flat = true
 
 [node name="position3" type="Node2D" parent="ennemiePosition"]
 position = Vector2(366, 23)
-script = ExtResource("14_ku83v")
+script = ExtResource("16_b6nyf")
 position_data = SubResource("Resource_if0a6")
-enemy_scene = ExtResource("18_mi26p")
+enemy_scene = ExtResource("20_fj73k")
 
 [node name="TextureRect" type="TextureRect" parent="ennemiePosition/position3"]
 visible = false
@@ -516,7 +518,7 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
-texture = ExtResource("7_l3wlu")
+texture = ExtResource("9_pr6vk")
 
 [node name="Button" type="Button" parent="ennemiePosition/position3"]
 offset_left = -92.0
@@ -528,7 +530,7 @@ flat = true
 
 [node name="position4" type="Node2D" parent="ennemiePosition"]
 position = Vector2(523, -10)
-script = ExtResource("14_ku83v")
+script = ExtResource("16_b6nyf")
 position_data = SubResource("Resource_euc7u")
 
 [node name="TextureRect" type="TextureRect" parent="ennemiePosition/position4"]
@@ -537,7 +539,7 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
-texture = ExtResource("7_l3wlu")
+texture = ExtResource("9_pr6vk")
 
 [node name="Button" type="Button" parent="ennemiePosition/position4"]
 offset_left = -92.0
@@ -554,7 +556,30 @@ offset_top = 23.0
 offset_right = 1858.0
 offset_bottom = 153.0
 text = "next"
-script = ExtResource("19_2u5uo")
+script = ExtResource("21_82q4f")
+
+[node name="SpriteHeros" type="Sprite2D" parent="."]
+z_index = 20
+position = Vector2(-344, 394)
+scale = Vector2(1.36806, 1.36806)
+texture = ExtResource("4_jmibc")
+script = ExtResource("5_i40dl")
+attackPos = Vector2(800, 500)
+MidPos = Vector2(400, 500)
+outsidePos = Vector2(-300, 500)
+esquivPos = Vector2(250, 500)
+attack_scale = Vector2(2, 2)
+
+[node name="SpriteEnnemies" type="Sprite2D" parent="."]
+z_index = 24
+position = Vector2(2308.5, 406.5)
+scale = Vector2(1.32465, 1.32465)
+texture = ExtResource("4_jmibc")
+script = ExtResource("5_i40dl")
+attackPos = Vector2(1400, 500)
+MidPos = Vector2(1625, 500)
+outsidePos = Vector2(2200, 500)
+esquivPos = Vector2(1700, 500)
 
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]

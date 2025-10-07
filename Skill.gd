@@ -75,7 +75,7 @@ func can_use() -> bool:
 
 func use(target: PositionSlot = null, secondtarget : bool=false):
 	print(owner.Charaname+ " use "+ self.name)
-	owner.SkillText.activate(ImageSkill,duration) 
+	target.combat_manager.stop_target_selection()
 	if not can_use():
 		return
 	

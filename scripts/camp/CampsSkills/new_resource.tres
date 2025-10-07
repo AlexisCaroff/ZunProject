@@ -11,6 +11,7 @@ name = "Repos"
 description = "Permet au héros de se reposer et de récupérer un peu de PV."
 icon = ExtResource("2_g4hdb")
 cost = 1
+standarEnd = true
 target_type = 1
 effects = Array[ExtResource("1_f4rjp")]([ExtResource("2_uc2qn")])
 metadata/_custom_type_script = "uid://p5e0p5tqo2hw"

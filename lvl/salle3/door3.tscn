@@ -278,6 +278,7 @@ position = Vector2(791, 374)
 [node name="EmbuscadeUI" type="TextureRect" parent="."]
 visible = false
 z_index = 12
+layout_mode = 0
 offset_left = 567.0
 offset_top = -7.0
 offset_right = 1463.0

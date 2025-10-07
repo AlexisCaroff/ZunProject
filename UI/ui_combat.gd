@@ -126,10 +126,10 @@ func update_cooldown(character:Character):
 			button.icon = skill.icon
 			if skill.current_cooldown > 0:
 				cooldownlabel.text = "%d" % [skill.current_cooldown]
-				dot.modulate = Color(0.0,0.0,0.0) 
+
 			else :
 				cooldownlabel.text = " "
-				dot.modulate = Color(0.8,0.78,0.7)
+	
 
 			var index = i  # capture locale de la bonne valeur
 			button.pressed.connect(

@@ -68,13 +68,13 @@ offset_bottom = -238.0
 text = "name"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 22.0
-offset_top = -252.0
-offset_right = 62.0
-offset_bottom = -233.0
+offset_left = 52.0
+offset_top = -196.947
+offset_right = 92.0
+offset_bottom = -177.947
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(0, -21)
+position = Vector2(30, 34.0527)
 script = ExtResource("11_ih6kd")
 min_scale = 1.0
 scalemini = 0.9
@@ -104,7 +104,7 @@ expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Arrow" type="Sprite2D" parent="."]
-position = Vector2(-52, -351)
+position = Vector2(-22, -295.947)
 scale = Vector2(0.38, 0.38)
 texture = ExtResource("13_3o24a")
 offset = Vector2(0, 117.335)
@@ -126,10 +126,10 @@ texture = ExtResource("14_3o24a")
 script = ExtResource("15_bbnup")
 
 [node name="HP" type="Label" parent="."]
-offset_left = -108.0
-offset_top = -26.0
-offset_right = -61.0
-offset_bottom = -7.0
+offset_left = -78.0
+offset_top = 29.0527
+offset_right = -31.0
+offset_bottom = 48.0527
 theme_override_fonts/font = ExtResource("16_bbnup")
 theme_override_font_sizes/font_size = 15
 text = "Stamina:"
@@ -183,10 +183,10 @@ offset_bottom = 17.0
 show_percentage = false
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
-offset_left = -101.0
-offset_top = -2.0
-offset_right = 33.0
-offset_bottom = 15.0
+offset_left = -71.0
+offset_top = 53.0527
+offset_right = 63.0
+offset_bottom = 70.0527
 alignment = 1
 
 [node name="DotAction1" type="TextureRect" parent="HBoxContainer2"]
