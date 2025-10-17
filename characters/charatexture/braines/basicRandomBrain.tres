@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AiBrain" load_steps=2 format=3 uid="uid://86jrw37oebpi"]
+
+[ext_resource type="Script" uid="uid://cf2k68rgsdle0" path="res://characters/charatexture/braines/Ai_brain.gd" id="1_76bnb"]
+
+[resource]
+script = ExtResource("1_76bnb")
+name = "Default AI"
+description = "IA basique qui choisit une compétence aléatoire utilisable et une cible valide."
+metadata/_custom_type_script = "uid://cf2k68rgsdle0"

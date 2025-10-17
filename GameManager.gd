@@ -26,7 +26,7 @@ func _ready():
 func enter_room(room: RoomResource):
 	last_room_Ressource = current_room_Ressource
 	current_room_Ressource = room
-	print("current room is ", current_room_Ressource.position_on_map)
+	print("current room is ", current_room_Ressource)
 	# Supprimer l'ancienne room si elle existe
 	if current_room_node:
 		current_room_node.queue_free()
@@ -36,7 +36,7 @@ func enter_room(room: RoomResource):
 	var scene_to_load: PackedScene = null
 	if room.door_scene:
 		scene_to_load = room.door_scene
-		print ("load scene door",scene_to_load.resource_name )
+		print ("load scene door" + scene_to_load.resource_name )
 
 	if scene_to_load:
 		var new_scene = scene_to_load.instantiate()
@@ -66,7 +66,7 @@ func go_to_connected_room(index: int):
 	var next_room = current_room_Ressource.connected_rooms[index]
 	enter_room(next_room)
 
-func _enter_scene_in_current_room(scene:PackedScene):
+func _enter_scene_in_current_room(scene:PackedScene, ennemy_are_embushed: bool = false, heroes_are_embushed: bool = false):
 	if scene:
 		print("old scene is ", current_room_node.name)
 		if current_room_node:
@@ -74,11 +74,26 @@ func _enter_scene_in_current_room(scene:PackedScene):
 			current_room_node.free()
 			current_room_node = null
 		var new_scene = scene.instantiate()
+		#if new_scene == current_room_Ressource.combat_scene:
+			#le encounter du combat manager = current_room_Ressource.encounter
+		if current_room_Ressource.combat_scene and scene == current_room_Ressource.combat_scene:
+			if new_scene.has_node("CombatManager"):
+				var combat_manager = new_scene.get_node("CombatManager")
+				combat_manager.encounter = current_room_Ressource.encounter
+				combat_manager.ennemy_are_embushed = ennemy_are_embushed
+				combat_manager.heroes_are_embushed = heroes_are_embushed
+				print("Encounter assigned to CombatManager")
+			else:
+				push_error("⚠️ CombatManager introuvable dans la scène de combat")
+		
 		room_container.add_child(new_scene)
+		
+
+			
 		current_room_node = new_scene
 		print("start new room: ", new_scene.name)
-		for child in room_container.get_children():
-			print("- child: ", child.name)
+		
+		
 			
 func go_to_campement():
 	# Nettoyer l’ancienne scène si besoin

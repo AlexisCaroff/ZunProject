@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dqnjuxw77ebnb"]
+[gd_scene load_steps=23 format=3 uid="uid://dqnjuxw77ebnb"]
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_ohhde"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_5rnso"]
@@ -17,8 +17,15 @@
 [ext_resource type="Script" uid="uid://cvdsxgbtufa4g" path="res://lvl/interactible.gd" id="15_ay18u"]
 [ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="16_dtf2f"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="17_3g6r7"]
-[ext_resource type="Script" uid="uid://2yw45k1rwvdf" path="res://DialogueUI.gd" id="20_e3ant"]
-[ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="21_80na2"]
+[ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="18_qg4ur"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qg4ur"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mlu07"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ln05l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3g6r7"]
 
 [node name="ExploInterface" type="Control"]
 layout_mode = 3
@@ -163,6 +170,7 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -522.0
 offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qg4ur")
 flat = true
 
 [node name="position2" type="Node2D" parent="HeroPosition"]
@@ -177,6 +185,7 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -525.0
 offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mlu07")
 flat = true
 
 [node name="position3" type="Node2D" parent="HeroPosition"]
@@ -190,6 +199,7 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -505.0
 offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ln05l")
 flat = true
 
 [node name="position4" type="Node2D" parent="HeroPosition"]
@@ -203,6 +213,7 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -539.0
 offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3g6r7")
 flat = true
 
 [node name="ExplorationManager" type="Node2D" parent="."]
@@ -228,20 +239,21 @@ expand_mode = 1
 
 [node name="Kairn" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1.2, 1)
-position = Vector2(254, 508)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("14_0oifh")
+position = Vector2(266, 464)
 script = ExtResource("15_ay18u")
 dialoguePass = "res://dialogue/dialogueTeste.txt"
 
 [node name="Button" type="Button" parent="Kairn"]
-offset_left = -170.0
-offset_top = -179.0
-offset_right = 201.0
-offset_bottom = 165.0
+offset_left = -146.0
+offset_top = -80.0
+offset_right = 134.0
+offset_bottom = 153.0
+icon = ExtResource("14_0oifh")
 flat = true
+expand_icon = true
 
 [node name="etiquette" type="Sprite2D" parent="Kairn"]
+visible = false
 position = Vector2(193.333, 6.66667)
 texture = ExtResource("16_dtf2f")
 
@@ -258,103 +270,8 @@ text = "EXPLORE"
 z_index = 6
 position = Vector2(-401.667, -825)
 script = ExtResource("17_3g6r7")
+portraits_resource = ExtResource("18_qg4ur")
 is_Choice = true
-
-[node name="DialogueUI" type="Control" parent="Kairn/DialogueManager"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_left = 143.333
-offset_top = -111.667
-offset_right = 183.333
-offset_bottom = -71.6666
-scale = Vector2(1.75383, 1.75383)
-script = ExtResource("20_e3ant")
-
-[node name="ColorRect2" type="ColorRect" parent="Kairn/DialogueManager/DialogueUI"]
-layout_mode = 0
-offset_left = -315.499
-offset_top = -57.018
-offset_right = 832.501
-offset_bottom = 203.982
-scale = Vector2(2.07695, 4.90172)
-color = Color(0, 0, 0, 0.580392)
-
-[node name="Portrait" type="TextureRect" parent="Kairn/DialogueManager/DialogueUI"]
-layout_mode = 0
-offset_left = 246.0
-offset_top = 239.0
-offset_right = 925.0
-offset_bottom = 945.0
-texture = ExtResource("21_80na2")
-
-[node name="ColorRect" type="ColorRect" parent="Kairn/DialogueManager/DialogueUI"]
-layout_mode = 0
-offset_left = 223.0
-offset_top = 772.0
-offset_right = 1371.0
-offset_bottom = 1033.0
-color = Color(0.832031, 0.746592, 0.613619, 1)
-
-[node name="Speaker" type="Label" parent="Kairn/DialogueManager/DialogueUI"]
-layout_mode = 0
-offset_left = 256.0
-offset_top = 783.0
-offset_right = 498.0
-offset_bottom = 884.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_ngelb")
-theme_override_font_sizes/font_size = 50
-text = "Nom"
-
-[node name="Text" type="Label" parent="Kairn/DialogueManager/DialogueUI"]
-layout_mode = 0
-offset_left = 278.0
-offset_top = 844.0
-offset_right = 1302.0
-offset_bottom = 1022.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_ngelb")
-theme_override_font_sizes/font_size = 40
-text = "tetxt"
-autowrap_mode = 3
-
-[node name="indication" type="Label" parent="Kairn/DialogueManager/DialogueUI"]
-layout_mode = 0
-offset_left = 680.0
-offset_top = 998.0
-offset_right = 1001.0
-offset_bottom = 1046.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_ngelb")
-theme_override_font_sizes/font_size = 30
-text = "(space to continue )"
-autowrap_mode = 3
-
-[node name="Choix" type="Control" parent="Kairn/DialogueManager"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="use" type="Button" parent="Kairn/DialogueManager/Choix"]
-layout_mode = 0
-offset_left = 1123.33
-offset_top = 616.667
-offset_right = 1505.33
-offset_bottom = 707.667
-theme_override_font_sizes/font_size = 60
-text = "Use the stele"
-
-[node name="destroy" type="Button" parent="Kairn/DialogueManager/Choix"]
-layout_mode = 0
-offset_left = 1660.0
-offset_top = 616.667
-offset_right = 1800.0
-offset_bottom = 647.667
-theme_override_font_sizes/font_size = 60
-text = "Destroy the stele"
 
 [connection signal="button_down" from="moveButton" to="ExplorationManager" method="_on_move_button_button_down"]
 [connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]
@@ -369,7 +286,3 @@ text = "Destroy the stele"
 [connection signal="button_down" from="Kairn/Button" to="Kairn" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Kairn/Button" to="Kairn" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Kairn/Button" to="Kairn" method="_on_button_mouse_exited"]
-[connection signal="button_down" from="Kairn/DialogueManager/Choix/use" to="Kairn" method="_on_use_button_down"]
-[connection signal="button_down" from="Kairn/DialogueManager/Choix/use" to="Kairn/DialogueManager" method="_on_use_button_down"]
-[connection signal="button_down" from="Kairn/DialogueManager/Choix/destroy" to="Kairn" method="_on_destroy_button_down"]
-[connection signal="button_down" from="Kairn/DialogueManager/Choix/destroy" to="Kairn/DialogueManager" method="_on_destroy_button_down"]

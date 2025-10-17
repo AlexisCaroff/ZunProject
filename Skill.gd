@@ -59,6 +59,7 @@ var the_second_target_type: int = second_target_type.ENNEMY
 var owner: Character
 var target1 : Array[PositionSlot]
 var target2 : Array[PositionSlot]
+@export var tags: Array[String] = []
 
 
 func can_use() -> bool:
@@ -75,20 +76,22 @@ func can_use() -> bool:
 
 func use(target: PositionSlot = null, secondtarget : bool=false):
 	print(owner.Charaname+ " use "+ self.name)
-	target.combat_manager.stop_target_selection()
-	if not can_use():
-		return
-	
-	if !allways_hit:
-		var chance = precision - target.occupant.evasion
-		var rand = randi() % 100
-		if rand >= chance:
-			target.occupant.miss_animation(owner)
+	if target.occupant != null:
+		
+		target.combat_manager.stop_target_selection()
+		if not can_use():
 			return
-	if secondtarget:
-		_apply_second_effect(target)
-	else:
-		_apply_effect(target, effects)
+		
+		if !allways_hit:
+			var chance = precision - target.occupant.evasion
+			var rand = randi() % 100
+			if rand >= chance:
+				target.occupant.miss_animation(owner)
+				return
+		if secondtarget:
+			_apply_second_effect(target)
+		else:
+			_apply_effect(target, effects)
 
 func pay_cost():
 	owner.current_stamina-= cost
@@ -244,3 +247,6 @@ func end_turn(combat_manager):
 	#combat_manager.pending_skill = null
 	combat_manager.turn_queue.append(combat_manager.current_character)
 	combat_manager.next_turn()
+
+func has_tag(tag: String) -> bool:
+	return tag in tags

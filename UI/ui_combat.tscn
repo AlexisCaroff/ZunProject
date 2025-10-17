@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://h8pqs7tabdxj"]
+[gd_scene load_steps=35 format=3 uid="uid://c4tmv66skkgd5"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_8flqu"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="1_32lil"]
@@ -13,15 +13,24 @@
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="8_roj6a"]
 [ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="10_x8qlv"]
 [ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterEnemyNymphe.tscn" id="12_ktp8g"]
-[ext_resource type="PackedScene" uid="uid://jc1bbpflus0q" path="res://characters/CharacterTestEnemy4.tscn" id="12_roj6a"]
 [ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharaEnnemyTemptress.tscn" id="13_euc7u"]
-[ext_resource type="PackedScene" uid="uid://jg7klanpwhgj" path="res://characters/CharacterTestEnemy3.tscn" id="14_roj6a"]
+[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="15_iaf2c"]
+[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="16_3hdr8"]
+[ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="17_f3fsa"]
+[ext_resource type="Texture2D" uid="uid://b0q8mhrqooms" path="res://characters/characterInitiative/cultisteIni.png" id="18_coye5"]
+[ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/HerosCombatSkills/Ennemi_attaque_basique.tres" id="19_5pw1t"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="20_5dq1s"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="21_nshbb"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="22_ivtvk"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="23_dxkpg"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="24_i61uy"]
 
 [sub_resource type="Resource" id="Resource_i1s1q"]
 script = ExtResource("7_i1s1q")
 index = 0
 scale = Vector2(1, 1)
 is_enemy = false
+isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_roj6a"]
@@ -31,6 +40,7 @@ script = ExtResource("7_i1s1q")
 index = 1
 scale = Vector2(0.8, 0.8)
 is_enemy = false
+isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="Resource" id="Resource_x8qlv"]
@@ -38,6 +48,7 @@ script = ExtResource("7_i1s1q")
 index = 2
 scale = Vector2(1, 1)
 is_enemy = false
+isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="Resource" id="Resource_t7hjh"]
@@ -45,6 +56,7 @@ script = ExtResource("7_i1s1q")
 index = 3
 scale = Vector2(0.8, 0.8)
 is_enemy = false
+isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="Resource" id="Resource_fs52m"]
@@ -52,6 +64,7 @@ script = ExtResource("7_i1s1q")
 index = 0
 scale = Vector2(1, 1)
 is_enemy = true
+isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="Resource" id="Resource_ehgg6"]
@@ -59,6 +72,7 @@ script = ExtResource("7_i1s1q")
 index = 1
 scale = Vector2(0.8, 0.8)
 is_enemy = true
+isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="Resource" id="Resource_if0a6"]
@@ -66,13 +80,28 @@ script = ExtResource("7_i1s1q")
 index = 2
 scale = Vector2(1, 1)
 is_enemy = true
+isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="PackedScene" id="PackedScene_qbte2"]
+_bundled = {
+"conn_count": 3,
+"conns": PackedInt32Array(1073741839, 1073741838, 135, 134, 2, 0, 0, 1073741841, 1073741840, 137, 136, 2, 0, 0, 1073741843, 1073741842, 139, 138, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("CharacterTestennemie3", "Node2D", "script", "portrait_texture", "dead_portrait_texture", "initiative_icon", "Charaname", "IsDemon", "Chara_position", "skill_resources", "is_player_controlled", "pivot", "Node2D", "position", "script", "HerosTexture1", "TextureRect", "offset_left", "offset_top", "offset_right", "offset_bottom", "mouse_filter", "texture", "expand_mode", "metadata/_edit_use_anchors_", "Selector", "TextureRect", "self_modulate", "offset_left", "offset_top", "offset_right", "offset_bottom", "mouse_filter", "texture", "expand_mode", "metadata/_edit_use_anchors_", "name", "Label", "visible", "offset_left", "offset_top", "offset_right", "offset_bottom", "text", "Button", "Button", "modulate", "offset_left", "offset_top", "offset_right", "offset_bottom", "HBoxContainer", "HBoxContainer", "offset_left", "offset_top", "offset_right", "offset_bottom", "Skill", "TextureRect", "visible", "offset_left", "offset_top", "offset_right", "offset_bottom", "scale", "texture", "script", "Arrow", "Sprite2D", "position", "scale", "texture", "offset", "script", "min_scale", "max_scale", "scalemini", "min_duration", "max_duration", "HP", "Label", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "text", "HPProgressBar", "ProgressBar", "modulate", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "value", "show_percentage", "Stress", "Label", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "text", "GuiltrogressBar", "ProgressBar", "modulate", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "show_percentage", "horny", "Label", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "text", "HornyProgressBar", "ProgressBar", "modulate", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "show_percentage", "_on_button_button_down", "button_down", "_on_button_mouse_entered", "mouse_entered", "_on_button_mouse_exited", "mouse_exited"),
+"node_count": 15,
+"node_paths": [NodePath("."), NodePath("./pivot"), NodePath("./pivot"), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("./HP"), NodePath("."), NodePath("./Stress"), NodePath("."), NodePath("./horny"), NodePath("."), NodePath("Button"), NodePath("."), NodePath("Button"), NodePath("."), NodePath("Button")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 9, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 10, 8, 0, 1073741824, 0, 12, 11, -1, 2, 13, 9, 14, 10, 0, 1073741825, 0, 16, 15, -1, 8, 17, 11, 18, 12, 19, 13, 20, 14, 21, 15, 22, 16, 23, 17, 24, 18, 0, 1073741826, 0, 26, 25, -1, 9, 27, 19, 28, 20, 29, 21, 30, 22, 31, 23, 32, 24, 33, 25, 34, 26, 35, 27, 0, 1073741827, 0, 37, 36, -1, 6, 38, 28, 39, 29, 40, 30, 41, 31, 42, 32, 43, 33, 0, 1073741828, 0, 45, 44, -1, 5, 46, 34, 47, 35, 48, 36, 49, 37, 50, 38, 0, 1073741829, 0, 52, 51, -1, 4, 53, 39, 54, 40, 55, 41, 56, 42, 0, 1073741830, 0, 58, 57, -1, 8, 59, 43, 60, 44, 61, 45, 62, 46, 63, 47, 64, 48, 65, 49, 66, 50, 0, 1073741831, 0, 68, 67, -1, 10, 69, 51, 70, 52, 71, 53, 72, 54, 73, 55, 74, 56, 75, 57, 76, 58, 77, 59, 78, 60, 0, 1073741832, 0, 80, 79, -1, 7, 81, 61, 82, 62, 83, 63, 84, 64, 85, 65, 86, 66, 87, 67, 0, 1073741833, 0, 89, 88, -1, 8, 90, 68, 91, 69, 92, 70, 93, 71, 94, 72, 95, 73, 96, 74, 97, 75, 0, 1073741834, 0, 99, 98, -1, 7, 100, 76, 101, 77, 102, 78, 103, 79, 104, 80, 105, 81, 106, 82, 0, 1073741835, 0, 108, 107, -1, 7, 109, 83, 110, 84, 111, 85, 112, 86, 113, 87, 114, 88, 115, 89, 0, 1073741836, 0, 117, 116, -1, 7, 118, 90, 119, 91, 120, 92, 121, 93, 122, 94, 123, 95, 124, 96, 0, 1073741837, 0, 126, 125, -1, 7, 127, 97, 128, 98, 129, 99, 130, 100, 131, 101, 132, 102, 133, 103, 0),
+"variants": [ExtResource("15_iaf2c"), ExtResource("16_3hdr8"), ExtResource("17_f3fsa"), ExtResource("18_coye5"), "Bulub", true, 2, Array[Resource]([ExtResource("19_5pw1t"), ExtResource("19_5pw1t"), ExtResource("19_5pw1t"), ExtResource("19_5pw1t"), ExtResource("20_5dq1s")]), false, Vector2(0, -21), ExtResource("21_nshbb"), -133.0, -229.0, 38.0, 2.0, 2, ExtResource("16_3hdr8"), 1, true, Color(2, 2, 2, 0), -133.0, -229.0, 38.0, 2.0, 2, ExtResource("16_3hdr8"), 1, true, false, -82.0, -265.0, -38.0, -242.0, "name", Color(1, 1, 1, 0), -123.0, -325.0, 110.0, 57.0, 22.0, -252.0, 62.0, -233.0, false, -176.0, -305.0, 400.0, 271.0, Vector2(0.5, 0.5), ExtResource("22_ivtvk"), ExtResource("23_dxkpg"), Vector2(-52, -351), Vector2(0.38, 0.38), ExtResource("24_i61uy"), Vector2(0, 117.335), ExtResource("21_nshbb"), 0.38, 0.38, 0.3, 0.5, 0.5, -108.0, -33.0, -65.0, -14.0, ExtResource("8_roj6a"), 15, "Stamina:", Color(0.690751, 1, 0, 1), 0, 50.0, 7.0, 146.0, 17.0, 100.0, false, -91.0, -15.0, -66.0, 4.0, ExtResource("8_roj6a"), 15, "Guilt:", Color(1, 0.257036, 0, 1), 0, 32.0, 7.0, 128.0, 17.0, false, -99.0, 2.0, -67.0, 21.0, ExtResource("8_roj6a"), 15, "Horny:", Color(0.905484, 0, 1, 1), 0, 39.0, 7.0, 135.0, 17.0, false],
+"version": 3
+}
 
 [sub_resource type="Resource" id="Resource_euc7u"]
 script = ExtResource("7_i1s1q")
 index = 3
 scale = Vector2(0.8, 0.8)
 is_enemy = true
+isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [node name="CombatInterface" type="Control"]
@@ -235,8 +264,6 @@ autowrap_mode = 3
 [node name="CombatManager" parent="." instance=ExtResource("10_x8qlv")]
 HERO_START_POS = Vector2(100, 500)
 ENEMY_START_POS = Vector2(1200, 500)
-next_scene_path = "res://scenes/combat2.tscn"
-ENEMY_SCENES = [ExtResource("12_ktp8g"), ExtResource("12_ktp8g"), ExtResource("14_roj6a"), ExtResource("12_roj6a")]
 
 [node name="ResultScreen" type="Label" parent="."]
 visible = false
@@ -398,7 +425,7 @@ texture = ExtResource("1_32lil")
 position = Vector2(366, 23)
 script = ExtResource("6_j6rr1")
 position_data = SubResource("Resource_if0a6")
-enemy_scene = ExtResource("14_roj6a")
+enemy_scene = SubResource("PackedScene_qbte2")
 
 [node name="Button" type="Button" parent="ennemiePosition/position3"]
 offset_left = -95.0

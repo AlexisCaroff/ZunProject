@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://csp2iaxa3prf"]
+[gd_scene load_steps=23 format=3 uid="uid://csp2iaxa3prf"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_1m0vh"]
 [ext_resource type="Texture2D" uid="uid://c8rp0k1fogimi" path="res://characters/charatexture/char priest.png" id="2_wpklt"]
@@ -13,16 +13,17 @@
 [ext_resource type="Resource" uid="uid://do1xqbabe8r4b" path="res://scripts/camp/CampsSkills/new_resource.tres" id="11_y8uyf"]
 [ext_resource type="Resource" uid="uid://cd4m2bk1ikodm" path="res://actions/CampSkill/dialogue.tres" id="12_7p8u1"]
 [ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/skillEffects/campSkilleffect/LoveEffect.tres" id="13_ea307"]
-[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="14_1kclh"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="15_fkass"]
 [ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="16_7adbu"]
 [ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="17_d4gm4"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="18_xgs3v"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="19_p6ptv"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="20_2acdn"]
+[ext_resource type="Texture2D" uid="uid://bri15xc6cn1ul" path="res://actions/hornyJauge.png" id="21_wpklt"]
 [ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="21_yalvy"]
+[ext_resource type="Texture2D" uid="uid://bk1gu5cgtgkfy" path="res://actions/hornyJaugePleine.png" id="22_xqmvo"]
 
-[node name="CharacterTestHero1" type="Node2D"]
+[node name="Priest" type="Node2D"]
 script = ExtResource("1_1m0vh")
 portrait_texture = ExtResource("2_wpklt")
 dead_portrait_texture = ExtResource("3_xqmvo")
@@ -39,71 +40,14 @@ offset_right = -11.0
 offset_bottom = -227.0
 text = "name"
 
-[node name="HP" type="Label" parent="."]
-offset_left = -79.0
-offset_top = 72.7975
-offset_right = -32.0
-offset_bottom = 91.7975
-theme_override_fonts/font = ExtResource("14_1kclh")
-theme_override_font_sizes/font_size = 15
-text = "Stamina:"
-
-[node name="HPProgressBar" type="ProgressBar" parent="HP"]
-modulate = Color(1, 0.714937, 0, 1)
-layout_mode = 0
-offset_left = 50.0
-offset_top = 7.0
-offset_right = 146.0
-offset_bottom = 17.0
-value = 100.0
-show_percentage = false
-
-[node name="Stress" type="Label" parent="."]
-visible = false
-offset_left = -91.0
-offset_top = -15.0
-offset_right = -66.0
-offset_bottom = 4.0
-theme_override_fonts/font = ExtResource("14_1kclh")
-theme_override_font_sizes/font_size = 15
-text = "Guilt:"
-
-[node name="GuiltrogressBar" type="ProgressBar" parent="Stress"]
-modulate = Color(1, 0.257036, 0, 1)
-layout_mode = 0
-offset_left = 32.0
-offset_top = 7.0
-offset_right = 128.0
-offset_bottom = 17.0
-show_percentage = false
-
-[node name="horny" type="Label" parent="."]
-visible = false
-offset_left = -99.0
-offset_top = 2.0
-offset_right = -67.0
-offset_bottom = 21.0
-theme_override_fonts/font = ExtResource("14_1kclh")
-theme_override_font_sizes/font_size = 15
-text = "Horny:"
-
-[node name="HornyProgressBar" type="ProgressBar" parent="horny"]
-modulate = Color(0.905484, 0, 1, 1)
-layout_mode = 0
-offset_left = 39.0
-offset_top = 7.0
-offset_right = 135.0
-offset_bottom = 17.0
-show_percentage = false
-
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = 33.0
-offset_top = -121.203
+offset_top = -158.202
 offset_right = 81.0
-offset_bottom = -80.2025
+offset_bottom = -117.202
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(32, 70.7975)
+position = Vector2(32, 33.798)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("15_fkass")
 min_scale = 1.1
@@ -146,7 +90,7 @@ texture = ExtResource("18_xgs3v")
 script = ExtResource("19_p6ptv")
 
 [node name="Arrow" type="Sprite2D" parent="."]
-position = Vector2(-16, -232.203)
+position = Vector2(-1, -269.203)
 scale = Vector2(0.38, 0.38)
 texture = ExtResource("20_2acdn")
 offset = Vector2(0, 115.375)
@@ -158,11 +102,21 @@ min_duration = 0.5
 max_duration = 0.5
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
-offset_left = -72.0
-offset_top = 96.7975
-offset_right = 62.0
-offset_bottom = 113.797
-alignment = 1
+clip_contents = true
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = 61.0
+offset_right = 28.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 8
 
 [node name="DotAction1" type="TextureRect" parent="HBoxContainer2"]
 modulate = Color(0.642019, 0.561016, 0.364715, 1)
@@ -188,3 +142,20 @@ texture = ExtResource("21_yalvy")
 modulate = Color(0.642019, 0.561016, 0.364715, 1)
 layout_mode = 2
 texture = ExtResource("21_yalvy")
+
+[node name="HornyJauge" type="Sprite2D" parent="."]
+position = Vector2(60, 50)
+scale = Vector2(0.403259, 0.403259)
+texture = ExtResource("21_wpklt")
+
+[node name="HornyJaugePleine" type="Sprite2D" parent="HornyJauge"]
+texture = ExtResource("22_xqmvo")
+
+[node name="HPProgressBar" type="ProgressBar" parent="."]
+modulate = Color(1, 0.714937, 0, 1)
+offset_left = -48.0
+offset_top = 42.798
+offset_right = 48.0
+offset_bottom = 52.798
+value = 100.0
+show_percentage = false

@@ -6,11 +6,9 @@ var Chartarget:Character
 func apply(source: Character, target: PositionSlot):
 	Chartarget = target.occupant
 	
-	if Chartarget == null:
-		return
-
-	Chartarget.taunted_by = source
-	Chartarget.taunt_duration = duration
+	if Chartarget != null:
+		Chartarget.taunted_by = source
+		Chartarget.taunt_duration = duration
 
 	
 		

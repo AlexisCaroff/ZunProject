@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw5s8ebimv1wh"]
+
+[ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="1_oausj"]
+[ext_resource type="Script" uid="uid://cevuvmhmwe5y5" path="res://UI/item_ui.gd" id="1_q6op2"]
+[ext_resource type="Texture2D" uid="uid://cwyh8uva3wdam" path="res://UI/goldIcon.png" id="2_q6op2"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="4_qyigm"]
+
+[node name="itemUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q6op2")
+
+[node name="boxUI" type="TextureRect" parent="."]
+layout_mode = 0
+texture = ExtResource("1_oausj")
+
+[node name="imageObj" type="TextureRect" parent="boxUI"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 43.0
+offset_right = 103.0
+offset_bottom = 93.0
+texture = ExtResource("2_q6op2")
+expand_mode = 1
+
+[node name="Labelname" type="Label" parent="boxUI"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 127.0
+offset_right = 118.0
+offset_bottom = 184.0
+theme_override_fonts/font = ExtResource("4_qyigm")
+theme_override_font_sizes/font_size = 20
+text = "Name"
+horizontal_alignment = 1

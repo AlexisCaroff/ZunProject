@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dv04v6jagn4q1"]
+[gd_scene load_steps=14 format=3 uid="uid://dv04v6jagn4q1"]
 
 [ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_o6m4w"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_puy7d"]
@@ -9,8 +9,6 @@
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="7_mdkvs"]
 [ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="8_r3s01"]
 [ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="9_7l14n"]
-[ext_resource type="Script" uid="uid://6edfrm0jkjqe" path="res://lvl/back.gd" id="10_1jugk"]
-[ext_resource type="Texture2D" uid="uid://bqmj6euxhil4t" path="res://UI/back.png" id="11_crknv"]
 [ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/buttonexitepeek.gd" id="12_6jptd"]
 [ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="12_013hq"]
 [ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="13_njmpn"]
@@ -209,25 +207,6 @@ offset_right = 200.0
 offset_bottom = 193.0
 texture = ExtResource("13_njmpn")
 
-[node name="Back" type="Button" parent="."]
-layout_mode = 0
-offset_left = 361.0
-offset_top = 650.0
-offset_right = 1550.0
-offset_bottom = 759.0
-flat = true
-script = ExtResource("10_1jugk")
-
-[node name="BackText" type="TextureRect" parent="Back"]
-modulate = Color(1, 1, 1, 0.513726)
-layout_mode = 0
-offset_left = 675.0
-offset_top = 16.0
-offset_right = 1212.0
-offset_bottom = 96.0
-texture = ExtResource("11_crknv")
-expand_mode = 1
-
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 visible = false
 layout_mode = 0
@@ -298,9 +277,6 @@ texture = ExtResource("15_o6m4w")
 [connection signal="button_down" from="peekButton" to="peekButton" method="_on_button_down"]
 [connection signal="mouse_entered" from="peekButton" to="peekButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="peekButton" to="peekButton" method="_on_mouse_exited"]
-[connection signal="button_down" from="Back" to="Back" method="_on_button_down"]
-[connection signal="mouse_entered" from="Back" to="Back" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Back" to="Back" method="_on_mouse_exited"]
 [connection signal="button_down" from="ExitPeek" to="ExitPeek" method="_on_button_down"]
 [connection signal="button_down" from="Door" to="Door" method="_on_button_down"]
 [connection signal="mouse_entered" from="Door" to="Door" method="_on_mouse_entered"]

@@ -8,12 +8,10 @@ class_name Character
 @export var dead_portrait_texture: Texture2D
 @export var initiative_icon: Texture2D
 @onready var name_label = $name
-@onready var hp_label = $HP
-@onready var hp_Jauge =$HP/HPProgressBar
-@onready var stress_label = $Stress
-@onready var guilt_Jauge=$Stress/GuiltrogressBar
-@onready var horny_label = $horny
-@onready var horny_Jauge = $horny/HornyProgressBar
+
+
+@onready var hp_Jauge =$HPProgressBar
+@onready var hornyJauge =$HornyJauge/HornyJaugePleine
 @onready var sprite = $pivot/HerosTexture1
 
 @onready var buff_bar = $HBoxContainer
@@ -68,6 +66,8 @@ var tags: Array[String] = []
 var combat_manager: Node = null 
 # --- Contrôle
 @export var is_player_controlled: bool = true
+@export var ai_brain: AiBrain
+@export var can_be_moved : bool = true
 const HornyEffectScene := preload("res://actions/damageEffect/charmed-particules.tscn")
 const DamageEffectScene := preload("res://actions/damageEffect/HitVFX.tscn")
 const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
@@ -130,31 +130,36 @@ func update_stats():
 		buff.apply_to(self)
 
 func update_ui():
-	if not hp_label or not stress_label or not horny_label:
-		hp_label=$HP
-		stress_label=$Stress
-		horny_label=$horny
-	if not hp_Jauge or not guilt_Jauge or not horny_Jauge:
-		hp_Jauge=$HP/HPProgressBar
-		guilt_Jauge=$Stress/GuiltrogressBar
-		horny_Jauge=$horny/HornyProgressBar
+
+	if not hp_Jauge:
+		hp_Jauge=$HPProgressBar
+		hornyJauge=$HornyJauge/HornyJaugePleine
+		dotsActions= [
+	$HBoxContainer2/DotAction1,
+	$HBoxContainer2/DotAction2,
+	$HBoxContainer2/DotAction3,
+	$HBoxContainer2/DotAction4,
+	$HBoxContainer2/DotAction5,
+	]
+		
+	
 		# return
+	hp_Jauge.max_value=max_stamina
 	hp_Jauge.value=current_stamina
-	guilt_Jauge.value=current_stress
-	horny_Jauge.value=current_horniness
+	
+	hornyJauge.self_modulate.a = (current_horniness*2.0)/max_horniness
+
 	
 	for i in range(skills.size()):
-		#var dot = dotsActions[i]
-		var skill= skills[i]
-		#if skill.current_cooldown == 0:
-		#	dot.modulate = Color(0.642,0.561,0.365)
-		#	dot.size = Vector2(0.8,0.8)
-		#else:
-		#	dot.modulate = Color(0.1,0.1,0.1)
-		#	dot.size = Vector2(0.7, 0.7)
-	#hp_label.text = "Stamina: %d / %d" % [current_stamina, max_stamina]
-	#stress_label.text = "Guilt: %d / %d" % [current_stress, max_stress]
-	#horny_label.text = "Horny: %d / %d" % [current_horniness, max_horniness]
+		if i<dotsActions.size():
+			var dot = dotsActions[i]
+			var skill= skills[i]
+			if skill.current_cooldown == 0:
+				dot.modulate = Color(0.642,0.561,0.365)
+				dot.size = Vector2(0.1,0.1)
+			else:
+				dot.modulate = Color(0.1,0.1,0.1)
+				dot.size = Vector2(0.5, 0.5)
 	
 	
 func add_buff(buff: Buff):
@@ -240,55 +245,29 @@ func _input_event(viewport, event, shape_idx):
 		
 
 
-func play_ai_turn(heroes : Array, ennemies :Array):
-	var usable_skills := skills.filter(func(s): return s.can_use())
+func play_ai_turn(heroes : Array, enemies :Array):
+	if ai_brain == null:
+		push_error("Aucun AiBrain assigné à %s" % name)
+		return
 
-	if usable_skills.is_empty():
-		print("%s n'a aucune compétence utilisable." % name)
+	var decision = ai_brain.decide_action(self, heroes, enemies)
+	if decision.is_empty():
 		resetVisuel()
 		return
 
+	var skill: Skill = decision["skill"]
+	var target: Character = decision.get("target", null)
 
-	var skill: Skill = usable_skills[randi() % usable_skills.size()]
-	combat_manager.pending_skill=skill
-	skill.owner = self  # important !
+	combat_manager.pending_skill = skill
+	skill.owner = self
 
-	
-	var possible_targets: Array[Character] = []
-
-	match skill.the_target_type:
-		skill.target_type.SELF:
-			skill.use(self.current_slot)
-			update_ui()
-			resetVisuel()
-			return
-
-		skill.target_type.ALLY:
-			possible_targets = ennemies  
-		skill.target_type.ENNEMY:
-			possible_targets = heroes
-		skill.target_type.ALL_ALLY, skill.target_type.ALL_ENNEMY:
-			skill.use()  #
-			resetVisuel()
-			return
-
-	for Chara in possible_targets:
-		if Chara.is_dead():
-			possible_targets.erase(Chara)
-		
-	var target: Character
-	if taunted_by != null:
-		if skill.the_target_type == skill.target_type.ENNEMY:
-			target = taunted_by
-		else:
-			target = self  
+	if target == null:
+		skill.use()
 	else:
-		target = possible_targets[randi() % possible_targets.size()]
-
+		await animate_attack(target)
+		skill.use(target.current_slot)
+		target.update_ui()
 	
-	await animate_attack(target)
-	skill.use(target.current_slot)
-	target.update_ui()
 	resetVisuel()
 
 func reduce_cooldowns() -> void:
@@ -304,6 +283,7 @@ func end_turn():
 	reduce_cooldowns()
 	
 	update_stats()
+	
 
 
 
@@ -312,7 +292,7 @@ func select_as_target():
 	combat_manager.select_target(self)
 	arrow.visible=false
 
-func take_damage(source: Character, stat: int, amount: int) -> void:
+func take_damage(source: Character, stat: int, amount: int, type:bool) -> void:
 	var damage := 0
 	
 	match stat:
@@ -325,10 +305,16 @@ func take_damage(source: Character, stat: int, amount: int) -> void:
 				
 				if current_stamina == 0:
 					sprite.self_modulate = Color(0.8, 0.1, 0.1)
+					sprite.texture = dead_portrait_texture
+					Selector.texture = dead_portrait_texture
 			else:
 				dead = true
-				sprite.texture = dead_portrait_texture
-				Selector.texture = dead_portrait_texture
+				if IsDemon && type:
+					combat_manager.nb_crystaleloot += 1 
+				print (Charaname+ " is dead")
+			
+		
+				
 
 		DamageEffect.Stat.HORNY:
 			damage = max(0, amount - willpower)
@@ -341,9 +327,7 @@ func take_damage(source: Character, stat: int, amount: int) -> void:
 			damage = max(0, amount - willpower)
 			current_stress = max(0, current_stress + damage)
 	shake_camera(20.0)
-	print("%s inflige %d de %s à %s" % [
-		source.name, damage, DamageEffect.Stat.keys()[stat], name
-	])
+	#print("%s inflige %d de %s à %s" % [source.name, damage, DamageEffect.Stat.keys()[stat], name])
 	update_ui()
 	
 	
@@ -352,6 +336,10 @@ func resetVisuel()-> void:
 	sprite.modulate=Color(1.0,1.0,1.0,1.0)
 	self.scale = CharaScale
 	self.z_index = 0
+	if current_stamina > 0:
+			sprite.texture = portrait_texture
+			Selector.texture = portrait_texture
+	
 
 #------------------------------- Animation ------------------------------------------------
 

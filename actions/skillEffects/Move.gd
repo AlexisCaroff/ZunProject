@@ -5,6 +5,8 @@ var Chartarget:Character
 
 func apply(user: Character, target: PositionSlot):
 	Chartarget=target.occupant
+	if !Chartarget.can_be_moved:
+		return
 	var cm = user.combat_manager
 	var slots = cm.get_positions(Chartarget.is_player_controlled)
 	print("Move "+user.Charaname+" to "+Chartarget.Charaname+" position")

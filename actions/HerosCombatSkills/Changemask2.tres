@@ -41,4 +41,5 @@ current_cooldown = 0
 precision = 100
 allways_hit = true
 duration = 1.0
+tags = Array[String]([])
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

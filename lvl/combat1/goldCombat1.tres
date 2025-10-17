@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bieis40psxagf"]
+
+[ext_resource type="Texture2D" uid="uid://cwyh8uva3wdam" path="res://UI/goldIcon.png" id="1_kxc16"]
+[ext_resource type="Script" uid="uid://bguggfgjsike1" path="res://scripts/Item.gd" id="1_m1whr"]
+
+[resource]
+script = ExtResource("1_m1whr")
+name = "20 coins"
+icon = ExtResource("1_kxc16")
+description = ""
+quantity = 20
+effects = Array[Dictionary]([])
+metadata/_custom_type_script = "uid://bguggfgjsike1"

@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4046lfpxkgqu"]
+
+[ext_resource type="Script" uid="uid://smmc6d506a52" path="res://UI/victory.gd" id="1_a5iy6"]
+[ext_resource type="Texture2D" uid="uid://de0bi1tg31an0" path="res://UI/victoryBox.png" id="1_x0fca"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="2_a5iy6"]
+[ext_resource type="Texture2D" uid="uid://cnxub0g557exn" path="res://UI/box.png" id="4_tbef5"]
+[ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="5_blfgt"]
+
+[node name="Victory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a5iy6")
+
+[node name="VictoryBox" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 538.0
+offset_top = 167.0
+offset_right = 1352.0
+offset_bottom = 718.0
+texture = ExtResource("1_x0fca")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VictoryBox"]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 231.0
+offset_right = 650.0
+offset_bottom = 362.0
+theme_override_constants/separation = 147
+
+[node name="Label" type="Label" parent="VictoryBox"]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 4.0
+offset_right = 544.0
+offset_bottom = 65.0
+theme_override_fonts/font = ExtResource("2_a5iy6")
+theme_override_font_sizes/font_size = 45
+text = "Victory !"
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 819.0
+offset_top = 674.0
+offset_right = 1083.0
+offset_bottom = 746.0
+icon = ExtResource("4_tbef5")
+flat = true
+script = ExtResource("5_blfgt")
+
+[node name="Label" type="Label" parent="ContinueButton"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 10.0
+offset_right = 187.0
+offset_bottom = 59.0
+theme_override_fonts/font = ExtResource("2_a5iy6")
+theme_override_font_sizes/font_size = 40
+text = "Continue"

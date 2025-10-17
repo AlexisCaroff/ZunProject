@@ -5,9 +5,9 @@
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_nv4t7"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="3_wlhg8"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="4_iy76m"]
-[ext_resource type="Texture2D" uid="uid://dfeafue752ymx" path="res://actions/actiontexture/actionCharge.png" id="4_wlhg8"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_7c32x"]
 [ext_resource type="Texture2D" uid="uid://dh3aguia4vq63" path="res://actions/bufftexture/debuff.png" id="6_wlhg8"]
+[ext_resource type="Texture2D" uid="uid://cchaa16vi0eht" path="res://actions/actiontexture/salt.png" id="7_vtysm"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("3_nv4t7")
@@ -29,7 +29,7 @@ script = ExtResource("5_7c32x")
 name = "Salt "
 descriptionName = "Salt "
 description = "debuff ennemies and deal smal dmg"
-icon = ExtResource("4_wlhg8")
+icon = ExtResource("7_vtysm")
 attack_sound = ExtResource("1_a6kki")
 required_position = 0
 ImageSkill = ExtResource("1_nv4t7")
@@ -47,4 +47,5 @@ current_cooldown = 0
 precision = 100
 allways_hit = false
 duration = 1.0
+tags = Array[String]([])
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

@@ -75,7 +75,7 @@ func update_ui_for_current_character(character: Character):
 		$ActionPanel/Action5
 		]
 		return
-	character.animate_start_Turn()
+	
 	character.sprite.modulate = Color(1.8, 1.8, 1.8)
 	
 	Charaname_panel.text = character.Charaname
@@ -119,7 +119,7 @@ func update_cooldown(character:Character):
 		var dot = character.dotsActions[i-1]
 		var skill = character.get_skill(i)
 		var cooldownlabel = cooldownLabel[i]
-		print ("update skill"+skill.name+str(skill.current_cooldown))
+		#print ("update skill"+skill.name+str(skill.current_cooldown))
 		if skill != null:
 			skill_buttons[i].Actiontext = skill.descriptionName + "\n" + skill.description
 			button.disabled = !skill.can_use()

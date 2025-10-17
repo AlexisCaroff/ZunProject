@@ -27,12 +27,12 @@ func apply(user: Character, target: PositionSlot) -> void:
 		amount,
 		duration
 	]
+	if target.occupant != null:
+		target.occupant.add_buff(buff)
 
-	target.occupant.add_buff(buff)
-
-	print("%s reçoit +%d %s pendant %d tours" % [
-		target.name,
-		amount,
-		Buff.Stat.keys()[affected_stat],
-		duration
-	])
+		print("%s reçoit +%d %s pendant %d tours" % [
+			target.name,
+			amount,
+			Buff.Stat.keys()[affected_stat],
+			duration
+		])

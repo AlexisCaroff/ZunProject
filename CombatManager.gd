@@ -1,6 +1,6 @@
 extends Node
 class_name CombatManager
-
+@onready var ResultScreen_label =$"../ResultScreen"
 # characters combat
 var heroes: Array[Character] = []
 var enemies: Array[Character] = []
@@ -41,12 +41,12 @@ var HERO_SCENES = [
 	preload("res://characters/CharaMystic.tscn"),
 	preload("res://characters/CharaWarrior.tscn")
 ]
-
+@export var cristal_texture = preload("res://UI/cristalIcon.png")
 @export var encounter: CombatEncounter
 
 #stat combat manager
 @onready var audio = $AudioStreamPlayer2D
-@onready var ResultScreen_label= $"../ResultScreen"
+
 @onready var SpriteHeros=$"../SpriteHeros"
 @onready var SpriteEnnemies=$"../SpriteEnnemies"
 enum CombatState {
@@ -56,11 +56,14 @@ enum CombatState {
 }
 var combat_state: CombatState = CombatState.IDLE
 var startcombat = true
-
+var nb_crystaleloot :int = 0
+var ennemy_are_embushed : bool = false
+var heroes_are_embushed : bool = false
 
 func _ready():
 	if startcombat ==true:
 		_start()
+
 func _start():
 	if GameState.current_phase == GameStat.GamePhase.COMBAT:
 		ui = get_parent()
@@ -88,6 +91,8 @@ func _start():
 				var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() - 1)
 				var slot = hero_positions[slot_index]
 				move_character_to(chara, slot, 0.0)
+				if heroes_are_embushed:
+					chara.stun=true
 				chara.update_ui()
 		
 		# Spawn ennemis
@@ -100,6 +105,8 @@ func _start():
 			var slot_index = i
 			var slot = enemy_positions[slot_index]
 			move_character_to(chara, slot, 0.0)
+			if ennemy_are_embushed:
+				chara.stun=true
 			chara.update_ui()
 		ui.log("start Combat")
 		start_combat()
@@ -129,6 +136,8 @@ func load_saved_heroes_into_slots(slots: Array[PositionSlot]):
 		var pos_index = hero_data.get("position", -1)
 		if pos_index >= 0 and pos_index < slots.size():
 			slots[pos_index].assign_character(hero, 0.0)
+		if heroes_are_embushed:
+			hero.stun =true
 	
 func start_combat():
 	combat_state = CombatState.IDLE
@@ -176,7 +185,6 @@ func next_turn():
 		ui.update_ui_for_current_character(current_character)
 	else:
 		ui.log("Enemie's turn")
-		var random_index = randi() % heroes.size()
 		ui.update_ui_for_current_character(current_character)
 		await get_tree().create_timer(1.0).timeout
 		current_character.play_ai_turn(heroes,enemies)
@@ -200,15 +208,26 @@ func is_animation_playing() -> bool:
 
 func _check_victory():
 	for enemy in enemies:
-		if not enemy.dead:
-			return 
-	
-	_show_victory()
+		if enemy.dead:
+			#print(enemy.Charaname+ " not dead")
+
+			#print(enemy.Charaname+ " dead")
+			turn_queue.erase(enemy)
+			enemy.current_slot.remove_character()
+			enemies.erase(enemy)
+			enemy.queue_free()
+	if enemies.is_empty():
+		_show_victory()
 	
 func _check_defeat():
 	for ally in heroes:
 		if not ally.dead:
 			return 
+		else:
+			turn_queue.erase(ally)
+			ally.current_slot.remove_character()
+			heroes.erase(ally)
+			ally .queue_free()
 	_show_defeat()
 	
 func _show_defeat():
@@ -216,23 +235,27 @@ func _show_defeat():
 	ResultScreen_label.modulate = Color(1, 1, 1, 1)
 	
 func _show_victory():
-	ResultScreen_label.text = "Victoire !"
-	ResultScreen_label.modulate = Color(1, 1, 1, 1)
+
+	var victory_ui_scene = preload("res://UI/victory.tscn")
+	var victory_ui = victory_ui_scene.instantiate()
+	var cristal_item := Item.new()
+	
+	cristal_item.name = (str(nb_crystaleloot)+" Cristal")
+	cristal_item.icon = cristal_texture
+	cristal_item.quantity = nb_crystaleloot
+	cristal_item.description = "Un cristal précieux obtenu en combat."
+	if nb_crystaleloot >0:
+		encounter.loots.append(cristal_item)
+	victory_ui.showLoot(encounter.loots)  # Passer les loots récupérés au Victory UI
+	
+	# Ajouter Victory UI à la scène et le faire apparaître
+	get_parent().add_child(victory_ui)
+	
 	await get_tree().create_timer(1.0).timeout
 
 	# --- Sauvegarder l'équipe avant de changer de scène
 	GameState.save_party_from_nodes(heroes)
-	GameState.current_phase = GameStat.GamePhase.EXPLORATION
-	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
-	if gm and gm.current_room_Ressource:
-		# On lui demande d’entrer dans la scène exploration de la salle actuelle
-		if gm.current_room_Ressource.exploration_scene:
-			gm._enter_scene_in_current_room(gm.current_room_Ressource.exploration_scene)
-		else:
-			push_error("Pas de scene exploration définie pour cette salle")
-	else:
-		push_error("GameManager introuvable ou current_room vide")
-
+	
 
 
 
@@ -264,16 +287,24 @@ func _on_target_selected(targets: Array[PositionSlot]):
 		CombatState.SELECTING_FIRST_TARGET :
 			if !pending_skill.two_target_Type:
 				for target in targets:
-					pending_skill.use(target)
-					print(target.occupant.Charaname)
-					target.occupant.update_ui()
-					ui.update_cooldown(current_character)
+					if target.occupant != null:
+						
+						pending_skill.use(target)
+						print(target.occupant.Charaname)
+						target.occupant.update_ui()
+						ui.update_cooldown(current_character)
 				if pending_skill.attack_sound != null:
 					audio.stream= pending_skill.attack_sound
 					audio.pitch_scale = randf_range(0.3, 0.5)
 					audio.play()
 				if pending_skill.name != "move" && pending_skill.name != "ChangeMask" :
-					await current_character.animate_attack(targets[0].occupant)  # anime sur la première cible
+					
+					var occupied_slots = targets.filter(func(slot): return slot.occupant != null)
+					var slot
+					if occupied_slots.size() > 0:
+						slot = occupied_slots[0] 
+			
+					await current_character.animate_attack(slot.occupant)  # anime sur la première cible
 				
 				ui.log(pending_skill.name)
 

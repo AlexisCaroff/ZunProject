@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://jc1bbpflus0q"]
+[gd_scene load_steps=19 format=3 uid="uid://gccof36vuvs4"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_gjeux"]
 [ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="2_1nlnd"]
@@ -46,6 +46,7 @@ current_cooldown = 0
 precision = 100
 allways_hit = true
 duration = 0.3
+tags = Array[String]([])
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
 
 [node name="CharacterTestennemie4" type="Node2D"]

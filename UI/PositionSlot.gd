@@ -32,7 +32,7 @@ func _ready():
 
 func assign_character(character: Character, movetime:float):
 	occupant = character
-	
+	occupant.CharaScale = position_data.scale
 	if not is_ready:
 		await ready
 	imageinside.texture=character.initiative_icon
@@ -126,7 +126,9 @@ func _on_button_button_down() -> void:
 						combat_manager._on_target_selected(selfposition)
 
 func _on_button_mouse_entered() -> void:
-	
+	if occupant == null:
+		return
+	combat_manager.ui.update_ui_for_current_character(occupant)
 	if combat_manager.pending_skill:
 		var skill = combat_manager.pending_skill
 		match combat_manager.combat_state:
@@ -151,17 +153,21 @@ func _on_button_mouse_entered() -> void:
 							occupant.Selector.self_modulate.a= 1.0
 					Skill.target_type.ALL_ALLY:
 						for chara in combat_manager.hero_positions:
-							print ("try modulate")
-							chara.occupant.Selector.self_modulate.a= 1.0
+							if chara.occupant !=null:
+								chara.occupant.Selector.self_modulate.a= 1.0
 					Skill.target_type.ALL_ENNEMY:
 						for chara in combat_manager.enemy_positions:
-							chara.occupant.Selector.self_modulate.a=1.0
+							if chara.occupant !=null:
+								chara.occupant.Selector.self_modulate.a=1.0
 	else :
 		occupant.Selector.self_modulate.a= 1.0
 
 
 func _on_button_mouse_exited() -> void:
+	if occupant == null:
+		return
 	occupant.Selector.self_modulate.a= 0.0
+	combat_manager.ui.update_ui_for_current_character(combat_manager.current_character)
 	if combat_manager.pending_skill:
 		var skill = combat_manager.pending_skill
 		match combat_manager.combat_state:
@@ -172,4 +178,5 @@ func _on_button_mouse_exited() -> void:
 							chara.occupant.Selector.self_modulate.a= 0.0
 					Skill.target_type.ALL_ENNEMY:
 						for chara in combat_manager.enemy_positions:
-							chara.occupant.Selector.self_modulate.a= 0.0
+							if chara.occupant !=null:
+								chara.occupant.Selector.self_modulate.a= 0.0

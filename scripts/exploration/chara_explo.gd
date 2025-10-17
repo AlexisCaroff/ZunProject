@@ -8,15 +8,11 @@ class_name CharaExplo
 var portrait_path: String = ""
 var dead_portrait_path: String = ""
 var initiative_icon_path: String = ""
-@onready var name_label = $name
-@onready var hp_label = $HP
-@onready var stress_label = $Stress
-@onready var horny_label = $horny
 @onready var sprite = $pivot/HerosTexture1
 @onready var buff_bar = $HBoxContainer
-@onready var hp_Jauge=$HP/HPProgressBar
-@onready var guilt_Jauge=$Stress/GuiltrogressBar
-@onready var horny_Jauge=$horny/HornyProgressBar
+@onready var hp_Jauge=$HPProgressBar
+
+@onready var hornyJauge=$HornyJauge/HornyJaugePleine
 
 # --- Infos de base
 @export var Charaname: String = "name"
@@ -87,15 +83,16 @@ func load_from_dict(data: Dictionary) -> void:
 	
 
 func update_display() -> void:
-	if not hp_Jauge or not guilt_Jauge or not horny_Jauge:
+	if not hp_Jauge or not hornyJauge:
 		hp_Jauge=$HP/HPProgressBar
-		guilt_Jauge=$Stress/GuiltrogressBar
-		horny_Jauge=$horny/HornyProgressBar
+
+		hornyJauge=$HornyJauge/HornyJaugePleine
 		# return
+	hp_Jauge.max_value=max_stamina
 	hp_Jauge.value=current_stamina
-	guilt_Jauge.value=current_stress
-	horny_Jauge.value=current_horny
-	name_label.text = Charaname
+	
+	hornyJauge.self_modulate.a = (current_horny*2.0)/max_horniness
+
 
 	
 	sprite.texture = portrait_texture

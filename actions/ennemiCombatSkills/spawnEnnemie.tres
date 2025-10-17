@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://b4okliodacjdm"]
+
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_e7b2u"]
+[ext_resource type="PackedScene" uid="uid://doitrlqhfja4t" path="res://characters/CharacterTestEnemySpitter1.tscn" id="2_lt7gc"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_tmr80"]
+[ext_resource type="Script" uid="uid://dh0x1pgx4tqgk" path="res://actions/skillEffects/Spawn.gd" id="3_oeisb"]
+[ext_resource type="Texture2D" uid="uid://b80ji1xecaebl" path="res://actions/actiontexture/spawnSlime.png" id="4_48h3l"]
+
+[sub_resource type="Resource" id="Resource_cne8y"]
+script = ExtResource("3_oeisb")
+enemy_scene = ExtResource("2_lt7gc")
+max_spawn = 1
+spawn_delay = 0.5
+metadata/_custom_type_script = "uid://dh0x1pgx4tqgk"
+
+[resource]
+script = ExtResource("2_tmr80")
+name = "spawnEnnemi"
+descriptionName = "invocation"
+description = "Spawn a new Slim"
+icon = ExtResource("4_48h3l")
+required_position = 0
+the_target_type = 1
+effects = Array[ExtResource("1_e7b2u")]([SubResource("Resource_cne8y")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("1_e7b2u")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String](["spawn"])
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
