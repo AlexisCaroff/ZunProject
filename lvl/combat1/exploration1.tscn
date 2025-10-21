@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dqnjuxw77ebnb"]
+[gd_scene load_steps=24 format=3 uid="uid://dqnjuxw77ebnb"]
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_ohhde"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_5rnso"]
@@ -26,6 +26,8 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ln05l"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3g6r7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rqfr"]
 
 [node name="ExploInterface" type="Control"]
 layout_mode = 3
@@ -237,6 +239,13 @@ offset_bottom = 543.0
 texture = ExtResource("13_1nxlp")
 expand_mode = 1
 
+[node name="DialogueManager" type="Node2D" parent="." node_paths=PackedStringArray("external_choice_receiver")]
+z_index = 6
+script = ExtResource("17_3g6r7")
+portraits_resource = ExtResource("18_qg4ur")
+is_Choice = true
+external_choice_receiver = NodePath("../Kairn")
+
 [node name="Kairn" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1.2, 1)
 position = Vector2(266, 464)
@@ -248,6 +257,7 @@ offset_left = -146.0
 offset_top = -80.0
 offset_right = 134.0
 offset_bottom = 153.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1rqfr")
 icon = ExtResource("14_0oifh")
 flat = true
 expand_icon = true
@@ -265,13 +275,6 @@ offset_bottom = 30.0
 theme_override_fonts/font = ExtResource("4_ngelb")
 theme_override_font_sizes/font_size = 40
 text = "EXPLORE"
-
-[node name="DialogueManager" type="Node2D" parent="Kairn"]
-z_index = 6
-position = Vector2(-401.667, -825)
-script = ExtResource("17_3g6r7")
-portraits_resource = ExtResource("18_qg4ur")
-is_Choice = true
 
 [connection signal="button_down" from="moveButton" to="ExplorationManager" method="_on_move_button_button_down"]
 [connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]

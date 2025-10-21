@@ -80,8 +80,8 @@ func _enter_scene_in_current_room(scene:PackedScene, ennemy_are_embushed: bool =
 			if new_scene.has_node("CombatManager"):
 				var combat_manager = new_scene.get_node("CombatManager")
 				combat_manager.encounter = current_room_Ressource.encounter
-				combat_manager.ennemy_are_embushed = ennemy_are_embushed
-				combat_manager.heroes_are_embushed = heroes_are_embushed
+				combat_manager.ennemy_are_ambushed = ennemy_are_embushed
+				combat_manager.heroes_are_ambushed = heroes_are_embushed
 				print("Encounter assigned to CombatManager")
 			else:
 				push_error("⚠️ CombatManager introuvable dans la scène de combat")

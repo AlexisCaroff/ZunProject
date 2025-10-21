@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CampDialogueEffect" load_steps=2 format=3 uid="uid://pbbhkdndafh5"]
+
+[ext_resource type="Script" uid="uid://dm64q3nqq05dt" path="res://actions/skillEffects/campSkilleffect/campDialogueEffect.gd" id="1_112gx"]
+
+[resource]
+script = ExtResource("1_112gx")
+name = "DialogueMystic"
+dialoguePriest = "res://dialogue/dialoguePriest&Mystic.txt"
+dialogueMystic = ""
+dialogueHunter = "res://dialogue/dialogueHunter&Mystic.txt"
+dialogueWarrior = "res://dialogue/dialogueMystic&Warrior.txt"
+metadata/_custom_type_script = "uid://dm64q3nqq05dt"

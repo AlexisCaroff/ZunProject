@@ -234,7 +234,7 @@ script = ExtResource("12_6jptd")
 z_index = 7
 layout_mode = 0
 offset_left = 799.0
-offset_top = 254.0
+offset_top = 151.0
 offset_right = 1084.0
 offset_bottom = 657.0
 flat = true
@@ -243,9 +243,9 @@ script = ExtResource("8_r3s01")
 [node name="DoorText" type="TextureRect" parent="Door"]
 layout_mode = 0
 offset_left = -3.0
-offset_top = 251.0
+offset_top = 338.0
 offset_right = 311.0
-offset_bottom = 373.0
+offset_bottom = 460.0
 texture = ExtResource("9_7l14n")
 
 [node name="pose1" type="Node2D" parent="."]

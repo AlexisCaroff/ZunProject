@@ -1,6 +1,6 @@
 extends Control
 
 
-@export var button_a: Button 
-@export var button_b: Button
+@onready var Choice1: Button =$Choice1
+@onready var Choice2: Button=$Choice2
 @export var dialogue_manager: DialogueManager  # tu glisses le DialogueManager ici dans l’inspecteur

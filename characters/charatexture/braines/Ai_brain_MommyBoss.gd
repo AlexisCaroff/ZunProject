@@ -26,12 +26,11 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 
 	# Si un skill de spawn est dispo ET qu’une position est libre ou contient un mort → on l’utilise
 	if not spawn_skills.is_empty() and valid_slot != null:
+		print ("try to spawn")
 		return {
 			"skill": spawn_skills.pick_random(),
 			"target": valid_slot
 		}
 
-	# Sinon comportement normal
-	return super.decide_action(owner, heroes, enemies)
 	# Sinon comportement normal
 	return super.decide_action(owner, heroes, enemies)

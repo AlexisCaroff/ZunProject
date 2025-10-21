@@ -1,5 +1,4 @@
 extends Node2D
-
 class_name Character
 #save
 
@@ -50,7 +49,7 @@ var CharaScale:Vector2 = Vector2(1.0, 1.0)
 @export var max_stress: int = 100
 @export var max_horniness: int = 100
 @export var dead: bool = false
-var current_stamina: int = max_stamina
+var current_stamina: int = 100
 var current_stress: int = 0
 var current_horniness: int = 0
 
@@ -88,8 +87,8 @@ var is_targetable: bool = false
 	$HBoxContainer2/DotAction4,
 	$HBoxContainer2/DotAction5,
 ]
-
-
+var exclamation :TextureRect
+var CharaColor =Color(1.0,1.0,1.0,1.0)
 func _ready():
 	arrow.visible=false
 	name_label.text = Charaname
@@ -244,7 +243,17 @@ func _input_event(viewport, event, shape_idx):
 		emit_signal("target_selected", self)
 		
 
+func surprised():
+	stun=true
+	exclamation = TextureRect.new()
+	exclamation.texture = preload("res://UI/exclamation.png")  # ton image
+	exclamation.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	exclamation.custom_minimum_size = Vector2(32, 32)
 
+	exclamation.position = Vector2(0, -164)
+	add_child(exclamation)
+	
+	
 func play_ai_turn(heroes : Array, enemies :Array):
 	if ai_brain == null:
 		push_error("Aucun AiBrain assigné à %s" % name)
@@ -252,6 +261,7 @@ func play_ai_turn(heroes : Array, enemies :Array):
 
 	var decision = ai_brain.decide_action(self, heroes, enemies)
 	if decision.is_empty():
+		print("no decision")
 		resetVisuel()
 		return
 
@@ -263,9 +273,11 @@ func play_ai_turn(heroes : Array, enemies :Array):
 
 	if target == null:
 		skill.use()
+		combat_manager.ui.log(Charaname+" use "+skill.descriptionName)
 	else:
 		await animate_attack(target)
 		skill.use(target.current_slot)
+		combat_manager.ui.log(Charaname+" use "+skill.descriptionName)
 		target.update_ui()
 	
 	resetVisuel()
@@ -277,7 +289,7 @@ func reduce_cooldowns() -> void:
 	
 func end_turn():
 	
-	
+	CharaColor=Color(1.0,1.0,1.0,1.0)
 	resetVisuel()
 	update_buffs()
 	reduce_cooldowns()
@@ -333,7 +345,7 @@ func take_damage(source: Character, stat: int, amount: int, type:bool) -> void:
 	
 	
 func resetVisuel()-> void:
-	sprite.modulate=Color(1.0,1.0,1.0,1.0)
+	sprite.modulate= CharaColor
 	self.scale = CharaScale
 	self.z_index = 0
 	if current_stamina > 0:
@@ -357,7 +369,6 @@ func animate_start_Turn():
 	var big_size= Vector2(1.0,1.1) 
 	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
 	tween.tween_property(self, "scale", normal_size, 0.2)
-	combat_manager.ui.log( str(normal_size))
 	await tween.finished
 	emit_signal("skill_animation_finished")
 

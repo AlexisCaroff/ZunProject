@@ -9,15 +9,21 @@ func showLoot(items: Array[Item]):
 		itemsContainer = $VictoryBox/HBoxContainer
 		continue_button =$ContinueButton
 	continue_button.pressed.connect(_on_continue_pressed)
+	
 	for child in itemsContainer.get_children():
 		if is_instance_valid(child):
 			child.queue_free()
+			
+	
 	for item in items:
 		if item == null:
 			continue
 		var item_ui = item_ui_scene.instantiate()
 		item_ui.setObject(item.icon, item.name)
 		itemsContainer.add_child(item_ui)
+		await item_ui.animation_finished
+		
+		
 func _on_continue_pressed() -> void:
 
 	GameState.current_phase = GameStat.GamePhase.EXPLORATION

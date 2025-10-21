@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://qi68oagp06kg"]
+[gd_scene load_steps=24 format=3 uid="uid://qi68oagp06kg"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i4uyy"]
 [ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="2_papga"]
@@ -12,7 +12,10 @@
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="10_cegev"]
 [ext_resource type="Resource" uid="uid://do1xqbabe8r4b" path="res://scripts/camp/CampsSkills/new_resource.tres" id="11_n2k53"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="12_0iyuo"]
+[ext_resource type="Resource" uid="uid://y8ibrfop35on" path="res://actions/CampSkill/dialogueHunter.tres" id="12_7u4xn"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="13_172yo"]
+[ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="13_kj6ch"]
+[ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="14_1t7b8"]
 [ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="14_oilqr"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="15_8hpy0"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="16_qhpv8"]
@@ -21,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://bri15xc6cn1ul" path="res://actions/hornyJauge.png" id="19_xn63r"]
 [ext_resource type="Texture2D" uid="uid://bk1gu5cgtgkfy" path="res://actions/hornyJaugePleine.png" id="20_6h38a"]
 
-[node name="CharacterTestHero2" type="Node2D"]
+[node name="Hunter" type="Node2D"]
 script = ExtResource("1_i4uyy")
 portrait_texture = ExtResource("2_papga")
 dead_portrait_texture = ExtResource("3_xn63r")
@@ -29,7 +32,7 @@ initiative_icon = ExtResource("4_6h38a")
 Charaname = "Hunter"
 Chara_position = 1
 skill_resources = Array[Resource]([ExtResource("5_184h1"), ExtResource("6_7u4xn"), ExtResource("7_kj6ch"), ExtResource("8_1t7b8"), ExtResource("9_rwkgt")])
-camp_skill_resources = Array[ExtResource("10_cegev")]([ExtResource("11_n2k53")])
+camp_skill_resources = Array[ExtResource("10_cegev")]([ExtResource("11_n2k53"), ExtResource("12_7u4xn"), ExtResource("13_kj6ch"), ExtResource("14_1t7b8")])
 
 [node name="name" type="Label" parent="."]
 visible = false
@@ -68,7 +71,7 @@ texture = ExtResource("2_papga")
 expand_mode = 1
 
 [node name="Selector" type="TextureRect" parent="pivot"]
-self_modulate = Color(2, 2, 2, 0)
+self_modulate = Color(3, 3, 3, 0)
 offset_left = -129.0
 offset_top = -213.0
 offset_right = 42.0

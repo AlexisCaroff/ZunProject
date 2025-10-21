@@ -11,10 +11,10 @@
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="9_doqsm"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="10_pweqf"]
 [ext_resource type="Resource" uid="uid://do1xqbabe8r4b" path="res://scripts/camp/CampsSkills/new_resource.tres" id="11_y8uyf"]
-[ext_resource type="Resource" uid="uid://cd4m2bk1ikodm" path="res://actions/CampSkill/dialogue.tres" id="12_7p8u1"]
-[ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/skillEffects/campSkilleffect/LoveEffect.tres" id="13_ea307"]
+[ext_resource type="Resource" uid="uid://cd4m2bk1ikodm" path="res://actions/CampSkill/dialoguePristress.tres" id="12_7p8u1"]
+[ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="13_ea307"]
+[ext_resource type="Resource" uid="uid://poprema6x515" path="res://actions/CampSkill/confession.tres" id="14_xqmvo"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="15_fkass"]
-[ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="16_7adbu"]
 [ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="17_d4gm4"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="18_xgs3v"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="19_p6ptv"]
@@ -30,7 +30,7 @@ dead_portrait_texture = ExtResource("3_xqmvo")
 initiative_icon = ExtResource("4_neqvp")
 Charaname = "Priest"
 skill_resources = Array[Resource]([ExtResource("5_054hg"), ExtResource("6_1bjum"), ExtResource("7_mg4qg"), ExtResource("8_6af8e"), ExtResource("9_doqsm")])
-camp_skill_resources = Array[ExtResource("10_pweqf")]([ExtResource("11_y8uyf"), ExtResource("12_7p8u1"), ExtResource("13_ea307")])
+camp_skill_resources = Array[ExtResource("10_pweqf")]([ExtResource("11_y8uyf"), ExtResource("12_7p8u1"), ExtResource("13_ea307"), ExtResource("14_xqmvo")])
 
 [node name="name" type="Label" parent="."]
 visible = false
@@ -63,7 +63,7 @@ offset_right = 74.3333
 offset_bottom = 19.3333
 scale = Vector2(1.2, 1)
 mouse_filter = 2
-texture = ExtResource("16_7adbu")
+texture = ExtResource("2_wpklt")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 

@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CampSkill" load_steps=11 format=3 uid="uid://do024kep0pxki"]
+
+[ext_resource type="Script" uid="uid://brw6jmbngkbbu" path="res://scripts/camp/CampEffect.gd" id="1_t4lje"]
+[ext_resource type="Script" uid="uid://gi5vwildn2qs" path="res://actions/skillEffects/campSkilleffect/CampBuffEffet.gd" id="2_6nl4t"]
+[ext_resource type="Script" uid="uid://bkvdwvrmdt5aw" path="res://actions/skillEffects/Buff.gd" id="3_kngi2"]
+[ext_resource type="Texture2D" uid="uid://dbuugeey6c5y4" path="res://UI/buffAtt.png" id="4_7nidr"]
+[ext_resource type="Texture2D" uid="uid://2u65ql48338r" path="res://actions/bufftexture/buffDeff.png" id="5_6nl4t"]
+[ext_resource type="Texture2D" uid="uid://w7tcv0qth2a" path="res://actions/CampSkill/maintainingequipement.png" id="6_kngi2"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="6_w3tfs"]
+
+[sub_resource type="Resource" id="Resource_dicsy"]
+script = ExtResource("3_kngi2")
+name = "Buff"
+description = "Effet temporaire sur les statistiques."
+icon = ExtResource("4_7nidr")
+stat = 0
+amount = 4
+duration = 3
+metadata/_custom_type_script = "uid://bkvdwvrmdt5aw"
+
+[sub_resource type="Resource" id="Resource_7nidr"]
+script = ExtResource("3_kngi2")
+name = "Buff"
+description = "Effet temporaire sur les statistiques."
+icon = ExtResource("5_6nl4t")
+stat = 1
+amount = 5
+duration = 3
+metadata/_custom_type_script = "uid://bkvdwvrmdt5aw"
+
+[sub_resource type="Resource" id="Resource_4wt56"]
+script = ExtResource("2_6nl4t")
+thebuffs = Array[ExtResource("3_kngi2")]([SubResource("Resource_dicsy"), SubResource("Resource_7nidr")])
+metadata/_custom_type_script = "uid://gi5vwildn2qs"
+
+[resource]
+script = ExtResource("6_w3tfs")
+name = "maintaining equipements"
+description = "buff atttack and defence"
+icon = ExtResource("6_kngi2")
+cost = 2
+standarEnd = true
+target_type = 2
+effects = Array[ExtResource("1_t4lje")]([SubResource("Resource_4wt56")])
+metadata/_custom_type_script = "uid://dmwb4vh0ycukv"

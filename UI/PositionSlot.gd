@@ -161,13 +161,15 @@ func _on_button_mouse_entered() -> void:
 								chara.occupant.Selector.self_modulate.a=1.0
 	else :
 		occupant.Selector.self_modulate.a= 1.0
+	
 
 
 func _on_button_mouse_exited() -> void:
+	
 	if occupant == null:
 		return
-	occupant.Selector.self_modulate.a= 0.0
 	combat_manager.ui.update_ui_for_current_character(combat_manager.current_character)
+	occupant.Selector.self_modulate.a= 0.0
 	if combat_manager.pending_skill:
 		var skill = combat_manager.pending_skill
 		match combat_manager.combat_state:

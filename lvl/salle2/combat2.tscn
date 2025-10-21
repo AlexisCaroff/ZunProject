@@ -347,17 +347,6 @@ theme_override_font_sizes/font_size = 20
 text = "Guilt:
 "
 
-[node name="contexte" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 1512.0
-offset_top = 754.0
-offset_right = 1822.0
-offset_bottom = 916.0
-theme_override_font_sizes/font_size = 40
-text = "ce qu'il se passe"
-autowrap_mode = 3
-
 [node name="CombatManager" parent="." instance=ExtResource("12_4sw3e")]
 HERO_START_POS = Vector2(100, 500)
 ENEMY_START_POS = Vector2(1200, 500)
@@ -600,6 +589,17 @@ attackPos = Vector2(1400, 500)
 MidPos = Vector2(1625, 500)
 outsidePos = Vector2(2200, 500)
 esquivPos = Vector2(1700, 500)
+
+[node name="contexte" type="Label" parent="."]
+offset_left = 823.0
+offset_top = 130.0
+offset_right = 1133.0
+offset_bottom = 292.0
+theme_override_fonts/font = ExtResource("11_56n5u")
+theme_override_font_sizes/font_size = 40
+text = "ce qu'il se passe"
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]

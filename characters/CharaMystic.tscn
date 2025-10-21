@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b8lhes1w5ga1t"]
+[gd_scene load_steps=24 format=3 uid="uid://b8lhes1w5ga1t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_nekcb"]
 [ext_resource type="Texture2D" uid="uid://df5ltgoqyf2jw" path="res://characters/charatexture/char mystic.png" id="2_bjjxo"]
@@ -10,13 +10,12 @@
 [ext_resource type="Resource" uid="uid://bcvrdy48sagwa" path="res://actions/HerosCombatSkills/hook.tres" id="8_2caud"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="9_8kln0"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="10_my5ka"]
-[ext_resource type="Resource" uid="uid://cd4m2bk1ikodm" path="res://actions/CampSkill/dialogue.tres" id="11_vynft"]
-[ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/skillEffects/campSkilleffect/LoveEffect.tres" id="12_5v8vm"]
+[ext_resource type="Resource" uid="uid://b2vd1hks0mof3" path="res://actions/CampSkill/dialogueMystic.tres" id="11_rwlb5"]
+[ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="12_5v8vm"]
 [ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="13_l5cqy"]
 [ext_resource type="Resource" uid="uid://cryoy3w5uet08" path="res://actions/CampSkill/buffskillCamp.tres" id="14_wxcsy"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="15_y67ho"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="16_ucs2x"]
-[ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="17_pg5rq"]
 [ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="18_2xt24"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="19_u2t1c"]
 [ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="20_hjios"]
@@ -25,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://bri15xc6cn1ul" path="res://actions/hornyJauge.png" id="23_ikc5x"]
 [ext_resource type="Texture2D" uid="uid://bk1gu5cgtgkfy" path="res://actions/hornyJaugePleine.png" id="24_ew8km"]
 
-[node name="CharacterTestHero3" type="Node2D"]
+[node name="Mystic" type="Node2D"]
 script = ExtResource("1_nekcb")
 portrait_texture = ExtResource("2_bjjxo")
 dead_portrait_texture = ExtResource("3_uj7tg")
@@ -34,7 +33,7 @@ Charaname = "Mystic"
 attack = 12
 Chara_position = 2
 skill_resources = Array[Resource]([ExtResource("5_ikc5x"), ExtResource("6_ew8km"), ExtResource("7_mtgue"), ExtResource("8_2caud"), ExtResource("9_8kln0")])
-camp_skill_resources = Array[ExtResource("10_my5ka")]([ExtResource("11_vynft"), ExtResource("12_5v8vm"), ExtResource("13_l5cqy"), ExtResource("14_wxcsy")])
+camp_skill_resources = Array[ExtResource("10_my5ka")]([ExtResource("11_rwlb5"), ExtResource("12_5v8vm"), ExtResource("13_l5cqy"), ExtResource("14_wxcsy")])
 
 [node name="name" type="Label" parent="."]
 visible = false
@@ -112,7 +111,7 @@ offset_right = 77.6667
 offset_bottom = 15.1667
 scale = Vector2(1.2, 1)
 mouse_filter = 2
-texture = ExtResource("17_pg5rq")
+texture = ExtResource("2_bjjxo")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 

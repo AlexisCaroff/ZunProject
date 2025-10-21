@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="CampSkill" load_steps=11 format=3 uid="uid://poprema6x515"]
+
+[ext_resource type="Script" uid="uid://brw6jmbngkbbu" path="res://scripts/camp/CampEffect.gd" id="1_6hngy"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_fyxek"]
+[ext_resource type="Script" uid="uid://gi5vwildn2qs" path="res://actions/skillEffects/campSkilleffect/CampBuffEffet.gd" id="2_yuiic"]
+[ext_resource type="Script" uid="uid://bkvdwvrmdt5aw" path="res://actions/skillEffects/Buff.gd" id="3_aj55t"]
+[ext_resource type="Texture2D" uid="uid://dbuugeey6c5y4" path="res://UI/buffAtt.png" id="4_5dfsc"]
+[ext_resource type="Script" uid="uid://cwdlfpy6jfr4w" path="res://actions/skillEffects/campSkilleffect/CampHealEffet.gd" id="5_aykp4"]
+[ext_resource type="Texture2D" uid="uid://hiujggsk4t1h" path="res://actions/CampSkill/confession.png" id="6_4dxr3"]
+
+[sub_resource type="Resource" id="Resource_vmukh"]
+script = ExtResource("3_aj55t")
+name = "Buff"
+description = "Effet temporaire sur les statistiques."
+icon = ExtResource("4_5dfsc")
+stat = 0
+amount = 5
+duration = 3
+metadata/_custom_type_script = "uid://bkvdwvrmdt5aw"
+
+[sub_resource type="Resource" id="Resource_4e5ro"]
+script = ExtResource("2_yuiic")
+thebuffs = Array[ExtResource("3_aj55t")]([SubResource("Resource_vmukh")])
+metadata/_custom_type_script = "uid://gi5vwildn2qs"
+
+[sub_resource type="Resource" id="Resource_a4ri2"]
+script = ExtResource("5_aykp4")
+heal_target_stat = 1
+amount = 30
+metadata/_custom_type_script = "uid://cwdlfpy6jfr4w"
+
+[resource]
+script = ExtResource("2_fyxek")
+name = "Dialogue"
+description = "engage une discution"
+icon = ExtResource("6_4dxr3")
+cost = 1
+standarEnd = true
+target_type = 1
+effects = Array[ExtResource("1_6hngy")]([SubResource("Resource_4e5ro"), SubResource("Resource_a4ri2")])
+metadata/_custom_type_script = "uid://dmwb4vh0ycukv"

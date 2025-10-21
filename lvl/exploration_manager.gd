@@ -26,7 +26,6 @@ func _ready():
 		donjon_map.move_to_position(donjon_map.curentposition)
 
 func focus_on_room(room: Node2D):
-	var vp_size: Vector2 = viewport.size
 	var target_pos = room.position
 	var tween = create_tween()
 	tween.tween_property(donjon_map.camera, "position", target_pos, 0.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)

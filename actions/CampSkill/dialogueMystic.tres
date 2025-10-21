@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CampSkill" load_steps=5 format=3 uid="uid://b2vd1hks0mof3"]
+
+[ext_resource type="Script" uid="uid://brw6jmbngkbbu" path="res://scripts/camp/CampEffect.gd" id="1_nldte"]
+[ext_resource type="Resource" uid="uid://pbbhkdndafh5" path="res://actions/skillEffects/campSkilleffect/campDialogueMysticEffect.tres" id="2_cmq3u"]
+[ext_resource type="Texture2D" uid="uid://bvbgspa31w61a" path="res://actions/CampSkill/dialogueIcon.png" id="3_3wews"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="4_1xboo"]
+
+[resource]
+script = ExtResource("4_1xboo")
+name = "Dialogue"
+description = "engage une discution"
+icon = ExtResource("3_3wews")
+cost = 1
+standarEnd = false
+target_type = 1
+effects = Array[ExtResource("1_nldte")]([ExtResource("2_cmq3u")])
+metadata/_custom_type_script = "uid://dmwb4vh0ycukv"

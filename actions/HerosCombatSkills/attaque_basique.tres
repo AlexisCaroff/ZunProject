@@ -16,8 +16,8 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [resource]
 script = ExtResource("1_jdsf0")
-name = "coup de hache"
-descriptionName = "large swing"
+name = "Large swing"
+descriptionName = "Large swing"
 description = "attack one ennemi"
 icon = ExtResource("3_8u6nw")
 attack_sound = ExtResource("1_qkv4v")

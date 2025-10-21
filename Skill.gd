@@ -60,7 +60,7 @@ var owner: Character
 var target1 : Array[PositionSlot]
 var target2 : Array[PositionSlot]
 @export var tags: Array[String] = []
-
+var combatManager
 
 func can_use() -> bool:
 	if owner == null:
@@ -75,7 +75,8 @@ func can_use() -> bool:
 	return true
 
 func use(target: PositionSlot = null, secondtarget : bool=false):
-	print(owner.Charaname+ " use "+ self.name)
+	if combatManager :
+		combatManager.ui.log(owner.Charaname+ " use "+ descriptionName)
 	if target.occupant != null:
 		
 		target.combat_manager.stop_target_selection()
@@ -108,7 +109,8 @@ func _apply_second_effect(target2: PositionSlot):
 	_apply_effect(target2, second_effects)
 
 func select_targets(combat_manager:CombatManager):
-	combat_manager.ui.log("Sélectionnez une cible pour %s" % name)
+	combatManager=combat_manager
+	combat_manager.ui.log("Select a target for %s" % descriptionName)
 	match the_target_type:
 		target_type.SELF:
 			for enemy in combat_manager.enemies:
@@ -205,7 +207,7 @@ func select_second_target(combat_manager:CombatManager):
 				enemy.set_targetable(false)
 
 		second_target_type.ENNEMY:
-			
+			combat_manager.ui.log("Now select an ennemy to target")
 			for enemy in combat_manager.enemies:
 				enemy.set_targetable(true)
 				if enemy.target_selected.is_connected(combat_manager._on_target_selected):
@@ -223,20 +225,24 @@ func select_second_target(combat_manager:CombatManager):
 				enemy.set_targetable(true)
 				
 		second_target_type.BACK_ALLY:
+			combat_manager.ui.log("Now select an ally")
 			for ally in combat_manager.heroes:
 				if !ally.current_slot.position_data.isFront:
 					ally.set_targetable(true)
 
 		second_target_type.FRONT_ALLY:
+			combat_manager.ui.log("Now select an ally")
 			for ally in combat_manager.heroes:
 				if ally.current_slot.position_data.isFront:
 					ally.set_targetable(true)
 		second_target_type.BACK_ENNEMY:
+			combat_manager.ui.log("Now select an ennemy to target")
 			for enemy in combat_manager.enemies:
 				if !enemy.current_slot.position_data.isFront:
 					enemy.set_targetable(true)
 
 		second_target_type.FRONT_ENNEMY:
+			combat_manager.ui.log("Now select an ennemy to target")
 			for enemy in combat_manager.enemies:
 				if enemy.current_slot.position_data.isFront:
 					enemy.set_targetable(true)

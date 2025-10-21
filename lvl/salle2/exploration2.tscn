@@ -252,12 +252,13 @@ theme_override_fonts/font = ExtResource("5_4ofby")
 theme_override_font_sizes/font_size = 40
 text = "EXPLORE"
 
-[node name="DialogueManager" type="Node2D" parent="Kairn"]
+[node name="DialogueManager" type="Node2D" parent="Kairn" node_paths=PackedStringArray("external_choice_receiver")]
 z_index = 6
 position = Vector2(-401.667, -825)
 script = ExtResource("17_58emc")
 portraits_resource = ExtResource("18_hntux")
 is_Choice = true
+external_choice_receiver = NodePath("..")
 
 [connection signal="button_down" from="moveButton" to="ExplorationManager" method="_on_move_button_button_down"]
 [connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]

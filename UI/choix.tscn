@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://fvl38cdlmapy"]
+[gd_scene load_steps=3 format=3 uid="uid://fvl38cdlmapy"]
+
+[ext_resource type="Script" uid="uid://cspa2tuof385o" path="res://lvl/ChoiceUI.gd" id="1_msup4"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="2_2sm2f"]
 
 [node name="Choix" type="Control"]
 layout_mode = 3
@@ -6,29 +9,24 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.601257, 0.601257)
+script = ExtResource("1_msup4")
 
-[node name="use" type="Button" parent="."]
+[node name="Choice1" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1123.33
+offset_left = 987.93
 offset_top = 616.667
-offset_right = 1505.33
+offset_right = 1369.93
 offset_bottom = 707.667
+theme_override_fonts/font = ExtResource("2_2sm2f")
 theme_override_font_sizes/font_size = 60
-text = "Use the stele"
+text = "Choice 1"
 
-[node name="destroy" type="Button" parent="."]
+[node name="Choice2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1660.0
+offset_left = 1862.76
 offset_top = 616.667
-offset_right = 1800.0
-offset_bottom = 647.667
+offset_right = 2244.76
+offset_bottom = 707.667
+theme_override_fonts/font = ExtResource("2_2sm2f")
 theme_override_font_sizes/font_size = 60
-text = "Destroy the stele"
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+text = "Choice 2"

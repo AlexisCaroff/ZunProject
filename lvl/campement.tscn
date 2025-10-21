@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://c63m6eq381xm1"]
+[gd_scene load_steps=43 format=3 uid="uid://c63m6eq381xm1"]
 
 [ext_resource type="Script" uid="uid://w6xjpbgh5xei" path="res://scripts/camp/campement.gd" id="1_7mjgo"]
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_dks4i"]
@@ -44,6 +44,8 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hfsnk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7788d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gwj3x"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wdxk4"]
 
@@ -162,6 +164,7 @@ offset_left = 204.0
 offset_top = 821.0
 offset_right = 442.0
 offset_bottom = 901.0
+theme_override_fonts/font = ExtResource("17_luaer")
 theme_override_font_sizes/font_size = 40
 text = "Hero Name"
 
@@ -374,9 +377,10 @@ bounce_height = 1.2
 
 [node name="TenteButton" type="Button" parent="Tente"]
 offset_left = -224.0
-offset_top = -99.0
+offset_top = -155.0
 offset_right = 204.0
 offset_bottom = 113.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gwj3x")
 flat = true
 
 [node name="Button" type="Button" parent="."]

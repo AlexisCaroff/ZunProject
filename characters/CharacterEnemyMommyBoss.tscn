@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://crq2yis3m8t41"]
+[gd_scene load_steps=18 format=3 uid="uid://crq2yis3m8t41"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_wxyxf"]
 [ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="3_x6ecl"]
@@ -6,10 +6,11 @@
 [ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/HerosCombatSkills/Ennemi_attaque_basique.tres" id="5_atoy3"]
 [ext_resource type="Resource" uid="uid://cvpggc0yt3l4o" path="res://actions/ennemiCombatSkills/Ennemi_charme.tres" id="6_nr0ub"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="7_rau51"]
-[ext_resource type="Script" uid="uid://b6a37g0gbkyla" path="res://characters/charatexture/braines/Ai_brain_MommyBoss.gd" id="8_717i8"]
+[ext_resource type="Resource" uid="uid://b4okliodacjdm" path="res://actions/ennemiCombatSkills/spawnEnnemie.tres" id="7_x6ecl"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="8_k67cb"]
 [ext_resource type="Texture2D" uid="uid://ccfldj30sasp8" path="res://characters/charatexture/boss.png" id="9_717i8"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="9_pwx3b"]
+[ext_resource type="Resource" uid="uid://ct7mvw26gtqt2" path="res://characters/charatexture/braines/MommyBrain.tres" id="9_x6ecl"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="10_303s1"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="11_wskpd"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="12_mxjth"]
@@ -25,9 +26,9 @@ initiative_icon = ExtResource("4_h8b51")
 Charaname = "ennemie1"
 IsDemon = true
 Chara_position = 1
-skill_resources = Array[Resource]([ExtResource("5_atoy3"), ExtResource("6_nr0ub"), ExtResource("5_atoy3"), ExtResource("6_nr0ub"), ExtResource("7_rau51")])
+skill_resources = Array[Resource]([ExtResource("5_atoy3"), ExtResource("6_nr0ub"), ExtResource("7_x6ecl"), ExtResource("6_nr0ub"), ExtResource("7_rau51")])
 is_player_controlled = false
-ai_brain = ExtResource("8_717i8")
+ai_brain = ExtResource("9_x6ecl")
 can_be_moved = false
 
 [node name="pivot" type="Node2D" parent="."]

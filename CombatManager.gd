@@ -25,16 +25,8 @@ var pending_skill: Skill:
 		#print("SET pending_skill →", value)
 		_pending_skill = value
 
-@onready var hero_positions: Array[PositionSlot]=[
-		$"../HeroPosition/position1",
-		$"../HeroPosition/position2",
-		$"../HeroPosition/position3",
-		$"../HeroPosition/position4"
-	
-]
-@onready var enemy_positions: Array[PositionSlot] =[
-
-]
+@onready var hero_positions: Array[PositionSlot]=[]
+@onready var enemy_positions: Array[PositionSlot] =[]
 var HERO_SCENES = [
 	preload("res://characters/CharaPriest.tscn"),
 	preload("res://characters/CharaHunter.tscn"),
@@ -57,12 +49,57 @@ enum CombatState {
 var combat_state: CombatState = CombatState.IDLE
 var startcombat = true
 var nb_crystaleloot :int = 0
-var ennemy_are_embushed : bool = false
-var heroes_are_embushed : bool = false
+var ennemy_are_ambushed : bool = false
+var heroes_are_ambushed : bool = false
 
 func _ready():
+	for child in $"../HeroPosition".get_children():
+		if child is PositionSlot:
+			hero_positions.append(child)
+	
+	for child in $"../ennemiePosition".get_children():
+		if child is PositionSlot:
+			enemy_positions.append(child)
+			
+	if heroes_are_ambushed:
+		show_ambush_message("You're ambushed!", Color(1, 0.2, 0.2))
+	elif ennemy_are_ambushed:
+		show_ambush_message("You surprise your enemies!", Color(0.2, 1, 0.2))
 	if startcombat ==true:
 		_start()
+func show_ambush_message(text: String, color: Color):
+	# Crée le Label
+	var label = Label.new()
+	label.text = text
+	label.z_index=21
+	label.scale = Vector2(0.1, 0.1)
+	label.modulate.a = 0.0
+	label.add_theme_font_size_override("font_size", 68)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.anchor_left = 0.5
+	label.anchor_top = 0.5
+	label.anchor_right = 0.5
+	label.anchor_bottom = 0.5
+	var font: FontFile = ResourceLoader.load("res://UI/Euphorigenic.otf")
+	label.add_theme_font_override("font", font)
+	label.add_theme_font_size_override("font_size", 64)
+	label.position = get_viewport().get_visible_rect().size / 3
+	add_child(label)
+	label.pivot_offset = label.size / 2
+
+	# Animation via Tween
+	var tween = create_tween()
+	tween.tween_property(label, "scale", Vector2(1.2, 1.2), 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_property(label, "modulate:a", 1.0, 0.3)
+	tween.tween_interval(1.0) # temps d’affichage
+	tween.parallel().tween_property(label, "scale", Vector2(1.5, 1.5), 0.6)
+	tween.parallel().tween_property(label, "modulate:a", 0.0, 0.6)
+	tween.finished.connect(func():
+		if is_instance_valid(label):
+			label.queue_free()
+	)
+
 
 func _start():
 	if GameState.current_phase == GameStat.GamePhase.COMBAT:
@@ -91,8 +128,9 @@ func _start():
 				var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() - 1)
 				var slot = hero_positions[slot_index]
 				move_character_to(chara, slot, 0.0)
-				if heroes_are_embushed:
-					chara.stun=true
+				chara.current_stamina= chara.max_stamina
+				if heroes_are_ambushed:
+					chara.surprised()
 				chara.update_ui()
 		
 		# Spawn ennemis
@@ -105,8 +143,8 @@ func _start():
 			var slot_index = i
 			var slot = enemy_positions[slot_index]
 			move_character_to(chara, slot, 0.0)
-			if ennemy_are_embushed:
-				chara.stun=true
+			if ennemy_are_ambushed:
+				chara.surprised()
 			chara.update_ui()
 		ui.log("start Combat")
 		start_combat()
@@ -125,19 +163,21 @@ func load_saved_heroes_into_slots(slots: Array[PositionSlot]):
 		hero.current_horniness = hero_data["horniness"]
 		hero.dead = hero_data["dead"]
 		hero.skill_resources = hero_data["skills"]
+		
 		hero._updateSkills(hero.skill_resources)
 		hero.update_ui()
 
 		add_child(hero)
 		hero.combat_manager = self
 		heroes.append(hero)
+		if heroes_are_ambushed:
+			hero.surprised()
 		hero.update_ui()
 		
 		var pos_index = hero_data.get("position", -1)
 		if pos_index >= 0 and pos_index < slots.size():
 			slots[pos_index].assign_character(hero, 0.0)
-		if heroes_are_embushed:
-			hero.stun =true
+		
 	
 func start_combat():
 	combat_state = CombatState.IDLE
@@ -163,9 +203,12 @@ func next_turn():
 		ui.update_turn_queue_ui(turn_queue)
 	ui.update_turn_queue_ui(turn_queue)
 	current_character = turn_queue.pop_front()
-	
-	
+	await get_tree().process_frame
+	ui.log(current_character.Charaname +" turn")
+	current_character.animate_start_Turn()
+	await current_character.skill_animation_finished
 	if current_character.current_stamina<=0: # look if tired
+		ui.log(current_character.Charaname +" is tired")
 		while is_animation_playing():
 			await get_tree().process_frame
 		turn_queue.append(current_character)
@@ -173,22 +216,33 @@ func next_turn():
 		return
 	if current_character.stun==true:
 		current_character.stun=false
+		ui.log(current_character.Charaname +" is stun")
+		if current_character.exclamation!= null:
+			current_character.exclamation.free()
+			ui.log(current_character.Charaname +" is surprised")
+		
 		current_character.sprite.self_modulate=Color(1,1,1,1)
 		while is_animation_playing():
 			await get_tree().process_frame
+		await get_tree().create_timer(1.5).timeout
 		turn_queue.append(current_character)
+		
 		next_turn()
 		
 		return
+	
 	if current_character.is_player_controlled:
+		
 		await get_tree().process_frame
 		ui.update_ui_for_current_character(current_character)
+		current_character.CharaColor =Color(1.8,1.8,1.8,1)
+		current_character.sprite.modulate =current_character.CharaColor
 	else:
-		ui.log("Enemie's turn")
+		
 		ui.update_ui_for_current_character(current_character)
 		await get_tree().create_timer(1.0).timeout
 		current_character.play_ai_turn(heroes,enemies)
-		await get_tree().create_timer(1.5).timeout
+		await get_tree().create_timer(2.5).timeout
 		while is_animation_playing():
 			await get_tree().process_frame
 		turn_queue.append(current_character)

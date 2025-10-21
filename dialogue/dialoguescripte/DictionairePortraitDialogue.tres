@@ -11,7 +11,7 @@ script = ExtResource("1_q5l30")
 portraits = {
 "Hunter": ExtResource("4_hsate"),
 "Mystic": ExtResource("2_hsate"),
-"Priest": ExtResource("1_g5hor"),
+"Priestess": ExtResource("1_g5hor"),
 "Warrior": ExtResource("3_n0cmy")
 }
 metadata/_custom_type_script = "uid://bckoqne0r03nj"

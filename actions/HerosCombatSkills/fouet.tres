@@ -17,9 +17,9 @@ metadata/_custom_type_script = "uid://13cgpeuxvpoa"
 
 [resource]
 script = ExtResource("4_7e8mt")
-name = "fouet"
-descriptionName = "fouet"
-description = "remove horny"
+name = "Whip"
+descriptionName = "Whip"
+description = "remove horny on Ally and deal dmg to ennemy"
 icon = ExtResource("4_2julc")
 required_position = 0
 ImageSkill = ExtResource("1_28per")

@@ -76,7 +76,7 @@ func update_ui_for_current_character(character: Character):
 		]
 		return
 	
-	character.sprite.modulate = Color(1.8, 1.8, 1.8)
+	#character.sprite.modulate = Color(1.8, 1.8, 1.8)
 	
 	Charaname_panel.text = character.Charaname
 	charaPortrait.texture=character.initiative_icon

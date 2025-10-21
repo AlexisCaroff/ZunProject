@@ -1,0 +1,24 @@
+Priestess : The priestess points to the mystic with her whip.
+You, daemon-wielder. What do you know about these heretics?
+How did you find this place?
+
+Mystic: The spirits told me, Azun’bir. They showed me a vision of an ancient evil.
+The visions led me to this place.
+
+Priestess : All the way from the warmlands? And what do your.. spirits.. say about this evil?
+
+Mystic: The spirits do not speak as we do. They show me images, emotions. 
+They showed me…a great whirlpool. Darkness, spreading over the land. 
+A very old and unquenchable hunger. 
+
+Priestess : …And that led you to this ruins? 
+
+Mystic: The visions led me chillwards, but I did not know where to. But the power in these ruins is part of the whirlpool. It taints the local spirits.
+
+Priestess : The priestess sneers:
+And what of your daemons, barbarian? Will they not be tainted as well?
+
+Mystic:I can feel the corruption trying to turn them, but it does not reach them. 
+As long as my mind remains resolute, they will protect us, Azun’bir.
+
+Priestess : We shall see.

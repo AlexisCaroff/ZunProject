@@ -68,17 +68,17 @@ func load_from_dict(data: Dictionary) -> void:
 	if data.has("horny"):
 		current_horny = data["horny"]
 	if data.has("portrait_texture_path"):
-		var portrait_path = data["portrait_texture_path"]
-		portrait_texture = Utils.load_texture(portrait_path)
+		var port_path = data["portrait_texture_path"]
+		portrait_texture = Utils.load_texture(port_path)
 	if data.has("dead_portrait_texture_path"):
-		var dead_portrait_path = data["dead_portrait_texture_path"]
-		dead_portrait_texture = Utils.load_texture(dead_portrait_path)
+		var dead_port_path = data["dead_portrait_texture_path"]
+		dead_portrait_texture = Utils.load_texture(dead_port_path)
 	if data.has("initiative_icon_path"):
-		var initiative_icon_path = data["initiative_icon_path"]
-		initiative_icon = Utils.load_texture(initiative_icon_path)
+		var init_icon_path = data["initiative_icon_path"]
+		initiative_icon = Utils.load_texture(init_icon_path)
 	if data.has("position"):
-		var position= data["position"]
-		current_position=position
+		var pos= data["position"]
+		current_position=pos
 		
 	
 

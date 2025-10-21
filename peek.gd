@@ -7,6 +7,9 @@ $PortraitSlot2,
 $PortraitSlot3,
 $PortraitSlot4
 ]
+var container
+@export var square_size: Vector2 = Vector2(16,16)
+@export var square_color: Color = Color(0.8, 0.6, 0.2)
 var door : Door
 
 func set_encounter(encounter: CombatEncounter) -> void:
@@ -14,18 +17,36 @@ func set_encounter(encounter: CombatEncounter) -> void:
 
 
 func preview_encounter(encounter: CombatEncounter) -> void:
+	var hbox := HBoxContainer.new()
+	hbox.anchor_left = 0.5
+	hbox.anchor_right = 0.5
+	hbox.anchor_top = 0.5
+	hbox.anchor_bottom = 0.5
+	hbox.position = Vector2(1920/2, 250)
+	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	add_child(hbox)
+
+	# Crée un carré pour chaque élément du tableau
+	for i in encounter.enemy_scenes.size():
+		if slots[i] != null:
+			var rect := ColorRect.new()
+			rect.color = square_color
+			rect.custom_minimum_size = square_size
+			hbox.add_child(rect)
+			
 	for i in range(slots.size()):
 		if i < encounter.enemy_scenes.size():
 			var enemy: Character = encounter.enemy_scenes[i].instantiate()
 			
 			if enemy.portrait_texture:
 				# Créer un conteneur Node2D pour le Sprite et le Tween
-				var container = Node2D.new()
+				container = Node2D.new()
 				slots[i].add_child(container)
 
 				# Créer un Sprite2D pour l'ennemi
 				var sprite = Sprite2D.new()
 				sprite.texture = enemy.portrait_texture
+				sprite.modulate = Color(0,0,0)
 				sprite.modulate.a = 0  # Commencer avec une alpha à 0 (transparent)
 				container.add_child(sprite)  # Ajouter le Sprite à son parent (container)
 

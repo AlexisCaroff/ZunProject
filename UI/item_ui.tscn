@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cw5s8ebimv1wh"]
+[gd_scene load_steps=7 format=3 uid="uid://cw5s8ebimv1wh"]
 
 [ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="1_oausj"]
 [ext_resource type="Script" uid="uid://cevuvmhmwe5y5" path="res://UI/item_ui.gd" id="1_q6op2"]
+[ext_resource type="Texture2D" uid="uid://2xyreu4glom" path="res://UI/etoile.png" id="2_nmcp0"]
 [ext_resource type="Texture2D" uid="uid://cwyh8uva3wdam" path="res://UI/goldIcon.png" id="2_q6op2"]
+[ext_resource type="Script" uid="uid://xgcdntldtp3u" path="res://UI/rotateSprite.gd" id="3_xmd8g"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="4_qyigm"]
 
 [node name="itemUI" type="Control"]
@@ -13,6 +15,52 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q6op2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.968, 1, 0.8, 0.083)
+position = Vector2(61.7577, 67.7577)
+scale = Vector2(0.220757, 0.220757)
+texture = ExtResource("2_nmcp0")
+script = ExtResource("3_xmd8g")
+vitesse = -0.5
+scale_amplitude = 0.2
+scale_speed = 0.31
+base_scale = Vector2(0.18, 0.18)
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+self_modulate = Color(0.968, 1, 0.8, 0.083)
+position = Vector2(70, 68)
+rotation = 0.785398
+scale = Vector2(0.220757, 0.220757)
+texture = ExtResource("2_nmcp0")
+script = ExtResource("3_xmd8g")
+vitesse = -0.4
+scale_amplitude = 0.2
+scale_speed = 0.25
+base_scale = Vector2(0.18, 0.18)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+self_modulate = Color(0.968, 1, 0.8, 0.083)
+position = Vector2(68, 69)
+scale = Vector2(0.220757, 0.220757)
+texture = ExtResource("2_nmcp0")
+script = ExtResource("3_xmd8g")
+vitesse = 0.45
+scale_amplitude = 0.2
+scale_speed = 0.2
+base_scale = Vector2(0.18, 0.18)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+self_modulate = Color(0.968, 1, 0.8, 0.083)
+position = Vector2(66, 70)
+rotation = 0.785398
+scale = Vector2(0.220757, 0.220757)
+texture = ExtResource("2_nmcp0")
+script = ExtResource("3_xmd8g")
+vitesse = 0.4
+scale_amplitude = 0.2
+scale_speed = 0.3
+base_scale = Vector2(0.18, 0.18)
 
 [node name="boxUI" type="TextureRect" parent="."]
 layout_mode = 0

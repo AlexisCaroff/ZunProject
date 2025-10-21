@@ -14,35 +14,35 @@ script = ExtResource("1_6e3n1")
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = -315.499
-offset_top = -57.018
-offset_right = 832.501
-offset_bottom = 203.982
+offset_left = -154.491
+offset_top = -57.0731
+offset_right = 993.509
+offset_bottom = 203.927
 scale = Vector2(2.07695, 4.90172)
 color = Color(0, 0, 0, 0.580392)
 
 [node name="Portrait" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 246.0
-offset_top = 239.0
-offset_right = 925.0
-offset_bottom = 945.0
+offset_left = 407.008
+offset_top = 238.945
+offset_right = 1086.01
+offset_bottom = 944.945
 texture = ExtResource("2_vl2if")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 223.0
-offset_top = 772.0
-offset_right = 1371.0
-offset_bottom = 1033.0
+offset_left = 384.008
+offset_top = 771.945
+offset_right = 1532.01
+offset_bottom = 1032.94
 color = Color(0.832031, 0.746592, 0.613619, 1)
 
 [node name="Speaker" type="Label" parent="."]
 layout_mode = 0
-offset_left = 256.0
-offset_top = 783.0
-offset_right = 498.0
-offset_bottom = 884.0
+offset_left = 417.008
+offset_top = 782.945
+offset_right = 659.008
+offset_bottom = 883.945
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_om3t3")
 theme_override_font_sizes/font_size = 50
@@ -50,10 +50,10 @@ text = "Nom"
 
 [node name="Text" type="Label" parent="."]
 layout_mode = 0
-offset_left = 278.0
-offset_top = 844.0
-offset_right = 1302.0
-offset_bottom = 1022.0
+offset_left = 439.008
+offset_top = 843.945
+offset_right = 1463.01
+offset_bottom = 1021.94
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_om3t3")
 theme_override_font_sizes/font_size = 40
@@ -62,14 +62,15 @@ autowrap_mode = 3
 
 [node name="indication" type="Label" parent="."]
 layout_mode = 0
-offset_left = 680.0
-offset_top = 998.0
-offset_right = 1001.0
-offset_bottom = 1046.0
+offset_left = 841.008
+offset_top = 1003.7
+offset_right = 1162.01
+offset_bottom = 1051.7
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_om3t3")
-theme_override_font_sizes/font_size = 30
-text = "(space to continue )"
+theme_override_font_sizes/font_size = 20
+text = "(left clic to continue )"
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Control" type="Control" parent="."]
@@ -77,5 +78,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 161.008
+offset_top = -0.0551311
+offset_right = 161.008
+offset_bottom = -0.05513
 grow_horizontal = 2
 grow_vertical = 2

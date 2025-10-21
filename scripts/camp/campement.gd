@@ -83,6 +83,7 @@ func changeSelectedCharacter(occupant:CharaCamp):
 	
 func updateUICharacter(character:CharaCamp):
 	portraitCharaselect.texture = character.initiative_icon
+	CharacterName.text = character.Charaname
 	AttLabel.text = "Attaque: %d" % [character.attack]
 	DefLabel.text = "Defence: %d" % [character.defense]
 	Stamina.text = "Stamina: %d / %d" % [character.current_stamina, character.max_stamina]

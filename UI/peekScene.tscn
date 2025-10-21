@@ -13,8 +13,8 @@ script = ExtResource("1_2c73c")
 ennemies = ExtResource("2_amsrx")
 
 [node name="ZunBg" type="Sprite2D" parent="."]
-position = Vector2(994, 475.625)
-scale = Vector2(1.1, 1.1)
+position = Vector2(1013.5, 481)
+scale = Vector2(1.18528, 1.3275)
 texture = ExtResource("2_cxl0a")
 
 [node name="atmosphere" parent="." instance=ExtResource("3_amsrx")]

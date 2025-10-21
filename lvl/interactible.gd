@@ -5,14 +5,15 @@ var startsize = Vector2(1.0,1.0)
 var current_tween: Tween = null
 @export var amount:int = 30
 @onready var  etiquette = $etiquette
-@onready var dialogue_manager := $DialogueManager
+@onready var dialogue_manager := $"../DialogueManager"
 @export var dialoguePass :String
 
 func _ready():
 
 	# Charger un fichier de dialogue
 	dialogue_manager.load_dialogue(dialoguePass)
-
+	dialogue_manager.text_choice1 = "Use Kairn "
+	dialogue_manager.text_choice2 = "Destroy Kairn "
 	
 func _on_button_button_down() -> void:
 	dialogue_manager.start_dialogue()
@@ -50,10 +51,10 @@ func _on_button_mouse_exited() -> void:
 	current_tween.tween_property(etiquette, "scale", startsize, 0.2)
 
 
-func _on_use_button_down() -> void:
+func _on_Choice1_button_down() -> void:
 	use_cairn()
 
 
 
-func _on_destroy_button_down() -> void:
+func _on_Choice2_button_down() -> void:
 	destroy_cairn()

@@ -17,12 +17,12 @@
 [ext_resource type="Texture2D" uid="uid://bri15xc6cn1ul" path="res://actions/hornyJauge.png" id="14_a27kg"]
 [ext_resource type="Texture2D" uid="uid://bk1gu5cgtgkfy" path="res://actions/hornyJaugePleine.png" id="15_8rby6"]
 
-[node name="CharacterTestennemie1" type="Node2D"]
+[node name="Nymphe" type="Node2D"]
 script = ExtResource("1_61pjh")
 portrait_texture = ExtResource("2_i0xeg")
 dead_portrait_texture = ExtResource("3_0go71")
 initiative_icon = ExtResource("3_mruho")
-Charaname = "ennemie1"
+Charaname = "Nymphe"
 IsDemon = true
 Chara_position = 1
 skill_resources = Array[Resource]([ExtResource("4_61pjh"), ExtResource("6_r4har"), ExtResource("4_61pjh"), ExtResource("6_r4har"), ExtResource("6_0go71")])

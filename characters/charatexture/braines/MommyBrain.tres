@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AiBrain_MommyBoss" load_steps=2 format=3 uid="uid://ct7mvw26gtqt2"]
+
+[ext_resource type="Script" uid="uid://b6a37g0gbkyla" path="res://characters/charatexture/braines/Ai_brain_MommyBoss.gd" id="1_qcjqh"]
+
+[resource]
+script = ExtResource("1_qcjqh")
+name = "Default AI"
+description = "IA basique qui choisit une compétence aléatoire utilisable et une cible valide."
+metadata/_custom_type_script = "uid://b6a37g0gbkyla"
