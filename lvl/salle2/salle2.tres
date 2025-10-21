@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://hsq4jpscmjyc" path="res://lvl/salle3/salle3.tres" id="2_4qc74"]
 [ext_resource type="PackedScene" uid="uid://csiiacrh5i14e" path="res://lvl/salle2/door2.tscn" id="2_6jy6b"]
 [ext_resource type="Resource" uid="uid://dum04r5du6nss" path="res://lvl/salle2/encounter2.tres" id="3_4qc74"]
-[ext_resource type="PackedScene" uid="uid://cop2b1h4dmg4f" path="res://lvl/salle2/exploration2.tscn" id="4_52khv"]
+[ext_resource type="PackedScene" uid="uid://b5a3qavf58m47" path="res://lvl/salle2/exploration2.tscn" id="4_52khv"]
 
 [resource]
 script = ExtResource("1_wfq2f")

@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://tq0nr5tg2b3k" path="res://lvl/positionexplo.gd" id="9_r435j"]
 [ext_resource type="Script" uid="uid://km54mxly4gk4" path="res://lvl/exploration_manager.gd" id="10_4cboy"]
 [ext_resource type="PackedScene" uid="uid://dq282vipchnbq" path="res://characters/chara_explo.tscn" id="11_y08b0"]
-[ext_resource type="Texture2D" uid="uid://5xrrcl7rnx6w" path="res://Enviro/door.png" id="13_1nxlp"]
+[ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="13_qg4ur"]
 [ext_resource type="Texture2D" uid="uid://djit2m4icvw0k" path="res://Enviro/kairn.png" id="14_0oifh"]
 [ext_resource type="Script" uid="uid://cvdsxgbtufa4g" path="res://lvl/interactible.gd" id="15_ay18u"]
 [ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="16_dtf2f"]
@@ -145,7 +145,7 @@ offset_bottom = 872.0
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 1920.0
-offset_bottom = 1000.0
+offset_bottom = 901.0
 theme_override_fonts/font = ExtResource("4_ngelb")
 theme_override_font_sizes/font_size = 450
 text = "Victoire !"
@@ -160,6 +160,7 @@ script = ExtResource("8_m4q63")
 [node name="HeroPosition" type="Node2D" parent="."]
 z_index = 1
 position = Vector2(568, 642)
+scale = Vector2(1.4, 1.4)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
 z_index = 1
@@ -232,11 +233,13 @@ flat = true
 expand_icon = true
 
 [node name="Doortext" type="TextureRect" parent="ExplorationManager/Button"]
+modulate = Color(0.38, 0.31445, 0.209, 1)
 layout_mode = 0
-offset_top = 6.0
-offset_right = 385.0
-offset_bottom = 543.0
-texture = ExtResource("13_1nxlp")
+offset_left = 348.0
+offset_top = 227.0
+offset_right = 589.0
+offset_bottom = 483.0
+texture = ExtResource("13_qg4ur")
 expand_mode = 1
 
 [node name="DialogueManager" type="Node2D" parent="." node_paths=PackedStringArray("external_choice_receiver")]

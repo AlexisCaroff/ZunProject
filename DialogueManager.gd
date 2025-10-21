@@ -77,7 +77,7 @@ func load_dialogue(file_path: String):
 
 func start_dialogue():
 	dialogue_started=true
-	$"../Kairn/Button".disabled=true
+	#$"../Kairn/Button".disabled=true
 	if dialogue_lines.is_empty():
 		emit_signal("dialogue_finished")
 		if is_Choice and choix:

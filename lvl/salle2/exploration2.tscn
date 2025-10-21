@@ -1,23 +1,23 @@
-[gd_scene load_steps=19 format=3 uid="uid://cop2b1h4dmg4f"]
+[gd_scene load_steps=19 format=3 uid="uid://b5a3qavf58m47"]
 
-[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_f8dfn"]
-[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_uymsn"]
-[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="3_ugroo"]
-[ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="4_ntlav"]
-[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="5_4ofby"]
-[ext_resource type="Texture2D" uid="uid://jhd7rid3c1c1" path="res://actions/actiontexture/moveIcon.png" id="6_3ol3m"]
-[ext_resource type="Script" uid="uid://conijhbkctdj2" path="res://lvl/moveExplo.gd" id="7_43pss"]
-[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="8_33tft"]
-[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="9_27c7y"]
-[ext_resource type="Script" uid="uid://tq0nr5tg2b3k" path="res://lvl/positionexplo.gd" id="10_bxa6i"]
-[ext_resource type="Script" uid="uid://km54mxly4gk4" path="res://lvl/exploration_manager.gd" id="11_uopa8"]
-[ext_resource type="PackedScene" uid="uid://dq282vipchnbq" path="res://characters/chara_explo.tscn" id="12_dpro2"]
+[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_o4w0v"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_xxi1w"]
+[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="3_m5yi7"]
+[ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="4_t8k64"]
+[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="5_tox4r"]
+[ext_resource type="Texture2D" uid="uid://jhd7rid3c1c1" path="res://actions/actiontexture/moveIcon.png" id="6_m035o"]
+[ext_resource type="Script" uid="uid://conijhbkctdj2" path="res://lvl/moveExplo.gd" id="7_ptjnh"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="8_wnj64"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="9_1o1g3"]
+[ext_resource type="Script" uid="uid://tq0nr5tg2b3k" path="res://lvl/positionexplo.gd" id="10_q3qlw"]
+[ext_resource type="Script" uid="uid://km54mxly4gk4" path="res://lvl/exploration_manager.gd" id="11_lxqu0"]
+[ext_resource type="PackedScene" uid="uid://dq282vipchnbq" path="res://characters/chara_explo.tscn" id="12_j0kaf"]
 [ext_resource type="Texture2D" uid="uid://5xrrcl7rnx6w" path="res://Enviro/door.png" id="13_c0g40"]
-[ext_resource type="Texture2D" uid="uid://djit2m4icvw0k" path="res://Enviro/kairn.png" id="14_ps41f"]
-[ext_resource type="Script" uid="uid://cvdsxgbtufa4g" path="res://lvl/interactible.gd" id="15_ehroj"]
-[ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="16_ye4oi"]
-[ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="17_58emc"]
-[ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="18_hntux"]
+[ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="14_gw8sn"]
+[ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="15_f0t6l"]
+[ext_resource type="Script" uid="uid://cvdsxgbtufa4g" path="res://lvl/interactible.gd" id="16_ehlqd"]
+[ext_resource type="Texture2D" uid="uid://djit2m4icvw0k" path="res://Enviro/kairn.png" id="17_inwje"]
+[ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="18_4cl5f"]
 
 [node name="ExploInterface" type="Control"]
 layout_mode = 3
@@ -29,9 +29,9 @@ grow_vertical = 2
 
 [node name="ZunBg" type="Sprite2D" parent="."]
 position = Vector2(961, 402)
-texture = ExtResource("1_f8dfn")
+texture = ExtResource("1_o4w0v")
 
-[node name="atmosphere" parent="." instance=ExtResource("2_uymsn")]
+[node name="atmosphere" parent="." instance=ExtResource("2_xxi1w")]
 position = Vector2(2, 352)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
@@ -46,12 +46,12 @@ handle_input_locally = false
 size = Vector2i(400, 400)
 render_target_update_mode = 4
 
-[node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_ugroo")]
+[node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_m5yi7")]
 scale = Vector2(0.5, 0.5)
 
 [node name="FightUi" type="Sprite2D" parent="."]
 position = Vector2(960, 545)
-texture = ExtResource("4_ntlav")
+texture = ExtResource("4_t8k64")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -69,13 +69,13 @@ offset_top = 854.0
 offset_right = 1007.0
 offset_bottom = 954.0
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("5_4ofby")
+theme_override_fonts/font = ExtResource("5_tox4r")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("6_3ol3m")
+icon = ExtResource("6_m035o")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("7_43pss")
+script = ExtResource("7_ptjnh")
 
 [node name="cooldownA" type="Label" parent="moveButton"]
 layout_mode = 0
@@ -88,7 +88,7 @@ offset_left = 681.0
 offset_top = 982.0
 offset_right = 1260.0
 offset_bottom = 1066.0
-theme_override_fonts/font = ExtResource("8_33tft")
+theme_override_fonts/font = ExtResource("8_wnj64")
 theme_override_font_sizes/font_size = 25
 text = "Move"
 horizontal_alignment = 1
@@ -135,7 +135,7 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1000.0
-theme_override_fonts/font = ExtResource("5_4ofby")
+theme_override_fonts/font = ExtResource("5_tox4r")
 theme_override_font_sizes/font_size = 450
 text = "Victoire !"
 horizontal_alignment = 1
@@ -144,7 +144,7 @@ vertical_alignment = 1
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
 ignore_rotation = false
-script = ExtResource("9_27c7y")
+script = ExtResource("9_1o1g3")
 
 [node name="HeroPosition" type="Node2D" parent="."]
 z_index = 1
@@ -153,7 +153,7 @@ position = Vector2(568, 642)
 [node name="position1" type="Node2D" parent="HeroPosition"]
 z_index = 1
 position = Vector2(-22, 1)
-script = ExtResource("10_bxa6i")
+script = ExtResource("10_q3qlw")
 
 [node name="Button" type="Button" parent="HeroPosition/position1"]
 z_index = 10
@@ -166,7 +166,7 @@ flat = true
 [node name="position2" type="Node2D" parent="HeroPosition"]
 z_index = 1
 position = Vector2(132, 24)
-script = ExtResource("10_bxa6i")
+script = ExtResource("10_q3qlw")
 
 [node name="Button" type="Button" parent="HeroPosition/position2"]
 z_index = 14
@@ -180,7 +180,7 @@ flat = true
 [node name="position3" type="Node2D" parent="HeroPosition"]
 z_index = 1
 position = Vector2(298, 2)
-script = ExtResource("10_bxa6i")
+script = ExtResource("10_q3qlw")
 
 [node name="Button" type="Button" parent="HeroPosition/position3"]
 z_index = 10
@@ -193,7 +193,7 @@ flat = true
 [node name="position4" type="Node2D" parent="HeroPosition"]
 z_index = 1
 position = Vector2(479, 24)
-script = ExtResource("10_bxa6i")
+script = ExtResource("10_q3qlw")
 
 [node name="Button" type="Button" parent="HeroPosition/position4"]
 z_index = 10
@@ -204,8 +204,8 @@ offset_right = 67.0
 flat = true
 
 [node name="ExplorationManager" type="Node2D" parent="."]
-script = ExtResource("11_uopa8")
-chara_explo_scene = ExtResource("12_dpro2")
+script = ExtResource("11_lxqu0")
+chara_explo_scene = ExtResource("12_j0kaf")
 
 [node name="Button" type="Button" parent="ExplorationManager"]
 z_index = 2
@@ -228,8 +228,8 @@ expand_mode = 1
 self_modulate = Color(1, 1, 1.2, 1)
 position = Vector2(254, 508)
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("14_ps41f")
-script = ExtResource("15_ehroj")
+texture = ExtResource("17_inwje")
+script = ExtResource("16_ehlqd")
 dialoguePass = "res://dialogue/dialogueTeste.txt"
 
 [node name="Button" type="Button" parent="Kairn"]
@@ -241,22 +241,22 @@ flat = true
 
 [node name="etiquette" type="Sprite2D" parent="Kairn"]
 position = Vector2(193.333, 6.66667)
-texture = ExtResource("16_ye4oi")
+texture = ExtResource("18_4cl5f")
 
 [node name="Label" type="Label" parent="Kairn/etiquette"]
 offset_left = -92.0
 offset_top = -23.0
 offset_right = 125.0
 offset_bottom = 30.0
-theme_override_fonts/font = ExtResource("5_4ofby")
+theme_override_fonts/font = ExtResource("5_tox4r")
 theme_override_font_sizes/font_size = 40
 text = "EXPLORE"
 
 [node name="DialogueManager" type="Node2D" parent="Kairn" node_paths=PackedStringArray("external_choice_receiver")]
 z_index = 6
 position = Vector2(-401.667, -825)
-script = ExtResource("17_58emc")
-portraits_resource = ExtResource("18_hntux")
+script = ExtResource("14_gw8sn")
+portraits_resource = ExtResource("15_f0t6l")
 is_Choice = true
 external_choice_receiver = NodePath("..")
 
