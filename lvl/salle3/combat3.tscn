@@ -552,6 +552,7 @@ outsidePos = Vector2(2200, 500)
 esquivPos = Vector2(1700, 500)
 
 [node name="contexte" type="Label" parent="."]
+layout_mode = 0
 offset_left = 823.0
 offset_top = 130.0
 offset_right = 1133.0

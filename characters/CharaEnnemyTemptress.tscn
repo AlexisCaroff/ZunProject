@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cr7722t3ktcl4"]
+[gd_scene load_steps=19 format=3 uid="uid://cr7722t3ktcl4"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_qghsa"]
 [ext_resource type="Texture2D" uid="uid://chha7owt72lwo" path="res://characters/charatexture/enemy temptress.png" id="2_7s1lw"]
@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="14_b3y7k"]
 [ext_resource type="Texture2D" uid="uid://bri15xc6cn1ul" path="res://actions/hornyJauge.png" id="14_u54kx"]
 [ext_resource type="Texture2D" uid="uid://bk1gu5cgtgkfy" path="res://actions/hornyJaugePleine.png" id="15_7pso5"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="17_n4itb"]
+[ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="18_p34m6"]
 
 [node name="CharacterTestennemie2" type="Node2D"]
 script = ExtResource("1_qghsa")
@@ -154,6 +156,26 @@ texture = ExtResource("14_u54kx")
 
 [node name="HornyJaugePleine" type="Sprite2D" parent="HornyJauge"]
 texture = ExtResource("15_7pso5")
+
+[node name="contexte" type="Label" parent="."]
+visible = false
+z_index = 15
+offset_left = -131.0
+offset_top = -219.0
+offset_right = 179.0
+offset_bottom = -57.0
+scale = Vector2(0.825763, 0.821068)
+theme_override_fonts/font = ExtResource("17_n4itb")
+theme_override_font_sizes/font_size = 40
+text = "Skill name"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="LootItem" type="Sprite2D" parent="contexte"]
+z_index = -1
+position = Vector2(161, 28)
+scale = Vector2(2.34924, 0.637405)
+texture = ExtResource("18_p34m6")
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

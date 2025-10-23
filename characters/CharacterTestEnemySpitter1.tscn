@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://doitrlqhfja4t"]
+[gd_scene load_steps=24 format=3 uid="uid://doitrlqhfja4t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_1rndn"]
 [ext_resource type="Texture2D" uid="uid://dlcmqtbjarl35" path="res://characters/charatexture/enemy spitterDead.png" id="3_1rndn"]
@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://bri15xc6cn1ul" path="res://actions/hornyJauge.png" id="17_j4qgo"]
 [ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="17_y1ii6"]
 [ext_resource type="Texture2D" uid="uid://bk1gu5cgtgkfy" path="res://actions/hornyJaugePleine.png" id="18_2prdw"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="20_x44ut"]
+[ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="21_78pn5"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("6_3o24a")
@@ -108,7 +110,8 @@ expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Arrow" type="Sprite2D" parent="."]
-position = Vector2(-22, -295.947)
+visible = false
+position = Vector2(2, -242)
 scale = Vector2(0.38, 0.38)
 texture = ExtResource("13_3o24a")
 offset = Vector2(0, 117.335)
@@ -187,3 +190,23 @@ texture = ExtResource("17_j4qgo")
 
 [node name="HornyJaugePleine" type="Sprite2D" parent="HornyJauge"]
 texture = ExtResource("18_2prdw")
+
+[node name="contexte" type="Label" parent="."]
+visible = false
+z_index = 15
+offset_left = -131.0
+offset_top = -183.0
+offset_right = 179.0
+offset_bottom = -21.0
+scale = Vector2(0.825763, 0.821068)
+theme_override_fonts/font = ExtResource("20_x44ut")
+theme_override_font_sizes/font_size = 40
+text = "Skill name"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="LootItem" type="Sprite2D" parent="contexte"]
+z_index = -1
+position = Vector2(161, 28)
+scale = Vector2(2.34924, 0.637405)
+texture = ExtResource("21_78pn5")

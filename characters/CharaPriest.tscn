@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://csp2iaxa3prf"]
+[gd_scene load_steps=25 format=3 uid="uid://csp2iaxa3prf"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_1m0vh"]
 [ext_resource type="Texture2D" uid="uid://c8rp0k1fogimi" path="res://characters/charatexture/char priest.png" id="2_wpklt"]
@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://bri15xc6cn1ul" path="res://actions/hornyJauge.png" id="21_wpklt"]
 [ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="21_yalvy"]
 [ext_resource type="Texture2D" uid="uid://bk1gu5cgtgkfy" path="res://actions/hornyJaugePleine.png" id="22_xqmvo"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="23_neqvp"]
+[ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="24_054hg"]
 
 [node name="Priest" type="Node2D"]
 script = ExtResource("1_1m0vh")
@@ -159,3 +161,23 @@ offset_right = 48.0
 offset_bottom = 52.798
 value = 100.0
 show_percentage = false
+
+[node name="contexte" type="Label" parent="."]
+visible = false
+z_index = 15
+offset_left = -131.0
+offset_top = -217.0
+offset_right = 179.0
+offset_bottom = -55.0
+scale = Vector2(0.825763, 0.821068)
+theme_override_fonts/font = ExtResource("23_neqvp")
+theme_override_font_sizes/font_size = 40
+text = "Skill name"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="LootItem" type="Sprite2D" parent="contexte"]
+z_index = -1
+position = Vector2(161, 28)
+scale = Vector2(2.34924, 0.637405)
+texture = ExtResource("24_054hg")

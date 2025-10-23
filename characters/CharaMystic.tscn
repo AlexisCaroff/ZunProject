@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b8lhes1w5ga1t"]
+[gd_scene load_steps=25 format=3 uid="uid://b8lhes1w5ga1t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_nekcb"]
 [ext_resource type="Texture2D" uid="uid://df5ltgoqyf2jw" path="res://characters/charatexture/char mystic.png" id="2_bjjxo"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="22_rwlb5"]
 [ext_resource type="Texture2D" uid="uid://bri15xc6cn1ul" path="res://actions/hornyJauge.png" id="23_ikc5x"]
 [ext_resource type="Texture2D" uid="uid://bk1gu5cgtgkfy" path="res://actions/hornyJaugePleine.png" id="24_ew8km"]
+[ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="24_ikc5x"]
 
 [node name="Mystic" type="Node2D"]
 script = ExtResource("1_nekcb")
@@ -207,6 +208,26 @@ texture = ExtResource("23_ikc5x")
 
 [node name="HornyJaugePleine" type="Sprite2D" parent="HornyJauge"]
 texture = ExtResource("24_ew8km")
+
+[node name="contexte" type="Label" parent="."]
+visible = false
+z_index = 15
+offset_left = -131.0
+offset_top = -191.0
+offset_right = 179.0
+offset_bottom = -29.0
+scale = Vector2(0.825763, 0.821068)
+theme_override_fonts/font = ExtResource("15_y67ho")
+theme_override_font_sizes/font_size = 40
+text = "Skill name"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="LootItem" type="Sprite2D" parent="contexte"]
+z_index = -1
+position = Vector2(161, 28)
+scale = Vector2(2.34924, 0.637405)
+texture = ExtResource("24_ikc5x")
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

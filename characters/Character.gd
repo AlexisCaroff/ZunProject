@@ -87,8 +87,14 @@ var is_targetable: bool = false
 	$HBoxContainer2/DotAction4,
 	$HBoxContainer2/DotAction5,
 ]
+@onready var context = $contexte
+
 var exclamation :TextureRect
 var CharaColor =Color(1.0,1.0,1.0,1.0)
+
+
+
+
 func _ready():
 	arrow.visible=false
 	name_label.text = Charaname
@@ -441,6 +447,8 @@ func DebuffAnim(text):
 	
 func animate_attack(target: Character):
 	emit_signal("skill_animation_started")
+	combat_manager.ui.log(Charaname+ " use " + combat_manager._pending_skill.descriptionName)
+	
 	if is_player_controlled:
 		combat_manager.SpriteHeros.attack_anim(self)
 	else:
@@ -467,6 +475,7 @@ func animate_attack(target: Character):
 	tween.parallel().tween_property(self, "scale", normal_size, 0.2).set_delay(1.0)
 	tween.parallel().tween_property(self, "modulate:a", 1.0, 0.15).set_delay(1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	await tween.finished	
+	
 	emit_signal("skill_animation_finished")
 	
 func miss_animation(target: Character):
