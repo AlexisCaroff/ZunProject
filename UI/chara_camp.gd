@@ -52,7 +52,7 @@ const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
 
 var CharaCampPoints : int = 2
 var camp : Campement
-
+var acte_twice : bool = false
 
 func _ready() -> void:
 	CharaScale= self.scale
@@ -97,6 +97,8 @@ func load_from_dict(data: Dictionary) -> void:
 		current_position=position
 	if data.has("camp_skills"):
 		camp_skill_resources = data["camp_skills"]
+	if data.has("acte_twice"):
+		acte_twice = data["acte_twice"]
 		
 func set_targetable(targe : bool):
 	targetable = targe 

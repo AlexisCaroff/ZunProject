@@ -3,9 +3,9 @@ class_name GameStat
 
 enum GamePhase { EXPLORATION, COMBAT, CAMP }
 var current_phase: GamePhase = GamePhase.EXPLORATION
-
+var saveRunning :bool = false
 var saved_heroes_data: Array = []
-
+signal save_finished
 
 func save_party_from_nodes(heroes: Array) -> void:
 	saved_heroes_data.clear()
@@ -24,13 +24,17 @@ func save_party_from_nodes(heroes: Array) -> void:
 			"skills": hero.skill_resources.duplicate(true),
 			"camp_skills": hero.camp_skill_resources.duplicate(true),  
 			"buffs": hero.buffs.duplicate(true),
+			"acte_twice":hero.acte_twice,
 
 			# Nouvelles données de textures
 			"portrait_texture_path": hero.portrait_texture.resource_path,
 			"dead_portrait_texture_path": hero.dead_portrait_texture.resource_path,
 			"initiative_icon_path": hero.initiative_icon.resource_path
 		})
+		print(hero.Charaname + "is saved")
 	#print("Party saved: ", saved_heroes_data)
+	emit_signal("save_finished")
+	saveRunning = false
 
 
 func update_hero_stat(name: String, stat_key: String, value):
@@ -61,6 +65,7 @@ func load_party_into_combat(slots: Array) -> void:
 
 		if hero_data.has("camp_skills"):
 			hero.camp_skill_resources = hero_data["camp_skills"]
+		hero.acte_twice = hero_data["acte_twice"]
 
 		hero.update_ui()
 
@@ -89,3 +94,37 @@ func load_party_into_camp(slots: Array, chara_scene: PackedScene) -> Array:
 		camp_chars.append(chara)
 
 	return camp_chars
+	
+func save_party_from_camp(camp_chars: Array[CharaCamp]) -> void:
+	if saveRunning:
+		push_warning("Sauvegarde déjà en cours")
+		return
+
+	saveRunning = true
+
+	for chara in camp_chars:
+		if not chara is CharaCamp:
+			continue
+
+		# Recherche du héros correspondant dans saved_heroes_data
+		var found := false
+		for hero_data in saved_heroes_data:
+			if hero_data["name"] == chara.Charaname:
+				# Met à jour uniquement les champs pertinents
+				hero_data["stamina"] = chara.current_stamina
+				hero_data["stress"] = chara.current_stress
+				hero_data["horniness"] = chara.current_horny
+				hero_data["buffs"] = chara.buffs.duplicate(true)
+				hero_data["camp_skills"] = chara.camp_skill_resources.duplicate(true)
+				hero_data["acte_twice"] = chara.acte_twice
+				hero_data["position"] = chara.current_position
+
+				found = true
+				print("✅ Camp data updated for: " + chara.Charaname)
+				break
+
+		if not found:
+			push_warning("Héros " + chara.Charaname + " non trouvé dans saved_heroes_data !")
+
+	saveRunning = false
+	emit_signal("save_finished")

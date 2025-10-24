@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="RoomResource" load_steps=6 format=3 uid="uid://bc8l84kr4sw7n"]
+
+[ext_resource type="PackedScene" uid="uid://b6uobv5s4ummc" path="res://lvl/salle4/combat4.tscn" id="1_xrfog"]
+[ext_resource type="PackedScene" uid="uid://4xvtvnrkftc3" path="res://lvl/salle4/door4.tscn" id="2_06fxo"]
+[ext_resource type="Resource" uid="uid://b4ig6c0yaidlp" path="res://lvl/salle4/encounter4.tres" id="3_gqh34"]
+[ext_resource type="PackedScene" uid="uid://dgcg3yopjjnv6" path="res://lvl/salle4/exploration4.tscn" id="4_rguxe"]
+[ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="5_agmis"]
+
+[resource]
+script = ExtResource("5_agmis")
+room_id = "Salle5"
+position_on_map = 4
+door_scene = ExtResource("2_06fxo")
+combat_scene = ExtResource("1_xrfog")
+exploration_scene = ExtResource("4_rguxe")
+encounter = ExtResource("3_gqh34")
+CanCamp = false
+connected_room_ids = Array[String](["Salle3"])
+metadata/_custom_type_script = "uid://oj44pgv34ji0"

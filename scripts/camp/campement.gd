@@ -41,6 +41,7 @@ func _ready():
 	for chara in characters:
 		chara.current_stamina = min(chara.max_stamina, chara.current_stamina + 30)
 		chara.animate_heal(30, chara)
+		chara.update_display()
 #--------------------------------------
 	donjon_map.curentposition = donjon_map.positions[gm.current_room_Ressource.position_on_map]
 	if donjon_map:
@@ -89,7 +90,7 @@ func updateUICharacter(character:CharaCamp):
 	Stamina.text = "Stamina: %d / %d" % [character.current_stamina, character.max_stamina]
 	guilt.text = "Guilt: %d / %d" % [character.current_stress, character.max_stress]
 	horny.text = "Horny: %d / %d" % [character.current_horny, character.max_horniness]
-		
+	character.update_display()
 		
 func After_camp_skill(skill: CampSkill):
 	campPoints -= skill.cost
@@ -174,6 +175,24 @@ func _on_camp_skill_pressed(skill: CampSkill, user: CharaCamp) -> void:
 
 func endcamp():
 	gm.return_to_exploration()
+	if GameState.saveRunning:
+		push_warning("Sauvegarde déjà en cours…")
+		return
+
+	GameState.save_party_from_camp(characters)
+	await GameState.save_finished
+
+	GameState.current_phase = GameStat.GamePhase.EXPLORATION
+	await get_tree().process_frame
+
+	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
+	if gm and gm.current_room_Ressource:
+		if gm.current_room_Ressource.exploration_scene:
+			gm._enter_scene_in_current_room(gm.current_room_Ressource.exploration_scene)
+		else:
+			push_error("Pas de scene exploration définie pour cette salle")
+	else:
+		push_error("GameManager introuvable ou current_room vide")
 func focus_on_room(room: Node2D):
 	
 	var target_pos = room.position
@@ -192,4 +211,11 @@ func _on_exit_button_button_down() -> void:
 
 
 func _on_button_button_down() -> void:
+	if GameState.saveRunning:
+		push_warning("Sauvegarde déjà en cours…")
+		return
+
+	GameState.save_party_from_camp(characters)
+
+
 	gm.return_to_exploration()

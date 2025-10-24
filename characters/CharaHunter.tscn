@@ -10,7 +10,7 @@
 [ext_resource type="Resource" uid="uid://bmkp0brav8l87" path="res://actions/HerosCombatSkills/bollas.tres" id="8_1t7b8"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="9_rwkgt"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="10_cegev"]
-[ext_resource type="Resource" uid="uid://do1xqbabe8r4b" path="res://scripts/camp/CampsSkills/new_resource.tres" id="11_n2k53"]
+[ext_resource type="Resource" uid="uid://mkaq7ws2yox8" path="res://actions/CampSkill/ActeTwiceSkill.tres" id="11_kj6ch"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="12_0iyuo"]
 [ext_resource type="Resource" uid="uid://y8ibrfop35on" path="res://actions/CampSkill/dialogueHunter.tres" id="12_7u4xn"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="13_172yo"]
@@ -32,8 +32,9 @@ dead_portrait_texture = ExtResource("3_xn63r")
 initiative_icon = ExtResource("4_6h38a")
 Charaname = "Hunter"
 Chara_position = 1
+current_stamina = 20
 skill_resources = Array[Resource]([ExtResource("5_184h1"), ExtResource("6_7u4xn"), ExtResource("7_kj6ch"), ExtResource("8_1t7b8"), ExtResource("9_rwkgt")])
-camp_skill_resources = Array[ExtResource("10_cegev")]([ExtResource("11_n2k53"), ExtResource("12_7u4xn"), ExtResource("13_kj6ch"), ExtResource("14_1t7b8")])
+camp_skill_resources = Array[ExtResource("10_cegev")]([ExtResource("11_kj6ch"), ExtResource("12_7u4xn"), ExtResource("13_kj6ch"), ExtResource("14_1t7b8")])
 
 [node name="name" type="Label" parent="."]
 visible = false

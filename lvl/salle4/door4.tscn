@@ -1,13 +1,17 @@
-[gd_scene load_steps=15 format=3 uid="uid://4xvtvnrkftc3"]
+[gd_scene load_steps=19 format=3 uid="uid://4xvtvnrkftc3"]
 
 [ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_wojcv"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_otd1v"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="3_2vsyd"]
+[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="3_xskr8"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="4_v6tgv"]
 [ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="5_hwkcl"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="6_fsnpn"]
+[ext_resource type="Texture2D" uid="uid://c5gdj53xfb58w" path="res://UI/doorIconleft.png" id="6_xprsh"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="7_0odnb"]
+[ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="7_xskr8"]
 [ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="8_3n407"]
+[ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="8_spta3"]
 [ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="9_ewqen"]
 [ext_resource type="Script" uid="uid://6edfrm0jkjqe" path="res://lvl/back.gd" id="10_meqow"]
 [ext_resource type="Texture2D" uid="uid://bqmj6euxhil4t" path="res://UI/back.png" id="11_07vmf"]
@@ -38,6 +42,22 @@ offset_top = 974.0
 offset_right = 1265.0
 offset_bottom = 975.0
 color = Color(0.501961, 0.407843, 0.207843, 1)
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_left = 1312.0
+offset_top = 791.0
+offset_right = 1832.0
+offset_bottom = 1191.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
+handle_input_locally = false
+size = Vector2i(520, 290)
+render_target_update_mode = 4
+
+[node name="map" parent="SubViewportContainer2/SubViewport" instance=ExtResource("3_xskr8")]
+position = Vector2(242, 50)
+scale = Vector2(0.5, 0.5)
 
 [node name="ActionPanel" type="HBoxContainer" parent="."]
 visible = false
@@ -136,6 +156,30 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
+[node name="LastDoor" type="Button" parent="."]
+layout_mode = 0
+offset_right = 242.0
+offset_bottom = 764.0
+icon = ExtResource("6_xprsh")
+flat = true
+expand_icon = true
+script = ExtResource("7_xskr8")
+normal_color = Color(0.710938, 0.659066, 0.443412, 1)
+hover_color = Color(0.917962, 0.917029, 0.933333, 1)
+
+[node name="NextDoor" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1676.0
+offset_right = 1918.0
+offset_bottom = 764.0
+icon = ExtResource("8_spta3")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_xskr8")
+normal_color = Color(0.710938, 0.659066, 0.443412, 1)
+hover_color = Color(0.917962, 0.917029, 0.933333, 1)
+
 [node name="LabelAction" type="Label" parent="."]
 visible = false
 layout_mode = 0
@@ -216,7 +260,6 @@ offset_right = 1550.0
 offset_bottom = 759.0
 flat = true
 script = ExtResource("10_meqow")
-target_scene = "uid://dqnjuxw77ebnb"
 
 [node name="BackText" type="TextureRect" parent="Back"]
 modulate = Color(1, 1, 1, 0.513726)

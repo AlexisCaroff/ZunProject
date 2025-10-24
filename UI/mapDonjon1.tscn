@@ -25,13 +25,13 @@ position = Vector2(-11, 404)
 position = Vector2(-12, 225)
 
 [node name="Room3" type="Node2D" parent="DonjonMap1"]
-position = Vector2(134, 376)
+position = Vector2(178, 259)
 
 [node name="Room4" type="Node2D" parent="DonjonMap1"]
-position = Vector2(110, 74)
+position = Vector2(125, 373)
 
 [node name="Room5" type="Node2D" parent="DonjonMap1"]
-position = Vector2(-138, 69)
+position = Vector2(110, 75)
 
 [node name="Room6" type="Node2D" parent="DonjonMap1"]
 position = Vector2(-319, 245)
@@ -46,7 +46,7 @@ position = Vector2(61, -119)
 position = Vector2(259, -38)
 
 [node name="Room10" type="Node2D" parent="DonjonMap1"]
-position = Vector2(302, 196)
+position = Vector2(383, -269)
 
 [node name="Position" type="Sprite2D" parent="."]
 position = Vector2(-9, 229)

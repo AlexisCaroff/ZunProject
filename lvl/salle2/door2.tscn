@@ -1,20 +1,24 @@
-[gd_scene load_steps=16 format=3 uid="uid://csiiacrh5i14e"]
+[gd_scene load_steps=20 format=3 uid="uid://cn17astg0ruj"]
 
-[ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_sytq7"]
-[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_r5kuf"]
-[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="3_qgedx"]
-[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="4_5mhcv"]
-[ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="5_j7wuy"]
-[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="6_gaivg"]
-[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="7_nvikr"]
-[ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="8_orp2t"]
-[ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="9_r4jmh"]
+[ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_5mhcv"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_j7wuy"]
+[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="3_gaivg"]
+[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="4_nvikr"]
+[ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="5_orp2t"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="6_r4jmh"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="7_c5jka"]
+[ext_resource type="Texture2D" uid="uid://c5gdj53xfb58w" path="res://UI/doorIconleft.png" id="8_nxxyh"]
+[ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="9_q8lj5"]
+[ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="10_723wk"]
 [ext_resource type="Script" uid="uid://6edfrm0jkjqe" path="res://lvl/back.gd" id="10_c5jka"]
+[ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="11_cwnh4"]
 [ext_resource type="Texture2D" uid="uid://bqmj6euxhil4t" path="res://UI/back.png" id="11_nxxyh"]
-[ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/buttonexitepeek.gd" id="12_q8lj5"]
-[ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="13_723wk"]
-[ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="14_cwnh4"]
-[ext_resource type="Texture2D" uid="uid://drp4vk52vgk74" path="res://UI/doorebuscade/DOOR_caught_nymph.png" id="15_471up"]
+[ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="12_8t7px"]
+[ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/buttonexitepeek.gd" id="13_q6jmt"]
+[ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="14_38hkl"]
+[ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="15_7jues"]
+[ext_resource type="Texture2D" uid="uid://drp4vk52vgk74" path="res://UI/doorebuscade/DOOR_caught_nymph.png" id="16_fyjxg"]
+[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="17_8ldxf"]
 
 [node name="Door" type="Control"]
 layout_mode = 3
@@ -27,9 +31,9 @@ grow_vertical = 2
 [node name="DoorBg" type="Sprite2D" parent="."]
 position = Vector2(960.5, 542)
 scale = Vector2(0.781352, 0.79562)
-texture = ExtResource("1_sytq7")
+texture = ExtResource("1_5mhcv")
 
-[node name="atmosphere" parent="." instance=ExtResource("2_r5kuf")]
+[node name="atmosphere" parent="." instance=ExtResource("2_j7wuy")]
 position = Vector2(19, 447)
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -56,13 +60,13 @@ alignment = 1
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_qgedx")
+theme_override_fonts/font = ExtResource("3_gaivg")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("4_5mhcv")
+icon = ExtResource("4_nvikr")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("5_j7wuy")
+script = ExtResource("5_orp2t")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action1"]
 layout_mode = 0
@@ -73,13 +77,13 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_qgedx")
+theme_override_fonts/font = ExtResource("3_gaivg")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("4_5mhcv")
+icon = ExtResource("4_nvikr")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("5_j7wuy")
+script = ExtResource("5_orp2t")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action2"]
 layout_mode = 0
@@ -90,13 +94,13 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_qgedx")
+theme_override_fonts/font = ExtResource("3_gaivg")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("4_5mhcv")
+icon = ExtResource("4_nvikr")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("5_j7wuy")
+script = ExtResource("5_orp2t")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action3"]
 layout_mode = 0
@@ -107,13 +111,13 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_qgedx")
+theme_override_fonts/font = ExtResource("3_gaivg")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("4_5mhcv")
+icon = ExtResource("4_nvikr")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("5_j7wuy")
+script = ExtResource("5_orp2t")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action4"]
 layout_mode = 0
@@ -124,13 +128,13 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_qgedx")
+theme_override_fonts/font = ExtResource("3_gaivg")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("4_5mhcv")
+icon = ExtResource("4_nvikr")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("5_j7wuy")
+script = ExtResource("5_orp2t")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action5"]
 layout_mode = 0
@@ -144,7 +148,7 @@ offset_left = 681.0
 offset_top = 982.0
 offset_right = 1260.0
 offset_bottom = 1066.0
-theme_override_fonts/font = ExtResource("6_gaivg")
+theme_override_fonts/font = ExtResource("6_r4jmh")
 theme_override_font_sizes/font_size = 25
 text = "Attaque1 
 et truc et bidule"
@@ -190,7 +194,31 @@ offset_bottom = 909.0
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
 ignore_rotation = false
-script = ExtResource("7_nvikr")
+script = ExtResource("7_c5jka")
+
+[node name="LastDoor" type="Button" parent="."]
+layout_mode = 0
+offset_right = 242.0
+offset_bottom = 764.0
+icon = ExtResource("8_nxxyh")
+flat = true
+expand_icon = true
+script = ExtResource("9_q8lj5")
+normal_color = Color(0.710938, 0.659066, 0.443412, 1)
+hover_color = Color(0.917962, 0.917029, 0.933333, 1)
+
+[node name="NextDoor" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1676.0
+offset_right = 1918.0
+offset_bottom = 764.0
+icon = ExtResource("10_723wk")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("9_q8lj5")
+normal_color = Color(0.710938, 0.659066, 0.443412, 1)
+hover_color = Color(0.917962, 0.917029, 0.933333, 1)
 
 [node name="peekButton" type="Button" parent="."]
 layout_mode = 0
@@ -199,7 +227,7 @@ offset_top = 280.0
 offset_right = 1317.0
 offset_bottom = 481.0
 flat = true
-script = ExtResource("8_orp2t")
+script = ExtResource("11_cwnh4")
 
 [node name="peek_texture" type="TextureRect" parent="peekButton"]
 layout_mode = 0
@@ -207,7 +235,7 @@ offset_left = 10.0
 offset_top = 5.0
 offset_right = 200.0
 offset_bottom = 193.0
-texture = ExtResource("9_r4jmh")
+texture = ExtResource("12_8t7px")
 
 [node name="Back" type="Button" parent="."]
 layout_mode = 0
@@ -249,7 +277,7 @@ offset_top = 87.0
 offset_right = 1902.0
 offset_bottom = 749.0
 text = "exit"
-script = ExtResource("12_q8lj5")
+script = ExtResource("13_q6jmt")
 
 [node name="Door" type="Button" parent="."]
 z_index = 7
@@ -259,7 +287,7 @@ offset_top = 254.0
 offset_right = 1071.0
 offset_bottom = 657.0
 flat = true
-script = ExtResource("13_723wk")
+script = ExtResource("14_38hkl")
 
 [node name="DoorText" type="TextureRect" parent="Door"]
 layout_mode = 0
@@ -267,7 +295,7 @@ offset_left = -3.0
 offset_top = 251.0
 offset_right = 311.0
 offset_bottom = 373.0
-texture = ExtResource("14_cwnh4")
+texture = ExtResource("15_7jues")
 
 [node name="pose1" type="Node2D" parent="."]
 position = Vector2(791, 286)
@@ -283,7 +311,23 @@ offset_left = 567.0
 offset_top = -7.0
 offset_right = 1463.0
 offset_bottom = 1051.0
-texture = ExtResource("15_471up")
+texture = ExtResource("16_fyjxg")
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_left = 1310.0
+offset_top = 803.0
+offset_right = 1830.0
+offset_bottom = 1203.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
+handle_input_locally = false
+size = Vector2i(520, 290)
+render_target_update_mode = 4
+
+[node name="map" parent="SubViewportContainer2/SubViewport" instance=ExtResource("17_8ldxf")]
+position = Vector2(242, 50)
+scale = Vector2(0.5, 0.5)
 
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]

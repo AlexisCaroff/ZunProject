@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="CampSkill" load_steps=11 format=3 uid="uid://mkaq7ws2yox8"]
+
+[ext_resource type="Script" uid="uid://brw6jmbngkbbu" path="res://scripts/camp/CampEffect.gd" id="1_nlq8c"]
+[ext_resource type="Texture2D" uid="uid://bcb1twtpeuh6o" path="res://UI/actTwice.png" id="2_ol1y1"]
+[ext_resource type="Script" uid="uid://bkvdwvrmdt5aw" path="res://actions/skillEffects/Buff.gd" id="3_o4kai"]
+[ext_resource type="Script" uid="uid://cuxffk7abiqqg" path="res://scripts/camp/CampsSkills/twoturneCampeffect.gd" id="4_3di4y"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="5_ecjsv"]
+[ext_resource type="Script" uid="uid://cwdlfpy6jfr4w" path="res://actions/skillEffects/campSkilleffect/CampHealEffet.gd" id="5_ol1y1"]
+[ext_resource type="Texture2D" uid="uid://by8cctmcjeicr" path="res://actions/CampSkill/ActeTwice.png" id="6_o4kai"]
+
+[sub_resource type="Resource" id="Resource_whrmr"]
+script = ExtResource("3_o4kai")
+name = "ActTwice"
+description = "Effet temporaire sur les statistiques."
+icon = ExtResource("2_ol1y1")
+stat = 2
+amount = 0
+duration = 0
+metadata/_custom_type_script = "uid://bkvdwvrmdt5aw"
+
+[sub_resource type="Resource" id="Resource_mamrm"]
+script = ExtResource("4_3di4y")
+icon = SubResource("Resource_whrmr")
+metadata/_custom_type_script = "uid://cuxffk7abiqqg"
+
+[sub_resource type="Resource" id="Resource_o4kai"]
+script = ExtResource("5_ol1y1")
+heal_target_stat = 2
+amount = 10
+metadata/_custom_type_script = "uid://cwdlfpy6jfr4w"
+
+[resource]
+script = ExtResource("5_ecjsv")
+name = "meditation"
+description = "reduce guilt and have 2 actions first round"
+icon = ExtResource("6_o4kai")
+cost = 1
+standarEnd = true
+target_type = 0
+effects = Array[ExtResource("1_nlq8c")]([SubResource("Resource_mamrm"), SubResource("Resource_o4kai")])
+metadata/_custom_type_script = "uid://dmwb4vh0ycukv"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dv04v6jagn4q1"]
+[gd_scene load_steps=15 format=3 uid="uid://dv04v6jagn4q1"]
 
 [ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_o6m4w"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_puy7d"]
@@ -7,16 +7,13 @@
 [ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="5_lps75"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="6_nju53"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="7_mdkvs"]
-[ext_resource type="Texture2D" uid="uid://c5gdj53xfb58w" path="res://UI/doorIconleft.png" id="8_puy7d"]
 [ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="8_r3s01"]
-[ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="9_6jptd"]
 [ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="9_7l14n"]
-[ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="10_betcj"]
-[ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/buttonexitepeek.gd" id="12_6jptd"]
+[ext_resource type="Script" uid="uid://6edfrm0jkjqe" path="res://lvl/back.gd" id="10_1jugk"]
+[ext_resource type="Texture2D" uid="uid://bqmj6euxhil4t" path="res://UI/back.png" id="11_crknv"]
+[ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/combat1/buttonexitepeek.gd" id="12_6jptd"]
 [ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="12_013hq"]
 [ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="13_njmpn"]
-[ext_resource type="Texture2D" uid="uid://drp4vk52vgk74" path="res://UI/doorebuscade/DOOR_caught_nymph.png" id="15_o6m4w"]
-[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="17_6jptd"]
 
 [node name="Door" type="Control"]
 layout_mode = 3
@@ -194,30 +191,6 @@ position = Vector2(960, 540)
 ignore_rotation = false
 script = ExtResource("7_mdkvs")
 
-[node name="LastDoor" type="Button" parent="."]
-layout_mode = 0
-offset_right = 242.0
-offset_bottom = 764.0
-icon = ExtResource("8_puy7d")
-flat = true
-expand_icon = true
-script = ExtResource("9_6jptd")
-normal_color = Color(0.710938, 0.659066, 0.443412, 1)
-hover_color = Color(0.917962, 0.917029, 0.933333, 1)
-
-[node name="NextDoor" type="Button" parent="."]
-layout_mode = 0
-offset_left = 1676.0
-offset_right = 1918.0
-offset_bottom = 764.0
-icon = ExtResource("10_betcj")
-flat = true
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("9_6jptd")
-normal_color = Color(0.710938, 0.659066, 0.443412, 1)
-hover_color = Color(0.917962, 0.917029, 0.933333, 1)
-
 [node name="peekButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1102.0
@@ -234,6 +207,26 @@ offset_top = 5.0
 offset_right = 200.0
 offset_bottom = 193.0
 texture = ExtResource("13_njmpn")
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 361.0
+offset_top = 650.0
+offset_right = 1550.0
+offset_bottom = 759.0
+flat = true
+script = ExtResource("10_1jugk")
+target_scene = "uid://dqnjuxw77ebnb"
+
+[node name="BackText" type="TextureRect" parent="Back"]
+modulate = Color(1, 1, 1, 0.513726)
+layout_mode = 0
+offset_left = 675.0
+offset_top = 16.0
+offset_right = 1212.0
+offset_bottom = 96.0
+texture = ExtResource("11_crknv")
+expand_mode = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 visible = false
@@ -262,8 +255,8 @@ script = ExtResource("12_6jptd")
 z_index = 7
 layout_mode = 0
 offset_left = 799.0
-offset_top = 151.0
-offset_right = 1084.0
+offset_top = 254.0
+offset_right = 1071.0
 offset_bottom = 657.0
 flat = true
 script = ExtResource("8_r3s01")
@@ -271,9 +264,9 @@ script = ExtResource("8_r3s01")
 [node name="DoorText" type="TextureRect" parent="Door"]
 layout_mode = 0
 offset_left = -3.0
-offset_top = 338.0
+offset_top = 251.0
 offset_right = 311.0
-offset_bottom = 460.0
+offset_bottom = 373.0
 texture = ExtResource("9_7l14n")
 
 [node name="pose1" type="Node2D" parent="."]
@@ -281,32 +274,6 @@ position = Vector2(791, 286)
 
 [node name="pose2" type="Node2D" parent="."]
 position = Vector2(791, 374)
-
-[node name="EmbuscadeUI" type="TextureRect" parent="."]
-visible = false
-z_index = 12
-layout_mode = 0
-offset_left = 567.0
-offset_top = -7.0
-offset_right = 1463.0
-offset_bottom = 1051.0
-texture = ExtResource("15_o6m4w")
-
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
-layout_mode = 0
-offset_left = 1312.0
-offset_top = 791.0
-offset_right = 1831.0
-offset_bottom = 1191.0
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
-handle_input_locally = false
-size = Vector2i(520, 290)
-render_target_update_mode = 4
-
-[node name="map" parent="SubViewportContainer2/SubViewport" instance=ExtResource("17_6jptd")]
-position = Vector2(242, 50)
-scale = Vector2(0.5, 0.5)
 
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]
@@ -321,6 +288,9 @@ scale = Vector2(0.5, 0.5)
 [connection signal="button_down" from="peekButton" to="peekButton" method="_on_button_down"]
 [connection signal="mouse_entered" from="peekButton" to="peekButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="peekButton" to="peekButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="Back" to="Back" method="_on_button_down"]
+[connection signal="mouse_entered" from="Back" to="Back" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Back" to="Back" method="_on_mouse_exited"]
 [connection signal="button_down" from="ExitPeek" to="ExitPeek" method="_on_button_down"]
 [connection signal="button_down" from="Door" to="Door" method="_on_button_down"]
 [connection signal="mouse_entered" from="Door" to="Door" method="_on_mouse_entered"]

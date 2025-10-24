@@ -163,7 +163,9 @@ func load_saved_heroes_into_slots(slots: Array[PositionSlot]):
 		hero.current_horniness = hero_data["horniness"]
 		hero.dead = hero_data["dead"]
 		hero.skill_resources = hero_data["skills"]
-		
+		hero.acte_twice = hero_data["acte_twice"]
+		for buff in  hero_data["buffs"]:
+			hero.add_buff(buff)
 		hero._updateSkills(hero.skill_resources)
 		hero.update_ui()
 
@@ -203,6 +205,9 @@ func next_turn():
 		ui.update_turn_queue_ui(turn_queue)
 	ui.update_turn_queue_ui(turn_queue)
 	current_character = turn_queue.pop_front()
+	if current_character.acte_twice:
+		current_character.acte_twice=false
+		turn_queue.push_front(current_character)
 	await get_tree().process_frame
 	ui.log(current_character.Charaname +" turn")
 	current_character.animate_start_Turn()
@@ -304,11 +309,11 @@ func _show_victory():
 	
 	# Ajouter Victory UI à la scène et le faire apparaître
 	get_parent().add_child(victory_ui)
-	
-	await get_tree().create_timer(1.0).timeout
+	GameState.saveRunning = true
 
 	# --- Sauvegarder l'équipe avant de changer de scène
 	GameState.save_party_from_nodes(heroes)
+	
 	
 
 

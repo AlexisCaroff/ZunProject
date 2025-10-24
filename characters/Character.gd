@@ -49,7 +49,7 @@ var CharaScale:Vector2 = Vector2(1.0, 1.0)
 @export var max_stress: int = 100
 @export var max_horniness: int = 100
 @export var dead: bool = false
-var current_stamina: int = 100
+@export var current_stamina: int = 100
 var current_stress: int = 0
 var current_horniness: int = 0
 
@@ -91,7 +91,7 @@ var is_targetable: bool = false
 
 var exclamation :TextureRect
 var CharaColor =Color(1.0,1.0,1.0,1.0)
-
+var acte_twice : bool = false
 
 
 
@@ -174,6 +174,8 @@ func add_buff(buff: Buff):
 	icon.texture = buff.icon
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	icon.custom_minimum_size = Vector2(20, 20)
+	if buff_bar ==null:
+		buff_bar =$HBoxContainer
 	buff_bar.add_child(icon)
 	buff_icons.append(icon)  # on stocke l’icône au même index
 	update_stats()

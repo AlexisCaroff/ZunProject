@@ -26,3 +26,10 @@ func move_to_position(target_node: Node2D) -> void:
 	tween = create_tween()
 	tween.tween_property( TeamPositisonIndicator, "position", curentposition.position, move_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	oldposition = curentposition 
+func focus_on_room(room: Node2D, viewport ):
+	var vp_size: Vector2 = viewport.size
+	var target_pos = room.position
+	var tween = create_tween()
+	tween.tween_property( camera, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	print("try to move")
+	

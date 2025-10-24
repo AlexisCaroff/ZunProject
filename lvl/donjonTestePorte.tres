@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="DonjonResource" load_steps=8 format=3 uid="uid://7dlbup10473y"]
+
+[ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="1_a0q4b"]
+[ext_resource type="Script" uid="uid://cm44dout6mc4v" path="res://lvl/DonjonRessource.gd" id="2_sowf2"]
+[ext_resource type="Resource" uid="uid://b5nqhfedb63on" path="res://lvl/combat1/salle1.tres" id="2_vhcbw"]
+[ext_resource type="Resource" uid="uid://dfukdcgmifh5j" path="res://lvl/salle2/salle2.tres" id="3_0haa1"]
+[ext_resource type="Resource" uid="uid://hsq4jpscmjyc" path="res://lvl/salle3/salle3.tres" id="4_bo08l"]
+[ext_resource type="Resource" uid="uid://y8m0h6ous7ho" path="res://lvl/salle4/salle4.tres" id="5_i0bu5"]
+[ext_resource type="Resource" uid="uid://bc8l84kr4sw7n" path="res://lvl/salle5/salle5.tres" id="6_0haa1"]
+
+[resource]
+script = ExtResource("2_sowf2")
+name = "teste Porte"
+rooms = Array[ExtResource("1_a0q4b")]([ExtResource("2_vhcbw"), ExtResource("3_0haa1"), ExtResource("4_bo08l"), ExtResource("5_i0bu5"), ExtResource("6_0haa1")])
+start_room_id = "Salle1"
+metadata/_custom_type_script = "uid://cm44dout6mc4v"

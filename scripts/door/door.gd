@@ -6,6 +6,10 @@ var startsize = Vector2(1.0,1.0)
 var current_tween: Tween = null
 var Game_Manager:GameManager
 var timePeeking : float = 0.0
+@onready var left_button: Button = $"../LastDoor"
+@onready var right_button: Button = $"../NextDoor"
+var current_index: int = -1
+var connected_ids: Array = []
 var peeking: bool = true
 @onready var sub_viewport : Viewport= $"../SubViewportContainer/SubViewport"
 var encounter_for_this_door: CombatEncounter
@@ -13,6 +17,8 @@ var encounter_for_this_door: CombatEncounter
 var peek_scene
 var ennemy_are_embushed : bool = false
 var heroes_are_embushed : bool = false
+@onready var viewport: Viewport = $"../SubViewportContainer2/SubViewport"
+@onready var donjon_map: Map = $"../SubViewportContainer2/SubViewport/map"
 
 func _ready():
 	Game_Manager = get_tree().root.get_node("GameManager") 
@@ -24,9 +30,40 @@ func _ready():
 	#print("next room ready")
 	#print(GameManager.current_room_Ressource.resource_name)
 	encounter_for_this_door= Game_Manager.current_room_Ressource.encounter
-	
+	if Game_Manager.last_room_Ressource :
+		if Game_Manager.last_room_Ressource.connected_room_ids.size()>1:
+			connected_ids = Game_Manager.last_room_Ressource.connected_room_ids.duplicate()
+			if connected_ids.is_empty():
+				push_warning("⚠️ Aucune room connectée depuis " + str(Game_Manager.last_room_Ressource.room_id))
+				left_button.disabled = true
+				right_button.disabled = true
+				return
 
-		
+			# Trouve l'index de la room actuelle dans cette liste
+			current_index = connected_ids.find(Game_Manager.current_room_Ressource.room_id)
+			if current_index == -1:
+				current_index = 0  # fallback si jamais l'id n'existe pas
+				print("⚠️ current_room non trouvée dans connected_room_ids, utilisation de l'index 0")
+
+			# Connecte les boutons
+			left_button.pressed.connect(_on_left_pressed)
+			right_button.pressed.connect(_on_right_pressed)
+		else :
+			left_button.disabled=true
+			left_button.modulate.a = 0.2
+			right_button.disabled=true
+			right_button.modulate.a = 0.2
+	else :
+		left_button.disabled=true
+		left_button.modulate.a = 0.2
+		right_button.disabled=true
+		right_button.modulate.a = 0.2
+	
+	await get_tree().process_frame  # attendre que la frame d'instanciation soit finie
+	donjon_map.curentposition = donjon_map.positions[Game_Manager.current_room_Ressource.position_on_map]
+	if donjon_map:
+		donjon_map.focus_on_room(donjon_map.curentposition, viewport)
+		donjon_map.move_to_position(donjon_map.curentposition)
 	
 func _on_mouse_exited() -> void:
 	Doortext.scale = big_size	
@@ -113,4 +150,33 @@ func _start_combat():
 	embuscadeUI.visible = true
 	await get_tree().create_timer(1.0).timeout
 	call_deferred("_advance_in_room")
+func _on_left_pressed():
+	if connected_ids.is_empty():
+		return
+	current_index = (current_index - 1 + connected_ids.size()) % connected_ids.size()
+	_go_to_connected_room(current_index)
+
+
+func _on_right_pressed():
+	if connected_ids.is_empty():
+		return
+	current_index = (current_index + 1) % connected_ids.size()
+	_go_to_connected_room(current_index)
+
+
+func _go_to_connected_room(index: int):
+	if not Game_Manager:
+		return
+	if index < 0 or index >= connected_ids.size():
+		push_error("Index de room invalide : %d" % index)
+		return
+
+	var target_id = connected_ids[index]
+	var next_room = Game_Manager.get_room_by_id(target_id)
+	if not next_room:
+		push_error("Impossible de trouver la room pour ID : %s" % target_id)
+		return
+
+	print("🚪 Door → Passage à la room suivante :", next_room.room_id)
+	Game_Manager.enter_room(next_room, true)
 	

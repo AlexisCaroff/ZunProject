@@ -16,6 +16,7 @@ var move_mode: bool = false
 var DoorNumber:int =0
 var gm : GameManager
 func _ready():
+	
 	gm = get_tree().root.get_node("GameManager") as GameManager
 	load_characters_from_gamestat()
 	selected_character = characters[0]
@@ -32,6 +33,7 @@ func focus_on_room(room: Node2D):
 
 func load_characters_from_gamestat():
 	characters.clear()
+	print("try to load characters, saved character are "+ str(GameState.saved_heroes_data.size()))
 	for i in GameState.saved_heroes_data.size():
 		var hero_data = GameState.saved_heroes_data[i]
 		var chara = chara_explo_scene.instantiate()
@@ -50,12 +52,31 @@ func go_to_next_room():
 	if not gm:
 		push_error("ExplorationManager: GameManager introuvable dans la scène !")
 		return
-	
-	# Récupère la première room connectée
-	if gm.current_room_Ressource and not gm.current_room_Ressource.connected_rooms.is_empty():
-		var next_room = gm.current_room_Ressource.connected_rooms[DoorNumber]
-		print("ExplorationManager → Passage à la room suivante :", next_room)
-		gm.enter_room(next_room)
+
+	if not gm.current_room_Ressource:
+		push_error("ExplorationManager: aucune room courante !")
+		return
+
+	# Récupère la liste d'IDs des rooms connectées
+	var connected_ids: Array = gm.current_room_Ressource.connected_room_ids
+	if connected_ids == null or connected_ids.is_empty():
+		push_warning("ExplorationManager: aucune salle connectée depuis " + str(gm.current_room_Ressource.room_id))
+		return
+
+	# Vérifie DoorNumber
+	if DoorNumber < 0 or DoorNumber >= connected_ids.size():
+		push_error("ExplorationManager: DoorNumber invalide (%d)" % DoorNumber)
+		return
+
+	# Récupère l'ID de la room cible et résoud la ressource via le GameManager
+	var next_room_id: String = connected_ids[DoorNumber]
+	var next_room: RoomResource = gm.get_room_by_id(next_room_id)
+	if next_room == null:
+		push_error("ExplorationManager: impossible de trouver la room pour ID '%s'" % next_room_id)
+		return
+
+	print("ExplorationManager → Passage à la room suivante :", next_room.room_id)
+	gm.enter_room(next_room)
 
 func move_character_to_slot(chara: Node, slot: Node):
 	if chara.get_parent():

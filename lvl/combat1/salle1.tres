@@ -1,19 +1,19 @@
-[gd_resource type="Resource" script_class="RoomResource" load_steps=7 format=3 uid="uid://b5nqhfedb63on"]
+[gd_resource type="Resource" script_class="RoomResource" load_steps=6 format=3 uid="uid://b5nqhfedb63on"]
 
 [ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="1_bdslr"]
 [ext_resource type="PackedScene" uid="uid://h8pqs7tabdxj" path="res://lvl/combat1/combat1.tscn" id="1_p3mg1"]
-[ext_resource type="Resource" uid="uid://dfukdcgmifh5j" path="res://lvl/salle2/salle2.tres" id="2_l0nqu"]
 [ext_resource type="PackedScene" uid="uid://dv04v6jagn4q1" path="res://lvl/combat1/door1.tscn" id="3_366qv"]
 [ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://lvl/combat1/encounter1.tres" id="4_85uva"]
 [ext_resource type="PackedScene" uid="uid://dqnjuxw77ebnb" path="res://lvl/combat1/exploration1.tscn" id="5_an7sa"]
 
 [resource]
 script = ExtResource("1_bdslr")
+room_id = "Salle1"
 position_on_map = 0
 door_scene = ExtResource("3_366qv")
 combat_scene = ExtResource("1_p3mg1")
 exploration_scene = ExtResource("5_an7sa")
 encounter = ExtResource("4_85uva")
 CanCamp = false
-connected_rooms = Array[Resource]([ExtResource("2_l0nqu")])
+connected_room_ids = Array[String](["Salle2"])
 metadata/_custom_type_script = "uid://oj44pgv34ji0"

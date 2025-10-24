@@ -27,7 +27,9 @@ func showLoot(items: Array[Item]):
 func _on_continue_pressed() -> void:
 
 	GameState.current_phase = GameStat.GamePhase.EXPLORATION
-
+	if GameState.saveRunning==true :
+		await GameState.save_finished
+	
 	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
 	if gm and gm.current_room_Ressource:
 		if gm.current_room_Ressource.exploration_scene:

@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://tq0nr5tg2b3k" path="res://lvl/positionexplo.gd" id="10_jfida"]
 [ext_resource type="Script" uid="uid://km54mxly4gk4" path="res://lvl/exploration_manager.gd" id="11_nq18n"]
 [ext_resource type="PackedScene" uid="uid://dq282vipchnbq" path="res://characters/chara_explo.tscn" id="12_evnpq"]
-[ext_resource type="Texture2D" uid="uid://5xrrcl7rnx6w" path="res://Enviro/door.png" id="13_nrdwe"]
+[ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="13_oyar6"]
 
 [node name="ExploInterface" type="Control"]
 layout_mode = 3
@@ -144,6 +144,7 @@ script = ExtResource("9_uv58n")
 [node name="HeroPosition" type="Node2D" parent="."]
 z_index = 22
 position = Vector2(196, 607)
+scale = Vector2(1.1, 1.1)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
 z_index = 1
@@ -204,19 +205,21 @@ chara_explo_scene = ExtResource("12_evnpq")
 
 [node name="Button" type="Button" parent="ExplorationManager"]
 z_index = 2
-offset_left = 1323.0
-offset_top = 62.0
-offset_right = 1698.0
-offset_bottom = 650.0
+offset_left = 1537.0
+offset_top = 43.0
+offset_right = 1912.0
+offset_bottom = 753.0
 flat = true
 expand_icon = true
 
 [node name="Doortext" type="TextureRect" parent="ExplorationManager/Button"]
+modulate = Color(0.703125, 0.642877, 0.387902, 1)
 layout_mode = 0
-offset_top = 6.0
-offset_right = 385.0
-offset_bottom = 543.0
-texture = ExtResource("13_nrdwe")
+offset_left = 16.0
+offset_top = 125.0
+offset_right = 378.0
+offset_bottom = 504.0
+texture = ExtResource("13_oyar6")
 expand_mode = 1
 
 [node name="Button2" type="Button" parent="ExplorationManager"]
@@ -228,20 +231,12 @@ offset_bottom = 653.0
 flat = true
 expand_icon = true
 
-[node name="Doortext2" type="TextureRect" parent="ExplorationManager/Button2"]
-layout_mode = 0
-offset_top = 6.0
-offset_right = 385.0
-offset_bottom = 543.0
-texture = ExtResource("13_nrdwe")
-expand_mode = 1
-
 [node name="Campement" type="Button" parent="ExplorationManager"]
-offset_left = 1078.0
-offset_top = 414.0
-offset_right = 1288.0
-offset_bottom = 615.0
-text = "campement"
+offset_left = 1142.0
+offset_top = 404.0
+offset_right = 1352.0
+offset_bottom = 605.0
+text = "Camp"
 
 [connection signal="button_down" from="moveButton" to="ExplorationManager" method="_on_move_button_button_down"]
 [connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]

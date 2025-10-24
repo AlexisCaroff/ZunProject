@@ -9,7 +9,7 @@ var current_tween: Tween = null
 @export var dialoguePass :String
 
 func _ready():
-
+	
 	# Charger un fichier de dialogue
 	dialogue_manager.load_dialogue(dialoguePass)
 	dialogue_manager.text_choice1 = "Use Kairn "
