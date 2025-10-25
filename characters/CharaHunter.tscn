@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="2_papga"]
 [ext_resource type="Texture2D" uid="uid://dltxnrwlxmjd7" path="res://characters/charatexture/char hunterDead.png" id="3_xn63r"]
 [ext_resource type="Texture2D" uid="uid://byy2w1dik22x8" path="res://characters/characterInitiative/hunterIni.png" id="4_6h38a"]
-[ext_resource type="Resource" uid="uid://ca8rrxibg12sg" path="res://actions/HerosCombatSkills/Fap.tres" id="5_184h1"]
+[ext_resource type="Resource" uid="uid://ca8rrxibg12sg" path="res://actions/HerosCombatSkills/Targetting.tres" id="5_184h1"]
 [ext_resource type="Resource" uid="uid://dn00l75vs5ctm" path="res://actions/HerosCombatSkills/Sel.tres" id="6_7u4xn"]
 [ext_resource type="Resource" uid="uid://cbakapyjnht36" path="res://actions/HerosCombatSkills/lance.tres" id="7_kj6ch"]
 [ext_resource type="Resource" uid="uid://bmkp0brav8l87" path="res://actions/HerosCombatSkills/bollas.tres" id="8_1t7b8"]
@@ -106,10 +106,11 @@ min_duration = 0.5
 max_duration = 0.5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 49.0
-offset_top = -160.202
-offset_right = 97.0
-offset_bottom = -119.202
+offset_left = -67.0
+offset_top = -160.0
+offset_right = 68.0
+offset_bottom = -119.0
+alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 clip_contents = true

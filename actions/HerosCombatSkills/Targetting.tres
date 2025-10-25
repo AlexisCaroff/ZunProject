@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://ca8rrxibg12sg"]
+
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_3rhwt"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_1rja0"]
+[ext_resource type="Texture2D" uid="uid://diax5md43vxxd" path="res://UI/target.png" id="3_1rja0"]
+[ext_resource type="Texture2D" uid="uid://cfgd3lfve00ud" path="res://actions/actiontexture/track.png" id="3_47d3i"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_p8nbi"]
+
+[sub_resource type="Resource" id="Resource_26ge4"]
+script = ExtResource("2_1rja0")
+name = "Target"
+uitexture = ExtResource("3_1rja0")
+affected_stat = 2
+amount = 2
+duration = 1
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[sub_resource type="Resource" id="Resource_xfomo"]
+script = ExtResource("2_1rja0")
+name = "buff Attack"
+affected_stat = 0
+amount = 5
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[resource]
+script = ExtResource("4_p8nbi")
+name = "targeting"
+descriptionName = "weak point"
+description = "remoce horny remove cooldown buff"
+icon = ExtResource("3_47d3i")
+required_position = 0
+the_target_type = 0
+effects = Array[ExtResource("1_3rhwt")]([SubResource("Resource_26ge4")])
+two_target_Type = false
+the_second_target_type = 2
+second_effects = Array[ExtResource("1_3rhwt")]([SubResource("Resource_xfomo")])
+usable_when_horny = true
+needtarget = true
+Actiontype = "attack"
+cost = 10
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 1.0
+tags = Array[String]([])
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

@@ -314,7 +314,9 @@ func select_as_target():
 
 func take_damage(source: Character, stat: int, amount: int, type:bool) -> void:
 	var damage := 0
-	
+	for buff in buffs:
+		if buff.name == "Target":
+			combat_manager.pending_skill.reducecost = buff.amount
 	match stat:
 		DamageEffect.Stat.STAMINA:
 			damage = max(0, (amount + source.attack) - defense)
@@ -429,7 +431,7 @@ func animate_heal(damage:int, source:Character, color=null):
 		effect_instance.setup(damage,color)
 		
 	var tween := create_tween() as Tween
-	var tween2 := create_tween() as Tween
+
 	var normal_size = CharaScale
 	var big_size= Vector2(1.0,1.05) 
 	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)

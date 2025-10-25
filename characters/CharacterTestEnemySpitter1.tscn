@@ -74,10 +74,11 @@ offset_bottom = -238.0
 text = "name"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 52.0
-offset_top = -196.947
-offset_right = 92.0
-offset_bottom = -177.947
+offset_left = -56.0
+offset_top = -121.0
+offset_right = 56.0
+offset_bottom = -102.0
+alignment = 1
 
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2(30, 34.0527)

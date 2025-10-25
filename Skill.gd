@@ -61,6 +61,7 @@ var target1 : Array[PositionSlot]
 var target2 : Array[PositionSlot]
 @export var tags: Array[String] = []
 var combatManager
+var reducecost : int=0
 
 func can_use() -> bool:
 	if owner == null:
@@ -83,7 +84,7 @@ func use(target: PositionSlot = null, secondtarget : bool=false):
 		if not can_use():
 			return
 		
-		if !allways_hit:
+		if allways_hit == false:
 			var chance = precision - target.occupant.evasion
 			var rand = randi() % 100
 			if rand >= chance:
@@ -97,7 +98,8 @@ func use(target: PositionSlot = null, secondtarget : bool=false):
 func pay_cost():
 	owner.current_stamina-= cost
 	if cooldown > 0:
-		current_cooldown = cooldown
+		current_cooldown = max(cooldown-reducecost,0)
+		reducecost =0
 	owner.update_ui()
 
 func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = effects):

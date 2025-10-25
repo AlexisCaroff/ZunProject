@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Buff" load_steps=3 format=3 uid="uid://iv1vy2lbhfme"]
+
+[ext_resource type="Script" uid="uid://bkvdwvrmdt5aw" path="res://actions/skillEffects/Buff.gd" id="1_bli82"]
+[ext_resource type="Texture2D" uid="uid://diax5md43vxxd" path="res://UI/target.png" id="1_m41p3"]
+
+[resource]
+script = ExtResource("1_bli82")
+name = "Target"
+description = "removecooldown"
+icon = ExtResource("1_m41p3")
+stat = 2
+amount = 2
+duration = 1
+metadata/_custom_type_script = "uid://bkvdwvrmdt5aw"

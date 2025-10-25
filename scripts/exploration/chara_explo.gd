@@ -79,7 +79,10 @@ func load_from_dict(data: Dictionary) -> void:
 	if data.has("position"):
 		var pos= data["position"]
 		current_position=pos
-		
+	if data.has("buffs"):
+		var buffs = data["buffs"]
+		for buff in buffs:
+			add_buff(buff)
 	
 
 func update_display() -> void:
@@ -96,3 +99,15 @@ func update_display() -> void:
 
 	
 	sprite.texture = portrait_texture
+	
+func add_buff(buff: Buff):
+	if buff_bar ==null:
+		buff_bar = $HBoxContainer
+	var new_buff = buff.duplicate()
+	var icon = TextureRect.new()
+	icon.texture = buff.icon
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.custom_minimum_size = Vector2(20, 20)
+	buff_bar.add_child(icon)
+	#buff_icons.add_child(icon)
+	print("add buff")
