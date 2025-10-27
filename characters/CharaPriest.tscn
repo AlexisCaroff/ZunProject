@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://csp2iaxa3prf"]
+[gd_scene load_steps=26 format=3 uid="uid://csp2iaxa3prf"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_1m0vh"]
 [ext_resource type="Texture2D" uid="uid://c8rp0k1fogimi" path="res://characters/charatexture/char priest.png" id="2_wpklt"]
+[ext_resource type="Texture2D" uid="uid://dwu2rkneujev8" path="res://characters/exploPortrait/pristressExploPortrait.png" id="3_054hg"]
 [ext_resource type="Texture2D" uid="uid://cynjnle30vnj0" path="res://characters/charatexture/char priestDead.png" id="3_xqmvo"]
 [ext_resource type="Texture2D" uid="uid://c8y2xrtwi8euj" path="res://characters/characterInitiative/priestIni.png" id="4_neqvp"]
 [ext_resource type="Resource" uid="uid://cswp6nkwg6iwu" path="res://actions/HerosCombatSkills/priere.tres" id="5_054hg"]
@@ -28,6 +29,7 @@
 [node name="Priest" type="Node2D"]
 script = ExtResource("1_1m0vh")
 portrait_texture = ExtResource("2_wpklt")
+explorationPortrait = ExtResource("3_054hg")
 dead_portrait_texture = ExtResource("3_xqmvo")
 initiative_icon = ExtResource("4_neqvp")
 Charaname = "Priest"

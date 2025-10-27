@@ -39,6 +39,10 @@ var max_stress: int =100
 var current_horny: int = 0 
 var max_horniness: int = 100
 var current_position: int =0
+var explorationPortrait:Texture2D
+var exploPortrait :Sprite2D
+var CharaPosition :Node2D
+
 
 func _ready() -> void:
 	print("chara ready")
@@ -83,6 +87,8 @@ func load_from_dict(data: Dictionary) -> void:
 		var buffs = data["buffs"]
 		for buff in buffs:
 			add_buff(buff)
+	if data.has("explorationPortrait"):
+		explorationPortrait= data["explorationPortrait"]
 	
 
 func update_display() -> void:
@@ -111,3 +117,18 @@ func add_buff(buff: Buff):
 	buff_bar.add_child(icon)
 	#buff_icons.add_child(icon)
 	print("add buff")
+	
+signal skill_animation_started
+signal skill_animation_finished
+
+	
+func animate_selected():
+	emit_signal("skill_animation_started")
+	var tween := create_tween() as Tween
+	var CharaScale = self.scale
+	var normal_size = CharaScale
+	var big_size= Vector2(1.0,1.1) 
+	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
+	tween.tween_property(self, "scale", normal_size, 0.2)
+	await tween.finished
+	emit_signal("skill_animation_finished")

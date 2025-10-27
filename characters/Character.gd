@@ -4,6 +4,7 @@ class_name Character
 
 # --- Données visuelles
 @export var portrait_texture: Texture2D
+@export var explorationPortrait:Texture2D
 @export var dead_portrait_texture: Texture2D
 @export var initiative_icon: Texture2D
 @onready var name_label = $name

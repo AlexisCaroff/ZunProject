@@ -8,6 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_0ex5m"]
 script = ExtResource("3_52cyf")
+name = "name"
 uitexture = ExtResource("4_wxop1")
 affected_stat = 0
 amount = 10

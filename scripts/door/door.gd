@@ -1,6 +1,7 @@
 extends Node
 class_name Door
 @onready var Doortext : TextureRect= $DoorText
+@export var chara_explo_scene : PackedScene
 var big_size = Vector2(1.2, 1.2)
 var startsize = Vector2(1.0,1.0)
 var current_tween: Tween = null
@@ -19,7 +20,10 @@ var ennemy_are_embushed : bool = false
 var heroes_are_embushed : bool = false
 @onready var viewport: Viewport = $"../SubViewportContainer2/SubViewport"
 @onready var donjon_map: Map = $"../SubViewportContainer2/SubViewport/map"
-
+@onready var portrait_selector = $"../Portraits/ExploCharaselector"
+var characters: Array[Node] = []
+@onready var portraits = $"../Portraits".get_children()
+var selected_character: CharaExplo
 func _ready():
 	Game_Manager = get_tree().root.get_node("GameManager") 
 	if Game_Manager:
@@ -64,7 +68,22 @@ func _ready():
 	if donjon_map:
 		donjon_map.focus_on_room(donjon_map.curentposition, viewport)
 		donjon_map.move_to_position(donjon_map.curentposition)
-	
+		
+func load_characters_from_gamestat():
+	characters.clear()
+	print("try to load characters, saved character are "+ str(GameState.saved_heroes_data.size()))
+	for i in GameState.saved_heroes_data.size():
+		var hero_data = GameState.saved_heroes_data[i]
+		var chara = chara_explo_scene.instantiate()
+		chara.load_from_dict(hero_data)
+		
+		characters.append(chara)
+		
+		# Placement dans le slot correspondant
+		var slot_index = hero_data.get("Chara_position")
+		portraits[slot_index].set_occupant(chara)
+		chara.exploPortrait=portraits[slot_index]
+		
 func _on_mouse_exited() -> void:
 	Doortext.scale = big_size	
 	Doortext.set_pivot_offset(Doortext.size/ 2)
@@ -179,4 +198,8 @@ func _go_to_connected_room(index: int):
 
 	print("🚪 Door → Passage à la room suivante :", next_room.room_id)
 	Game_Manager.enter_room(next_room, true)
-	
+func selectCharacter(chara: CharaExplo):
+
+		selected_character = chara
+		var i = characters.find(chara)
+		portrait_selector.position = portraits[i].position

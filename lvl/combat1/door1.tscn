@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://dv04v6jagn4q1"]
+[gd_scene load_steps=26 format=3 uid="uid://dv04v6jagn4q1"]
 
 [ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_o6m4w"]
+[ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_mdkvs"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_puy7d"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="3_6jptd"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="4_betcj"]
@@ -17,6 +18,14 @@
 [ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="13_njmpn"]
 [ext_resource type="Texture2D" uid="uid://drp4vk52vgk74" path="res://UI/doorebuscade/DOOR_caught_nymph.png" id="15_o6m4w"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="17_6jptd"]
+[ext_resource type="Texture2D" uid="uid://dwu2rkneujev8" path="res://characters/exploPortrait/pristressExploPortrait.png" id="19_1jugk"]
+[ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="19_r3s01"]
+[ext_resource type="Script" uid="uid://byensau5ptguo" path="res://lvl/combat1/door_portrait.gd" id="20_7l14n"]
+[ext_resource type="Texture2D" uid="uid://bl6qdsm60pd37" path="res://UI/exploCharaselector.png" id="21_1jugk"]
+[ext_resource type="Texture2D" uid="uid://dd4k5wxaesfo4" path="res://characters/exploPortrait/MysticExploPortrait.png" id="22_crknv"]
+[ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="23_013hq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_crknv"]
 
 [node name="Door" type="Control"]
 layout_mode = 3
@@ -30,6 +39,11 @@ grow_vertical = 2
 position = Vector2(960.5, 542)
 scale = Vector2(0.781352, 0.79562)
 texture = ExtResource("1_o6m4w")
+
+[node name="exploUI" type="Sprite2D" parent="."]
+position = Vector2(959.889, 540)
+scale = Vector2(0.781668, 0.788321)
+texture = ExtResource("2_mdkvs")
 
 [node name="atmosphere" parent="." instance=ExtResource("2_puy7d")]
 position = Vector2(19, 447)
@@ -161,15 +175,6 @@ offset_right = 1921.0
 offset_bottom = 93.0
 mouse_filter = 2
 alignment = 1
-
-[node name="Charaname" type="Label" parent="."]
-layout_mode = 0
-offset_left = 204.0
-offset_top = 821.0
-offset_right = 848.0
-offset_bottom = 901.0
-theme_override_font_sizes/font_size = 40
-text = "Hero Name"
 
 [node name="contexte" type="Label" parent="."]
 visible = false
@@ -307,6 +312,70 @@ render_target_update_mode = 4
 [node name="map" parent="SubViewportContainer2/SubViewport" instance=ExtResource("17_6jptd")]
 position = Vector2(242, 50)
 scale = Vector2(0.5, 0.5)
+
+[node name="Portraits" type="Node2D" parent="."]
+scale = Vector2(0.779851, 0.779851)
+
+[node name="DoorPortrait1" type="Sprite2D" parent="Portraits"]
+position = Vector2(121.017, 1266.91)
+texture = ExtResource("19_1jugk")
+script = ExtResource("20_7l14n")
+
+[node name="Button" type="Button" parent="Portraits/DoorPortrait1"]
+offset_left = -82.5479
+offset_top = -73.0908
+offset_right = 73.4521
+offset_bottom = 79.9092
+theme_override_styles/focus = SubResource("StyleBoxEmpty_crknv")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="DoorPortrait2" type="Sprite2D" parent="Portraits"]
+position = Vector2(251.33, 1133.55)
+texture = ExtResource("19_r3s01")
+script = ExtResource("20_7l14n")
+
+[node name="Button" type="Button" parent="Portraits/DoorPortrait2"]
+offset_left = -82.5479
+offset_top = -73.0908
+offset_right = 73.4521
+offset_bottom = 79.9092
+theme_override_styles/focus = SubResource("StyleBoxEmpty_crknv")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="DoorPortrait3" type="Sprite2D" parent="Portraits"]
+position = Vector2(383.888, 1266.11)
+texture = ExtResource("22_crknv")
+script = ExtResource("20_7l14n")
+
+[node name="Button" type="Button" parent="Portraits/DoorPortrait3"]
+offset_left = -76.1363
+offset_top = -76.1364
+offset_right = 79.8637
+offset_bottom = 76.8636
+theme_override_styles/focus = SubResource("StyleBoxEmpty_crknv")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="DoorPortrait4" type="Sprite2D" parent="Portraits"]
+position = Vector2(514.201, 1132.75)
+texture = ExtResource("23_013hq")
+script = ExtResource("20_7l14n")
+
+[node name="Button" type="Button" parent="Portraits/DoorPortrait4"]
+offset_left = -76.1363
+offset_top = -76.1364
+offset_right = 79.8637
+offset_bottom = 76.8636
+theme_override_styles/focus = SubResource("StyleBoxEmpty_crknv")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ExploCharaselector" type="Sprite2D" parent="Portraits"]
+position = Vector2(385.971, 1265.63)
+scale = Vector2(1.12354, 1.12354)
+texture = ExtResource("21_1jugk")
 
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]

@@ -1,9 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://dqnjuxw77ebnb"]
+[gd_scene load_steps=28 format=3 uid="uid://dqnjuxw77ebnb"]
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_ohhde"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_5rnso"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="3_fyasy"]
-[ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="3_ldoi1"]
+[ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="3_ln05l"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="4_ngelb"]
 [ext_resource type="Texture2D" uid="uid://jhd7rid3c1c1" path="res://actions/actiontexture/moveIcon.png" id="5_l58pu"]
 [ext_resource type="Script" uid="uid://conijhbkctdj2" path="res://lvl/moveExplo.gd" id="6_ss0qx"]
@@ -18,6 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="16_dtf2f"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="17_3g6r7"]
 [ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="18_qg4ur"]
+[ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="19_3g6r7"]
+[ext_resource type="Texture2D" uid="uid://bl6qdsm60pd37" path="res://UI/exploCharaselector.png" id="20_1rqfr"]
+[ext_resource type="Script" uid="uid://gljyiwavrmws" path="res://lvl/combat1/explo_portrait.gd" id="20_3g6r7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qg4ur"]
 
@@ -29,20 +32,32 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rqfr"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fyasy"]
+
 [node name="ExploInterface" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ZunBg" type="Sprite2D" parent="."]
-position = Vector2(961, 402)
+position = Vector2(959.5, 401)
+scale = Vector2(1.00157, 1.0025)
 texture = ExtResource("1_ohhde")
 
 [node name="atmosphere" parent="." instance=ExtResource("2_5rnso")]
 position = Vector2(2, 352)
+
+[node name="exploUI" type="Sprite2D" parent="."]
+position = Vector2(959, 539.5)
+scale = Vector2(0.780945, 0.787591)
+texture = ExtResource("3_ln05l")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0
@@ -59,10 +74,6 @@ render_target_update_mode = 4
 [node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_fyasy")]
 position = Vector2(0, 60)
 scale = Vector2(0.5, 0.5)
-
-[node name="FightUi" type="Sprite2D" parent="."]
-position = Vector2(960, 545)
-texture = ExtResource("3_ldoi1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -114,15 +125,6 @@ offset_bottom = 93.0
 mouse_filter = 2
 alignment = 1
 
-[node name="Charaname" type="Label" parent="."]
-layout_mode = 0
-offset_left = 204.0
-offset_top = 821.0
-offset_right = 848.0
-offset_bottom = 901.0
-theme_override_font_sizes/font_size = 40
-text = "Hero Name"
-
 [node name="contexte" type="Label" parent="."]
 visible = false
 layout_mode = 0
@@ -140,17 +142,6 @@ offset_left = 66.0
 offset_top = 756.0
 offset_right = 183.0
 offset_bottom = 872.0
-
-[node name="ResultScreen" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 901.0
-theme_override_fonts/font = ExtResource("4_ngelb")
-theme_override_font_sizes/font_size = 450
-text = "Victoire !"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
@@ -278,6 +269,70 @@ offset_bottom = 30.0
 theme_override_fonts/font = ExtResource("4_ngelb")
 theme_override_font_sizes/font_size = 40
 text = "EXPLORE"
+
+[node name="Portraits" type="Node2D" parent="."]
+scale = Vector2(0.779851, 0.779851)
+
+[node name="ExploPortrait1" type="Sprite2D" parent="Portraits"]
+position = Vector2(121.017, 1266.91)
+texture = ExtResource("19_3g6r7")
+script = ExtResource("20_3g6r7")
+
+[node name="Button" type="Button" parent="Portraits/ExploPortrait1"]
+offset_left = -82.5479
+offset_top = -73.0908
+offset_right = 73.4521
+offset_bottom = 79.9092
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fyasy")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ExploPortrait2" type="Sprite2D" parent="Portraits"]
+position = Vector2(251.33, 1133.55)
+texture = ExtResource("19_3g6r7")
+script = ExtResource("20_3g6r7")
+
+[node name="Button" type="Button" parent="Portraits/ExploPortrait2"]
+offset_left = -82.5479
+offset_top = -73.0908
+offset_right = 73.4521
+offset_bottom = 79.9092
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fyasy")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ExploPortrait3" type="Sprite2D" parent="Portraits"]
+position = Vector2(383.888, 1266.11)
+texture = ExtResource("19_3g6r7")
+script = ExtResource("20_3g6r7")
+
+[node name="Button" type="Button" parent="Portraits/ExploPortrait3"]
+offset_left = -76.1363
+offset_top = -76.1364
+offset_right = 79.8637
+offset_bottom = 76.8636
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fyasy")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ExploPortrait4" type="Sprite2D" parent="Portraits"]
+position = Vector2(514.201, 1132.75)
+texture = ExtResource("19_3g6r7")
+script = ExtResource("20_3g6r7")
+
+[node name="Button" type="Button" parent="Portraits/ExploPortrait4"]
+offset_left = -76.1363
+offset_top = -76.1364
+offset_right = 79.8637
+offset_bottom = 76.8636
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fyasy")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ExploCharaselector" type="Sprite2D" parent="Portraits"]
+position = Vector2(385.971, 1265.63)
+scale = Vector2(1.12354, 1.12354)
+texture = ExtResource("20_1rqfr")
 
 [connection signal="button_down" from="moveButton" to="ExplorationManager" method="_on_move_button_button_down"]
 [connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]

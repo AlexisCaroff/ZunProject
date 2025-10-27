@@ -25,7 +25,7 @@ func save_party_from_nodes(heroes: Array) -> void:
 			"camp_skills": hero.camp_skill_resources.duplicate(true),  
 			"buffs": hero.buffs.duplicate(true),
 			"acte_twice":hero.acte_twice,
-
+			"explorationPortrait": hero.explorationPortrait,
 			# Nouvelles données de textures
 			"portrait_texture_path": hero.portrait_texture.resource_path,
 			"dead_portrait_texture_path": hero.dead_portrait_texture.resource_path,

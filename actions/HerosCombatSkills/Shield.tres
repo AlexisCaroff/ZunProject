@@ -9,6 +9,7 @@
 
 [sub_resource type="Resource" id="Resource_mdx25"]
 script = ExtResource("2_r53j6")
+name = "name"
 uitexture = ExtResource("4_r53j6")
 affected_stat = 1
 amount = 20

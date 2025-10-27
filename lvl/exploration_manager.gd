@@ -1,7 +1,7 @@
 extends Node2D
 class_name ExplorationManager
 
-@onready var portraitCharaselect = $"../charaPortrait"
+
 @export var chara_explo_scene : PackedScene
 @onready var Doortext = $Button/Doortext
 @onready var slots = $"../HeroPosition".get_children() # conteneur des ExploPositionSlot
@@ -13,6 +13,8 @@ var selected_character: CharaExplo = null
 var move_mode: bool = false
 @onready var viewport: Viewport = $"../SubViewportContainer/SubViewport"
 @onready var donjon_map: Map = $"../SubViewportContainer/SubViewport/map"
+@onready var portraits = $"../Portraits".get_children()
+@onready var portrait_selector =$"../Portraits/ExploCharaselector"
 var DoorNumber:int =0
 var gm : GameManager
 func _ready():
@@ -20,7 +22,7 @@ func _ready():
 	gm = get_tree().root.get_node("GameManager") as GameManager
 	load_characters_from_gamestat()
 	selected_character = characters[0]
-	portraitCharaselect.texture = characters[0].initiative_icon
+	portrait_selector.position = portraits[0].position
 	donjon_map.curentposition = donjon_map.positions[gm.current_room_Ressource.position_on_map]
 	if donjon_map:
 		focus_on_room(donjon_map.curentposition)
@@ -40,11 +42,14 @@ func load_characters_from_gamestat():
 		chara.load_from_dict(hero_data)
 		add_child(chara)
 		characters.append(chara)
-
+		
 		# Placement dans le slot correspondant
 		var slot_index = clamp(hero_data.get("Chara_position", i), 0, slots.size() - 1)
 		move_character_to_slot(chara, slots[slot_index])
 		slots[slot_index].occupant = chara
+		portraits[slot_index].set_occupant(chara)
+		
+		chara.exploPortrait=portraits[slot_index]
 
 ## --- Nouvelle logique pour passer à la prochaine room ---
 func go_to_next_room():
@@ -88,17 +93,24 @@ func move_character_to_slot(chara: Node, slot: Node):
 func _swap_characters(chara1: Node, chara2: Node) -> void:
 	var slot1 = chara1.current_position
 	var slot2 = chara2.current_position
+	var portrait1= chara1.exploPortrait 
+	var portrait2= chara2.exploPortrait 
 
 	move_character_to_slot(chara1, slots[slot2])
 	chara1.current_position = slot2
+	portrait2.set_occupant(chara1)
+	
 	move_character_to_slot(chara2, slots[slot1])
 	chara2.current_position = slot1
+	portrait1.set_occupant(chara2)
 	move_mode = false
 
 func selectCharacter(chara: CharaExplo):
+	chara.animate_selected()
 	if !move_mode:
 		selected_character = chara
-		portraitCharaselect.texture = chara.initiative_icon
+		var i = characters.find(chara)
+		portrait_selector.position = portraits[i].position
 	else:
 		_swap_characters(chara, selected_character)
 

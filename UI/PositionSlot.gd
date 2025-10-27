@@ -128,7 +128,7 @@ func _on_button_button_down() -> void:
 func _on_button_mouse_entered() -> void:
 	if occupant == null:
 		return
-	combat_manager.ui.update_ui_for_current_character(occupant)
+	combat_manager.ui.update_ui_for_overed_character(occupant)
 	if combat_manager.pending_skill:
 		var skill = combat_manager.pending_skill
 		match combat_manager.combat_state:

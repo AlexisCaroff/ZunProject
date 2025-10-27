@@ -620,6 +620,186 @@ text = "ce qu'il se passe"
 horizontal_alignment = 1
 autowrap_mode = 3
 
+[node name="overmenu" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 1428.0
+offset_top = 792.0
+offset_right = 1848.0
+offset_bottom = 1113.0
+color = Color(0.0235294, 0.0196078, 0, 1)
+
+[node name="charaPortrait2" type="TextureRect" parent="overmenu"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = -8.0
+offset_right = 141.0
+offset_bottom = 95.0
+
+[node name="Charaname2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 32.0
+offset_right = 412.0
+offset_bottom = 112.0
+theme_override_fonts/font = ExtResource("5_kacea")
+theme_override_font_sizes/font_size = 40
+text = "Hero Name"
+
+[node name="AttLabel2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 98.0
+offset_right = 317.0
+offset_bottom = 153.0
+theme_override_fonts/font = ExtResource("5_kacea")
+theme_override_font_sizes/font_size = 20
+text = "Attaque :"
+
+[node name="DefLabel2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 119.0
+offset_right = 264.0
+offset_bottom = 174.0
+theme_override_fonts/font = ExtResource("5_kacea")
+theme_override_font_sizes/font_size = 20
+text = "Defence:"
+
+[node name="Stamina2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 143.0
+offset_right = 270.0
+offset_bottom = 198.0
+theme_override_fonts/font = ExtResource("5_kacea")
+theme_override_font_sizes/font_size = 20
+text = "Stamina :	
+"
+
+[node name="Horny2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 98.0
+offset_right = 459.0
+offset_bottom = 153.0
+theme_override_fonts/font = ExtResource("5_kacea")
+theme_override_font_sizes/font_size = 20
+text = "Horny
+"
+
+[node name="Guilt2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 118.0
+offset_right = 459.0
+offset_bottom = 173.0
+theme_override_fonts/font = ExtResource("5_kacea")
+theme_override_font_sizes/font_size = 20
+text = "Guilt:
+"
+
+[node name="ActionPanel2" type="HBoxContainer" parent="overmenu"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 0
+offset_left = 21.0001
+offset_top = 184.0
+offset_right = 511.0
+offset_bottom = 274.0
+scale = Vector2(0.792293, 0.792293)
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="Action1" type="Button" parent="overmenu/ActionPanel2"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("5_kacea")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
+icon = ExtResource("6_0c2hg")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_ll5py")
+
+[node name="cooldownA" type="Label" parent="overmenu/ActionPanel2/Action1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("8_amx0e")
+
+[node name="Action2" type="Button" parent="overmenu/ActionPanel2"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("5_kacea")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qk00q")
+icon = ExtResource("6_0c2hg")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_ll5py")
+
+[node name="cooldownA" type="Label" parent="overmenu/ActionPanel2/Action2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action3" type="Button" parent="overmenu/ActionPanel2"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("5_kacea")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8rvme")
+icon = ExtResource("6_0c2hg")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_ll5py")
+
+[node name="cooldownA" type="Label" parent="overmenu/ActionPanel2/Action3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action4" type="Button" parent="overmenu/ActionPanel2"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("5_kacea")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uwmmy")
+icon = ExtResource("6_0c2hg")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_ll5py")
+
+[node name="cooldownA" type="Label" parent="overmenu/ActionPanel2/Action4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action5" type="Button" parent="overmenu/ActionPanel2"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("5_kacea")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_boe0j")
+icon = ExtResource("6_0c2hg")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_ll5py")
+
+[node name="cooldownA" type="Label" parent="overmenu/ActionPanel2/Action5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]
 [connection signal="pressed" from="ActionPanel/Action1" to="CombatManager" method="_on_action_1_pressed"]
@@ -660,3 +840,18 @@ autowrap_mode = 3
 [connection signal="mouse_entered" from="ennemiePosition/position4/Button" to="ennemiePosition/position4" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="ennemiePosition/position4/Button" to="ennemiePosition/position4" method="_on_button_mouse_exited"]
 [connection signal="button_down" from="Button" to="Button" method="_on_button_down"]
+[connection signal="mouse_entered" from="overmenu/ActionPanel2/Action1" to="overmenu/ActionPanel2/Action1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="overmenu/ActionPanel2/Action1" to="overmenu/ActionPanel2/Action1" method="_on_mouse_exited"]
+[connection signal="pressed" from="overmenu/ActionPanel2/Action1" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="overmenu/ActionPanel2/Action2" to="overmenu/ActionPanel2/Action2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="overmenu/ActionPanel2/Action2" to="overmenu/ActionPanel2/Action2" method="_on_mouse_exited"]
+[connection signal="pressed" from="overmenu/ActionPanel2/Action2" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="overmenu/ActionPanel2/Action3" to="overmenu/ActionPanel2/Action3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="overmenu/ActionPanel2/Action3" to="overmenu/ActionPanel2/Action3" method="_on_mouse_exited"]
+[connection signal="pressed" from="overmenu/ActionPanel2/Action3" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="overmenu/ActionPanel2/Action4" to="overmenu/ActionPanel2/Action4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="overmenu/ActionPanel2/Action4" to="overmenu/ActionPanel2/Action4" method="_on_mouse_exited"]
+[connection signal="pressed" from="overmenu/ActionPanel2/Action4" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="overmenu/ActionPanel2/Action5" to="overmenu/ActionPanel2/Action5" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="overmenu/ActionPanel2/Action5" to="overmenu/ActionPanel2/Action5" method="_on_mouse_exited"]
+[connection signal="pressed" from="overmenu/ActionPanel2/Action5" to="CombatManager" method="_on_action_1_pressed"]

@@ -21,6 +21,7 @@ metadata/_custom_type_script = "uid://2vsqpp6jqiow"
 
 [sub_resource type="Resource" id="Resource_qng7d"]
 script = ExtResource("6_aki42")
+name = "name"
 uitexture = ExtResource("8_yu2gj")
 affected_stat = 1
 amount = 5000

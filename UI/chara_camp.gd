@@ -140,7 +140,7 @@ func animate_heal(damage:int, source:CharaCamp, color=null):
 		effect_instance.setup(damage,color)
 		
 	var tween := create_tween() as Tween
-	var tween2 := create_tween() as Tween
+	
 	var normal_size = CharaScale
 	var big_size= Vector2(1.0,1.05) 
 	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
