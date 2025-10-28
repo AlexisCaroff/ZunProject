@@ -282,7 +282,7 @@ func play_ai_turn(heroes : Array, enemies :Array):
 
 	if target == null:
 		skill.use()
-		combat_manager.ui.log(Charaname+" use "+skill.descriptionName)
+		combat_manager.ui.logennemi(Charaname+" use "+skill.descriptionName)
 	else:
 		await animate_attack(target)
 		skill.use(target.current_slot)

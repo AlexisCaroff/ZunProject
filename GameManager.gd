@@ -13,7 +13,7 @@ func _ready():
 	var screen_index := 1
 	if screen_index < DisplayServer.get_screen_count():
 		DisplayServer.window_set_current_screen(screen_index)
-
+	
 	if not room_container:
 		room_container = Node2D.new()
 		add_child(room_container)
@@ -136,3 +136,4 @@ func return_to_exploration():
 		var new_scene = scene_to_load.instantiate()
 		room_container.add_child(new_scene)
 		current_room_node = new_scene
+		

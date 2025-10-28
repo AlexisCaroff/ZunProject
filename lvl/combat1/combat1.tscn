@@ -610,13 +610,24 @@ script = ExtResource("19_m3wsf")
 
 [node name="contexte" type="Label" parent="."]
 layout_mode = 0
-offset_left = 823.0
+offset_left = 197.0
 offset_top = 130.0
-offset_right = 1133.0
+offset_right = 507.0
 offset_bottom = 292.0
 theme_override_fonts/font = ExtResource("8_amx0e")
 theme_override_font_sizes/font_size = 40
 text = "ce qu'il se passe"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="contextennemi" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1359.0
+offset_top = 130.0
+offset_right = 1669.0
+offset_bottom = 292.0
+theme_override_fonts/font = ExtResource("8_amx0e")
+theme_override_font_sizes/font_size = 40
 horizontal_alignment = 1
 autowrap_mode = 3
 

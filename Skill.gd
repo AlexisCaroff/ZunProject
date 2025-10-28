@@ -77,7 +77,8 @@ func can_use() -> bool:
 
 func use(target: PositionSlot = null, secondtarget : bool=false):
 	if combatManager :
-		combatManager.ui.log(owner.Charaname+ " use "+ descriptionName)
+			combatManager.ui.log(owner.Charaname+ " use "+ descriptionName)
+
 	if target.occupant != null:
 		
 		target.combat_manager.stop_target_selection()

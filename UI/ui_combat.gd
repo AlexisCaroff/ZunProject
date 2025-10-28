@@ -11,6 +11,7 @@ extends Control
 @onready var Charaname_panel = $Charaname
 @onready var charaPortrait= $charaPortrait
 @onready var log_panel = $contexte
+@onready var contextennemi= $contextennemi
 @onready var labelAction= $LabelAction
 @onready var combat_manager = $CombatManager 
 @onready var turnOrderPanel = $TurnOrderPanel
@@ -193,9 +194,20 @@ func update_cooldown(character:Character):
 
 
 func log(text):
-	if log_panel==null:
-		log_panel=$contexte
-		log_panel.text =  text
+	if combat_manager == null:
+		combat_manager = $CombatManager 
 	else:
-		log_panel.text =  text
-		
+		if combat_manager.current_character.is_player_controlled:
+			if log_panel==null:
+				log_panel=$contexte
+				log_panel.text =  text
+			else:
+				log_panel.text =  text
+			contextennemi.text = ""
+		else :
+			if contextennemi==null:
+				contextennemi=$contextennemi
+				contextennemi.text =  text
+			else:
+				contextennemi.text =  text
+			log_panel.text = ""

@@ -200,6 +200,7 @@ func build_turn_queue(characters: Array[Character]) -> Array[Character]:
 func next_turn():
 	_check_victory()
 	_check_defeat()
+
 	if turn_queue.is_empty():
 		turn_queue = build_turn_queue(heroes + enemies)
 		ui.update_turn_queue_ui(turn_queue)
@@ -209,10 +210,15 @@ func next_turn():
 		current_character.acte_twice=false
 		turn_queue.push_front(current_character)
 	await get_tree().process_frame
+	
+
 	ui.log(current_character.Charaname +" turn")
+
 	current_character.animate_start_Turn()
 	await current_character.skill_animation_finished
+	
 	if current_character.current_stamina<=0: # look if tired
+		
 		ui.log(current_character.Charaname +" is tired")
 		while is_animation_playing():
 			await get_tree().process_frame
