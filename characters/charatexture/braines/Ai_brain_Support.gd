@@ -20,7 +20,7 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 		}
 
 	# --- 2️⃣ Sinon, cherche une attaque contre les héros
-	var attack_skills: Array = usable_skills.filter(func(s): return s.Actiontype == "attack" or s.the_target_type == s.target_type.ENNEMY)
+	var attack_skills: Array = usable_skills.filter(func(s): return s.Actiontype == "attack")
 	if not attack_skills.is_empty():
 		var attack_skill: Skill = attack_skills.pick_random()
 		var possible_targets: Array[Character] = heroes.filter(func(h): return not h.is_dead())

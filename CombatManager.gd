@@ -128,6 +128,7 @@ func _start():
 				var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() - 1)
 				var slot = hero_positions[slot_index]
 				move_character_to(chara, slot, 0.0)
+				chara._current_slot=slot
 				chara.current_stamina= chara.max_stamina
 				if heroes_are_ambushed:
 					chara.surprised()
@@ -145,7 +146,9 @@ func _start():
 			move_character_to(chara, slot, 0.0)
 			if ennemy_are_ambushed:
 				chara.surprised()
+			chara._current_slot=slot
 			chara.update_ui()
+			
 		ui.log("start Combat")
 		start_combat()
 		
@@ -167,19 +170,20 @@ func load_saved_heroes_into_slots(slots: Array[PositionSlot]):
 		for buff in  hero_data["buffs"]:
 			hero.add_buff(buff)
 		hero._updateSkills(hero.skill_resources)
-		hero.update_ui()
+
 
 		add_child(hero)
 		hero.combat_manager = self
 		heroes.append(hero)
 		if heroes_are_ambushed:
 			hero.surprised()
-		hero.update_ui()
+		
 		
 		var pos_index = hero_data.get("position", -1)
 		if pos_index >= 0 and pos_index < slots.size():
 			slots[pos_index].assign_character(hero, 0.0)
 		
+		hero.update_ui()
 	
 func start_combat():
 	combat_state = CombatState.IDLE
@@ -200,7 +204,7 @@ func build_turn_queue(characters: Array[Character]) -> Array[Character]:
 func next_turn():
 	_check_victory()
 	_check_defeat()
-
+	
 	if turn_queue.is_empty():
 		turn_queue = build_turn_queue(heroes + enemies)
 		ui.update_turn_queue_ui(turn_queue)

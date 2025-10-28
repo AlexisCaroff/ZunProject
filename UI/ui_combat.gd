@@ -204,10 +204,15 @@ func log(text):
 			else:
 				log_panel.text =  text
 			contextennemi.text = ""
+			var fenetre = contextennemi.get_child(0)
+			fenetre.visible = false
+			
 		else :
 			if contextennemi==null:
 				contextennemi=$contextennemi
 				contextennemi.text =  text
 			else:
 				contextennemi.text =  text
+			var fenetre = contextennemi.get_child(0)
+			fenetre.visible = true
 			log_panel.text = ""

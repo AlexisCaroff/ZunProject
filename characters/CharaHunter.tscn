@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://qi68oagp06kg"]
+[gd_scene load_steps=23 format=3 uid="uid://qi68oagp06kg"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i4uyy"]
 [ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="2_papga"]
@@ -21,9 +21,6 @@
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="15_8hpy0"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="16_qhpv8"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="17_34cm8"]
-[ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="18_etx73"]
-[ext_resource type="Texture2D" uid="uid://bri15xc6cn1ul" path="res://actions/hornyJauge.png" id="19_xn63r"]
-[ext_resource type="Texture2D" uid="uid://bk1gu5cgtgkfy" path="res://actions/hornyJaugePleine.png" id="20_6h38a"]
 [ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="24_kj6ch"]
 
 [node name="Hunter" type="Node2D"]
@@ -55,7 +52,7 @@ offset_right = 155.0
 offset_bottom = 123.797
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(69, 37.798)
+position = Vector2(69, 25)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("13_172yo")
 min_scale = 1.15
@@ -113,65 +110,6 @@ offset_top = -160.0
 offset_right = 68.0
 offset_bottom = -119.0
 alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
-clip_contents = true
-custom_minimum_size = Vector2(10, 10)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = 61.0
-offset_right = 28.0
-offset_bottom = 69.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 0
-theme_override_constants/separation = 8
-
-[node name="DotAction1" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("18_etx73")
-
-[node name="DotAction2" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("18_etx73")
-
-[node name="DotAction3" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("18_etx73")
-
-[node name="DotAction4" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.14, 0.14, 0.14, 1)
-layout_mode = 2
-texture = ExtResource("18_etx73")
-
-[node name="DotAction5" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("18_etx73")
-
-[node name="HPProgressBar" type="ProgressBar" parent="."]
-modulate = Color(1, 0.714937, 0, 1)
-offset_left = -48.0
-offset_top = 40.798
-offset_right = 48.0
-offset_bottom = 50.798
-value = 100.0
-show_percentage = false
-
-[node name="HornyJauge" type="Sprite2D" parent="."]
-position = Vector2(60, 50)
-scale = Vector2(0.403259, 0.403259)
-texture = ExtResource("19_xn63r")
-
-[node name="HornyJaugePleine" type="Sprite2D" parent="HornyJauge"]
-texture = ExtResource("20_6h38a")
 
 [node name="contexte" type="Label" parent="."]
 visible = false

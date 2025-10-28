@@ -10,8 +10,8 @@ class_name Character
 @onready var name_label = $name
 
 
-@onready var hp_Jauge =$HPProgressBar
-@onready var hornyJauge =$HornyJauge/HornyJaugePleine
+@onready var hp_Jauge 
+@onready var hornyJauge 
 @onready var sprite = $pivot/HerosTexture1
 
 @onready var buff_bar = $HBoxContainer
@@ -81,14 +81,8 @@ signal target_selected()
 var is_targetable: bool = false
 @onready var arrow = $Arrow
 @export var camp_skill_resources: Array[CampSkill] = []
-@onready var dotsActions : Array[TextureRect] = [
-	$HBoxContainer2/DotAction1,
-	$HBoxContainer2/DotAction2,
-	$HBoxContainer2/DotAction3,
-	$HBoxContainer2/DotAction4,
-	$HBoxContainer2/DotAction5,
-]
-@onready var context = $contexte
+@onready var dotsActions : Array[TextureRect] 
+
 
 var exclamation :TextureRect
 var CharaColor =Color(1.0,1.0,1.0,1.0)
@@ -102,7 +96,7 @@ func _ready():
 	sprite.texture = portrait_texture
 	Selector.texture = portrait_texture
 	
-	update_ui()
+	
 	
 	for s in skill_resources:
 		#print("Contenu de skill_resource :", s)
@@ -138,15 +132,11 @@ func update_stats():
 func update_ui():
 
 	if not hp_Jauge:
-		hp_Jauge=$HPProgressBar
-		hornyJauge=$HornyJauge/HornyJaugePleine
-		dotsActions= [
-	$HBoxContainer2/DotAction1,
-	$HBoxContainer2/DotAction2,
-	$HBoxContainer2/DotAction3,
-	$HBoxContainer2/DotAction4,
-	$HBoxContainer2/DotAction5,
-	]
+		print("no hpJauge")
+		_current_slot.Set_CharaUI()
+		hp_Jauge=_current_slot.CharaUI.getHpbar()
+		hornyJauge=_current_slot.CharaUI.get_HornyBar()
+		dotsActions=_current_slot.CharaUI.getactionpoints()
 		
 	
 		# return
@@ -358,7 +348,7 @@ func take_damage(source: Character, stat: int, amount: int, type:bool) -> void:
 func resetVisuel()-> void:
 	sprite.modulate= CharaColor
 	self.scale = CharaScale
-	self.z_index = 0
+	self.z_index = _current_slot.z_index
 	if current_stamina > 0:
 			sprite.texture = portrait_texture
 			Selector.texture = portrait_texture

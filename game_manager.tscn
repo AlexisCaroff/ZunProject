@@ -1,8 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://dg0coy6r6f1ww"]
+[gd_scene load_steps=6 format=3 uid="uid://dg0coy6r6f1ww"]
 
 [ext_resource type="Script" uid="uid://d12jn42j03tgg" path="res://GameManager.gd" id="1_70yv6"]
 [ext_resource type="Resource" uid="uid://7dlbup10473y" path="res://lvl/donjonTestePorte.tres" id="2_smx3j"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="3_d5upp"]
+[ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="4_vk86k"]
+[ext_resource type="Texture2D" uid="uid://c7i05i2v2djk1" path="res://UI/seau.png" id="5_vk86k"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_70yv6")
 donjon = ExtResource("2_smx3j")
+
+[node name="Label" type="Label" parent="."]
+z_index = 6
+offset_left = 133.0
+offset_top = 31.0
+offset_right = 377.0
+offset_bottom = 86.0
+theme_override_fonts/font = ExtResource("3_d5upp")
+theme_override_font_sizes/font_size = 30
+text = "Explore the dungeon"
+
+[node name="DialogueBox" type="Sprite2D" parent="Label"]
+z_index = -1
+position = Vector2(107, 21)
+scale = Vector2(0.256716, 0.325843)
+texture = ExtResource("4_vk86k")
+
+[node name="Seau" type="Sprite2D" parent="Label"]
+position = Vector2(-59, 21)
+scale = Vector2(1.12691, 1.07276)
+texture = ExtResource("5_vk86k")

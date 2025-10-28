@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cr7722t3ktcl4"]
+[gd_scene load_steps=16 format=3 uid="uid://cr7722t3ktcl4"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_qghsa"]
 [ext_resource type="Texture2D" uid="uid://chha7owt72lwo" path="res://characters/charatexture/enemy temptress.png" id="2_7s1lw"]
@@ -13,9 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="8_7pso5"]
 [ext_resource type="Resource" uid="uid://cvpggc0yt3l4o" path="res://actions/ennemiCombatSkills/Ennemi_charme.tres" id="8_gg7eq"]
 [ext_resource type="Resource" uid="uid://86jrw37oebpi" path="res://characters/charatexture/braines/basicRandomBrain.tres" id="9_7pso5"]
-[ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="14_b3y7k"]
-[ext_resource type="Texture2D" uid="uid://bri15xc6cn1ul" path="res://actions/hornyJauge.png" id="14_u54kx"]
-[ext_resource type="Texture2D" uid="uid://bk1gu5cgtgkfy" path="res://actions/hornyJaugePleine.png" id="15_7pso5"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="17_n4itb"]
 [ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="18_p34m6"]
 
@@ -31,14 +28,15 @@ is_player_controlled = false
 ai_brain = ExtResource("9_7pso5")
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(52, 50.9492)
+position = Vector2(51, 26)
 script = ExtResource("5_gg7eq")
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
 offset_left = -133.0
-offset_top = -229.0
+offset_top = -221.0
 offset_right = 38.0
-offset_bottom = 2.0
+offset_bottom = 10.0
+scale = Vector2(0.958059, 0.958059)
 mouse_filter = 2
 texture = ExtResource("2_7s1lw")
 expand_mode = 1
@@ -47,9 +45,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Selector" type="TextureRect" parent="pivot"]
 self_modulate = Color(2, 2, 2, 0)
 offset_left = -133.0
-offset_top = -229.0
+offset_top = -221.0
 offset_right = 38.0
-offset_bottom = 2.0
+offset_bottom = 10.0
+scale = Vector2(0.958059, 0.958059)
 mouse_filter = 2
 texture = ExtResource("2_7s1lw")
 expand_mode = 1
@@ -98,65 +97,6 @@ max_scale = 0.38
 scalemini = 0.3
 min_duration = 0.5
 max_duration = 0.5
-
-[node name="HPProgressBar" type="ProgressBar" parent="."]
-modulate = Color(1, 0.943894, 0, 1)
-offset_left = -48.0
-offset_top = 45.9492
-offset_right = 48.0
-offset_bottom = 55.9492
-value = 100.0
-show_percentage = false
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
-clip_contents = true
-custom_minimum_size = Vector2(10, 10)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = 61.0
-offset_right = 28.0
-offset_bottom = 69.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 0
-theme_override_constants/separation = 8
-
-[node name="DotAction1" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("14_b3y7k")
-
-[node name="DotAction2" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("14_b3y7k")
-
-[node name="DotAction3" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("14_b3y7k")
-
-[node name="DotAction4" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.14, 0.14, 0.14, 1)
-layout_mode = 2
-texture = ExtResource("14_b3y7k")
-
-[node name="DotAction5" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("14_b3y7k")
-
-[node name="HornyJauge" type="Sprite2D" parent="."]
-position = Vector2(60, 50)
-scale = Vector2(0.403259, 0.403259)
-texture = ExtResource("14_u54kx")
-
-[node name="HornyJaugePleine" type="Sprite2D" parent="HornyJauge"]
-texture = ExtResource("15_7pso5")
 
 [node name="contexte" type="Label" parent="."]
 visible = false

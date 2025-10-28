@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://cifpdtrct42ek"]
+
+[ext_resource type="Script" uid="uid://ckeut5nsvwp2s" path="res://UI/chara_combat_ui.gd" id="1_n50uc"]
+[ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="1_qnl5p"]
+[ext_resource type="Texture2D" uid="uid://bri15xc6cn1ul" path="res://actions/hornyJauge.png" id="2_n50uc"]
+[ext_resource type="Texture2D" uid="uid://bk1gu5cgtgkfy" path="res://actions/hornyJaugePleine.png" id="3_50q8f"]
+
+[node name="charaCombatUI" type="Node2D"]
+script = ExtResource("1_n50uc")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = 13.0
+offset_right = 47.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.700702, 0.700702)
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="DotAction1" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(0.642019, 0.561016, 0.364715, 1)
+layout_mode = 2
+texture = ExtResource("1_qnl5p")
+
+[node name="DotAction2" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(0.642019, 0.561016, 0.364715, 1)
+layout_mode = 2
+texture = ExtResource("1_qnl5p")
+
+[node name="DotAction3" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(0.642019, 0.561016, 0.364715, 1)
+layout_mode = 2
+texture = ExtResource("1_qnl5p")
+
+[node name="DotAction4" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(0.14, 0.14, 0.14, 1)
+layout_mode = 2
+texture = ExtResource("1_qnl5p")
+
+[node name="DotAction5" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(0.642019, 0.561016, 0.364715, 1)
+layout_mode = 2
+texture = ExtResource("1_qnl5p")
+
+[node name="HPProgressBar" type="ProgressBar" parent="."]
+modulate = Color(1, 0.714937, 0, 1)
+offset_left = -34.0
+offset_top = 1.02985
+offset_right = 62.0
+offset_bottom = 11.0299
+scale = Vector2(0.700702, 0.700702)
+value = 100.0
+show_percentage = false
+
+[node name="HornyJauge" type="Sprite2D" parent="."]
+position = Vector2(45, 10.3246)
+scale = Vector2(0.282564, 0.282564)
+texture = ExtResource("2_n50uc")
+
+[node name="HornyJaugePleine" type="Sprite2D" parent="HornyJauge"]
+texture = ExtResource("3_50q8f")

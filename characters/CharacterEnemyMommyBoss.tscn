@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://crq2yis3m8t41"]
+[gd_scene load_steps=16 format=3 uid="uid://crq2yis3m8t41"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_wxyxf"]
 [ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="3_x6ecl"]
@@ -14,9 +14,6 @@
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="10_303s1"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="11_wskpd"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="12_mxjth"]
-[ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="13_k662s"]
-[ext_resource type="Texture2D" uid="uid://bri15xc6cn1ul" path="res://actions/hornyJauge.png" id="14_kys6v"]
-[ext_resource type="Texture2D" uid="uid://bk1gu5cgtgkfy" path="res://actions/hornyJaugePleine.png" id="15_uanlp"]
 [ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="18_h8b51"]
 
 [node name="CharacterTestennemie1" type="Node2D"]
@@ -103,103 +100,6 @@ max_scale = 0.38
 scalemini = 0.3
 min_duration = 0.5
 max_duration = 0.5
-
-[node name="HPProgressBar" type="ProgressBar" parent="."]
-modulate = Color(0.690751, 1, 0, 1)
-offset_left = -48.0
-offset_top = 41.798
-offset_right = 48.0
-offset_bottom = 51.798
-value = 100.0
-show_percentage = false
-
-[node name="Stress" type="Label" parent="."]
-visible = false
-offset_left = -91.0
-offset_top = -15.0
-offset_right = -66.0
-offset_bottom = 4.0
-theme_override_fonts/font = ExtResource("12_mxjth")
-theme_override_font_sizes/font_size = 15
-text = "Guilt:"
-
-[node name="GuiltrogressBar" type="ProgressBar" parent="Stress"]
-modulate = Color(1, 0.257036, 0, 1)
-layout_mode = 0
-offset_left = 32.0
-offset_top = 7.0
-offset_right = 128.0
-offset_bottom = 17.0
-show_percentage = false
-
-[node name="horny" type="Label" parent="."]
-visible = false
-offset_left = -99.0
-offset_top = 2.0
-offset_right = -67.0
-offset_bottom = 21.0
-theme_override_fonts/font = ExtResource("12_mxjth")
-theme_override_font_sizes/font_size = 15
-text = "Horny:"
-
-[node name="HornyProgressBar" type="ProgressBar" parent="horny"]
-modulate = Color(0.905484, 0, 1, 1)
-layout_mode = 0
-offset_left = 39.0
-offset_top = 7.0
-offset_right = 135.0
-offset_bottom = 17.0
-show_percentage = false
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
-clip_contents = true
-custom_minimum_size = Vector2(10, 10)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = 61.0
-offset_right = 28.0
-offset_bottom = 69.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 0
-theme_override_constants/separation = 8
-
-[node name="DotAction1" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("13_k662s")
-
-[node name="DotAction2" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("13_k662s")
-
-[node name="DotAction3" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("13_k662s")
-
-[node name="DotAction4" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.14, 0.14, 0.14, 1)
-layout_mode = 2
-texture = ExtResource("13_k662s")
-
-[node name="DotAction5" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("13_k662s")
-
-[node name="HornyJauge" type="Sprite2D" parent="."]
-position = Vector2(60, 50)
-scale = Vector2(0.403259, 0.403259)
-texture = ExtResource("14_kys6v")
-
-[node name="HornyJaugePleine" type="Sprite2D" parent="HornyJauge"]
-texture = ExtResource("15_uanlp")
 
 [node name="contexte" type="Label" parent="."]
 visible = false

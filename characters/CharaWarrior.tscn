@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dbtxyhyysj65n"]
+[gd_scene load_steps=22 format=3 uid="uid://dbtxyhyysj65n"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_bw87w"]
 [ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="2_m75wf"]
@@ -19,9 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="14_j8b2c"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="15_a3eqf"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="16_373rw"]
-[ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="17_apvcu"]
-[ext_resource type="Texture2D" uid="uid://bri15xc6cn1ul" path="res://actions/hornyJauge.png" id="17_m75wf"]
-[ext_resource type="Texture2D" uid="uid://bk1gu5cgtgkfy" path="res://actions/hornyJaugePleine.png" id="18_o000s"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="22_au1md"]
 [ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="23_8h1bt"]
 
@@ -51,7 +48,7 @@ offset_bottom = -230.0
 text = "name"
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(51, 55)
+position = Vector2(51, 51)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("13_y06sh")
 min_scale = 1.15
@@ -72,7 +69,7 @@ expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Selector" type="TextureRect" parent="pivot"]
-self_modulate = Color(2, 2, 2, 1)
+self_modulate = Color(1, 1, 1, 0)
 offset_left = -133.0
 offset_top = -229.0
 offset_right = 38.0
@@ -109,65 +106,6 @@ offset_left = 19.0
 offset_top = -176.36
 offset_right = 59.0
 offset_bottom = -157.36
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
-clip_contents = true
-custom_minimum_size = Vector2(10, 10)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = 61.0
-offset_right = 28.0
-offset_bottom = 69.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 0
-theme_override_constants/separation = 8
-
-[node name="DotAction1" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("17_apvcu")
-
-[node name="DotAction2" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("17_apvcu")
-
-[node name="DotAction3" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("17_apvcu")
-
-[node name="DotAction4" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.14, 0.14, 0.14, 1)
-layout_mode = 2
-texture = ExtResource("17_apvcu")
-
-[node name="DotAction5" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.642019, 0.561016, 0.364715, 1)
-layout_mode = 2
-texture = ExtResource("17_apvcu")
-
-[node name="HPProgressBar" type="ProgressBar" parent="."]
-modulate = Color(2, 0.8, 0, 1)
-offset_left = -48.0
-offset_top = 40.64
-offset_right = 48.0
-offset_bottom = 50.64
-value = 100.0
-show_percentage = false
-
-[node name="HornyJauge" type="Sprite2D" parent="."]
-position = Vector2(60, 50)
-scale = Vector2(0.403259, 0.403259)
-texture = ExtResource("17_m75wf")
-
-[node name="HornyJaugePleine" type="Sprite2D" parent="HornyJauge"]
-texture = ExtResource("18_o000s")
 
 [node name="contexte" type="Label" parent="."]
 visible = false

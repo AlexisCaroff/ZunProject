@@ -8,6 +8,7 @@ var occupant: Character = null
 var combat_manager 
 @onready var imageinside = $TextureRect
 var selfposition: Array[PositionSlot] = []
+@onready var CharaUI = $"charaCombatUI"
 
 var is_ready: bool = false
 
@@ -30,9 +31,23 @@ func _ready():
 	if GameState.current_phase == GameStat.GamePhase.COMBAT:
 		combat_manager = $"../../CombatManager"
 
+func Set_CharaUI():
+	CharaUI = $"charaCombatUI"
+
 func assign_character(character: Character, movetime:float):
+	await get_tree().process_frame
+	
 	occupant = character
 	occupant.CharaScale = position_data.scale
+	if CharaUI == null : 
+		CharaUI = $"charaCombatUI"
+		print("charaUI is null")
+	occupant.hornyJauge =CharaUI.HornyBar
+	occupant.hp_Jauge=CharaUI.HPProgressBar
+	
+	occupant.dotsActions = CharaUI.actionpoints
+	occupant.z_index=self.z_index
+	print("chara assigned to position")
 	if not is_ready:
 		await ready
 	imageinside.texture=character.initiative_icon
