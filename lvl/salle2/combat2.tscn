@@ -1,39 +1,53 @@
-[gd_scene load_steps=47 format=3 uid="uid://b4td1xw3c18rx"]
+[gd_scene load_steps=56 format=3 uid="uid://w1hej04ice08"]
 
-[ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_u3ti6"]
-[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_ucvp2"]
-[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_eawyw"]
-[ext_resource type="Texture2D" uid="uid://b1t6ygc3nxo7c" path="res://characters/charatexture/warriorHit.png" id="4_jmibc"]
-[ext_resource type="Script" uid="uid://ds3vigal0aygx" path="res://lvl/combat1/SpriteActionCombat.gd" id="5_i40dl"]
-[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="6_ov3h8"]
-[ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="7_fko1d"]
-[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="8_kai0j"]
-[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="9_pr6vk"]
-[ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="10_hi45r"]
-[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="11_56n5u"]
-[ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="12_4sw3e"]
-[ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="14_ptev3"]
-[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="15_ssuj2"]
-[ext_resource type="Script" uid="uid://igdjgbcqg1d6" path="res://UI/PositionSlot.gd" id="16_b6nyf"]
-[ext_resource type="Script" uid="uid://b3l4l88c3b65c" path="res://PositionData.gd" id="17_h6iln"]
-[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="18_ireg5"]
-[ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterEnemyNymphe.tscn" id="18_mk0s0"]
-[ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharaEnnemyTemptress.tscn" id="19_plvru"]
-[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="19_rnnri"]
-[ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="20_6vj1g"]
-[ext_resource type="Script" uid="uid://bqnn7n8kuofir" path="res://UI/buttonSkipCombat.gd" id="21_82q4f"]
-[ext_resource type="Texture2D" uid="uid://b0q8mhrqooms" path="res://characters/characterInitiative/cultisteIni.png" id="21_swru7"]
-[ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/HerosCombatSkills/Ennemi_attaque_basique.tres" id="22_dtx5y"]
-[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="23_wxkh7"]
-[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="24_mxirr"]
-[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="25_1rhdd"]
-[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="26_mhdky"]
-[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="27_qgiaq"]
+[ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_n184l"]
+[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_ptev3"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_ssuj2"]
+[ext_resource type="Texture2D" uid="uid://b1t6ygc3nxo7c" path="res://characters/charatexture/warriorHit.png" id="4_b6nyf"]
+[ext_resource type="Script" uid="uid://ds3vigal0aygx" path="res://lvl/combat1/SpriteActionCombat.gd" id="5_h6iln"]
+[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="6_mk0s0"]
+[ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="7_plvru"]
+[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="8_fj73k"]
+[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="9_82q4f"]
+[ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="10_ie0v0"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="11_sbut5"]
+[ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="12_368tf"]
+[ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://lvl/combat1/encounter1.tres" id="13_c35xl"]
+[ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="14_fx5mu"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="15_5vkgm"]
+[ext_resource type="Script" uid="uid://igdjgbcqg1d6" path="res://UI/PositionSlot.gd" id="16_02e6q"]
+[ext_resource type="Script" uid="uid://b3l4l88c3b65c" path="res://PositionData.gd" id="17_l6uf5"]
+[ext_resource type="PackedScene" uid="uid://cifpdtrct42ek" path="res://UI/chara_combat_ui.tscn" id="18_4eqw4"]
+[ext_resource type="Texture2D" uid="uid://la06rj6j3ci2" path="res://UI/shadow.png" id="19_t07b4"]
+[ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterEnemyNymphe.tscn" id="20_111sy"]
+[ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharaEnnemyTemptress.tscn" id="21_l1d1l"]
+[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="22_dspic"]
+[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="23_802co"]
+[ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="24_flq0k"]
+[ext_resource type="Texture2D" uid="uid://b0q8mhrqooms" path="res://characters/characterInitiative/cultisteIni.png" id="25_u8fnw"]
+[ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/HerosCombatSkills/Ennemi_attaque_basique.tres" id="26_7q5l7"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="27_7qeob"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="28_co2bd"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="29_a6p7r"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="30_2yxpt"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="31_1s65e"]
+[ext_resource type="Script" uid="uid://bqnn7n8kuofir" path="res://UI/buttonSkipCombat.gd" id="32_y3bwx"]
+[ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="33_suw7h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kiw3p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qk00q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8rvme"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uwmmy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_boe0j"]
 
 [sub_resource type="Resource" id="Resource_i1s1q"]
-script = ExtResource("17_h6iln")
+script = ExtResource("17_l6uf5")
 index = 0
-scale = Vector2(1.2, 1.2)
+scale = Vector2(2, 2)
 is_enemy = false
 isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -41,9 +55,9 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s6b88"]
 
 [sub_resource type="Resource" id="Resource_8flqu"]
-script = ExtResource("17_h6iln")
+script = ExtResource("17_l6uf5")
 index = 1
-scale = Vector2(1, 1)
+scale = Vector2(1.8, 1.8)
 is_enemy = false
 isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -51,9 +65,9 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hxbks"]
 
 [sub_resource type="Resource" id="Resource_x8qlv"]
-script = ExtResource("17_h6iln")
+script = ExtResource("17_l6uf5")
 index = 2
-scale = Vector2(1.2, 1.2)
+scale = Vector2(2, 2)
 is_enemy = false
 isFront = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -61,9 +75,9 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtu61"]
 
 [sub_resource type="Resource" id="Resource_t7hjh"]
-script = ExtResource("17_h6iln")
+script = ExtResource("17_l6uf5")
 index = 3
-scale = Vector2(1, 1)
+scale = Vector2(1.8, 1.8)
 is_enemy = false
 isFront = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -71,9 +85,9 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m2l43"]
 
 [sub_resource type="Resource" id="Resource_fs52m"]
-script = ExtResource("17_h6iln")
+script = ExtResource("17_l6uf5")
 index = 0
-scale = Vector2(1, 1)
+scale = Vector2(1.7, 1.7)
 is_enemy = true
 isFront = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -81,9 +95,9 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xtuat"]
 
 [sub_resource type="Resource" id="Resource_ehgg6"]
-script = ExtResource("17_h6iln")
+script = ExtResource("17_l6uf5")
 index = 1
-scale = Vector2(0.9, 0.9)
+scale = Vector2(1.6, 1.6)
 is_enemy = true
 isFront = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -91,9 +105,9 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xwqlg"]
 
 [sub_resource type="Resource" id="Resource_if0a6"]
-script = ExtResource("17_h6iln")
+script = ExtResource("17_l6uf5")
 index = 2
-scale = Vector2(1, 1)
+scale = Vector2(1.7, 1.7)
 is_enemy = true
 isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -107,37 +121,60 @@ _bundled = {
 "node_count": 15,
 "node_paths": [NodePath("."), NodePath("./pivot"), NodePath("./pivot"), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("./HP"), NodePath("."), NodePath("./Stress"), NodePath("."), NodePath("./horny"), NodePath("."), NodePath("Button"), NodePath("."), NodePath("Button"), NodePath("."), NodePath("Button")],
 "nodes": PackedInt32Array(-1, -1, 1, 0, -1, 9, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 10, 8, 0, 1073741824, 0, 12, 11, -1, 2, 13, 9, 14, 10, 0, 1073741825, 0, 16, 15, -1, 8, 17, 11, 18, 12, 19, 13, 20, 14, 21, 15, 22, 16, 23, 17, 24, 18, 0, 1073741826, 0, 26, 25, -1, 9, 27, 19, 28, 20, 29, 21, 30, 22, 31, 23, 32, 24, 33, 25, 34, 26, 35, 27, 0, 1073741827, 0, 37, 36, -1, 6, 38, 28, 39, 29, 40, 30, 41, 31, 42, 32, 43, 33, 0, 1073741828, 0, 45, 44, -1, 5, 46, 34, 47, 35, 48, 36, 49, 37, 50, 38, 0, 1073741829, 0, 52, 51, -1, 4, 53, 39, 54, 40, 55, 41, 56, 42, 0, 1073741830, 0, 58, 57, -1, 8, 59, 43, 60, 44, 61, 45, 62, 46, 63, 47, 64, 48, 65, 49, 66, 50, 0, 1073741831, 0, 68, 67, -1, 10, 69, 51, 70, 52, 71, 53, 72, 54, 73, 55, 74, 56, 75, 57, 76, 58, 77, 59, 78, 60, 0, 1073741832, 0, 80, 79, -1, 7, 81, 61, 82, 62, 83, 63, 84, 64, 85, 65, 86, 66, 87, 67, 0, 1073741833, 0, 89, 88, -1, 8, 90, 68, 91, 69, 92, 70, 93, 71, 94, 72, 95, 73, 96, 74, 97, 75, 0, 1073741834, 0, 99, 98, -1, 7, 100, 76, 101, 77, 102, 78, 103, 79, 104, 80, 105, 81, 106, 82, 0, 1073741835, 0, 108, 107, -1, 7, 109, 83, 110, 84, 111, 85, 112, 86, 113, 87, 114, 88, 115, 89, 0, 1073741836, 0, 117, 116, -1, 7, 118, 90, 119, 91, 120, 92, 121, 93, 122, 94, 123, 95, 124, 96, 0, 1073741837, 0, 126, 125, -1, 7, 127, 97, 128, 98, 129, 99, 130, 100, 131, 101, 132, 102, 133, 103, 0),
-"variants": [ExtResource("18_ireg5"), ExtResource("19_rnnri"), ExtResource("20_6vj1g"), ExtResource("21_swru7"), "Bulub", true, 2, Array[Resource]([ExtResource("22_dtx5y"), ExtResource("22_dtx5y"), ExtResource("22_dtx5y"), ExtResource("22_dtx5y"), ExtResource("23_wxkh7")]), false, Vector2(0, -21), ExtResource("24_mxirr"), -133.0, -229.0, 38.0, 2.0, 2, ExtResource("19_rnnri"), 1, true, Color(2, 2, 2, 0), -133.0, -229.0, 38.0, 2.0, 2, ExtResource("19_rnnri"), 1, true, false, -82.0, -265.0, -38.0, -242.0, "name", Color(1, 1, 1, 0), -123.0, -325.0, 110.0, 57.0, 22.0, -252.0, 62.0, -233.0, false, -176.0, -305.0, 400.0, 271.0, Vector2(0.5, 0.5), ExtResource("25_1rhdd"), ExtResource("26_mhdky"), Vector2(-52, -351), Vector2(0.38, 0.38), ExtResource("27_qgiaq"), Vector2(0, 117.335), ExtResource("24_mxirr"), 0.38, 0.38, 0.3, 0.5, 0.5, -108.0, -33.0, -65.0, -14.0, ExtResource("11_56n5u"), 15, "Stamina:", Color(0.690751, 1, 0, 1), 0, 50.0, 7.0, 146.0, 17.0, 100.0, false, -91.0, -15.0, -66.0, 4.0, ExtResource("11_56n5u"), 15, "Guilt:", Color(1, 0.257036, 0, 1), 0, 32.0, 7.0, 128.0, 17.0, false, -99.0, 2.0, -67.0, 21.0, ExtResource("11_56n5u"), 15, "Horny:", Color(0.905484, 0, 1, 1), 0, 39.0, 7.0, 135.0, 17.0, false],
+"variants": [ExtResource("22_dspic"), ExtResource("23_802co"), ExtResource("24_flq0k"), ExtResource("25_u8fnw"), "Bulub", true, 2, Array[Resource]([ExtResource("26_7q5l7"), ExtResource("26_7q5l7"), ExtResource("26_7q5l7"), ExtResource("26_7q5l7"), ExtResource("27_7qeob")]), false, Vector2(0, -21), ExtResource("28_co2bd"), -133.0, -229.0, 38.0, 2.0, 2, ExtResource("23_802co"), 1, true, Color(2, 2, 2, 0), -133.0, -229.0, 38.0, 2.0, 2, ExtResource("23_802co"), 1, true, false, -82.0, -265.0, -38.0, -242.0, "name", Color(1, 1, 1, 0), -123.0, -325.0, 110.0, 57.0, 22.0, -252.0, 62.0, -233.0, false, -176.0, -305.0, 400.0, 271.0, Vector2(0.5, 0.5), ExtResource("29_a6p7r"), ExtResource("30_2yxpt"), Vector2(-52, -351), Vector2(0.38, 0.38), ExtResource("31_1s65e"), Vector2(0, 117.335), ExtResource("28_co2bd"), 0.38, 0.38, 0.3, 0.5, 0.5, -108.0, -33.0, -65.0, -14.0, ExtResource("11_sbut5"), 15, "Stamina:", Color(0.690751, 1, 0, 1), 0, 50.0, 7.0, 146.0, 17.0, 100.0, false, -91.0, -15.0, -66.0, 4.0, ExtResource("11_sbut5"), 15, "Guilt:", Color(1, 0.257036, 0, 1), 0, 32.0, 7.0, 128.0, 17.0, false, -99.0, 2.0, -67.0, 21.0, ExtResource("11_sbut5"), 15, "Horny:", Color(0.905484, 0, 1, 1), 0, 39.0, 7.0, 135.0, 17.0, false],
 "version": 3
 }
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c7ruu"]
 
 [sub_resource type="Resource" id="Resource_euc7u"]
-script = ExtResource("17_h6iln")
+script = ExtResource("17_l6uf5")
 index = 3
-scale = Vector2(0.9, 0.9)
+scale = Vector2(1.6, 1.6)
 is_enemy = true
 isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iaf2c"]
 
-[node name="Combat2" type="Control"]
+[node name="CombatInterface" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_u3ti6")
+script = ExtResource("1_n184l")
 
 [node name="ZunBg" type="Sprite2D" parent="."]
 position = Vector2(961, 402)
-texture = ExtResource("2_ucvp2")
+texture = ExtResource("2_ptev3")
 
-[node name="atmosphere" parent="." instance=ExtResource("3_eawyw")]
+[node name="atmosphere" parent="." instance=ExtResource("3_ssuj2")]
 position = Vector2(2, 352)
+
+[node name="SpriteHeros" type="Sprite2D" parent="."]
+z_index = 20
+position = Vector2(-344, 394)
+scale = Vector2(1.36806, 1.36806)
+texture = ExtResource("4_b6nyf")
+script = ExtResource("5_h6iln")
+attackPos = Vector2(800, 500)
+MidPos = Vector2(400, 500)
+outsidePos = Vector2(-300, 500)
+esquivPos = Vector2(250, 500)
+attack_scale = Vector2(2, 2)
+
+[node name="SpriteEnnemies" type="Sprite2D" parent="."]
+z_index = 24
+position = Vector2(2308.5, 406.5)
+scale = Vector2(1.32465, 1.32465)
+texture = ExtResource("4_b6nyf")
+script = ExtResource("5_h6iln")
+attackPos = Vector2(1400, 500)
+MidPos = Vector2(1625, 500)
+outsidePos = Vector2(2200, 500)
+esquivPos = Vector2(1700, 500)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0
@@ -151,12 +188,12 @@ handle_input_locally = false
 size = Vector2i(400, 400)
 render_target_update_mode = 4
 
-[node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("6_ov3h8")]
+[node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("6_mk0s0")]
 scale = Vector2(0.5, 0.5)
 
 [node name="FightUi" type="Sprite2D" parent="."]
 position = Vector2(960, 545)
-texture = ExtResource("7_fko1d")
+texture = ExtResource("7_plvru")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -181,30 +218,33 @@ alignment = 1
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("8_kai0j")
+theme_override_fonts/font = ExtResource("8_fj73k")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("9_pr6vk")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
+icon = ExtResource("9_82q4f")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("10_hi45r")
+script = ExtResource("10_ie0v0")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action1"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("11_sbut5")
 
 [node name="Action2" type="Button" parent="ActionPanel"]
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("8_kai0j")
+theme_override_fonts/font = ExtResource("8_fj73k")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("9_pr6vk")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qk00q")
+icon = ExtResource("9_82q4f")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("10_hi45r")
+script = ExtResource("10_ie0v0")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action2"]
 layout_mode = 0
@@ -215,13 +255,14 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("8_kai0j")
+theme_override_fonts/font = ExtResource("8_fj73k")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("9_pr6vk")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8rvme")
+icon = ExtResource("9_82q4f")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("10_hi45r")
+script = ExtResource("10_ie0v0")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action3"]
 layout_mode = 0
@@ -232,13 +273,14 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("8_kai0j")
+theme_override_fonts/font = ExtResource("8_fj73k")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("9_pr6vk")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uwmmy")
+icon = ExtResource("9_82q4f")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("10_hi45r")
+script = ExtResource("10_ie0v0")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action4"]
 layout_mode = 0
@@ -249,13 +291,14 @@ offset_bottom = 23.0
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("8_kai0j")
+theme_override_fonts/font = ExtResource("8_fj73k")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("9_pr6vk")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_boe0j")
+icon = ExtResource("9_82q4f")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("10_hi45r")
+script = ExtResource("10_ie0v0")
 
 [node name="cooldownA" type="Label" parent="ActionPanel/Action5"]
 layout_mode = 0
@@ -268,7 +311,7 @@ offset_left = 681.0
 offset_top = 982.0
 offset_right = 1260.0
 offset_bottom = 1066.0
-theme_override_fonts/font = ExtResource("11_56n5u")
+theme_override_fonts/font = ExtResource("11_sbut5")
 theme_override_font_sizes/font_size = 25
 text = "Attaque1 
 et truc et bidule"
@@ -290,7 +333,7 @@ offset_left = 204.0
 offset_top = 821.0
 offset_right = 848.0
 offset_bottom = 901.0
-theme_override_fonts/font = ExtResource("8_kai0j")
+theme_override_fonts/font = ExtResource("8_fj73k")
 theme_override_font_sizes/font_size = 40
 text = "Hero Name"
 
@@ -300,7 +343,7 @@ offset_left = 59.0
 offset_top = 928.0
 offset_right = 325.0
 offset_bottom = 983.0
-theme_override_fonts/font = ExtResource("8_kai0j")
+theme_override_fonts/font = ExtResource("8_fj73k")
 theme_override_font_sizes/font_size = 20
 text = "Attaque :"
 
@@ -310,7 +353,7 @@ offset_left = 59.0
 offset_top = 961.0
 offset_right = 272.0
 offset_bottom = 1016.0
-theme_override_fonts/font = ExtResource("8_kai0j")
+theme_override_fonts/font = ExtResource("8_fj73k")
 theme_override_font_sizes/font_size = 20
 text = "Defence:"
 
@@ -320,7 +363,7 @@ offset_left = 59.0
 offset_top = 988.0
 offset_right = 278.0
 offset_bottom = 1043.0
-theme_override_fonts/font = ExtResource("8_kai0j")
+theme_override_fonts/font = ExtResource("8_fj73k")
 theme_override_font_sizes/font_size = 20
 text = "Stamina :	
 "
@@ -331,7 +374,7 @@ offset_left = 59.0
 offset_top = 1015.0
 offset_right = 278.0
 offset_bottom = 1070.0
-theme_override_fonts/font = ExtResource("8_kai0j")
+theme_override_fonts/font = ExtResource("8_fj73k")
 theme_override_font_sizes/font_size = 20
 text = "Horny
 "
@@ -342,18 +385,19 @@ offset_left = 59.0
 offset_top = 1043.0
 offset_right = 278.0
 offset_bottom = 1098.0
-theme_override_fonts/font = ExtResource("8_kai0j")
+theme_override_fonts/font = ExtResource("8_fj73k")
 theme_override_font_sizes/font_size = 20
 text = "Guilt:
 "
 
-[node name="CombatManager" parent="." instance=ExtResource("12_4sw3e")]
+[node name="CombatManager" parent="." instance=ExtResource("12_368tf")]
 HERO_START_POS = Vector2(100, 500)
 ENEMY_START_POS = Vector2(1200, 500)
 target_scene = "uid://dqnjuxw77ebnb"
+encounter = ExtResource("13_c35xl")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CombatManager"]
-stream = ExtResource("14_ptev3")
+stream = ExtResource("14_fx5mu")
 volume_db = 4.455
 pitch_scale = 0.67
 
@@ -368,8 +412,8 @@ offset_bottom = 909.0
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 1920.0
-offset_bottom = 1000.0
-theme_override_fonts/font = ExtResource("8_kai0j")
+offset_bottom = 740.0
+theme_override_fonts/font = ExtResource("8_fj73k")
 theme_override_font_sizes/font_size = 450
 text = "Victoire !"
 horizontal_alignment = 1
@@ -378,14 +422,16 @@ vertical_alignment = 1
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
 ignore_rotation = false
-script = ExtResource("15_ssuj2")
+script = ExtResource("15_5vkgm")
 
 [node name="HeroPosition" type="Node2D" parent="."]
-position = Vector2(288, 642)
+position = Vector2(168, 597)
+scale = Vector2(0.9, 0.9)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
-position = Vector2(0, 28)
-script = ExtResource("16_b6nyf")
+z_index = 2
+position = Vector2(-1, 32)
+script = ExtResource("16_02e6q")
 position_data = SubResource("Resource_i1s1q")
 
 [node name="TextureRect" type="TextureRect" parent="HeroPosition/position1"]
@@ -395,19 +441,34 @@ offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
 mouse_filter = 2
-texture = ExtResource("9_pr6vk")
+texture = ExtResource("9_82q4f")
 
 [node name="Button" type="Button" parent="HeroPosition/position1"]
-offset_left = -92.0
+offset_left = -101.0
 offset_top = -304.0
 offset_right = 78.0
-offset_bottom = 11.0
+offset_bottom = 82.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_s6b88")
 flat = true
 
+[node name="charaCombatUI" parent="HeroPosition/position1" instance=ExtResource("18_4eqw4")]
+position = Vector2(-1.00012, 70)
+scale = Vector2(1.8, 1.8)
+
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position1"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0
+offset_right = 108.0
+offset_bottom = 61.0
+texture = ExtResource("19_t07b4")
+expand_mode = 1
+
 [node name="position2" type="Node2D" parent="HeroPosition"]
-position = Vector2(173, -13)
-script = ExtResource("16_b6nyf")
+z_index = 1
+position = Vector2(233.333, -4.99998)
+script = ExtResource("16_02e6q")
 position_data = SubResource("Resource_8flqu")
 
 [node name="TextureRect" type="TextureRect" parent="HeroPosition/position2"]
@@ -416,19 +477,35 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
-texture = ExtResource("9_pr6vk")
+texture = ExtResource("9_82q4f")
 
 [node name="Button" type="Button" parent="HeroPosition/position2"]
-offset_left = -92.0
+offset_left = -104.0
 offset_top = -304.0
-offset_right = 78.0
-offset_bottom = 11.0
+offset_right = 92.0
+offset_bottom = 154.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_hxbks")
 flat = true
 
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position2"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0
+offset_right = 108.0
+offset_bottom = 61.0
+texture = ExtResource("19_t07b4")
+expand_mode = 1
+
+[node name="charaCombatUI" parent="HeroPosition/position2" instance=ExtResource("18_4eqw4")]
+position = Vector2(-44.4444, 105.833)
+scale = Vector2(1.8, 1.8)
+
 [node name="position3" type="Node2D" parent="HeroPosition"]
-position = Vector2(354, 33)
-script = ExtResource("16_b6nyf")
+z_index = 2
+z_as_relative = false
+position = Vector2(391.111, 30.833)
+script = ExtResource("16_02e6q")
 position_data = SubResource("Resource_x8qlv")
 
 [node name="TextureRect" type="TextureRect" parent="HeroPosition/position3"]
@@ -437,19 +514,34 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
-texture = ExtResource("9_pr6vk")
+texture = ExtResource("9_82q4f")
 
 [node name="Button" type="Button" parent="HeroPosition/position3"]
-offset_left = -92.0
+offset_left = -89.0
 offset_top = -304.0
-offset_right = 78.0
-offset_bottom = 11.0
+offset_right = 105.0
+offset_bottom = 130.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_vtu61")
 flat = true
 
+[node name="charaCombatUI" parent="HeroPosition/position3" instance=ExtResource("18_4eqw4")]
+position = Vector2(-7.7778, 70)
+scale = Vector2(1.8, 1.8)
+
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position3"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0
+offset_right = 108.0
+offset_bottom = 61.0
+texture = ExtResource("19_t07b4")
+expand_mode = 1
+
 [node name="position4" type="Node2D" parent="HeroPosition"]
-position = Vector2(572, -3)
-script = ExtResource("16_b6nyf")
+z_index = 1
+position = Vector2(625, -9.00002)
+script = ExtResource("16_02e6q")
 position_data = SubResource("Resource_t7hjh")
 
 [node name="TextureRect" type="TextureRect" parent="HeroPosition/position4"]
@@ -458,24 +550,40 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
-texture = ExtResource("9_pr6vk")
+texture = ExtResource("9_82q4f")
 
 [node name="Button" type="Button" parent="HeroPosition/position4"]
-offset_left = -92.0
+offset_left = -111.0
 offset_top = -304.0
-offset_right = 78.0
-offset_bottom = 11.0
+offset_right = 86.0
+offset_bottom = 164.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_m2l43")
 flat = true
 
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position4"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0
+offset_right = 108.0
+offset_bottom = 61.0
+texture = ExtResource("19_t07b4")
+expand_mode = 1
+
+[node name="charaCombatUI" parent="HeroPosition/position4" instance=ExtResource("18_4eqw4")]
+position = Vector2(-42.7778, 109.833)
+scale = Vector2(1.8, 1.8)
+
 [node name="ennemiePosition" type="Node2D" parent="."]
-position = Vector2(1209, 642)
+position = Vector2(1272, 605)
+scale = Vector2(0.9, 0.9)
 
 [node name="position1" type="Node2D" parent="ennemiePosition"]
-position = Vector2(0, 23)
-script = ExtResource("16_b6nyf")
+z_index = 2
+position = Vector2(-3, 24)
+script = ExtResource("16_02e6q")
 position_data = SubResource("Resource_fs52m")
-enemy_scene = ExtResource("18_mk0s0")
+enemy_scene = ExtResource("20_111sy")
 
 [node name="TextureRect" type="TextureRect" parent="ennemiePosition/position1"]
 visible = false
@@ -483,21 +591,37 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
-texture = ExtResource("9_pr6vk")
+texture = ExtResource("9_82q4f")
 
 [node name="Button" type="Button" parent="ennemiePosition/position1"]
-offset_left = -90.0
-offset_top = -320.0
-offset_right = 80.0
-offset_bottom = -5.0
+offset_left = -129.222
+offset_top = -354.0
+offset_right = 65.7776
+offset_bottom = 101.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_xtuat")
 flat = true
 
+[node name="charaCombatUI" parent="ennemiePosition/position1" instance=ExtResource("18_4eqw4")]
+position = Vector2(-30.3335, 70)
+scale = Vector2(1.8, 1.8)
+
+[node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position1"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0
+offset_right = 108.0
+offset_bottom = 61.0
+texture = ExtResource("19_t07b4")
+expand_mode = 1
+flip_h = true
+
 [node name="position2" type="Node2D" parent="ennemiePosition"]
-position = Vector2(169, -16)
-script = ExtResource("16_b6nyf")
+z_index = 1
+position = Vector2(145.555, -25)
+script = ExtResource("16_02e6q")
 position_data = SubResource("Resource_ehgg6")
-enemy_scene = ExtResource("19_plvru")
+enemy_scene = ExtResource("21_l1d1l")
 
 [node name="TextureRect" type="TextureRect" parent="ennemiePosition/position2"]
 visible = false
@@ -505,19 +629,35 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
-texture = ExtResource("9_pr6vk")
+texture = ExtResource("9_82q4f")
 
 [node name="Button" type="Button" parent="ennemiePosition/position2"]
-offset_left = -92.0
-offset_top = -304.0
-offset_right = 78.0
-offset_bottom = 11.0
+offset_left = -76.6666
+offset_top = -317.0
+offset_right = 112.333
+offset_bottom = 158.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_xwqlg")
 flat = true
 
+[node name="charaCombatUI" parent="ennemiePosition/position2" instance=ExtResource("18_4eqw4")]
+position = Vector2(16.6667, 119)
+scale = Vector2(1.8, 1.8)
+
+[node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position2"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0
+offset_right = 108.0
+offset_bottom = 61.0
+texture = ExtResource("19_t07b4")
+expand_mode = 1
+flip_h = true
+
 [node name="position3" type="Node2D" parent="ennemiePosition"]
-position = Vector2(366, 23)
-script = ExtResource("16_b6nyf")
+z_index = 2
+position = Vector2(368.889, 23.3333)
+script = ExtResource("16_02e6q")
 position_data = SubResource("Resource_if0a6")
 enemy_scene = SubResource("PackedScene_qbte2")
 
@@ -527,19 +667,35 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
-texture = ExtResource("9_pr6vk")
+texture = ExtResource("9_82q4f")
 
 [node name="Button" type="Button" parent="ennemiePosition/position3"]
-offset_left = -92.0
-offset_top = -304.0
-offset_right = 78.0
-offset_bottom = 11.0
+offset_left = -108.889
+offset_top = -364.444
+offset_right = 65.1111
+offset_bottom = 105.556
 theme_override_styles/focus = SubResource("StyleBoxEmpty_c7ruu")
 flat = true
 
+[node name="charaCombatUI" parent="ennemiePosition/position3" instance=ExtResource("18_4eqw4")]
+position = Vector2(-8.00005, 68)
+scale = Vector2(1.8, 1.8)
+
+[node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position3"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0
+offset_right = 108.0
+offset_bottom = 61.0
+texture = ExtResource("19_t07b4")
+expand_mode = 1
+flip_h = true
+
 [node name="position4" type="Node2D" parent="ennemiePosition"]
-position = Vector2(523, -10)
-script = ExtResource("16_b6nyf")
+z_index = 1
+position = Vector2(515.555, -26)
+script = ExtResource("16_02e6q")
 position_data = SubResource("Resource_euc7u")
 
 [node name="TextureRect" type="TextureRect" parent="ennemiePosition/position4"]
@@ -548,15 +704,30 @@ offset_left = -47.0
 offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
-texture = ExtResource("9_pr6vk")
+texture = ExtResource("9_82q4f")
 
 [node name="Button" type="Button" parent="ennemiePosition/position4"]
-offset_left = -92.0
-offset_top = -304.0
-offset_right = 78.0
-offset_bottom = 11.0
+offset_left = -74.3334
+offset_top = -310.667
+offset_right = 95.6666
+offset_bottom = 159.333
 theme_override_styles/focus = SubResource("StyleBoxEmpty_iaf2c")
 flat = true
+
+[node name="charaCombatUI" parent="ennemiePosition/position4" instance=ExtResource("18_4eqw4")]
+position = Vector2(21.2221, 117)
+scale = Vector2(1.8, 1.8)
+
+[node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position4"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -136.667
+offset_top = -14.0
+offset_right = 119.333
+offset_bottom = 65.0
+texture = ExtResource("19_t07b4")
+expand_mode = 1
+flip_h = true
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
@@ -565,42 +736,225 @@ offset_top = 23.0
 offset_right = 1858.0
 offset_bottom = 153.0
 text = "next"
-script = ExtResource("21_82q4f")
-
-[node name="SpriteHeros" type="Sprite2D" parent="."]
-z_index = 20
-position = Vector2(-344, 394)
-scale = Vector2(1.36806, 1.36806)
-texture = ExtResource("4_jmibc")
-script = ExtResource("5_i40dl")
-attackPos = Vector2(800, 500)
-MidPos = Vector2(400, 500)
-outsidePos = Vector2(-300, 500)
-esquivPos = Vector2(250, 500)
-attack_scale = Vector2(2, 2)
-
-[node name="SpriteEnnemies" type="Sprite2D" parent="."]
-z_index = 24
-position = Vector2(2308.5, 406.5)
-scale = Vector2(1.32465, 1.32465)
-texture = ExtResource("4_jmibc")
-script = ExtResource("5_i40dl")
-attackPos = Vector2(1400, 500)
-MidPos = Vector2(1625, 500)
-outsidePos = Vector2(2200, 500)
-esquivPos = Vector2(1700, 500)
+script = ExtResource("32_y3bwx")
 
 [node name="contexte" type="Label" parent="."]
+z_index = 1
 layout_mode = 0
-offset_left = 823.0
-offset_top = 130.0
-offset_right = 1133.0
-offset_bottom = 292.0
-theme_override_fonts/font = ExtResource("11_56n5u")
+offset_left = 134.0
+offset_top = 153.0
+offset_right = 600.0
+offset_bottom = 315.0
+theme_override_fonts/font = ExtResource("11_sbut5")
 theme_override_font_sizes/font_size = 40
-text = "ce qu'il se passe"
+text = "iilii"
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="dialogue" type="Sprite2D" parent="contexte"]
+z_index = -1
+position = Vector2(233, 33)
+scale = Vector2(0.600586, 0.477406)
+texture = ExtResource("33_suw7h")
+
+[node name="contextennemi" type="Label" parent="."]
+z_index = 2
+layout_mode = 0
+offset_left = 1359.0
+offset_top = 153.0
+offset_right = 1669.0
+offset_bottom = 315.0
+theme_override_fonts/font = ExtResource("11_sbut5")
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="LootItem" type="Sprite2D" parent="contextennemi"]
+z_index = -1
+position = Vector2(155, 33)
+scale = Vector2(0.600586, 0.477406)
+texture = ExtResource("33_suw7h")
+
+[node name="overmenu" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 1428.0
+offset_top = 792.0
+offset_right = 1848.0
+offset_bottom = 1113.0
+color = Color(0.0235294, 0.0196078, 0, 1)
+
+[node name="charaPortrait2" type="TextureRect" parent="overmenu"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = -8.0
+offset_right = 141.0
+offset_bottom = 95.0
+
+[node name="Charaname2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 32.0
+offset_right = 412.0
+offset_bottom = 112.0
+theme_override_fonts/font = ExtResource("8_fj73k")
+theme_override_font_sizes/font_size = 40
+text = "Hero Name"
+
+[node name="AttLabel2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 98.0
+offset_right = 317.0
+offset_bottom = 153.0
+theme_override_fonts/font = ExtResource("8_fj73k")
+theme_override_font_sizes/font_size = 20
+text = "Attaque :"
+
+[node name="DefLabel2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 119.0
+offset_right = 264.0
+offset_bottom = 174.0
+theme_override_fonts/font = ExtResource("8_fj73k")
+theme_override_font_sizes/font_size = 20
+text = "Defence:"
+
+[node name="Stamina2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 143.0
+offset_right = 270.0
+offset_bottom = 198.0
+theme_override_fonts/font = ExtResource("8_fj73k")
+theme_override_font_sizes/font_size = 20
+text = "Stamina :	
+"
+
+[node name="Horny2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 98.0
+offset_right = 459.0
+offset_bottom = 153.0
+theme_override_fonts/font = ExtResource("8_fj73k")
+theme_override_font_sizes/font_size = 20
+text = "Horny
+"
+
+[node name="Guilt2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 118.0
+offset_right = 459.0
+offset_bottom = 173.0
+theme_override_fonts/font = ExtResource("8_fj73k")
+theme_override_font_sizes/font_size = 20
+text = "Guilt:
+"
+
+[node name="ActionPanel2" type="HBoxContainer" parent="overmenu"]
+visible = false
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 0
+offset_left = 21.0001
+offset_top = 184.0
+offset_right = 511.0
+offset_bottom = 274.0
+scale = Vector2(0.792293, 0.792293)
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="Action1" type="Button" parent="overmenu/ActionPanel2"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_fj73k")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
+icon = ExtResource("9_82q4f")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("10_ie0v0")
+
+[node name="cooldownA" type="Label" parent="overmenu/ActionPanel2/Action1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("11_sbut5")
+
+[node name="Action2" type="Button" parent="overmenu/ActionPanel2"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_fj73k")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qk00q")
+icon = ExtResource("9_82q4f")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("10_ie0v0")
+
+[node name="cooldownA" type="Label" parent="overmenu/ActionPanel2/Action2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action3" type="Button" parent="overmenu/ActionPanel2"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_fj73k")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8rvme")
+icon = ExtResource("9_82q4f")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("10_ie0v0")
+
+[node name="cooldownA" type="Label" parent="overmenu/ActionPanel2/Action3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action4" type="Button" parent="overmenu/ActionPanel2"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_fj73k")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uwmmy")
+icon = ExtResource("9_82q4f")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("10_ie0v0")
+
+[node name="cooldownA" type="Label" parent="overmenu/ActionPanel2/Action4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action5" type="Button" parent="overmenu/ActionPanel2"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_fj73k")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_boe0j")
+icon = ExtResource("9_82q4f")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("10_ie0v0")
+
+[node name="cooldownA" type="Label" parent="overmenu/ActionPanel2/Action5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]
@@ -642,3 +996,18 @@ autowrap_mode = 3
 [connection signal="mouse_entered" from="ennemiePosition/position4/Button" to="ennemiePosition/position4" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="ennemiePosition/position4/Button" to="ennemiePosition/position4" method="_on_button_mouse_exited"]
 [connection signal="button_down" from="Button" to="Button" method="_on_button_down"]
+[connection signal="mouse_entered" from="overmenu/ActionPanel2/Action1" to="overmenu/ActionPanel2/Action1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="overmenu/ActionPanel2/Action1" to="overmenu/ActionPanel2/Action1" method="_on_mouse_exited"]
+[connection signal="pressed" from="overmenu/ActionPanel2/Action1" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="overmenu/ActionPanel2/Action2" to="overmenu/ActionPanel2/Action2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="overmenu/ActionPanel2/Action2" to="overmenu/ActionPanel2/Action2" method="_on_mouse_exited"]
+[connection signal="pressed" from="overmenu/ActionPanel2/Action2" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="overmenu/ActionPanel2/Action3" to="overmenu/ActionPanel2/Action3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="overmenu/ActionPanel2/Action3" to="overmenu/ActionPanel2/Action3" method="_on_mouse_exited"]
+[connection signal="pressed" from="overmenu/ActionPanel2/Action3" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="overmenu/ActionPanel2/Action4" to="overmenu/ActionPanel2/Action4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="overmenu/ActionPanel2/Action4" to="overmenu/ActionPanel2/Action4" method="_on_mouse_exited"]
+[connection signal="pressed" from="overmenu/ActionPanel2/Action4" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="overmenu/ActionPanel2/Action5" to="overmenu/ActionPanel2/Action5" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="overmenu/ActionPanel2/Action5" to="overmenu/ActionPanel2/Action5" method="_on_mouse_exited"]
+[connection signal="pressed" from="overmenu/ActionPanel2/Action5" to="CombatManager" method="_on_action_1_pressed"]

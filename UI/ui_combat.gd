@@ -206,7 +206,8 @@ func log(text):
 			contextennemi.text = ""
 			var fenetre = contextennemi.get_child(0)
 			fenetre.visible = false
-			
+			var fenetre2 = log_panel.get_child(0)
+			fenetre2.visible = true
 		else :
 			if contextennemi==null:
 				contextennemi=$contextennemi
@@ -216,3 +217,5 @@ func log(text):
 			var fenetre = contextennemi.get_child(0)
 			fenetre.visible = true
 			log_panel.text = ""
+			var fenetre2 = log_panel.get_child(0)
+			fenetre2.visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://h8pqs7tabdxj"]
+[gd_scene load_steps=57 format=3 uid="uid://h8pqs7tabdxj"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_64xaa"]
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_8iwb5"]
@@ -33,6 +33,7 @@
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="28_rxuxu"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="29_3wn8c"]
 [ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="33_uwmmy"]
+[ext_resource type="Texture2D" uid="uid://c5n10tc640uqk" path="res://UI/selectorCombatChara.png" id="34_boe0j"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kiw3p"]
 
@@ -154,7 +155,7 @@ texture = ExtResource("2_8iwb5")
 position = Vector2(2, 352)
 
 [node name="SpriteHeros" type="Sprite2D" parent="."]
-z_index = 20
+z_index = 4
 position = Vector2(-344, 394)
 scale = Vector2(1.36806, 1.36806)
 texture = ExtResource("4_fgvjh")
@@ -166,7 +167,7 @@ esquivPos = Vector2(250, 500)
 attack_scale = Vector2(2, 2)
 
 [node name="SpriteEnnemies" type="Sprite2D" parent="."]
-z_index = 24
+z_index = 4
 position = Vector2(2308.5, 406.5)
 scale = Vector2(1.32465, 1.32465)
 texture = ExtResource("4_fgvjh")
@@ -192,10 +193,12 @@ render_target_update_mode = 4
 scale = Vector2(0.5, 0.5)
 
 [node name="FightUi" type="Sprite2D" parent="."]
+z_index = 5
 position = Vector2(960, 545)
 texture = ExtResource("4_j8jp5")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+z_index = 6
 layout_mode = 0
 offset_left = 681.0
 offset_top = 974.0
@@ -204,6 +207,7 @@ offset_bottom = 975.0
 color = Color(0.501961, 0.407843, 0.207843, 1)
 
 [node name="ActionPanel" type="HBoxContainer" parent="."]
+z_index = 6
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 0
 offset_left = 579.0
@@ -306,6 +310,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="LabelAction" type="Label" parent="."]
+z_index = 6
 layout_mode = 0
 offset_left = 681.0
 offset_top = 982.0
@@ -328,6 +333,7 @@ mouse_filter = 2
 alignment = 1
 
 [node name="Charaname" type="Label" parent="."]
+z_index = 6
 layout_mode = 0
 offset_left = 204.0
 offset_top = 821.0
@@ -338,6 +344,7 @@ theme_override_font_sizes/font_size = 40
 text = "Hero Name"
 
 [node name="AttLabel" type="Label" parent="."]
+z_index = 6
 layout_mode = 0
 offset_left = 59.0
 offset_top = 928.0
@@ -348,6 +355,7 @@ theme_override_font_sizes/font_size = 20
 text = "Attaque :"
 
 [node name="DefLabel" type="Label" parent="."]
+z_index = 6
 layout_mode = 0
 offset_left = 59.0
 offset_top = 961.0
@@ -358,6 +366,7 @@ theme_override_font_sizes/font_size = 20
 text = "Defence:"
 
 [node name="Stamina" type="Label" parent="."]
+z_index = 6
 layout_mode = 0
 offset_left = 59.0
 offset_top = 988.0
@@ -369,6 +378,7 @@ text = "Stamina :
 "
 
 [node name="Horny" type="Label" parent="."]
+z_index = 6
 layout_mode = 0
 offset_left = 59.0
 offset_top = 1015.0
@@ -380,6 +390,7 @@ text = "Horny
 "
 
 [node name="Guilt" type="Label" parent="."]
+z_index = 6
 layout_mode = 0
 offset_left = 59.0
 offset_top = 1043.0
@@ -409,6 +420,7 @@ offset_right = 183.0
 offset_bottom = 909.0
 
 [node name="ResultScreen" type="Label" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 1920.0
@@ -670,12 +682,11 @@ offset_bottom = -274.0
 texture = ExtResource("6_0c2hg")
 
 [node name="Button" type="Button" parent="ennemiePosition/position3"]
-offset_left = -108.889
-offset_top = -364.444
-offset_right = 65.1111
-offset_bottom = 105.556
+offset_left = -109.0
+offset_top = -364.0
+offset_right = 69.0
+offset_bottom = 106.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_c7ruu")
-flat = true
 
 [node name="charaCombatUI" parent="ennemiePosition/position3" instance=ExtResource("19_utru8")]
 position = Vector2(-8.00005, 68)
@@ -707,9 +718,9 @@ offset_bottom = -274.0
 texture = ExtResource("6_0c2hg")
 
 [node name="Button" type="Button" parent="ennemiePosition/position4"]
-offset_left = -74.3334
+offset_left = -72.2222
 offset_top = -310.667
-offset_right = 95.6666
+offset_right = 97.7778
 offset_bottom = 159.333
 theme_override_styles/focus = SubResource("StyleBoxEmpty_iaf2c")
 flat = true
@@ -730,6 +741,7 @@ expand_mode = 1
 flip_h = true
 
 [node name="Button" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 1560.0
 offset_top = 23.0
@@ -776,6 +788,7 @@ scale = Vector2(0.600586, 0.477406)
 texture = ExtResource("33_uwmmy")
 
 [node name="overmenu" type="ColorRect" parent="."]
+z_index = 6
 layout_mode = 0
 offset_left = 1428.0
 offset_top = 792.0
@@ -955,6 +968,12 @@ script = ExtResource("7_ll5py")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="SelectorCombatChara" type="Sprite2D" parent="."]
+modulate = Color(100, 100, 100, 1)
+position = Vector2(691.5, 683)
+scale = Vector2(0.871212, 1.17647)
+texture = ExtResource("34_boe0j")
 
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]

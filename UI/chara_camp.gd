@@ -15,7 +15,7 @@ var initiative_icon_path: String = ""
 @onready var buff_bar = $HBuffsContainer
 @onready var hp_Jauge=$HP/HPProgressBar
 @onready var guilt_Jauge=$Stress/GuiltrogressBar
-@onready var horny_Jauge=$horny/HornyProgressBar
+
 @onready var Arrow = $Arrow
 # --- Infos de base
 @export var Charaname: String = "name"
@@ -115,14 +115,14 @@ func add_buff(buff: Buff):
 	print("add buff")
 	
 func update_display() -> void:
-	if not hp_Jauge or not guilt_Jauge or not horny_Jauge:
+	if not hp_Jauge or not guilt_Jauge :
 		hp_Jauge=$HP/HPProgressBar
 		guilt_Jauge=$Stress/GuiltrogressBar
-		horny_Jauge=$horny/HornyProgressBar
+		#horny_Jauge=$horny/HornyProgressBar
 		# return
 	hp_Jauge.value=current_stamina
 	guilt_Jauge.value=current_stress
-	horny_Jauge.value=current_horny
+	#horny_Jauge.value=current_horny
 	name_label.text = Charaname
 
 	

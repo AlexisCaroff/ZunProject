@@ -1,57 +1,79 @@
-[gd_scene load_steps=19 format=3 uid="uid://b5a3qavf58m47"]
+[gd_scene load_steps=28 format=3 uid="uid://dep3dgvc5a1q4"]
 
-[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_o4w0v"]
-[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_xxi1w"]
-[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="3_m5yi7"]
-[ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="4_t8k64"]
-[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="5_tox4r"]
-[ext_resource type="Texture2D" uid="uid://jhd7rid3c1c1" path="res://actions/actiontexture/moveIcon.png" id="6_m035o"]
-[ext_resource type="Script" uid="uid://conijhbkctdj2" path="res://lvl/moveExplo.gd" id="7_ptjnh"]
-[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="8_wnj64"]
-[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="9_1o1g3"]
-[ext_resource type="Script" uid="uid://tq0nr5tg2b3k" path="res://lvl/positionexplo.gd" id="10_q3qlw"]
-[ext_resource type="Script" uid="uid://km54mxly4gk4" path="res://lvl/exploration_manager.gd" id="11_lxqu0"]
-[ext_resource type="PackedScene" uid="uid://dq282vipchnbq" path="res://characters/chara_explo.tscn" id="12_j0kaf"]
-[ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="13_ewplu"]
-[ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="14_gw8sn"]
-[ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="15_f0t6l"]
-[ext_resource type="Script" uid="uid://cvdsxgbtufa4g" path="res://lvl/interactible.gd" id="16_ehlqd"]
-[ext_resource type="Texture2D" uid="uid://djit2m4icvw0k" path="res://Enviro/kairn.png" id="17_inwje"]
-[ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="18_4cl5f"]
+[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_t8k64"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_tox4r"]
+[ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="3_m035o"]
+[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="4_ptjnh"]
+[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="5_wnj64"]
+[ext_resource type="Texture2D" uid="uid://jhd7rid3c1c1" path="res://actions/actiontexture/moveIcon.png" id="6_1o1g3"]
+[ext_resource type="Script" uid="uid://conijhbkctdj2" path="res://lvl/moveExplo.gd" id="7_q3qlw"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="8_lxqu0"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="9_j0kaf"]
+[ext_resource type="Script" uid="uid://tq0nr5tg2b3k" path="res://lvl/positionexplo.gd" id="10_mrc5m"]
+[ext_resource type="Script" uid="uid://km54mxly4gk4" path="res://lvl/exploration_manager.gd" id="11_gw8sn"]
+[ext_resource type="PackedScene" uid="uid://dq282vipchnbq" path="res://characters/chara_explo.tscn" id="12_f0t6l"]
+[ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="13_ehlqd"]
+[ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="14_inwje"]
+[ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="15_4cl5f"]
+[ext_resource type="Script" uid="uid://cvdsxgbtufa4g" path="res://lvl/interactible.gd" id="16_unmd3"]
+[ext_resource type="Texture2D" uid="uid://djit2m4icvw0k" path="res://Enviro/kairn.png" id="17_xhvj8"]
+[ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="18_out33"]
+[ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="19_fd1fj"]
+[ext_resource type="Script" uid="uid://gljyiwavrmws" path="res://lvl/combat1/explo_portrait.gd" id="20_purov"]
+[ext_resource type="Texture2D" uid="uid://bl6qdsm60pd37" path="res://UI/exploCharaselector.png" id="21_k4r1u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qg4ur"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mlu07"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ln05l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3g6r7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rqfr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fyasy"]
 
 [node name="ExploInterface" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ZunBg" type="Sprite2D" parent="."]
-position = Vector2(961, 402)
-texture = ExtResource("1_o4w0v")
+position = Vector2(959.5, 401)
+scale = Vector2(1.00157, 1.0025)
+texture = ExtResource("1_t8k64")
 
-[node name="atmosphere" parent="." instance=ExtResource("2_xxi1w")]
+[node name="atmosphere" parent="." instance=ExtResource("2_tox4r")]
 position = Vector2(2, 352)
+
+[node name="exploUI" type="Sprite2D" parent="."]
+position = Vector2(959, 539.5)
+scale = Vector2(0.780945, 0.787591)
+texture = ExtResource("3_m035o")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0
-offset_left = 1457.0
-offset_top = 774.0
-offset_right = 1857.0
-offset_bottom = 1174.0
+offset_left = 1454.0
+offset_top = 804.0
+offset_right = 1854.0
+offset_bottom = 1204.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(400, 400)
 render_target_update_mode = 4
 
-[node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_m5yi7")]
+[node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_ptjnh")]
+position = Vector2(0, 60)
 scale = Vector2(0.5, 0.5)
-
-[node name="FightUi" type="Sprite2D" parent="."]
-position = Vector2(960, 545)
-texture = ExtResource("4_t8k64")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -69,13 +91,13 @@ offset_top = 854.0
 offset_right = 1007.0
 offset_bottom = 954.0
 size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("5_tox4r")
+theme_override_fonts/font = ExtResource("5_wnj64")
 theme_override_font_sizes/font_size = 40
-icon = ExtResource("6_m035o")
+icon = ExtResource("6_1o1g3")
 flat = true
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("7_ptjnh")
+script = ExtResource("7_q3qlw")
 
 [node name="cooldownA" type="Label" parent="moveButton"]
 layout_mode = 0
@@ -88,7 +110,7 @@ offset_left = 681.0
 offset_top = 982.0
 offset_right = 1260.0
 offset_bottom = 1066.0
-theme_override_fonts/font = ExtResource("8_wnj64")
+theme_override_fonts/font = ExtResource("8_lxqu0")
 theme_override_font_sizes/font_size = 25
 text = "Move"
 horizontal_alignment = 1
@@ -102,15 +124,6 @@ offset_right = 1921.0
 offset_bottom = 93.0
 mouse_filter = 2
 alignment = 1
-
-[node name="Charaname" type="Label" parent="."]
-layout_mode = 0
-offset_left = 204.0
-offset_top = 821.0
-offset_right = 848.0
-offset_bottom = 901.0
-theme_override_font_sizes/font_size = 40
-text = "Hero Name"
 
 [node name="contexte" type="Label" parent="."]
 visible = false
@@ -130,30 +143,20 @@ offset_top = 756.0
 offset_right = 183.0
 offset_bottom = 872.0
 
-[node name="ResultScreen" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1000.0
-theme_override_fonts/font = ExtResource("5_tox4r")
-theme_override_font_sizes/font_size = 450
-text = "Victoire !"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
 ignore_rotation = false
-script = ExtResource("9_1o1g3")
+script = ExtResource("9_j0kaf")
 
 [node name="HeroPosition" type="Node2D" parent="."]
 z_index = 1
 position = Vector2(568, 642)
+scale = Vector2(1.4, 1.4)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
 z_index = 1
 position = Vector2(-22, 1)
-script = ExtResource("10_q3qlw")
+script = ExtResource("10_mrc5m")
 
 [node name="Button" type="Button" parent="HeroPosition/position1"]
 z_index = 10
@@ -161,12 +164,13 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -522.0
 offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qg4ur")
 flat = true
 
 [node name="position2" type="Node2D" parent="HeroPosition"]
 z_index = 1
 position = Vector2(132, 24)
-script = ExtResource("10_q3qlw")
+script = ExtResource("10_mrc5m")
 
 [node name="Button" type="Button" parent="HeroPosition/position2"]
 z_index = 14
@@ -175,12 +179,13 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -525.0
 offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mlu07")
 flat = true
 
 [node name="position3" type="Node2D" parent="HeroPosition"]
 z_index = 1
 position = Vector2(298, 2)
-script = ExtResource("10_q3qlw")
+script = ExtResource("10_mrc5m")
 
 [node name="Button" type="Button" parent="HeroPosition/position3"]
 z_index = 10
@@ -188,12 +193,13 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -505.0
 offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ln05l")
 flat = true
 
 [node name="position4" type="Node2D" parent="HeroPosition"]
 z_index = 1
 position = Vector2(479, 24)
-script = ExtResource("10_q3qlw")
+script = ExtResource("10_mrc5m")
 
 [node name="Button" type="Button" parent="HeroPosition/position4"]
 z_index = 10
@@ -201,67 +207,132 @@ y_sort_enabled = true
 offset_left = -82.0
 offset_top = -539.0
 offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3g6r7")
 flat = true
 
 [node name="ExplorationManager" type="Node2D" parent="."]
-script = ExtResource("11_lxqu0")
-chara_explo_scene = ExtResource("12_j0kaf")
+script = ExtResource("11_gw8sn")
+chara_explo_scene = ExtResource("12_f0t6l")
 
 [node name="Button" type="Button" parent="ExplorationManager"]
 z_index = 2
-offset_left = 1542.0
-offset_top = 102.0
-offset_right = 1917.0
-offset_bottom = 690.0
+offset_left = 1323.0
+offset_top = 62.0
+offset_right = 1698.0
+offset_bottom = 650.0
 flat = true
 expand_icon = true
 
 [node name="Doortext" type="TextureRect" parent="ExplorationManager/Button"]
 modulate = Color(0.38, 0.31445, 0.209, 1)
 layout_mode = 0
-offset_left = 129.0
-offset_top = 189.0
-offset_right = 370.0
-offset_bottom = 445.0
-texture = ExtResource("13_ewplu")
+offset_left = 348.0
+offset_top = 227.0
+offset_right = 589.0
+offset_bottom = 483.0
+texture = ExtResource("13_ehlqd")
 expand_mode = 1
 
 [node name="DialogueManager" type="Node2D" parent="." node_paths=PackedStringArray("external_choice_receiver")]
 z_index = 6
-position = Vector2(12.9998, 13)
-scale = Vector2(0.6, 0.6)
-script = ExtResource("14_gw8sn")
-portraits_resource = ExtResource("15_f0t6l")
+script = ExtResource("14_inwje")
+portraits_resource = ExtResource("15_4cl5f")
 is_Choice = true
 external_choice_receiver = NodePath("../Kairn")
 
 [node name="Kairn" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1.2, 1)
-position = Vector2(254, 508)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("17_inwje")
-script = ExtResource("16_ehlqd")
+position = Vector2(266, 464)
+script = ExtResource("16_unmd3")
 dialoguePass = "res://dialogue/dialogueTeste.txt"
 
 [node name="Button" type="Button" parent="Kairn"]
-offset_left = -170.0
-offset_top = -179.0
-offset_right = 201.0
-offset_bottom = 165.0
+offset_left = -146.0
+offset_top = -80.0
+offset_right = 134.0
+offset_bottom = 153.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1rqfr")
+icon = ExtResource("17_xhvj8")
 flat = true
+expand_icon = true
 
 [node name="etiquette" type="Sprite2D" parent="Kairn"]
+visible = false
 position = Vector2(193.333, 6.66667)
-texture = ExtResource("18_4cl5f")
+texture = ExtResource("18_out33")
 
 [node name="Label" type="Label" parent="Kairn/etiquette"]
 offset_left = -92.0
 offset_top = -23.0
 offset_right = 125.0
 offset_bottom = 30.0
-theme_override_fonts/font = ExtResource("5_tox4r")
+theme_override_fonts/font = ExtResource("5_wnj64")
 theme_override_font_sizes/font_size = 40
 text = "EXPLORE"
+
+[node name="Portraits" type="Node2D" parent="."]
+scale = Vector2(0.779851, 0.779851)
+
+[node name="ExploPortrait1" type="Sprite2D" parent="Portraits"]
+position = Vector2(121.017, 1266.91)
+texture = ExtResource("19_fd1fj")
+script = ExtResource("20_purov")
+
+[node name="Button" type="Button" parent="Portraits/ExploPortrait1"]
+offset_left = -82.5479
+offset_top = -73.0908
+offset_right = 73.4521
+offset_bottom = 79.9092
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fyasy")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ExploPortrait2" type="Sprite2D" parent="Portraits"]
+position = Vector2(251.33, 1133.55)
+texture = ExtResource("19_fd1fj")
+script = ExtResource("20_purov")
+
+[node name="Button" type="Button" parent="Portraits/ExploPortrait2"]
+offset_left = -82.5479
+offset_top = -73.0908
+offset_right = 73.4521
+offset_bottom = 79.9092
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fyasy")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ExploPortrait3" type="Sprite2D" parent="Portraits"]
+position = Vector2(383.888, 1266.11)
+texture = ExtResource("19_fd1fj")
+script = ExtResource("20_purov")
+
+[node name="Button" type="Button" parent="Portraits/ExploPortrait3"]
+offset_left = -76.1363
+offset_top = -76.1364
+offset_right = 79.8637
+offset_bottom = 76.8636
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fyasy")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ExploPortrait4" type="Sprite2D" parent="Portraits"]
+position = Vector2(514.201, 1132.75)
+texture = ExtResource("19_fd1fj")
+script = ExtResource("20_purov")
+
+[node name="Button" type="Button" parent="Portraits/ExploPortrait4"]
+offset_left = -76.1363
+offset_top = -76.1364
+offset_right = 79.8637
+offset_bottom = 76.8636
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fyasy")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ExploCharaselector" type="Sprite2D" parent="Portraits"]
+position = Vector2(385.971, 1265.63)
+scale = Vector2(1.12354, 1.12354)
+texture = ExtResource("21_k4r1u")
 
 [connection signal="button_down" from="moveButton" to="ExplorationManager" method="_on_move_button_button_down"]
 [connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]

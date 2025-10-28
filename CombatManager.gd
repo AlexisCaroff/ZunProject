@@ -182,7 +182,7 @@ func load_saved_heroes_into_slots(slots: Array[PositionSlot]):
 		var pos_index = hero_data.get("position", -1)
 		if pos_index >= 0 and pos_index < slots.size():
 			slots[pos_index].assign_character(hero, 0.0)
-		
+		hero._current_slot=slots[pos_index]
 		hero.update_ui()
 	
 func start_combat():
