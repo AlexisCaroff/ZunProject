@@ -13,7 +13,7 @@ enum TargetType {
 }
 @export_enum("Self", "Ally", "All Allies")
 var target_type: int = TargetType.SELF
-
+var used:bool =false
 @export var effects: Array[CampEffect] = []   # une liste d’effets appliqués
 
 func use(user: CharaCamp, targets: Array[CharaCamp]):

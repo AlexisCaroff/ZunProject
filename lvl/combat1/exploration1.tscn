@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dqnjuxw77ebnb"]
+[gd_scene load_steps=30 format=3 uid="uid://dqnjuxw77ebnb"]
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_ohhde"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_5rnso"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="8_m4q63"]
 [ext_resource type="Script" uid="uid://tq0nr5tg2b3k" path="res://lvl/positionexplo.gd" id="9_r435j"]
 [ext_resource type="Script" uid="uid://km54mxly4gk4" path="res://lvl/exploration_manager.gd" id="10_4cboy"]
+[ext_resource type="Texture2D" uid="uid://la06rj6j3ci2" path="res://UI/shadow.png" id="11_fyasy"]
 [ext_resource type="PackedScene" uid="uid://dq282vipchnbq" path="res://characters/chara_explo.tscn" id="11_y08b0"]
 [ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="13_qg4ur"]
 [ext_resource type="Texture2D" uid="uid://djit2m4icvw0k" path="res://Enviro/kairn.png" id="14_0oifh"]
@@ -21,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="19_3g6r7"]
 [ext_resource type="Texture2D" uid="uid://bl6qdsm60pd37" path="res://UI/exploCharaselector.png" id="20_1rqfr"]
 [ext_resource type="Script" uid="uid://gljyiwavrmws" path="res://lvl/combat1/explo_portrait.gd" id="20_3g6r7"]
+[ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="22_1rqfr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qg4ur"]
 
@@ -61,19 +63,19 @@ texture = ExtResource("3_ln05l")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0
-offset_left = 1454.0
-offset_top = 804.0
-offset_right = 1854.0
-offset_bottom = 1204.0
+offset_left = 1360.0
+offset_top = 793.0
+offset_right = 1850.0
+offset_bottom = 1193.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(400, 400)
+size = Vector2i(490, 280)
 render_target_update_mode = 4
 
 [node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_fyasy")]
-position = Vector2(0, 60)
-scale = Vector2(0.5, 0.5)
+position = Vector2(218, 140)
+scale = Vector2(0.4, 0.4)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -155,7 +157,8 @@ scale = Vector2(1.4, 1.4)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
 z_index = 1
-position = Vector2(-22, 1)
+position = Vector2(-284.286, -10.7143)
+scale = Vector2(1.2, 1.2)
 script = ExtResource("9_r435j")
 
 [node name="Button" type="Button" parent="HeroPosition/position1"]
@@ -167,10 +170,31 @@ offset_right = 67.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_qg4ur")
 flat = true
 
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position1"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -64.2857
+offset_top = -27.3314
+offset_right = 65.7143
+offset_bottom = 12.6686
+texture = ExtResource("11_fyasy")
+expand_mode = 1
+
 [node name="position2" type="Node2D" parent="HeroPosition"]
 z_index = 1
-position = Vector2(132, 24)
+position = Vector2(-136.429, -34.2857)
+scale = Vector2(1.1, 1.1)
 script = ExtResource("9_r435j")
+
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position2"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -64.0693
+offset_top = -28.5714
+offset_right = 65.9307
+offset_bottom = 11.4286
+texture = ExtResource("11_fyasy")
+expand_mode = 1
 
 [node name="Button" type="Button" parent="HeroPosition/position2"]
 z_index = 14
@@ -184,8 +208,19 @@ flat = true
 
 [node name="position3" type="Node2D" parent="HeroPosition"]
 z_index = 1
-position = Vector2(298, 2)
+position = Vector2(-32.1428, -14.2857)
+scale = Vector2(1.2, 1.2)
 script = ExtResource("9_r435j")
+
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position3"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -64.2857
+offset_top = -27.3314
+offset_right = 65.7143
+offset_bottom = 12.6686
+texture = ExtResource("11_fyasy")
+expand_mode = 1
 
 [node name="Button" type="Button" parent="HeroPosition/position3"]
 z_index = 10
@@ -197,9 +232,19 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_ln05l")
 flat = true
 
 [node name="position4" type="Node2D" parent="HeroPosition"]
-z_index = 1
-position = Vector2(479, 24)
+position = Vector2(117.143, -36.4286)
+scale = Vector2(1.1, 1.1)
 script = ExtResource("9_r435j")
+
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position4"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -64.0693
+offset_top = -28.5714
+offset_right = 65.9307
+offset_bottom = 11.4286
+texture = ExtResource("11_fyasy")
+expand_mode = 1
 
 [node name="Button" type="Button" parent="HeroPosition/position4"]
 z_index = 10
@@ -216,20 +261,20 @@ chara_explo_scene = ExtResource("11_y08b0")
 
 [node name="Button" type="Button" parent="ExplorationManager"]
 z_index = 2
-offset_left = 1323.0
-offset_top = 62.0
-offset_right = 1698.0
-offset_bottom = 650.0
+offset_left = 1523.0
+offset_top = 50.0
+offset_right = 1898.0
+offset_bottom = 638.0
 flat = true
 expand_icon = true
 
 [node name="Doortext" type="TextureRect" parent="ExplorationManager/Button"]
 modulate = Color(0.38, 0.31445, 0.209, 1)
 layout_mode = 0
-offset_left = 348.0
-offset_top = 227.0
-offset_right = 589.0
-offset_bottom = 483.0
+offset_left = 100.0
+offset_top = 264.0
+offset_right = 341.0
+offset_bottom = 520.0
 texture = ExtResource("13_qg4ur")
 expand_mode = 1
 
@@ -333,6 +378,11 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(385.971, 1265.63)
 scale = Vector2(1.12354, 1.12354)
 texture = ExtResource("20_1rqfr")
+
+[node name="ContourMap" type="Sprite2D" parent="."]
+position = Vector2(1603.63, 931)
+scale = Vector2(0.839983, 0.815186)
+texture = ExtResource("22_1rqfr")
 
 [connection signal="button_down" from="moveButton" to="ExplorationManager" method="_on_move_button_button_down"]
 [connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]

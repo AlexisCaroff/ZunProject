@@ -10,7 +10,7 @@ var current_tween_button: Tween = null
 
 func _on_mouse_entered() -> void:
 	var label = $"../LabelAction"
-	var startposition = label.position
+#	var startposition = label.position
 	label.scale = startsize 
 	label.visible = true
 	label.text = Actiontext
@@ -31,7 +31,7 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	var label = $"../LabelAction"
-	var startposition = label.position
+#	var startposition = label.position
 	label.visible = false
 	label.text = Actiontext
 

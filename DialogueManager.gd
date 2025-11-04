@@ -14,6 +14,7 @@ var choix: Control
 var dialogue_started : bool = false
 var ui: Node =null
 var scene: PackedScene = preload("res://UI/dialogue_ui.tscn")
+@export var participants: Array[String] = [] # ex: ["Hero", "Guide"]
 func _ready():
 	
 	if ui==null:
@@ -91,25 +92,44 @@ func start_dialogue():
 	show_line()
 
 
+
 func show_line():
 	if current_index >= dialogue_lines.size():
 		ui.visible = false
 		emit_signal("dialogue_finished")
 		if is_Choice and choix:
-			choix.Choice1.text=text_choice1
-			choix.Choice2.text=text_choice2
+			choix.Choice1.text = text_choice1
+			choix.Choice2.text = text_choice2
 			choix.visible = true
-			dialogue_started=false
+			dialogue_started = false
 		return
 
 	var line = dialogue_lines[current_index]
 	var speaker = line["speaker"]
 	var text = line["text"]
 
-	if portraits_resource and portraits_resource.portraits.has(speaker):
-		ui.set_portrait(portraits_resource.portraits[speaker])
+	var left_portrait: Texture2D = null
+	var right_portrait: Texture2D = null
+
+	# Si on a deux participants définis
+	if participants.size() == 2:
+		var left_name = participants[0]
+		var right_name = participants[1]
+
+		if portraits_resource:
+			left_portrait = portraits_resource.portraits.get(left_name, null)
+			right_portrait = portraits_resource.portraits.get(right_name, null)
+			
+		# Le locuteur détermine quel côté est actif
+		var active_side = "left" if speaker == left_name else "right"
+		ui.set_portraits(left_portrait, right_portrait, active_side)
+
 	else:
-		ui.set_portrait(null)
+		# Un seul portrait (comme avant)
+		if portraits_resource and portraits_resource.portraits.has(speaker):
+			ui.set_portraits(portraits_resource.portraits[speaker], null, "left")
+		else:
+			ui.set_portraits(null, null, "left")
 
 	ui.set_text(speaker, text)
 

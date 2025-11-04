@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_nekcb"]
 [ext_resource type="Texture2D" uid="uid://df5ltgoqyf2jw" path="res://characters/charatexture/char mystic.png" id="2_bjjxo"]
 [ext_resource type="Texture2D" uid="uid://dd4k5wxaesfo4" path="res://characters/exploPortrait/MysticExploPortrait.png" id="3_ew8km"]
-[ext_resource type="Texture2D" uid="uid://dqygw2q7rp8yv" path="res://characters/charatexture/death.png" id="3_uj7tg"]
-[ext_resource type="Texture2D" uid="uid://cxgtaq54g42pp" path="res://characters/characterInitiative/occultisteIni.png" id="4_rwlb5"]
+[ext_resource type="Texture2D" uid="uid://bauxvokp1lm7g" path="res://characters/charatexture/char mysticDead.png" id="4_uj7tg"]
 [ext_resource type="Resource" uid="uid://m6nw8l2ax4to" path="res://actions/HerosCombatSkills/ChangeMask.tres" id="5_ikc5x"]
+[ext_resource type="Texture2D" uid="uid://dtbnk3lssqj8l" path="res://characters/CampementPorttrait/Mysticcampement.png" id="5_uj7tg"]
 [ext_resource type="Resource" uid="uid://dopuwtv1moav3" path="res://actions/HerosCombatSkills/Shield.tres" id="6_ew8km"]
 [ext_resource type="Resource" uid="uid://duo5wcnmn0qo2" path="res://actions/HerosCombatSkills/vampire.tres" id="7_mtgue"]
 [ext_resource type="Resource" uid="uid://bcvrdy48sagwa" path="res://actions/HerosCombatSkills/hook.tres" id="8_2caud"]
@@ -27,12 +27,14 @@
 script = ExtResource("1_nekcb")
 portrait_texture = ExtResource("2_bjjxo")
 explorationPortrait = ExtResource("3_ew8km")
-dead_portrait_texture = ExtResource("3_uj7tg")
-initiative_icon = ExtResource("4_rwlb5")
+dead_portrait_texture = ExtResource("4_uj7tg")
+initiative_icon = ExtResource("3_ew8km")
+textureCamp = ExtResource("5_uj7tg")
 Charaname = "Mystic"
 attack = 12
 Chara_position = 2
 skill_resources = Array[Resource]([ExtResource("5_ikc5x"), ExtResource("6_ew8km"), ExtResource("7_mtgue"), ExtResource("8_2caud"), ExtResource("9_8kln0")])
+tags = Array[String](["voyeur", "captive", "switch"])
 camp_skill_resources = Array[ExtResource("10_my5ka")]([ExtResource("11_rwlb5"), ExtResource("12_5v8vm"), ExtResource("13_l5cqy"), ExtResource("14_wxcsy")])
 
 [node name="name" type="Label" parent="."]

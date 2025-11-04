@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RoomResource" load_steps=2 format=3 uid="uid://bjupnilvigvhl"]
+
+[ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="1_1aoju"]
+
+[resource]
+script = ExtResource("1_1aoju")
+room_id = "Salle0"
+position_on_map = 0
+CanCamp = false
+connected_room_ids = Array[String](["Salle1"])
+explored = true
+metadata/_custom_type_script = "uid://oj44pgv34ji0"

@@ -9,3 +9,5 @@ extends Resource
 @export var encounter: Resource  # Encounter.tres
 @export var CanCamp: bool = false
 @export var connected_room_ids: Array[String] = []
+@export var explored: bool = false
+@export var ennemikilled: bool =false

@@ -9,6 +9,8 @@ class_name CampDialogueEffect
 
 func apply(user: CharaCamp, target: CharaCamp):
 	var camp = user.camp
+	for chara in camp.characters:
+		chara.set_targetable(false)
 	if not camp:
 		return
 
@@ -31,6 +33,8 @@ func apply(user: CharaCamp, target: CharaCamp):
 	
 	if dialogue_manager and file_path != "":
 			dialogue_manager.load_dialogue(file_path)
+			dialogue_manager.participants.append(user.Charaname)
+			dialogue_manager.participants.append(target.Charaname)
 			dialogue_manager.start_dialogue()
 
 		

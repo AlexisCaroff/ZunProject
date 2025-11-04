@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkqcghxo5xns2"]
+
+[ext_resource type="Script" uid="uid://cdva0owcmjo24" path="res://LoveScene/SexScene.gd" id="1_a4eqb"]
+[ext_resource type="Texture2D" uid="uid://dnt1p02cl1hnt" path="res://LoveScene/PriestxMystic.jpg" id="2_a4eqb"]
+[ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="3_mioyq"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="4_4xlxo"]
+
+[node name="HunterxWarrior" type="Node2D"]
+script = ExtResource("1_a4eqb")
+
+[node name="HunterxWarrior" type="Sprite2D" parent="."]
+position = Vector2(949, 539)
+texture = ExtResource("2_a4eqb")
+
+[node name="DialogueBox" type="Sprite2D" parent="."]
+position = Vector2(939, 873)
+scale = Vector2(1.58427, 1.58427)
+texture = ExtResource("3_mioyq")
+
+[node name="Label" type="Label" parent="DialogueBox"]
+z_index = 2
+anchors_preset = -1
+anchor_left = -0.00978637
+anchor_top = -0.492469
+anchor_right = -0.00978637
+anchor_bottom = -0.492469
+offset_left = -479.979
+offset_top = 28.9573
+offset_right = 502.021
+offset_bottom = 199.958
+theme_override_fonts/font = ExtResource("4_4xlxo")
+theme_override_font_sizes/font_size = 30
+text = "The Priestess was loath to admit it, but this barbarian was very good with his hands... And that strange mixture was making her feel tingly..."
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="."]
+offset_right = 1909.0
+offset_bottom = 1079.0
+flat = true

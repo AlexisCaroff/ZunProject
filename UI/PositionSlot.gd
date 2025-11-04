@@ -28,6 +28,7 @@ func is_occupied() -> bool:
 func _ready():
 	selfposition.append(self)
 	is_ready= true
+	
 	if GameState.current_phase == GameStat.GamePhase.COMBAT:
 		combat_manager = $"../../CombatManager"
 
@@ -64,11 +65,13 @@ func assign_character(character: Character, movetime:float):
 	
 	if position_data.buff:
 		position_data.buff.apply(character, character)
-
+	CharaUI.visible=true
+	
 func remove_character():
 	if occupant:
 		occupant.resetVisuel()
 		occupant = null
+		CharaUI.visible=false
 		
 
 func _on_button_button_down() -> void:

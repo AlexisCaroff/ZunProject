@@ -8,12 +8,13 @@
 [sub_resource type="Resource" id="Resource_71lud"]
 script = ExtResource("2_4mowf")
 name = ""
-love_images = {
-"Hunter+Warrior": "res://LoveScene/HunterxWarrior.jpg",
-"Mystic+Hunter": "res://LoveScene/MysticxHunter.jpg",
-"Mystic+Warrior": "res://LoveScene/WarriorxMystic.jpg",
-"Priest+Mystic": "res://LoveScene/PriestxMystic.jpg",
-"Priest+Warrior": "res://LoveScene/PriestxWarrior.jpg"
+love_scenes = {
+"Hunter+Warrior": "res://LoveScene/HunterxWarrior.tscn",
+"Mystic+Hunter": "res://LoveScene/MysticxHunter.tscn",
+"Mystic+Warrior": "res://LoveScene/WarriorxMystic.tscn",
+"Priest+Hunter": "res://LoveScene/PriestxHunter.tscn",
+"Priest+Mystic": "res://LoveScene/PriestxMystic.tscn",
+"Priest+Warrior": "res://LoveScene/PriestxWarrior.tscn"
 }
 metadata/_custom_type_script = "uid://bjysq2c5802md"
 
@@ -22,7 +23,7 @@ script = ExtResource("2_s3ehv")
 name = "Flirt"
 description = "engage une discution"
 icon = ExtResource("3_racfd")
-cost = 1
+cost = 2
 standarEnd = false
 target_type = 1
 effects = Array[ExtResource("1_vrnum")]([SubResource("Resource_71lud")])

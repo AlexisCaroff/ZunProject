@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyds6t8cudlnw"]
+
+[ext_resource type="Script" uid="uid://cdva0owcmjo24" path="res://LoveScene/SexScene.gd" id="1_rjks7"]
+[ext_resource type="Texture2D" uid="uid://dwdxqq1h2u4l2" path="res://LoveScene/WarriorxMystic.jpg" id="2_rjks7"]
+[ext_resource type="Texture2D" uid="uid://l7vod4fmaqrl" path="res://UI/DialogueBox2.png" id="3_lpkng"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="4_pr8ww"]
+
+[node name="HunterxWarrior" type="Node2D"]
+script = ExtResource("1_rjks7")
+
+[node name="HunterxWarrior" type="Sprite2D" parent="."]
+position = Vector2(949, 539)
+texture = ExtResource("2_rjks7")
+
+[node name="DialogueBox" type="Sprite2D" parent="."]
+position = Vector2(341.5, 529.346)
+scale = Vector2(1.39402, 1.39402)
+texture = ExtResource("3_lpkng")
+
+[node name="Label" type="Label" parent="DialogueBox"]
+anchors_preset = -1
+anchor_top = -4.80197e-05
+anchor_right = 0.893998
+anchor_bottom = 0.882
+offset_left = -153.872
+offset_top = -285.72
+offset_right = -176.863
+offset_bottom = -308.687
+theme_override_fonts/font = ExtResource("4_pr8ww")
+theme_override_font_sizes/font_size = 30
+text = "Now this was better.
+She'd been wanting to try one of these slimes since she saw them, and here was a man who could make them take on any shape?
+She was going to ride this toy til she was sore."
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="."]
+offset_right = 1909.0
+offset_bottom = 1079.0
+flat = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://h8pqs7tabdxj"]
+[gd_scene load_steps=66 format=3 uid="uid://h8pqs7tabdxj"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_64xaa"]
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_8iwb5"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="12_kiw3p"]
 [ext_resource type="Script" uid="uid://igdjgbcqg1d6" path="res://UI/PositionSlot.gd" id="13_qk00q"]
 [ext_resource type="Script" uid="uid://b3l4l88c3b65c" path="res://PositionData.gd" id="14_8rvme"]
+[ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="15_boe0j"]
 [ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterEnemyNymphe.tscn" id="15_uwmmy"]
 [ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharaEnnemyTemptress.tscn" id="16_boe0j"]
 [ext_resource type="Script" uid="uid://bqnn7n8kuofir" path="res://UI/buttonSkipCombat.gd" id="19_m3wsf"]
@@ -33,17 +34,15 @@
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="28_rxuxu"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="29_3wn8c"]
 [ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="33_uwmmy"]
-[ext_resource type="Texture2D" uid="uid://c5n10tc640uqk" path="res://UI/selectorCombatChara.png" id="34_boe0j"]
+[ext_resource type="Texture2D" uid="uid://0x6um7xfv678" path="res://characters/exploPortrait/BossExploPortrait.png" id="35_cmgi2"]
+[ext_resource type="Script" uid="uid://dpfgacyh24syl" path="res://lvl/combat1/overmenu.gd" id="36_hsfnw"]
+[ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="37_3phk4"]
+[ext_resource type="Texture2D" uid="uid://bpgas6hnffbe0" path="res://UI/sideButton.png" id="38_4hyc1"]
+[ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="39_ellpq"]
+[ext_resource type="Texture2D" uid="uid://dh6k7cso8hksn" path="res://UI/charaIcon.png" id="40_dk4nq"]
+[ext_resource type="Texture2D" uid="uid://ctkoy8ysbicta" path="res://UI/iconMap.png" id="41_508lt"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kiw3p"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qk00q"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8rvme"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uwmmy"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_boe0j"]
 
 [sub_resource type="Resource" id="Resource_i1s1q"]
 script = ExtResource("14_8rvme")
@@ -138,6 +137,18 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iaf2c"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qk00q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8rvme"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uwmmy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_boe0j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rem33"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c35ka"]
+
 [node name="CombatInterface" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -155,7 +166,7 @@ texture = ExtResource("2_8iwb5")
 position = Vector2(2, 352)
 
 [node name="SpriteHeros" type="Sprite2D" parent="."]
-z_index = 4
+z_index = 6
 position = Vector2(-344, 394)
 scale = Vector2(1.36806, 1.36806)
 texture = ExtResource("4_fgvjh")
@@ -167,7 +178,7 @@ esquivPos = Vector2(250, 500)
 attack_scale = Vector2(2, 2)
 
 [node name="SpriteEnnemies" type="Sprite2D" parent="."]
-z_index = 4
+z_index = 5
 position = Vector2(2308.5, 406.5)
 scale = Vector2(1.32465, 1.32465)
 texture = ExtResource("4_fgvjh")
@@ -178,23 +189,25 @@ outsidePos = Vector2(2200, 500)
 esquivPos = Vector2(1700, 500)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+z_index = 7
 layout_mode = 0
-offset_left = 1457.0
-offset_top = 774.0
-offset_right = 1857.0
-offset_bottom = 1174.0
+offset_left = 1421.0
+offset_top = 798.0
+offset_right = 1846.0
+offset_bottom = 1198.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(400, 400)
+size = Vector2i(440, 276)
 render_target_update_mode = 4
 
 [node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_64xaa")]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 
 [node name="FightUi" type="Sprite2D" parent="."]
-z_index = 5
-position = Vector2(960, 545)
+z_index = 6
+position = Vector2(960, 540)
+scale = Vector2(0.779723, 0.787591)
 texture = ExtResource("4_j8jp5")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -231,11 +244,13 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("7_ll5py")
 
-[node name="cooldownA" type="Label" parent="ActionPanel/Action1"]
+[node name="CooldownBar" type="HBoxContainer" parent="ActionPanel/Action1"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_fonts/font = ExtResource("8_amx0e")
+offset_left = 10.0
+offset_top = -3.21287
+offset_right = 81.0
+offset_bottom = 1.78713
+alignment = 1
 
 [node name="Action2" type="Button" parent="ActionPanel"]
 custom_minimum_size = Vector2(90, 90)
@@ -243,17 +258,20 @@ layout_mode = 2
 size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/focus = SubResource("StyleBoxEmpty_qk00q")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
 icon = ExtResource("6_0c2hg")
 flat = true
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("7_ll5py")
 
-[node name="cooldownA" type="Label" parent="ActionPanel/Action2"]
+[node name="CooldownBar" type="HBoxContainer" parent="ActionPanel/Action2"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = -3.21287
+offset_right = 81.0
+offset_bottom = 1.78713
+alignment = 1
 
 [node name="Action3" type="Button" parent="ActionPanel"]
 custom_minimum_size = Vector2(90, 90)
@@ -261,17 +279,20 @@ layout_mode = 2
 size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/focus = SubResource("StyleBoxEmpty_8rvme")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
 icon = ExtResource("6_0c2hg")
 flat = true
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("7_ll5py")
 
-[node name="cooldownA" type="Label" parent="ActionPanel/Action3"]
+[node name="CooldownBar" type="HBoxContainer" parent="ActionPanel/Action3"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = -3.21287
+offset_right = 81.0
+offset_bottom = 1.78713
+alignment = 1
 
 [node name="Action4" type="Button" parent="ActionPanel"]
 custom_minimum_size = Vector2(90, 90)
@@ -279,17 +300,20 @@ layout_mode = 2
 size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/focus = SubResource("StyleBoxEmpty_uwmmy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
 icon = ExtResource("6_0c2hg")
 flat = true
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("7_ll5py")
 
-[node name="cooldownA" type="Label" parent="ActionPanel/Action4"]
+[node name="CooldownBar" type="HBoxContainer" parent="ActionPanel/Action4"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = -3.21287
+offset_right = 81.0
+offset_bottom = 1.78713
+alignment = 1
 
 [node name="Action5" type="Button" parent="ActionPanel"]
 custom_minimum_size = Vector2(90, 90)
@@ -297,17 +321,20 @@ layout_mode = 2
 size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/focus = SubResource("StyleBoxEmpty_boe0j")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
 icon = ExtResource("6_0c2hg")
 flat = true
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("7_ll5py")
 
-[node name="cooldownA" type="Label" parent="ActionPanel/Action5"]
+[node name="CooldownBar" type="HBoxContainer" parent="ActionPanel/Action5"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = -3.21287
+offset_right = 81.0
+offset_bottom = 1.78713
+alignment = 1
 
 [node name="LabelAction" type="Label" parent="."]
 z_index = 6
@@ -318,12 +345,11 @@ offset_right = 1260.0
 offset_bottom = 1066.0
 theme_override_fonts/font = ExtResource("8_amx0e")
 theme_override_font_sizes/font_size = 25
-text = "Attaque1 
-et truc et bidule"
 horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="TurnOrderPanel" type="HBoxContainer" parent="."]
+modulate = Color(1.5, 1.5, 1.5, 1)
 layout_mode = 0
 offset_left = 5.0
 offset_top = 28.0
@@ -332,24 +358,30 @@ offset_bottom = 93.0
 mouse_filter = 2
 alignment = 1
 
+[node name="TextureRect" type="TextureRect" parent="TurnOrderPanel"]
+layout_mode = 2
+texture = ExtResource("35_cmgi2")
+expand_mode = 3
+
 [node name="Charaname" type="Label" parent="."]
 z_index = 6
 layout_mode = 0
-offset_left = 204.0
-offset_top = 821.0
-offset_right = 848.0
-offset_bottom = 901.0
-theme_override_fonts/font = ExtResource("5_kacea")
+offset_left = 238.0
+offset_top = 809.0
+offset_right = 882.0
+offset_bottom = 858.0
+theme_override_fonts/font = ExtResource("8_amx0e")
 theme_override_font_sizes/font_size = 40
-text = "Hero Name"
+text = "Warrior"
+uppercase = true
 
 [node name="AttLabel" type="Label" parent="."]
 z_index = 6
 layout_mode = 0
-offset_left = 59.0
-offset_top = 928.0
-offset_right = 325.0
-offset_bottom = 983.0
+offset_left = 268.0
+offset_top = 872.0
+offset_right = 534.0
+offset_bottom = 927.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 20
 text = "Attaque :"
@@ -357,10 +389,10 @@ text = "Attaque :"
 [node name="DefLabel" type="Label" parent="."]
 z_index = 6
 layout_mode = 0
-offset_left = 59.0
-offset_top = 961.0
-offset_right = 272.0
-offset_bottom = 1016.0
+offset_left = 268.0
+offset_top = 905.0
+offset_right = 481.0
+offset_bottom = 960.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 20
 text = "Defence:"
@@ -368,10 +400,10 @@ text = "Defence:"
 [node name="Stamina" type="Label" parent="."]
 z_index = 6
 layout_mode = 0
-offset_left = 59.0
-offset_top = 988.0
-offset_right = 278.0
-offset_bottom = 1043.0
+offset_left = 269.0
+offset_top = 958.0
+offset_right = 488.0
+offset_bottom = 1013.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 20
 text = "Stamina :	
@@ -380,22 +412,22 @@ text = "Stamina :
 [node name="Horny" type="Label" parent="."]
 z_index = 6
 layout_mode = 0
-offset_left = 59.0
-offset_top = 1015.0
-offset_right = 278.0
-offset_bottom = 1070.0
+offset_left = 268.0
+offset_top = 982.0
+offset_right = 487.0
+offset_bottom = 1037.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 20
-text = "Horny
+text = "Lust:
 "
 
 [node name="Guilt" type="Label" parent="."]
 z_index = 6
 layout_mode = 0
-offset_left = 59.0
-offset_top = 1043.0
-offset_right = 278.0
-offset_bottom = 1098.0
+offset_left = 268.0
+offset_top = 1010.0
+offset_right = 487.0
+offset_bottom = 1065.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 20
 text = "Guilt:
@@ -413,11 +445,14 @@ volume_db = 4.455
 pitch_scale = 0.67
 
 [node name="charaPortrait" type="TextureRect" parent="."]
+z_index = 6
 layout_mode = 0
-offset_left = 77.0
-offset_top = 806.0
-offset_right = 183.0
-offset_bottom = 909.0
+offset_left = 66.0
+offset_top = 811.0
+offset_right = 212.0
+offset_bottom = 957.0
+texture = ExtResource("15_boe0j")
+expand_mode = 1
 
 [node name="ResultScreen" type="Label" parent="."]
 visible = false
@@ -455,6 +490,16 @@ offset_bottom = -274.0
 mouse_filter = 2
 texture = ExtResource("6_0c2hg")
 
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position1"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0001
+offset_right = 108.0
+offset_bottom = 60.9999
+texture = ExtResource("20_8rvme")
+expand_mode = 1
+
 [node name="Button" type="Button" parent="HeroPosition/position1"]
 offset_left = -101.0
 offset_top = -304.0
@@ -464,18 +509,9 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_s6b88")
 flat = true
 
 [node name="charaCombatUI" parent="HeroPosition/position1" instance=ExtResource("19_utru8")]
+visible = false
 position = Vector2(-1.00012, 70)
 scale = Vector2(1.8, 1.8)
-
-[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position1"]
-modulate = Color(1, 1, 1, 0.34902)
-z_index = -1
-offset_left = -148.0
-offset_top = -18.0
-offset_right = 108.0
-offset_bottom = 61.0
-texture = ExtResource("20_8rvme")
-expand_mode = 1
 
 [node name="position2" type="Node2D" parent="HeroPosition"]
 z_index = 1
@@ -491,14 +527,6 @@ offset_right = 19.0
 offset_bottom = -274.0
 texture = ExtResource("6_0c2hg")
 
-[node name="Button" type="Button" parent="HeroPosition/position2"]
-offset_left = -104.0
-offset_top = -304.0
-offset_right = 92.0
-offset_bottom = 154.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_hxbks")
-flat = true
-
 [node name="TextureRect2" type="TextureRect" parent="HeroPosition/position2"]
 modulate = Color(1, 1, 1, 0.34902)
 z_index = -1
@@ -509,7 +537,16 @@ offset_bottom = 61.0
 texture = ExtResource("20_8rvme")
 expand_mode = 1
 
+[node name="Button" type="Button" parent="HeroPosition/position2"]
+offset_left = -104.0
+offset_top = -304.0
+offset_right = 92.0
+offset_bottom = 154.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hxbks")
+flat = true
+
 [node name="charaCombatUI" parent="HeroPosition/position2" instance=ExtResource("19_utru8")]
+visible = false
 position = Vector2(-44.4444, 105.833)
 scale = Vector2(1.8, 1.8)
 
@@ -528,6 +565,16 @@ offset_right = 19.0
 offset_bottom = -274.0
 texture = ExtResource("6_0c2hg")
 
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position3"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0001
+offset_right = 108.0
+offset_bottom = 60.9999
+texture = ExtResource("20_8rvme")
+expand_mode = 1
+
 [node name="Button" type="Button" parent="HeroPosition/position3"]
 offset_left = -89.0
 offset_top = -304.0
@@ -537,18 +584,9 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_vtu61")
 flat = true
 
 [node name="charaCombatUI" parent="HeroPosition/position3" instance=ExtResource("19_utru8")]
+visible = false
 position = Vector2(-7.7778, 70)
 scale = Vector2(1.8, 1.8)
-
-[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position3"]
-modulate = Color(1, 1, 1, 0.34902)
-z_index = -1
-offset_left = -148.0
-offset_top = -18.0
-offset_right = 108.0
-offset_bottom = 61.0
-texture = ExtResource("20_8rvme")
-expand_mode = 1
 
 [node name="position4" type="Node2D" parent="HeroPosition"]
 z_index = 1
@@ -564,14 +602,6 @@ offset_right = 19.0
 offset_bottom = -274.0
 texture = ExtResource("6_0c2hg")
 
-[node name="Button" type="Button" parent="HeroPosition/position4"]
-offset_left = -111.0
-offset_top = -304.0
-offset_right = 86.0
-offset_bottom = 164.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_m2l43")
-flat = true
-
 [node name="TextureRect2" type="TextureRect" parent="HeroPosition/position4"]
 modulate = Color(1, 1, 1, 0.34902)
 z_index = -1
@@ -582,7 +612,16 @@ offset_bottom = 61.0
 texture = ExtResource("20_8rvme")
 expand_mode = 1
 
+[node name="Button" type="Button" parent="HeroPosition/position4"]
+offset_left = -111.0
+offset_top = -304.0
+offset_right = 86.0
+offset_bottom = 164.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m2l43")
+flat = true
+
 [node name="charaCombatUI" parent="HeroPosition/position4" instance=ExtResource("19_utru8")]
+visible = false
 position = Vector2(-42.7778, 109.833)
 scale = Vector2(1.8, 1.8)
 
@@ -605,18 +644,6 @@ offset_right = 19.0
 offset_bottom = -274.0
 texture = ExtResource("6_0c2hg")
 
-[node name="Button" type="Button" parent="ennemiePosition/position1"]
-offset_left = -129.222
-offset_top = -354.0
-offset_right = 65.7776
-offset_bottom = 101.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xtuat")
-flat = true
-
-[node name="charaCombatUI" parent="ennemiePosition/position1" instance=ExtResource("19_utru8")]
-position = Vector2(-30.3335, 70)
-scale = Vector2(1.8, 1.8)
-
 [node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position1"]
 modulate = Color(1, 1, 1, 0.34902)
 z_index = -1
@@ -627,6 +654,19 @@ offset_bottom = 61.0
 texture = ExtResource("20_8rvme")
 expand_mode = 1
 flip_h = true
+
+[node name="Button" type="Button" parent="ennemiePosition/position1"]
+offset_left = -129.222
+offset_top = -354.0
+offset_right = 65.7776
+offset_bottom = 101.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xtuat")
+flat = true
+
+[node name="charaCombatUI" parent="ennemiePosition/position1" instance=ExtResource("19_utru8")]
+visible = false
+position = Vector2(-30.3335, 70)
+scale = Vector2(1.8, 1.8)
 
 [node name="position2" type="Node2D" parent="ennemiePosition"]
 z_index = 1
@@ -652,6 +692,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_xwqlg")
 flat = true
 
 [node name="charaCombatUI" parent="ennemiePosition/position2" instance=ExtResource("19_utru8")]
+visible = false
 position = Vector2(16.6667, 119)
 scale = Vector2(1.8, 1.8)
 
@@ -681,17 +722,6 @@ offset_right = 19.0
 offset_bottom = -274.0
 texture = ExtResource("6_0c2hg")
 
-[node name="Button" type="Button" parent="ennemiePosition/position3"]
-offset_left = -109.0
-offset_top = -364.0
-offset_right = 69.0
-offset_bottom = 106.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_c7ruu")
-
-[node name="charaCombatUI" parent="ennemiePosition/position3" instance=ExtResource("19_utru8")]
-position = Vector2(-8.00005, 68)
-scale = Vector2(1.8, 1.8)
-
 [node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position3"]
 modulate = Color(1, 1, 1, 0.34902)
 z_index = -1
@@ -702,6 +732,19 @@ offset_bottom = 61.0
 texture = ExtResource("20_8rvme")
 expand_mode = 1
 flip_h = true
+
+[node name="Button" type="Button" parent="ennemiePosition/position3"]
+offset_left = -109.0
+offset_top = -364.0
+offset_right = 69.0
+offset_bottom = 106.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c7ruu")
+flat = true
+
+[node name="charaCombatUI" parent="ennemiePosition/position3" instance=ExtResource("19_utru8")]
+visible = false
+position = Vector2(-8.00005, 68)
+scale = Vector2(1.8, 1.8)
 
 [node name="position4" type="Node2D" parent="ennemiePosition"]
 z_index = 1
@@ -717,18 +760,6 @@ offset_right = 19.0
 offset_bottom = -274.0
 texture = ExtResource("6_0c2hg")
 
-[node name="Button" type="Button" parent="ennemiePosition/position4"]
-offset_left = -72.2222
-offset_top = -310.667
-offset_right = 97.7778
-offset_bottom = 159.333
-theme_override_styles/focus = SubResource("StyleBoxEmpty_iaf2c")
-flat = true
-
-[node name="charaCombatUI" parent="ennemiePosition/position4" instance=ExtResource("19_utru8")]
-position = Vector2(21.2221, 117)
-scale = Vector2(1.8, 1.8)
-
 [node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position4"]
 modulate = Color(1, 1, 1, 0.34902)
 z_index = -1
@@ -740,8 +771,20 @@ texture = ExtResource("20_8rvme")
 expand_mode = 1
 flip_h = true
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="ennemiePosition/position4"]
+offset_left = -72.2222
+offset_top = -310.667
+offset_right = 97.7778
+offset_bottom = 159.333
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iaf2c")
+flat = true
+
+[node name="charaCombatUI" parent="ennemiePosition/position4" instance=ExtResource("19_utru8")]
 visible = false
+position = Vector2(21.2221, 117)
+scale = Vector2(1.8, 1.8)
+
+[node name="Button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1560.0
 offset_top = 23.0
@@ -753,55 +796,64 @@ script = ExtResource("19_m3wsf")
 [node name="contexte" type="Label" parent="."]
 z_index = 1
 layout_mode = 0
-offset_left = 134.0
+offset_left = 79.0
 offset_top = 153.0
 offset_right = 600.0
-offset_bottom = 315.0
+offset_bottom = 223.0
 theme_override_fonts/font = ExtResource("8_amx0e")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 25
 text = "iilii"
 horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="dialogue" type="Sprite2D" parent="contexte"]
 z_index = -1
-position = Vector2(233, 33)
-scale = Vector2(0.600586, 0.477406)
+position = Vector2(261, 20)
+scale = Vector2(0.600586, 0.38477)
 texture = ExtResource("33_uwmmy")
 
 [node name="contextennemi" type="Label" parent="."]
 z_index = 2
 layout_mode = 0
-offset_left = 1359.0
+offset_left = 1383.0
 offset_top = 153.0
-offset_right = 1669.0
-offset_bottom = 315.0
+offset_right = 1693.0
+offset_bottom = 205.0
 theme_override_fonts/font = ExtResource("8_amx0e")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 25
+text = "iilii"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="LootItem" type="Sprite2D" parent="contextennemi"]
+[node name="dialogue" type="Sprite2D" parent="contextennemi"]
 z_index = -1
-position = Vector2(155, 33)
-scale = Vector2(0.600586, 0.477406)
+position = Vector2(155, 21)
+scale = Vector2(0.600586, 0.38477)
 texture = ExtResource("33_uwmmy")
 
 [node name="overmenu" type="ColorRect" parent="."]
-z_index = 6
+z_index = 8
 layout_mode = 0
 offset_left = 1428.0
-offset_top = 792.0
-offset_right = 1848.0
+offset_top = 798.0
+offset_right = 1862.0
 offset_bottom = 1113.0
 color = Color(0.0235294, 0.0196078, 0, 1)
+script = ExtResource("36_hsfnw")
+
+[node name="CharaIcon" type="Sprite2D" parent="overmenu"]
+modulate = Color(1, 1, 1, 0.05)
+position = Vector2(217, 136)
+scale = Vector2(2.91157, 2.91157)
+texture = ExtResource("40_dk4nq")
 
 [node name="charaPortrait2" type="TextureRect" parent="overmenu"]
 layout_mode = 0
-offset_left = 35.0
-offset_top = -8.0
-offset_right = 141.0
-offset_bottom = 95.0
+offset_left = 1.0
+offset_top = 7.0
+offset_right = 128.0
+offset_bottom = 133.0
+expand_mode = 1
 
 [node name="Charaname2" type="Label" parent="overmenu"]
 layout_mode = 0
@@ -811,60 +863,51 @@ offset_right = 412.0
 offset_bottom = 112.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 40
-text = "Hero Name"
 
 [node name="AttLabel2" type="Label" parent="overmenu"]
 layout_mode = 0
-offset_left = 51.0
-offset_top = 98.0
-offset_right = 317.0
-offset_bottom = 153.0
+offset_left = 117.0
+offset_top = 94.0
+offset_right = 383.0
+offset_bottom = 149.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 20
-text = "Attaque :"
 
 [node name="DefLabel2" type="Label" parent="overmenu"]
 layout_mode = 0
-offset_left = 51.0
-offset_top = 119.0
-offset_right = 264.0
-offset_bottom = 174.0
+offset_left = 117.0
+offset_top = 115.0
+offset_right = 330.0
+offset_bottom = 170.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 20
-text = "Defence:"
 
 [node name="Stamina2" type="Label" parent="overmenu"]
 layout_mode = 0
-offset_left = 51.0
-offset_top = 143.0
-offset_right = 270.0
-offset_bottom = 198.0
+offset_left = 244.0
+offset_top = 92.0
+offset_right = 463.0
+offset_bottom = 147.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 20
-text = "Stamina :	
-"
 
 [node name="Horny2" type="Label" parent="overmenu"]
 layout_mode = 0
-offset_left = 240.0
-offset_top = 98.0
-offset_right = 459.0
-offset_bottom = 153.0
+offset_left = 246.0
+offset_top = 116.0
+offset_right = 465.0
+offset_bottom = 171.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 20
-text = "Horny
-"
 
 [node name="Guilt2" type="Label" parent="overmenu"]
 layout_mode = 0
-offset_left = 240.0
-offset_top = 118.0
-offset_right = 459.0
-offset_bottom = 173.0
+offset_left = 246.0
+offset_top = 136.0
+offset_right = 465.0
+offset_bottom = 191.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 20
-text = "Guilt:
-"
 
 [node name="ActionPanel2" type="HBoxContainer" parent="overmenu"]
 visible = false
@@ -969,11 +1012,45 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="SelectorCombatChara" type="Sprite2D" parent="."]
-modulate = Color(100, 100, 100, 1)
-position = Vector2(691.5, 683)
-scale = Vector2(0.871212, 1.17647)
-texture = ExtResource("34_boe0j")
+[node name="ContourMap" type="Sprite2D" parent="."]
+z_index = 8
+position = Vector2(1642, 938)
+scale = Vector2(0.747029, 0.802292)
+texture = ExtResource("37_3phk4")
+
+[node name="ButtonCharainfo" type="Button" parent="ContourMap"]
+offset_left = 286.558
+offset_top = -155.804
+offset_right = 365.558
+offset_bottom = -62.8036
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rem33")
+icon = ExtResource("38_4hyc1")
+flat = true
+script = ExtResource("39_ellpq")
+hover_color = Color(0.643137, 0.572549, 0.435294, 1)
+centered = false
+
+[node name="CharaIcon" type="Sprite2D" parent="ContourMap/ButtonCharainfo"]
+position = Vector2(38.7304, 44.8714)
+scale = Vector2(0.874031, 0.874031)
+texture = ExtResource("40_dk4nq")
+
+[node name="ButtonMap" type="Button" parent="ContourMap"]
+z_index = -1
+offset_left = 286.558
+offset_top = -73.5393
+offset_right = 365.558
+offset_bottom = 19.4607
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c35ka")
+icon = ExtResource("38_4hyc1")
+flat = true
+script = ExtResource("39_ellpq")
+centered = false
+
+[node name="IconMap" type="Sprite2D" parent="ContourMap/ButtonMap"]
+position = Vector2(39.8667, 43.7125)
+scale = Vector2(0.937106, 0.907487)
+texture = ExtResource("41_508lt")
 
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]

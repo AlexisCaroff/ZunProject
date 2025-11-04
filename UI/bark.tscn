@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://c02yu3qnsajyt"]
+
+[ext_resource type="Script" uid="uid://dxx1ddjxngdu1" path="res://bark.gd" id="1_gcy8k"]
+[ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="2_7fg1b"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="3_hn14b"]
+
+[node name="Bark" type="Node2D"]
+script = ExtResource("1_gcy8k")
+
+[node name="Label" type="Label" parent="."]
+z_index = 2
+offset_left = 12.0
+offset_top = 11.0
+offset_right = 203.0
+offset_bottom = 53.0
+theme_override_fonts/font = ExtResource("3_hn14b")
+theme_override_font_sizes/font_size = 20
+text = "You fight like a wet noodle!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="DialogueBox" type="Sprite2D" parent="Label"]
+z_index = -1
+position = Vector2(95.5, 22)
+scale = Vector2(0.204102, 0.314607)
+texture = ExtResource("2_7fg1b")

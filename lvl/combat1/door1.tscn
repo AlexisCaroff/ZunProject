@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dv04v6jagn4q1"]
+[gd_scene load_steps=29 format=3 uid="uid://dv04v6jagn4q1"]
 
 [ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_o6m4w"]
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_mdkvs"]
@@ -24,6 +24,9 @@
 [ext_resource type="Texture2D" uid="uid://bl6qdsm60pd37" path="res://UI/exploCharaselector.png" id="21_1jugk"]
 [ext_resource type="Texture2D" uid="uid://dd4k5wxaesfo4" path="res://characters/exploPortrait/MysticExploPortrait.png" id="22_crknv"]
 [ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="23_013hq"]
+[ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="25_njmpn"]
+[ext_resource type="Texture2D" uid="uid://bpgas6hnffbe0" path="res://UI/sideButton.png" id="26_50xwi"]
+[ext_resource type="Texture2D" uid="uid://ctkoy8ysbicta" path="res://UI/iconMap.png" id="27_gf8ky"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_crknv"]
 
@@ -41,8 +44,8 @@ scale = Vector2(0.781352, 0.79562)
 texture = ExtResource("1_o6m4w")
 
 [node name="exploUI" type="Sprite2D" parent="."]
-position = Vector2(959.889, 540)
-scale = Vector2(0.781668, 0.788321)
+position = Vector2(961, 541)
+scale = Vector2(0.782573, 0.789781)
 texture = ExtResource("2_mdkvs")
 
 [node name="atmosphere" parent="." instance=ExtResource("2_puy7d")]
@@ -176,7 +179,6 @@ offset_right = 872.0
 offset_bottom = 980.0
 theme_override_fonts/font = ExtResource("6_nju53")
 theme_override_font_sizes/font_size = 40
-text = "Name"
 autowrap_mode = 3
 
 [node name="charaPortrait" type="TextureRect" parent="."]
@@ -291,19 +293,19 @@ texture = ExtResource("15_o6m4w")
 
 [node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
 layout_mode = 0
-offset_left = 1312.0
-offset_top = 791.0
-offset_right = 1831.0
-offset_bottom = 1191.0
+offset_left = 1318.0
+offset_top = 799.0
+offset_right = 1859.0
+offset_bottom = 1199.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
 handle_input_locally = false
-size = Vector2i(520, 290)
+size = Vector2i(542, 272)
 render_target_update_mode = 4
 
 [node name="map" parent="SubViewportContainer2/SubViewport" instance=ExtResource("17_6jptd")]
 position = Vector2(242, 50)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 
 [node name="Portraits" type="Node2D" parent="."]
 scale = Vector2(0.779851, 0.779851)
@@ -368,6 +370,23 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(385.971, 1265.63)
 scale = Vector2(1.12354, 1.12354)
 texture = ExtResource("21_1jugk")
+
+[node name="ContourMap" type="Sprite2D" parent="."]
+z_index = 8
+position = Vector2(1589.5, 935.5)
+scale = Vector2(0.925297, 0.787965)
+texture = ExtResource("25_njmpn")
+
+[node name="SideButton" type="Sprite2D" parent="."]
+z_index = 9
+position = Vector2(1886.26, 845)
+scale = Vector2(0.7532, 0.830896)
+texture = ExtResource("26_50xwi")
+
+[node name="IconMap" type="Sprite2D" parent="SideButton"]
+position = Vector2(0.980437, -2.40703)
+scale = Vector2(1.07026, 1.0878)
+texture = ExtResource("27_gf8ky")
 
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]

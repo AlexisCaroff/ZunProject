@@ -3,7 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="1_54gp4"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_54gp4"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_62wbe"]
-[ext_resource type="Texture2D" uid="uid://dfeafue752ymx" path="res://actions/actiontexture/actionCharge.png" id="4_g166n"]
+[ext_resource type="Texture2D" uid="uid://c1p57x81edssp" path="res://actions/actiontexture/mitraille.png" id="4_dtk8s"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_bfp37"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
@@ -17,8 +17,8 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("5_bfp37")
 name = "mitaille"
 descriptionName = "mitaille"
-description = "attaquetout les enneimes"
-icon = ExtResource("4_g166n")
+description = "attack all ennemies"
+icon = ExtResource("4_dtk8s")
 attack_sound = ExtResource("1_54gp4")
 required_position = null
 the_target_type = 4

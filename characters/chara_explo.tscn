@@ -35,11 +35,11 @@ min_duration = 1.0
 max_duration = 1.5
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -85.8333
-offset_top = -205.0
-offset_right = 85.1667
-offset_bottom = 26.0
-scale = Vector2(1.2, 1)
+offset_left = -68.3333
+offset_top = -186.667
+offset_right = 102.667
+offset_bottom = 44.3333
+scale = Vector2(1.11699, 0.930823)
 mouse_filter = 2
 texture = ExtResource("1_nyqc8")
 expand_mode = 1
@@ -47,11 +47,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Selector" type="TextureRect" parent="pivot"]
 self_modulate = Color(2, 2, 2, 0)
-offset_left = -85.8333
-offset_top = -205.0
-offset_right = 85.1667
-offset_bottom = 26.0
-scale = Vector2(1.2, 1)
+offset_left = -68.3333
+offset_top = -186.667
+offset_right = 102.667
+offset_bottom = 44.3333
+scale = Vector2(1.11699, 0.930823)
 mouse_filter = 2
 texture = ExtResource("1_nyqc8")
 expand_mode = 1
@@ -59,16 +59,16 @@ metadata/_edit_use_anchors_ = true
 
 [node name="HPProgressBar" type="ProgressBar" parent="."]
 modulate = Color(1, 0.714937, 0, 1)
-offset_left = -48.0
-offset_top = 19.1055
-offset_right = 48.0
-offset_bottom = 29.1055
+offset_left = -43.0
+offset_top = 19.0
+offset_right = 36.0
+offset_bottom = 27.0
 value = 100.0
 show_percentage = false
 
 [node name="HornyJauge" type="Sprite2D" parent="."]
-position = Vector2(60, 24)
-scale = Vector2(0.403259, 0.403259)
+position = Vector2(51, 24.1538)
+scale = Vector2(0.347971, 0.337993)
 texture = ExtResource("4_bd7mk")
 
 [node name="HornyJaugePleine" type="Sprite2D" parent="HornyJauge"]

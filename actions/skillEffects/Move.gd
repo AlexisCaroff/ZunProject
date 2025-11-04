@@ -23,8 +23,11 @@ func apply(user: Character, target: PositionSlot):
 			push_error("Le personnage cible n'a pas de slot assigné.")
 			return
 		cm.swap_characters(target_current_slot, user_slot, 1.7)
+		user.update_ui()
+		Chartarget.update_ui()
 		
 	else:
 		cm.move_character_to(Chartarget, user_slot,.7)
-
+		Chartarget.update_ui()
+		
 	

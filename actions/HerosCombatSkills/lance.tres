@@ -4,8 +4,8 @@
 [ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="1_x8kf7"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_58yna"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="3_uogve"]
-[ext_resource type="Texture2D" uid="uid://dfeafue752ymx" path="res://actions/actiontexture/actionCharge.png" id="4_y1v2a"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_1dvb3"]
+[ext_resource type="Texture2D" uid="uid://b3kf5qxfdrv0k" path="res://actions/actiontexture/actionSpear.png" id="5_na1tf"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("3_58yna")
@@ -19,7 +19,7 @@ script = ExtResource("5_1dvb3")
 name = "Spear"
 descriptionName = "Spear"
 description = "attaque un ennemi"
-icon = ExtResource("4_y1v2a")
+icon = ExtResource("5_na1tf")
 attack_sound = ExtResource("1_x8kf7")
 required_position = null
 ImageSkill = ExtResource("1_uogve")

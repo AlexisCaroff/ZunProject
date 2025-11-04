@@ -23,15 +23,11 @@ func _ready():
 	load_characters_from_gamestat()
 	selected_character = characters[0]
 	portrait_selector.position = portraits[0].position
-	donjon_map.curentposition = donjon_map.positions[gm.current_room_Ressource.position_on_map]
+	
 	if donjon_map:
-		focus_on_room(donjon_map.curentposition)
-		donjon_map.move_to_position(donjon_map.curentposition)
+		donjon_map.focus_on_room(gm.current_room_Ressource, viewport)
+		#donjon_map.move_to_position(donjon_map.curentposition)
 
-func focus_on_room(room: Node2D):
-	var target_pos = room.position
-	var tween = create_tween()
-	tween.tween_property(donjon_map.camera, "position", target_pos, 0.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func load_characters_from_gamestat():
 	characters.clear()

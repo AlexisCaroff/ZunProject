@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bg44l1eibyvid"]
+[gd_scene load_steps=6 format=3 uid="uid://bg44l1eibyvid"]
 
 [ext_resource type="Script" uid="uid://2yw45k1rwvdf" path="res://DialogueUI.gd" id="1_6e3n1"]
 [ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="2_vl2if"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="3_om3t3"]
 [ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="3_vl2if"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="5_om3t3"]
 
 [node name="DialogueUI" type="Control"]
 layout_mode = 3
@@ -22,6 +23,13 @@ offset_bottom = 203.927
 scale = Vector2(2.07695, 4.90172)
 color = Color(0, 0, 0, 0.580392)
 
+[node name="Portrait2" type="TextureRect" parent="."]
+offset_left = 729.159
+offset_top = -219.436
+offset_right = 2084.15
+offset_bottom = 1189.57
+flip_h = true
+
 [node name="Portrait" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = -180.076
@@ -29,6 +37,14 @@ offset_top = -186.964
 offset_right = 1174.92
 offset_bottom = 1222.04
 texture = ExtResource("2_vl2if")
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = 35.0
+offset_top = 705.0
+offset_right = 897.0
+offset_bottom = 776.0
+scale = Vector2(2.07695, 4.90172)
+color = Color(0, 0, 0, 0.763)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -58,18 +74,6 @@ theme_override_fonts/font = ExtResource("3_om3t3")
 theme_override_font_sizes/font_size = 50
 text = "Nom"
 
-[node name="Text" type="Label" parent="."]
-layout_mode = 0
-offset_left = 137.0
-offset_top = 793.0
-offset_right = 1737.0
-offset_bottom = 971.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_om3t3")
-theme_override_font_sizes/font_size = 40
-text = "tetxt"
-autowrap_mode = 3
-
 [node name="indication" type="Label" parent="."]
 layout_mode = 0
 offset_left = 841.008
@@ -94,3 +98,13 @@ offset_right = 161.008
 offset_bottom = -0.05513
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 131.859
+offset_top = 790.168
+offset_right = 1793.86
+offset_bottom = 991.168
+theme_override_fonts/normal_font = ExtResource("5_om3t3")
+theme_override_font_sizes/normal_font_size = 45
+text = "Teste dialogue"

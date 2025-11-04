@@ -51,6 +51,8 @@ var startcombat = true
 var nb_crystaleloot :int = 0
 var ennemy_are_ambushed : bool = false
 var heroes_are_ambushed : bool = false
+const SELECTOR_TEX = preload("res://UI/selectorCombatChara.png")
+var selectorChara : Sprite2D
 
 func _ready():
 	for child in $"../HeroPosition".get_children():
@@ -143,10 +145,11 @@ func _start():
 
 			var slot_index = i
 			var slot = enemy_positions[slot_index]
+			chara._current_slot=slot
 			move_character_to(chara, slot, 0.0)
 			if ennemy_are_ambushed:
 				chara.surprised()
-			chara._current_slot=slot
+			
 			chara.update_ui()
 			
 		ui.log("start Combat")
@@ -183,6 +186,7 @@ func load_saved_heroes_into_slots(slots: Array[PositionSlot]):
 		if pos_index >= 0 and pos_index < slots.size():
 			slots[pos_index].assign_character(hero, 0.0)
 		hero._current_slot=slots[pos_index]
+		move_character_to(hero, slots[pos_index], 0.0)
 		hero.update_ui()
 	
 func start_combat():
@@ -192,6 +196,7 @@ func start_combat():
 	all_characters.append_array(enemies)
 	turn_queue = build_turn_queue(all_characters)
 	ui.update_turn_queue_ui(turn_queue)
+	create_selector_sprite()
 	next_turn()
 
 func build_turn_queue(characters: Array[Character]) -> Array[Character]:
@@ -217,8 +222,11 @@ func next_turn():
 	
 
 	ui.log(current_character.Charaname +" turn")
+	selectorChara.position= current_character._current_slot.CharaUI.global_position
 
 	current_character.animate_start_Turn()
+	for chara in turn_queue:
+		chara.update_ui()
 	await current_character.skill_animation_finished
 	
 	if current_character.current_stamina<=0: # look if tired
@@ -265,6 +273,16 @@ func next_turn():
 
 
 var active_animations := 0
+
+func create_selector_sprite():
+	var sprite := Sprite2D.new()
+	sprite.texture = SELECTOR_TEX
+	add_child(sprite)
+	selectorChara=sprite
+	selectorChara.scale= Vector2(0.9,1.1)
+	selectorChara.offset.y =-4.0
+	selectorChara.z_index = 3
+
 
 func _on_skill_animation_started():
 	active_animations += 1
@@ -316,11 +334,12 @@ func _show_victory():
 	if nb_crystaleloot >0:
 		encounter.loots.append(cristal_item)
 	victory_ui.showLoot(encounter.loots)  # Passer les loots récupérés au Victory UI
-	
+	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
+	gm.current_room_Ressource.ennemikilled=true
 	# Ajouter Victory UI à la scène et le faire apparaître
 	get_parent().add_child(victory_ui)
 	GameState.saveRunning = true
-
+	
 	# --- Sauvegarder l'équipe avant de changer de scène
 	GameState.save_party_from_nodes(heroes)
 	
@@ -433,8 +452,11 @@ func get_positions(is_playercontroled: bool) -> Array[PositionSlot]:
 func move_character_to(character: Character, slot: PositionSlot, movetime: int):
 	if slot.occupant == character:
 		return  
-
+	slot.Set_CharaUI()
+	slot.CharaUI.visible=true
 	slot.assign_character(character,movetime)
+	character._current_slot =slot
+	character.update_ui()
 		
 func swap_characters(slot_a: PositionSlot, slot_b: PositionSlot,movetime: int):
 	var char_a = slot_a.occupant
@@ -444,3 +466,5 @@ func swap_characters(slot_a: PositionSlot, slot_b: PositionSlot,movetime: int):
 		slot_b.assign_character(char_a,movetime)
 	if char_b != null:
 		slot_a.assign_character(char_b,movetime)
+	char_a.update_ui()
+	char_b.update_ui()

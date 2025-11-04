@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ggsa3x3ajxbr"]
+[gd_scene load_steps=30 format=3 uid="uid://ggsa3x3ajxbr"]
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_p3oys"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_7hr4g"]
@@ -21,6 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="19_1p7a5"]
 [ext_resource type="Script" uid="uid://gljyiwavrmws" path="res://lvl/combat1/explo_portrait.gd" id="20_yq2hk"]
 [ext_resource type="Texture2D" uid="uid://bl6qdsm60pd37" path="res://UI/exploCharaselector.png" id="21_o242q"]
+[ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="22_koy5r"]
+[ext_resource type="Texture2D" uid="uid://df6e4btmrj1i8" path="res://props/campFire.png" id="23_3nplw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qg4ur"]
 
@@ -150,12 +152,13 @@ script = ExtResource("9_1heii")
 
 [node name="HeroPosition" type="Node2D" parent="."]
 z_index = 1
-position = Vector2(568, 642)
+position = Vector2(178, 615)
 scale = Vector2(1.4, 1.4)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
 z_index = 1
 position = Vector2(-22, 1)
+scale = Vector2(1.1, 1.1)
 script = ExtResource("10_i544t")
 
 [node name="Button" type="Button" parent="HeroPosition/position1"]
@@ -170,6 +173,7 @@ flat = true
 [node name="position2" type="Node2D" parent="HeroPosition"]
 z_index = 1
 position = Vector2(132, 24)
+scale = Vector2(1.2, 1.2)
 script = ExtResource("10_i544t")
 
 [node name="Button" type="Button" parent="HeroPosition/position2"]
@@ -185,6 +189,7 @@ flat = true
 [node name="position3" type="Node2D" parent="HeroPosition"]
 z_index = 1
 position = Vector2(298, 2)
+scale = Vector2(1.1, 1.1)
 script = ExtResource("10_i544t")
 
 [node name="Button" type="Button" parent="HeroPosition/position3"]
@@ -199,6 +204,7 @@ flat = true
 [node name="position4" type="Node2D" parent="HeroPosition"]
 z_index = 1
 position = Vector2(479, 24)
+scale = Vector2(1.2, 1.2)
 script = ExtResource("10_i544t")
 
 [node name="Button" type="Button" parent="HeroPosition/position4"]
@@ -348,8 +354,15 @@ offset_left = 1142.0
 offset_top = 404.0
 offset_right = 1352.0
 offset_bottom = 605.0
-text = "Camp"
+flat = true
+script = ExtResource("22_koy5r")
+hover_color = Color(0.933333, 0.0872172, 0.108109, 1)
+hover_scale = Vector2(1.1, 1.1)
 metadata/_edit_use_anchors_ = true
+
+[node name="CampFire" type="Sprite2D" parent="ExplorationManager/Campement"]
+position = Vector2(100, 143)
+texture = ExtResource("23_3nplw")
 
 [connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="moveButton" to="moveButton" method="_on_mouse_exited"]

@@ -8,12 +8,13 @@
 
 [resource]
 script = ExtResource("1_bdslr")
-room_id = "Salle1"
+room_id = "Hall1"
 position_on_map = 0
 door_scene = ExtResource("3_366qv")
 combat_scene = ExtResource("1_p3mg1")
 exploration_scene = ExtResource("5_an7sa")
 encounter = ExtResource("4_85uva")
-CanCamp = false
-connected_room_ids = Array[String](["Salle2"])
+CanCamp = true
+connected_room_ids = Array[String](["Corridor1"])
+explored = false
 metadata/_custom_type_script = "uid://oj44pgv34ji0"

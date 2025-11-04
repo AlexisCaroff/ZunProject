@@ -1,14 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://dg0coy6r6f1ww"]
+[gd_scene load_steps=7 format=3 uid="uid://dg0coy6r6f1ww"]
 
 [ext_resource type="Script" uid="uid://d12jn42j03tgg" path="res://GameManager.gd" id="1_70yv6"]
 [ext_resource type="Resource" uid="uid://7dlbup10473y" path="res://lvl/donjonTestePorte.tres" id="2_smx3j"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="3_d5upp"]
+[ext_resource type="Resource" uid="uid://bjupnilvigvhl" path="res://lvl/salle0/Salle0.tres" id="3_shwjl"]
 [ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="4_vk86k"]
 [ext_resource type="Texture2D" uid="uid://c7i05i2v2djk1" path="res://UI/seau.png" id="5_vk86k"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_70yv6")
 donjon = ExtResource("2_smx3j")
+last_room_Ressource = ExtResource("3_shwjl")
 
 [node name="Label" type="Label" parent="."]
 z_index = 6

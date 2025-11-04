@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="2_m75wf"]
 [ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="3_8h1bt"]
 [ext_resource type="Texture2D" uid="uid://b1gqe0n366p7t" path="res://characters/charatexture/char tankdead.png" id="3_o000s"]
-[ext_resource type="Texture2D" uid="uid://b23pftdqkb2it" path="res://characters/characterInitiative/croiséIni.png" id="4_cags6"]
 [ext_resource type="Resource" uid="uid://behrtqotkyvnx" path="res://actions/HerosCombatSkills/Taunt.tres" id="5_hed2b"]
+[ext_resource type="Texture2D" uid="uid://cs8w5wjum3566" path="res://characters/CampementPorttrait/WarriorCampement.png" id="6_au1md"]
 [ext_resource type="Resource" uid="uid://doydfjjogegnd" path="res://actions/HerosCombatSkills/StunAttaque.tres" id="6_sehei"]
 [ext_resource type="Resource" uid="uid://clw258vbo2rq1" path="res://actions/HerosCombatSkills/Charge.tres" id="7_au1md"]
 [ext_resource type="Resource" uid="uid://bpsapqkry8g3q" path="res://actions/HerosCombatSkills/attaque_basique.tres" id="8_8h1bt"]
@@ -27,7 +27,8 @@ script = ExtResource("1_bw87w")
 portrait_texture = ExtResource("2_m75wf")
 explorationPortrait = ExtResource("3_8h1bt")
 dead_portrait_texture = ExtResource("3_o000s")
-initiative_icon = ExtResource("4_cags6")
+initiative_icon = ExtResource("3_8h1bt")
+textureCamp = ExtResource("6_au1md")
 Charaname = "Warrior"
 base_attack = 12
 base_defense = 10
@@ -37,6 +38,7 @@ initiative = 2
 Chara_position = 3
 max_stamina = 120
 skill_resources = Array[Resource]([ExtResource("5_hed2b"), ExtResource("6_sehei"), ExtResource("7_au1md"), ExtResource("8_8h1bt"), ExtResource("9_3mtpu")])
+tags = Array[String](["switch", "degrader", "exib"])
 camp_skill_resources = Array[ExtResource("10_ujj0e")]([ExtResource("11_hed2b"), ExtResource("12_hed2b"), ExtResource("13_au1md"), ExtResource("14_8h1bt")])
 
 [node name="name" type="Label" parent="."]

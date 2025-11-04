@@ -22,7 +22,7 @@ var current_tween: Tween = null
 var move_mode: bool = false
 @onready var viewport: Viewport = $SubViewportContainer/SubViewport
 @onready var donjon_map: Map = $SubViewportContainer/SubViewport/map
-@onready var loveimage=$Loveimage
+
 var DoorNumber:int =0
 var gm : GameManager
 var skillused : CampSkill =null
@@ -31,6 +31,10 @@ var campPointLabel
 @export var codeActionButton = "res://scripts/camp/campActionButton.gd"
 var skillcampmode : bool = true
 @onready var TheTente:tente =$Tente
+@onready var mapButton =$MapButton
+@onready var QuitmapButton = $QuittMapButton
+@onready var contourMap=$ContourMap
+
 
 func _ready():
 	gm = get_tree().root.get_node("GameManager") as GameManager
@@ -43,15 +47,20 @@ func _ready():
 		chara.animate_heal(30, chara)
 		chara.update_display()
 #--------------------------------------
-	donjon_map.curentposition = donjon_map.positions[gm.current_room_Ressource.position_on_map]
+	
 	if donjon_map:
-		focus_on_room(donjon_map.curentposition)
-		donjon_map.move_to_position(donjon_map.curentposition)
+		donjon_map.focus_on_room(gm.current_room_Ressource,viewport)
+		#donjon_map.move_to_position(donjon_map.curentposition)
 	
 	changeSelectedCharacter(selected_chara)
 	campPointLabel = $CampPoint
 	campPointLabel.text= str(campPoints)
-
+	
+	mapButton.connect("button_down",toggleshowMap)
+	QuitmapButton.connect("button_down",toggleshowMap)
+#func startLovescene():
+	
+	
 func load_characters_from_gamestat():
 	characters.clear()
 	for i in GameState.saved_heroes_data.size():
@@ -81,6 +90,7 @@ func move_character_to_slot(chara: Node, slot: Node):
 func changeSelectedCharacter(occupant:CharaCamp):
 	show_chara_actions(occupant)
 	updateUICharacter(occupant)
+	occupant.animate_selected()
 	
 func updateUICharacter(character:CharaCamp):
 	portraitCharaselect.texture = character.initiative_icon
@@ -100,9 +110,23 @@ func After_camp_skill(skill: CampSkill):
 				if c is CharaCamp:
 					c.set_targetable(false)
 					c.update_display()
+	skill.used =true
 	skillused=null
 	exitButton.visible = false
 	
+	
+	
+func noCharacterSelected():
+	clear_container(action_panel)
+	portraitCharaselect.texture = null
+	CharacterName.text = ""
+	AttLabel.text = ""
+	DefLabel.text = ""
+	Stamina.text = ""
+	guilt.text =  ""
+	horny.text = ""
+		
+		
 func clear_container(container: Node) -> void:
 	for child in container.get_children():
 		# queue_free() est préférable à remove_child + free pour éviter les dépendances
@@ -138,7 +162,10 @@ func show_chara_actions(chara: CharaCamp):
 		var empty_style := StyleBoxEmpty.new()
 		btn.add_theme_stylebox_override("focus", empty_style)
 		btn.Actiontext = skill.name
-
+		if skill.cost>campPoints:
+			btn.disabled=true
+		if skill.used && not skill.name== "Dialogue":
+			btn.disabled=true
 		btn.pressed.connect(Callable(self, "_on_camp_skill_pressed").bindv([skill, chara]))
 
 		action_panel.add_child(btn)
@@ -157,6 +184,10 @@ func _on_camp_skill_pressed(skill: CampSkill, user: CharaCamp) -> void:
 	# Exemple d'utilisation simple selon le target_type
 	if !skillcampmode:
 		return
+	if skill.cost>campPoints:
+		return
+	if not TheTente.twoInside.is_empty(): 
+		TheTente.loved_one_go_out()
 	skillused= skill
 	match skill.target_type:
 		CampSkill.TargetType.SELF:
@@ -172,6 +203,7 @@ func _on_camp_skill_pressed(skill: CampSkill, user: CharaCamp) -> void:
 			skill.use(user, targets)
 			print ("use skill on ", )
 	exitButton.visible=true
+	
 
 func endcamp():
 	gm.return_to_exploration()
@@ -207,15 +239,15 @@ func _on_exit_button_button_down() -> void:
 					c.set_targetable(false)
 	skillused=null
 	exitButton.visible = false
-	
-
 
 func _on_button_button_down() -> void:
 	if GameState.saveRunning:
 		push_warning("Sauvegarde déjà en cours…")
 		return
-
 	GameState.save_party_from_camp(characters)
-
-
 	gm.return_to_exploration()
+func toggleshowMap():
+	var subviewport=$SubViewportContainer
+	subviewport.visible= !subviewport.visible
+	QuitmapButton.visible = !QuitmapButton.visible
+	contourMap.visible= !contourMap.visible

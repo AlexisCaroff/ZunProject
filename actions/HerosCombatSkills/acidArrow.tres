@@ -3,7 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="1_j6ayg"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_j6ayg"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_0vj4x"]
-[ext_resource type="Texture2D" uid="uid://dfeafue752ymx" path="res://actions/actiontexture/actionCharge.png" id="4_jens0"]
+[ext_resource type="Texture2D" uid="uid://b6gv81bd6sq1o" path="res://actions/actiontexture/acideArrow.png" id="4_04q3t"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_bsyl5"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
@@ -18,7 +18,7 @@ script = ExtResource("5_bsyl5")
 name = "Acid Arrow"
 descriptionName = "Acid Arrow"
 description = "attaque,un ennemi"
-icon = ExtResource("4_jens0")
+icon = ExtResource("4_04q3t")
 attack_sound = ExtResource("1_j6ayg")
 required_position = null
 the_target_type = null

@@ -5,7 +5,7 @@ class_name SkillEffectSpawnEnemy
 @export var max_spawn: int = 1  # combien d'ennemis peuvent être spawn
 @export var spawn_delay: float = 0.5
 
-func apply(user: Character, target: PositionSlot) -> void:
+func apply(_user: Character, target: PositionSlot) -> void:
 	if not enemy_scene:
 		push_error("Aucune scène d'ennemi assignée à SkillEffectSpawnEnemy")
 		return

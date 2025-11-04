@@ -111,7 +111,7 @@ func add_buff(buff: Buff):
 		buff_bar = $HBoxContainer
 	var new_buff = buff.duplicate()
 	var icon = TextureRect.new()
-	icon.texture = buff.icon
+	icon.texture = new_buff.icon
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	icon.custom_minimum_size = Vector2(20, 20)
 	buff_bar.add_child(icon)

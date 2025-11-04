@@ -4,13 +4,15 @@ class_name GameManager
 @export var donjon: DonjonResource
 var room_container: Node
 var current_room_Ressource: RoomResource
-var last_room_Ressource: RoomResource
+@export var last_room_Ressource: RoomResource
 @export var current_room_node: Node
 @export_file("*.tscn") var campement_scene_path: String = "res://lvl/campement.tscn"
 var campement_node: Node = null
 
+
 func _ready():
 	var screen_index := 1
+	
 	if screen_index < DisplayServer.get_screen_count():
 		DisplayServer.window_set_current_screen(screen_index)
 	
@@ -24,6 +26,7 @@ func _ready():
 			call_deferred("enter_room", start_room)
 		else:
 			push_error("❌ Start room introuvable pour ID : " + donjon.start_room_id)
+	
 
 
 
@@ -31,7 +34,8 @@ func enter_room(room: RoomResource, changedoor: bool = false):
 	if not changedoor:
 		last_room_Ressource = current_room_Ressource
 	current_room_Ressource = room
-
+	current_room_Ressource.explored = true
+	
 	print("🏰 Current room is ", current_room_Ressource.room_id)
 
 	if current_room_node:
@@ -96,9 +100,10 @@ func _enter_scene_in_current_room(scene: PackedScene, ennemy_are_embushed: bool 
 			current_room_node.free()
 			current_room_node = null
 
-		var new_scene = scene.instantiate()
-
-		if current_room_Ressource.combat_scene and scene == current_room_Ressource.combat_scene:
+		
+		var new_scene
+		if current_room_Ressource.combat_scene and scene == current_room_Ressource.combat_scene and current_room_Ressource.ennemikilled == false:
+			new_scene = scene.instantiate()
 			if new_scene.has_node("CombatManager"):
 				var combat_manager = new_scene.get_node("CombatManager")
 				combat_manager.encounter = current_room_Ressource.encounter
@@ -107,11 +112,14 @@ func _enter_scene_in_current_room(scene: PackedScene, ennemy_are_embushed: bool 
 				print("⚔️ Encounter assigned to CombatManager")
 			else:
 				push_error("⚠️ CombatManager introuvable dans la scène de combat")
-
+		else : 
+			new_scene = current_room_Ressource.exploration_scene.instantiate()
+			
 		room_container.add_child(new_scene)
 		current_room_node = new_scene
 		print("🌟 Start new room: ", new_scene.name)
-
+		
+			
 
 func go_to_campement():
 	if current_room_node and is_instance_valid(current_room_node):

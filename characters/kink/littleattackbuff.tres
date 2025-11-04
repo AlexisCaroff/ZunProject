@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Buff" load_steps=3 format=3 uid="uid://ueptel68dk1y"]
+
+[ext_resource type="Texture2D" uid="uid://dbuugeey6c5y4" path="res://UI/buffAtt.png" id="1_5lkch"]
+[ext_resource type="Script" uid="uid://bkvdwvrmdt5aw" path="res://actions/skillEffects/Buff.gd" id="1_t3vd1"]
+
+[resource]
+script = ExtResource("1_t3vd1")
+name = "littlebuff"
+description = "Effet temporaire sur les statistiques."
+icon = ExtResource("1_5lkch")
+stat = 0
+amount = 2
+duration = 3
+metadata/_custom_type_script = "uid://bkvdwvrmdt5aw"

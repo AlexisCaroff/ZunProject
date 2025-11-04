@@ -15,6 +15,9 @@ func apply(user: Character, target: PositionSlot) -> void:
 	Chartarget = target.occupant
 	match heal_target_stat:
 			Stat.STAMINA:
+				for tag in Chartarget.tags:
+					if tag == "maso":
+						amount+=2
 				Chartarget.current_stamina = min(Chartarget.max_stamina, Chartarget.current_stamina + amount)
 				Chartarget.animate_heal(amount,user)
 			Stat.HORNY:

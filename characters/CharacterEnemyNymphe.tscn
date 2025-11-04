@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_61pjh"]
 [ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="2_i0xeg"]
 [ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="3_0go71"]
-[ext_resource type="Texture2D" uid="uid://b0q8mhrqooms" path="res://characters/characterInitiative/cultisteIni.png" id="3_mruho"]
+[ext_resource type="Texture2D" uid="uid://bj4kyibf1he0q" path="res://characters/exploPortrait/NymphExploPortrait.png" id="3_xyxhh"]
 [ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/HerosCombatSkills/Ennemi_attaque_basique.tres" id="4_61pjh"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="6_0go71"]
 [ext_resource type="Resource" uid="uid://cvpggc0yt3l4o" path="res://actions/ennemiCombatSkills/Ennemi_charme.tres" id="6_r4har"]
@@ -18,8 +18,9 @@
 [node name="Nymphe" type="Node2D"]
 script = ExtResource("1_61pjh")
 portrait_texture = ExtResource("2_i0xeg")
+explorationPortrait = ExtResource("3_xyxhh")
 dead_portrait_texture = ExtResource("3_0go71")
-initiative_icon = ExtResource("3_mruho")
+initiative_icon = ExtResource("3_xyxhh")
 Charaname = "Nymphe"
 IsDemon = true
 Chara_position = 1
@@ -35,9 +36,10 @@ scalemini = 0.95
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
 offset_left = -133.0
-offset_top = -229.0
+offset_top = -214.0
 offset_right = 38.0
-offset_bottom = 2.0
+offset_bottom = 17.0
+scale = Vector2(0.94799, 0.94799)
 mouse_filter = 2
 texture = ExtResource("2_i0xeg")
 expand_mode = 1
@@ -46,9 +48,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Selector" type="TextureRect" parent="pivot"]
 self_modulate = Color(2, 2, 2, 0)
 offset_left = -133.0
-offset_top = -229.0
+offset_top = -214.0
 offset_right = 38.0
-offset_bottom = 2.0
+offset_bottom = 17.0
+scale = Vector2(0.94799, 0.94799)
 mouse_filter = 2
 texture = ExtResource("2_i0xeg")
 expand_mode = 1
@@ -70,17 +73,18 @@ offset_right = 152.0
 offset_bottom = 124.797
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 64.0
-offset_top = -184.202
-offset_right = 104.0
-offset_bottom = -165.202
+offset_left = -19.0
+offset_top = -189.0
+offset_right = 21.0
+offset_bottom = -170.0
+alignment = 1
 
 [node name="Skill" type="TextureRect" parent="."]
 visible = false
-offset_left = -182.0
-offset_top = -318.0
-offset_right = 394.0
-offset_bottom = 258.0
+offset_left = -158.0
+offset_top = -240.0
+offset_right = 418.0
+offset_bottom = 336.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_xwnr5")
 script = ExtResource("8_065j3")

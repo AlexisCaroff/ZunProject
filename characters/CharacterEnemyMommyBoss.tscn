@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=3 uid="uid://crq2yis3m8t41"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_wxyxf"]
+[ext_resource type="Texture2D" uid="uid://0x6um7xfv678" path="res://characters/exploPortrait/BossExploPortrait.png" id="3_wxyxf"]
 [ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="3_x6ecl"]
-[ext_resource type="Texture2D" uid="uid://b0q8mhrqooms" path="res://characters/characterInitiative/cultisteIni.png" id="4_h8b51"]
 [ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/HerosCombatSkills/Ennemi_attaque_basique.tres" id="5_atoy3"]
 [ext_resource type="Resource" uid="uid://cvpggc0yt3l4o" path="res://actions/ennemiCombatSkills/Ennemi_charme.tres" id="6_nr0ub"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="7_rau51"]
@@ -19,8 +19,9 @@
 [node name="CharacterTestennemie1" type="Node2D"]
 script = ExtResource("1_wxyxf")
 portrait_texture = ExtResource("9_717i8")
+explorationPortrait = ExtResource("3_wxyxf")
 dead_portrait_texture = ExtResource("3_x6ecl")
-initiative_icon = ExtResource("4_h8b51")
+initiative_icon = ExtResource("3_wxyxf")
 Charaname = "ennemie1"
 IsDemon = true
 Chara_position = 1

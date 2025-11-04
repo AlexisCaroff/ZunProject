@@ -8,12 +8,12 @@ var portrait_path: String = ""
 var dead_portrait_path: String = ""
 var initiative_icon_path: String = ""
 @onready var name_label = $name
-@onready var hp_label = $HP
+
 @onready var stress_label = $Stress
-@onready var horny_label = $horny
+
 @onready var sprite = $pivot/HerosTexture1
 @onready var buff_bar = $HBuffsContainer
-@onready var hp_Jauge=$HP/HPProgressBar
+@onready var hp_Jauge=$HPProgressBar
 @onready var guilt_Jauge=$Stress/GuiltrogressBar
 
 @onready var Arrow = $Arrow
@@ -43,9 +43,9 @@ var max_stress: int =100
 var current_horny: int = 0 
 var max_horniness: int = 100
 var current_position: int =0
+var textureCamp: Texture2D
 
-
-var campposition
+var campposition :CampPosition 
 var targetable : bool = false 
 var CharaScale : Vector2
 const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
@@ -96,9 +96,16 @@ func load_from_dict(data: Dictionary) -> void:
 		var position= data["position"]
 		current_position=position
 	if data.has("camp_skills"):
-		camp_skill_resources = data["camp_skills"]
+		
+		camp_skill_resources.clear()  
+		for skill_data in data["camp_skills"]:
+			var skill = skill_data.duplicate()  
+			camp_skill_resources.append(skill)
 	if data.has("acte_twice"):
 		acte_twice = data["acte_twice"]
+	if data.has("textureCamp"):
+		textureCamp = data["textureCamp"]
+		portrait_texture = textureCamp
 		
 func set_targetable(targe : bool):
 	targetable = targe 
@@ -116,7 +123,7 @@ func add_buff(buff: Buff):
 	
 func update_display() -> void:
 	if not hp_Jauge or not guilt_Jauge :
-		hp_Jauge=$HP/HPProgressBar
+		hp_Jauge=$HPProgressBar
 		guilt_Jauge=$Stress/GuiltrogressBar
 		#horny_Jauge=$horny/HornyProgressBar
 		# return
@@ -147,3 +154,16 @@ func animate_heal(damage:int, source:CharaCamp, color=null):
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	await tween.finished
 	#emit_signal("skill_animation_finished")
+
+signal skill_animation_started
+signal skill_animation_finished
+func animate_selected():
+	emit_signal("skill_animation_started")
+	var tween := create_tween() as Tween
+	var CharaScale = self.scale
+	var normal_size = CharaScale
+	var big_size= Vector2(1.0,1.1) 
+	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
+	tween.tween_property(self, "scale", normal_size, 0.2)
+	await tween.finished
+	emit_signal("skill_animation_finished")

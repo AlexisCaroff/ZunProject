@@ -86,6 +86,9 @@ func use(target: PositionSlot = null, secondtarget : bool=false):
 			return
 		
 		if allways_hit == false:
+			for tag in owner.tags:
+				if tag == "voyeur":
+					precision+=5
 			var chance = precision - target.occupant.evasion
 			var rand = randi() % 100
 			if rand >= chance:
@@ -104,6 +107,11 @@ func pay_cost():
 	owner.update_ui()
 
 func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = effects):
+	for tag in owner.tags:
+				if tag == "degrader":
+					if target != owner._current_slot:
+						target.occupant.current_stress +=2
+						owner.slur()
 	for effect in effects_array:
 		effect.apply(owner, target)
 

@@ -8,7 +8,7 @@ class_name Character
 @export var dead_portrait_texture: Texture2D
 @export var initiative_icon: Texture2D
 @onready var name_label = $name
-
+@export var textureCamp: Texture2D
 
 @onready var hp_Jauge 
 @onready var hornyJauge 
@@ -22,12 +22,14 @@ class_name Character
 @export var base_defense: int = 5
 @export var base_willpower: int = 5
 @export var base_initiative: int = 1
+@export var base_evasion: int = 5
 @export var attack: int = 10
 @export var defense: int = 5
 @export var willpower: int = 5
 @export var evasion: int = 5
 @export var initiative: int = 1
-@export var base_evasion: int = 5
+
+
 
 @onready var Selector:TextureRect =$pivot/Selector
 
@@ -61,7 +63,7 @@ var skills: Array[Skill] = []
 @onready var skillText =$Skill
 @export var skill_resources: Array[Resource] = []
 # --- Tags (type, classe, etc.)
-var tags: Array[String] = []
+@export var tags: Array[String] = []
 #combat
 var combat_manager: Node = null 
 # --- Contrôle
@@ -87,7 +89,18 @@ var is_targetable: bool = false
 var exclamation :TextureRect
 var CharaColor =Color(1.0,1.0,1.0,1.0)
 var acte_twice : bool = false
-
+var exibBonusAtt = 0
+@export var bark_scene: PackedScene = preload("res://UI/bark.tscn")
+@export var taunts := [
+	"Is that all you've got?",
+	"Try harder!",
+	"Pathetic!",
+	"You're wide open!",
+	"You fight like a wet noodle!",
+	"Oops! Did that hurt?",
+	
+]
+var current_bark: Bark = null
 
 
 func _ready():
@@ -95,7 +108,11 @@ func _ready():
 	name_label.text = Charaname
 	sprite.texture = portrait_texture
 	Selector.texture = portrait_texture
-	
+	for tag in tags:
+				if tag=="sadist":
+					attack+=2
+				if tag=="maso":
+					evasion -=2
 	
 	
 	for s in skill_resources:
@@ -128,7 +145,27 @@ func update_stats():
 
 	for buff in buffs:
 		buff.apply_to(self)
+		
 
+func show_bark(text:String):
+	if bark_scene == null:
+		return
+	
+	# Si un bark existe déjà, on le supprime avant d’en créer un nouveau
+	if current_bark and is_instance_valid(current_bark):
+		current_bark.queue_free()
+	
+	current_bark = bark_scene.instantiate()
+	add_child(current_bark) # 🔥 Instancié comme enfant du personnage
+	
+	current_bark.set_text(text)
+	
+	# Position ajustée au-dessus du personnage
+	var bark_offset_y :=  - 160  # un peu au-dessus de la tête
+	current_bark.position = Vector2(0, bark_offset_y)
+
+func slur():
+	show_bark(taunts.pick_random())
 func update_ui():
 
 	if not hp_Jauge:
@@ -297,7 +334,11 @@ func end_turn():
 	
 
 
-
+func isdead():
+	dead = true
+	
+	print (Charaname+ " is dead")
+			
 func select_as_target():
 	print("Cible sélectionnée : ", self.name)
 	combat_manager.select_target(self)
@@ -305,11 +346,23 @@ func select_as_target():
 
 func take_damage(source: Character, stat: int, amount: int, type:bool) -> void:
 	var damage := 0
+	
 	for buff in buffs:
 		if buff.name == "Target":
 			combat_manager.pending_skill.reducecost = buff.amount
 	match stat:
 		DamageEffect.Stat.STAMINA:
+			for tag in tags:
+				if tag=="maso":
+					var littlebuff := load("res://characters/kink/littleattackbuff.tres")
+					add_buff(littlebuff)
+					current_horniness = max(0, current_horniness + 2)
+			for tag in source.tags:
+				if tag =="sadist":
+					source.current_horniness = max(0, source.current_horniness + 2)
+				if tag =="degrader":
+					source.current_horniness = max(0, source.current_horniness + floor(current_stress/2))
+					
 			damage = max(0, (amount + source.attack) - defense)
 			animate_take_damage(damage, source)
 			if current_stamina > 0:
@@ -317,15 +370,16 @@ func take_damage(source: Character, stat: int, amount: int, type:bool) -> void:
 				current_stamina = clamp(current_stamina - damage, 0, max_stamina)
 				
 				if current_stamina == 0:
+					
 					sprite.self_modulate = Color(0.8, 0.1, 0.1)
 					sprite.texture = dead_portrait_texture
 					Selector.texture = dead_portrait_texture
 			else:
-				dead = true
 				if IsDemon && type:
 					combat_manager.nb_crystaleloot += 1 
-				print (Charaname+ " is dead")
-			
+				isdead()
+				
+
 		
 				
 
@@ -337,8 +391,26 @@ func take_damage(source: Character, stat: int, amount: int, type:bool) -> void:
 			
 
 		DamageEffect.Stat.STRESS:
+			for tag in tags:
+				if tag=="exib":
+					amount -= 2
+					take_damage(self, 2, 2,false)
+					attack -= exibBonusAtt
+					exibBonusAtt =  floor(current_stress/10)
+					attack += exibBonusAtt
+				if tag=="degenerate":
+					var usedSkills : Array[Skill]
+					for skill in skills:
+						if skill.current_cooldown >0:
+							usedSkills.append(skill)
+					if not usedSkills.is_empty():
+						var reduceCooldownSkill :Skill = usedSkills.pick_random()
+						reduceCooldownSkill.current_cooldown -=1
+					current_horniness = max(0, current_horniness + 2)
+					
 			damage = max(0, amount - willpower)
 			current_stress = max(0, current_stress + damage)
+			
 	shake_camera(20.0)
 	#print("%s inflige %d de %s à %s" % [source.name, damage, DamageEffect.Stat.keys()[stat], name])
 	update_ui()
@@ -352,7 +424,12 @@ func resetVisuel()-> void:
 	if current_stamina > 0:
 			sprite.texture = portrait_texture
 			Selector.texture = portrait_texture
-	
+	update_ui()
+
+
+var outline : TextureRect
+
+
 
 #------------------------------- Animation ------------------------------------------------
 
@@ -367,7 +444,7 @@ func animate_start_Turn():
 	var tween := create_tween() as Tween
 	CharaScale = current_slot.position_data.scale
 	var normal_size = CharaScale
-	var big_size= Vector2(1.0,1.1) 
+	var big_size= Vector2(normal_size.x*1.1,normal_size.y*1.3) 
 	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	await tween.finished
@@ -383,7 +460,7 @@ func animate_get_horny(damage:int):
 		effect_instance.setup(damage)
 	var tween := create_tween() as Tween
 	var normal_size = CharaScale
-	var big_size= Vector2(1.0,1.1) 
+	var big_size= Vector2(normal_size.x*1.1,normal_size.y*1.3) 
 	tween.tween_property(self, "scale", big_size, 0.2)
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	await tween.finished
@@ -400,8 +477,8 @@ func animate_take_damage(damage:int, source:Character):
 	var tween := create_tween() as Tween
 	var tween2 := create_tween() as Tween
 	var normal_size = CharaScale
-	var big_size= Vector2(1.0,1.05) 
-	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
+	var big_size= Vector2(normal_size.x*1.1,normal_size.y*1.3) 
+	tween.tween_property(self, "scale", big_size, 0.2)
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	var start_pos = position
 	var direction = (source.global_position + global_position).normalized()
@@ -443,7 +520,7 @@ func DebuffAnim(text):
 func animate_attack(target: Character):
 	emit_signal("skill_animation_started")
 	combat_manager.ui.log(Charaname+ " use " + combat_manager._pending_skill.descriptionName)
-	
+
 	if is_player_controlled:
 		combat_manager.SpriteHeros.attack_anim(self)
 	else:
@@ -492,6 +569,9 @@ func miss_animation(target: Character):
 	tween.tween_property(self, "position", start_pose, 0.2).set_delay(0.2)
 	await tween.finished
 	emit_signal("skill_animation_finished")
+	
+
+	
 	
 func shake_camera(strength := 5.0):
 	var cam := get_viewport().get_camera_2d()

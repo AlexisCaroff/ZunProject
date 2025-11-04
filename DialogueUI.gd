@@ -1,16 +1,22 @@
 extends Control
 
-@onready var portrait := $Portrait
-@onready var speaker_label := $Speaker
-@onready var text_label := $Text
+@onready var left_portrait: TextureRect = $Portrait
+@onready var right_portrait: TextureRect = $Portrait2
+@onready var dialogue_text: RichTextLabel = $RichTextLabel
+@onready var name_label: Label = $Speaker
 
-func set_portrait(tex: Texture2D):
-	if tex:
-		portrait.texture = tex
-		portrait.visible = true
-	else:
-		portrait.visible = false
+func set_text(speaker: String, text: String) -> void:
+	name_label.text = speaker
+	dialogue_text.text = text
 
-func set_text(speaker: String, text: String):
-	speaker_label.text = speaker
-	text_label.text = text
+func set_portraits(left: Texture2D, right: Texture2D, active_side: String = "left") -> void:
+	left_portrait.texture = left
+	right_portrait.texture = right
+	
+	# Met en avant celui qui parle
+	if active_side == "left":
+		left_portrait.modulate = Color(1, 1, 1, 1)
+		right_portrait.modulate = Color(1, 1, 1, 0.5)
+	elif active_side == "right":
+		left_portrait.modulate = Color(1, 1, 1, 0.5)
+		right_portrait.modulate = Color(1, 1, 1, 1)

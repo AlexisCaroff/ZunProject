@@ -64,10 +64,10 @@ func _ready():
 		right_button.modulate.a = 0.2
 	
 	await get_tree().process_frame  # attendre que la frame d'instanciation soit finie
-	donjon_map.curentposition = donjon_map.positions[Game_Manager.current_room_Ressource.position_on_map]
+
 	if donjon_map:
-		donjon_map.focus_on_room(donjon_map.curentposition, viewport)
-		donjon_map.move_to_position(donjon_map.curentposition)
+		donjon_map.focus_door(Game_Manager.current_room_Ressource, viewport)
+		#donjon_map.move_to_position(donjon_map.curentposition)
 		
 func load_characters_from_gamestat():
 	characters.clear()

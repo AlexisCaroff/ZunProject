@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://doitrlqhfja4t"]
+[gd_scene load_steps=21 format=3 uid="uid://doitrlqhfja4t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_1rndn"]
 [ext_resource type="Texture2D" uid="uid://dlcmqtbjarl35" path="res://characters/charatexture/enemy spitterDead.png" id="3_1rndn"]
+[ext_resource type="Texture2D" uid="uid://dbq25fw4dr1n0" path="res://characters/exploPortrait/SpitterExploPortrait.png" id="3_y1ii6"]
 [ext_resource type="Texture2D" uid="uid://cgnrms5owdhet" path="res://characters/characterInitiative/slimportini.png" id="4_1rndn"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="5_3o24a"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="6_3o24a"]
@@ -57,6 +58,7 @@ metadata/_custom_type_script = "uid://db1m8vwgp38yx"
 [node name="CharacterTestennemie4" type="Node2D"]
 script = ExtResource("1_1rndn")
 portrait_texture = ExtResource("11_2uqc5")
+explorationPortrait = ExtResource("3_y1ii6")
 dead_portrait_texture = ExtResource("3_1rndn")
 initiative_icon = ExtResource("4_1rndn")
 Charaname = "Glarg"

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_d2e5p"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_e3o77"]
 [ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="3_e3o77"]
-[ext_resource type="Texture2D" uid="uid://cn8mh7x1j6vs" path="res://actions/actiontexture/charge.png" id="4_1g6qw"]
+[ext_resource type="Texture2D" uid="uid://ccnq4lbltabiy" path="res://actions/actiontexture/tentacles.png" id="5_b0cgj"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_c83rg"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
@@ -23,8 +23,8 @@ metadata/_custom_type_script = "uid://cxxxcftffxxjh"
 script = ExtResource("5_c83rg")
 name = "hook"
 descriptionName = "tentacle grabe"
-description = "Inflige des dégâts à un ennemi et le tire vers l'avnt"
-icon = ExtResource("4_1g6qw")
+description = "pulls an enemy forward"
+icon = ExtResource("5_b0cgj")
 required_position = null
 ImageSkill = ExtResource("1_d2e5p")
 the_target_type = null

@@ -29,7 +29,8 @@ func save_party_from_nodes(heroes: Array) -> void:
 			# Nouvelles données de textures
 			"portrait_texture_path": hero.portrait_texture.resource_path,
 			"dead_portrait_texture_path": hero.dead_portrait_texture.resource_path,
-			"initiative_icon_path": hero.initiative_icon.resource_path
+			"initiative_icon_path": hero.initiative_icon.resource_path,
+			"textureCamp": hero.textureCamp
 		})
 		print(hero.Charaname + "is saved")
 	#print("Party saved: ", saved_heroes_data)

@@ -7,9 +7,11 @@ extends Button
 # échelle configurables
 @export var normal_scale: Vector2 = Vector2.ONE
 @export var hover_scale: Vector2 = Vector2(1.2, 1.2)
+@export var centered : bool =true
 
 func _ready():
-	pivot_offset = size / 2
+	if centered:
+		pivot_offset = size / 2
 	# couleur de départ
 	self_modulate = normal_color
 	scale = normal_scale
