@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://h8pqs7tabdxj"]
+[gd_scene load_steps=67 format=3 uid="uid://h8pqs7tabdxj"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_64xaa"]
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_8iwb5"]
@@ -41,6 +41,7 @@
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="39_ellpq"]
 [ext_resource type="Texture2D" uid="uid://dh6k7cso8hksn" path="res://UI/charaIcon.png" id="40_dk4nq"]
 [ext_resource type="Texture2D" uid="uid://ctkoy8ysbicta" path="res://UI/iconMap.png" id="41_508lt"]
+[ext_resource type="Texture2D" uid="uid://cfoht4c53xv8e" path="res://UI/ennemiturn.png" id="42_3phk4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kiw3p"]
 
@@ -206,11 +207,12 @@ scale = Vector2(0.4, 0.4)
 
 [node name="FightUi" type="Sprite2D" parent="."]
 z_index = 6
-position = Vector2(960, 540)
-scale = Vector2(0.779723, 0.787591)
+position = Vector2(960, 537.75)
+scale = Vector2(0.779723, 0.793066)
 texture = ExtResource("4_j8jp5")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 z_index = 6
 layout_mode = 0
 offset_left = 681.0
@@ -238,7 +240,6 @@ size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
-icon = ExtResource("6_0c2hg")
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -259,7 +260,6 @@ size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
-icon = ExtResource("6_0c2hg")
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -280,7 +280,6 @@ size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
-icon = ExtResource("6_0c2hg")
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -301,7 +300,6 @@ size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
-icon = ExtResource("6_0c2hg")
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -322,7 +320,6 @@ size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("5_kacea")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
-icon = ExtResource("6_0c2hg")
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -448,9 +445,9 @@ pitch_scale = 0.67
 z_index = 6
 layout_mode = 0
 offset_left = 66.0
-offset_top = 811.0
+offset_top = 809.0
 offset_right = 212.0
-offset_bottom = 957.0
+offset_bottom = 955.0
 texture = ExtResource("15_boe0j")
 expand_mode = 1
 
@@ -1051,6 +1048,21 @@ centered = false
 position = Vector2(39.8667, 43.7125)
 scale = Vector2(0.937106, 0.907487)
 texture = ExtResource("41_508lt")
+
+[node name="EnnemiTurn" type="ColorRect" parent="."]
+z_index = 15
+layout_mode = 0
+offset_left = 448.0
+offset_top = 838.0
+offset_right = 1416.0
+offset_bottom = 1074.0
+color = Color(0.0235294, 0.0196078, 0, 1)
+
+[node name="Ennemiturn" type="Sprite2D" parent="EnnemiTurn"]
+self_modulate = Color(0.385493, 0.385492, 0.385492, 0.635)
+position = Vector2(512, 109)
+scale = Vector2(0.784465, 0.752116)
+texture = ExtResource("42_3phk4")
 
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]

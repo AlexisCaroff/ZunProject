@@ -7,10 +7,13 @@ var color = null
 
 func setup(damage_amount: int, _thecolor = null):
 	if _thecolor != null:
+		
 		for child in get_children():
 			if child is Node2D:
 				child.modulate = _thecolor
-	label.text = "-" + str(damage_amount)
+		label.add_theme_color_override("font_color", _thecolor)
+	label.text = "" + str(damage_amount)
+	
 	anim.play("hit")
 
 

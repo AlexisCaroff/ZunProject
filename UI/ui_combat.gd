@@ -32,7 +32,7 @@ extends Control
 @onready var guilt2= $overmenu/Guilt2
 @onready var horny2 = $overmenu/Horny2
 @onready var skills2 = $overmenu/ActionPanel2.get_children()
-
+@onready var hideSkillsPanel =$EnnemiTurn
 @onready var viewport: Viewport = $SubViewportContainer/SubViewport
 @onready var donjon_map: Map = $SubViewportContainer/SubViewport/map
 @onready var cooldown_bars = [
@@ -71,7 +71,11 @@ func update_turn_queue_ui(queue: Array[Character]):
 		
 
 func update_ui_for_current_character(character: Character):
-	
+	if character.is_player_controlled:
+		hideSkillsPanel.visible=false
+	else:
+		hideSkillsPanel.visible=true
+		
 	if skill_buttons == null:
 		#push_error("skill_buttons est null pour %s" % character.Charaname)
 		skill_buttons = [
@@ -127,7 +131,7 @@ func update_ui_for_current_character(character: Character):
 
 
 func update_cooldown_bar(container: HBoxContainer, skill):
-	# On efface d'abord les anciens compteurs
+	
 	for child in container.get_children():
 		child.queue_free()
 	
@@ -140,14 +144,14 @@ func update_cooldown_bar(container: HBoxContainer, skill):
 	# Sécurité : éviter erreurs si pas défini
 	if max_cd <= 0:
 		return
-
+	var charged : int = max_cd-current_cd
 	for i in range(max_cd):
 		var rect = ColorRect.new()
 		rect.custom_minimum_size = Vector2(5, 5)
-		rect.color = Color.GRAY
+		rect.color = Color(0.2,0.2,0.2)
 
 		# Si ce tour est déjà "récupéré", on le met orange
-		if i >= current_cd:
+		if i <= charged :
 			rect.color = Color(0.64,0.56,0.36)
 		container.add_child(rect)
 func update_ui_for_overed_character(character: Character):
@@ -226,15 +230,22 @@ func log(text):
 			var fenetre = contextennemi.get_child(0)
 			fenetre.visible = false
 			var fenetre2 = log_panel.get_child(0)
-			fenetre2.visible = true
+			if text != "":
+				fenetre2.visible = true
+			else:
+				fenetre2.visible = false
 		else :
 			if contextennemi==null:
 				contextennemi=$contextennemi
 				contextennemi.text =  text
 			else:
 				contextennemi.text =  text
+
 			var fenetre = contextennemi.get_child(0)
-			fenetre.visible = true
+			if text != "":
+				fenetre.visible = true
+			else:
+				fenetre.visible = false
 			log_panel.text = ""
 			var fenetre2 = log_panel.get_child(0)
 			fenetre2.visible = false

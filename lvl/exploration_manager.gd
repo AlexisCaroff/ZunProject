@@ -144,3 +144,9 @@ func _on_button_2_button_down() -> void:
 
 func _on_campement_button_down() -> void:
 	gm.go_to_campement()
+func sortie_du_camp():
+	for chara in characters:
+		chara.current_stamina = min(chara.max_stamina, chara.current_stamina + 10)
+		chara.animate_heal(10, chara)
+		chara.update_display()
+		

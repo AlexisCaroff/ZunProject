@@ -43,8 +43,8 @@ func _ready():
 # -------Heal chara----------------
 
 	for chara in characters:
-		chara.current_stamina = min(chara.max_stamina, chara.current_stamina + 30)
-		chara.animate_heal(30, chara)
+		chara.current_stamina = min(chara.max_stamina, chara.current_stamina + 10)
+		chara.animate_heal(10, chara)
 		chara.update_display()
 #--------------------------------------
 	
@@ -206,6 +206,8 @@ func _on_camp_skill_pressed(skill: CampSkill, user: CharaCamp) -> void:
 	
 
 func endcamp():
+	
+	
 	gm.return_to_exploration()
 	if GameState.saveRunning:
 		push_warning("Sauvegarde déjà en cours…")

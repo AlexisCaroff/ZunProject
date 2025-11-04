@@ -21,7 +21,7 @@ metadata/_custom_type_script = "uid://bjysq2c5802md"
 [resource]
 script = ExtResource("2_s3ehv")
 name = "Flirt"
-description = "engage une discution"
+description = "Invite charater to tent"
 icon = ExtResource("3_racfd")
 cost = 2
 standarEnd = false

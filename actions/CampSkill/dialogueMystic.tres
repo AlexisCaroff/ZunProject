@@ -8,7 +8,7 @@
 [resource]
 script = ExtResource("4_1xboo")
 name = "Dialogue"
-description = "engage une discution"
+description = "talk to the character"
 icon = ExtResource("3_3wews")
 cost = 1
 standarEnd = false

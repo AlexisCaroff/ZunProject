@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="5_om3t3"]
 
 [node name="DialogueUI" type="Control"]
+z_index = 20
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -24,6 +25,7 @@ scale = Vector2(2.07695, 4.90172)
 color = Color(0, 0, 0, 0.580392)
 
 [node name="Portrait2" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 729.159
 offset_top = -219.436
 offset_right = 2084.15
@@ -32,13 +34,14 @@ flip_h = true
 
 [node name="Portrait" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -180.076
-offset_top = -186.964
-offset_right = 1174.92
-offset_bottom = 1222.04
+offset_left = -205.66
+offset_top = -184.996
+offset_right = 1149.34
+offset_bottom = 1224.01
 texture = ExtResource("2_vl2if")
 
 [node name="ColorRect3" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = 35.0
 offset_top = 705.0
 offset_right = 897.0

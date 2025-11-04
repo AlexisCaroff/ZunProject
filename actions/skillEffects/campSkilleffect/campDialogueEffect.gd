@@ -18,7 +18,7 @@ func apply(user: CharaCamp, target: CharaCamp):
 
 	# Choix du texte en fonction de la classe ou du nom du target
 	match target.Charaname:
-		"Priest":  file_path = dialoguePriest
+		"Priestess":  file_path = dialoguePriest
 		"Mystic":  file_path = dialogueMystic
 		"Hunter":  file_path = dialogueHunter
 		"Warrior": file_path = dialogueWarrior
@@ -33,6 +33,7 @@ func apply(user: CharaCamp, target: CharaCamp):
 	
 	if dialogue_manager and file_path != "":
 			dialogue_manager.load_dialogue(file_path)
+			dialogue_manager.participants.clear()
 			dialogue_manager.participants.append(user.Charaname)
 			dialogue_manager.participants.append(target.Charaname)
 			dialogue_manager.start_dialogue()

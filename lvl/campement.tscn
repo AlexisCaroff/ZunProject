@@ -438,7 +438,7 @@ offset_right = 212.0
 offset_bottom = 95.0
 theme_override_fonts/font = ExtResource("17_luaer")
 theme_override_font_sizes/font_size = 30
-text = "Return to the exploration"
+text = "Sleep an return to the exploration"
 horizontal_alignment = 1
 autowrap_mode = 2
 

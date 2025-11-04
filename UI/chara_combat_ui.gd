@@ -9,6 +9,7 @@ extends Node2D
 
 @onready var HPProgressBar= $HPProgressBar
 @onready var HornyBar=$HornyJauge/HornyJaugePleine
+@onready var TheHornyBar=$HornyJauge
 
 func getHpbar():
 	HPProgressBar= $HPProgressBar

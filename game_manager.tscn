@@ -32,3 +32,14 @@ texture = ExtResource("4_vk86k")
 position = Vector2(-59, 21)
 scale = Vector2(1.12691, 1.07276)
 texture = ExtResource("5_vk86k")
+
+[node name="Label" type="Label" parent="Label"]
+z_index = 6
+offset_left = 1513.0
+offset_top = -8.0
+offset_right = 1757.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("3_d5upp")
+theme_override_font_sizes/font_size = 30
+text = "Pre-Alpha test"
+horizontal_alignment = 1

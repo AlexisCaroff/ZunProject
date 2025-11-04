@@ -16,7 +16,7 @@ func set_portraits(left: Texture2D, right: Texture2D, active_side: String = "lef
 	# Met en avant celui qui parle
 	if active_side == "left":
 		left_portrait.modulate = Color(1, 1, 1, 1)
-		right_portrait.modulate = Color(1, 1, 1, 0.5)
+		right_portrait.modulate = Color(0.3, 0.3, 0.3, 1.0)
 	elif active_side == "right":
-		left_portrait.modulate = Color(1, 1, 1, 0.5)
+		left_portrait.modulate = Color(0.3, 0.3, 0.3, 1.0)
 		right_portrait.modulate = Color(1, 1, 1, 1)

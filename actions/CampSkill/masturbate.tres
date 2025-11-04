@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://c1v0aouwm1dpi"
 [resource]
 script = ExtResource("2_0q17p")
 name = "Masturbate"
-description = "try to calm down"
+description = "releave pressure "
 icon = ExtResource("3_beaml")
 cost = 2
 standarEnd = false

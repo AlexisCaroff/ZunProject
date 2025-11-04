@@ -48,6 +48,11 @@ func assign_character(character: Character, movetime:float):
 	
 	occupant.dotsActions = CharaUI.actionpoints
 	occupant.z_index=self.z_index
+	if occupant.is_player_controlled==false:
+		for actionpoint in CharaUI.actionpoints:
+			actionpoint.visible=false
+		CharaUI.TheHornyBar.visible=false
+		
 	print("chara assigned to position")
 	if not is_ready:
 		await ready

@@ -161,8 +161,8 @@ func show_bark(text:String):
 	current_bark.set_text(text)
 	
 	# Position ajustée au-dessus du personnage
-	var bark_offset_y :=  - 160  # un peu au-dessus de la tête
-	current_bark.position = Vector2(0, bark_offset_y)
+	var bark_offset_y :=  - 240 # un peu au-dessus de la tête
+	current_bark.position = Vector2(-60, bark_offset_y)
 
 func slur():
 	show_bark(taunts.pick_random())
@@ -472,7 +472,7 @@ func animate_take_damage(damage:int, source:Character):
 	get_tree().current_scene.add_child(effect_instance)
 	effect_instance.global_position = global_position + Vector2(0, -140)
 	if effect_instance.has_method("setup"):
-		effect_instance.setup(damage)
+		effect_instance.setup(damage, Color(1,0.4,0.3))
 		
 	var tween := create_tween() as Tween
 	var tween2 := create_tween() as Tween

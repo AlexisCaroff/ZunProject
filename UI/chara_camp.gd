@@ -138,8 +138,10 @@ func update_display() -> void:
 func gomasturbate():
 	campposition.visible=false
 	
+signal skill_animation_started
+signal skill_animation_finished
 func animate_heal(damage:int, source:CharaCamp, color=null):
-	#emit_signal("skill_animation_started")
+	emit_signal("skill_animation_started")
 	var effect_instance = healEffectScene.instantiate()
 	get_tree().current_scene.add_child(effect_instance)
 	effect_instance.global_position = global_position + Vector2(0, -140)
@@ -153,10 +155,9 @@ func animate_heal(damage:int, source:CharaCamp, color=null):
 	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	await tween.finished
-	#emit_signal("skill_animation_finished")
+	emit_signal("skill_animation_finished")
 
-signal skill_animation_started
-signal skill_animation_finished
+
 func animate_selected():
 	emit_signal("skill_animation_started")
 	var tween := create_tween() as Tween

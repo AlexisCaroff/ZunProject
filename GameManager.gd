@@ -144,4 +144,5 @@ func return_to_exploration():
 		var new_scene = scene_to_load.instantiate()
 		room_container.add_child(new_scene)
 		current_room_node = new_scene
-		
+		var exploManager =new_scene.get_node("ExplorationManager") as ExplorationManager
+		exploManager.sortie_du_camp()

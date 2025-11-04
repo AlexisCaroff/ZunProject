@@ -14,6 +14,8 @@ var initiative_icon_path: String = ""
 
 @onready var hornyJauge=$HornyJauge/HornyJaugePleine
 
+
+const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
 # --- Infos de base
 @export var Charaname: String = "name"
 @export var IsDemon: bool = false
@@ -120,7 +122,22 @@ func add_buff(buff: Buff):
 	
 signal skill_animation_started
 signal skill_animation_finished
-
+func animate_heal(damage:int, source:CharaExplo, color=null):
+	emit_signal("skill_animation_started")
+	var effect_instance = healEffectScene.instantiate()
+	get_tree().current_scene.add_child(effect_instance)
+	effect_instance.global_position = global_position + Vector2(0, -140)
+	if effect_instance.has_method("setup"):
+		effect_instance.setup(damage,color)
+		
+	var tween := create_tween() as Tween
+	
+	var normal_size = self.scale
+	var big_size= Vector2(1.0,1.05) 
+	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
+	tween.tween_property(self, "scale", normal_size, 0.2)
+	await tween.finished
+	emit_signal("skill_animation_finished")
 	
 func animate_selected():
 	emit_signal("skill_animation_started")

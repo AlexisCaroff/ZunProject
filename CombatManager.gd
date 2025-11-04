@@ -221,9 +221,12 @@ func next_turn():
 	await get_tree().process_frame
 	
 
-	ui.log(current_character.Charaname +" turn")
+	ui.log("")
 	selectorChara.position= current_character._current_slot.CharaUI.global_position
-
+	if current_character.is_player_controlled:
+		selectorChara.modulate = Color(0.9,0.95,0.7)
+	else:
+		selectorChara.modulate = Color(0.1,0.1,0.1)
 	current_character.animate_start_Turn()
 	for chara in turn_queue:
 		chara.update_ui()
