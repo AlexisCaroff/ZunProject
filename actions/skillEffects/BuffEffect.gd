@@ -6,11 +6,12 @@ enum Stat {
 	DEFENSE,
 	SPEED,
 	STRESS_RESIST,
-	HORNY_RESIST
+	HORNY_RESIST,
+	OTHER
 }
 @export var name = "name" 
 @export var uitexture: Texture2D = null
-@export_enum("ATTACK", "DEFENSE", "SPEED", "STRESS_RESIST", "HORNY_RESIST")
+@export_enum("ATTACK", "DEFENSE", "SPEED", "STRESS_RESIST", "HORNY_RESIST","OTHER")
 var affected_stat: int = Stat.ATTACK
 
 @export var amount: int = 5

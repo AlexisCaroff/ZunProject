@@ -227,7 +227,8 @@ func next_turn():
 		selectorChara.modulate = Color(0.9,0.95,0.7)
 	else:
 		selectorChara.modulate = Color(0.1,0.1,0.1)
-	current_character.animate_start_Turn()
+	current_character.start_turn()
+	
 	for chara in turn_queue:
 		chara.update_ui()
 	await current_character.skill_animation_finished

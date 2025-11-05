@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://dxj1ksi0rq6i6"]
+
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_2gtcg"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_2odx0"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_jtfnp"]
+[ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="3_7m3nb"]
+[ext_resource type="Texture2D" uid="uid://ccnq4lbltabiy" path="res://actions/actiontexture/tentacles.png" id="4_2x4hl"]
+
+[sub_resource type="Resource" id="Resource_t3sey"]
+script = ExtResource("2_jtfnp")
+MagicDMG = false
+amount = 10
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[sub_resource type="Resource" id="Resource_t52hr"]
+script = ExtResource("3_7m3nb")
+target_index = 4
+metadata/_custom_type_script = "uid://cxxxcftffxxjh"
+
+[resource]
+script = ExtResource("2_2odx0")
+name = "Attaque"
+descriptionName = "Attaque"
+description = "Inflige des dégâts à un ennemi"
+icon = ExtResource("4_2x4hl")
+required_position = 1
+the_target_type = 0
+effects = Array[ExtResource("1_2gtcg")]([SubResource("Resource_t3sey"), SubResource("Resource_t52hr")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("1_2gtcg")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://dwdi447w8ocvi"]
+
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_tnww7"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_f2alv"]
+[ext_resource type="Texture2D" uid="uid://yyl7yyr5j4rv" path="res://UI/poisonHorny.png" id="3_tnww7"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="4_dt8ru"]
+[ext_resource type="Texture2D" uid="uid://bw10cun1t2x4g" path="res://actions/actiontexture/poison.png" id="5_fmjc0"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="6_kauge"]
+
+[sub_resource type="Resource" id="Resource_jrqoj"]
+script = ExtResource("2_f2alv")
+name = "poisonHorny"
+uitexture = ExtResource("3_tnww7")
+affected_stat = 5
+amount = 5
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[sub_resource type="Resource" id="Resource_3h4no"]
+script = ExtResource("4_dt8ru")
+MagicDMG = false
+amount = 5
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[resource]
+script = ExtResource("6_kauge")
+name = "Poison"
+descriptionName = "Horny Poison"
+description = "Aphrodisiac on an enemy"
+icon = ExtResource("5_fmjc0")
+required_position = 0
+the_target_type = 0
+effects = Array[ExtResource("1_tnww7")]([SubResource("Resource_jrqoj"), SubResource("Resource_3h4no")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("1_tnww7")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

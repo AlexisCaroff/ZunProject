@@ -1,0 +1,127 @@
+[gd_scene load_steps=16 format=3 uid="uid://dasi42qwl63md"]
+
+[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_f5x8r"]
+[ext_resource type="Texture2D" uid="uid://kpc43243oyss" path="res://characters/charatexture/ENEMY_ADDICT_idle.png" id="2_jdh3h"]
+[ext_resource type="Texture2D" uid="uid://b0yhh4guwwtsh" path="res://characters/exploPortrait/AdictExploPortrait.png" id="3_6livi"]
+[ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="4_2b0t4"]
+[ext_resource type="Resource" uid="uid://dxj1ksi0rq6i6" path="res://actions/ennemiCombatSkills/tentacleGrab.tres" id="5_2b0t4"]
+[ext_resource type="Resource" uid="uid://dkph6nihwi550" path="res://actions/ennemiCombatSkills/raving.tres" id="6_jdh3h"]
+[ext_resource type="Resource" uid="uid://daxgjjbu82mgo" path="res://actions/ennemiCombatSkills/euphoria.tres" id="7_6livi"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="7_8uu4u"]
+[ext_resource type="Resource" uid="uid://86jrw37oebpi" path="res://characters/charatexture/braines/basicRandomBrain.tres" id="8_au82g"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="9_qu7su"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="10_sb46e"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="11_lw1ij"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="12_flf2m"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="13_3g74j"]
+[ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="14_l8mbh"]
+
+[node name="Addict" type="Node2D"]
+script = ExtResource("1_f5x8r")
+portrait_texture = ExtResource("2_jdh3h")
+explorationPortrait = ExtResource("3_6livi")
+dead_portrait_texture = ExtResource("4_2b0t4")
+initiative_icon = ExtResource("3_6livi")
+Charaname = "Addict"
+IsDemon = true
+Chara_position = 1
+skill_resources = Array[Resource]([ExtResource("5_2b0t4"), ExtResource("6_jdh3h"), ExtResource("7_6livi"), ExtResource("5_2b0t4"), ExtResource("7_8uu4u")])
+is_player_controlled = false
+ai_brain = ExtResource("8_au82g")
+
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(42, 38)
+script = ExtResource("9_qu7su")
+min_scale = 1.0
+scalemini = 0.95
+
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+offset_left = -153.0
+offset_top = -207.0
+offset_right = 18.0
+offset_bottom = 24.0
+scale = Vector2(1.19628, 0.899908)
+mouse_filter = 2
+texture = ExtResource("2_jdh3h")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Selector" type="TextureRect" parent="pivot"]
+self_modulate = Color(2, 2, 2, 0)
+offset_left = -153.0
+offset_top = -207.0
+offset_right = 18.0
+offset_bottom = 24.0
+scale = Vector2(1.19628, 0.899908)
+mouse_filter = 2
+texture = ExtResource("2_jdh3h")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="name" type="Label" parent="."]
+visible = false
+offset_left = -46.0
+offset_top = -267.0
+offset_right = -2.0
+offset_bottom = -244.0
+text = "name"
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = -81.0
+offset_top = -257.203
+offset_right = 152.0
+offset_bottom = 124.797
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = -19.0
+offset_top = -189.0
+offset_right = 21.0
+offset_bottom = -170.0
+alignment = 1
+
+[node name="Skill" type="TextureRect" parent="."]
+visible = false
+offset_left = -158.0
+offset_top = -240.0
+offset_right = 418.0
+offset_bottom = 336.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_sb46e")
+script = ExtResource("11_lw1ij")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(1, -286.203)
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("12_flf2m")
+offset = Vector2(0, 115.375)
+script = ExtResource("9_qu7su")
+min_scale = 0.38
+max_scale = 0.38
+scalemini = 0.3
+min_duration = 0.5
+max_duration = 0.5
+
+[node name="contexte" type="Label" parent="."]
+visible = false
+z_index = 15
+offset_left = -131.0
+offset_top = -225.0
+offset_right = 179.0
+offset_bottom = -63.0
+scale = Vector2(0.825763, 0.821068)
+theme_override_fonts/font = ExtResource("13_3g74j")
+theme_override_font_sizes/font_size = 40
+text = "Skill name"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="LootItem" type="Sprite2D" parent="contexte"]
+z_index = -1
+position = Vector2(161, 28)
+scale = Vector2(2.34924, 0.637405)
+texture = ExtResource("14_l8mbh")
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]

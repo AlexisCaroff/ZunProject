@@ -322,7 +322,22 @@ func reduce_cooldowns() -> void:
 	for skill in skills:
 		if skill.current_cooldown > 0:
 			skill.current_cooldown -= 1	
-	
+func start_turn():
+	print(Charaname+ "start turn")
+	animate_start_Turn()
+	var dmg =0
+	var dmgHorny=0
+	for buff in buffs:
+		if buff.name=="poison":
+			print (str(buff.amount))
+			dmg += buff.amount
+		if buff.name=="poisonHorny":
+			print (str(buff.amount))
+			dmgHorny += buff.amount
+	if dmg>0:
+		take_damage(self,0,dmg,false)	
+	if dmgHorny>0:
+		take_damage(self,1,dmg,false)	
 func end_turn():
 	
 	CharaColor=Color(1.0,1.0,1.0,1.0)
@@ -357,13 +372,18 @@ func take_damage(source: Character, stat: int, amount: int, type:bool) -> void:
 					var littlebuff := load("res://characters/kink/littleattackbuff.tres")
 					add_buff(littlebuff)
 					current_horniness = max(0, current_horniness + 2)
-			for tag in source.tags:
-				if tag =="sadist":
-					source.current_horniness = max(0, source.current_horniness + 2)
-				if tag =="degrader":
-					source.current_horniness = max(0, source.current_horniness + floor(current_stress/2))
-					
-			damage = max(0, (amount + source.attack) - defense)
+			if source != self:
+				for tag in source.tags:
+					if tag =="sadist":
+						source.current_horniness = max(0, source.current_horniness + 2)
+					if tag =="degrader":
+						source.current_horniness = max(0, source.current_horniness + floor(current_stress/2))
+			if source != self:
+				print (str(amount)+ " "+" -"+ str(defense))
+				damage = max(0, ((amount + source.attack) - defense))
+				print(self.Charaname+ " take "+ str(damage) +" damage from "+ source.Charaname)
+			else :
+				damage=amount
 			animate_take_damage(damage, source)
 			if current_stamina > 0:
 				

@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://daxgjjbu82mgo"]
+
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_11uf3"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_devca"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_jtbft"]
+[ext_resource type="Texture2D" uid="uid://bt3c7xnciduqy" path="res://actions/actiontexture/raving.png" id="3_hmtly"]
+
+[sub_resource type="Resource" id="Resource_383f7"]
+script = ExtResource("2_jtbft")
+name = "name"
+affected_stat = 0
+amount = 5
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[resource]
+script = ExtResource("2_devca")
+name = "Attaque"
+descriptionName = "Attaque"
+description = "Inflige des dégâts à un ennemi"
+icon = ExtResource("3_hmtly")
+required_position = 1
+the_target_type = 0
+effects = Array[ExtResource("1_11uf3")]([SubResource("Resource_383f7")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("1_11uf3")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

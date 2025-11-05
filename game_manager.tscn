@@ -35,6 +35,7 @@ texture = ExtResource("5_vk86k")
 
 [node name="Label" type="Label" parent="Label"]
 z_index = 6
+layout_mode = 0
 offset_left = 1513.0
 offset_top = -8.0
 offset_right = 1757.0

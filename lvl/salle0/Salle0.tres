@@ -9,4 +9,5 @@ position_on_map = 0
 CanCamp = false
 connected_room_ids = Array[String](["Salle1"])
 explored = true
+ennemikilled = false
 metadata/_custom_type_script = "uid://oj44pgv34ji0"

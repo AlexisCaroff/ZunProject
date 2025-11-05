@@ -7,14 +7,15 @@ enum Stat {
 	DEFENSE,
 	SPEED,
 	WILL_POWER,
-	EVASION
+	EVASION,
+	OTHER
 }
 
 @export var name: String = "Buff"
 @export var description: String = "Effet temporaire sur les statistiques."
 @export var icon: Texture2D
 
-@export_enum("ATTACK", "DEFENSE", "SPEED", "WILL_POWER", "EVASION")
+@export_enum("ATTACK", "DEFENSE", "SPEED", "WILL_POWER", "EVASION","OTHER")
 var stat: int = Stat.ATTACK
 
 @export var amount: int = 1

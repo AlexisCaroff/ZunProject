@@ -17,4 +17,5 @@ encounter = ExtResource("3_4qc74")
 CanCamp = false
 connected_room_ids = Array[String](["Room3", "Hall1", "Salon1"])
 explored = false
+ennemikilled = false
 metadata/_custom_type_script = "uid://oj44pgv34ji0"
