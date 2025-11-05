@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ggsa3x3ajxbr"]
+[gd_scene load_steps=30 format=3 uid="uid://4geo8fk32q5q"]
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_p3oys"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_7hr4g"]
@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://djit2m4icvw0k" path="res://Enviro/kairn.png" id="17_0umxm"]
 [ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="18_ebh22"]
 [ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="19_1p7a5"]
-[ext_resource type="Script" uid="uid://gljyiwavrmws" path="res://lvl/combat1/explo_portrait.gd" id="20_yq2hk"]
+[ext_resource type="Script" uid="uid://gljyiwavrmws" path="res://lvl/Hall1/explo_portrait.gd" id="20_yq2hk"]
 [ext_resource type="Texture2D" uid="uid://bl6qdsm60pd37" path="res://UI/exploCharaselector.png" id="21_o242q"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="22_koy5r"]
 [ext_resource type="Texture2D" uid="uid://df6e4btmrj1i8" path="res://props/campFire.png" id="23_3nplw"]
@@ -341,6 +341,7 @@ texture = ExtResource("13_vxtxt")
 expand_mode = 1
 
 [node name="Button2" type="Button" parent="ExplorationManager"]
+visible = false
 z_index = 2
 offset_left = 589.0
 offset_top = 65.0

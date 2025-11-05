@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d03bcp7xtqcnt"]
+[gd_scene load_steps=16 format=3 uid="uid://by8mjcj5wtmte"]
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_tegn2"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_if4eq"]

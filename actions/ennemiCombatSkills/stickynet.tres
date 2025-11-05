@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://b12yj86cv1lo7"]
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://b12yj86cv1lo7"]
 
+[ext_resource type="Texture2D" uid="uid://cx5momixgm1ey" path="res://actions/actiontexture/SkillImage/nymphShoot.png" id="1_4y5k8"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_nya7c"]
 [ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="2_g222q"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_kcvw8"]
@@ -28,11 +29,12 @@ metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [resource]
 script = ExtResource("2_kcvw8")
-name = "Attaque"
-descriptionName = "Attaque"
-description = "Inflige des dégâts à un ennemi"
+name = "Stickynet"
+descriptionName = "Stickynet"
+description = "Stickynet"
 icon = ExtResource("4_j4j7o")
-required_position = 0
+required_position = 2
+ImageSkill = ExtResource("1_4y5k8")
 the_target_type = 0
 effects = Array[ExtResource("1_nya7c")]([SubResource("Resource_coij5"), SubResource("Resource_g6l6p"), SubResource("Resource_df3d6")])
 two_target_Type = false

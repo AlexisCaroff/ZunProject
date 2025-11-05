@@ -91,10 +91,10 @@ offset_right = 142.0
 offset_bottom = 124.797
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 54.0
-offset_top = -184.202
-offset_right = 94.0
-offset_bottom = -165.202
+offset_left = -20.0
+offset_top = -161.0
+offset_right = 20.0
+offset_bottom = -142.0
 
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2(29, 35.798)

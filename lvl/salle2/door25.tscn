@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cn17astg0ruj"]
+[gd_scene load_steps=20 format=3 uid="uid://cj4l728a7r54e"]
 
 [ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_2qncb"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_snvc3"]

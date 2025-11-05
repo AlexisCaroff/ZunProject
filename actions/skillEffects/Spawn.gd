@@ -4,8 +4,9 @@ class_name SkillEffectSpawnEnemy
 @export var enemy_scene: PackedScene
 @export var max_spawn: int = 1  # combien d'ennemis peuvent être spawn
 @export var spawn_delay: float = 0.5
-
+var combatmanager 
 func apply(_user: Character, target: PositionSlot) -> void:
+	combatmanager =_user.combat_manager
 	if not enemy_scene:
 		push_error("Aucune scène d'ennemi assignée à SkillEffectSpawnEnemy")
 		return
@@ -35,9 +36,23 @@ func apply(_user: Character, target: PositionSlot) -> void:
 
 func _spawn_enemy_in_slot(slot: PositionSlot):
 	var new_enemy = enemy_scene.instantiate()
-	slot.add_child(new_enemy)
+	combatmanager.add_child(new_enemy)
 	slot.assign_character(new_enemy, 0.5)
+	combatmanager.enemies.append(new_enemy)
 	new_enemy.is_player_controlled = false
-	new_enemy.combat_manager = slot.combat_manager
+	new_enemy.combat_manager = combatmanager  
 	new_enemy.name = "Spawned_" + str(randi() % 1000)
 	print("Spawned new enemy in slot: ", slot.name)
+	new_enemy._current_slot=slot
+	combatmanager.move_character_to(new_enemy, slot, 0.0)
+	new_enemy.update_ui()
+
+
+
+
+
+
+			
+
+			
+			

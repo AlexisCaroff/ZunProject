@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="Resource_3q5jt"]
 script = ExtResource("2_2a5gp")
 MagicDMG = false
-amount = 20
+amount = 15
 damage_target_stat = 0
 metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 

@@ -12,8 +12,8 @@
 [ext_resource type="Resource" uid="uid://daik6fj7sis15" path="res://actions/ennemiCombatSkills/vampire.tres" id="7_gg7eq"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="7_u54kx"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="8_7pso5"]
-[ext_resource type="Resource" uid="uid://cvpggc0yt3l4o" path="res://actions/ennemiCombatSkills/Ennemi_charme.tres" id="8_gg7eq"]
 [ext_resource type="Resource" uid="uid://86jrw37oebpi" path="res://characters/charatexture/braines/basicRandomBrain.tres" id="9_7pso5"]
+[ext_resource type="Resource" uid="uid://c6phd3e1sln7n" path="res://actions/ennemiCombatSkills/healMonster.tres" id="9_rhaxp"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="17_n4itb"]
 [ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="18_p34m6"]
 
@@ -25,7 +25,7 @@ dead_portrait_texture = ExtResource("3_pders")
 initiative_icon = ExtResource("4_7eoqt")
 Charaname = "Temptress"
 initiative = 0
-skill_resources = Array[Resource]([ExtResource("5_pders"), ExtResource("5_pders"), ExtResource("6_gg7eq"), ExtResource("7_gg7eq"), ExtResource("8_gg7eq")])
+skill_resources = Array[Resource]([ExtResource("5_pders"), ExtResource("5_pders"), ExtResource("6_gg7eq"), ExtResource("7_gg7eq"), ExtResource("9_rhaxp")])
 is_player_controlled = false
 ai_brain = ExtResource("9_7pso5")
 
@@ -34,11 +34,11 @@ position = Vector2(44, 30)
 script = ExtResource("5_gg7eq")
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -133.0
-offset_top = -221.0
-offset_right = 38.0
-offset_bottom = 10.0
-scale = Vector2(0.958059, 0.958059)
+offset_left = -164.0
+offset_top = -266.0
+offset_right = 7.0
+offset_bottom = -35.0
+scale = Vector2(1.42236, 1.17286)
 mouse_filter = 2
 texture = ExtResource("2_7s1lw")
 expand_mode = 1
@@ -46,11 +46,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Selector" type="TextureRect" parent="pivot"]
 self_modulate = Color(2, 2, 2, 0)
-offset_left = -133.0
-offset_top = -221.0
-offset_right = 38.0
-offset_bottom = 10.0
-scale = Vector2(0.958059, 0.958059)
+offset_left = -164.0
+offset_top = -266.0
+offset_right = 7.0
+offset_bottom = -35.0
+scale = Vector2(1.42236, 1.17286)
 mouse_filter = 2
 texture = ExtResource("2_7s1lw")
 expand_mode = 1

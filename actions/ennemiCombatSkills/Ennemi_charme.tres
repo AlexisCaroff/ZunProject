@@ -3,13 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://cx5momixgm1ey" path="res://actions/actiontexture/SkillImage/nymphShoot.png" id="1_ngyod"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_8l48j"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_gfmg3"]
-[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="4_8tx68"]
+[ext_resource type="Texture2D" uid="uid://c6ptbylmpvkdy" path="res://actions/CampSkill/masturbIcon.png" id="4_ngyod"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_nar82"]
 
 [sub_resource type="Resource" id="Resource_d6f35"]
 script = ExtResource("3_gfmg3")
 MagicDMG = false
-amount = 20
+amount = 25
 damage_target_stat = 1
 metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
@@ -18,7 +18,7 @@ script = ExtResource("5_nar82")
 name = "Charme"
 descriptionName = "Charme"
 description = "incrase horny"
-icon = ExtResource("4_8tx68")
+icon = ExtResource("4_ngyod")
 required_position = null
 ImageSkill = ExtResource("1_ngyod")
 the_target_type = null

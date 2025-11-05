@@ -11,10 +11,10 @@ var campement_node: Node = null
 
 
 func _ready():
-	var screen_index := 1
+	#var screen_index := 1
 	
-	if screen_index < DisplayServer.get_screen_count():
-		DisplayServer.window_set_current_screen(screen_index)
+	#if screen_index < DisplayServer.get_screen_count():
+	#	DisplayServer.window_set_current_screen(screen_index)
 	
 	if not room_container:
 		room_container = Node2D.new()

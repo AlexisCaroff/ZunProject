@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RoomResource" load_steps=6 format=3 uid="uid://bc8l84kr4sw7n"]
+
+[ext_resource type="PackedScene" uid="uid://dc4g65o3bmvmr" path="res://lvl/salle6/combatRoomCellar.tscn" id="1_i8vmo"]
+[ext_resource type="PackedScene" uid="uid://v5sa3ky4nk8q" path="res://lvl/salle6/doorRoomCellar.tscn" id="2_nruu1"]
+[ext_resource type="Resource" uid="uid://ulv47dtbemlo" path="res://lvl/salle6/encounterCellar.tres" id="3_piadk"]
+[ext_resource type="PackedScene" uid="uid://djlvysakef1yb" path="res://lvl/salle6/explorationCellar.tscn" id="4_y11vf"]
+[ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="5_8nlib"]
+
+[resource]
+script = ExtResource("5_8nlib")
+room_id = "Room1"
+position_on_map = 4
+door_scene = ExtResource("2_nruu1")
+combat_scene = ExtResource("1_i8vmo")
+exploration_scene = ExtResource("4_y11vf")
+encounter = ExtResource("3_piadk")
+CanCamp = false
+connected_room_ids = Array[String](["Cellar", "Corridor1"])
+explored = false
+ennemikilled = false
+metadata/_custom_type_script = "uid://oj44pgv34ji0"

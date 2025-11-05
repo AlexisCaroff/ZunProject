@@ -209,7 +209,7 @@ func build_turn_queue(characters: Array[Character]) -> Array[Character]:
 func next_turn():
 	_check_victory()
 	_check_defeat()
-	
+
 	if turn_queue.is_empty():
 		turn_queue = build_turn_queue(heroes + enemies)
 		ui.update_turn_queue_ui(turn_queue)
@@ -219,7 +219,9 @@ func next_turn():
 		current_character.acte_twice=false
 		turn_queue.push_front(current_character)
 	await get_tree().process_frame
-	
+	for position in enemy_positions:
+		if position.occupant==null :
+			position.CharaUI.visible=false
 
 	ui.log("")
 	selectorChara.position= current_character._current_slot.CharaUI.global_position
@@ -241,6 +243,13 @@ func next_turn():
 		turn_queue.append(current_character)
 		next_turn()
 		return
+	if current_character.current_horniness==100: # look if tired
+		
+		ui.log(current_character.Charaname +" is too horny to fight")
+		while is_animation_playing():
+			await get_tree().process_frame
+		turn_queue.append(current_character)
+		next_turn()
 	if current_character.stun==true:
 		current_character.stun=false
 		ui.log(current_character.Charaname +" is stun")
@@ -454,11 +463,14 @@ func get_positions(is_playercontroled: bool) -> Array[PositionSlot]:
 	return hero_positions if is_playercontroled else enemy_positions
 
 func move_character_to(character: Character, slot: PositionSlot, movetime: int):
+	var currentslot = character._current_slot
 	if slot.occupant == character:
 		return  
 	slot.Set_CharaUI()
 	slot.CharaUI.visible=true
+
 	slot.assign_character(character,movetime)
+	
 	character._current_slot =slot
 	character.update_ui()
 		
@@ -467,8 +479,10 @@ func swap_characters(slot_a: PositionSlot, slot_b: PositionSlot,movetime: int):
 	var char_b = slot_b.occupant
 
 	if char_a != null:
+	
 		slot_b.assign_character(char_a,movetime)
 	if char_b != null:
+
 		slot_a.assign_character(char_b,movetime)
 	char_a.update_ui()
 	char_b.update_ui()
