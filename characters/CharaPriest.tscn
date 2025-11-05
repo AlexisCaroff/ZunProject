@@ -43,10 +43,10 @@ offset_bottom = -227.0
 text = "name"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 33.0
-offset_top = -158.202
-offset_right = 81.0
-offset_bottom = -117.202
+offset_left = -24.0
+offset_top = -176.0
+offset_right = 24.0
+offset_bottom = -157.0
 
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2(33, 28)
@@ -63,18 +63,19 @@ offset_left = -96.6667
 offset_top = -209.167
 offset_right = 74.3333
 offset_bottom = 21.8336
-scale = Vector2(1.17034, 0.975287)
+scale = Vector2(1.21106, 0.954615)
 mouse_filter = 2
 texture = ExtResource("2_wpklt")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Selector" type="TextureRect" parent="pivot"]
+self_modulate = Color(2, 2, 2, 0)
 offset_left = -96.6667
 offset_top = -209.167
 offset_right = 74.3333
 offset_bottom = 21.8336
-scale = Vector2(1.17034, 0.975287)
+scale = Vector2(1.21106, 0.954615)
 mouse_filter = 2
 texture = ExtResource("2_wpklt")
 expand_mode = 1

@@ -33,7 +33,8 @@ func _ready():
 	
 	#print("next room ready")
 	#print(GameManager.current_room_Ressource.resource_name)
-	encounter_for_this_door= Game_Manager.current_room_Ressource.encounter
+	if Game_Manager.current_room_Ressource.encounter != null and Game_Manager.current_room_Ressource.ennemikilled ==false :
+		encounter_for_this_door= Game_Manager.current_room_Ressource.encounter
 	if Game_Manager.last_room_Ressource :
 		if Game_Manager.last_room_Ressource.connected_room_ids.size()>1:
 			connected_ids = Game_Manager.last_room_Ressource.connected_room_ids.duplicate()
@@ -139,8 +140,10 @@ func _advance_in_room():
 
 func startpeeking():
 	peek_scene.door = self
+	
 	peek_scene.set_encounter(encounter_for_this_door)
 	
+		
 
 func stop_peekink():
 	peeking = false

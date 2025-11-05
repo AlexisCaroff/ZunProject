@@ -39,62 +39,62 @@ self_modulate = Color(1, 1, 1, 0)
 texture = ExtResource("2_ydegi")
 
 [node name="Hall1" type="Sprite2D" parent="DonjonRooms"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0.77084, 0.770839, 0.770839, 1)
 position = Vector2(-421, -51)
 texture = ExtResource("3_b056a")
 
 [node name="Corridor1" type="Sprite2D" parent="DonjonRooms"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0.77084, 0.770839, 0.770839, 1)
 position = Vector2(-260, 310)
 texture = ExtResource("5_q6d3n")
 
 [node name="Room3" type="Sprite2D" parent="DonjonRooms"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0.77084, 0.770839, 0.770839, 1)
 position = Vector2(-645, 272)
 texture = ExtResource("6_uvyco")
 
 [node name="Cellar" type="Sprite2D" parent="DonjonRooms"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0.77084, 0.770839, 0.770839, 1)
 position = Vector2(573, 490)
 texture = ExtResource("7_7inu3")
 
 [node name="Corridor2" type="Sprite2D" parent="DonjonRooms"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0.77084, 0.770839, 0.770839, 1)
 position = Vector2(-189, -413)
 texture = ExtResource("8_7t236")
 
 [node name="Hall2" type="Sprite2D" parent="DonjonRooms"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0.77084, 0.770839, 0.770839, 1)
 position = Vector2(269, 73)
 texture = ExtResource("9_7wh5l")
 
 [node name="Room1" type="Sprite2D" parent="DonjonRooms"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0.77084, 0.770839, 0.770839, 1)
 position = Vector2(113, 303)
 texture = ExtResource("10_qxe13")
 
 [node name="Room2" type="Sprite2D" parent="DonjonRooms"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0.77084, 0.770839, 0.770839, 1)
 position = Vector2(230, -302)
 texture = ExtResource("11_8o02c")
 
 [node name="Salon1" type="Sprite2D" parent="DonjonRooms"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0.77084, 0.770839, 0.770839, 1)
 position = Vector2(-94, 126)
 texture = ExtResource("12_jabyi")
 
 [node name="Salon2" type="Sprite2D" parent="DonjonRooms"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0.77084, 0.770839, 0.770839, 1)
 position = Vector2(-94, -225)
 texture = ExtResource("13_cj5uu")
 
 [node name="BossRoom" type="Sprite2D" parent="DonjonRooms"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0.77084, 0.770839, 0.770839, 1)
 position = Vector2(793, 6)
 texture = ExtResource("14_qsvxc")
 
 [node name="Salle0" type="Sprite2D" parent="DonjonRooms"]
-self_modulate = Color(0.566406, 0.522848, 0.416085, 1)
+self_modulate = Color(0.77084, 0.770839, 0.770839, 1)
 position = Vector2(-1092, -34)
 texture = ExtResource("17_pnf5p")
 
@@ -157,8 +157,47 @@ connectedRooms = Array[String](["Corridor1", "Room1"])
 [node name="Door6" type="Sprite2D" parent="DonjonDoor"]
 self_modulate = Color(0, 0, 0, 1)
 z_index = 2
-position = Vector2(179, 394)
+position = Vector2(177, 398)
 rotation = 2.57914
 texture = ExtResource("4_oc32i")
 script = ExtResource("18_b056a")
 connectedRooms = Array[String](["Cellar", "Room1"])
+
+[node name="Door8" type="Sprite2D" parent="DonjonDoor"]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 2
+position = Vector2(801, 357)
+rotation = 3.14562
+scale = Vector2(1.23567, 1.30099)
+texture = ExtResource("4_oc32i")
+script = ExtResource("18_b056a")
+connectedRooms = Array[String](["Cellar", "Room1"])
+
+[node name="Door7" type="Sprite2D" parent="DonjonDoor"]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 2
+position = Vector2(146, 83)
+rotation = 2.07029
+texture = ExtResource("4_oc32i")
+script = ExtResource("18_b056a")
+connectedRooms = Array[String](["Salon1", "Hall2"])
+
+[node name="Door9" type="Sprite2D" parent="DonjonDoor"]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 2
+position = Vector2(-460, -287)
+rotation = 3.14384
+texture = ExtResource("4_oc32i")
+script = ExtResource("18_b056a")
+connectedRooms = Array[String](["Salon1", "Hall2"])
+locked = true
+
+[node name="Door10" type="Sprite2D" parent="DonjonDoor"]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 2
+position = Vector2(-91, -249)
+rotation = 3.72728
+texture = ExtResource("4_oc32i")
+script = ExtResource("18_b056a")
+connectedRooms = Array[String](["Salon1", "Hall2"])
+locked = true

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_f5x8r"]
 [ext_resource type="Texture2D" uid="uid://kpc43243oyss" path="res://characters/charatexture/ENEMY_ADDICT_idle.png" id="2_jdh3h"]
 [ext_resource type="Texture2D" uid="uid://b0yhh4guwwtsh" path="res://characters/exploPortrait/AdictExploPortrait.png" id="3_6livi"]
-[ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="4_2b0t4"]
+[ext_resource type="Texture2D" uid="uid://bon5vsyrujwe7" path="res://characters/charatexture/ENEMY_ADDICT_tired.png" id="4_jdh3h"]
 [ext_resource type="Resource" uid="uid://dxj1ksi0rq6i6" path="res://actions/ennemiCombatSkills/tentacleGrab.tres" id="5_2b0t4"]
 [ext_resource type="Resource" uid="uid://dkph6nihwi550" path="res://actions/ennemiCombatSkills/raving.tres" id="6_jdh3h"]
 [ext_resource type="Resource" uid="uid://daxgjjbu82mgo" path="res://actions/ennemiCombatSkills/euphoria.tres" id="7_6livi"]
@@ -20,7 +20,7 @@
 script = ExtResource("1_f5x8r")
 portrait_texture = ExtResource("2_jdh3h")
 explorationPortrait = ExtResource("3_6livi")
-dead_portrait_texture = ExtResource("4_2b0t4")
+dead_portrait_texture = ExtResource("4_jdh3h")
 initiative_icon = ExtResource("3_6livi")
 Charaname = "Addict"
 IsDemon = true
@@ -30,33 +30,31 @@ is_player_controlled = false
 ai_brain = ExtResource("8_au82g")
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(42, 38)
+position = Vector2(25, 29)
 script = ExtResource("9_qu7su")
 min_scale = 1.0
 scalemini = 0.95
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -153.0
-offset_top = -207.0
-offset_right = 18.0
-offset_bottom = 24.0
-scale = Vector2(1.19628, 0.899908)
+offset_left = -197.0
+offset_top = -270.0
+offset_right = -26.0
+offset_bottom = -39.0
+scale = Vector2(1.6947, 1.27485)
 mouse_filter = 2
 texture = ExtResource("2_jdh3h")
 expand_mode = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="Selector" type="TextureRect" parent="pivot"]
 self_modulate = Color(2, 2, 2, 0)
-offset_left = -153.0
-offset_top = -207.0
-offset_right = 18.0
-offset_bottom = 24.0
-scale = Vector2(1.19628, 0.899908)
+offset_left = -197.0
+offset_top = -270.0
+offset_right = -26.0
+offset_bottom = -39.0
+scale = Vector2(1.6947, 1.27485)
 mouse_filter = 2
 texture = ExtResource("2_jdh3h")
 expand_mode = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="name" type="Label" parent="."]
 visible = false

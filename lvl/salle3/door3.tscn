@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b2kc2r4vdeypk"]
+[gd_scene load_steps=26 format=3 uid="uid://4krgtdd0p7pg"]
 
 [ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_qvtik"]
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_1wbx2"]
@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://drp4vk52vgk74" path="res://UI/doorebuscade/DOOR_caught_nymph.png" id="17_xqrnb"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="18_mpb7v"]
 [ext_resource type="Texture2D" uid="uid://dwu2rkneujev8" path="res://characters/exploPortrait/pristressExploPortrait.png" id="19_e78aa"]
-[ext_resource type="Script" uid="uid://byensau5ptguo" path="res://lvl/combat1/door_portrait.gd" id="20_tw3to"]
+[ext_resource type="Script" uid="uid://byensau5ptguo" path="res://lvl/Hall1/door_portrait.gd" id="20_tw3to"]
 [ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="21_eu8xd"]
 [ext_resource type="Texture2D" uid="uid://dd4k5wxaesfo4" path="res://characters/exploPortrait/MysticExploPortrait.png" id="22_ri8nu"]
 [ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="23_uf6fx"]

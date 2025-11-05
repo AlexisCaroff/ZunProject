@@ -39,11 +39,19 @@ func focus_on_room(room: RoomResource, viewport ):
 			salle.self_modulate = Color.BLACK
 		if salle.name==room.room_id:
 			focusedRoom=salle
-	for thedoor :MapDoor in Doors:
+	var RoomExploreds: Array[RoomResource]
+	for roomRes in gm.donjon.rooms:
 		
-		for roomname in thedoor.connectedRooms:
-			if roomname == room.room_id:
-				thedoor.self_modulate=colorDoorToExplor
+		if roomRes.explored:
+			RoomExploreds.append(roomRes)
+			
+	for roomExplored in RoomExploreds:
+		for thedoor :MapDoor in Doors:
+			for roomname in thedoor.connectedRooms:
+				
+				if roomname == room.room_id:
+					print("roomExplored "+roomExplored.room_id)
+					thedoor.self_modulate=colorDoorToExplor
 	
 	var vp_size: Vector2 = viewport.size
 	var target_pos = focusedRoom.position

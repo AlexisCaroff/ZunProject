@@ -75,6 +75,7 @@ const DamageEffectScene := preload("res://actions/damageEffect/HitVFX.tscn")
 const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
 const MissEffectScene:= preload("res://actions/damageEffect/miss_vfx.tscn")
 const DebuffEffectScene:= preload("res://actions/damageEffect/debuffVfx.tscn")
+const BonkEffectScene:= preload("res://actions/damageEffect/bonkVFX.tscn")
 @export var min_durationIddle: float = 0.6
 @export var max_durationIddle: float = 1.0
 @export var min_scale: float = 0.95
@@ -302,8 +303,8 @@ func play_ai_turn(heroes : Array, enemies :Array):
 		return
 
 	var skill: Skill = decision["skill"]
-	var target: Character = decision.get("target", null)
-
+	var targetPosistions: Array[PositionSlot] = decision.get("target", null)
+	var target = targetPosistions[0].occupant
 	combat_manager.pending_skill = skill
 	skill.owner = self
 
@@ -311,8 +312,9 @@ func play_ai_turn(heroes : Array, enemies :Array):
 		skill.use()
 		combat_manager.ui.logennemi(Charaname+" use "+skill.descriptionName)
 	else:
-		await animate_attack(target)
-		skill.use(target.current_slot)
+		await animate_attack(targetPosistions[0].occupant)
+		for thetarget in targetPosistions:
+			skill.use(thetarget)
 		combat_manager.ui.log(Charaname+" use "+skill.descriptionName)
 		target.update_ui()
 	
@@ -324,20 +326,23 @@ func reduce_cooldowns() -> void:
 			skill.current_cooldown -= 1	
 func start_turn():
 	print(Charaname+ "start turn")
-	animate_start_Turn()
+	
 	var dmg =0
 	var dmgHorny=0
 	for buff in buffs:
 		if buff.name=="poison":
-			print (str(buff.amount))
+			print (str(buff.amount)+ "dmg")
 			dmg += buff.amount
 		if buff.name=="poisonHorny":
-			print (str(buff.amount))
+			print (str(buff.amount)+ "dmg horny")
 			dmgHorny += buff.amount
 	if dmg>0:
 		take_damage(self,0,dmg,false)	
-	if dmgHorny>0:
-		take_damage(self,1,dmg,false)	
+	elif dmgHorny>0:
+		take_damage(self,1,dmgHorny,false)	
+	else :
+		animate_start_Turn()
+		
 func end_turn():
 	
 	CharaColor=Color(1.0,1.0,1.0,1.0)
@@ -384,7 +389,7 @@ func take_damage(source: Character, stat: int, amount: int, type:bool) -> void:
 				print(self.Charaname+ " take "+ str(damage) +" damage from "+ source.Charaname)
 			else :
 				damage=amount
-			animate_take_damage(damage, source)
+			
 			if current_stamina > 0:
 				
 				current_stamina = clamp(current_stamina - damage, 0, max_stamina)
@@ -398,14 +403,24 @@ func take_damage(source: Character, stat: int, amount: int, type:bool) -> void:
 				if IsDemon && type:
 					combat_manager.nb_crystaleloot += 1 
 				isdead()
-				
+			if dead:
+				animate_bonk()
+			else:
+				animate_take_damage(damage, source)
 
 		
 				
 
 		DamageEffect.Stat.HORNY:
-			damage = max(0, amount - willpower)
-			current_horniness = max(0, current_horniness + damage)
+			damage=amount
+			if source == self:
+				
+				current_horniness = max(0, current_horniness + damage)
+				print ("tack"+str(damage)+" dmg horny" )
+			else :
+				damage = max(0, amount - willpower)
+				current_horniness = max(0, current_horniness + damage)
+			
 			animate_get_horny(damage)
 			update_ui()
 			
@@ -590,8 +605,21 @@ func miss_animation(target: Character):
 	await tween.finished
 	emit_signal("skill_animation_finished")
 	
+func animate_bonk(): 
+	emit_signal("skill_animation_started")
+	var effect_instance = BonkEffectScene.instantiate()
+	get_tree().current_scene.add_child(effect_instance)
 
-	
+	effect_instance.global_position = global_position + Vector2(0, -30)
+	if effect_instance.has_method("setup"):
+		effect_instance.setup(0)
+	var tween := create_tween() as Tween
+	var normal_size = CharaScale
+	var big_size= Vector2(normal_size.x*1.1,normal_size.y*1.3) 
+	tween.tween_property(self, "scale", big_size, 0.2)
+	tween.tween_property(self, "scale", normal_size, 0.2)
+	await tween.finished
+	emit_signal("skill_animation_finished")
 	
 func shake_camera(strength := 5.0):
 	var cam := get_viewport().get_camera_2d()

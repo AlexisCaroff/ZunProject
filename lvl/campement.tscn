@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://c63m6eq381xm1"]
+[gd_scene load_steps=48 format=3 uid="uid://c63m6eq381xm1"]
 
 [ext_resource type="Script" uid="uid://w6xjpbgh5xei" path="res://scripts/camp/campement.gd" id="1_7mjgo"]
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_dks4i"]
@@ -38,6 +38,8 @@
 [ext_resource type="Texture2D" uid="uid://csxp5q5mkr2g3" path="res://props/insidetenteUIBackground.png" id="35_bg6vn"]
 [ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="36_gwj3x"]
 [ext_resource type="Texture2D" uid="uid://cbbc3rht6f8fd" path="res://props/sac.png" id="38_fctf2"]
+[ext_resource type="Texture2D" uid="uid://dw7qyyxtv4puc" path="res://tuto/intro4.png" id="39_gofun"]
+[ext_resource type="Script" uid="uid://b0ir2tk1oluly" path="res://lvl/Hall1/tuto.gd" id="40_xmkko"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_luaer"]
 
@@ -438,7 +440,7 @@ offset_right = 212.0
 offset_bottom = 95.0
 theme_override_fonts/font = ExtResource("17_luaer")
 theme_override_font_sizes/font_size = 30
-text = "Sleep an return to the exploration"
+text = "Sleep and return to the exploration"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -492,6 +494,27 @@ texture = ExtResource("18_03c8w")
 position = Vector2(1668.57, 607.353)
 scale = Vector2(0.839673, 0.858693)
 texture = ExtResource("38_fctf2")
+
+[node name="Intro2" type="Sprite2D" parent="."]
+z_index = 22
+position = Vector2(963, 538)
+scale = Vector2(0.72634, 0.72634)
+texture = ExtResource("39_gofun")
+script = ExtResource("40_xmkko")
+
+[node name="HideTuto" type="Button" parent="Intro2"]
+offset_left = -1349.99
+offset_top = -962.771
+offset_right = -1341.99
+offset_bottom = -954.771
+scale = Vector2(338.499, 233.869)
+flat = true
+
+[node name="ShowTuto" type="Button" parent="."]
+z_index = 22
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Didaticiel"
 
 [connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]

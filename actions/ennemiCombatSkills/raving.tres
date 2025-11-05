@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://dkph6nihwi550"]
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://dkph6nihwi550"]
 
+[ext_resource type="Texture2D" uid="uid://bypte40fhj4os" path="res://characters/charatexture/ENEMY_ADDICT_raving.png" id="1_hcnd1"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_pctl8"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_jt8n7"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_k0sh5"]
@@ -14,11 +15,12 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [resource]
 script = ExtResource("2_jt8n7")
-name = "Attaque"
-descriptionName = "Attaque"
-description = "Inflige des dégâts à un ennemi"
+name = "Raving"
+descriptionName = "Raving"
+description = "scary"
 icon = ExtResource("3_hcnd1")
 required_position = 1
+ImageSkill = ExtResource("1_hcnd1")
 the_target_type = 4
 effects = Array[ExtResource("1_pctl8")]([SubResource("Resource_tpo8j")])
 two_target_Type = false

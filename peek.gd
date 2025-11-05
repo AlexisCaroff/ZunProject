@@ -16,6 +16,7 @@ func set_encounter(encounter: CombatEncounter) -> void:
 	preview_encounter(encounter)
 
 
+	
 func preview_encounter(encounter: CombatEncounter) -> void:
 	var hbox := HBoxContainer.new()
 	hbox.anchor_left = 0.5
@@ -25,7 +26,9 @@ func preview_encounter(encounter: CombatEncounter) -> void:
 	hbox.position = Vector2(1920/2, 250)
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	add_child(hbox)
-
+	
+	if encounter == null:
+		return
 	# Crée un carré pour chaque élément du tableau
 	for i in encounter.enemy_scenes.size():
 		if slots[i] != null:

@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://dg0coy6r6f1ww"]
+
+[ext_resource type="Script" uid="uid://d12jn42j03tgg" path="res://GameManager.gd" id="1_838hb"]
+[ext_resource type="Resource" uid="uid://7dlbup10473y" path="res://lvl/donjonTestePorte.tres" id="2_soe0u"]
+[ext_resource type="Resource" uid="uid://bjupnilvigvhl" path="res://lvl/salle0/Salle0.tres" id="3_0q5so"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="4_dhxbs"]
+[ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="5_twojc"]
+[ext_resource type="Texture2D" uid="uid://c7i05i2v2djk1" path="res://UI/seau.png" id="6_fuquo"]
+[ext_resource type="Script" uid="uid://bhsro7sspbgqw" path="res://UI/button.gd" id="7_k66he"]
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_838hb")
+donjon = ExtResource("2_soe0u")
+last_room_Ressource = ExtResource("3_0q5so")
+
+[node name="Label" type="Label" parent="."]
+z_index = 6
+offset_left = 133.0
+offset_top = 31.0
+offset_right = 377.0
+offset_bottom = 86.0
+theme_override_fonts/font = ExtResource("4_dhxbs")
+theme_override_font_sizes/font_size = 30
+text = "Explore the dungeon"
+
+[node name="DialogueBox" type="Sprite2D" parent="Label"]
+z_index = -1
+position = Vector2(107, 21)
+scale = Vector2(0.256716, 0.325843)
+texture = ExtResource("5_twojc")
+
+[node name="Seau" type="Sprite2D" parent="Label"]
+position = Vector2(-59, 21)
+scale = Vector2(1.12691, 1.07276)
+texture = ExtResource("6_fuquo")
+
+[node name="Label" type="Label" parent="Label"]
+z_index = 6
+layout_mode = 0
+offset_left = 1513.0
+offset_top = -8.0
+offset_right = 1757.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("4_dhxbs")
+theme_override_font_sizes/font_size = 30
+text = "Pre-Alpha test"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+z_index = 6
+offset_left = 384.0
+offset_top = 23.0
+offset_right = 607.0
+offset_bottom = 81.0
+theme_override_fonts/font = ExtResource("4_dhxbs")
+theme_override_font_sizes/font_size = 40
+text = "Quitter"
+flat = true
+script = ExtResource("7_k66he")
+
+[node name="DialogueBox" type="Sprite2D" parent="Button"]
+z_index = -1
+position = Vector2(112, 29)
+scale = Vector2(0.217285, 0.325843)
+texture = ExtResource("5_twojc")

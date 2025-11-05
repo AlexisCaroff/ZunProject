@@ -2,6 +2,7 @@ extends AiBrain
 class_name AiBrain_MommyBoss
 
 func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionary:
+	print (" Mommy Decide!")
 	var usable_skills := owner.skills.filter(func(s): return s.can_use())
 	if usable_skills.is_empty():
 		return {}
@@ -16,8 +17,10 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 	for slot in enemy_positions:
 		if not slot.is_occupied():
 			valid_slot = slot
+			print ("empty slot for Mommy")
 			break
 		elif slot.occupant != null and slot.occupant.is_dead:
+			
 			valid_slot = slot
 			break
 

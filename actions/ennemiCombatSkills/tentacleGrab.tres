@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://dxj1ksi0rq6i6"]
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://dxj1ksi0rq6i6"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_2gtcg"]
+[ext_resource type="Texture2D" uid="uid://dhl84sfs5yodp" path="res://characters/charatexture/ENEMY_ADDICT_tentacle.png" id="1_7m3nb"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_2odx0"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_jtfnp"]
 [ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="3_7m3nb"]
@@ -15,16 +16,17 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [sub_resource type="Resource" id="Resource_t52hr"]
 script = ExtResource("3_7m3nb")
-target_index = 4
+target_index = 3
 metadata/_custom_type_script = "uid://cxxxcftffxxjh"
 
 [resource]
 script = ExtResource("2_2odx0")
-name = "Attaque"
+name = "tentacleGrab"
 descriptionName = "Attaque"
 description = "Inflige des dégâts à un ennemi"
 icon = ExtResource("4_2x4hl")
 required_position = 1
+ImageSkill = ExtResource("1_7m3nb")
 the_target_type = 0
 effects = Array[ExtResource("1_2gtcg")]([SubResource("Resource_t3sey"), SubResource("Resource_t52hr")])
 two_target_Type = false

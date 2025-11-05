@@ -1,13 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://d3jx7ce6fpdr1"]
+[gd_scene load_steps=16 format=3 uid="uid://d3jx7ce6fpdr1"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_61pjh"]
 [ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="2_i0xeg"]
 [ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="3_0go71"]
 [ext_resource type="Texture2D" uid="uid://bj4kyibf1he0q" path="res://characters/exploPortrait/NymphExploPortrait.png" id="3_xyxhh"]
-[ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/HerosCombatSkills/Ennemi_attaque_basique.tres" id="4_61pjh"]
+[ext_resource type="Resource" uid="uid://b12yj86cv1lo7" path="res://actions/ennemiCombatSkills/stickynet.tres" id="5_a27kg"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="6_0go71"]
 [ext_resource type="Resource" uid="uid://cvpggc0yt3l4o" path="res://actions/ennemiCombatSkills/Ennemi_charme.tres" id="6_r4har"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="7_065j3"]
+[ext_resource type="Resource" uid="uid://nri716ki3ipb" path="res://actions/ennemiCombatSkills/BigpoisonHorny.tres" id="7_a27kg"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="7_xwnr5"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="8_0ot4w"]
 [ext_resource type="Resource" uid="uid://86jrw37oebpi" path="res://characters/charatexture/braines/basicRandomBrain.tres" id="8_8rby6"]
@@ -24,7 +25,7 @@ initiative_icon = ExtResource("3_xyxhh")
 Charaname = "Nymphe"
 IsDemon = true
 Chara_position = 1
-skill_resources = Array[Resource]([ExtResource("4_61pjh"), ExtResource("6_r4har"), ExtResource("4_61pjh"), ExtResource("6_r4har"), ExtResource("6_0go71")])
+skill_resources = Array[Resource]([ExtResource("5_a27kg"), ExtResource("6_r4har"), ExtResource("7_a27kg"), ExtResource("6_r4har"), ExtResource("6_0go71")])
 is_player_controlled = false
 ai_brain = ExtResource("8_8rby6")
 

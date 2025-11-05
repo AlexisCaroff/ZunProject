@@ -9,6 +9,7 @@ var combat_manager
 @onready var imageinside = $TextureRect
 var selfposition: Array[PositionSlot] = []
 @onready var CharaUI = $"charaCombatUI"
+@onready var shadow =$"TextureRect2"
 
 var is_ready: bool = false
 
@@ -37,7 +38,7 @@ func Set_CharaUI():
 
 func assign_character(character: Character, movetime:float):
 	await get_tree().process_frame
-	
+	shadow.modulate.a =0.349
 	occupant = character
 	occupant.CharaScale = position_data.scale
 	if CharaUI == null : 
@@ -71,12 +72,15 @@ func assign_character(character: Character, movetime:float):
 	if position_data.buff:
 		position_data.buff.apply(character, character)
 	CharaUI.visible=true
+
+	shadow.modulate.a =0.3
 	
 func remove_character():
 	if occupant:
 		occupant.resetVisuel()
 		occupant = null
-		CharaUI.visible=false
+	CharaUI.visible=false
+	shadow.modulate.a =0.1
 		
 
 func _on_button_button_down() -> void:

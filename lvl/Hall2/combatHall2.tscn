@@ -1,0 +1,1121 @@
+[gd_scene load_steps=67 format=3 uid="uid://dqmvd8xedw2aj"]
+
+[ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_cj48p"]
+[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_fq8tp"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_cjibp"]
+[ext_resource type="Texture2D" uid="uid://b1t6ygc3nxo7c" path="res://characters/charatexture/warriorHit.png" id="4_n4mtp"]
+[ext_resource type="Script" uid="uid://ds3vigal0aygx" path="res://lvl/Hall1/SpriteActionCombat.gd" id="5_eyss2"]
+[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="6_4r7lu"]
+[ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="7_bvkpi"]
+[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="8_0lsc6"]
+[ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="9_y6osc"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="10_grewm"]
+[ext_resource type="Texture2D" uid="uid://0x6um7xfv678" path="res://characters/exploPortrait/BossExploPortrait.png" id="11_yqcep"]
+[ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="12_p6van"]
+[ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://lvl/Hall1/encounter1.tres" id="13_h6snt"]
+[ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="14_s4w8b"]
+[ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="15_a1i00"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="16_620ik"]
+[ext_resource type="Script" uid="uid://igdjgbcqg1d6" path="res://UI/PositionSlot.gd" id="17_qawtg"]
+[ext_resource type="Script" uid="uid://b3l4l88c3b65c" path="res://PositionData.gd" id="18_jjwvp"]
+[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="19_51nu6"]
+[ext_resource type="Texture2D" uid="uid://la06rj6j3ci2" path="res://UI/shadow.png" id="20_2jb5e"]
+[ext_resource type="PackedScene" uid="uid://cifpdtrct42ek" path="res://UI/chara_combat_ui.tscn" id="21_bugi7"]
+[ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterEnemyNymphe.tscn" id="22_qkkxu"]
+[ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharaEnnemyTemptress.tscn" id="23_w72v8"]
+[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="24_fgc3r"]
+[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="25_tbxql"]
+[ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="26_m51mi"]
+[ext_resource type="Texture2D" uid="uid://b0q8mhrqooms" path="res://characters/characterInitiative/cultisteIni.png" id="27_0vrm3"]
+[ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/HerosCombatSkills/Ennemi_attaque_basique.tres" id="28_2yl46"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="29_ar2vr"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="30_jo1db"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="31_3ccen"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="32_2myda"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="33_rgn3p"]
+[ext_resource type="Script" uid="uid://bqnn7n8kuofir" path="res://UI/buttonSkipCombat.gd" id="34_aky5v"]
+[ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="35_mw24c"]
+[ext_resource type="Script" uid="uid://dpfgacyh24syl" path="res://lvl/Hall1/overmenu.gd" id="36_gjnr8"]
+[ext_resource type="Texture2D" uid="uid://dh6k7cso8hksn" path="res://UI/charaIcon.png" id="37_gwmn5"]
+[ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="38_todgb"]
+[ext_resource type="Texture2D" uid="uid://bpgas6hnffbe0" path="res://UI/sideButton.png" id="39_ff0d8"]
+[ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="40_hvxfv"]
+[ext_resource type="Texture2D" uid="uid://ctkoy8ysbicta" path="res://UI/iconMap.png" id="41_0yc6e"]
+[ext_resource type="Texture2D" uid="uid://cfoht4c53xv8e" path="res://UI/ennemiturn.png" id="42_ucggl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kiw3p"]
+
+[sub_resource type="Resource" id="Resource_i1s1q"]
+script = ExtResource("18_jjwvp")
+index = 0
+scale = Vector2(2, 2)
+is_enemy = false
+isFront = false
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s6b88"]
+
+[sub_resource type="Resource" id="Resource_8flqu"]
+script = ExtResource("18_jjwvp")
+index = 1
+scale = Vector2(1.8, 1.8)
+is_enemy = false
+isFront = false
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hxbks"]
+
+[sub_resource type="Resource" id="Resource_x8qlv"]
+script = ExtResource("18_jjwvp")
+index = 2
+scale = Vector2(2, 2)
+is_enemy = false
+isFront = true
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtu61"]
+
+[sub_resource type="Resource" id="Resource_t7hjh"]
+script = ExtResource("18_jjwvp")
+index = 3
+scale = Vector2(1.8, 1.8)
+is_enemy = false
+isFront = true
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m2l43"]
+
+[sub_resource type="Resource" id="Resource_fs52m"]
+script = ExtResource("18_jjwvp")
+index = 0
+scale = Vector2(1.7, 1.7)
+is_enemy = true
+isFront = true
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xtuat"]
+
+[sub_resource type="Resource" id="Resource_ehgg6"]
+script = ExtResource("18_jjwvp")
+index = 1
+scale = Vector2(1.6, 1.6)
+is_enemy = true
+isFront = true
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xwqlg"]
+
+[sub_resource type="Resource" id="Resource_if0a6"]
+script = ExtResource("18_jjwvp")
+index = 2
+scale = Vector2(1.7, 1.7)
+is_enemy = true
+isFront = false
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="PackedScene" id="PackedScene_qbte2"]
+_bundled = {
+"conn_count": 3,
+"conns": PackedInt32Array(1073741839, 1073741838, 135, 134, 2, 0, 0, 1073741841, 1073741840, 137, 136, 2, 0, 0, 1073741843, 1073741842, 139, 138, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("CharacterTestennemie3", "Node2D", "script", "portrait_texture", "dead_portrait_texture", "initiative_icon", "Charaname", "IsDemon", "Chara_position", "skill_resources", "is_player_controlled", "pivot", "Node2D", "position", "script", "HerosTexture1", "TextureRect", "offset_left", "offset_top", "offset_right", "offset_bottom", "mouse_filter", "texture", "expand_mode", "metadata/_edit_use_anchors_", "Selector", "TextureRect", "self_modulate", "offset_left", "offset_top", "offset_right", "offset_bottom", "mouse_filter", "texture", "expand_mode", "metadata/_edit_use_anchors_", "name", "Label", "visible", "offset_left", "offset_top", "offset_right", "offset_bottom", "text", "Button", "Button", "modulate", "offset_left", "offset_top", "offset_right", "offset_bottom", "HBoxContainer", "HBoxContainer", "offset_left", "offset_top", "offset_right", "offset_bottom", "Skill", "TextureRect", "visible", "offset_left", "offset_top", "offset_right", "offset_bottom", "scale", "texture", "script", "Arrow", "Sprite2D", "position", "scale", "texture", "offset", "script", "min_scale", "max_scale", "scalemini", "min_duration", "max_duration", "HP", "Label", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "text", "HPProgressBar", "ProgressBar", "modulate", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "value", "show_percentage", "Stress", "Label", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "text", "GuiltrogressBar", "ProgressBar", "modulate", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "show_percentage", "horny", "Label", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "text", "HornyProgressBar", "ProgressBar", "modulate", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "show_percentage", "_on_button_button_down", "button_down", "_on_button_mouse_entered", "mouse_entered", "_on_button_mouse_exited", "mouse_exited"),
+"node_count": 15,
+"node_paths": [NodePath("."), NodePath("./pivot"), NodePath("./pivot"), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("./HP"), NodePath("."), NodePath("./Stress"), NodePath("."), NodePath("./horny"), NodePath("."), NodePath("Button"), NodePath("."), NodePath("Button"), NodePath("."), NodePath("Button")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 9, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 10, 8, 0, 1073741824, 0, 12, 11, -1, 2, 13, 9, 14, 10, 0, 1073741825, 0, 16, 15, -1, 8, 17, 11, 18, 12, 19, 13, 20, 14, 21, 15, 22, 16, 23, 17, 24, 18, 0, 1073741826, 0, 26, 25, -1, 9, 27, 19, 28, 20, 29, 21, 30, 22, 31, 23, 32, 24, 33, 25, 34, 26, 35, 27, 0, 1073741827, 0, 37, 36, -1, 6, 38, 28, 39, 29, 40, 30, 41, 31, 42, 32, 43, 33, 0, 1073741828, 0, 45, 44, -1, 5, 46, 34, 47, 35, 48, 36, 49, 37, 50, 38, 0, 1073741829, 0, 52, 51, -1, 4, 53, 39, 54, 40, 55, 41, 56, 42, 0, 1073741830, 0, 58, 57, -1, 8, 59, 43, 60, 44, 61, 45, 62, 46, 63, 47, 64, 48, 65, 49, 66, 50, 0, 1073741831, 0, 68, 67, -1, 10, 69, 51, 70, 52, 71, 53, 72, 54, 73, 55, 74, 56, 75, 57, 76, 58, 77, 59, 78, 60, 0, 1073741832, 0, 80, 79, -1, 7, 81, 61, 82, 62, 83, 63, 84, 64, 85, 65, 86, 66, 87, 67, 0, 1073741833, 0, 89, 88, -1, 8, 90, 68, 91, 69, 92, 70, 93, 71, 94, 72, 95, 73, 96, 74, 97, 75, 0, 1073741834, 0, 99, 98, -1, 7, 100, 76, 101, 77, 102, 78, 103, 79, 104, 80, 105, 81, 106, 82, 0, 1073741835, 0, 108, 107, -1, 7, 109, 83, 110, 84, 111, 85, 112, 86, 113, 87, 114, 88, 115, 89, 0, 1073741836, 0, 117, 116, -1, 7, 118, 90, 119, 91, 120, 92, 121, 93, 122, 94, 123, 95, 124, 96, 0, 1073741837, 0, 126, 125, -1, 7, 127, 97, 128, 98, 129, 99, 130, 100, 131, 101, 132, 102, 133, 103, 0),
+"variants": [ExtResource("24_fgc3r"), ExtResource("25_tbxql"), ExtResource("26_m51mi"), ExtResource("27_0vrm3"), "Bulub", true, 2, Array[Resource]([ExtResource("28_2yl46"), ExtResource("28_2yl46"), ExtResource("28_2yl46"), ExtResource("28_2yl46"), ExtResource("29_ar2vr")]), false, Vector2(0, -21), ExtResource("30_jo1db"), -133.0, -229.0, 38.0, 2.0, 2, ExtResource("25_tbxql"), 1, true, Color(2, 2, 2, 0), -133.0, -229.0, 38.0, 2.0, 2, ExtResource("25_tbxql"), 1, true, false, -82.0, -265.0, -38.0, -242.0, "name", Color(1, 1, 1, 0), -123.0, -325.0, 110.0, 57.0, 22.0, -252.0, 62.0, -233.0, false, -176.0, -305.0, 400.0, 271.0, Vector2(0.5, 0.5), ExtResource("31_3ccen"), ExtResource("32_2myda"), Vector2(-52, -351), Vector2(0.38, 0.38), ExtResource("33_rgn3p"), Vector2(0, 117.335), ExtResource("30_jo1db"), 0.38, 0.38, 0.3, 0.5, 0.5, -108.0, -33.0, -65.0, -14.0, ExtResource("10_grewm"), 15, "Stamina:", Color(0.690751, 1, 0, 1), 0, 50.0, 7.0, 146.0, 17.0, 100.0, false, -91.0, -15.0, -66.0, 4.0, ExtResource("10_grewm"), 15, "Guilt:", Color(1, 0.257036, 0, 1), 0, 32.0, 7.0, 128.0, 17.0, false, -99.0, 2.0, -67.0, 21.0, ExtResource("10_grewm"), 15, "Horny:", Color(0.905484, 0, 1, 1), 0, 39.0, 7.0, 135.0, 17.0, false],
+"version": 3
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c7ruu"]
+
+[sub_resource type="Resource" id="Resource_euc7u"]
+script = ExtResource("18_jjwvp")
+index = 3
+scale = Vector2(1.6, 1.6)
+is_enemy = true
+isFront = false
+metadata/_custom_type_script = "uid://b3l4l88c3b65c"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iaf2c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qk00q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8rvme"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uwmmy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_boe0j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rem33"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c35ka"]
+
+[node name="CombatInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cj48p")
+
+[node name="ZunBg" type="Sprite2D" parent="."]
+position = Vector2(961, 402)
+texture = ExtResource("2_fq8tp")
+
+[node name="atmosphere" parent="." instance=ExtResource("3_cjibp")]
+position = Vector2(2, 352)
+
+[node name="SpriteHeros" type="Sprite2D" parent="."]
+z_index = 6
+position = Vector2(-344, 394)
+scale = Vector2(1.36806, 1.36806)
+texture = ExtResource("4_n4mtp")
+script = ExtResource("5_eyss2")
+attackPos = Vector2(800, 500)
+MidPos = Vector2(400, 500)
+outsidePos = Vector2(-300, 500)
+esquivPos = Vector2(250, 500)
+attack_scale = Vector2(2, 2)
+
+[node name="SpriteEnnemies" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(2308.5, 406.5)
+scale = Vector2(1.32465, 1.32465)
+texture = ExtResource("4_n4mtp")
+script = ExtResource("5_eyss2")
+attackPos = Vector2(1400, 500)
+MidPos = Vector2(1625, 500)
+outsidePos = Vector2(2200, 500)
+esquivPos = Vector2(1700, 500)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+z_index = 7
+layout_mode = 0
+offset_left = 1421.0
+offset_top = 798.0
+offset_right = 1846.0
+offset_bottom = 1198.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(440, 276)
+render_target_update_mode = 4
+
+[node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("6_4r7lu")]
+scale = Vector2(0.4, 0.4)
+
+[node name="FightUi" type="Sprite2D" parent="."]
+z_index = 6
+position = Vector2(960, 537.75)
+scale = Vector2(0.779723, 0.793066)
+texture = ExtResource("7_bvkpi")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = 6
+layout_mode = 0
+offset_left = 681.0
+offset_top = 974.0
+offset_right = 1265.0
+offset_bottom = 975.0
+color = Color(0.501961, 0.407843, 0.207843, 1)
+
+[node name="ActionPanel" type="HBoxContainer" parent="."]
+z_index = 6
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 0
+offset_left = 579.0
+offset_top = 845.0
+offset_right = 1202.0
+offset_bottom = 945.0
+scale = Vector2(1.245, 1.245)
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Action1" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("9_y6osc")
+
+[node name="CooldownBar" type="HBoxContainer" parent="ActionPanel/Action1"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -3.21287
+offset_right = 81.0
+offset_bottom = 1.78713
+alignment = 1
+
+[node name="Action2" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("9_y6osc")
+
+[node name="CooldownBar" type="HBoxContainer" parent="ActionPanel/Action2"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -3.21287
+offset_right = 81.0
+offset_bottom = 1.78713
+alignment = 1
+
+[node name="Action3" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("9_y6osc")
+
+[node name="CooldownBar" type="HBoxContainer" parent="ActionPanel/Action3"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -3.21287
+offset_right = 81.0
+offset_bottom = 1.78713
+alignment = 1
+
+[node name="Action4" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("9_y6osc")
+
+[node name="CooldownBar" type="HBoxContainer" parent="ActionPanel/Action4"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -3.21287
+offset_right = 81.0
+offset_bottom = 1.78713
+alignment = 1
+
+[node name="Action5" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("9_y6osc")
+
+[node name="CooldownBar" type="HBoxContainer" parent="ActionPanel/Action5"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -3.21287
+offset_right = 81.0
+offset_bottom = 1.78713
+alignment = 1
+
+[node name="LabelAction" type="Label" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 681.0
+offset_top = 982.0
+offset_right = 1260.0
+offset_bottom = 1066.0
+theme_override_fonts/font = ExtResource("10_grewm")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TurnOrderPanel" type="HBoxContainer" parent="."]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 28.0
+offset_right = 1921.0
+offset_bottom = 93.0
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="TurnOrderPanel"]
+layout_mode = 2
+texture = ExtResource("11_yqcep")
+expand_mode = 3
+
+[node name="Charaname" type="Label" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 238.0
+offset_top = 809.0
+offset_right = 882.0
+offset_bottom = 858.0
+theme_override_fonts/font = ExtResource("10_grewm")
+theme_override_font_sizes/font_size = 40
+text = "Warrior"
+uppercase = true
+
+[node name="AttLabel" type="Label" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 268.0
+offset_top = 872.0
+offset_right = 534.0
+offset_bottom = 927.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 20
+text = "Attaque :"
+
+[node name="DefLabel" type="Label" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 268.0
+offset_top = 905.0
+offset_right = 481.0
+offset_bottom = 960.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 20
+text = "Defence:"
+
+[node name="Stamina" type="Label" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 269.0
+offset_top = 958.0
+offset_right = 488.0
+offset_bottom = 1013.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 20
+text = "Stamina :	
+"
+
+[node name="Horny" type="Label" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 268.0
+offset_top = 982.0
+offset_right = 487.0
+offset_bottom = 1037.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 20
+text = "Lust:
+"
+
+[node name="Guilt" type="Label" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 268.0
+offset_top = 1010.0
+offset_right = 487.0
+offset_bottom = 1065.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 20
+text = "Guilt:
+"
+
+[node name="CombatManager" parent="." instance=ExtResource("12_p6van")]
+HERO_START_POS = Vector2(100, 500)
+ENEMY_START_POS = Vector2(1200, 500)
+target_scene = "uid://dqnjuxw77ebnb"
+encounter = ExtResource("13_h6snt")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CombatManager"]
+stream = ExtResource("14_s4w8b")
+volume_db = 4.455
+pitch_scale = 0.67
+
+[node name="charaPortrait" type="TextureRect" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 66.0
+offset_top = 809.0
+offset_right = 212.0
+offset_bottom = 955.0
+texture = ExtResource("15_a1i00")
+expand_mode = 1
+
+[node name="ResultScreen" type="Label" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 740.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 450
+text = "Victoire !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+ignore_rotation = false
+script = ExtResource("16_620ik")
+
+[node name="HeroPosition" type="Node2D" parent="."]
+position = Vector2(168, 597)
+scale = Vector2(0.9, 0.9)
+
+[node name="position1" type="Node2D" parent="HeroPosition"]
+z_index = 2
+position = Vector2(-1, 32)
+script = ExtResource("17_qawtg")
+position_data = SubResource("Resource_i1s1q")
+
+[node name="TextureRect" type="TextureRect" parent="HeroPosition/position1"]
+visible = false
+offset_left = -47.0
+offset_top = -334.0
+offset_right = 19.0
+offset_bottom = -274.0
+mouse_filter = 2
+texture = ExtResource("19_51nu6")
+
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position1"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0001
+offset_right = 108.0
+offset_bottom = 60.9999
+texture = ExtResource("20_2jb5e")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="HeroPosition/position1"]
+offset_left = -101.0
+offset_top = -304.0
+offset_right = 78.0
+offset_bottom = 82.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s6b88")
+flat = true
+
+[node name="charaCombatUI" parent="HeroPosition/position1" instance=ExtResource("21_bugi7")]
+visible = false
+position = Vector2(-1.00012, 70)
+scale = Vector2(1.8, 1.8)
+
+[node name="position2" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(233.333, -4.99998)
+script = ExtResource("17_qawtg")
+position_data = SubResource("Resource_8flqu")
+
+[node name="TextureRect" type="TextureRect" parent="HeroPosition/position2"]
+visible = false
+offset_left = -47.0
+offset_top = -334.0
+offset_right = 19.0
+offset_bottom = -274.0
+texture = ExtResource("19_51nu6")
+
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position2"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0
+offset_right = 108.0
+offset_bottom = 61.0
+texture = ExtResource("20_2jb5e")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="HeroPosition/position2"]
+offset_left = -104.0
+offset_top = -304.0
+offset_right = 92.0
+offset_bottom = 154.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hxbks")
+flat = true
+
+[node name="charaCombatUI" parent="HeroPosition/position2" instance=ExtResource("21_bugi7")]
+visible = false
+position = Vector2(-44.4444, 105.833)
+scale = Vector2(1.8, 1.8)
+
+[node name="position3" type="Node2D" parent="HeroPosition"]
+z_index = 2
+z_as_relative = false
+position = Vector2(391.111, 30.833)
+script = ExtResource("17_qawtg")
+position_data = SubResource("Resource_x8qlv")
+
+[node name="TextureRect" type="TextureRect" parent="HeroPosition/position3"]
+visible = false
+offset_left = -47.0
+offset_top = -334.0
+offset_right = 19.0
+offset_bottom = -274.0
+texture = ExtResource("19_51nu6")
+
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position3"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0001
+offset_right = 108.0
+offset_bottom = 60.9999
+texture = ExtResource("20_2jb5e")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="HeroPosition/position3"]
+offset_left = -89.0
+offset_top = -304.0
+offset_right = 105.0
+offset_bottom = 130.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vtu61")
+flat = true
+
+[node name="charaCombatUI" parent="HeroPosition/position3" instance=ExtResource("21_bugi7")]
+visible = false
+position = Vector2(-7.7778, 70)
+scale = Vector2(1.8, 1.8)
+
+[node name="position4" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(625, -9.00002)
+script = ExtResource("17_qawtg")
+position_data = SubResource("Resource_t7hjh")
+
+[node name="TextureRect" type="TextureRect" parent="HeroPosition/position4"]
+visible = false
+offset_left = -47.0
+offset_top = -334.0
+offset_right = 19.0
+offset_bottom = -274.0
+texture = ExtResource("19_51nu6")
+
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position4"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0
+offset_right = 108.0
+offset_bottom = 61.0
+texture = ExtResource("20_2jb5e")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="HeroPosition/position4"]
+offset_left = -111.0
+offset_top = -304.0
+offset_right = 86.0
+offset_bottom = 164.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m2l43")
+flat = true
+
+[node name="charaCombatUI" parent="HeroPosition/position4" instance=ExtResource("21_bugi7")]
+visible = false
+position = Vector2(-42.7778, 109.833)
+scale = Vector2(1.8, 1.8)
+
+[node name="ennemiePosition" type="Node2D" parent="."]
+position = Vector2(1272, 605)
+scale = Vector2(0.9, 0.9)
+
+[node name="position1" type="Node2D" parent="ennemiePosition"]
+z_index = 2
+position = Vector2(-3, 24)
+script = ExtResource("17_qawtg")
+position_data = SubResource("Resource_fs52m")
+enemy_scene = ExtResource("22_qkkxu")
+
+[node name="TextureRect" type="TextureRect" parent="ennemiePosition/position1"]
+visible = false
+offset_left = -47.0
+offset_top = -334.0
+offset_right = 19.0
+offset_bottom = -274.0
+texture = ExtResource("19_51nu6")
+
+[node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position1"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0
+offset_right = 108.0
+offset_bottom = 61.0
+texture = ExtResource("20_2jb5e")
+expand_mode = 1
+flip_h = true
+
+[node name="Button" type="Button" parent="ennemiePosition/position1"]
+offset_left = -129.222
+offset_top = -354.0
+offset_right = 65.7776
+offset_bottom = 101.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xtuat")
+flat = true
+
+[node name="charaCombatUI" parent="ennemiePosition/position1" instance=ExtResource("21_bugi7")]
+visible = false
+position = Vector2(-30.3335, 70)
+scale = Vector2(1.8, 1.8)
+
+[node name="position2" type="Node2D" parent="ennemiePosition"]
+z_index = 1
+position = Vector2(145.555, -25)
+script = ExtResource("17_qawtg")
+position_data = SubResource("Resource_ehgg6")
+enemy_scene = ExtResource("23_w72v8")
+
+[node name="TextureRect" type="TextureRect" parent="ennemiePosition/position2"]
+visible = false
+offset_left = -47.0
+offset_top = -334.0
+offset_right = 19.0
+offset_bottom = -274.0
+texture = ExtResource("19_51nu6")
+
+[node name="Button" type="Button" parent="ennemiePosition/position2"]
+offset_left = -76.6666
+offset_top = -317.0
+offset_right = 112.333
+offset_bottom = 158.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xwqlg")
+flat = true
+
+[node name="charaCombatUI" parent="ennemiePosition/position2" instance=ExtResource("21_bugi7")]
+visible = false
+position = Vector2(16.6667, 119)
+scale = Vector2(1.8, 1.8)
+
+[node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position2"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0
+offset_right = 108.0
+offset_bottom = 61.0
+texture = ExtResource("20_2jb5e")
+expand_mode = 1
+flip_h = true
+
+[node name="position3" type="Node2D" parent="ennemiePosition"]
+z_index = 2
+position = Vector2(368.889, 23.3333)
+script = ExtResource("17_qawtg")
+position_data = SubResource("Resource_if0a6")
+enemy_scene = SubResource("PackedScene_qbte2")
+
+[node name="TextureRect" type="TextureRect" parent="ennemiePosition/position3"]
+visible = false
+offset_left = -47.0
+offset_top = -334.0
+offset_right = 19.0
+offset_bottom = -274.0
+texture = ExtResource("19_51nu6")
+
+[node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position3"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -148.0
+offset_top = -18.0
+offset_right = 108.0
+offset_bottom = 61.0
+texture = ExtResource("20_2jb5e")
+expand_mode = 1
+flip_h = true
+
+[node name="Button" type="Button" parent="ennemiePosition/position3"]
+offset_left = -109.0
+offset_top = -364.0
+offset_right = 69.0
+offset_bottom = 106.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c7ruu")
+flat = true
+
+[node name="charaCombatUI" parent="ennemiePosition/position3" instance=ExtResource("21_bugi7")]
+visible = false
+position = Vector2(-8.00005, 68)
+scale = Vector2(1.8, 1.8)
+
+[node name="position4" type="Node2D" parent="ennemiePosition"]
+z_index = 1
+position = Vector2(515.555, -26)
+script = ExtResource("17_qawtg")
+position_data = SubResource("Resource_euc7u")
+
+[node name="TextureRect" type="TextureRect" parent="ennemiePosition/position4"]
+visible = false
+offset_left = -47.0
+offset_top = -334.0
+offset_right = 19.0
+offset_bottom = -274.0
+texture = ExtResource("19_51nu6")
+
+[node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position4"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -136.667
+offset_top = -14.0
+offset_right = 119.333
+offset_bottom = 65.0
+texture = ExtResource("20_2jb5e")
+expand_mode = 1
+flip_h = true
+
+[node name="Button" type="Button" parent="ennemiePosition/position4"]
+offset_left = -72.2222
+offset_top = -310.667
+offset_right = 97.7778
+offset_bottom = 159.333
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iaf2c")
+flat = true
+
+[node name="charaCombatUI" parent="ennemiePosition/position4" instance=ExtResource("21_bugi7")]
+visible = false
+position = Vector2(21.2221, 117)
+scale = Vector2(1.8, 1.8)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1560.0
+offset_top = 23.0
+offset_right = 1858.0
+offset_bottom = 153.0
+text = "next"
+script = ExtResource("34_aky5v")
+
+[node name="contexte" type="Label" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 79.0
+offset_top = 153.0
+offset_right = 600.0
+offset_bottom = 223.0
+theme_override_fonts/font = ExtResource("10_grewm")
+theme_override_font_sizes/font_size = 25
+text = "iilii"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="dialogue" type="Sprite2D" parent="contexte"]
+z_index = -1
+position = Vector2(261, 20)
+scale = Vector2(0.600586, 0.38477)
+texture = ExtResource("35_mw24c")
+
+[node name="contextennemi" type="Label" parent="."]
+z_index = 2
+layout_mode = 0
+offset_left = 1383.0
+offset_top = 153.0
+offset_right = 1693.0
+offset_bottom = 205.0
+theme_override_fonts/font = ExtResource("10_grewm")
+theme_override_font_sizes/font_size = 25
+text = "iilii"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="dialogue" type="Sprite2D" parent="contextennemi"]
+z_index = -1
+position = Vector2(155, 21)
+scale = Vector2(0.600586, 0.38477)
+texture = ExtResource("35_mw24c")
+
+[node name="overmenu" type="ColorRect" parent="."]
+z_index = 8
+layout_mode = 0
+offset_left = 1428.0
+offset_top = 798.0
+offset_right = 1862.0
+offset_bottom = 1113.0
+color = Color(0.0235294, 0.0196078, 0, 1)
+script = ExtResource("36_gjnr8")
+
+[node name="CharaIcon" type="Sprite2D" parent="overmenu"]
+modulate = Color(1, 1, 1, 0.05)
+position = Vector2(217, 136)
+scale = Vector2(2.91157, 2.91157)
+texture = ExtResource("37_gwmn5")
+
+[node name="charaPortrait2" type="TextureRect" parent="overmenu"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 7.0
+offset_right = 128.0
+offset_bottom = 133.0
+expand_mode = 1
+
+[node name="Charaname2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 32.0
+offset_right = 412.0
+offset_bottom = 112.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 40
+
+[node name="AttLabel2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 94.0
+offset_right = 383.0
+offset_bottom = 149.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 20
+
+[node name="DefLabel2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 115.0
+offset_right = 330.0
+offset_bottom = 170.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 20
+
+[node name="Stamina2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 244.0
+offset_top = 92.0
+offset_right = 463.0
+offset_bottom = 147.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 20
+
+[node name="Horny2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 116.0
+offset_right = 465.0
+offset_bottom = 171.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 20
+
+[node name="Guilt2" type="Label" parent="overmenu"]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 136.0
+offset_right = 465.0
+offset_bottom = 191.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 20
+
+[node name="ActionPanel2" type="HBoxContainer" parent="overmenu"]
+visible = false
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 0
+offset_left = 21.0001
+offset_top = 184.0
+offset_right = 511.0
+offset_bottom = 274.0
+scale = Vector2(0.792293, 0.792293)
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="Action1" type="Button" parent="overmenu/ActionPanel2"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kiw3p")
+icon = ExtResource("19_51nu6")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("9_y6osc")
+
+[node name="cooldownA" type="Label" parent="overmenu/ActionPanel2/Action1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("10_grewm")
+
+[node name="Action2" type="Button" parent="overmenu/ActionPanel2"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qk00q")
+icon = ExtResource("19_51nu6")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("9_y6osc")
+
+[node name="cooldownA" type="Label" parent="overmenu/ActionPanel2/Action2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action3" type="Button" parent="overmenu/ActionPanel2"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8rvme")
+icon = ExtResource("19_51nu6")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("9_y6osc")
+
+[node name="cooldownA" type="Label" parent="overmenu/ActionPanel2/Action3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action4" type="Button" parent="overmenu/ActionPanel2"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uwmmy")
+icon = ExtResource("19_51nu6")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("9_y6osc")
+
+[node name="cooldownA" type="Label" parent="overmenu/ActionPanel2/Action4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Action5" type="Button" parent="overmenu/ActionPanel2"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_0lsc6")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_boe0j")
+icon = ExtResource("19_51nu6")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("9_y6osc")
+
+[node name="cooldownA" type="Label" parent="overmenu/ActionPanel2/Action5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ContourMap" type="Sprite2D" parent="."]
+z_index = 8
+position = Vector2(1642, 938)
+scale = Vector2(0.747029, 0.802292)
+texture = ExtResource("38_todgb")
+
+[node name="ButtonCharainfo" type="Button" parent="ContourMap"]
+offset_left = 286.558
+offset_top = -155.804
+offset_right = 365.558
+offset_bottom = -62.8036
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rem33")
+icon = ExtResource("39_ff0d8")
+flat = true
+script = ExtResource("40_hvxfv")
+hover_color = Color(0.643137, 0.572549, 0.435294, 1)
+centered = false
+
+[node name="CharaIcon" type="Sprite2D" parent="ContourMap/ButtonCharainfo"]
+position = Vector2(38.7304, 44.8714)
+scale = Vector2(0.874031, 0.874031)
+texture = ExtResource("37_gwmn5")
+
+[node name="ButtonMap" type="Button" parent="ContourMap"]
+z_index = -1
+offset_left = 286.558
+offset_top = -73.5393
+offset_right = 365.558
+offset_bottom = 19.4607
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c35ka")
+icon = ExtResource("39_ff0d8")
+flat = true
+script = ExtResource("40_hvxfv")
+centered = false
+
+[node name="IconMap" type="Sprite2D" parent="ContourMap/ButtonMap"]
+position = Vector2(39.8667, 43.7125)
+scale = Vector2(0.937106, 0.907487)
+texture = ExtResource("41_0yc6e")
+
+[node name="EnnemiTurn" type="ColorRect" parent="."]
+z_index = 15
+layout_mode = 0
+offset_left = 448.0
+offset_top = 838.0
+offset_right = 1416.0
+offset_bottom = 1074.0
+color = Color(0.0235294, 0.0196078, 0, 1)
+
+[node name="Ennemiturn" type="Sprite2D" parent="EnnemiTurn"]
+self_modulate = Color(0.385493, 0.385492, 0.385492, 0.635)
+position = Vector2(512, 109)
+scale = Vector2(0.784465, 0.752116)
+texture = ExtResource("42_ucggl")
+
+[connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]
+[connection signal="pressed" from="ActionPanel/Action1" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="ActionPanel/Action2" to="ActionPanel/Action2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action2" to="ActionPanel/Action2" method="_on_mouse_exited"]
+[connection signal="pressed" from="ActionPanel/Action2" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="ActionPanel/Action3" to="ActionPanel/Action3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action3" to="ActionPanel/Action3" method="_on_mouse_exited"]
+[connection signal="pressed" from="ActionPanel/Action3" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="ActionPanel/Action4" to="ActionPanel/Action4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action4" to="ActionPanel/Action4" method="_on_mouse_exited"]
+[connection signal="pressed" from="ActionPanel/Action4" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="ActionPanel/Action5" to="ActionPanel/Action5" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action5" to="ActionPanel/Action5" method="_on_mouse_exited"]
+[connection signal="pressed" from="ActionPanel/Action5" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
+[connection signal="mouse_entered" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]
+[connection signal="mouse_entered" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_button_down"]
+[connection signal="mouse_entered" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_button_down"]
+[connection signal="mouse_entered" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="ennemiePosition/position1/Button" to="ennemiePosition/position1" method="_on_button_button_down"]
+[connection signal="mouse_entered" from="ennemiePosition/position1/Button" to="ennemiePosition/position1" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="ennemiePosition/position1/Button" to="ennemiePosition/position1" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="ennemiePosition/position2/Button" to="ennemiePosition/position2" method="_on_button_button_down"]
+[connection signal="mouse_entered" from="ennemiePosition/position2/Button" to="ennemiePosition/position2" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="ennemiePosition/position2/Button" to="ennemiePosition/position2" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="ennemiePosition/position3/Button" to="ennemiePosition/position3" method="_on_button_button_down"]
+[connection signal="mouse_entered" from="ennemiePosition/position3/Button" to="ennemiePosition/position3" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="ennemiePosition/position3/Button" to="ennemiePosition/position3" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="ennemiePosition/position4/Button" to="ennemiePosition/position4" method="_on_button_button_down"]
+[connection signal="mouse_entered" from="ennemiePosition/position4/Button" to="ennemiePosition/position4" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="ennemiePosition/position4/Button" to="ennemiePosition/position4" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="Button" to="Button" method="_on_button_down"]
+[connection signal="mouse_entered" from="overmenu/ActionPanel2/Action1" to="overmenu/ActionPanel2/Action1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="overmenu/ActionPanel2/Action1" to="overmenu/ActionPanel2/Action1" method="_on_mouse_exited"]
+[connection signal="pressed" from="overmenu/ActionPanel2/Action1" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="overmenu/ActionPanel2/Action2" to="overmenu/ActionPanel2/Action2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="overmenu/ActionPanel2/Action2" to="overmenu/ActionPanel2/Action2" method="_on_mouse_exited"]
+[connection signal="pressed" from="overmenu/ActionPanel2/Action2" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="overmenu/ActionPanel2/Action3" to="overmenu/ActionPanel2/Action3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="overmenu/ActionPanel2/Action3" to="overmenu/ActionPanel2/Action3" method="_on_mouse_exited"]
+[connection signal="pressed" from="overmenu/ActionPanel2/Action3" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="overmenu/ActionPanel2/Action4" to="overmenu/ActionPanel2/Action4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="overmenu/ActionPanel2/Action4" to="overmenu/ActionPanel2/Action4" method="_on_mouse_exited"]
+[connection signal="pressed" from="overmenu/ActionPanel2/Action4" to="CombatManager" method="_on_action_1_pressed"]
+[connection signal="mouse_entered" from="overmenu/ActionPanel2/Action5" to="overmenu/ActionPanel2/Action5" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="overmenu/ActionPanel2/Action5" to="overmenu/ActionPanel2/Action5" method="_on_mouse_exited"]
+[connection signal="pressed" from="overmenu/ActionPanel2/Action5" to="CombatManager" method="_on_action_1_pressed"]
