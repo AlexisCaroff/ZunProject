@@ -27,6 +27,7 @@ func preview_encounter(encounter: CombatEncounter) -> void:
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	add_child(hbox)
 	
+	
 	if encounter == null:
 		return
 	# Crée un carré pour chaque élément du tableau
@@ -38,6 +39,7 @@ func preview_encounter(encounter: CombatEncounter) -> void:
 			hbox.add_child(rect)
 			
 	for i in range(slots.size()):
+		move_randomly_in_area(slots[i])
 		if i < encounter.enemy_scenes.size():
 			var enemy: Character = encounter.enemy_scenes[i].instantiate()
 			
@@ -65,3 +67,8 @@ func preview_encounter(encounter: CombatEncounter) -> void:
 				# Attendre la fin de l'animation avant de passer à l'itération suivante
 				await fade_in_tween.finished
 	door.check_detection()
+	
+func move_randomly_in_area(node: Node2D):
+	var random_x = randf_range(-550, 550)
+	var random_y = randf_range(0, 50)
+	node.position += Vector2(random_x, random_y)

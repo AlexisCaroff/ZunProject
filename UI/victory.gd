@@ -27,15 +27,17 @@ func showLoot(items: Array[Item]):
 func _on_continue_pressed() -> void:
 
 	GameState.current_phase = GameStat.GamePhase.EXPLORATION
-	if GameState.saveRunning==true :
-		await GameState.save_finished
+	#if GameState.saveRunning==true :
+		#await GameState.save_finished
 	
 	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
 	if gm and gm.current_room_Ressource:
 		if gm.current_room_Ressource.exploration_scene:
-			gm._enter_scene_in_current_room(gm.current_room_Ressource.exploration_scene)
+			call_deferred("_enter_exploration_scene", gm)
 		else:
 			push_error("Pas de scene exploration définie pour cette salle")
 	else:
 		push_error("GameManager introuvable ou current_room vide")
-	
+
+func _enter_exploration_scene(gm: GameManager) -> void:
+	gm._enter_scene_in_current_room(gm.current_room_Ressource.exploration_scene)

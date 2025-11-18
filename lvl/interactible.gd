@@ -7,9 +7,10 @@ var current_tween: Tween = null
 @onready var  etiquette = $etiquette
 @onready var dialogue_manager := $"../DialogueManager"
 @export var dialoguePass :String
+@onready var button: Button =$Button
 
 func _ready():
-	
+	button.connect("button_down", _on_button_button_down)
 	# Charger un fichier de dialogue
 	dialogue_manager.load_dialogue(dialoguePass)
 	dialogue_manager.text_choice1 = "Use Kairn "

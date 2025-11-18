@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://6oj65xacpxi"]
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://6oj65xacpxi"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_pnk3y"]
+[ext_resource type="Texture2D" uid="uid://di6rn04xd5e1x" path="res://characters/charatexture/ENEMY_SPITTER_tentacle.png" id="1_xuyw1"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_2a5gp"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_bjxpp"]
 [ext_resource type="Texture2D" uid="uid://ccnq4lbltabiy" path="res://actions/actiontexture/tentacles.png" id="3_xuyw1"]
@@ -19,6 +20,7 @@ descriptionName = "Tentacles Attack"
 description = "dmg an ennemi"
 icon = ExtResource("3_xuyw1")
 required_position = 0
+ImageSkill = ExtResource("1_xuyw1")
 the_target_type = 0
 effects = Array[ExtResource("1_pnk3y")]([SubResource("Resource_3q5jt")])
 two_target_Type = false

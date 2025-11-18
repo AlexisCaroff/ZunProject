@@ -241,10 +241,11 @@ func next_turn():
 		while is_animation_playing():
 			await get_tree().process_frame
 		turn_queue.append(current_character)
+		
 		next_turn()
 		return
-	if current_character.current_horniness==100: # look if tired
-		
+	if current_character.current_horniness>=100: 
+		current_character.current_horniness =100
 		ui.log(current_character.Charaname +" is too horny to fight")
 		while is_animation_playing():
 			await get_tree().process_frame

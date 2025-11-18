@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dg0coy6r6f1ww"]
+[gd_scene load_steps=9 format=3 uid="uid://dg0coy6r6f1ww"]
 
 [ext_resource type="Script" uid="uid://d12jn42j03tgg" path="res://GameManager.gd" id="1_838hb"]
 [ext_resource type="Resource" uid="uid://7dlbup10473y" path="res://lvl/donjonTestePorte.tres" id="2_soe0u"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="5_twojc"]
 [ext_resource type="Texture2D" uid="uid://c7i05i2v2djk1" path="res://UI/seau.png" id="6_fuquo"]
 [ext_resource type="Script" uid="uid://bhsro7sspbgqw" path="res://UI/button.gd" id="7_k66he"]
+[ext_resource type="Texture2D" uid="uid://u4r16y7nxe6o" path="res://logo.png" id="8_soe0u"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_838hb")
@@ -63,3 +64,30 @@ z_index = -1
 position = Vector2(112, 29)
 scale = Vector2(0.217285, 0.325843)
 texture = ExtResource("5_twojc")
+
+[node name="endGame" type="ColorRect" parent="."]
+visible = false
+offset_right = 1978.0
+offset_bottom = 1059.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="endGame"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 231.0
+offset_right = 1397.0
+offset_bottom = 715.0
+theme_override_fonts/font = ExtResource("4_dhxbs")
+theme_override_font_sizes/font_size = 50
+text = "You've beaten the boss!
+
+Thanks for taking part in this first playtest!
+
+Leave us your feedback in the discord!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Logo" type="Sprite2D" parent="endGame"]
+position = Vector2(951, 842)
+scale = Vector2(0.816406, 0.816406)
+texture = ExtResource("8_soe0u")

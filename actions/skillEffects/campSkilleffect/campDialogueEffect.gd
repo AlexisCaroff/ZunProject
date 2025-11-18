@@ -23,7 +23,7 @@ func apply(user: CharaCamp, target: CharaCamp):
 		"Hunter":  file_path = dialogueHunter
 		"Warrior": file_path = dialogueWarrior
 		_: 
-			print("⚠️ Aucun dialogue défini pour ", target.Charaname)
+			print(" Aucun dialogue défini pour ", target.Charaname)
 			return
 
 

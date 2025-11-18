@@ -42,8 +42,9 @@ extends Control
 	$ActionPanel/Action4/CooldownBar,
 	$ActionPanel/Action5/CooldownBar
 ]
-
+@onready var thebutton =$Button
 func _ready():
+	#thebutton.visible=false
 	var current_character = combat_manager.get_current_character()
 	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
 

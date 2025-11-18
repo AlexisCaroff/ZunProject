@@ -8,6 +8,7 @@ var current_room_Ressource: RoomResource
 @export var current_room_node: Node
 @export_file("*.tscn") var campement_scene_path: String = "res://lvl/campement.tscn"
 var campement_node: Node = null
+@onready var end =$endGame
 
 
 func _ready():
@@ -34,7 +35,7 @@ func enter_room(room: RoomResource, changedoor: bool = false):
 	if not changedoor:
 		last_room_Ressource = current_room_Ressource
 	current_room_Ressource = room
-	current_room_Ressource.explored = true
+	
 	
 	print("🏰 Current room is ", current_room_Ressource.room_id)
 
@@ -94,10 +95,15 @@ func go_to_connected_room(index: int):
 
 
 func _enter_scene_in_current_room(scene: PackedScene, ennemy_are_embushed: bool = false, heroes_are_embushed: bool = false):
+	current_room_Ressource.explored = true
+	if get_room_by_id("Cellar").ennemikilled == true:
+		end.visible=true
 	if scene:
 		print("old scene is ", current_room_node.name)
 		if current_room_node:
+			print ("free old room")
 			current_room_node.free()
+			
 			current_room_node = null
 
 		

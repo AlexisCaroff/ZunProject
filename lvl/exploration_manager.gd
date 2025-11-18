@@ -17,15 +17,22 @@ var move_mode: bool = false
 @onready var portrait_selector =$"../Portraits/ExploCharaselector"
 var DoorNumber:int =0
 var gm : GameManager
+var campButton: Button
+
 func _ready():
 	
 	gm = get_tree().root.get_node("GameManager") as GameManager
+	if gm.current_room_Ressource.CanCamp:
+		campButton=$Campement
+		if gm.current_room_Ressource.CampDone:
+			campButton.disabled=true
 	load_characters_from_gamestat()
 	selected_character = characters[0]
 	portrait_selector.position = portraits[0].position
 	
-	if donjon_map:
-		donjon_map.focus_on_room(gm.current_room_Ressource, viewport)
+	if donjon_map== null:
+		donjon_map=$"../SubViewportContainer/SubViewport/map"
+	donjon_map.focus_on_room(gm.current_room_Ressource,viewport)
 		#donjon_map.move_to_position(donjon_map.curentposition)
 
 
@@ -143,6 +150,7 @@ func _on_button_2_button_down() -> void:
 
 
 func _on_campement_button_down() -> void:
+	gm.current_room_Ressource.CampDone=true
 	gm.go_to_campement()
 func sortie_du_camp():
 	for chara in characters:

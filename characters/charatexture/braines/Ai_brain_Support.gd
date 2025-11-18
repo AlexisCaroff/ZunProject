@@ -12,8 +12,10 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 
 	if not heal_skills.is_empty() and not weak_allies.is_empty():
 		var heal_skill: Skill = heal_skills.pick_random()
-		var target: Character = weak_allies.pick_random()
-		print("%s (AI Support) soigne %s avec %s" % [owner.name, target.name, heal_skill.descriptionName])
+		var Charatarget: Character = weak_allies.pick_random()
+		print("%s (AI Support) soigne %s avec %s" % [owner.name, Charatarget.name, heal_skill.descriptionName])
+		var target :Array[PositionSlot]
+		target.append(Charatarget. _current_slot)
 		return {
 			"skill": heal_skill,
 			"target": target
@@ -24,8 +26,11 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 	if not attack_skills.is_empty():
 		var attack_skill: Skill = attack_skills.pick_random()
 		var possible_targets: Array[Character] = heroes.filter(func(h): return not h.is_dead())
-		var target: Character = possible_targets.pick_random() if possible_targets.size() > 0 else null
-		print("%s (AI Support) attaque %s avec %s" % [owner.name, target.name if target else "personne", attack_skill.descriptionName])
+		var Charatarget: Character = possible_targets.pick_random() if possible_targets.size() > 0 else null
+		var target :Array[PositionSlot]
+		target.append(Charatarget. _current_slot)
+		#print("%s (AI Support) attaque %s avec %s" % [owner.name, target.name if target else "personne", attack_skill.descriptionName])
+		
 		return {
 			"skill": attack_skill,
 			"target": target

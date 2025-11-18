@@ -24,20 +24,20 @@ var Tentescale
 @onready var love_sprite: Sprite2D = $"../LoveImage"
 
 @export var love_images := {
-	"Priest+Mystic": preload("res://LoveScene/LoveSceneimage/PriestMystic.png"),
+	"Priestess+Mystic": preload("res://LoveScene/LoveSceneimage/PriestMystic.png"),
 	"Mystic+Hunter": preload("res://LoveScene/LoveSceneimage/MysticHunter.png"),
-	"Priest+Warrior": preload("res://LoveScene/LoveSceneimage/PriestWarriorAnim.png"), # animée
+	"Priestess+Warrior": preload("res://LoveScene/LoveSceneimage/PriestWarriorAnim.png"), # animée
 	"Hunter+Warrior": preload("res://LoveScene/LoveSceneimage/HunterWarrior.png"),
 	"Mystic+Warrior": preload("res://LoveScene/LoveSceneimage/WarriorMystic.png"),
-	"Priest+Hunter": preload("res://LoveScene/LoveSceneimage/PriestHunter.png")
+	"Priestess+Hunter": preload("res://LoveScene/LoveSceneimage/PriestHunter.png")
 }
 @export var love_scenes := {
-	"Priest+Mystic": "res://LoveScene/PriestxMystic.tscn",
+	"Priestess+Mystic": "res://LoveScene/PriestxMystic.tscn",
 	"Mystic+Hunter": "res://LoveScene/MysticxHunter.tscn",
-	"Priest+Warrior": "res://LoveScene/PriestxWarrior.tscn",
+	"Priestess+Warrior": "res://LoveScene/PriestxWarrior.tscn",
 	"Hunter+Warrior": "res://LoveScene/HunterxWarrior.tscn",
 	"Mystic+Warrior": "res://LoveScene/WarriorxMystic.tscn",
-	"Priest+Hunter": "res://LoveScene/PriestxHunter.tscn"
+	"Priestess+Hunter": "res://LoveScene/PriestxHunter.tscn"
 }
 var current_love_scene: Node = null
 var scene_path := ""
@@ -55,7 +55,7 @@ func startMasturbation(user:CharaCamp):
 	ButtonStopMasturb.visible=true
 	bounce_enabled=true
 	match user.Charaname:
-		"Priest":  images = PriestImages
+		"Priestess":  images = PriestImages
 		"Mystic":  images = MysticImages
 		"Hunter":  images = HunterImages
 		"Warrior": images = WarriorImages
@@ -201,7 +201,7 @@ func show_love_image(user: CharaCamp, target: CharaCamp):
 		child.queue_free()
 
 	# Cas spécial : Priest+Warrior → animation 7x5
-	if key1 == "Priest+Warrior" or key2 == "Priest+Warrior":
+	if key1 == "Priestess+Warrior" or key2 == "Priestess+Warrior":
 		love_sprite.visible = true
 		love_sprite.texture = null  # on n’affiche pas la texture statique
 

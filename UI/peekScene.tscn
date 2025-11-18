@@ -21,19 +21,19 @@ texture = ExtResource("2_cxl0a")
 position = Vector2(2, 515)
 
 [node name="PortraitSlot1" type="Node2D" parent="."]
-position = Vector2(495, 628)
+position = Vector2(946, 719)
 script = ExtResource("5_knem7")
 
 [node name="PortraitSlot2" type="Node2D" parent="."]
-position = Vector2(770, 647)
+position = Vector2(954, 727)
 script = ExtResource("5_knem7")
 
 [node name="PortraitSlot3" type="Node2D" parent="."]
-position = Vector2(1113, 622)
+position = Vector2(963, 725)
 script = ExtResource("5_knem7")
 
 [node name="PortraitSlot4" type="Node2D" parent="."]
-position = Vector2(1450, 702)
+position = Vector2(967, 733)
 script = ExtResource("5_knem7")
 
 [node name="doorshadows" type="Sprite2D" parent="."]

@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="3_wwy36"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="6_aki42"]
 [ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="6_ukosw"]
-[ext_resource type="Texture2D" uid="uid://2u65ql48338r" path="res://actions/bufftexture/buffDeff.png" id="8_yu2gj"]
+[ext_resource type="Texture2D" uid="uid://blaxr6boo4hkf" path="res://UI/buffDeff.png" id="8_3o4k5"]
 
 [sub_resource type="Resource" id="Resource_yu2gj"]
 script = ExtResource("2_wwy36")
@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://2vsqpp6jqiow"
 [sub_resource type="Resource" id="Resource_qng7d"]
 script = ExtResource("6_aki42")
 name = "name"
-uitexture = ExtResource("8_yu2gj")
+uitexture = ExtResource("8_3o4k5")
 affected_stat = 1
 amount = 5000
 duration = 2

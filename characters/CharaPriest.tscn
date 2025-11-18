@@ -30,6 +30,7 @@ dead_portrait_texture = ExtResource("3_xqmvo")
 initiative_icon = ExtResource("3_054hg")
 textureCamp = ExtResource("6_wpklt")
 Charaname = "Priestess"
+base_attack = 8
 skill_resources = Array[Resource]([ExtResource("5_054hg"), ExtResource("6_1bjum"), ExtResource("7_mg4qg"), ExtResource("8_6af8e"), ExtResource("9_doqsm")])
 tags = Array[String](["dom", "sadist", "jailor"])
 camp_skill_resources = Array[ExtResource("10_pweqf")]([ExtResource("14_xqmvo"), ExtResource("15_1m0vh"), ExtResource("12_7p8u1"), ExtResource("13_ea307")])

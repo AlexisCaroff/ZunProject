@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://nri716ki3ipb"]
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://nri716ki3ipb"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_jh1m6"]
+[ext_resource type="Texture2D" uid="uid://ccwfpgtpuqje" path="res://characters/charatexture/ENEMY_NYMPH_F_charm.png" id="1_vb7f5"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_vb7f5"]
 [ext_resource type="Texture2D" uid="uid://yyl7yyr5j4rv" path="res://UI/poisonHorny.png" id="3_w1vbh"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="4_j3em7"]
@@ -30,6 +31,7 @@ descriptionName = "Horny Poison"
 description = "Aphrodisiac on an enemy"
 icon = ExtResource("5_n6mpd")
 required_position = 0
+ImageSkill = ExtResource("1_vb7f5")
 the_target_type = 0
 effects = Array[ExtResource("1_jh1m6")]([SubResource("Resource_jrqoj"), SubResource("Resource_3h4no")])
 two_target_Type = false

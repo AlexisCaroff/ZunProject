@@ -394,6 +394,5 @@ texture = ExtResource("23_a7oxe")
 [connection signal="button_down" from="ExplorationManager/Button" to="ExplorationManager" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="ExplorationManager/Button" to="ExplorationManager" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="ExplorationManager/Button" to="ExplorationManager" method="_on_button_mouse_exited"]
-[connection signal="button_down" from="Kairn/Button" to="Kairn" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Kairn/Button" to="Kairn" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Kairn/Button" to="Kairn" method="_on_button_mouse_exited"]

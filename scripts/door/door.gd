@@ -140,7 +140,7 @@ func _advance_in_room():
 
 func startpeeking():
 	peek_scene.door = self
-	
+	donjon_map.peek_next_Room(Game_Manager.current_room_Ressource, viewport)
 	peek_scene.set_encounter(encounter_for_this_door)
 	
 		
@@ -152,12 +152,12 @@ func check_detection() -> void:
 	# On lance une boucle tant que peek est vrai
 	ennemy_are_embushed = true
 	
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(.2).timeout
 	
 	if peeking:
 		var rand = randi_range(1, 100)
 		print("Jet de détection :", rand)
-		if rand > 60:
+		if rand > 70:
 			print("Tu es repéré ! Combat déclenché.")
 			peeking = false 
 			heroes_are_embushed = true

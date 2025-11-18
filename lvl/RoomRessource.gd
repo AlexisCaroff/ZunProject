@@ -11,3 +11,4 @@ extends Resource
 @export var connected_room_ids: Array[String] = []
 @export var explored: bool = false
 @export var ennemikilled: bool =false
+@export var CampDone: bool =false

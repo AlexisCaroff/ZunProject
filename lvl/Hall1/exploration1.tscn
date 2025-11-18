@@ -165,7 +165,7 @@ script = ExtResource("9_r435j")
 z_index = 10
 y_sort_enabled = true
 offset_left = -82.0
-offset_top = -522.0
+offset_top = -304.0
 offset_right = 67.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_qg4ur")
 flat = true
@@ -201,7 +201,7 @@ z_index = 14
 z_as_relative = false
 y_sort_enabled = true
 offset_left = -82.0
-offset_top = -525.0
+offset_top = -304.0
 offset_right = 67.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mlu07")
 flat = true
@@ -226,7 +226,7 @@ expand_mode = 1
 z_index = 10
 y_sort_enabled = true
 offset_left = -82.0
-offset_top = -505.0
+offset_top = -308.0
 offset_right = 67.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ln05l")
 flat = true
@@ -394,6 +394,5 @@ texture = ExtResource("22_1rqfr")
 [connection signal="button_down" from="ExplorationManager/Button" to="ExplorationManager" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="ExplorationManager/Button" to="ExplorationManager" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="ExplorationManager/Button" to="ExplorationManager" method="_on_button_mouse_exited"]
-[connection signal="button_down" from="Kairn/Button" to="Kairn" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Kairn/Button" to="Kairn" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Kairn/Button" to="Kairn" method="_on_button_mouse_exited"]
