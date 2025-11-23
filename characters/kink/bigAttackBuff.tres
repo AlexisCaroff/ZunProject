@@ -9,6 +9,6 @@ name = "Buff"
 description = "Effet temporaire sur les statistiques."
 icon = ExtResource("1_ekic8")
 stat = 0
-amount = 1
+amount = 4
 duration = 3
 metadata/_custom_type_script = "uid://bkvdwvrmdt5aw"

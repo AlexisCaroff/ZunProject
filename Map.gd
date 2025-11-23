@@ -86,6 +86,22 @@ func peek_next_Room(room : RoomResource, viewport=null):
 				if focusedRoom.name in thedoor.connectedRooms and lastRoom in thedoor.connectedRooms:
 					thedoor.self_modulate=colorDoorFocus
 					
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 					
 
 		

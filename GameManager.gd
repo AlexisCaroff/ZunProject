@@ -9,13 +9,13 @@ var current_room_Ressource: RoomResource
 @export_file("*.tscn") var campement_scene_path: String = "res://lvl/campement.tscn"
 var campement_node: Node = null
 @onready var end =$endGame
-
+var inventory: Array[Equipment] = []
 
 func _ready():
-	#var screen_index := 1
+	var screen_index := 1
 	
-	#if screen_index < DisplayServer.get_screen_count():
-	#	DisplayServer.window_set_current_screen(screen_index)
+	if screen_index < DisplayServer.get_screen_count():
+		DisplayServer.window_set_current_screen(screen_index)
 	
 	if not room_container:
 		room_container = Node2D.new()
@@ -152,3 +152,5 @@ func return_to_exploration():
 		current_room_node = new_scene
 		var exploManager =new_scene.get_node("ExplorationManager") as ExplorationManager
 		exploManager.sortie_du_camp()
+func add_to_inventory(item: Equipment):
+	inventory.append(item)

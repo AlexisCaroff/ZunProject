@@ -1,5 +1,5 @@
 extends Control
-
+class_name UI_combat
 @onready var skill_buttons = [
 	$ActionPanel/Action1,
 	$ActionPanel/Action2,
@@ -43,6 +43,8 @@ extends Control
 	$ActionPanel/Action5/CooldownBar
 ]
 @onready var thebutton =$Button
+@onready var Items =$Items
+
 func _ready():
 	#thebutton.visible=false
 	var current_character = combat_manager.get_current_character()
@@ -94,7 +96,7 @@ func update_ui_for_current_character(character: Character):
 		$ActionPanel/Action5/CooldownBar
 		]
 		return
-
+	update_equipment_icons(character)
 	
 	Charaname_panel.text = character.Charaname
 	charaPortrait.texture=character.explorationPortrait
@@ -130,7 +132,25 @@ func update_ui_for_current_character(character: Character):
 		guilt.text = "Guilt: %d / %d" % [character.current_stress, character.max_stress]
 		horny.text = "Horny: %d / %d" % [character.current_horniness, character.max_horniness]
 
+func update_equipment_icons(character: Character):
+	var slots = [
+		Items.get_node("Item1"),
+		Items.get_node("Item2")
+	]
 
+	# On efface d'abord les anciennes icônes dans chaque slot
+	for s in slots:
+		s.texture = null
+			
+
+	# On remplit les slots selon les équipements
+	for i in range(character.equipped_items.size()):
+		if i >= slots.size():
+			break  # sécurité si plus d’items que de slots
+
+		var equip: Equipment = character.equipped_items[i]
+		slots[i].assigne_item(equip)
+		
 func update_cooldown_bar(container: HBoxContainer, skill):
 	
 	for child in container.get_children():

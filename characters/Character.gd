@@ -18,6 +18,10 @@ class_name Character
 @export var Charaname: String = "name"
 @export var IsDemon: bool = false
 # --- Stats de combat
+@export var base_max_stamina: int = 100
+@export var base_max_stress: int = 100
+@export var base_max_horniness: int = 100
+
 @export var base_attack: int = 10
 @export var base_defense: int = 5
 @export var base_willpower: int = 5
@@ -28,7 +32,9 @@ class_name Character
 @export var willpower: int = 5
 @export var evasion: int = 5
 @export var initiative: int = 1
-
+@export var peek :int =0
+@export var equipped_items: Array[Equipment] = []
+const MAX_EQUIPMENT = 2
 
 
 @onready var Selector:TextureRect =$pivot/Selector
@@ -53,8 +59,8 @@ var CharaScale:Vector2 = Vector2(1.0, 1.0)
 @export var max_horniness: int = 100
 @export var dead: bool = false
 @export var current_stamina: int = 100
-var current_stress: int = 0
-var current_horniness: int = 0
+@export var current_stress: int = 0
+@export var current_horniness: int = 0
 
 var buff_icons: Array = []
 
@@ -109,44 +115,68 @@ func _ready():
 	name_label.text = Charaname
 	sprite.texture = portrait_texture
 	Selector.texture = portrait_texture
-	for tag in tags:
-				if tag=="sadist":
-					attack+=2
-				if tag=="maso":
-					evasion -=2
+
 	
-	
-	for s in skill_resources:
-		#print("Contenu de skill_resource :", s)
-		if s == null:
-			push_error("Une ressource de compétence est nulle dans %s" % name)
-			continue
-		var inst= s.duplicate()
-		inst.owner = self
-		skills.append(inst)
+	_updateSkills(skill_resources)
+
 		#print("Compétence chargée : ", inst.name)
 
 
 func _updateSkills(updated_skills: Array[Resource] ):
 	skills.clear()
 	for s in updated_skills:
-	#print("Contenu de skill_resource :", s)
+		#print("Contenu de skill_resource :", s)
 		if s == null:
 			push_error("Une ressource de compétence est nulle dans %s" % name)
 			continue
 		var inst= s.duplicate()
 		inst.owner = self
+		var base_cd = inst.cooldown
+		var reduced_cd = base_cd - get_equipement_cooldown_reduction_for(inst)
+		reduced_cd = max(0, reduced_cd)
+		inst.cooldown =reduced_cd
 		skills.append(inst)
+		
 func update_stats():
-
+	max_stamina= base_max_stamina
+	max_horniness = base_max_horniness
+	max_stress= base_max_stress
 	attack = base_attack
 	defense = base_defense
 	initiative = base_initiative
 	willpower = base_willpower
-
+	evasion = base_evasion
+	for tag in tags:
+				if tag=="sadist":
+					attack+=2
+				if tag=="maso":
+					evasion -=2
 	for buff in buffs:
 		buff.apply_to(self)
 		
+	for eq in equipped_items:
+		attack += eq.attack_bonus
+		defense += eq.defense_bonus
+		max_horniness += eq.Max_lust_bonus
+		max_stamina += eq.Max_stamina_bonus
+		max_stress += eq.Max_Guilt_bonus
+		willpower += eq.willpower_bonus
+		evasion += eq.evasion_bonus
+		initiative += eq.initiative_bonus
+		
+		
+func get_equipement_cooldown_reduction_for(skill: Skill) -> int: #for equipement
+	var reduction := 0
+
+	for eq in equipped_items:
+		# Réduction globale
+		reduction += eq.global_cooldown_reduction
+
+		# Réduction ciblée
+		if skill.name in eq.skill_specific_cooldown:
+			reduction += eq.skill_specific_cooldown[skill.name]
+
+	return reduction
 
 func show_bark(text:String):
 	if bark_scene == null:
@@ -342,15 +372,16 @@ func start_turn():
 		take_damage(self,1,dmgHorny,false)	
 	else :
 		animate_start_Turn()
-		
+	update_stats()
+	combat_manager.ui.update_ui_for_current_character(self)
 func end_turn():
 	
 	CharaColor=Color(1.0,1.0,1.0,1.0)
 	resetVisuel()
 	update_buffs()
 	reduce_cooldowns()
-	
-	update_stats()
+	combat_manager.ui.update_ui_for_current_character(self)
+
 	
 
 
@@ -389,7 +420,8 @@ func take_damage(source: Character, stat: int, amount: int, type:bool) -> void:
 				print(self.Charaname+ " take "+ str(damage) +" damage from "+ source.Charaname)
 			else :
 				damage=amount
-			
+			for eq in equipped_items:
+				eq.on_receive_attack(self, source, damage)
 			if current_stamina > 0:
 				
 				current_stamina = clamp(current_stamina - damage, 0, max_stamina)
@@ -420,7 +452,8 @@ func take_damage(source: Character, stat: int, amount: int, type:bool) -> void:
 			else :
 				damage = max(0, amount - willpower)
 				current_horniness = max(0, current_horniness + damage)
-			
+			for eq in equipped_items:
+				eq.on_receive_attack(self, source, damage)
 			animate_get_horny(damage)
 			update_ui()
 			
@@ -462,14 +495,27 @@ func resetVisuel()-> void:
 	update_ui()
 
 
-var outline : TextureRect
 
+
+func refresh_stats_from_equipment():
+	attack = base_attack
+	defense = base_defense
+	willpower = base_willpower
+	evasion = base_evasion
+	initiative = base_initiative
+
+	for eq in equipped_items:
+		attack += eq.attack_bonus
+		defense += eq.defense_bonus
+		willpower += eq.willpower_bonus
+		evasion += eq.evasion_bonus
+		initiative += eq.initiative_bonus
 
 
 #------------------------------- Animation ------------------------------------------------
 
 
-
+var outline : TextureRect
 signal skill_animation_started
 signal skill_animation_finished
 

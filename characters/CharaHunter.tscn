@@ -1,12 +1,14 @@
-[gd_scene load_steps=23 format=3 uid="uid://qi68oagp06kg"]
+[gd_scene load_steps=25 format=3 uid="uid://qi68oagp06kg"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i4uyy"]
 [ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="2_papga"]
 [ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="3_1t7b8"]
 [ext_resource type="Texture2D" uid="uid://dltxnrwlxmjd7" path="res://characters/charatexture/char hunterDead.png" id="3_xn63r"]
 [ext_resource type="Resource" uid="uid://ca8rrxibg12sg" path="res://actions/HerosCombatSkills/Targetting.tres" id="5_184h1"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_1t7b8"]
 [ext_resource type="Resource" uid="uid://dn00l75vs5ctm" path="res://actions/HerosCombatSkills/Sel.tres" id="6_7u4xn"]
 [ext_resource type="Texture2D" uid="uid://b35vrdic1jyh" path="res://characters/CampementPorttrait/HunterCampement.png" id="6_kj6ch"]
+[ext_resource type="Resource" uid="uid://msi3wq2l6s3t" path="res://Items/itemsRessources/SilkGloves.tres" id="7_1t7b8"]
 [ext_resource type="Resource" uid="uid://cbakapyjnht36" path="res://actions/HerosCombatSkills/lance.tres" id="7_kj6ch"]
 [ext_resource type="Resource" uid="uid://bmkp0brav8l87" path="res://actions/HerosCombatSkills/bollas.tres" id="8_1t7b8"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="9_rwkgt"]
@@ -33,6 +35,7 @@ textureCamp = ExtResource("6_kj6ch")
 Charaname = "Hunter"
 base_initiative = 3
 initiative = 3
+equipped_items = Array[ExtResource("6_1t7b8")]([ExtResource("7_1t7b8")])
 Chara_position = 1
 current_stamina = 20
 skill_resources = Array[Resource]([ExtResource("5_184h1"), ExtResource("6_7u4xn"), ExtResource("7_kj6ch"), ExtResource("8_1t7b8"), ExtResource("9_rwkgt")])

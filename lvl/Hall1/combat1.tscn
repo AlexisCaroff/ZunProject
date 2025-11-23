@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://h8pqs7tabdxj"]
+[gd_scene load_steps=71 format=3 uid="uid://h8pqs7tabdxj"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_64xaa"]
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_8iwb5"]
@@ -44,6 +44,8 @@
 [ext_resource type="Texture2D" uid="uid://cfoht4c53xv8e" path="res://UI/ennemiturn.png" id="42_3phk4"]
 [ext_resource type="Texture2D" uid="uid://b1thgnhggbr0w" path="res://tuto/intro3.png" id="43_r6yfu"]
 [ext_resource type="Script" uid="uid://b0ir2tk1oluly" path="res://lvl/Hall1/tuto.gd" id="44_j0tyx"]
+[ext_resource type="Texture2D" uid="uid://5trmkstb5g8x" path="res://Items/ItemIcons/testeIcon.png" id="45_j0tyx"]
+[ext_resource type="Script" uid="uid://d35u47t7s0fv4" path="res://UI/UICombatItem.gd" id="46_gl0js"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kiw3p"]
 
@@ -1067,6 +1069,7 @@ scale = Vector2(0.784465, 0.752116)
 texture = ExtResource("42_3phk4")
 
 [node name="Intro2" type="Sprite2D" parent="."]
+visible = false
 z_index = 20
 position = Vector2(963, 538)
 scale = Vector2(0.72634, 0.72634)
@@ -1086,6 +1089,64 @@ layout_mode = 0
 offset_right = 114.0
 offset_bottom = 97.0
 text = "didactitiel"
+
+[node name="Items" type="Sprite2D" parent="."]
+z_index = 8
+position = Vector2(205, 997)
+scale = Vector2(0.90566, 0.90566)
+
+[node name="Item1" type="Sprite2D" parent="Items"]
+z_index = 8
+position = Vector2(-146.854, 0)
+texture = ExtResource("45_j0tyx")
+script = ExtResource("46_gl0js")
+
+[node name="Button" type="Button" parent="Items/Item1"]
+offset_left = -1.0
+offset_top = -57.0
+offset_right = 81.0
+offset_bottom = 21.0
+rotation = 0.790096
+flat = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Items/Item1"]
+visible = false
+offset_left = -61.0
+offset_top = 17.0
+offset_right = 64.0
+offset_bottom = 84.0
+theme_override_fonts/normal_font = ExtResource("8_amx0e")
+theme_override_fonts/bold_italics_font = ExtResource("5_kacea")
+theme_override_fonts/bold_font = ExtResource("5_kacea")
+theme_override_font_sizes/normal_font_size = 15
+theme_override_font_sizes/bold_font_size = 20
+horizontal_alignment = 1
+
+[node name="Item2" type="Sprite2D" parent="Items"]
+z_index = 8
+texture = ExtResource("45_j0tyx")
+script = ExtResource("46_gl0js")
+
+[node name="Button" type="Button" parent="Items/Item2"]
+offset_left = -1.0
+offset_top = -57.0
+offset_right = 82.0
+offset_bottom = 22.0
+rotation = 0.790096
+flat = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Items/Item2"]
+visible = false
+offset_left = -61.0
+offset_top = 17.0
+offset_right = 64.0
+offset_bottom = 84.0
+theme_override_fonts/normal_font = ExtResource("5_kacea")
+theme_override_fonts/bold_italics_font = ExtResource("5_kacea")
+theme_override_fonts/bold_font = ExtResource("5_kacea")
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 30
+horizontal_alignment = 1
 
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]

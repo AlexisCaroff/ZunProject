@@ -54,7 +54,7 @@ func assign_character(character: Character, movetime:float):
 			actionpoint.visible=false
 		CharaUI.TheHornyBar.visible=false
 		
-	print("chara assigned to position")
+	#print("chara assigned to position")
 	if not is_ready:
 		await ready
 	imageinside.texture=character.initiative_icon

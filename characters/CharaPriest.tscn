@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://csp2iaxa3prf"]
+[gd_scene load_steps=24 format=3 uid="uid://csp2iaxa3prf"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_1m0vh"]
 [ext_resource type="Texture2D" uid="uid://c8rp0k1fogimi" path="res://characters/charatexture/char priest.png" id="2_wpklt"]
@@ -7,7 +7,9 @@
 [ext_resource type="Resource" uid="uid://cswp6nkwg6iwu" path="res://actions/HerosCombatSkills/priere.tres" id="5_054hg"]
 [ext_resource type="Resource" uid="uid://sahrc1c16ogi" path="res://actions/HerosCombatSkills/fouet.tres" id="6_1bjum"]
 [ext_resource type="Texture2D" uid="uid://bx0r66uuskgf1" path="res://characters/CampementPorttrait/pristressCampement.png" id="6_wpklt"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_xqmvo"]
 [ext_resource type="Resource" uid="uid://bptddsqeaq28h" path="res://actions/HerosCombatSkills/heal.tres" id="7_mg4qg"]
+[ext_resource type="Resource" uid="uid://dyc56iqi4mh2s" path="res://Items/itemsRessources/ThornWhip.tres" id="7_neqvp"]
 [ext_resource type="Resource" uid="uid://b4f6tt51qrg3o" path="res://actions/HerosCombatSkills/exorcisme.tres" id="8_6af8e"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="9_doqsm"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="10_pweqf"]
@@ -31,6 +33,7 @@ initiative_icon = ExtResource("3_054hg")
 textureCamp = ExtResource("6_wpklt")
 Charaname = "Priestess"
 base_attack = 8
+equipped_items = Array[ExtResource("6_xqmvo")]([ExtResource("7_neqvp")])
 skill_resources = Array[Resource]([ExtResource("5_054hg"), ExtResource("6_1bjum"), ExtResource("7_mg4qg"), ExtResource("8_6af8e"), ExtResource("9_doqsm")])
 tags = Array[String](["dom", "sadist", "jailor"])
 camp_skill_resources = Array[ExtResource("10_pweqf")]([ExtResource("14_xqmvo"), ExtResource("15_1m0vh"), ExtResource("12_7p8u1"), ExtResource("13_ea307")])

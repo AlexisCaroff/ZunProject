@@ -2,7 +2,7 @@ extends Button
 
 
 @export var normal_color: Color = Color.WHITE
-@export var hover_color: Color = Color.VIOLET
+@export var hover_color: Color = Color.BISQUE
 
 # échelle configurables
 @export var normal_scale: Vector2 = Vector2.ONE

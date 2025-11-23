@@ -208,7 +208,7 @@ func _on_camp_skill_pressed(skill: CampSkill, user: CharaCamp) -> void:
 func endcamp():
 	
 	
-	gm.return_to_exploration()
+	
 	if GameState.saveRunning:
 		push_warning("Sauvegarde déjà en cours…")
 		return
@@ -227,6 +227,7 @@ func endcamp():
 			push_error("Pas de scene exploration définie pour cette salle")
 	else:
 		push_error("GameManager introuvable ou current_room vide")
+	gm.return_to_exploration()
 func focus_on_room(room: Node2D):
 	
 	var target_pos = room.position

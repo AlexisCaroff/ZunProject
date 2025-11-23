@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://cauc5mvfnd043"]
+
+[ext_resource type="Texture2D" uid="uid://5trmkstb5g8x" path="res://Items/ItemIcons/testeIcon.png" id="1_28sgu"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="2_i54lb"]
+
+[resource]
+script = ExtResource("2_i54lb")
+icon = ExtResource("1_28sgu")
+name = "TetsePendantif"
+description = ""
+attack_bonus = -20
+defense_bonus = 100
+willpower_bonus = 100
+evasion_bonus = 100
+initiative_bonus = 100
+peekbonus = 100
+global_cooldown_reduction = 0
+skill_specific_cooldown = Dictionary[String, int]({
+"Salt ": 5
+})
+metadata/_custom_type_script = "uid://ha2eko5otag4"

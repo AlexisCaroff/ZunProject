@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="SilkGloves" load_steps=3 format=3 uid="uid://msi3wq2l6s3t"]
+
+[ext_resource type="Script" uid="uid://d2mi50dgks1at" path="res://Items/ItemScripts/SilkGloves.gd" id="1_4chqx"]
+[ext_resource type="Texture2D" uid="uid://dfrt5qu50emjc" path="res://Items/ItemIcons/gloves.png" id="1_aubnq"]
+
+[resource]
+script = ExtResource("1_4chqx")
+malusHorny = 2
+icon = ExtResource("1_aubnq")
+name = "Silk Gloves"
+description = "+5 att et autres"
+isCursed = true
+Max_stamina_bonus = 0
+Max_lust_bonus = 0
+Max_Guilt_bonus = 0
+attack_bonus = 5
+defense_bonus = 0
+willpower_bonus = 0
+evasion_bonus = 0
+initiative_bonus = 0
+peekbonus = 0
+global_cooldown_reduction = 0
+skill_specific_cooldown = Dictionary[String, int]({})
+metadata/_custom_type_script = "uid://d2mi50dgks1at"

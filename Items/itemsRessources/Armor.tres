@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://cvdyu43xainie"]
+
+[ext_resource type="Texture2D" uid="uid://tcifkqraaqvt" path="res://Items/ItemIcons/armor.png" id="1_gb2yd"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="1_pb6po"]
+
+[resource]
+script = ExtResource("1_pb6po")
+icon = ExtResource("1_gb2yd")
+name = "Armor"
+description = ""
+isCursed = false
+Max_stamina_bonus = 5
+Max_lust_bonus = 0
+Max_Guilt_bonus = 0
+attack_bonus = 0
+defense_bonus = 5
+willpower_bonus = 0
+evasion_bonus = 0
+initiative_bonus = 0
+peekbonus = 0
+global_cooldown_reduction = 0
+skill_specific_cooldown = Dictionary[String, int]({})
+metadata/_custom_type_script = "uid://ha2eko5otag4"

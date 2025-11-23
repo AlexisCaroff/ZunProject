@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ThornWhipCursed" load_steps=4 format=3 uid="uid://dyc56iqi4mh2s"]
+
+[ext_resource type="Resource" uid="uid://ueptel68dk1y" path="res://characters/kink/littleattackbuff.tres" id="1_a3pwn"]
+[ext_resource type="Script" uid="uid://cvtwl7tphucho" path="res://Items/ItemScripts/ThornWhipCursed.gd" id="1_mci6p"]
+[ext_resource type="Texture2D" uid="uid://dv754aqww4n5q" path="res://Items/ItemIcons/cursed Thorn whip.png" id="2_hbnfo"]
+
+[resource]
+script = ExtResource("1_mci6p")
+horny_increase = 15
+buff = ExtResource("1_a3pwn")
+icon = ExtResource("2_hbnfo")
+name = "Torn Whip"
+description = ""
+isCursed = true
+Max_stamina_bonus = 0
+Max_lust_bonus = 0
+Max_Guilt_bonus = 0
+attack_bonus = 0
+defense_bonus = 0
+willpower_bonus = 0
+evasion_bonus = 0
+initiative_bonus = 0
+peekbonus = 0
+global_cooldown_reduction = 0
+skill_specific_cooldown = Dictionary[String, int]({})
+metadata/_custom_type_script = "uid://cvtwl7tphucho"

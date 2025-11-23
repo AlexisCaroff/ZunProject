@@ -62,6 +62,8 @@ var target2 : Array[PositionSlot]
 @export var tags: Array[String] = []
 var combatManager
 var reducecost : int=0
+var skill_effect_overridden := false
+
 
 func can_use() -> bool:
 	if owner == null:
@@ -78,7 +80,9 @@ func can_use() -> bool:
 func use(target: PositionSlot = null, secondtarget : bool=false):
 	if combatManager :
 			combatManager.ui.log(owner.Charaname+ " use "+ descriptionName)
-
+	for eq in owner.equipped_items:
+		eq.on_skill_use(owner, self, target.occupant)
+	
 	if target.occupant != null:
 		
 		target.combat_manager.stop_target_selection()
@@ -107,13 +111,14 @@ func pay_cost():
 	owner.update_ui()
 
 func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = effects):
-	for tag in owner.tags:
-				if tag == "degrader":
-					if target != owner._current_slot:
-						target.occupant.current_stress +=2
-						owner.slur()
-	for effect in effects_array:
-		effect.apply(owner, target)
+	if not skill_effect_overridden:
+		for tag in owner.tags:
+					if tag == "degrader":
+						if target != owner._current_slot:
+							target.occupant.current_stress +=2
+							owner.slur()
+		for effect in effects_array:
+			effect.apply(owner, target)
 
 func _apply_second_effect(target2: PositionSlot):
 	#print("apply second effect")

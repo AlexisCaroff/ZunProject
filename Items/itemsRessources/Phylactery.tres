@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://carva5p7ronwp"]
+
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="1_ceefv"]
+[ext_resource type="Texture2D" uid="uid://dc1643xs8111i" path="res://Items/ItemIcons/phylactere.png" id="1_ffytr"]
+
+[resource]
+script = ExtResource("1_ceefv")
+icon = ExtResource("1_ffytr")
+name = "Phylactery"
+description = ""
+isCursed = true
+Max_stamina_bonus = 0
+Max_lust_bonus = -20
+Max_Guilt_bonus = 0
+attack_bonus = 0
+defense_bonus = 0
+willpower_bonus = 0
+evasion_bonus = 0
+initiative_bonus = 0
+peekbonus = 0
+global_cooldown_reduction = 2
+skill_specific_cooldown = Dictionary[String, int]({})
+metadata/_custom_type_script = "uid://ha2eko5otag4"

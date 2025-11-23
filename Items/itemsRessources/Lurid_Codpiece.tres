@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://dd3x1krj5j35e"]
+
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="1_drw5b"]
+[ext_resource type="Texture2D" uid="uid://b8iwrks00vrj3" path="res://Items/ItemIcons/Lurid codpiece.png" id="1_s1wml"]
+
+[resource]
+script = ExtResource("1_drw5b")
+icon = ExtResource("1_s1wml")
+name = "Lurid Codpiece"
+description = ""
+isCursed = true
+Max_stamina_bonus = 5
+Max_lust_bonus = 10
+Max_Guilt_bonus = 0
+attack_bonus = 0
+defense_bonus = 0
+willpower_bonus = -10
+evasion_bonus = 0
+initiative_bonus = 0
+peekbonus = 0
+global_cooldown_reduction = 0
+skill_specific_cooldown = Dictionary[String, int]({})
+metadata/_custom_type_script = "uid://ha2eko5otag4"
