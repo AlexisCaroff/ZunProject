@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://bvr5vf8uyqxhp"]
+[gd_scene load_steps=19 format=3 uid="uid://bvr5vf8uyqxhp"]
 
 [ext_resource type="Script" uid="uid://btg7pq0vcw8uk" path="res://InvetoryUI.gd" id="1_22r63"]
+[ext_resource type="Texture2D" uid="uid://2y35qfvr2gxv" path="res://Items/ItemIcons/emptyItemSlot.png" id="2_p2sg8"]
 [ext_resource type="Texture2D" uid="uid://lhncc7d02shi" path="res://UI/BigBox.png" id="2_tlc6u"]
 [ext_resource type="Texture2D" uid="uid://dsi4pii678hew" path="res://UI/longBox.png" id="3_gcq4s"]
 [ext_resource type="Texture2D" uid="uid://bcmasdwfxkknm" path="res://UI/cadre.png" id="3_lmh8x"]
@@ -12,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://df5ltgoqyf2jw" path="res://characters/charatexture/char mystic.png" id="9_6t33u"]
 [ext_resource type="Texture2D" uid="uid://d162na82h3g2m" path="res://UI/exite.png" id="11_rggra"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="12_jlxux"]
+[ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="12_wlqro"]
 [ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="13_wlqro"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22r63"]
@@ -30,6 +32,7 @@ grow_vertical = 2
 script = ExtResource("1_22r63")
 inventory_size_x = 3
 inventory_size_y = 6
+emptySlotTexture = ExtResource("2_p2sg8")
 
 [node name="background2" type="TextureRect" parent="."]
 layout_mode = 0
@@ -111,8 +114,8 @@ offset_left = 1454.0
 offset_top = 117.0
 offset_right = 1836.0
 offset_bottom = 980.0
-theme_override_constants/h_separation = 75
-theme_override_constants/v_separation = 75
+theme_override_constants/h_separation = 60
+theme_override_constants/v_separation = 60
 columns = 8
 
 [node name="EquipmentSlots" type="HBoxContainer" parent="."]
@@ -537,6 +540,7 @@ offset_bottom = 57.0
 icon = ExtResource("11_rggra")
 flat = true
 expand_icon = true
+script = ExtResource("12_wlqro")
 
 [node name="ActionPanel" type="HBoxContainer" parent="."]
 z_index = 6

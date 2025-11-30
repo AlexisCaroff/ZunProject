@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://doitrlqhfja4t" path="res://characters/CharacterTestEnemySpitter1.tscn" id="2_scooq"]
 [ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharaEnnemyTemptress.tscn" id="3_6c5mv"]
 [ext_resource type="Texture2D" uid="uid://drp4vk52vgk74" path="res://UI/doorebuscade/DOOR_caught_nymph.png" id="4_6l2ge"]
-[ext_resource type="Script" uid="uid://bguggfgjsike1" path="res://scripts/Item.gd" id="5_6n7ld"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="5_6c5mv"]
 [ext_resource type="Script" uid="uid://dmxcru3ra8jg" path="res://lvl/CombatEncounter.gd" id="6_6uylw"]
 
 [resource]
 script = ExtResource("6_6uylw")
 enemy_scenes = Array[PackedScene]([ExtResource("2_scooq"), ExtResource("2_scooq"), ExtResource("1_ko27v"), ExtResource("3_6c5mv")])
-loots = Array[ExtResource("5_6n7ld")]([])
+loots = Array[ExtResource("5_6c5mv")]([])
 description = ""
 imageEmbuscade = ExtResource("4_6l2ge")
 metadata/_custom_type_script = "uid://dmxcru3ra8jg"

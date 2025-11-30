@@ -4,7 +4,7 @@ class_name InventoryUI
 
 @export var inventory_size_x := 5
 @export var inventory_size_y := 5
-
+@export var emptySlotTexture : Texture2D
 # --- Références
 @onready var characters_panel = $CharactersPanel
 @onready var inventory_grid = $InventoryGrid
@@ -51,11 +51,12 @@ var inventory_items: Array[Equipment] = []
 
 var dragged_item : Equipment = null
 var dragged_slot_index : int = -1
-
+var gm: GameManager
 func _ready():
-
+	gm = get_tree().root.get_node("GameManager") as GameManager
+	
 	create_inventory_grid()
-
+	#inventory_items=gm.inventory
 	ExitButton.connect("button_down", hideMenu)
 	drag_icon.visible = false
 
@@ -164,6 +165,7 @@ func create_inventory_cell(index: int) -> Control:
 	btn.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	btn.size=Vector2(120, 120)
 	btn.flat=true
+	
 	var emptyStyle = StyleBoxEmpty.new()
 	btn.add_theme_stylebox_override("focus", emptyStyle)
 	
@@ -177,13 +179,19 @@ func create_inventory_cell(index: int) -> Control:
 # --------------------------------------------------------------------
 
 func on_inventory_slot_pressed(index: int):
-
+	if index < 0 or index >= inventory_items.size():
+		print("Index hors limite :", index)
+		return
 	var item = inventory_items[index]
 
 	if dragged_item == null:
 		# Début de drag
 		if item != null:
+			if GameState.current_phase == GameStat.GamePhase.COMBAT:
+				print( "can't in Combat")
+				return
 			start_drag(item, index)
+			
 	else:
 		# Déposer l’item ici
 		place_item_in_inventory(index)
@@ -258,17 +266,21 @@ func update_equipment_slots():
 
 
 func unequip(slot_index: int):
+	if GameState.current_phase == GameStat.GamePhase.COMBAT:
+		return
 	print ('try unequip item')
 	var item = selected_character.equipped_items[slot_index]
-	print('unequip '+ item.name)
+	
 	# Trouver une place dans l’inventaire
-	for i in range(inventory_items.size()):
+	for i in range(inventory_items.size()+1):
+		
 		if inventory_items[i] == null:
 			inventory_items[i] = item
 			selected_character.equipped_items.remove_at(slot_index)
 			selected_character.update_stats()
 			update_inventory_ui()
 			update_equipment_slots()
+			print('unequip '+ item.name)
 			return
 
 
@@ -277,11 +289,14 @@ func unequip(slot_index: int):
 # --------------------------------------------------------------------
 
 func _gui_input(event):
-	if dragged_item == null:
-		return
+	
 
-	if event is InputEventMouseButton and event.pressed == false:
+	if event is InputEventMouseButton :
 		# On relâche
+		
+		if dragged_item == null:
+			return
+		print(dragged_item.name+ "is try to equipe")
 		try_equip_on_character()
 		finish_drag()
 
@@ -291,6 +306,7 @@ func try_equip_on_character():
 		return
 
 	if selected_character.equipped_items.size() >= 2:
+		
 		return # Deux slots déjà remplis
 
 	selected_character.equipped_items.append(dragged_item)
@@ -304,13 +320,14 @@ func try_equip_on_character():
 # --------------------------------------------------------------------
 
 func update_inventory_ui():
-
+	print ("update_inventory_ui")
 	for i in range(inventory_items.size()):
 		var item = inventory_items[i]
 		var cell = inventory_grid.get_child(i)
 		var icon = cell.get_node("Icon")
 
-		icon.texture = item.icon if item != null else null
+		icon.texture = item.icon if item != null else emptySlotTexture
+		
 func hideMenu():
 	self.visible=false
 	
