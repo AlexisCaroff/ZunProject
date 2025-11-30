@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dg0coy6r6f1ww"]
+[gd_scene load_steps=11 format=3 uid="uid://dg0coy6r6f1ww"]
 
 [ext_resource type="Script" uid="uid://d12jn42j03tgg" path="res://GameManager.gd" id="1_838hb"]
 [ext_resource type="Resource" uid="uid://7dlbup10473y" path="res://lvl/donjonTestePorte.tres" id="2_soe0u"]
 [ext_resource type="Resource" uid="uid://bjupnilvigvhl" path="res://lvl/salle0/Salle0.tres" id="3_0q5so"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_0q5so"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="4_dhxbs"]
+[ext_resource type="Resource" uid="uid://b7ana3ldrsk7j" path="res://Items/itemsRessources/golds.tres" id="5_dhxbs"]
 [ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="5_twojc"]
 [ext_resource type="Texture2D" uid="uid://c7i05i2v2djk1" path="res://UI/seau.png" id="6_fuquo"]
 [ext_resource type="Script" uid="uid://bhsro7sspbgqw" path="res://UI/button.gd" id="7_k66he"]
@@ -13,6 +15,7 @@
 script = ExtResource("1_838hb")
 donjon = ExtResource("2_soe0u")
 last_room_Ressource = ExtResource("3_0q5so")
+inventory = Array[ExtResource("4_0q5so")]([ExtResource("5_dhxbs"), ExtResource("5_dhxbs")])
 
 [node name="Label" type="Label" parent="."]
 z_index = 6

@@ -4,7 +4,7 @@ class_name Equipment
 @export var name: String
 @export var description: String
 @export var isCursed: bool= false
-
+@export var number :int =1
 # --- Modificateurs de stats ---
 @export var Max_stamina_bonus: int =0
 @export var Max_lust_bonus: int =0

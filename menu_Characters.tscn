@@ -1,0 +1,651 @@
+[gd_scene load_steps=17 format=3 uid="uid://bvr5vf8uyqxhp"]
+
+[ext_resource type="Script" uid="uid://btg7pq0vcw8uk" path="res://InvetoryUI.gd" id="1_22r63"]
+[ext_resource type="Texture2D" uid="uid://lhncc7d02shi" path="res://UI/BigBox.png" id="2_tlc6u"]
+[ext_resource type="Texture2D" uid="uid://dsi4pii678hew" path="res://UI/longBox.png" id="3_gcq4s"]
+[ext_resource type="Texture2D" uid="uid://bcmasdwfxkknm" path="res://UI/cadre.png" id="3_lmh8x"]
+[ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="4_qryfk"]
+[ext_resource type="Script" uid="uid://23jk35s0bxvn" path="res://CharaIventoryUI.gd" id="5_1dccd"]
+[ext_resource type="Texture2D" uid="uid://5trmkstb5g8x" path="res://Items/ItemIcons/testeIcon.png" id="6_n2jd0"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="7_txi41"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="8_ls6yl"]
+[ext_resource type="Texture2D" uid="uid://df5ltgoqyf2jw" path="res://characters/charatexture/char mystic.png" id="9_6t33u"]
+[ext_resource type="Texture2D" uid="uid://d162na82h3g2m" path="res://UI/exite.png" id="11_rggra"]
+[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="12_jlxux"]
+[ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="13_wlqro"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22r63"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tlc6u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p2sg8"]
+
+[node name="MenuPerso" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_22r63")
+inventory_size_x = 3
+inventory_size_y = 6
+
+[node name="background2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 28.0
+offset_right = 1395.0
+offset_bottom = 1022.0
+texture = ExtResource("2_tlc6u")
+expand_mode = 1
+
+[node name="background5" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 629.0
+offset_top = 685.0
+offset_right = 1369.0
+offset_bottom = 994.0
+texture = ExtResource("3_lmh8x")
+expand_mode = 1
+
+[node name="background7" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 629.0
+offset_top = 166.0
+offset_right = 1369.0
+offset_bottom = 675.0
+texture = ExtResource("3_lmh8x")
+expand_mode = 1
+
+[node name="background8" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 428.0
+offset_right = 611.0
+offset_bottom = 672.0
+texture = ExtResource("3_lmh8x")
+expand_mode = 1
+
+[node name="background10" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 687.0
+offset_right = 611.0
+offset_bottom = 996.0
+texture = ExtResource("3_lmh8x")
+expand_mode = 1
+
+[node name="background9" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 14.0
+offset_right = 611.0
+offset_bottom = 417.0
+texture = ExtResource("3_lmh8x")
+expand_mode = 1
+
+[node name="background6" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 629.0
+offset_top = 13.0
+offset_right = 1369.0
+offset_bottom = 158.0
+texture = ExtResource("3_lmh8x")
+expand_mode = 1
+
+[node name="background3" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1404.0
+offset_top = 15.0
+offset_right = 1884.0
+offset_bottom = 1022.0
+texture = ExtResource("3_gcq4s")
+expand_mode = 1
+
+[node name="InventoryGrid" type="GridContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 0
+offset_left = 1454.0
+offset_top = 117.0
+offset_right = 1836.0
+offset_bottom = 980.0
+theme_override_constants/h_separation = 75
+theme_override_constants/v_separation = 75
+columns = 8
+
+[node name="EquipmentSlots" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 513.0
+offset_right = 479.0
+offset_bottom = 652.0
+theme_override_constants/separation = 160
+
+[node name="EquipSlot1" type="Control" parent="EquipmentSlots"]
+layout_mode = 2
+
+[node name="IconBack" type="TextureRect" parent="EquipmentSlots/EquipSlot1"]
+modulate = Color(1, 1, 1, 0.425)
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 0
+offset_left = 2.0
+offset_right = 142.0
+offset_bottom = 140.0
+texture = ExtResource("6_n2jd0")
+
+[node name="Icon" type="TextureRect" parent="EquipmentSlots/EquipSlot1"]
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 2
+offset_left = 2.0
+offset_right = 108.0
+offset_bottom = 106.0
+texture = ExtResource("6_n2jd0")
+
+[node name="Btn" type="Button" parent="EquipmentSlots/EquipSlot1"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 2.0
+offset_right = 168.0
+offset_bottom = 96.0
+rotation = 0.790096
+theme_override_styles/focus = SubResource("StyleBoxEmpty_22r63")
+flat = true
+
+[node name="EquipSlot2" type="Control" parent="EquipmentSlots"]
+layout_mode = 2
+
+[node name="IconBack" type="TextureRect" parent="EquipmentSlots/EquipSlot2"]
+modulate = Color(1, 1, 1, 0.425)
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 2
+offset_left = 2.0
+offset_right = 142.0
+offset_bottom = 140.0
+texture = ExtResource("6_n2jd0")
+
+[node name="Icon" type="TextureRect" parent="EquipmentSlots/EquipSlot2"]
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 2
+offset_left = 2.0
+offset_right = 108.0
+offset_bottom = 106.0
+texture = ExtResource("6_n2jd0")
+
+[node name="Btn" type="Button" parent="EquipmentSlots/EquipSlot2"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 2.0
+offset_right = 166.0
+offset_bottom = 97.0
+rotation = 0.790096
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tlc6u")
+flat = true
+
+[node name="DragIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 108.0
+offset_bottom = 106.0
+texture = ExtResource("6_n2jd0")
+
+[node name="CharactersPanel2" type="GridContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 138.0
+offset_top = 647.0
+offset_right = 427.0
+offset_bottom = 923.0
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(1002, 611)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("8_ls6yl")
+min_scale = 1.15
+max_scale = 1.15
+scalemini = 1.1
+min_duration = 1.0
+max_duration = 1.5
+
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+offset_left = -171.667
+offset_top = -473.333
+offset_right = -0.666412
+offset_bottom = -242.334
+scale = Vector2(2.78572, 2.32144)
+mouse_filter = 2
+texture = ExtResource("9_6t33u")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Charaname" type="Label" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 934.0
+offset_top = 182.0
+offset_right = 1123.0
+offset_bottom = 231.0
+theme_override_fonts/font = ExtResource("7_txi41")
+theme_override_font_sizes/font_size = 40
+text = "Warrior"
+uppercase = true
+
+[node name="Equipement" type="Label" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 234.0
+offset_top = 441.0
+offset_right = 434.0
+offset_bottom = 490.0
+theme_override_fonts/font = ExtResource("7_txi41")
+theme_override_font_sizes/font_size = 40
+text = "Equipements"
+uppercase = true
+
+[node name="Equipement5" type="Label" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 234.0
+offset_top = 62.0
+offset_right = 434.0
+offset_bottom = 111.0
+theme_override_fonts/font = ExtResource("7_txi41")
+theme_override_font_sizes/font_size = 40
+text = "Affinity"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Equipement4" type="Label" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 235.0
+offset_top = 704.0
+offset_right = 435.0
+offset_bottom = 753.0
+theme_override_fonts/font = ExtResource("7_txi41")
+theme_override_font_sizes/font_size = 40
+text = "Skills"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Equipement3" type="Label" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 1564.0
+offset_top = 55.0
+offset_right = 1764.0
+offset_bottom = 104.0
+theme_override_fonts/font = ExtResource("7_txi41")
+theme_override_font_sizes/font_size = 40
+text = "Inventaire"
+uppercase = true
+
+[node name="Equipement2" type="Label" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 671.0
+offset_top = 710.0
+offset_right = 871.0
+offset_bottom = 759.0
+theme_override_fonts/font = ExtResource("7_txi41")
+theme_override_font_sizes/font_size = 40
+text = "Stats"
+uppercase = true
+
+[node name="AttLabel" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 675.0
+offset_top = 783.0
+offset_right = 988.0
+offset_bottom = 838.0
+theme_override_fonts/normal_font = ExtResource("7_txi41")
+theme_override_font_sizes/normal_font_size = 20
+text = "Attack :"
+
+[node name="DefLabel" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 675.0
+offset_top = 816.0
+offset_right = 938.0
+offset_bottom = 871.0
+theme_override_fonts/normal_font = ExtResource("7_txi41")
+theme_override_font_sizes/normal_font_size = 20
+text = "Defence:"
+
+[node name="WillPower" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 675.0
+offset_top = 847.0
+offset_right = 987.0
+offset_bottom = 902.0
+theme_override_fonts/normal_font = ExtResource("7_txi41")
+theme_override_font_sizes/normal_font_size = 20
+text = "Willpower:"
+
+[node name="Stamina" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 676.0
+offset_top = 879.0
+offset_right = 895.0
+offset_bottom = 934.0
+theme_override_fonts/normal_font = ExtResource("7_txi41")
+theme_override_font_sizes/normal_font_size = 20
+text = "Stamina :	
+"
+
+[node name="Horny" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 675.0
+offset_top = 903.0
+offset_right = 894.0
+offset_bottom = 958.0
+theme_override_fonts/normal_font = ExtResource("7_txi41")
+theme_override_font_sizes/normal_font_size = 20
+text = "Lust:
+"
+
+[node name="Guilt" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 675.0
+offset_top = 931.0
+offset_right = 894.0
+offset_bottom = 986.0
+theme_override_fonts/normal_font = ExtResource("7_txi41")
+theme_override_font_sizes/normal_font_size = 20
+text = "Guilt:
+"
+
+[node name="CharactersPanel" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 695.0
+offset_top = 20.0
+offset_right = 1327.0
+offset_bottom = 148.0
+theme_override_constants/separation = 40
+
+[node name="chara1" type="TextureRect" parent="CharactersPanel"]
+z_index = 6
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+expand_mode = 1
+script = ExtResource("5_1dccd")
+
+[node name="chara" type="TextureRect" parent="CharactersPanel/chara1"]
+z_index = 6
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("4_qryfk")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="CharactersPanel/chara1"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = -3.0
+offset_right = 159.0
+offset_bottom = 92.0
+rotation = 0.793458
+flat = true
+
+[node name="chara2" type="TextureRect" parent="CharactersPanel"]
+z_index = 6
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+expand_mode = 1
+script = ExtResource("5_1dccd")
+
+[node name="chara" type="TextureRect" parent="CharactersPanel/chara2"]
+z_index = 6
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("4_qryfk")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="CharactersPanel/chara2"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = -3.0
+offset_right = 159.0
+offset_bottom = 92.0
+rotation = 0.793458
+flat = true
+
+[node name="chara3" type="TextureRect" parent="CharactersPanel"]
+z_index = 6
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+expand_mode = 1
+script = ExtResource("5_1dccd")
+
+[node name="chara" type="TextureRect" parent="CharactersPanel/chara3"]
+z_index = 6
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("4_qryfk")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="CharactersPanel/chara3"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = -3.0
+offset_right = 159.0
+offset_bottom = 92.0
+rotation = 0.793458
+flat = true
+
+[node name="chara4" type="TextureRect" parent="CharactersPanel"]
+z_index = 6
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+expand_mode = 1
+script = ExtResource("5_1dccd")
+
+[node name="chara" type="TextureRect" parent="CharactersPanel/chara4"]
+z_index = 6
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("4_qryfk")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="CharactersPanel/chara4"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = -3.0
+offset_right = 159.0
+offset_bottom = 92.0
+rotation = 0.793458
+flat = true
+
+[node name="CharactersPanelAffinity" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 0
+offset_left = 111.0
+offset_top = 180.0
+offset_right = 575.0
+offset_bottom = 308.0
+theme_override_constants/separation = 40
+
+[node name="chara1" type="TextureRect" parent="CharactersPanelAffinity"]
+z_index = 6
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("4_qryfk")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="CharactersPanelAffinity/chara1"]
+layout_mode = 0
+offset_left = 66.0
+offset_right = 155.0
+offset_bottom = 91.0
+rotation = 0.793458
+flat = true
+
+[node name="chara2" type="TextureRect" parent="CharactersPanelAffinity"]
+z_index = 6
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("4_qryfk")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="CharactersPanelAffinity/chara2"]
+layout_mode = 0
+offset_left = 66.0
+offset_right = 155.0
+offset_bottom = 91.0
+rotation = 0.793458
+flat = true
+
+[node name="chara3" type="TextureRect" parent="CharactersPanelAffinity"]
+z_index = 6
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("4_qryfk")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="CharactersPanelAffinity/chara3"]
+layout_mode = 0
+offset_left = 66.0
+offset_right = 155.0
+offset_bottom = 91.0
+rotation = 0.793458
+flat = true
+
+[node name="ExitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1851.0
+offset_top = -1.0
+offset_right = 1906.0
+offset_bottom = 57.0
+icon = ExtResource("11_rggra")
+flat = true
+expand_icon = true
+
+[node name="ActionPanel" type="HBoxContainer" parent="."]
+z_index = 6
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 0
+offset_left = 89.0
+offset_top = 765.0
+offset_right = 491.0
+offset_bottom = 855.0
+scale = Vector2(1.245, 1.245)
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Action1" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("12_jlxux")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p2sg8")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("13_wlqro")
+
+[node name="CooldownBar" type="HBoxContainer" parent="ActionPanel/Action1"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -3.21287
+offset_right = 81.0
+offset_bottom = 1.78713
+alignment = 1
+
+[node name="Action2" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("12_jlxux")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p2sg8")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("13_wlqro")
+
+[node name="CooldownBar" type="HBoxContainer" parent="ActionPanel/Action2"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -3.21287
+offset_right = 81.0
+offset_bottom = 1.78713
+alignment = 1
+
+[node name="Action3" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("12_jlxux")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p2sg8")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("13_wlqro")
+
+[node name="CooldownBar" type="HBoxContainer" parent="ActionPanel/Action3"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -3.21287
+offset_right = 81.0
+offset_bottom = 1.78713
+alignment = 1
+
+[node name="Action4" type="Button" parent="ActionPanel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("12_jlxux")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p2sg8")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("13_wlqro")
+
+[node name="CooldownBar" type="HBoxContainer" parent="ActionPanel/Action4"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -3.21287
+offset_right = 81.0
+offset_bottom = 1.78713
+alignment = 1
+
+[node name="LabelAction" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 81.0
+offset_top = 899.0
+offset_right = 595.0
+offset_bottom = 983.0
+theme_override_fonts/normal_font = ExtResource("7_txi41")
+theme_override_font_sizes/normal_font_size = 20
+horizontal_alignment = 1
+
+[connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action2" to="ActionPanel/Action2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action2" to="ActionPanel/Action2" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action3" to="ActionPanel/Action3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action3" to="ActionPanel/Action3" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ActionPanel/Action4" to="ActionPanel/Action4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ActionPanel/Action4" to="ActionPanel/Action4" method="_on_mouse_exited"]

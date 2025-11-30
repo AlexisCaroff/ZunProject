@@ -30,7 +30,7 @@ is_player_controlled = false
 ai_brain = ExtResource("8_au82g")
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(25, 29)
+position = Vector2(58, 29)
 script = ExtResource("9_qu7su")
 min_scale = 1.0
 scalemini = 0.95

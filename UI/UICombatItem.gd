@@ -14,15 +14,19 @@ func _ready():
 	button.connect("mouse_exited",exit)
 	normal_scale= scale
 	
+	
 	label.pivot_offset = label.size / 2
 func assigne_item(item:Equipment):
 	
 	equipement = item
 	texture= equipement.icon
 	label.bbcode_enabled = true
-	label.bbcode_text= "[b][color=ff5555]%s[/color][/b]\n%s" % [equipement.name, equipement.description]
-	
-	
+	label.bbcode_text= "[b][color=AA55FF]%s[/color][/b]\n%s" % [equipement.name, equipement.description]
+func remove_item():
+	equipement = null
+	texture=null
+	label.bbcode_enabled = true
+	label.bbcode_text= "[b][color=AA55FF][/color][/b]\n%s"
 func over():
 	if equipement:
 		label.visible = true

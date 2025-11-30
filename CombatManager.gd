@@ -153,7 +153,10 @@ func _start():
 			chara.update_ui()
 			
 		ui.log("start Combat")
+		ui.set_MenuPerso(heroes)
+		
 		start_combat()
+		
 		
 	for char in heroes + enemies:
 		char.skill_animation_started.connect(_on_skill_animation_started)
@@ -215,6 +218,7 @@ func next_turn():
 		ui.update_turn_queue_ui(turn_queue)
 	ui.update_turn_queue_ui(turn_queue)
 	current_character = turn_queue.pop_front()
+	
 	if current_character.acte_twice:
 		current_character.acte_twice=false
 		turn_queue.push_front(current_character)
@@ -269,7 +273,7 @@ func next_turn():
 		return
 	
 	if current_character.is_player_controlled:
-		
+		ui.MenuPerso.select_character(current_character)
 		await get_tree().process_frame
 		ui.update_ui_for_current_character(current_character)
 		current_character.CharaColor =Color(1.8,1.8,1.8,1)
@@ -347,8 +351,9 @@ func _show_victory():
 	cristal_item.description = "Un cristal précieux obtenu en combat."
 	if nb_crystaleloot >0:
 		encounter.loots.append(cristal_item)
-	victory_ui.showLoot(encounter.loots)  # Passer les loots récupérés au Victory UI
 	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
+	victory_ui.showLoot(encounter.loots, gm)  # Passer les loots récupérés au Victory UI
+	
 	gm.current_room_Ressource.ennemikilled=true
 	# Ajouter Victory UI à la scène et le faire apparaître
 	get_parent().add_child(victory_ui)

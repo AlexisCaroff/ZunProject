@@ -14,4 +14,5 @@ CanCamp = true
 connected_room_ids = Array[String](["Corridor1"])
 explored = false
 ennemikilled = false
+CampDone = false
 metadata/_custom_type_script = "uid://oj44pgv34ji0"

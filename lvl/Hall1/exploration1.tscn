@@ -85,27 +85,6 @@ offset_right = 1265.0
 offset_bottom = 975.0
 color = Color(0.501961, 0.407843, 0.207843, 1)
 
-[node name="moveButton" type="Button" parent="."]
-custom_minimum_size = Vector2(90, 90)
-layout_mode = 2
-offset_left = 917.0
-offset_top = 854.0
-offset_right = 1007.0
-offset_bottom = 954.0
-size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("4_ngelb")
-theme_override_font_sizes/font_size = 40
-icon = ExtResource("5_l58pu")
-flat = true
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("6_ss0qx")
-
-[node name="cooldownA" type="Label" parent="moveButton"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="LabelAction" type="Label" parent="."]
 layout_mode = 0
 offset_left = 681.0
@@ -166,7 +145,7 @@ z_index = 10
 y_sort_enabled = true
 offset_left = -82.0
 offset_top = -304.0
-offset_right = 67.0
+offset_right = 63.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_qg4ur")
 flat = true
 
@@ -200,9 +179,9 @@ expand_mode = 1
 z_index = 14
 z_as_relative = false
 y_sort_enabled = true
-offset_left = -82.0
+offset_left = -66.0
 offset_top = -304.0
-offset_right = 67.0
+offset_right = 62.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mlu07")
 flat = true
 
@@ -225,7 +204,7 @@ expand_mode = 1
 [node name="Button" type="Button" parent="HeroPosition/position3"]
 z_index = 10
 y_sort_enabled = true
-offset_left = -82.0
+offset_left = -40.0
 offset_top = -308.0
 offset_right = 67.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ln05l")
@@ -249,7 +228,7 @@ expand_mode = 1
 [node name="Button" type="Button" parent="HeroPosition/position4"]
 z_index = 10
 y_sort_enabled = true
-offset_left = -82.0
+offset_left = -66.0
 offset_top = -539.0
 offset_right = 67.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3g6r7")
@@ -284,6 +263,27 @@ script = ExtResource("17_3g6r7")
 portraits_resource = ExtResource("18_qg4ur")
 is_Choice = true
 external_choice_receiver = NodePath("../Kairn")
+
+[node name="moveButton" type="Button" parent="."]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+offset_left = 917.0
+offset_top = 854.0
+offset_right = 1007.0
+offset_bottom = 954.0
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("4_ngelb")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("5_l58pu")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("6_ss0qx")
+
+[node name="cooldownA" type="Label" parent="moveButton"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="Kairn" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1.2, 1)
@@ -384,9 +384,6 @@ position = Vector2(1603.63, 931)
 scale = Vector2(0.839983, 0.815186)
 texture = ExtResource("22_1rqfr")
 
-[connection signal="button_down" from="moveButton" to="ExplorationManager" method="_on_move_button_button_down"]
-[connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="moveButton" to="moveButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_button_down"]
@@ -394,5 +391,8 @@ texture = ExtResource("22_1rqfr")
 [connection signal="button_down" from="ExplorationManager/Button" to="ExplorationManager" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="ExplorationManager/Button" to="ExplorationManager" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="ExplorationManager/Button" to="ExplorationManager" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="moveButton" to="ExplorationManager" method="_on_move_button_button_down"]
+[connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="moveButton" to="moveButton" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="Kairn/Button" to="Kairn" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Kairn/Button" to="Kairn" method="_on_button_mouse_exited"]

@@ -9,7 +9,7 @@ var current_room_Ressource: RoomResource
 @export_file("*.tscn") var campement_scene_path: String = "res://lvl/campement.tscn"
 var campement_node: Node = null
 @onready var end =$endGame
-var inventory: Array[Equipment] = []
+@export var inventory: Array[Equipment] = []
 
 func _ready():
 	var screen_index := 1
@@ -110,8 +110,9 @@ func _enter_scene_in_current_room(scene: PackedScene, ennemy_are_embushed: bool 
 		var new_scene
 		if current_room_Ressource.combat_scene and scene == current_room_Ressource.combat_scene and current_room_Ressource.ennemikilled == false:
 			new_scene = scene.instantiate()
-			if new_scene.has_node("CombatManager"):
-				var combat_manager = new_scene.get_node("CombatManager")
+			var combat_manager = new_scene.find_child("CombatManager", true, false)
+
+			if combat_manager:
 				combat_manager.encounter = current_room_Ressource.encounter
 				combat_manager.ennemy_are_ambushed = ennemy_are_embushed
 				combat_manager.heroes_are_ambushed = heroes_are_embushed

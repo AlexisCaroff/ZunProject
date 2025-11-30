@@ -27,9 +27,10 @@ func _on_attack():
 	# Changement de texture (attaque)
 	if chara.combat_manager.pending_skill.ImageSkill != null:
 		self.texture = chara.combat_manager.pending_skill.ImageSkill
-
+	
 	# Mouvement vers la position d’attaque
-	var tween = create_tween()
+	tween = null
+	tween = create_tween()
 	tween.parallel().tween_property(self, "position", attackPos, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	tween.parallel().tween_property(self, "scale", attack_scale, 0.1).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	
@@ -41,6 +42,7 @@ func _on_attack():
 	
 func _on_return():
 	self.texture = chara.portrait_texture
-	var tween = create_tween()
+	tween = null
+	tween = create_tween()
 	tween.parallel().tween_property(self, "position", outsidePos, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.parallel().tween_property(self, "scale", normal_scale, 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)

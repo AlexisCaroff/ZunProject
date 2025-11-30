@@ -68,10 +68,10 @@ texture = ExtResource("1_oausj")
 
 [node name="imageObj" type="TextureRect" parent="boxUI"]
 layout_mode = 0
-offset_left = 30.0
-offset_top = 43.0
-offset_right = 103.0
-offset_bottom = 93.0
+offset_left = 29.0
+offset_top = 33.0
+offset_right = 102.0
+offset_bottom = 103.0
 texture = ExtResource("2_q6op2")
 expand_mode = 1
 

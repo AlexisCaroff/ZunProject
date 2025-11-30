@@ -4,7 +4,7 @@ extends Control
 @onready var continue_button = $ContinueButton
 @export var item_ui_scene: PackedScene = preload("res://UI/item_ui.tscn")
 
-func showLoot(items: Array[Item]):
+func showLoot(items: Array[Equipment], gm:GameManager):
 	if itemsContainer == null:
 		itemsContainer = $VictoryBox/HBoxContainer
 		continue_button =$ContinueButton
@@ -13,8 +13,7 @@ func showLoot(items: Array[Item]):
 	for child in itemsContainer.get_children():
 		if is_instance_valid(child):
 			child.queue_free()
-			
-	
+		
 	for item in items:
 		if item == null:
 			continue
@@ -23,6 +22,7 @@ func showLoot(items: Array[Item]):
 		itemsContainer.add_child(item_ui)
 		await item_ui.animation_finished
 		
+		gm.add_to_inventory(item)
 		
 func _on_continue_pressed() -> void:
 

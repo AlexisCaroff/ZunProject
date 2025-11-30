@@ -44,19 +44,22 @@ class_name UI_combat
 ]
 @onready var thebutton =$Button
 @onready var Items =$Items
+@onready var MenuPerso:InventoryUI =$"../MenuPerso"
+@onready var charaPortraitButton =$charaPortrait/charaPortraitButton
 
 func _ready():
 	#thebutton.visible=false
 	var current_character = combat_manager.get_current_character()
 	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
-
+	
 	call_deferred("update_ui_for_current_character", current_character)
 	await get_tree().process_frame  # attendre que la frame d'instanciation soit finie
 	
 	if donjon_map:
 		donjon_map.focus_on_room(gm.current_room_Ressource, viewport)
-	
-
+	charaPortraitButton.connect("button_down",showMenuPerso)
+	MenuPerso.inventory_items = gm.inventory
+	MenuPerso.update_inventory_ui()
 
 func update_turn_queue_ui(queue: Array[Character]):
 	if turnOrderPanel == null:
@@ -126,8 +129,8 @@ func update_ui_for_current_character(character: Character):
 		else:
 			button.text = "—"
 			button.disabled = true
-		AttLabel.text = "Attaque: %d" % [character.attack]
-		DefLabel.text = "Defence: %d" % [character.defense]
+		AttLabel.text = "Attack: %d" % [character.attack]
+		DefLabel.text = "Defense: %d" % [character.defense]
 		Stamina.text = "Stamina: %d / %d" % [character.current_stamina, character.max_stamina]
 		guilt.text = "Guilt: %d / %d" % [character.current_stress, character.max_stress]
 		horny.text = "Horny: %d / %d" % [character.current_horniness, character.max_horniness]
@@ -140,7 +143,8 @@ func update_equipment_icons(character: Character):
 
 	# On efface d'abord les anciennes icônes dans chaque slot
 	for s in slots:
-		s.texture = null
+		s.remove_item()
+		
 			
 
 	# On remplit les slots selon les équipements
@@ -270,3 +274,8 @@ func log(text):
 			log_panel.text = ""
 			var fenetre2 = log_panel.get_child(0)
 			fenetre2.visible = false
+func set_MenuPerso(heroes:Array[Character]):
+	MenuPerso=$"../MenuPerso"
+	MenuPerso.characters = heroes
+func showMenuPerso():
+	MenuPerso.visible =true
