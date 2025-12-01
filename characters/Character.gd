@@ -17,6 +17,8 @@ class_name Character
 @onready var buff_bar = $HBoxContainer
 @export var Charaname: String = "name"
 @export var IsDemon: bool = false
+# ---- Affinity
+var affinity: Dictionary[String, int] = {}
 # --- Stats de combat
 @export var base_max_stamina: int = 100
 @export var base_max_stress: int = 100
@@ -511,7 +513,22 @@ func refresh_stats_from_equipment():
 		evasion += eq.evasion_bonus
 		initiative += eq.initiative_bonus
 
+func add_affinity(target: Character, amount: int):
+	var key := target.Charaname
+	if not affinity.has(key):
+		return
+	affinity[key] = clampi(affinity[key] + amount, 0, 100)
 
+
+func reduce_affinity(target: Character, amount: int):
+	add_affinity(target, -amount)
+
+
+func get_affinity(target: Character) -> int:
+	var key := target.Charaname
+	if affinity.has(key):
+		return affinity[key]
+	return 0
 #------------------------------- Animation ------------------------------------------------
 
 

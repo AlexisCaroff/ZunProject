@@ -10,6 +10,12 @@ var current_room_Ressource: RoomResource
 var campement_node: Node = null
 @onready var end =$endGame
 @export var inventory: Array[Equipment] = []
+var characters: Array[Character] = [
+	preload("res://characters/CharaHunter.tscn").instantiate(),
+	preload("res://characters/CharaMystic.tscn").instantiate(),
+	preload("res://characters/CharaPriest.tscn").instantiate(),
+	preload("res://characters/CharaWarrior.tscn").instantiate(),
+]
 
 func _ready():
 	var screen_index := 1
@@ -155,3 +161,12 @@ func return_to_exploration():
 		exploManager.sortie_du_camp()
 func add_to_inventory(item: Equipment):
 	inventory.append(item)
+	
+
+func initialize_affinities(characters: Array[Character]):
+	for chara in characters:
+		chara.affinity = {}
+		for other in characters:
+			if other != chara:
+				chara.affinity[other.Charaname] = 0
+	

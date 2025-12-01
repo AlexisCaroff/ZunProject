@@ -1122,6 +1122,7 @@ rotation = 0.790096
 flat = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Items/Item1"]
+visible = false
 offset_left = -61.0
 offset_top = 17.0
 offset_right = 64.0

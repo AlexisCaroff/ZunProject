@@ -53,8 +53,11 @@ var ennemy_are_ambushed : bool = false
 var heroes_are_ambushed : bool = false
 const SELECTOR_TEX = preload("res://UI/selectorCombatChara.png")
 var selectorChara : Sprite2D
+var gm: GameManager
+
 
 func _ready():
+	gm= get_tree().root.get_node("GameManager") as GameManager
 	for child in $"../HeroPosition".get_children():
 		if child is PositionSlot:
 			hero_positions.append(child)
@@ -119,8 +122,8 @@ func _start():
 		else:
 			print("Aucune sauvegarde -> Spawn des héros par défaut")
 			for i in HERO_SCENES.size():
-				var chara_scene = HERO_SCENES[i]
-				var chara: Character = chara_scene.instantiate()
+				
+				var chara: Character = gm.characters[i]
 				
 				chara.Chara_position = i
 				add_child(chara)

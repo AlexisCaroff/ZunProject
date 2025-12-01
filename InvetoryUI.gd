@@ -19,6 +19,13 @@ class_name InventoryUI
 @onready var Guilt=$Guilt
 @onready var WillPower=$WillPower
 @onready var ExitButton= $ExitButton
+@onready var CharactersPanelAffinity= $CharactersPanelAffinity
+@onready var CharactersAffinity= [
+	$CharactersPanelAffinity/chara1,
+	$CharactersPanelAffinity/chara2,
+	$CharactersPanelAffinity/chara3
+	
+]
 @onready var skill_buttons = [
 	$ActionPanel/Action1,
 	$ActionPanel/Action2,
