@@ -11,7 +11,7 @@ var ui: Control = null
 @export var ENEMY_START_POS = Vector2(1200, 600)
 @export var SPACING_Y = 250
 @export var _pending_skill: Skill = null  
-
+@export var turnNumber : int =0
 @export_file("*.tscn") var target_scene : String
 
 #save
@@ -215,7 +215,7 @@ func build_turn_queue(characters: Array[Character]) -> Array[Character]:
 func next_turn():
 	_check_victory()
 	_check_defeat()
-
+	turnNumber += 1
 	if turn_queue.is_empty():
 		turn_queue = build_turn_queue(heroes + enemies)
 		ui.update_turn_queue_ui(turn_queue)

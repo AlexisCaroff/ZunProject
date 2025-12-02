@@ -1,0 +1,97 @@
+[gd_scene load_steps=4 format=3 uid="uid://b56xf3f3pkdwt"]
+
+[ext_resource type="Texture2D" uid="uid://lhncc7d02shi" path="res://UI/BigBox.png" id="1_avxu3"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="2_bpccd"]
+[ext_resource type="Texture2D" uid="uid://ccfldj30sasp8" path="res://characters/charatexture/boss.png" id="3_wo4sy"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background2" type="TextureRect" parent="."]
+offset_left = 40.0
+offset_top = 28.0
+offset_right = 1866.0
+offset_bottom = 1022.0
+texture = ExtResource("1_avxu3")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="background2"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 0
+offset_left = 88.0
+offset_top = 154.0
+offset_right = 488.0
+offset_bottom = 949.0
+theme_override_constants/separation = 5
+
+[node name="ButtonStart" type="Button" parent="background2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bpccd")
+theme_override_font_sizes/font_size = 60
+text = "Start"
+flat = true
+
+[node name="Buttonoption" type="Button" parent="background2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bpccd")
+theme_override_font_sizes/font_size = 35
+text = "Options"
+flat = true
+
+[node name="ButtonGallerie" type="Button" parent="background2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bpccd")
+theme_override_font_sizes/font_size = 35
+text = "Gallerie"
+flat = true
+
+[node name="ButtonGallerie2" type="Button" parent="background2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bpccd")
+theme_override_font_sizes/font_size = 35
+text = "Glossair"
+flat = true
+
+[node name="ButtonDitactitiel" type="Button" parent="background2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bpccd")
+theme_override_font_sizes/font_size = 35
+text = "Didactitiel"
+flat = true
+
+[node name="Button2Quit" type="Button" parent="background2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bpccd")
+theme_override_font_sizes/font_size = 35
+text = "Quit"
+flat = true
+
+[node name="background3" type="TextureRect" parent="."]
+offset_left = 563.0
+offset_top = 28.0
+offset_right = 1866.0
+offset_bottom = 1022.0
+texture = ExtResource("3_wo4sy")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 535.0
+offset_top = 66.0
+offset_right = 1204.0
+offset_bottom = 343.0
+theme_override_fonts/normal_font = ExtResource("2_bpccd")
+theme_override_font_sizes/normal_font_size = 90
+text = "Dark Side Of Zun"
+horizontal_alignment = 1
