@@ -3,95 +3,56 @@ class_name Character
 #save
 
 # --- Données visuelles
-@export var portrait_texture: Texture2D
-@export var explorationPortrait:Texture2D
-@export var dead_portrait_texture: Texture2D
-@export var initiative_icon: Texture2D
+
 @onready var name_label = $name
-@export var textureCamp: Texture2D
 
-@onready var hp_Jauge 
-@onready var hornyJauge 
 @onready var sprite = $pivot/HerosTexture1
-
-@onready var buff_bar = $HBoxContainer
-@export var Charaname: String = "name"
-@export var IsDemon: bool = false
-# ---- Affinity
-var affinity: Dictionary[String, int] = {}
-# --- Stats de combat
-@export var base_max_stamina: int = 100
-@export var base_max_stress: int = 100
-@export var base_max_horniness: int = 100
-
-@export var base_attack: int = 10
-@export var base_defense: int = 5
-@export var base_willpower: int = 5
-@export var base_initiative: int = 1
-@export var base_evasion: int = 5
-@export var attack: int = 10
-@export var defense: int = 5
-@export var willpower: int = 5
-@export var evasion: int = 5
-@export var initiative: int = 1
-@export var peek :int =0
-@export var equipped_items: Array[Equipment] = []
+var hp_Jauge
+var hornyJauge
 const MAX_EQUIPMENT = 2
 
 
 @onready var Selector:TextureRect =$pivot/Selector
 
 #etat
-@export var stun : bool = false
+
 var taunted_by: Character = null
 var taunt_duration: int = 0
 var buffs: Array[Buff] = []
-@export var Chara_position:int = 0 
-
 var _current_slot: PositionSlot = null
+
+
 var current_slot:
 	get: return _current_slot
 	set(value):
 		_current_slot = value
 var CharaScale:Vector2 = Vector2(1.0, 1.0)
 
-# --- Jauges
-@export var max_stamina: int = 100
-@export var max_stress: int = 100
-@export var max_horniness: int = 100
-@export var dead: bool = false
-@export var current_stamina: int = 100
-@export var current_stress: int = 0
-@export var current_horniness: int = 0
+var dead: bool = false
 
 var buff_icons: Array = []
 
 # --- Compétences
 var skills: Array[Skill] = []
 @onready var skillText =$Skill
-@export var skill_resources: Array[Resource] = []
+
 # --- Tags (type, classe, etc.)
-@export var tags: Array[String] = []
+
 #combat
 var combat_manager: Node = null 
 # --- Contrôle
-@export var is_player_controlled: bool = true
-@export var ai_brain: AiBrain
-@export var can_be_moved : bool = true
+
 const HornyEffectScene := preload("res://actions/damageEffect/charmed-particules.tscn")
 const DamageEffectScene := preload("res://actions/damageEffect/HitVFX.tscn")
 const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
 const MissEffectScene:= preload("res://actions/damageEffect/miss_vfx.tscn")
 const DebuffEffectScene:= preload("res://actions/damageEffect/debuffVfx.tscn")
 const BonkEffectScene:= preload("res://actions/damageEffect/bonkVFX.tscn")
-@export var min_durationIddle: float = 0.6
-@export var max_durationIddle: float = 1.0
-@export var min_scale: float = 0.95
-@export var max_scale: float = 1.0
+
 signal target_selected()
 var is_targetable: bool = false
 @onready var arrow = $Arrow
-@export var camp_skill_resources: Array[CampSkill] = []
+@onready var buff_bar=$HBoxContainer
 @onready var dotsActions : Array[TextureRect] 
 
 
@@ -99,27 +60,18 @@ var exclamation :TextureRect
 var CharaColor =Color(1.0,1.0,1.0,1.0)
 var acte_twice : bool = false
 var exibBonusAtt = 0
-@export var bark_scene: PackedScene = preload("res://UI/bark.tscn")
-@export var taunts := [
-	"Is that all you've got?",
-	"Try harder!",
-	"Pathetic!",
-	"You're wide open!",
-	"You fight like a wet noodle!",
-	"Oops! Did that hurt?",
-	
-]
-var current_bark: Bark = null
 
+var current_bark: Bark = null
+@export var characterData : CharacterData
 
 func _ready():
 	arrow.visible=false
-	name_label.text = Charaname
-	sprite.texture = portrait_texture
-	Selector.texture = portrait_texture
+	name_label.text = characterData.Charaname
+	sprite.texture = characterData.portrait_texture
+	Selector.texture = characterData.portrait_texture
 
 	
-	_updateSkills(skill_resources)
+	_updateSkills(characterData.skill_resources)
 
 		#print("Compétence chargée : ", inst.name)
 
@@ -140,37 +92,37 @@ func _updateSkills(updated_skills: Array[Resource] ):
 		skills.append(inst)
 		
 func update_stats():
-	max_stamina= base_max_stamina
-	max_horniness = base_max_horniness
-	max_stress= base_max_stress
-	attack = base_attack
-	defense = base_defense
-	initiative = base_initiative
-	willpower = base_willpower
-	evasion = base_evasion
-	for tag in tags:
+	characterData.max_stamina= characterData.base_max_stamina
+	characterData.max_horniness = characterData.characterData.base_max_horniness
+	characterData.max_stress= characterData.base_max_stress
+	characterData.attack = characterData.base_attack
+	characterData.defense = characterData.base_defense
+	characterData.initiative = characterData.base_initiative
+	characterData.willpower = characterData.base_willpower
+	characterData.evasion = characterData.base_evasion
+	for tag in characterData.tags:
 				if tag=="sadist":
-					attack+=2
+					characterData.attack+=2
 				if tag=="maso":
-					evasion -=2
+					characterData.evasion -=2
 	for buff in buffs:
 		buff.apply_to(self)
 		
-	for eq in equipped_items:
-		attack += eq.attack_bonus
-		defense += eq.defense_bonus
-		max_horniness += eq.Max_lust_bonus
-		max_stamina += eq.Max_stamina_bonus
-		max_stress += eq.Max_Guilt_bonus
-		willpower += eq.willpower_bonus
-		evasion += eq.evasion_bonus
-		initiative += eq.initiative_bonus
+	for eq in characterData.equipped_items:
+		characterData.attack += eq.attack_bonus
+		characterData.defense += eq.defense_bonus
+		characterData.max_horniness += eq.Max_lust_bonus
+		characterData.max_stamina += eq.Max_stamina_bonus
+		characterData.max_stress += eq.Max_Guilt_bonus
+		characterData.willpower += eq.willpower_bonus
+		characterData.evasion += eq.evasion_bonus
+		characterData.initiative += eq.initiative_bonus
 		
 		
 func get_equipement_cooldown_reduction_for(skill: Skill) -> int: #for equipement
 	var reduction := 0
 
-	for eq in equipped_items:
+	for eq in characterData.equipped_items:
 		# Réduction globale
 		reduction += eq.global_cooldown_reduction
 
@@ -181,14 +133,14 @@ func get_equipement_cooldown_reduction_for(skill: Skill) -> int: #for equipement
 	return reduction
 
 func show_bark(text:String):
-	if bark_scene == null:
+	if characterData.bark_scene == null:
 		return
 	
 	# Si un bark existe déjà, on le supprime avant d’en créer un nouveau
 	if current_bark and is_instance_valid(current_bark):
 		current_bark.queue_free()
 	
-	current_bark = bark_scene.instantiate()
+	current_bark = characterData.bark_scene.instantiate()
 	add_child(current_bark) # 🔥 Instancié comme enfant du personnage
 	
 	current_bark.set_text(text)
@@ -198,10 +150,10 @@ func show_bark(text:String):
 	current_bark.position = Vector2(-60, bark_offset_y)
 
 func slur():
-	show_bark(taunts.pick_random())
+	show_bark(characterData.taunts.pick_random())
 func update_ui():
 
-	if not hp_Jauge:
+	if not characterData.hp_Jauge:
 		print("no hpJauge")
 		_current_slot.Set_CharaUI()
 		hp_Jauge=_current_slot.CharaUI.getHpbar()
@@ -210,10 +162,10 @@ func update_ui():
 		
 	
 		# return
-	hp_Jauge.max_value=max_stamina
-	hp_Jauge.value=current_stamina
+	hp_Jauge.max_value=characterData.max_stamina
+	hp_Jauge.value=characterData.current_stamina
 	
-	hornyJauge.self_modulate.a = (current_horniness*2.0)/max_horniness
+	hornyJauge.self_modulate.a = (characterData.current_horniness*2.0)/characterData.max_horniness
 
 	
 	for i in range(skills.size()):
@@ -270,9 +222,9 @@ func remove_buff(buff: Buff):
 func get_stat(stat_enum: int) -> int:
 	var base_value = 0
 	match stat_enum:
-		Buff.Stat.ATTACK: base_value = base_attack
-		Buff.Stat.DEFENSE: base_value = base_defense
-		Buff.Stat.SPEED: base_value = base_initiative
+		Buff.Stat.ATTACK: base_value = characterData.base_attack
+		Buff.Stat.DEFENSE: base_value = characterData.base_defense
+		Buff.Stat.SPEED: base_value = characterData.base_initiative
 		_:
 			print("Stat inconnue : ", stat_enum)
 	
@@ -293,7 +245,7 @@ func is_dead() -> bool:
 	return dead
 
 func can_act() -> bool:
-	return not is_dead() and current_stress < 100 and current_horniness < 100
+	return not is_dead() and characterData.current_stress < 100 and characterData.current_horniness < 100
 	
 	
 func set_targetable(state: bool):
@@ -313,7 +265,7 @@ func _input_event(viewport, event, shape_idx):
 		
 
 func surprised():
-	stun=true
+	characterData.stun=true
 	exclamation = TextureRect.new()
 	exclamation.texture = preload("res://UI/exclamation.png")  # ton image
 	exclamation.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -324,11 +276,11 @@ func surprised():
 	
 	
 func play_ai_turn(heroes : Array, enemies :Array):
-	if ai_brain == null:
+	if characterData.ai_brain == null:
 		push_error("Aucun AiBrain assigné à %s" % name)
 		return
 
-	var decision = ai_brain.decide_action(self, heroes, enemies)
+	var decision = characterData.ai_brain.decide_action(self, heroes, enemies)
 	if decision.is_empty():
 		print("no decision")
 		resetVisuel()
@@ -342,12 +294,12 @@ func play_ai_turn(heroes : Array, enemies :Array):
 
 	if target == null:
 		skill.use()
-		combat_manager.ui.logennemi(Charaname+" use "+skill.descriptionName)
+		combat_manager.ui.logennemi(characterData.Charaname+" use "+skill.descriptionName)
 	else:
 		await animate_attack(targetPosistions[0].occupant)
 		for thetarget in targetPosistions:
 			skill.use(thetarget)
-		combat_manager.ui.log(Charaname+" use "+skill.descriptionName)
+		combat_manager.ui.log(characterData.Charaname+" use "+skill.descriptionName)
 		target.update_ui()
 	
 	resetVisuel()
@@ -357,7 +309,7 @@ func reduce_cooldowns() -> void:
 		if skill.current_cooldown > 0:
 			skill.current_cooldown -= 1	
 func start_turn():
-	print(Charaname+ "start turn")
+	print(characterData.Charaname+ "start turn")
 	
 	var dmg =0
 	var dmgHorny=0
@@ -390,7 +342,7 @@ func end_turn():
 func isdead():
 	dead = true
 	
-	print (Charaname+ " is dead")
+	print (characterData.Charaname+ " is dead")
 			
 func select_as_target():
 	print("Cible sélectionnée : ", self.name)
@@ -405,36 +357,36 @@ func take_damage(source: Character, stat: int, amount: int, type:bool) -> void:
 			combat_manager.pending_skill.reducecost = buff.amount
 	match stat:
 		DamageEffect.Stat.STAMINA:
-			for tag in tags:
+			for tag in characterData.tags:
 				if tag=="maso":
 					var littlebuff := load("res://characters/kink/littleattackbuff.tres")
 					add_buff(littlebuff)
-					current_horniness = max(0, current_horniness + 2)
+					characterData.current_horniness = max(0, characterData.current_horniness + 2)
 			if source != self:
 				for tag in source.tags:
 					if tag =="sadist":
 						source.current_horniness = max(0, source.current_horniness + 2)
 					if tag =="degrader":
-						source.current_horniness = max(0, source.current_horniness + floor(current_stress/2))
+						source.characterData.current_horniness = max(0, source.characterData.current_horniness + floor(characterData.current_stress/2))
 			if source != self:
-				print (str(amount)+ " "+" -"+ str(defense))
-				damage = max(0, ((amount + source.attack) - defense))
+				print (str(amount)+ " "+" -"+ str(characterData.defense))
+				damage = max(0, ((amount + source.characterData.attack) - characterData.defense))
 				print(self.Charaname+ " take "+ str(damage) +" damage from "+ source.Charaname)
 			else :
 				damage=amount
-			for eq in equipped_items:
+			for eq in characterData.equipped_items:
 				eq.on_receive_attack(self, source, damage)
-			if current_stamina > 0:
+			if characterData.current_stamina > 0:
 				
-				current_stamina = clamp(current_stamina - damage, 0, max_stamina)
+				characterData.current_stamina = clamp(characterData.current_stamina - damage, 0, characterData.max_stamina)
 				
-				if current_stamina == 0:
+				if characterData.current_stamina == 0:
 					
 					sprite.self_modulate = Color(0.8, 0.1, 0.1)
-					sprite.texture = dead_portrait_texture
-					Selector.texture = dead_portrait_texture
+					sprite.texture = characterData.dead_portrait_texture
+					Selector.texture = characterData.dead_portrait_texture
 			else:
-				if IsDemon && type:
+				if characterData.IsDemon && characterData.type:
 					combat_manager.nb_crystaleloot += 1 
 				isdead()
 			if dead:
@@ -449,25 +401,25 @@ func take_damage(source: Character, stat: int, amount: int, type:bool) -> void:
 			damage=amount
 			if source == self:
 				
-				current_horniness = max(0, current_horniness + damage)
+				characterData.current_horniness = max(0, characterData.current_horniness + damage)
 				print ("tack"+str(damage)+" dmg horny" )
 			else :
-				damage = max(0, amount - willpower)
-				current_horniness = max(0, current_horniness + damage)
-			for eq in equipped_items:
+				damage = max(0, amount - characterData.willpower)
+				characterData.current_horniness = max(0, characterData.current_horniness + damage)
+			for eq in characterData.equipped_items:
 				eq.on_receive_attack(self, source, damage)
 			animate_get_horny(damage)
 			update_ui()
 			
 
 		DamageEffect.Stat.STRESS:
-			for tag in tags:
+			for tag in characterData.tags:
 				if tag=="exib":
 					amount -= 2
 					take_damage(self, 2, 2,false)
-					attack -= exibBonusAtt
-					exibBonusAtt =  floor(current_stress/10)
-					attack += exibBonusAtt
+					characterData.attack -= exibBonusAtt
+					exibBonusAtt =  floor(characterData.current_stress/10)
+					characterData.attack += exibBonusAtt
 				if tag=="degenerate":
 					var usedSkills : Array[Skill]
 					for skill in skills:
@@ -476,10 +428,10 @@ func take_damage(source: Character, stat: int, amount: int, type:bool) -> void:
 					if not usedSkills.is_empty():
 						var reduceCooldownSkill :Skill = usedSkills.pick_random()
 						reduceCooldownSkill.current_cooldown -=1
-					current_horniness = max(0, current_horniness + 2)
+					characterData.current_horniness = max(0, characterData.current_horniness + 2)
 					
-			damage = max(0, amount - willpower)
-			current_stress = max(0, current_stress + damage)
+			damage = max(0, amount - characterData.willpower)
+			characterData.current_stress = max(0, characterData.current_stress + damage)
 			
 	shake_camera(20.0)
 	#print("%s inflige %d de %s à %s" % [source.name, damage, DamageEffect.Stat.keys()[stat], name])
@@ -491,33 +443,33 @@ func resetVisuel()-> void:
 	sprite.modulate= CharaColor
 	self.scale = CharaScale
 	self.z_index = _current_slot.z_index
-	if current_stamina > 0:
-			sprite.texture = portrait_texture
-			Selector.texture = portrait_texture
+	if characterData.current_stamina > 0:
+			sprite.texture = characterData.portrait_texture
+			Selector.texture = characterData.portrait_texture
 	update_ui()
 
 
 
 
 func refresh_stats_from_equipment():
-	attack = base_attack
-	defense = base_defense
-	willpower = base_willpower
-	evasion = base_evasion
-	initiative = base_initiative
+	characterData.attack = characterData.base_attack
+	characterData.defense = characterData.base_defense
+	characterData.willpower = characterData.base_willpower
+	characterData.evasion = characterData.base_evasion
+	characterData.initiative = characterData.base_initiative
 
-	for eq in equipped_items:
-		attack += eq.attack_bonus
-		defense += eq.defense_bonus
-		willpower += eq.willpower_bonus
-		evasion += eq.evasion_bonus
-		initiative += eq.initiative_bonus
+	for eq in characterData.equipped_items:
+		characterData.attack += eq.attack_bonus
+		characterData.defense += eq.defense_bonus
+		characterData.willpower += eq.willpower_bonus
+		characterData.evasion += eq.evasion_bonus
+		characterData.initiative += eq.initiative_bonus
 
 func add_affinity(target: Character, amount: int):
-	var key := target.Charaname
-	if not affinity.has(key):
+	var key := target.characterData.Charaname
+	if not characterData.affinity.has(key):
 		return
-	affinity[key] = clampi(affinity[key] + amount, 0, 100)
+	characterData.affinity[key] = clampi(characterData.affinity[key] + amount, 0, 100)
 
 
 func reduce_affinity(target: Character, amount: int):
@@ -525,9 +477,9 @@ func reduce_affinity(target: Character, amount: int):
 
 
 func get_affinity(target: Character) -> int:
-	var key := target.Charaname
-	if affinity.has(key):
-		return affinity[key]
+	var key := target.characterData.Charaname
+	if characterData.affinity.has(key):
+		return characterData.affinity[key]
 	return 0
 #------------------------------- Animation ------------------------------------------------
 
@@ -617,9 +569,9 @@ func DebuffAnim(text):
 	
 func animate_attack(target: Character):
 	emit_signal("skill_animation_started")
-	combat_manager.ui.log(Charaname+ " use " + combat_manager._pending_skill.descriptionName)
+	combat_manager.ui.log(characterData.Charaname+ " use " + combat_manager._pending_skill.descriptionName)
 
-	if is_player_controlled:
+	if characterData.is_player_controlled:
 		combat_manager.SpriteHeros.attack_anim(self)
 	else:
 		combat_manager.SpriteEnnemies.attack_anim(self)

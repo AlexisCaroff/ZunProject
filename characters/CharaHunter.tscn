@@ -41,6 +41,7 @@ current_stamina = 20
 skill_resources = Array[Resource]([ExtResource("5_184h1"), ExtResource("6_7u4xn"), ExtResource("7_kj6ch"), ExtResource("8_1t7b8"), ExtResource("9_rwkgt")])
 tags = Array[String](["sub", "degenerate", "jailor"])
 camp_skill_resources = Array[ExtResource("10_cegev")]([ExtResource("11_kj6ch"), ExtResource("14_1t7b8"), ExtResource("12_7u4xn"), ExtResource("13_kj6ch")])
+metadata/character_data_path = "res://characters/data/CharaHunter.tres"
 
 [node name="name" type="Label" parent="."]
 visible = false

@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=12 format=3 uid="uid://c3vy2fgg7t28x"]
+
+[ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_716pa"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_tavhp"]
+[ext_resource type="Texture2D" uid="uid://dlcmqtbjarl35" path="res://characters/charatexture/enemy spitterDead.png" id="3_bxekq"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_kpmge"]
+[ext_resource type="Texture2D" uid="uid://dbq25fw4dr1n0" path="res://characters/exploPortrait/SpitterExploPortrait.png" id="5_s2gjy"]
+[ext_resource type="Texture2D" uid="uid://cgnrms5owdhet" path="res://characters/characterInitiative/slimportini.png" id="6_tnthr"]
+[ext_resource type="Texture2D" uid="uid://bwlcc7mlf1iwx" path="res://characters/charatexture/enemy spitter.png" id="7_2lnkb"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="8_i4ffr"]
+[ext_resource type="Resource" uid="uid://dwdi447w8ocvi" path="res://actions/ennemiCombatSkills/poisonHorny.tres" id="9_odt67"]
+[ext_resource type="Resource" uid="uid://6oj65xacpxi" path="res://actions/ennemiCombatSkills/tentacleAttack.tres" id="10_qbpw2"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="11_ev3yx"]
+
+[resource]
+script = ExtResource("8_i4ffr")
+portrait_texture = ExtResource("7_2lnkb")
+explorationPortrait = ExtResource("5_s2gjy")
+dead_portrait_texture = ExtResource("3_bxekq")
+initiative_icon = ExtResource("6_tnthr")
+Charaname = "Glarg"
+IsDemon = true
+affinity = Dictionary[String, int]({})
+base_max_stamina = 100
+base_max_stress = 100
+base_max_horniness = 100
+base_attack = 7
+base_defense = 5
+base_willpower = 5
+base_initiative = 20
+base_evasion = 5
+attack = 10
+defense = 5
+willpower = 5
+evasion = 5
+initiative = 3
+peek = 0
+equipped_items = Array[ExtResource("4_kpmge")]([])
+stun = false
+Chara_position = 3
+max_stamina = 100
+max_stress = 100
+max_horniness = 100
+current_stamina = 100
+current_stress = 0
+current_horniness = 0
+skill_resources = Array[Resource]([ExtResource("9_odt67"), ExtResource("9_odt67"), ExtResource("10_qbpw2"), ExtResource("10_qbpw2"), ExtResource("11_ev3yx")])
+tags = Array[String]([])
+is_player_controlled = false
+can_be_moved = true
+min_durationIddle = 0.6
+max_durationIddle = 1.0
+min_scale = 0.95
+max_scale = 1.0
+camp_skill_resources = Array[ExtResource("2_tavhp")]([])
+bark_scene = ExtResource("1_716pa")
+taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide open!", "You fight like a wet noodle!", "Oops! Did that hurt?"]

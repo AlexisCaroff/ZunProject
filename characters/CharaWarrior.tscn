@@ -40,6 +40,8 @@ max_stamina = 120
 skill_resources = Array[Resource]([ExtResource("5_hed2b"), ExtResource("6_sehei"), ExtResource("7_au1md"), ExtResource("8_8h1bt"), ExtResource("9_3mtpu")])
 tags = Array[String](["switch", "degrader", "exib"])
 camp_skill_resources = Array[ExtResource("10_ujj0e")]([ExtResource("11_hed2b"), ExtResource("13_au1md"), ExtResource("12_hed2b"), ExtResource("14_8h1bt")])
+metadata/converted = true
+metadata/character_data_path = "res://characters/data/CharaWarrior.tres"
 
 [node name="name" type="Label" parent="."]
 visible = false

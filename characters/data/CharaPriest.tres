@@ -1,0 +1,65 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=19 format=3 uid="uid://cw65x7yfthrul"]
+
+[ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_k2y3o"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_32fiq"]
+[ext_resource type="Resource" uid="uid://poprema6x515" path="res://actions/CampSkill/confession.tres" id="3_4vmab"]
+[ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="4_h4nms"]
+[ext_resource type="Resource" uid="uid://cd4m2bk1ikodm" path="res://actions/CampSkill/dialoguePristress.tres" id="5_k2dab"]
+[ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="6_dtkfh"]
+[ext_resource type="Texture2D" uid="uid://cynjnle30vnj0" path="res://characters/charatexture/char priestDead.png" id="7_8av4k"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="8_3iphg"]
+[ext_resource type="Resource" uid="uid://dyc56iqi4mh2s" path="res://Items/itemsRessources/ThornWhip.tres" id="9_ib3s3"]
+[ext_resource type="Texture2D" uid="uid://dwu2rkneujev8" path="res://characters/exploPortrait/pristressExploPortrait.png" id="10_pcj8w"]
+[ext_resource type="Texture2D" uid="uid://c8rp0k1fogimi" path="res://characters/charatexture/char priest.png" id="11_r5jsd"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="12_74clh"]
+[ext_resource type="Resource" uid="uid://cswp6nkwg6iwu" path="res://actions/HerosCombatSkills/priere.tres" id="13_3brwx"]
+[ext_resource type="Resource" uid="uid://sahrc1c16ogi" path="res://actions/HerosCombatSkills/fouet.tres" id="14_se5jd"]
+[ext_resource type="Resource" uid="uid://bptddsqeaq28h" path="res://actions/HerosCombatSkills/heal.tres" id="15_y6w34"]
+[ext_resource type="Resource" uid="uid://b4f6tt51qrg3o" path="res://actions/HerosCombatSkills/exorcisme.tres" id="16_67nw5"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="17_b3euk"]
+[ext_resource type="Texture2D" uid="uid://bx0r66uuskgf1" path="res://characters/CampementPorttrait/pristressCampement.png" id="18_kpfpq"]
+
+[resource]
+script = ExtResource("12_74clh")
+portrait_texture = ExtResource("11_r5jsd")
+explorationPortrait = ExtResource("10_pcj8w")
+dead_portrait_texture = ExtResource("7_8av4k")
+initiative_icon = ExtResource("10_pcj8w")
+textureCamp = ExtResource("18_kpfpq")
+Charaname = "Priestess"
+IsDemon = false
+affinity = Dictionary[String, int]({})
+base_max_stamina = 100
+base_max_stress = 100
+base_max_horniness = 100
+base_attack = 8
+base_defense = 5
+base_willpower = 5
+base_initiative = 1
+base_evasion = 5
+attack = 10
+defense = 5
+willpower = 5
+evasion = 5
+initiative = 1
+peek = 0
+equipped_items = Array[ExtResource("8_3iphg")]([ExtResource("9_ib3s3")])
+stun = false
+Chara_position = 0
+max_stamina = 100
+max_stress = 100
+max_horniness = 100
+current_stamina = 100
+current_stress = 0
+current_horniness = 0
+skill_resources = Array[Resource]([ExtResource("13_3brwx"), ExtResource("14_se5jd"), ExtResource("15_y6w34"), ExtResource("16_67nw5"), ExtResource("17_b3euk")])
+tags = Array[String](["dom", "sadist", "jailor"])
+is_player_controlled = true
+can_be_moved = true
+min_durationIddle = 0.6
+max_durationIddle = 1.0
+min_scale = 0.95
+max_scale = 1.0
+camp_skill_resources = Array[ExtResource("2_32fiq")]([ExtResource("3_4vmab"), ExtResource("4_h4nms"), ExtResource("5_k2dab"), ExtResource("6_dtkfh")])
+bark_scene = ExtResource("1_k2y3o")
+taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide open!", "You fight like a wet noodle!", "Oops! Did that hurt?"]

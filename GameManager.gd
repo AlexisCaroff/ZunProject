@@ -10,12 +10,7 @@ var current_room_Ressource: RoomResource
 var campement_node: Node = null
 @onready var end =$endGame
 @export var inventory: Array[Equipment] = []
-var characters: Array[Character] = [
-	preload("res://characters/CharaHunter.tscn").instantiate(),
-	preload("res://characters/CharaMystic.tscn").instantiate(),
-	preload("res://characters/CharaPriest.tscn").instantiate(),
-	preload("res://characters/CharaWarrior.tscn").instantiate(),
-]
+#var characters: Array[Character] = []
 
 func _ready():
 	var screen_index := 1

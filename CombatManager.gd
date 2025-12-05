@@ -28,10 +28,10 @@ var pending_skill: Skill:
 @onready var hero_positions: Array[PositionSlot]=[]
 @onready var enemy_positions: Array[PositionSlot] =[]
 var HERO_SCENES = [
-	preload("res://characters/CharaPriest.tscn"),
-	preload("res://characters/CharaHunter.tscn"),
-	preload("res://characters/CharaMystic.tscn"),
-	preload("res://characters/CharaWarrior.tscn")
+	preload("res://characters/CharaPriest.tscn").instantiate(),
+	preload("res://characters/CharaHunter.tscn").instantiate(),
+	preload("res://characters/CharaMystic.tscn").instantiate(),
+	preload("res://characters/CharaWarrior.tscn").instantiate()
 ]
 @export var cristal_texture = preload("res://UI/cristalIcon.png")
 @export var encounter: CombatEncounter
@@ -123,7 +123,7 @@ func _start():
 			print("Aucune sauvegarde -> Spawn des héros par défaut")
 			for i in HERO_SCENES.size():
 				
-				var chara: Character = gm.characters[i]
+				var chara = HERO_SCENES[i]
 				
 				chara.Chara_position = i
 				add_child(chara)

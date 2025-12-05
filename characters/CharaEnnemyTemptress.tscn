@@ -34,6 +34,7 @@ initiative = 0
 skill_resources = Array[Resource]([ExtResource("5_pders"), ExtResource("5_pders"), ExtResource("6_gg7eq"), ExtResource("7_gg7eq"), ExtResource("9_rhaxp")])
 is_player_controlled = false
 ai_brain = SubResource("Resource_rhaxp")
+metadata/character_data_path = "res://characters/data/CharaEnnemyTemptress.tres"
 
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2(44, 30)

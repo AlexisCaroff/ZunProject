@@ -28,6 +28,7 @@ Chara_position = 1
 skill_resources = Array[Resource]([ExtResource("5_2b0t4"), ExtResource("6_jdh3h"), ExtResource("7_6livi"), ExtResource("5_2b0t4"), ExtResource("7_8uu4u")])
 is_player_controlled = false
 ai_brain = ExtResource("8_au82g")
+metadata/character_data_path = "res://characters/data/CharacterEnemyAdict.tres"
 
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2(58, 29)

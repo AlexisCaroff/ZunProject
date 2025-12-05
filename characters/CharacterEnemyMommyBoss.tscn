@@ -29,6 +29,8 @@ skill_resources = Array[Resource]([ExtResource("5_atoy3"), ExtResource("6_nr0ub"
 is_player_controlled = false
 ai_brain = ExtResource("9_x6ecl")
 can_be_moved = false
+metadata/converted = true
+metadata/character_data_path = "res://characters/data/CharacterEnemyMommyBoss.tres"
 
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2(42, 46.798)

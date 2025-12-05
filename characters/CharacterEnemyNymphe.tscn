@@ -28,6 +28,7 @@ Chara_position = 1
 skill_resources = Array[Resource]([ExtResource("5_a27kg"), ExtResource("6_r4har"), ExtResource("7_a27kg"), ExtResource("6_r4har"), ExtResource("6_0go71")])
 is_player_controlled = false
 ai_brain = ExtResource("8_8rby6")
+metadata/character_data_path = "res://characters/data/CharacterEnemyNymphe.tres"
 
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2(42, 38)

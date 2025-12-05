@@ -38,6 +38,7 @@ Chara_position = 2
 skill_resources = Array[Resource]([ExtResource("5_ikc5x"), ExtResource("6_ew8km"), ExtResource("7_mtgue"), ExtResource("8_2caud"), ExtResource("9_8kln0")])
 tags = Array[String](["voyeur", "captive", "switch"])
 camp_skill_resources = Array[ExtResource("10_my5ka")]([ExtResource("14_wxcsy"), ExtResource("13_l5cqy"), ExtResource("11_rwlb5"), ExtResource("12_5v8vm")])
+metadata/character_data_path = "res://characters/data/CharaMystic.tres"
 
 [node name="name" type="Label" parent="."]
 visible = false

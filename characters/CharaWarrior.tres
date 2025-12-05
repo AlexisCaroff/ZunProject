@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="Character" load_steps=18 format=3 uid="uid://bausw00x5sxbe"]
+
+[ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_am1mw"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_s5tb8"]
+[ext_resource type="Resource" uid="uid://do024kep0pxki" path="res://actions/CampSkill/EquipmentMaintenance.tres" id="3_wx3st"]
+[ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="4_x8kqy"]
+[ext_resource type="Resource" uid="uid://c00hfk3k1wy86" path="res://actions/CampSkill/dialogueWarrior.tres" id="5_cu7n5"]
+[ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="6_g7w1l"]
+[ext_resource type="Texture2D" uid="uid://b1gqe0n366p7t" path="res://characters/charatexture/char tankdead.png" id="7_k08fp"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="8_i1wwn"]
+[ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="9_awmmu"]
+[ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="10_3nb6i"]
+[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="11_7o4y7"]
+[ext_resource type="Resource" uid="uid://behrtqotkyvnx" path="res://actions/HerosCombatSkills/Taunt.tres" id="12_jcan8"]
+[ext_resource type="Resource" uid="uid://doydfjjogegnd" path="res://actions/HerosCombatSkills/StunAttaque.tres" id="13_a5o87"]
+[ext_resource type="Resource" uid="uid://clw258vbo2rq1" path="res://actions/HerosCombatSkills/Charge.tres" id="14_v35or"]
+[ext_resource type="Resource" uid="uid://bpsapqkry8g3q" path="res://actions/HerosCombatSkills/attaque_basique.tres" id="15_sh0nd"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="16_fd3v2"]
+[ext_resource type="Texture2D" uid="uid://cs8w5wjum3566" path="res://characters/CampementPorttrait/WarriorCampement.png" id="17_mekcl"]
+
+[resource]
+script = ExtResource("11_7o4y7")
+portrait_texture = ExtResource("10_3nb6i")
+explorationPortrait = ExtResource("9_awmmu")
+dead_portrait_texture = ExtResource("7_k08fp")
+initiative_icon = ExtResource("9_awmmu")
+textureCamp = ExtResource("17_mekcl")
+Charaname = "Warrior"
+IsDemon = false
+base_max_stamina = 100
+base_max_stress = 100
+base_max_horniness = 100
+base_attack = 12
+base_defense = 12
+base_willpower = 5
+base_initiative = 1
+base_evasion = 5
+attack = 12
+defense = 10
+willpower = 5
+evasion = 5
+initiative = 2
+peek = 0
+equipped_items = Array[ExtResource("8_i1wwn")]([])
+stun = false
+Chara_position = 3
+max_stamina = 120
+max_stress = 100
+max_horniness = 100
+dead = false
+current_stamina = 100
+current_stress = 0
+current_horniness = 0
+skill_resources = Array[Resource]([ExtResource("12_jcan8"), ExtResource("13_a5o87"), ExtResource("14_v35or"), ExtResource("15_sh0nd"), ExtResource("16_fd3v2")])
+tags = Array[String](["switch", "degrader", "exib"])
+is_player_controlled = true
+can_be_moved = true
+min_durationIddle = 0.6
+max_durationIddle = 1.0
+min_scale = 0.95
+max_scale = 1.0
+camp_skill_resources = Array[ExtResource("2_s5tb8")]([ExtResource("3_wx3st"), ExtResource("4_x8kqy"), ExtResource("5_cu7n5"), ExtResource("6_g7w1l")])
+bark_scene = ExtResource("1_am1mw")
+taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide open!", "You fight like a wet noodle!", "Oops! Did that hurt?"]
