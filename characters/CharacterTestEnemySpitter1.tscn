@@ -1,13 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://doitrlqhfja4t"]
+[gd_scene load_steps=8 format=3 uid="uid://doitrlqhfja4t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_1rndn"]
-[ext_resource type="Texture2D" uid="uid://dlcmqtbjarl35" path="res://characters/charatexture/enemy spitterDead.png" id="3_1rndn"]
-[ext_resource type="Texture2D" uid="uid://dbq25fw4dr1n0" path="res://characters/exploPortrait/SpitterExploPortrait.png" id="3_y1ii6"]
-[ext_resource type="Texture2D" uid="uid://cgnrms5owdhet" path="res://characters/characterInitiative/slimportini.png" id="4_1rndn"]
-[ext_resource type="Resource" uid="uid://dwdi447w8ocvi" path="res://actions/ennemiCombatSkills/poisonHorny.tres" id="6_3o24a"]
-[ext_resource type="Resource" uid="uid://6oj65xacpxi" path="res://actions/ennemiCombatSkills/tentacleAttack.tres" id="7_bbnup"]
-[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="10_2prdw"]
-[ext_resource type="Script" uid="uid://cf2k68rgsdle0" path="res://characters/charatexture/braines/Ai_brain.gd" id="10_y1ii6"]
 [ext_resource type="Texture2D" uid="uid://bwlcc7mlf1iwx" path="res://characters/charatexture/enemy spitter.png" id="11_2uqc5"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="11_ih6kd"]
 [ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="12_e7hg0"]
@@ -15,27 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="14_3o24a"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="15_bbnup"]
 
-[sub_resource type="Resource" id="Resource_j4qgo"]
-script = ExtResource("10_y1ii6")
-name = "Default AI"
-description = "IA basique qui choisit une compétence aléatoire utilisable et une cible valide."
-metadata/_custom_type_script = "uid://cf2k68rgsdle0"
-
 [node name="CharacterTestennemie4" type="Node2D"]
 script = ExtResource("1_1rndn")
-portrait_texture = ExtResource("11_2uqc5")
-explorationPortrait = ExtResource("3_y1ii6")
-dead_portrait_texture = ExtResource("3_1rndn")
-initiative_icon = ExtResource("4_1rndn")
-Charaname = "Glarg"
-IsDemon = true
-base_attack = 7
-base_initiative = 20
-initiative = 3
-Chara_position = 3
-skill_resources = Array[Resource]([ExtResource("6_3o24a"), ExtResource("6_3o24a"), ExtResource("7_bbnup"), ExtResource("7_bbnup"), ExtResource("10_2prdw")])
-is_player_controlled = false
-ai_brain = SubResource("Resource_j4qgo")
 metadata/character_data_path = "res://characters/data/CharacterTestEnemySpitter1.tres"
 
 [node name="name" type="Label" parent="."]

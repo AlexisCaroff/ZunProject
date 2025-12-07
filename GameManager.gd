@@ -10,7 +10,7 @@ var current_room_Ressource: RoomResource
 var campement_node: Node = null
 @onready var end =$endGame
 @export var inventory: Array[Equipment] = []
-#var characters: Array[Character] = []
+var characters: Array[CharacterData] = []
 
 func _ready():
 	var screen_index := 1

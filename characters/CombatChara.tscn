@@ -1,16 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbtxyhyysj65n"]
+[gd_scene load_steps=9 format=3 uid="uid://qffxu8t8mvlx"]
 
-[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_bw87w"]
-[ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="2_m75wf"]
-[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="13_y06sh"]
-[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="14_j8b2c"]
-[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="15_a3eqf"]
-[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="16_373rw"]
-[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="22_au1md"]
-[ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="23_8h1bt"]
+[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i21nx"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="2_uoxmb"]
+[ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="3_t6ab6"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="4_qgiwc"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="5_5cv4u"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="6_fn4af"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="7_pv5ss"]
+[ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="8_osbnm"]
 
 [node name="Warrior" type="Node2D"]
-script = ExtResource("1_bw87w")
+script = ExtResource("1_i21nx")
 metadata/converted = true
 metadata/character_data_path = "res://characters/data/CharaWarrior.tres"
 
@@ -25,7 +25,7 @@ text = "name"
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2(51, 51)
 scale = Vector2(1.2, 1.2)
-script = ExtResource("13_y06sh")
+script = ExtResource("2_uoxmb")
 min_scale = 1.15
 max_scale = 1.15
 scalemini = 1.1
@@ -39,7 +39,7 @@ offset_right = 38.0
 offset_bottom = 2.0
 scale = Vector2(1.2, 1)
 mouse_filter = 2
-texture = ExtResource("2_m75wf")
+texture = ExtResource("3_t6ab6")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -51,7 +51,7 @@ offset_right = 38.0
 offset_bottom = 2.0
 scale = Vector2(1.2, 1)
 mouse_filter = 2
-texture = ExtResource("2_m75wf")
+texture = ExtResource("3_t6ab6")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -62,14 +62,14 @@ offset_top = -316.0
 offset_right = 443.0
 offset_bottom = 260.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("14_j8b2c")
-script = ExtResource("15_a3eqf")
+texture = ExtResource("4_qgiwc")
+script = ExtResource("5_5cv4u")
 
 [node name="Arrow" type="Sprite2D" parent="."]
 position = Vector2(1, -232)
 scale = Vector2(0.38, 0.38)
-texture = ExtResource("16_373rw")
-script = ExtResource("13_y06sh")
+texture = ExtResource("6_fn4af")
+script = ExtResource("2_uoxmb")
 min_scale = 0.38
 max_scale = 0.38
 scalemini = 0.3
@@ -91,7 +91,7 @@ offset_top = -214.0
 offset_right = 179.0
 offset_bottom = -52.0
 scale = Vector2(0.825763, 0.821068)
-theme_override_fonts/font = ExtResource("22_au1md")
+theme_override_fonts/font = ExtResource("7_pv5ss")
 theme_override_font_sizes/font_size = 40
 text = "Skill name"
 horizontal_alignment = 1
@@ -101,4 +101,4 @@ autowrap_mode = 3
 z_index = -1
 position = Vector2(161, 28)
 scale = Vector2(2.34924, 0.637405)
-texture = ExtResource("23_8h1bt")
+texture = ExtResource("8_osbnm")

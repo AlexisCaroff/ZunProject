@@ -235,14 +235,14 @@ func get_stat(stat_enum: int) -> int:
 	return base_value
 		
 func get_skill(index: int) -> Skill:
-	if index >= 0 and index < skills.size():
+	if index >= 0 and index < characterData.skills.size():
 		return skills[index]
 	else:
 		push_error("Skill index %d out of bounds for character %s" % [index, name])
 		return null
 
 func is_dead() -> bool:
-	return dead
+	return characterData.dead
 
 func can_act() -> bool:
 	return not is_dead() and characterData.current_stress < 100 and characterData.current_horniness < 100

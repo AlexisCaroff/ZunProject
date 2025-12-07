@@ -13,6 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="background2" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 28.0
 offset_right = 1866.0
@@ -78,6 +79,7 @@ text = "Quit"
 flat = true
 
 [node name="background3" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 563.0
 offset_top = 28.0
 offset_right = 1866.0

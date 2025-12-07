@@ -101,8 +101,8 @@ func update_ui_for_current_character(character: Character):
 		return
 	update_equipment_icons(character)
 	
-	Charaname_panel.text = character.Charaname
-	charaPortrait.texture=character.explorationPortrait
+	Charaname_panel.text = character.characterData.Charaname
+	charaPortrait.texture=character.characterData.explorationPortrait
 	# Déconnexion de tous les anciens signaux pour éviter les doublons
 	for button in skill_buttons:
 		for conn in button.pressed.get_connections():
@@ -129,11 +129,11 @@ func update_ui_for_current_character(character: Character):
 		else:
 			button.text = "—"
 			button.disabled = true
-		AttLabel.text = "Attack: %d" % [character.attack]
-		DefLabel.text = "Defense: %d" % [character.defense]
-		Stamina.text = "Stamina: %d / %d" % [character.current_stamina, character.max_stamina]
-		guilt.text = "Guilt: %d / %d" % [character.current_stress, character.max_stress]
-		horny.text = "Horny: %d / %d" % [character.current_horniness, character.max_horniness]
+		AttLabel.text = "Attack: %d" % [character.characterData.attack]
+		DefLabel.text = "Defense: %d" % [character.characterData.defense]
+		Stamina.text = "Stamina: %d / %d" % [character.characterData.current_stamina, character.characterData.max_stamina]
+		guilt.text = "Guilt: %d / %d" % [character.characterData.current_stress, character.characterData.max_stress]
+		horny.text = "Horny: %d / %d" % [character.characterData.current_horniness, character.characterData.max_horniness]
 
 func update_equipment_icons(character: Character):
 	var slots = [
@@ -148,11 +148,11 @@ func update_equipment_icons(character: Character):
 			
 
 	# On remplit les slots selon les équipements
-	for i in range(character.equipped_items.size()):
+	for i in range(character.characterData.equipped_items.size()):
 		if i >= slots.size():
 			break  # sécurité si plus d’items que de slots
 
-		var equip: Equipment = character.equipped_items[i]
+		var equip: Equipment = character.characterData.equipped_items[i]
 		slots[i].assigne_item(equip)
 		
 func update_cooldown_bar(container: HBoxContainer, skill):
@@ -189,8 +189,8 @@ func update_ui_for_overed_character(character: Character):
 		return
 
 	
-	Charaname2.text = character.Charaname
-	charaPortrait2.texture=character.explorationPortrait
+	Charaname2.text = character.characterData.Charaname
+	charaPortrait2.texture=character.characterData.explorationPortrait
 	# Déconnexion de tous les anciens signaux pour éviter les doublons
 	for button in skills2:
 		for conn in button.pressed.get_connections():
@@ -219,7 +219,7 @@ func update_ui_for_overed_character(character: Character):
 func update_cooldown(character:Character):
 	for i in range(skill_buttons.size()):
 		var button = skill_buttons[i]
-		var dot = character.dotsActions[i-1]
+		
 		var skill = character.get_skill(i)
 		
 		#print ("update skill"+skill.name+str(skill.current_cooldown))

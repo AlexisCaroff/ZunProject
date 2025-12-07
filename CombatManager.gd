@@ -125,16 +125,16 @@ func _start():
 				
 				var chara = HERO_SCENES[i]
 				
-				chara.Chara_position = i
+				chara.characterData.Chara_position = i
 				add_child(chara)
 				chara.combat_manager = self
 				heroes.append(chara)
 
-				var slot_index = clamp(chara.Chara_position, 0, hero_positions.size() - 1)
+				var slot_index = clamp(chara.characterData.Chara_position, 0, hero_positions.size() - 1)
 				var slot = hero_positions[slot_index]
 				move_character_to(chara, slot, 0.0)
-				chara._current_slot=slot
-				chara.current_stamina= chara.max_stamina
+				chara.characterData._current_slot=slot
+				chara.characterData.current_stamina= chara.max_stamina
 				if heroes_are_ambushed:
 					chara.surprised()
 				chara.update_ui()
@@ -148,7 +148,7 @@ func _start():
 
 			var slot_index = i
 			var slot = enemy_positions[slot_index]
-			chara._current_slot=slot
+			chara.characterData._current_slot=slot
 			move_character_to(chara, slot, 0.0)
 			if ennemy_are_ambushed:
 				chara.surprised()

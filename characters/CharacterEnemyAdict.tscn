@@ -1,14 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://dasi42qwl63md"]
+[gd_scene load_steps=9 format=3 uid="uid://dasi42qwl63md"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_f5x8r"]
 [ext_resource type="Texture2D" uid="uid://kpc43243oyss" path="res://characters/charatexture/ENEMY_ADDICT_idle.png" id="2_jdh3h"]
-[ext_resource type="Texture2D" uid="uid://b0yhh4guwwtsh" path="res://characters/exploPortrait/AdictExploPortrait.png" id="3_6livi"]
-[ext_resource type="Texture2D" uid="uid://bon5vsyrujwe7" path="res://characters/charatexture/ENEMY_ADDICT_tired.png" id="4_jdh3h"]
-[ext_resource type="Resource" uid="uid://dxj1ksi0rq6i6" path="res://actions/ennemiCombatSkills/tentacleGrab.tres" id="5_2b0t4"]
-[ext_resource type="Resource" uid="uid://dkph6nihwi550" path="res://actions/ennemiCombatSkills/raving.tres" id="6_jdh3h"]
-[ext_resource type="Resource" uid="uid://daxgjjbu82mgo" path="res://actions/ennemiCombatSkills/euphoria.tres" id="7_6livi"]
-[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="7_8uu4u"]
-[ext_resource type="Resource" uid="uid://86jrw37oebpi" path="res://characters/charatexture/braines/basicRandomBrain.tres" id="8_au82g"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="9_qu7su"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="10_sb46e"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="11_lw1ij"]
@@ -18,16 +11,6 @@
 
 [node name="Addict" type="Node2D"]
 script = ExtResource("1_f5x8r")
-portrait_texture = ExtResource("2_jdh3h")
-explorationPortrait = ExtResource("3_6livi")
-dead_portrait_texture = ExtResource("4_jdh3h")
-initiative_icon = ExtResource("3_6livi")
-Charaname = "Addict"
-IsDemon = true
-Chara_position = 1
-skill_resources = Array[Resource]([ExtResource("5_2b0t4"), ExtResource("6_jdh3h"), ExtResource("7_6livi"), ExtResource("5_2b0t4"), ExtResource("7_8uu4u")])
-is_player_controlled = false
-ai_brain = ExtResource("8_au82g")
 metadata/character_data_path = "res://characters/data/CharacterEnemyAdict.tres"
 
 [node name="pivot" type="Node2D" parent="."]

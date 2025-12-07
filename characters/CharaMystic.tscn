@@ -1,20 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://b8lhes1w5ga1t"]
+[gd_scene load_steps=10 format=3 uid="uid://b8lhes1w5ga1t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_nekcb"]
 [ext_resource type="Texture2D" uid="uid://df5ltgoqyf2jw" path="res://characters/charatexture/char mystic.png" id="2_bjjxo"]
-[ext_resource type="Texture2D" uid="uid://dd4k5wxaesfo4" path="res://characters/exploPortrait/MysticExploPortrait.png" id="3_ew8km"]
-[ext_resource type="Texture2D" uid="uid://bauxvokp1lm7g" path="res://characters/charatexture/char mysticDead.png" id="4_uj7tg"]
-[ext_resource type="Resource" uid="uid://m6nw8l2ax4to" path="res://actions/HerosCombatSkills/ChangeMask.tres" id="5_ikc5x"]
-[ext_resource type="Texture2D" uid="uid://dtbnk3lssqj8l" path="res://characters/CampementPorttrait/Mysticcampement.png" id="5_uj7tg"]
-[ext_resource type="Resource" uid="uid://dopuwtv1moav3" path="res://actions/HerosCombatSkills/Shield.tres" id="6_ew8km"]
-[ext_resource type="Resource" uid="uid://duo5wcnmn0qo2" path="res://actions/HerosCombatSkills/vampire.tres" id="7_mtgue"]
-[ext_resource type="Resource" uid="uid://bcvrdy48sagwa" path="res://actions/HerosCombatSkills/hook.tres" id="8_2caud"]
-[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="9_8kln0"]
-[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="10_my5ka"]
-[ext_resource type="Resource" uid="uid://b2vd1hks0mof3" path="res://actions/CampSkill/dialogueMystic.tres" id="11_rwlb5"]
-[ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="12_5v8vm"]
-[ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="13_l5cqy"]
-[ext_resource type="Resource" uid="uid://cryoy3w5uet08" path="res://actions/CampSkill/buffskillCamp.tres" id="14_wxcsy"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="15_y67ho"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="16_ucs2x"]
 [ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="18_2xt24"]
@@ -25,19 +12,6 @@
 
 [node name="Mystic" type="Node2D"]
 script = ExtResource("1_nekcb")
-portrait_texture = ExtResource("2_bjjxo")
-explorationPortrait = ExtResource("3_ew8km")
-dead_portrait_texture = ExtResource("4_uj7tg")
-initiative_icon = ExtResource("3_ew8km")
-textureCamp = ExtResource("5_uj7tg")
-Charaname = "Mystic"
-base_initiative = 2
-attack = 12
-initiative = 2
-Chara_position = 2
-skill_resources = Array[Resource]([ExtResource("5_ikc5x"), ExtResource("6_ew8km"), ExtResource("7_mtgue"), ExtResource("8_2caud"), ExtResource("9_8kln0")])
-tags = Array[String](["voyeur", "captive", "switch"])
-camp_skill_resources = Array[ExtResource("10_my5ka")]([ExtResource("14_wxcsy"), ExtResource("13_l5cqy"), ExtResource("11_rwlb5"), ExtResource("12_5v8vm")])
 metadata/character_data_path = "res://characters/data/CharaMystic.tres"
 
 [node name="name" type="Label" parent="."]
