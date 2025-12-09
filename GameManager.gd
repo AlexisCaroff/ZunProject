@@ -10,11 +10,11 @@ var current_room_Ressource: RoomResource
 var campement_node: Node = null
 @onready var end =$endGame
 @export var inventory: Array[Equipment] = []
-var characters: Array[CharacterData] = []
+@export var characters: Array[CharacterData] = []
 
 func _ready():
 	var screen_index := 1
-	inventory.resize(3*6)
+	
 	if screen_index < DisplayServer.get_screen_count():
 		DisplayServer.window_set_current_screen(screen_index)
 	

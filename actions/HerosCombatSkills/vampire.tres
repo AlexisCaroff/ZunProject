@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://duo5wcnmn0qo2"]
 
-[ext_resource type="Texture2D" uid="uid://cmsror5fqe18s" path="res://actions/actiontexture/SkillImage/Hero_Mystique_Shiphon.png" id="1_jbp84"]
+[ext_resource type="Texture2D" uid="uid://cu2trwua3sb1" path="res://characters/charatexture/demo characters/HERO_mystic_cc_siphon.png" id="1_nbap8"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_jbp84"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_rn6hm"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_jbp84"]
@@ -33,7 +33,7 @@ descriptionName = null
 description = "deal psy dmg and steal stamina"
 icon = ExtResource("4_nbap8")
 required_position = 0
-ImageSkill = ExtResource("1_jbp84")
+ImageSkill = ExtResource("1_nbap8")
 the_target_type = null
 effects = Array[ExtResource("2_jbp84")]([SubResource("Resource_i4eos")])
 two_target_Type = true

@@ -11,7 +11,7 @@ var tween: Tween
 
 func attack_anim(character: Character):
 	chara = character
-	self.texture = chara.portrait_texture
+	self.texture = chara.characterData.portrait_texture
 	self.position = outsidePos 
 	self.scale=Vector2(2.0,2.0)
 	# Création du tween principal
@@ -41,7 +41,7 @@ func _on_attack():
 	tween.tween_callback(Callable(self, "_on_return"))
 	
 func _on_return():
-	self.texture = chara.portrait_texture
+	self.texture = chara.characterData.portrait_texture
 	tween = null
 	tween = create_tween()
 	tween.parallel().tween_property(self, "position", outsidePos, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)

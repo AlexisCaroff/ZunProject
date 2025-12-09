@@ -1,18 +1,20 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=19 format=3 uid="uid://cw65x7yfthrul"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=21 format=3 uid="uid://cw65x7yfthrul"]
 
+[ext_resource type="Texture2D" uid="uid://d03x4qonaygqb" path="res://characters/charatexture/PriestBody2.png" id="1_4vmab"]
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_k2y3o"]
+[ext_resource type="Texture2D" uid="uid://bus306td6s2go" path="res://characters/charatexture/demo characters/HERO_priestess_hit.png" id="2_4vmab"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_32fiq"]
 [ext_resource type="Resource" uid="uid://poprema6x515" path="res://actions/CampSkill/confession.tres" id="3_4vmab"]
 [ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="4_h4nms"]
 [ext_resource type="Resource" uid="uid://cd4m2bk1ikodm" path="res://actions/CampSkill/dialoguePristress.tres" id="5_k2dab"]
 [ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="6_dtkfh"]
-[ext_resource type="Texture2D" uid="uid://cynjnle30vnj0" path="res://characters/charatexture/char priestDead.png" id="7_8av4k"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="8_3iphg"]
+[ext_resource type="Texture2D" uid="uid://bnx56w5vhsm2n" path="res://characters/charatexture/demo characters/HERO_priestess_down.png" id="9_h4nms"]
 [ext_resource type="Resource" uid="uid://dyc56iqi4mh2s" path="res://Items/itemsRessources/ThornWhip.tres" id="9_ib3s3"]
 [ext_resource type="Texture2D" uid="uid://dwu2rkneujev8" path="res://characters/exploPortrait/pristressExploPortrait.png" id="10_pcj8w"]
-[ext_resource type="Texture2D" uid="uid://c8rp0k1fogimi" path="res://characters/charatexture/char priest.png" id="11_r5jsd"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="12_74clh"]
 [ext_resource type="Resource" uid="uid://cswp6nkwg6iwu" path="res://actions/HerosCombatSkills/priere.tres" id="13_3brwx"]
+[ext_resource type="Texture2D" uid="uid://iob20mrmybf7" path="res://characters/charatexture/demo characters/HERO_priestess_idle.png" id="13_k2dab"]
 [ext_resource type="Resource" uid="uid://sahrc1c16ogi" path="res://actions/HerosCombatSkills/fouet.tres" id="14_se5jd"]
 [ext_resource type="Resource" uid="uid://bptddsqeaq28h" path="res://actions/HerosCombatSkills/heal.tres" id="15_y6w34"]
 [ext_resource type="Resource" uid="uid://b4f6tt51qrg3o" path="res://actions/HerosCombatSkills/exorcisme.tres" id="16_67nw5"]
@@ -21,10 +23,12 @@
 
 [resource]
 script = ExtResource("12_74clh")
-portrait_texture = ExtResource("11_r5jsd")
+portrait_texture = ExtResource("13_k2dab")
 explorationPortrait = ExtResource("10_pcj8w")
-dead_portrait_texture = ExtResource("7_8av4k")
+dead_portrait_texture = ExtResource("9_h4nms")
+Hit_texture = ExtResource("2_4vmab")
 initiative_icon = ExtResource("10_pcj8w")
+Dialogue_texture = ExtResource("1_4vmab")
 textureCamp = ExtResource("18_kpfpq")
 Charaname = "Priestess"
 IsDemon = false

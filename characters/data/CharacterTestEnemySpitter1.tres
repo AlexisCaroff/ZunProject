@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=12 format=3 uid="uid://c3vy2fgg7t28x"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=14 format=3 uid="uid://c3vy2fgg7t28x"]
 
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_716pa"]
+[ext_resource type="Script" uid="uid://cf2k68rgsdle0" path="res://characters/charatexture/braines/Ai_brain.gd" id="1_tavhp"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_tavhp"]
 [ext_resource type="Texture2D" uid="uid://dlcmqtbjarl35" path="res://characters/charatexture/enemy spitterDead.png" id="3_bxekq"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_kpmge"]
@@ -11,6 +12,12 @@
 [ext_resource type="Resource" uid="uid://dwdi447w8ocvi" path="res://actions/ennemiCombatSkills/poisonHorny.tres" id="9_odt67"]
 [ext_resource type="Resource" uid="uid://6oj65xacpxi" path="res://actions/ennemiCombatSkills/tentacleAttack.tres" id="10_qbpw2"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="11_ev3yx"]
+
+[sub_resource type="Resource" id="Resource_bxekq"]
+script = ExtResource("1_tavhp")
+name = "Default AI"
+description = "IA basique qui choisit une compétence aléatoire utilisable et une cible valide."
+metadata/_custom_type_script = "uid://cf2k68rgsdle0"
 
 [resource]
 script = ExtResource("8_i4ffr")
@@ -47,6 +54,7 @@ current_horniness = 0
 skill_resources = Array[Resource]([ExtResource("9_odt67"), ExtResource("9_odt67"), ExtResource("10_qbpw2"), ExtResource("10_qbpw2"), ExtResource("11_ev3yx")])
 tags = Array[String]([])
 is_player_controlled = false
+ai_brain = SubResource("Resource_bxekq")
 can_be_moved = true
 min_durationIddle = 0.6
 max_durationIddle = 1.0

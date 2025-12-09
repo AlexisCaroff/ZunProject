@@ -70,17 +70,17 @@ func can_use() -> bool:
 		return false
 	if current_cooldown > 0:
 		return false
-	if required_position == position_requirement.FRONT and not owner.current_slot.position_data.isFront:
+	if required_position == position_requirement.FRONT and not owner._current_slot.position_data.isFront:
 		return false
-	if required_position == position_requirement.BACK and owner.current_slot.position_data.isFront:
+	if required_position == position_requirement.BACK and owner._current_slot.position_data.isFront:
 		return false
 	
 	return true
 
 func use(target: PositionSlot = null, secondtarget : bool=false):
 	if combatManager :
-			combatManager.ui.log(owner.Charaname+ " use "+ descriptionName)
-	for eq in owner.equipped_items:
+			combatManager.ui.log(owner.characterData.Charaname+ " use "+ descriptionName)
+	for eq in owner.characterData.equipped_items:
 		eq.on_skill_use(owner, self, target.occupant)
 	
 	if target.occupant != null:
@@ -90,10 +90,10 @@ func use(target: PositionSlot = null, secondtarget : bool=false):
 			return
 		
 		if allways_hit == false:
-			for tag in owner.tags:
+			for tag in owner.characterData.tags:
 				if tag == "voyeur":
 					precision+=5
-			var chance = precision - target.occupant.evasion
+			var chance = precision - target.occupant.characterData.evasion
 			var rand = randi() % 100
 			if rand >= chance:
 				target.occupant.miss_animation(owner)
@@ -104,7 +104,7 @@ func use(target: PositionSlot = null, secondtarget : bool=false):
 			_apply_effect(target, effects)
 
 func pay_cost():
-	owner.current_stamina-= cost
+	owner.characterData.current_stamina-= cost
 	if cooldown > 0:
 		current_cooldown = max(cooldown-reducecost,0)
 		reducecost =0
@@ -112,10 +112,10 @@ func pay_cost():
 
 func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = effects):
 	if not skill_effect_overridden:
-		for tag in owner.tags:
+		for tag in owner.characterData.tags:
 					if tag == "degrader":
 						if target != owner._current_slot:
-							target.occupant.current_stress +=2
+							target.occupant.characterData.current_stress +=2
 							owner.slur()
 		for effect in effects_array:
 			effect.apply(owner, target)
@@ -166,14 +166,14 @@ func select_targets(combat_manager:CombatManager):
 				ally.set_targetable(false)
 		target_type.BACK_ALLY:
 			for ally in combat_manager.heroes:
-				if !ally.current_slot.position_data.isFront:
+				if !ally._current_slot.position_data.isFront:
 					ally.set_targetable(true)
 				else: 
 					ally.set_targetable(false)
 
 		target_type.FRONT_ALLY:
 			for ally in combat_manager.heroes:
-				if ally.current_slot.position_data.isFront:
+				if ally._current_slot.position_data.isFront:
 					ally.set_targetable(true)
 				else: 
 					ally.set_targetable(false)
@@ -181,7 +181,7 @@ func select_targets(combat_manager:CombatManager):
 				enemy.set_targetable(false)
 		target_type.BACK_ENNEMY:
 			for enemy in combat_manager.enemies:
-				if !enemy.current_slot.position_data.isFront:
+				if !enemy._current_slot.position_data.isFront:
 					enemy.set_targetable(true)
 				else:
 					enemy.set_targetable(false)
@@ -190,7 +190,7 @@ func select_targets(combat_manager:CombatManager):
 
 		target_type.FRONT_ENNEMY:
 			for enemy in combat_manager.enemies:
-				if enemy.current_slot.position_data.isFront:
+				if enemy._current_slot.position_data.isFront:
 					enemy.set_targetable(true)
 				else:
 					enemy.set_targetable(false)
@@ -208,7 +208,7 @@ func select_second_target(combat_manager:CombatManager):
 	match the_second_target_type:
 		second_target_type.SELF:
 			var selfposition: Array[PositionSlot]
-			selfposition.append(combat_manager.current_character.current_slot)
+			selfposition.append(combat_manager.current_character._current_slot)
 			print("affect self")
 			combat_manager._on_target_selected(selfposition)
 
@@ -243,24 +243,24 @@ func select_second_target(combat_manager:CombatManager):
 		second_target_type.BACK_ALLY:
 			combat_manager.ui.log("Now select an ally")
 			for ally in combat_manager.heroes:
-				if !ally.current_slot.position_data.isFront:
+				if !ally._current_slot.position_data.isFront:
 					ally.set_targetable(true)
 
 		second_target_type.FRONT_ALLY:
 			combat_manager.ui.log("Now select an ally")
 			for ally in combat_manager.heroes:
-				if ally.current_slot.position_data.isFront:
+				if ally._current_slot.position_data.isFront:
 					ally.set_targetable(true)
 		second_target_type.BACK_ENNEMY:
 			combat_manager.ui.log("Now select an ennemy to target")
 			for enemy in combat_manager.enemies:
-				if !enemy.current_slot.position_data.isFront:
+				if !enemy._current_slot.position_data.isFront:
 					enemy.set_targetable(true)
 
 		second_target_type.FRONT_ENNEMY:
 			combat_manager.ui.log("Now select an ennemy to target")
 			for enemy in combat_manager.enemies:
-				if enemy.current_slot.position_data.isFront:
+				if enemy._current_slot.position_data.isFront:
 					enemy.set_targetable(true)
 
 func end_turn(combat_manager):

@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://doitrlqhfja4t"]
+[gd_scene load_steps=9 format=3 uid="uid://doitrlqhfja4t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_1rndn"]
+[ext_resource type="Resource" uid="uid://c3vy2fgg7t28x" path="res://characters/data/CharacterTestEnemySpitter1.tres" id="2_gbqy8"]
 [ext_resource type="Texture2D" uid="uid://bwlcc7mlf1iwx" path="res://characters/charatexture/enemy spitter.png" id="11_2uqc5"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="11_ih6kd"]
 [ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="12_e7hg0"]
@@ -10,6 +11,7 @@
 
 [node name="CharacterTestennemie4" type="Node2D"]
 script = ExtResource("1_1rndn")
+characterData = ExtResource("2_gbqy8")
 metadata/character_data_path = "res://characters/data/CharacterTestEnemySpitter1.tres"
 
 [node name="name" type="Label" parent="."]

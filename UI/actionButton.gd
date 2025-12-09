@@ -1,8 +1,8 @@
 extends Button
-
+class_name action_Button
 var big_size = Vector2(1.2, 1.2)
 var startsize = Vector2(1.0,1.0)
-@onready var label : RichTextLabel
+@onready var label : RichTextLabel 
 @onready var startposition : Vector2
 var Actiontext : String = "Move"
 var current_tween: Tween = null

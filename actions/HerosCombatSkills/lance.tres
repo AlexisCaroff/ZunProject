@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://cbakapyjnht36"]
 
-[ext_resource type="Texture2D" uid="uid://byihg8xi3xuy5" path="res://actions/actiontexture/SkillImage/Hero_Priest_lance.png" id="1_uogve"]
+[ext_resource type="Texture2D" uid="uid://cdhidvnxb6h10" path="res://characters/charatexture/demo characters/HERO_hunter_thrust.png" id="1_na1tf"]
 [ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="1_x8kf7"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_58yna"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="3_uogve"]
@@ -22,7 +22,7 @@ description = "attaque un ennemi"
 icon = ExtResource("5_na1tf")
 attack_sound = ExtResource("1_x8kf7")
 required_position = null
-ImageSkill = ExtResource("1_uogve")
+ImageSkill = ExtResource("1_na1tf")
 the_target_type = null
 effects = Array[ExtResource("3_uogve")]([SubResource("Resource_i4eos")])
 two_target_Type = null

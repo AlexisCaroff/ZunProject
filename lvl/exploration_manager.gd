@@ -18,7 +18,8 @@ var move_mode: bool = false
 var DoorNumber:int =0
 var gm : GameManager
 var campButton: Button
-
+@onready var menuPerso = $"../MenuPerso"
+@onready var bouton_menuPerso=$"../charaPortrait2/charaPortraitButton"
 func _ready():
 	
 	gm = get_tree().root.get_node("GameManager") as GameManager
@@ -26,10 +27,11 @@ func _ready():
 		campButton=$Campement
 		if gm.current_room_Ressource.CampDone:
 			campButton.disabled=true
+	menuPerso.characters=gm.characters
 	load_characters_from_gamestat()
 	selected_character = characters[0]
 	portrait_selector.position = portraits[0].position
-	
+	bouton_menuPerso.connect("button_down", showMenuPerso)
 	if donjon_map== null:
 		donjon_map=$"../SubViewportContainer/SubViewport/map"
 	donjon_map.focus_on_room(gm.current_room_Ressource,viewport)
@@ -38,20 +40,20 @@ func _ready():
 
 func load_characters_from_gamestat():
 	characters.clear()
-	print("try to load characters, saved character are "+ str(GameState.saved_heroes_data.size()))
-	for i in GameState.saved_heroes_data.size():
-		var hero_data = GameState.saved_heroes_data[i]
+	
+	for i in gm.characters.size():
+		var hero_data = gm.characters[i]
 		var chara = chara_explo_scene.instantiate()
-		chara.load_from_dict(hero_data)
+		chara.characterData = hero_data
 		add_child(chara)
+		chara.load_chara()
 		characters.append(chara)
 		
 		# Placement dans le slot correspondant
-		var slot_index = clamp(hero_data.get("Chara_position", i), 0, slots.size() - 1)
+		var slot_index = hero_data.Chara_position
 		move_character_to_slot(chara, slots[slot_index])
 		slots[slot_index].occupant = chara
 		portraits[slot_index].set_occupant(chara)
-		
 		chara.exploPortrait=portraits[slot_index]
 
 ## --- Nouvelle logique pour passer à la prochaine room ---
@@ -86,12 +88,12 @@ func go_to_next_room():
 	print("ExplorationManager → Passage à la room suivante :", next_room.room_id)
 	gm.enter_room(next_room)
 
-func move_character_to_slot(chara: Node, slot: Node):
+func move_character_to_slot(chara: CharaExplo, slot: Node):
 	if chara.get_parent():
 		chara.get_parent().remove_child(chara)
 	slot.add_child(chara)
 	chara.global_position = slot.global_position
-	GameState.update_hero_stat(chara.Charaname, "position", chara.current_position)
+	
 
 func _swap_characters(chara1: Node, chara2: Node) -> void:
 	var slot1 = chara1.current_position
@@ -158,3 +160,5 @@ func sortie_du_camp():
 		chara.animate_heal(10, chara)
 		chara.update_display()
 		
+func showMenuPerso():
+	menuPerso.visible = true

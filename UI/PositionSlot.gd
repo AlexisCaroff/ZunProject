@@ -49,7 +49,7 @@ func assign_character(character: Character, movetime:float):
 	
 	occupant.dotsActions = CharaUI.actionpoints
 	occupant.z_index=self.z_index
-	if occupant.is_player_controlled==false:
+	if occupant.characterData.is_player_controlled==false:
 		for actionpoint in CharaUI.actionpoints:
 			actionpoint.visible=false
 		CharaUI.TheHornyBar.visible=false
@@ -57,8 +57,8 @@ func assign_character(character: Character, movetime:float):
 	#print("chara assigned to position")
 	if not is_ready:
 		await ready
-	imageinside.texture=character.initiative_icon
-	character.current_slot = self
+	
+	character._current_slot = self
 	#print(character.Charaname,"→ current_slot défini à ", self.name)
 	var tween2 = get_tree().create_tween()
 	var tween = get_tree().create_tween()
@@ -162,21 +162,21 @@ func _on_button_mouse_entered() -> void:
 			combat_manager.CombatState.SELECTING_FIRST_TARGET:
 				match skill.the_target_type:
 					Skill.target_type.ALLY:
-						if occupant.is_player_controlled:
+						if occupant.characterData.is_player_controlled:
 							occupant.Selector.self_modulate.a= 1.0
 					Skill.target_type.FRONT_ALLY:
-						if occupant.is_player_controlled:
+						if occupant.characterData.is_player_controlled:
 							occupant.Selector.self_modulate.a= 1.0
 					Skill.target_type.FRONT_ENNEMY:
-						if !occupant.is_player_controlled:
+						if !occupant.characterData.is_player_controlled:
 							occupant.Selector.self_modulate.a= 1.0
 					Skill.target_type.BACK_ALLY:
 						occupant.Selector.self_modulate.a= 1.0
 					Skill.target_type.BACK_ENNEMY:
-						if !occupant.is_player_controlled:
+						if !occupant.characterData.is_player_controlled:
 							occupant.Selector.self_modulate.a= 1.0
 					Skill.target_type.ENNEMY:
-						if !occupant.is_player_controlled:
+						if !occupant.characterData.is_player_controlled:
 							occupant.Selector.self_modulate.a= 1.0
 					Skill.target_type.ALL_ALLY:
 						for chara in combat_manager.hero_positions:

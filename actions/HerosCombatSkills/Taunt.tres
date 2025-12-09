@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://behrtqotkyvnx"]
 
-[ext_resource type="Texture2D" uid="uid://dmd71tk5hpefb" path="res://actions/actiontexture/SkillImage/HERO_WARRIOR_Taunt.png" id="1_aki42"]
+[ext_resource type="Texture2D" uid="uid://f8o3t710mcxl" path="res://characters/charatexture/demo characters/HERO_warrior_roar.png" id="1_3o4k5"]
 [ext_resource type="Script" uid="uid://cjfkha61akav3" path="res://actions/skillEffects/TauntEffect.gd" id="2_wwy36"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_yu2gj"]
 [ext_resource type="Texture2D" uid="uid://b4a5l81b2i8a5" path="res://actions/actiontexture/taunt.png" id="3_ukosw"]
@@ -35,7 +35,7 @@ descriptionName = "Taunt"
 description = "taunt one ennemi and reset 2 cooldown on skills"
 icon = ExtResource("3_ukosw")
 required_position = null
-ImageSkill = ExtResource("1_aki42")
+ImageSkill = ExtResource("1_3o4k5")
 the_target_type = null
 effects = Array[ExtResource("2_yu2gj")]([SubResource("Resource_yu2gj")])
 two_target_Type = true

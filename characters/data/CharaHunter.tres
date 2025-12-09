@@ -1,17 +1,19 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=19 format=3 uid="uid://uf5x5dpfh5ln"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=21 format=3 uid="uid://uf5x5dpfh5ln"]
 
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_3p432"]
+[ext_resource type="Texture2D" uid="uid://xil5mbkowvn" path="res://characters/charatexture/hunter2.png" id="1_y4sil"]
+[ext_resource type="Texture2D" uid="uid://dlo2fppwhny1b" path="res://characters/charatexture/demo characters/HERO_hunter_hit.png" id="2_404pk"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_y4sil"]
 [ext_resource type="Resource" uid="uid://mkaq7ws2yox8" path="res://actions/CampSkill/ActeTwiceSkill.tres" id="3_404pk"]
 [ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="4_4vg1p"]
 [ext_resource type="Resource" uid="uid://y8ibrfop35on" path="res://actions/CampSkill/dialogueHunter.tres" id="5_isn0k"]
 [ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="6_swvsv"]
-[ext_resource type="Texture2D" uid="uid://dltxnrwlxmjd7" path="res://characters/charatexture/char hunterDead.png" id="7_hreqf"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="8_4jn0w"]
+[ext_resource type="Texture2D" uid="uid://dtsue4pkmdqi4" path="res://characters/charatexture/demo characters/HERO_hunter_down.png" id="9_4vg1p"]
 [ext_resource type="Resource" uid="uid://msi3wq2l6s3t" path="res://Items/itemsRessources/SilkGloves.tres" id="9_vrfcs"]
 [ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="10_j4cyw"]
-[ext_resource type="Texture2D" uid="uid://cy82grtulscw1" path="res://characters/charatexture/char hunter.png" id="11_g7djh"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="12_x3tfg"]
+[ext_resource type="Texture2D" uid="uid://ysjg7rf1ovm5" path="res://characters/charatexture/demo characters/HERO_hunter_idle.png" id="13_isn0k"]
 [ext_resource type="Resource" uid="uid://ca8rrxibg12sg" path="res://actions/HerosCombatSkills/Targetting.tres" id="13_ym5ya"]
 [ext_resource type="Resource" uid="uid://dn00l75vs5ctm" path="res://actions/HerosCombatSkills/Sel.tres" id="14_6clvv"]
 [ext_resource type="Resource" uid="uid://cbakapyjnht36" path="res://actions/HerosCombatSkills/lance.tres" id="15_yughv"]
@@ -21,10 +23,12 @@
 
 [resource]
 script = ExtResource("12_x3tfg")
-portrait_texture = ExtResource("11_g7djh")
+portrait_texture = ExtResource("13_isn0k")
 explorationPortrait = ExtResource("10_j4cyw")
-dead_portrait_texture = ExtResource("7_hreqf")
+dead_portrait_texture = ExtResource("9_4vg1p")
+Hit_texture = ExtResource("2_404pk")
 initiative_icon = ExtResource("10_j4cyw")
+Dialogue_texture = ExtResource("1_y4sil")
 textureCamp = ExtResource("18_egu01")
 Charaname = "Hunter"
 IsDemon = false
@@ -32,12 +36,12 @@ affinity = Dictionary[String, int]({})
 base_max_stamina = 100
 base_max_stress = 100
 base_max_horniness = 100
-base_attack = 10
+base_attack = 1000
 base_defense = 5
 base_willpower = 5
-base_initiative = 3
+base_initiative = 20
 base_evasion = 5
-attack = 10
+attack = 1000
 defense = 5
 willpower = 5
 evasion = 5

@@ -25,13 +25,13 @@ var stat: int = Stat.ATTACK
 func apply_to(target: Character) -> void:
 	match stat:
 		Stat.ATTACK:
-			target.attack += amount
+			target.characterData.attack += amount
 		Stat.DEFENSE:
-			target.defense += amount
+			target.characterData.defense += amount
 		Stat.SPEED:
-			target.initiative += amount
+			target.characterData.initiative += amount
 		Stat.WILL_POWER:
-			target.willpower += amount
+			target.characterData.willpower += amount
 		Stat.EVASION:
-			target.evasion +=amount
+			target.characterData.evasion +=amount
 	

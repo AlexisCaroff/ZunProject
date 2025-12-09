@@ -5,20 +5,20 @@ var Chartarget:Character
 
 func apply(user: Character, target: PositionSlot):
 	Chartarget=target.occupant
-	if !Chartarget.can_be_moved:
+	if !Chartarget.characterData.can_be_moved:
 		return
 	var cm = user.combat_manager
-	var slots = cm.get_positions(Chartarget.is_player_controlled)
-	print("Move "+user.Charaname+" to "+Chartarget.Charaname+" position")
+	var slots = cm.get_positions(Chartarget.characterData.is_player_controlled)
+	print("Move "+user.characterData.Charaname+" to "+Chartarget.characterData.Charaname+" position")
 
-	var user_slot = user.current_slot
+	var user_slot = user._current_slot
 
 	if Chartarget.current_slot==null:
 		return
 		
 	if Chartarget.current_slot.is_occupied():
 		
-		var target_current_slot = Chartarget.current_slot
+		var target_current_slot = Chartarget._current_slot
 		if target_current_slot == null:
 			push_error("Le personnage cible n'a pas de slot assigné.")
 			return

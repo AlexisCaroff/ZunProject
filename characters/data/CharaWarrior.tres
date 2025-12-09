@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=18 format=3 uid="uid://b5k1alktrg3t4"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=20 format=3 uid="uid://b5k1alktrg3t4"]
 
+[ext_resource type="Texture2D" uid="uid://cbtwm47mnjttj" path="res://characters/charatexture/CroiséBody2.png" id="1_q5t8p"]
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_qo24v"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_elmwn"]
+[ext_resource type="Texture2D" uid="uid://c18klaue4evao" path="res://characters/charatexture/demo characters/HERO_warrior_hit.png" id="2_q5t8p"]
 [ext_resource type="Resource" uid="uid://do024kep0pxki" path="res://actions/CampSkill/EquipmentMaintenance.tres" id="3_q5t8p"]
 [ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="4_k6dui"]
 [ext_resource type="Resource" uid="uid://c00hfk3k1wy86" path="res://actions/CampSkill/dialogueWarrior.tres" id="5_j7a6i"]
 [ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="6_5vjsu"]
-[ext_resource type="Texture2D" uid="uid://b1gqe0n366p7t" path="res://characters/charatexture/char tankdead.png" id="7_j0wbt"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="8_af1mm"]
+[ext_resource type="Texture2D" uid="uid://bxkt7r7ry34ci" path="res://characters/charatexture/demo characters/HERO_warrior_down.png" id="9_k6dui"]
 [ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="9_nsh6g"]
-[ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="10_s5opr"]
+[ext_resource type="Texture2D" uid="uid://cfbwrknqf04rn" path="res://characters/charatexture/demo characters/HERO_warrior_idle.png" id="11_elmwn"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="11_vpitw"]
 [ext_resource type="Resource" uid="uid://behrtqotkyvnx" path="res://actions/HerosCombatSkills/Taunt.tres" id="12_70vf5"]
 [ext_resource type="Resource" uid="uid://doydfjjogegnd" path="res://actions/HerosCombatSkills/StunAttaque.tres" id="13_mupei"]
@@ -20,10 +22,12 @@
 
 [resource]
 script = ExtResource("11_vpitw")
-portrait_texture = ExtResource("10_s5opr")
+portrait_texture = ExtResource("11_elmwn")
 explorationPortrait = ExtResource("9_nsh6g")
-dead_portrait_texture = ExtResource("7_j0wbt")
+dead_portrait_texture = ExtResource("9_k6dui")
+Hit_texture = ExtResource("2_q5t8p")
 initiative_icon = ExtResource("9_nsh6g")
+Dialogue_texture = ExtResource("1_q5t8p")
 textureCamp = ExtResource("17_17pm1")
 Charaname = "Warrior"
 IsDemon = false

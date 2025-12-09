@@ -6,7 +6,7 @@ class_name InventoryUI
 @export var inventory_size_y := 5
 @export var emptySlotTexture : Texture2D
 # --- Références
-@onready var characters_panel = $CharactersPanel
+
 @onready var inventory_grid = $InventoryGrid
 @onready var slots_panel = $EquipmentSlots
 @onready var drag_icon = $DragIcon
@@ -24,33 +24,32 @@ class_name InventoryUI
 	$CharactersPanelAffinity/chara1,
 	$CharactersPanelAffinity/chara2,
 	$CharactersPanelAffinity/chara3
-	
 ]
 @onready var skill_buttons = [
 	$ActionPanel/Action1,
 	$ActionPanel/Action2,
 	$ActionPanel/Action3,
 	$ActionPanel/Action4,
-	
-
 ]
 @onready var cooldown_bars = [
 		$ActionPanel/Action1/CooldownBar,
 		$ActionPanel/Action2/CooldownBar,
 		$ActionPanel/Action3/CooldownBar,
 		$ActionPanel/Action4/CooldownBar,
-		
 		]
+@onready var ButtonCharacter1=$ButtonCharacter1
+@onready var ButtonCharacter2=$ButtonCharacter2
 @onready var LabelAction= $LabelAction
+@onready var StaminaProgressBar=$StaminaProgressBar
+@onready var LustProgressBar=$LustProgressBar
+@onready var GuiltProgressBar=$GuiltProgressBar
+@onready var KinksList=$KinksList
 # Instances des personnages
-var characters : Array[Character]= [
-	preload("res://characters/CharaHunter.tscn").instantiate(),
-	preload("res://characters/CharaMystic.tscn").instantiate(),
-	preload("res://characters/CharaPriest.tscn").instantiate(),
-	preload("res://characters/CharaWarrior.tscn").instantiate(),
+var characters : Array[CharacterData]= [
+	
 ]
-
-var selected_character : Character = null
+var current_character_index : int = 0
+var selected_character : CharacterData = null
 
 # Inventaire (128 items max)
 var inventory_items: Array[Equipment] = []
@@ -61,7 +60,7 @@ var dragged_slot_index : int = -1
 var gm: GameManager
 func _ready():
 	gm = get_tree().root.get_node("GameManager") as GameManager
-	
+	inventory_items.resize(3*6)
 	create_inventory_grid()
 	#inventory_items=gm.inventory
 	ExitButton.connect("button_down", hideMenu)
@@ -71,41 +70,70 @@ func _ready():
 	inventory_items.resize(inventory_size_x * inventory_size_y)
 	for i in range(inventory_items.size()):
 		inventory_items[i] = null
-	apply_character_icons()
-	select_character(characters[0])
 	
+	select_character(characters[0])
+	ButtonCharacter1.connect("button_down",nextChara)
+	ButtonCharacter2.connect("button_down",lastChara)
 
 
 # --------------------------------------------------------------------
 # UI CHARACTERS
 # --------------------------------------------------------------------
+func nextChara():
+	if characters.is_empty():
+		return
+	
+	current_character_index = (current_character_index + 1) % characters.size()
+	select_character(characters[current_character_index])
+	
+func lastChara():
+	if characters.is_empty():
+		return
 
-func apply_character_icons():
-	var c := 0 
-	for image in characters_panel.get_children():
-		image.chara =characters[c]
-		image.thetexture.texture= characters[c].explorationPortrait
-		c += 1
+	current_character_index = (current_character_index - 1 + characters.size()) % characters.size()
+	select_character(characters[current_character_index])
 
-func select_character(chara:Character):
+func select_character_by_index(index: int):
+	print (index)
+	current_character_index = clamp(index, 0, characters.size() - 1)
+	var chara = characters[current_character_index]
+	select_character(chara)
+	
+func select_character(chara:CharacterData):
 	selected_character = chara
 	update_equipment_slots()
-	Selected_Chara_icon.texture=chara.portrait_texture
-	print (chara.name + " selected")
-	for eq in chara.equipped_items:
-		print(eq.name)
+	Selected_Chara_icon.texture=chara.Dialogue_texture
+	#print (chara.Charaname + " selected")
+	#for eq in chara.equipped_items:
+		#print(eq.name)
+	KinksList.bbcode_enabled = true
+	KinksList.text = ""
+
+	for tag in chara.tags:
+		KinksList.text += tag + "\n"
 	Charaname.text=chara.Charaname
 	Def.bbcode_enabled = true
 	Att.bbcode_enabled = true
 	WillPower.bbcode_enabled = true
-	Att.text = "Attack: %d [color=AAAAAA] (Base %d + Bonus %d)[/color]" % [chara.attack,chara.base_attack,(chara.attack - chara.base_attack)]
-	#Att.text = "Attack: %d Base %d Bonus %d" % [chara.attack, chara.base_attack, (chara.attack-chara.base_attack)]
+	Stamina.bbcode_enabled = true
+	Guilt.bbcode_enabled = true
+	Horny.bbcode_enabled = true
+	Att.text = "Attack: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
+	chara.attack, chara.base_attack, (chara.attack - chara.base_attack)]
+	Def.text = "Defense: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
+	chara.defense, chara.base_defense, (chara.defense - chara.base_defense)]
+	WillPower.text = "Willpower: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
+	chara.willpower, chara.base_willpower, (chara.willpower - chara.base_willpower)]
 	
-	Def.text = "Defense: %d [color=AAAAAA] (Base %d + Bonus %d)[/color]" % [chara.defense,chara.base_defense,(chara.defense - chara.base_defense)]
-	WillPower.text = "Willpower: %d [color=AAAAAA] (Base %d + Bonus %d)[/color]" % [chara.willpower,chara.base_willpower,(chara.willpower - chara.base_willpower)]
-	Stamina.text = "Stamina: %d / %d" % [chara.current_stamina, chara.max_stamina]
-	Guilt.text = "Guilt: %d / %d" % [chara.current_stress, chara.max_stress]
-	Horny.text = "Horny: %d / %d" % [chara.current_horniness, chara.max_horniness]
+	Stamina.text = "%d / %d" % [chara.current_stamina, chara.max_stamina]
+	StaminaProgressBar.max_value= chara.max_stamina
+	StaminaProgressBar.value=chara.current_stamina
+	Guilt.text = "%d / %d" % [chara.current_stress, chara.max_stress]
+	GuiltProgressBar.max_value=chara.max_stress
+	GuiltProgressBar.value=chara.current_stress
+	Horny.text = "%d / %d" % [chara.current_horniness, chara.max_horniness]
+	LustProgressBar.max_value=chara.max_horniness
+	LustProgressBar.value=chara.current_horniness
 	
 	if skill_buttons == null:
 		#push_error("skill_buttons est null pour %s" % character.Charaname)
@@ -123,10 +151,16 @@ func select_character(chara:Character):
 		$ActionPanel/Action4/CooldownBar,
 		
 		]
-		return
+		CharactersAffinity= [
+		$CharactersPanelAffinity/chara1,
+		$CharactersPanelAffinity/chara2,
+		$CharactersPanelAffinity/chara3
+		]
+	
 	for i in range(skill_buttons.size()):
 		var button = skill_buttons[i]
-		var skill = chara.get_skill(i)
+		
+		var skill = chara.skill_resources[i]
 		
 		
 		if skill != null:
@@ -142,6 +176,36 @@ func select_character(chara:Character):
 		else:
 			button.text = "—"
 			button.disabled = true
+	var other_members : Array = []
+	for c in characters:
+		if c != chara:
+			other_members.append(c)
+	for i in range(CharactersAffinity.size()):
+		var slot = CharactersAffinity[i]
+
+		if i < other_members.size():
+			var target = other_members[i]
+
+			# Récupération de la RichTextLabel
+			var rtl : RichTextLabel = slot.get_node("Textaffinity")
+			rtl.bbcode_enabled = true
+			
+			
+			# Affinité (valeur)
+			var value := 0
+			if chara.affinity.has(target.Charaname):
+				value = chara.affinity[target.Charaname]
+			slot.set_chara(target, value)
+			# Couleur facultative selon la valeur
+
+			# Texte affiché
+			rtl.text = target.Charaname
+
+			slot.visible = true
+
+		else:
+			slot.visible = false
+			 
 	
 # --------------------------------------------------------------------
 # INVENTORY GRID
@@ -327,7 +391,7 @@ func try_equip_on_character():
 # --------------------------------------------------------------------
 
 func update_inventory_ui():
-	print ("update_inventory_ui")
+	print ("update_inventory_ui" + str(inventory_items.size()))
 	for i in range(inventory_items.size()):
 		var item = inventory_items[i]
 		var cell = inventory_grid.get_child(i)

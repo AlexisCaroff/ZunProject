@@ -1,17 +1,19 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=18 format=3 uid="uid://feukv2xbt3m6"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=20 format=3 uid="uid://feukv2xbt3m6"]
 
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_3bk0l"]
+[ext_resource type="Texture2D" uid="uid://62i56yrriret" path="res://characters/charatexture/occultiste2.png" id="1_woow1"]
+[ext_resource type="Texture2D" uid="uid://chqvuss7wfueq" path="res://characters/charatexture/demo characters/HERO_mystic_cc_hit.png" id="2_woow1"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_xua2o"]
 [ext_resource type="Resource" uid="uid://cryoy3w5uet08" path="res://actions/CampSkill/buffskillCamp.tres" id="3_woow1"]
 [ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="4_jg4jp"]
 [ext_resource type="Resource" uid="uid://b2vd1hks0mof3" path="res://actions/CampSkill/dialogueMystic.tres" id="5_n62aw"]
 [ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="6_vs65e"]
-[ext_resource type="Texture2D" uid="uid://bauxvokp1lm7g" path="res://characters/charatexture/char mysticDead.png" id="7_12b5l"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="8_7ygxr"]
+[ext_resource type="Texture2D" uid="uid://dsun64yr5mg5l" path="res://characters/charatexture/demo characters/HERO_mystic_cc_down.png" id="9_jg4jp"]
 [ext_resource type="Texture2D" uid="uid://dd4k5wxaesfo4" path="res://characters/exploPortrait/MysticExploPortrait.png" id="9_tsoqm"]
-[ext_resource type="Texture2D" uid="uid://df5ltgoqyf2jw" path="res://characters/charatexture/char mystic.png" id="10_rl4v6"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="11_4khx0"]
 [ext_resource type="Resource" uid="uid://m6nw8l2ax4to" path="res://actions/HerosCombatSkills/ChangeMask.tres" id="12_iqc5r"]
+[ext_resource type="Texture2D" uid="uid://he220dsml4k6" path="res://characters/charatexture/demo characters/HERO_mystic_cc_idle.png" id="12_n62aw"]
 [ext_resource type="Resource" uid="uid://dopuwtv1moav3" path="res://actions/HerosCombatSkills/Shield.tres" id="13_klcdq"]
 [ext_resource type="Resource" uid="uid://duo5wcnmn0qo2" path="res://actions/HerosCombatSkills/vampire.tres" id="14_glo23"]
 [ext_resource type="Resource" uid="uid://bcvrdy48sagwa" path="res://actions/HerosCombatSkills/hook.tres" id="15_0yih5"]
@@ -20,10 +22,12 @@
 
 [resource]
 script = ExtResource("11_4khx0")
-portrait_texture = ExtResource("10_rl4v6")
+portrait_texture = ExtResource("12_n62aw")
 explorationPortrait = ExtResource("9_tsoqm")
-dead_portrait_texture = ExtResource("7_12b5l")
+dead_portrait_texture = ExtResource("9_jg4jp")
+Hit_texture = ExtResource("2_woow1")
 initiative_icon = ExtResource("9_tsoqm")
+Dialogue_texture = ExtResource("1_woow1")
 textureCamp = ExtResource("17_eorem")
 Charaname = "Mystic"
 IsDemon = false

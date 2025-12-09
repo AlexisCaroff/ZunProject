@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dqnjuxw77ebnb"]
+[gd_scene load_steps=34 format=3 uid="uid://dqnjuxw77ebnb"]
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_ohhde"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_5rnso"]
@@ -23,6 +23,9 @@
 [ext_resource type="Texture2D" uid="uid://bl6qdsm60pd37" path="res://UI/exploCharaselector.png" id="20_1rqfr"]
 [ext_resource type="Script" uid="uid://gljyiwavrmws" path="res://lvl/Hall1/explo_portrait.gd" id="20_3g6r7"]
 [ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="22_1rqfr"]
+[ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="24_xq8yd"]
+[ext_resource type="Texture2D" uid="uid://dh6k7cso8hksn" path="res://UI/charaIcon.png" id="25_s26rh"]
+[ext_resource type="Script" uid="uid://cxgw24yv778d8" path="res://lvl/chara_portraitButton.gd" id="26_npolu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qg4ur"]
 
@@ -35,6 +38,8 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rqfr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fyasy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sp77w"]
 
 [node name="ExploInterface" type="Control"]
 layout_mode = 3
@@ -383,6 +388,34 @@ texture = ExtResource("20_1rqfr")
 position = Vector2(1603.63, 931)
 scale = Vector2(0.839983, 0.815186)
 texture = ExtResource("22_1rqfr")
+
+[node name="MenuPerso" parent="." instance=ExtResource("24_xq8yd")]
+visible = false
+z_index = 20
+layout_mode = 1
+offset_left = -6.0
+offset_top = 18.0
+offset_right = -6.0
+offset_bottom = 18.0
+
+[node name="charaPortrait2" type="TextureRect" parent="."]
+z_index = 6
+offset_left = 1831.0
+offset_top = 786.0
+offset_right = 1920.0
+offset_bottom = 875.0
+texture = ExtResource("25_s26rh")
+expand_mode = 1
+script = ExtResource("26_npolu")
+
+[node name="charaPortraitButton" type="Button" parent="charaPortrait2"]
+layout_mode = 0
+offset_left = 73.0
+offset_right = 179.0
+offset_bottom = 108.0
+rotation = 0.787448
+theme_override_styles/focus = SubResource("StyleBoxEmpty_sp77w")
+flat = true
 
 [connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]

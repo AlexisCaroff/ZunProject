@@ -44,53 +44,19 @@ var current_position: int =0
 var explorationPortrait:Texture2D
 var exploPortrait :Sprite2D
 var CharaPosition :Node2D
-
+var characterData : CharacterData
 
 func _ready() -> void:
 	print("chara ready")
 	update_display()
 
 # Appelée après instanciation, pour charger les données du GameStat
-func load_from_dict(data: Dictionary) -> void:
-	if data.has("name"):
-		Charaname = data["name"]
-		print(Charaname)
-	if data.has("attack"):
-		attack = data["attack"]
-	if data.has("defense"):
-		defense = data["defense"]
-	if data.has("willpower"):
-		willpower = data["willpower"]
-	if data.has("evasion"):
-		evasion = data["evasion"]
-	if data.has("initiative"):
-		initiative = data["initiative"]
-	if data.has("stamina"):
-		current_stamina = data["stamina"]
-	if data.has("max_stamina"):
-		max_stamina = data["max_stamina"]
-	if data.has("stress"):
-		current_stress = data["stress"]
-	if data.has("horny"):
-		current_horny = data["horny"]
-	if data.has("portrait_texture_path"):
-		var port_path = data["portrait_texture_path"]
-		portrait_texture = Utils.load_texture(port_path)
-	if data.has("dead_portrait_texture_path"):
-		var dead_port_path = data["dead_portrait_texture_path"]
-		dead_portrait_texture = Utils.load_texture(dead_port_path)
-	if data.has("initiative_icon_path"):
-		var init_icon_path = data["initiative_icon_path"]
-		initiative_icon = Utils.load_texture(init_icon_path)
-	if data.has("position"):
-		var pos= data["position"]
-		current_position=pos
-	if data.has("buffs"):
-		var buffs = data["buffs"]
-		for buff in buffs:
-			add_buff(buff)
-	if data.has("explorationPortrait"):
-		explorationPortrait= data["explorationPortrait"]
+func load_chara() -> void:
+	Charaname = characterData.Charaname
+	sprite.texture =characterData.portrait_texture
+	current_position = characterData.Chara_position
+	for buff in characterData.buffs:
+		add_buff(buff)
 	
 
 func update_display() -> void:
@@ -117,6 +83,7 @@ func add_buff(buff: Buff):
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	icon.custom_minimum_size = Vector2(20, 20)
 	buff_bar.add_child(icon)
+	characterData.buffs.append(buff)
 	#buff_icons.add_child(icon)
 	print("add buff")
 	

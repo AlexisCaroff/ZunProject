@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dg0coy6r6f1ww"]
+[gd_scene load_steps=16 format=3 uid="uid://dg0coy6r6f1ww"]
 
 [ext_resource type="Script" uid="uid://d12jn42j03tgg" path="res://GameManager.gd" id="1_838hb"]
 [ext_resource type="Resource" uid="uid://7dlbup10473y" path="res://lvl/donjonTestePorte.tres" id="2_soe0u"]
@@ -7,15 +7,21 @@
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="4_dhxbs"]
 [ext_resource type="Resource" uid="uid://b7ana3ldrsk7j" path="res://Items/itemsRessources/golds.tres" id="5_dhxbs"]
 [ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="5_twojc"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="6_1xubm"]
 [ext_resource type="Texture2D" uid="uid://c7i05i2v2djk1" path="res://UI/seau.png" id="6_fuquo"]
 [ext_resource type="Script" uid="uid://bhsro7sspbgqw" path="res://UI/button.gd" id="7_k66he"]
+[ext_resource type="Resource" uid="uid://uf5x5dpfh5ln" path="res://characters/data/CharaHunter.tres" id="7_vbvj5"]
+[ext_resource type="Resource" uid="uid://feukv2xbt3m6" path="res://characters/data/CharaMystic.tres" id="8_6kqjp"]
 [ext_resource type="Texture2D" uid="uid://u4r16y7nxe6o" path="res://logo.png" id="8_soe0u"]
+[ext_resource type="Resource" uid="uid://cw65x7yfthrul" path="res://characters/data/CharaPriest.tres" id="9_43qkp"]
+[ext_resource type="Resource" uid="uid://b5k1alktrg3t4" path="res://characters/data/CharaWarrior.tres" id="10_nm67f"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_838hb")
 donjon = ExtResource("2_soe0u")
 last_room_Ressource = ExtResource("3_0q5so")
 inventory = Array[ExtResource("4_0q5so")]([ExtResource("5_dhxbs"), ExtResource("5_dhxbs")])
+characters = Array[ExtResource("6_1xubm")]([ExtResource("7_vbvj5"), ExtResource("8_6kqjp"), ExtResource("9_43qkp"), ExtResource("10_nm67f")])
 
 [node name="Label" type="Label" parent="."]
 z_index = 6

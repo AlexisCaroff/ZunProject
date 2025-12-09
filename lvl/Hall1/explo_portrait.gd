@@ -7,7 +7,7 @@ func _ready():
 	button.button_down.connect(clicOnPorttrait)
 func set_occupant(Chara:CharaExplo):
 	occupant=Chara
-	self.texture= Chara.explorationPortrait
+	self.texture= Chara.characterData.explorationPortrait
 	
 func clicOnPorttrait():
 	explorationManager.selectCharacter(occupant)

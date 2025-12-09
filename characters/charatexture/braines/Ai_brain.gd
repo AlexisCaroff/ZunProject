@@ -11,9 +11,9 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 	var herosPositions = combat_manager.hero_positions
 	var usable_skills := owner.skills.filter(func(s): return s.can_use())
 	if usable_skills.is_empty():
-		print("%s n'a aucune compétence utilisable." % owner.name)
+		print("%s n'a aucune compétence utilisable." % owner.characterData.Charaname)
 		return {}
-	print ("usable skills for" + owner.Charaname+ " :")
+	print ("usable skills for" + owner.characterData.Charaname+ " :")
 	for skill in usable_skills:
 		if usable_skills.size() >1 and skill.name=="move":
 			usable_skills.erase(skill)

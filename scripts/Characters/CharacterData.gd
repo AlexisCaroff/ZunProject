@@ -4,8 +4,9 @@ class_name CharacterData
 @export var portrait_texture: Texture2D
 @export var explorationPortrait:Texture2D
 @export var dead_portrait_texture: Texture2D
+@export var Hit_texture: Texture2D
 @export var initiative_icon: Texture2D
-
+@export var Dialogue_texture: Texture2D
 @export var textureCamp: Texture2D
 
 @export var Charaname: String = "name"
@@ -77,4 +78,5 @@ class_name CharacterData
 	"Oops! Did that hurt?",
 	
 ]
+var buffs: Array[Buff] = []
 var current_bark: Bark = null

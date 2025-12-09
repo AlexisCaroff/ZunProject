@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://dhh17qt8y66hk"]
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://dhh17qt8y66hk"]
 
+[ext_resource type="Texture2D" uid="uid://bjl3tx6extox8" path="res://characters/charatexture/demo characters/HERO_mystic_ranged_shootbig.png" id="1_3yijc"]
 [ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="1_54gp4"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_54gp4"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_62wbe"]
@@ -21,6 +22,7 @@ description = "attack all ennemies"
 icon = ExtResource("4_dtk8s")
 attack_sound = ExtResource("1_54gp4")
 required_position = null
+ImageSkill = ExtResource("1_3yijc")
 the_target_type = 4
 effects = Array[ExtResource("2_54gp4")]([SubResource("Resource_i4eos")])
 two_target_Type = null
