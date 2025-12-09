@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i21nx"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="2_uoxmb"]
-[ext_resource type="Texture2D" uid="uid://dwuj0jfv5adyt" path="res://characters/charatexture/char tank.png" id="3_t6ab6"]
+[ext_resource type="Texture2D" uid="uid://cfbwrknqf04rn" path="res://characters/charatexture/demo characters/HERO_warrior_idle.png" id="3_i21nx"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="4_qgiwc"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="5_5cv4u"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="6_fn4af"]
@@ -23,7 +23,7 @@ offset_bottom = -230.0
 text = "name"
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(51, 51)
+position = Vector2(51, 23)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("2_uoxmb")
 min_scale = 1.15
@@ -33,25 +33,25 @@ min_duration = 1.0
 max_duration = 1.5
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -133.0
-offset_top = -229.0
-offset_right = 38.0
-offset_bottom = 2.0
-scale = Vector2(1.2, 1)
+offset_left = -154.167
+offset_top = -315.0
+offset_right = 16.8333
+offset_bottom = -84.0
+scale = Vector2(1.87875, 1.51287)
 mouse_filter = 2
-texture = ExtResource("3_t6ab6")
+texture = ExtResource("3_i21nx")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Selector" type="TextureRect" parent="pivot"]
-self_modulate = Color(2.5, 2.5, 2.5, 1)
-offset_left = -133.0
-offset_top = -229.0
-offset_right = 38.0
-offset_bottom = 2.0
-scale = Vector2(1.2, 1)
+self_modulate = Color(2.5, 2.5, 2.5, 0)
+offset_left = -154.167
+offset_top = -315.0
+offset_right = 16.8333
+offset_bottom = -84.0
+scale = Vector2(1.87875, 1.51287)
 mouse_filter = 2
-texture = ExtResource("3_t6ab6")
+texture = ExtResource("3_i21nx")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 

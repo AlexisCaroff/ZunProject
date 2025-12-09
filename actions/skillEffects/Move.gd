@@ -13,10 +13,10 @@ func apply(user: Character, target: PositionSlot):
 
 	var user_slot = user._current_slot
 
-	if Chartarget.current_slot==null:
+	if Chartarget._current_slot==null:
 		return
 		
-	if Chartarget.current_slot.is_occupied():
+	if Chartarget._current_slot.is_occupied():
 		
 		var target_current_slot = Chartarget._current_slot
 		if target_current_slot == null:

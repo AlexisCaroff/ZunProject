@@ -28,7 +28,7 @@ func _ready():
 			call_deferred("enter_room", start_room)
 		else:
 			push_error("❌ Start room introuvable pour ID : " + donjon.start_room_id)
-	
+	initialize_affinities(characters)
 
 
 
@@ -158,10 +158,10 @@ func add_to_inventory(item: Equipment):
 	inventory.append(item)
 	
 
-func initialize_affinities(characters: Array[Character]):
+func initialize_affinities(characters: Array[CharacterData]):
 	for chara in characters:
 		chara.affinity = {}
 		for other in characters:
 			if other != chara:
-				chara.affinity[other.Charaname] = 0
+				chara.affinity[other.Charaname] = 20
 	

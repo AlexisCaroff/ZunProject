@@ -11,22 +11,24 @@ var tween: Tween
 
 func attack_anim(character: Character):
 	chara = character
+	self.visible=true
 	self.texture = chara.characterData.portrait_texture
+	if chara.combat_manager.pending_skill.ImageSkill != null:
+		self.texture = chara.combat_manager.pending_skill.ImageSkill
 	self.position = outsidePos 
-	self.scale=Vector2(2.0,2.0)
+	
 	# Création du tween principal
 	tween = create_tween()
 	
 	# Étape 1 : entrée jusqu’à la position intermédiaire
-	tween.tween_property(self, "position", MidPos, 0.2)
+	tween.tween_property(self, "position", MidPos, 0.1)
 	
 	# Étape 2 : attaque
 	tween.tween_callback(Callable(self, "_on_attack"))
 
 func _on_attack():
 	# Changement de texture (attaque)
-	if chara.combat_manager.pending_skill.ImageSkill != null:
-		self.texture = chara.combat_manager.pending_skill.ImageSkill
+
 	
 	# Mouvement vers la position d’attaque
 	tween = null
@@ -35,14 +37,15 @@ func _on_attack():
 	tween.parallel().tween_property(self, "scale", attack_scale, 0.1).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	
 	# Petite pause pour marquer l'impact
-	tween.tween_interval(0.5)
+	tween.tween_interval(1.0)
 
 	# Retour à la normale
 	tween.tween_callback(Callable(self, "_on_return"))
 	
 func _on_return():
-	self.texture = chara.characterData.portrait_texture
+	#self.texture = chara.characterData.portrait_texture
 	tween = null
 	tween = create_tween()
 	tween.parallel().tween_property(self, "position", outsidePos, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.parallel().tween_property(self, "scale", normal_scale, 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	self.visible=false

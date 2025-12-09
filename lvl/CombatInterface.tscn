@@ -171,11 +171,11 @@ position = Vector2(-344, 394)
 scale = Vector2(1.36806, 1.36806)
 texture = ExtResource("2_5brbe")
 script = ExtResource("3_mhvks")
-attackPos = Vector2(800, 500)
-MidPos = Vector2(400, 500)
-outsidePos = Vector2(-300, 500)
-esquivPos = Vector2(250, 500)
-attack_scale = Vector2(2, 2)
+attackPos = Vector2(800, 0)
+MidPos = Vector2(400, 0)
+outsidePos = Vector2(-300, 0)
+esquivPos = Vector2(250, 0)
+attack_scale = Vector2(1, 1)
 
 [node name="SpriteEnnemies" type="Sprite2D" parent="."]
 z_index = 5

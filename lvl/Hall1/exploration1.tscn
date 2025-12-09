@@ -400,6 +400,7 @@ offset_bottom = 18.0
 
 [node name="charaPortrait2" type="TextureRect" parent="."]
 z_index = 6
+layout_mode = 0
 offset_left = 1831.0
 offset_top = 786.0
 offset_right = 1920.0
