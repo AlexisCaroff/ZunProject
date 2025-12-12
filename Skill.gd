@@ -120,9 +120,9 @@ func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = eff
 		for effect in effects_array:
 			effect.apply(owner, target)
 
-func _apply_second_effect(target2: PositionSlot):
+func _apply_second_effect(thetarget2: PositionSlot):
 	#print("apply second effect")
-	_apply_effect(target2, second_effects)
+	_apply_effect(thetarget2, second_effects)
 
 func select_targets(combat_manager:CombatManager):
 	combatManager=combat_manager

@@ -39,5 +39,5 @@ func apply(user: Character, target: PositionSlot) -> void:
 		if Chartarget.IsDemon && MagicDMG:
 			DMGamount= DMGamount*2
 		if Chartarget.IsDemon && !MagicDMG:
-			DMGamount= DMGamount/2.0
+			DMGamount = int(DMGamount * 0.5)
 		Chartarget.take_damage(user, damage_target_stat, DMGamount+user.base_attack-Chartarget.base_defense,MagicDMG)

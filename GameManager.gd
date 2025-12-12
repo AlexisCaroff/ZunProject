@@ -158,10 +158,10 @@ func add_to_inventory(item: Equipment):
 	inventory.append(item)
 	
 
-func initialize_affinities(characters: Array[CharacterData]):
-	for chara in characters:
+func initialize_affinities(thecharacters: Array[CharacterData]):
+	for chara in thecharacters:
 		chara.affinity = {}
-		for other in characters:
+		for other in thecharacters:
 			if other != chara:
 				chara.affinity[other.Charaname] = 20
 	

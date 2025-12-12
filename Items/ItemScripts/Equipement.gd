@@ -25,9 +25,9 @@ class_name Equipment
 @export var skill_specific_cooldown: Dictionary[String, int] = {}
 # --- Effets spéciaux ---
 # Appelé quand ce personnage utilise une compétence
-func on_skill_use(user: Character, skill: Skill, target: Character):
+func on_skill_use(_user: Character, _skill: Skill, _target: Character):
 	pass
 
 # Appelé quand ce personnage reçoit une attaque
-func on_receive_attack(user: Character, attacker: Character, damage: int):
+func on_receive_attack(_user: Character, _attacker: Character, _damage: int):
 	pass

@@ -13,7 +13,7 @@ var selfposition: Array[PositionSlot] = []
 
 var is_ready: bool = false
 
-signal slot_selected(slot: PositionSlot)
+
 
 #@onready var click_button = $Button  # ou le nom de ton bouton dans le slot
 

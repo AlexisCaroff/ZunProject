@@ -10,7 +10,7 @@ class_name  tente
 @onready var tenteback = $"../TenteBack"
 var images:Array[Texture2D]
 var current_state: bool = true
-var timer
+var timer:Timer
 
 @export var bounce_enabled: bool = false
 @export var bounce_height: float = 1.5
@@ -122,7 +122,7 @@ func _on_timer_timeout():
 func _on_inside_tente_button_button_down() -> void:
 	print ("stop masturb")
 	ButtonStopMasturb.visible=false
-	timer.stop
+	timer.stop()
 	bounce_enabled=false
 	somoneInside.current_horny= max(0, somoneInside.current_horny - 20)
 	

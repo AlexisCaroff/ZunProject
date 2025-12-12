@@ -3,7 +3,7 @@ class_name ReduceCooldownEffect
 var Chartarget:Character
 @export var amount: int = 2
 
-func apply(user: Character, target: PositionSlot) -> void:
+func apply(_user: Character, target: PositionSlot) -> void:
 	
 	Chartarget=target.occupant
 	

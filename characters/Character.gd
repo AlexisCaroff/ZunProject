@@ -251,7 +251,7 @@ func set_targetable(state: bool):
 	else:
 		sprite.modulate = Color(0.5, 0.5, 0.5)
 
-func _input_event(viewport, event, shape_idx):
+func _input_event(_viewport, event, shape_idx):
 	if is_targetable and event is InputEventMouseButton and event.pressed:
 		emit_signal("target_selected", self)
 
@@ -513,7 +513,7 @@ func animate_take_damage(damage:int, source:Character):
 	await tween.finished
 	emit_signal("skill_animation_finished")
 
-func animate_heal(damage:int, source:Character, color=null):
+func animate_heal(damage:int, _source:Character, color=null):
 	emit_signal("skill_animation_started")
 	var effect_instance = healEffectScene.instantiate()
 	get_tree().current_scene.add_child(effect_instance)

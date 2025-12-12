@@ -8,7 +8,7 @@ func apply(user: Character, target: PositionSlot):
 	if !Chartarget.characterData.can_be_moved:
 		return
 	var cm = user.combat_manager
-	var slots = cm.get_positions(Chartarget.characterData.is_player_controlled)
+	
 	print("Move "+user.characterData.Charaname+" to "+Chartarget.characterData.Charaname+" position")
 
 	var user_slot = user._current_slot

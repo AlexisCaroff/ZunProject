@@ -7,7 +7,7 @@ class_name ChangeSkill
 @export var dead_texture: Texture2D
 
 
-func apply(user: Character, target: PositionSlot) -> void:
+func apply(user: Character, _target: PositionSlot) -> void:
 	user._updateSkills(updated_skills)
 	user.characterData.portrait_texture=portrait_texture
 	user.characterData.dead_portrait_texture= dead_texture

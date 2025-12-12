@@ -64,7 +64,7 @@ value = 100.0
 show_percentage = false
 
 [node name="HornyJauge" type="Sprite2D" parent="."]
-position = Vector2(45, 10.3246)
+position = Vector2(40, 13)
 scale = Vector2(0.282564, 0.282564)
 texture = ExtResource("2_n50uc")
 

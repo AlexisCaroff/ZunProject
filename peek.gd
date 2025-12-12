@@ -43,14 +43,14 @@ func preview_encounter(encounter: CombatEncounter) -> void:
 		if i < encounter.enemy_scenes.size():
 			var enemy: Character = encounter.enemy_scenes[i].instantiate()
 			
-			if enemy.portrait_texture:
+			if enemy.characterData.portrait_texture:
 				# Créer un conteneur Node2D pour le Sprite et le Tween
 				container = Node2D.new()
 				slots[i].add_child(container)
 
 				# Créer un Sprite2D pour l'ennemi
 				var sprite = Sprite2D.new()
-				sprite.texture = enemy.portrait_texture
+				sprite.texture = enemy.characterData.portrait_texture
 				sprite.modulate = Color(0,0,0)
 				sprite.modulate.a = 0  # Commencer avec une alpha à 0 (transparent)
 				container.add_child(sprite)  # Ajouter le Sprite à son parent (container)

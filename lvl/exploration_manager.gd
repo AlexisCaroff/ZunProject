@@ -4,12 +4,13 @@ class_name ExplorationManager
 
 @export var chara_explo_scene : PackedScene
 @onready var Doortext = $Button/Doortext
-@onready var slots = $"../HeroPosition".get_children() # conteneur des ExploPositionSlot
+@onready var slots : Array[ExplorationPosition] = []
 var characters: Array[Node] = []
 var big_size = Vector2(1.1, 1.1)
 var startsize = Vector2(1.0, 1.0)
 var current_tween: Tween = null
 var selected_character: CharaExplo = null
+var over_chara: CharaExplo
 var move_mode: bool = false
 @onready var viewport: Viewport = $"../SubViewportContainer/SubViewport"
 @onready var donjon_map: Map = $"../SubViewportContainer/SubViewport/map"
@@ -20,8 +21,15 @@ var gm : GameManager
 var campButton: Button
 @onready var menuPerso = $"../MenuPerso"
 @onready var bouton_menuPerso=$"../charaPortrait2/charaPortraitButton"
+
+const SELECTOR_TEX = preload("res://UI/selectorCombatChara.png")
+var selectorChara : Sprite2D
+
 func _ready():
-	
+	for child in $"../HeroPosition".get_children():
+		if child is ExplorationPosition:
+			slots.append(child)
+			
 	gm = get_tree().root.get_node("GameManager") as GameManager
 	if gm.current_room_Ressource.CanCamp:
 		campButton=$Campement
@@ -30,13 +38,16 @@ func _ready():
 	menuPerso.characters=gm.characters
 	load_characters_from_gamestat()
 	selected_character = characters[0]
+	
 	portrait_selector.position = portraits[0].position
 	bouton_menuPerso.connect("button_down", showMenuPerso)
+	
 	if donjon_map== null:
 		donjon_map=$"../SubViewportContainer/SubViewport/map"
 	donjon_map.focus_on_room(gm.current_room_Ressource,viewport)
 		#donjon_map.move_to_position(donjon_map.curentposition)
-
+	create_selector_sprite()
+	selectorChara.position= selected_character.CharaPosition.charaUI.global_position if selected_character.CharaPosition else Vector2.ZERO
 
 func load_characters_from_gamestat():
 	characters.clear()
@@ -52,9 +63,9 @@ func load_characters_from_gamestat():
 		# Placement dans le slot correspondant
 		var slot_index = hero_data.Chara_position
 		move_character_to_slot(chara, slots[slot_index])
-		slots[slot_index].occupant = chara
+		
 		portraits[slot_index].set_occupant(chara)
-		chara.exploPortrait=portraits[slot_index]
+		
 
 ## --- Nouvelle logique pour passer à la prochaine room ---
 func go_to_next_room():
@@ -88,27 +99,28 @@ func go_to_next_room():
 	print("ExplorationManager → Passage à la room suivante :", next_room.room_id)
 	gm.enter_room(next_room)
 
-func move_character_to_slot(chara: CharaExplo, slot: Node):
-	if chara.get_parent():
-		chara.get_parent().remove_child(chara)
-	slot.add_child(chara)
-	chara.global_position = slot.global_position
+func move_character_to_slot(chara: CharaExplo, slot: ExplorationPosition):
+	
+	slot.set_occupant(chara) 
 	
 
-func _swap_characters(chara1: Node, chara2: Node) -> void:
-	var slot1 = chara1.current_position
-	var slot2 = chara2.current_position
-	var portrait1= chara1.exploPortrait 
-	var portrait2= chara2.exploPortrait 
+func _swap_characters(chara1: CharaExplo, chara2: CharaExplo) -> void:
+	var slot1 = chara1.characterData.Chara_position
+	var slot2 = chara2.characterData.Chara_position
+	var portrait1= chara1.exploPortrait
+	var portrait2= chara2.exploPortrait
 
 	move_character_to_slot(chara1, slots[slot2])
-	chara1.current_position = slot2
+	chara1.characterData.Chara_position = slot2
+	chara1.move()
 	portrait2.set_occupant(chara1)
 	
 	move_character_to_slot(chara2, slots[slot1])
-	chara2.current_position = slot1
+	chara2.characterData.Chara_position = slot1
+	chara2.move()
 	portrait1.set_occupant(chara2)
 	move_mode = false
+	selectorChara.position= selected_character.CharaPosition.charaUI.global_position if selected_character.CharaPosition else Vector2.ZERO
 
 func selectCharacter(chara: CharaExplo):
 	chara.animate_selected()
@@ -116,8 +128,10 @@ func selectCharacter(chara: CharaExplo):
 		selected_character = chara
 		var i = characters.find(chara)
 		portrait_selector.position = portraits[i].position
-	else:
-		_swap_characters(chara, selected_character)
+		selectorChara.position= selected_character.CharaPosition.charaUI.global_position if selected_character.CharaPosition else Vector2.ZERO
+
+		
+		
 
 ## --- Le bouton appelle maintenant go_to_next_room ---
 func _on_button_button_down() -> void:
@@ -143,6 +157,8 @@ func _on_button_mouse_exited() -> void:
 
 func _on_move_button_button_down() -> void:
 	move_mode = true
+	selected_character.want_to_move()
+	_swap_characters(over_chara, selected_character)
 	print("move mode")
 
 
@@ -154,6 +170,7 @@ func _on_button_2_button_down() -> void:
 func _on_campement_button_down() -> void:
 	gm.current_room_Ressource.CampDone=true
 	gm.go_to_campement()
+	
 func sortie_du_camp():
 	for chara in characters:
 		chara.current_stamina = min(chara.max_stamina, chara.current_stamina + 10)
@@ -162,3 +179,12 @@ func sortie_du_camp():
 		
 func showMenuPerso():
 	menuPerso.visible = true
+
+func create_selector_sprite():
+	var sprite := Sprite2D.new()
+	sprite.texture = SELECTOR_TEX
+	add_child(sprite)
+	selectorChara=sprite
+	selectorChara.scale= Vector2(0.9,1.1)
+	selectorChara.offset.y =-4.0
+	selectorChara.z_index = 3

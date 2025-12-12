@@ -165,12 +165,12 @@ func select_character(chara:CharacterData):
 		
 		if skill != null:
 			skill_buttons[i].Actiontext = skill.descriptionName + "\n" + skill.description
-			button.disabled = !skill.can_use()
+			button.disabled = skill.can_use()
 			button.icon = skill.icon
 			skill_buttons[i].label = LabelAction
 			
 
-			var index = i  # capture locale de la bonne valeur
+
 			
 			update_cooldown_bar(cooldown_bars[i],skill)
 		else:
@@ -284,7 +284,7 @@ func start_drag(item: Equipment, index: int):
 	inventory_items[index] = null
 	update_inventory_ui()
 
-func _process(delta):
+func _process(_delta):
 	if dragged_item:
 		drag_icon.global_position = get_global_mouse_position()
 

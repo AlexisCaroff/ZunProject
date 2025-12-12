@@ -29,7 +29,7 @@ func _ready() -> void:
 	# Exemple : aller à la première position si elle existe
 	
 
-func focus_on_room(room: RoomResource, viewport=null ):
+func focus_on_room(room: RoomResource, _viewport=null ):
 	var focusedRoom
 	for salle in Rooms:
 		var room_res = gm.get_room_by_id(salle.name)
@@ -61,7 +61,7 @@ func focus_on_room(room: RoomResource, viewport=null ):
 	tween.tween_property( camera, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 
-func peek_next_Room(room : RoomResource, viewport=null):
+func peek_next_Room(room : RoomResource, _viewport=null):
 	if gm == null:
 		gm = get_tree().root.get_node("GameManager") as GameManager
 		print ("go find Gm")
@@ -105,7 +105,7 @@ func peek_next_Room(room : RoomResource, viewport=null):
 					
 
 		
-func focus_door(room : RoomResource, viewport=null):
+func focus_door(room : RoomResource, _viewport=null):
 	
 	if gm == null:
 		gm = get_tree().root.get_node("GameManager") as GameManager
@@ -148,8 +148,8 @@ func focus_door(room : RoomResource, viewport=null):
 		
 	if target_pos ==null:
 		target_pos=focusedRoom.position
-	var tween = create_tween()
-	tween.tween_property( camera, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	var thetween = create_tween()
+	thetween.tween_property( camera, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	
 		
 		

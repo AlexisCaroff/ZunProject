@@ -2,17 +2,19 @@ extends Node2D
 class_name CharaExplo
 
 # --- Données d'affichage
-@export var portrait_texture: Texture2D
+
 @export var dead_portrait_texture: Texture2D
 @export var initiative_icon: Texture2D
 var portrait_path: String = ""
 var dead_portrait_path: String = ""
 var initiative_icon_path: String = ""
-@onready var sprite = $pivot/HerosTexture1
-@onready var buff_bar = $HBoxContainer
-@onready var hp_Jauge=$HPProgressBar
 
-@onready var hornyJauge=$HornyJauge/HornyJaugePleine
+@onready var sprite = $pivot/HerosTexture1
+@onready var selector = $pivot/Selector
+@onready var buff_bar = $HBoxContainer
+@onready var hp_Jauge
+
+@onready var hornyJauge
 
 
 const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
@@ -20,59 +22,41 @@ const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
 @export var Charaname: String = "name"
 @export var IsDemon: bool = false
 
-# --- Stats de combat
-@export var base_attack: int = 10
-@export var base_defense: int = 5
-@export var base_willpower: int = 5
-@export var base_initiative: int = 1
-@export var base_evasion: int = 5
 
-@export var attack: int = 10
-@export var defense: int = 5
-@export var willpower: int = 5
-@export var evasion: int = 5
-@export var initiative: int = 1
 
-# --- Valeurs dynamiques
-var current_stamina: int = 100
-var max_stamina: int = 100
-var current_stress: int = 0
-var max_stress: int =100
-var current_horny: int = 0 
-var max_horniness: int = 100
-var current_position: int =0
-var explorationPortrait:Texture2D
-var exploPortrait :Sprite2D
-var CharaPosition :Node2D
+var CharaPosition :ExplorationPosition
 var characterData : CharacterData
+var exploPortrait : ExploPortrait
 
 func _ready() -> void:
 	print("chara ready")
-	update_display()
+	
 
 # Appelée après instanciation, pour charger les données du GameStat
 func load_chara() -> void:
 	Charaname = characterData.Charaname
 	sprite.texture =characterData.portrait_texture
-	current_position = characterData.Chara_position
+
 	for buff in characterData.buffs:
 		add_buff(buff)
 	
 
 func update_display() -> void:
-	if not hp_Jauge or not hornyJauge:
-		hp_Jauge=$HP/HPProgressBar
 
-		hornyJauge=$HornyJauge/HornyJaugePleine
-		# return
-	hp_Jauge.max_value=max_stamina
-	hp_Jauge.value=current_stamina
+	sprite.texture =characterData.portrait_texture
+	selector.texture = characterData.portrait_texture
+	hp_Jauge.max_value=characterData.max_stamina
+	hp_Jauge.value=characterData.current_stamina
 	
-	hornyJauge.self_modulate.a = (current_horny*2.0)/max_horniness
+	hornyJauge.self_modulate.a = (characterData.current_horniness*2.0)/characterData.max_horniness
 
 
 	
-	sprite.texture = portrait_texture
+
+func want_to_move():
+	selector.self_modulate.a =1.0
+func move():
+	selector.self_modulate.a =0.0
 	
 func add_buff(buff: Buff):
 	if buff_bar ==null:
@@ -89,7 +73,7 @@ func add_buff(buff: Buff):
 	
 signal skill_animation_started
 signal skill_animation_finished
-func animate_heal(damage:int, source:CharaExplo, color=null):
+func animate_heal(damage:int, _source:CharaExplo, color=null):
 	emit_signal("skill_animation_started")
 	var effect_instance = healEffectScene.instantiate()
 	get_tree().current_scene.add_child(effect_instance)

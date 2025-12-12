@@ -69,7 +69,7 @@ func _ready():
 	if startcombat ==true:
 		_start()
 
-func show_ambush_message(text: String, color: Color):
+func show_ambush_message(text: String, _color: Color):
 	var label = Label.new()
 	label.text = text
 	label.z_index=21
@@ -127,7 +127,7 @@ func _start():
 			# place in slot
 			var slot_index = clamp(chara.characterData.Chara_position, 0, hero_positions.size() - 1)
 			var slot = hero_positions[slot_index]
-			move_character_to(chara, slot, 0.0)
+			move_character_to(chara, slot, 0)
 
 				# initialise les stats runtime depuis la ressource (si besoin)
 			chara.update_stats()
@@ -149,7 +149,7 @@ func _start():
 
 			var slot_index = i
 			var slot = enemy_positions[slot_index]
-			move_character_to(chara, slot, 0.0)
+			move_character_to(chara, slot, 0)
 
 			# initialise stats runtime si la ressource existe
 			if chara.characterData:
@@ -168,9 +168,9 @@ func _start():
 		
 		start_combat()
 		
-	for char in heroes + enemies:
-		char.skill_animation_started.connect(_on_skill_animation_started)
-		char.skill_animation_finished.connect(_on_skill_animation_finished)
+	for chara in heroes + enemies:
+		chara.skill_animation_started.connect(_on_skill_animation_started)
+		chara.skill_animation_finished.connect(_on_skill_animation_finished)
 	
 	
 func start_combat():
@@ -329,7 +329,7 @@ func _show_victory():
 	cristal_item.description = "Un cristal précieux obtenu en combat."
 	if nb_crystaleloot >0:
 		encounter.loots.append(cristal_item)
-	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
+	gm = get_tree().root.get_node("GameManager") as GameManager
 	victory_ui.showLoot(encounter.loots, gm)
 	
 	gm.current_room_Ressource.ennemikilled=true
@@ -372,8 +372,9 @@ func _on_target_selected(targets: Array[PositionSlot]):
 					audio.pitch_scale = randf_range(0.3, 0.5)
 					audio.play()
 				if pending_skill.name != "move" && pending_skill.name != "ChangeMask" :
-					var occupied_slots = targets.filter(func(slot): return slot.occupant != null)
 					var slot
+					var occupied_slots = targets.filter(func(slot): return slot.occupant != null)
+					
 					if occupied_slots.size() > 0:
 						slot = occupied_slots[0] 
 					await current_character.animate_attack(slot.occupant)

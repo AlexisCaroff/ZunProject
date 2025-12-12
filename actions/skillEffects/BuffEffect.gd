@@ -17,7 +17,7 @@ var affected_stat: int = Stat.ATTACK
 @export var amount: int = 5
 @export var duration: int = 3  # en tours
 
-func apply(user: Character, target: PositionSlot) -> void:
+func apply(_user: Character, target: PositionSlot) -> void:
 	var buff := Buff.new()
 	buff.stat = affected_stat
 	buff.icon=uitexture
