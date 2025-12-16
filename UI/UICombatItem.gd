@@ -25,6 +25,8 @@ func assigne_item(item:Equipment):
 func remove_item():
 	equipement = null
 	texture=null
+	if !label:
+		label = $RichTextLabel
 	label.bbcode_enabled = true
 	label.bbcode_text= "[b][color=AA55FF][/color][/b]\n%s"
 func over():

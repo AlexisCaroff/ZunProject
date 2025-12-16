@@ -4,7 +4,7 @@ class_name InventoryUI
 
 @export var inventory_size_x := 5
 @export var inventory_size_y := 5
-@export var emptySlotTexture : Texture2D
+@export var emptySlotTexture : Texture2D = preload("res://UI/emptyItemSlot.png")
 # --- Références
 
 @onready var inventory_grid = $InventoryGrid
@@ -58,6 +58,12 @@ var inventory_items: Array[Equipment] = []
 var dragged_item : Equipment = null
 var dragged_slot_index : int = -1
 var gm: GameManager
+signal change_in_equipment(character: CharacterData)
+
+
+
+
+
 func _ready():
 	gm = get_tree().root.get_node("GameManager") as GameManager
 	inventory_items.resize(3*6)
@@ -70,10 +76,12 @@ func _ready():
 	inventory_items.resize(inventory_size_x * inventory_size_y)
 	for i in range(inventory_items.size()):
 		inventory_items[i] = null
-	
+	if characters.is_empty():
+		characters=gm.characters
 	select_character(characters[0])
 	ButtonCharacter1.connect("button_down",nextChara)
 	ButtonCharacter2.connect("button_down",lastChara)
+	update_inventory_ui()
 
 
 # --------------------------------------------------------------------
@@ -94,7 +102,7 @@ func lastChara():
 	select_character(characters[current_character_index])
 
 func select_character_by_index(index: int):
-	print (index)
+	#print (index)
 	current_character_index = clamp(index, 0, characters.size() - 1)
 	var chara = characters[current_character_index]
 	select_character(chara)
@@ -217,6 +225,7 @@ func create_inventory_grid():
 	for i in range(inventory_size_x * inventory_size_y):
 		var cell = create_inventory_cell(i)
 		inventory_grid.add_child(cell)
+	#print ("inventory gride created for " +str(inventory_size_x))
 
 func create_inventory_cell(index: int) -> Control:
 
@@ -250,16 +259,16 @@ func create_inventory_cell(index: int) -> Control:
 # --------------------------------------------------------------------
 
 func on_inventory_slot_pressed(index: int):
-	if index < 0 or index >= inventory_items.size():
-		print("Index hors limite :", index)
-		return
+	#if index < 0 or index >= inventory_items.size():
+	#	print("Index hors limite :", index)
+	#	return
 	var item = inventory_items[index]
 
 	if dragged_item == null:
 		# Début de drag
 		if item != null:
 			if GameState.current_phase == GameStat.GamePhase.COMBAT:
-				print( "can't in Combat")
+				#print( "can't in Combat")
 				return
 			start_drag(item, index)
 			
@@ -339,7 +348,7 @@ func update_equipment_slots():
 func unequip(slot_index: int):
 	if GameState.current_phase == GameStat.GamePhase.COMBAT:
 		return
-	print ('try unequip item')
+	#print ('try unequip item')
 	var item = selected_character.equipped_items[slot_index]
 	
 	# Trouver une place dans l’inventaire
@@ -348,10 +357,10 @@ func unequip(slot_index: int):
 		if inventory_items[i] == null:
 			inventory_items[i] = item
 			selected_character.equipped_items.remove_at(slot_index)
-			selected_character.update_stats()
+		
 			update_inventory_ui()
 			update_equipment_slots()
-			print('unequip '+ item.name)
+			#print('unequip '+ item.name)
 			return
 
 
@@ -367,7 +376,7 @@ func _gui_input(event):
 		
 		if dragged_item == null:
 			return
-		print(dragged_item.name+ "is try to equipe")
+		#print(dragged_item.name+ "is try to equipe")
 		try_equip_on_character()
 		finish_drag()
 
@@ -391,14 +400,19 @@ func try_equip_on_character():
 # --------------------------------------------------------------------
 
 func update_inventory_ui():
-	print ("update_inventory_ui" + str(inventory_items.size()))
+	#print("update_inventory_ui_______________________________________________________")
+	#for item in inventory_items:
+	#	if item != null:
+	#		print ( item.name)
+	
 	for i in range(inventory_items.size()):
 		var item = inventory_items[i]
 		var cell = inventory_grid.get_child(i)
 		var icon = cell.get_node("Icon")
 
 		icon.texture = item.icon if item != null else emptySlotTexture
-		
+	emit_signal("change_in_equipment", selected_character)
+	
 func hideMenu():
 	self.visible=false
 	

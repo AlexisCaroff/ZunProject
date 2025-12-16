@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2y35qfvr2gxv"
-path="res://.godot/imported/emptyItemSlot.png-79f7adc99b2f7f38b01667ad11745aee.ctex"
+uid="uid://6c6j120lvsba"
+path="res://.godot/imported/flameHalo.png-20cb288da7bf64448a5aac03a88d5598.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Items/ItemIcons/emptyItemSlot.png"
-dest_files=["res://.godot/imported/emptyItemSlot.png-79f7adc99b2f7f38b01667ad11745aee.ctex"]
+source_file="res://props/flameHalo.png"
+dest_files=["res://.godot/imported/flameHalo.png-20cb288da7bf64448a5aac03a88d5598.ctex"]
 
 [params]
 

@@ -45,4 +45,6 @@ precision = null
 allways_hit = true
 duration = 1.0
 tags = null
+is_contact = false
+distance_contact = 0.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

@@ -17,7 +17,9 @@ func _ready():
 	scale = normal_scale
 	if disabled:
 		modulate.a = 0.0
-
+	var empty := StyleBoxEmpty.new()
+	add_theme_stylebox_override("focus", empty)
+	add_theme_stylebox_override("focus_visible", empty)
 	# connecter les signaux de souris
 	connect("mouse_entered", Callable(self, "_on_mouse_entered"))
 	connect("mouse_exited", Callable(self, "_on_mouse_exited"))

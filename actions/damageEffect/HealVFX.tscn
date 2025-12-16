@@ -233,6 +233,8 @@ _data = {
 }
 
 [node name="Node2D" type="Node2D"]
+z_index = 20
+z_as_relative = false
 script = ExtResource("1_fgbhh")
 
 [node name="Label" type="Label" parent="."]

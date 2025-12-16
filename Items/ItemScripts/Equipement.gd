@@ -31,3 +31,5 @@ func on_skill_use(_user: Character, _skill: Skill, _target: Character):
 # Appelé quand ce personnage reçoit une attaque
 func on_receive_attack(_user: Character, _attacker: Character, _damage: int):
 	pass
+func after_skill_use(user: Character, skill: Skill, _target: Character):
+	pass

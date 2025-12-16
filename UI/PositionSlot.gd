@@ -60,13 +60,14 @@ func assign_character(character: Character, movetime:float):
 	
 	character._current_slot = self
 	#print(character.Charaname,"→ current_slot défini à ", self.name)
-	var tween2 = get_tree().create_tween()
+
 	var tween = get_tree().create_tween()
-	tween.tween_property(character, "global_position", global_position, movetime)
-	tween2.tween_property(character, "scale", position_data.scale, movetime)
+	tween.parallel().tween_property(character, "global_position", self.global_position, movetime).set_delay(0.2)
+	tween.parallel().tween_property(character, "scale", position_data.scale, movetime).set_delay(0.2)
 	await tween.finished
-	await tween2.finished
+
 	character.CharaScale= position_data.scale
+	character.global_position=self.global_position
 	character.set_scale(position_data.scale)
 	
 	if position_data.buff:

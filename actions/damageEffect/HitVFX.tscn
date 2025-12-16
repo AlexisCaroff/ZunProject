@@ -186,6 +186,8 @@ _data = {
 }
 
 [node name="Node2D" type="Node2D"]
+z_index = 40
+z_as_relative = false
 script = ExtResource("1_ktxfw")
 
 [node name="Label" type="Label" parent="."]

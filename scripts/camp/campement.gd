@@ -34,16 +34,18 @@ var skillcampmode : bool = true
 @onready var mapButton =$MapButton
 @onready var QuitmapButton = $QuittMapButton
 @onready var contourMap=$ContourMap
-
+@onready var MenuPerso = $MenuPerso
+@onready var MenuPersoButton=$charaPortrait2/charaPortraitButton
 
 func _ready():
 	gm = get_tree().root.get_node("GameManager") as GameManager
+	MenuPerso.characters = gm.characters
 	load_characters_from_gamestat()
 	selected_chara = characters[0]
 # -------Heal chara----------------
 
 	for chara in characters:
-		chara.current_stamina = min(chara.max_stamina, chara.current_stamina + 10)
+		chara.characterData.current_stamina = min(chara.characterData.max_stamina, chara.characterData.current_stamina + 10)
 		chara.animate_heal(10, chara)
 		chara.update_display()
 #--------------------------------------
@@ -58,21 +60,22 @@ func _ready():
 	
 	mapButton.connect("button_down",toggleshowMap)
 	QuitmapButton.connect("button_down",toggleshowMap)
+	MenuPersoButton.connect("button_down",showMenuPerso)
 #func startLovescene():
 	
 	
 func load_characters_from_gamestat():
 	characters.clear()
-	for i in GameState.saved_heroes_data.size():
-		var hero_data = GameState.saved_heroes_data[i]
+	for i in gm.characters.size():
+		var hero_data = gm.characters[i]
 		var chara = chara_Camp_scene.instantiate()
-		chara.load_from_dict(hero_data)
+		chara.load_camp_chara(hero_data)
 		add_child(chara)
 		characters.append(chara)
 		chara.camp= self
 
 		# Placement dans le slot correspondant
-		var slot_index = i-1
+		var slot_index = hero_data.Chara_position
 	
 		move_character_to_slot(chara, slots[slot_index])
 		
@@ -85,22 +88,23 @@ func move_character_to_slot(chara: Node, slot: Node):
 	chara.global_position = slot.global_position
 	chara.campposition = slot
 	slot.occupant=chara
-	GameState.update_hero_stat(chara.Charaname, "position", chara.current_position)
+	
 
 func changeSelectedCharacter(occupant:CharaCamp):
 	show_chara_actions(occupant)
-	updateUICharacter(occupant)
+	updateUICharacter(occupant.characterData)
 	occupant.animate_selected()
 	
-func updateUICharacter(character:CharaCamp):
+func updateUICharacter(character:CharacterData):
 	portraitCharaselect.texture = character.initiative_icon
 	CharacterName.text = character.Charaname
 	AttLabel.text = "Attaque: %d" % [character.attack]
 	DefLabel.text = "Defence: %d" % [character.defense]
 	Stamina.text = "Stamina: %d / %d" % [character.current_stamina, character.max_stamina]
 	guilt.text = "Guilt: %d / %d" % [character.current_stress, character.max_stress]
-	horny.text = "Horny: %d / %d" % [character.current_horny, character.max_horniness]
-	character.update_display()
+	horny.text = "Horny: %d / %d" % [character.current_horniness, character.max_horniness]
+	selected_chara.update_display()
+	MenuPerso.select_character(MenuPerso.selected_character)
 		
 func After_camp_skill(skill: CampSkill):
 	campPoints -= skill.cost
@@ -133,8 +137,9 @@ func clear_container(container: Node) -> void:
 		if is_instance_valid(child):
 			child.queue_free()
 			
-func show_chara_actions(chara: CharaCamp):
-	selected_chara = chara
+func show_chara_actions(thechara: CharaCamp):
+	var chara = thechara.characterData 
+	selected_chara = thechara
 
 	# vide les panels
 	clear_container(action_panel)
@@ -147,7 +152,7 @@ func show_chara_actions(chara: CharaCamp):
 	var action_button_script = load(codeActionButton )
 
 	for i in range(chara.camp_skill_resources.size()):
-		var skill: CampSkill = chara.camp_skill_resources[i]
+		var skill: CampSkill = thechara.camp_skills[i]
 
 		# Création d'un bouton d'action avec script custom
 		var btn := Button.new()
@@ -166,7 +171,7 @@ func show_chara_actions(chara: CharaCamp):
 			btn.disabled=true
 		if skill.used && not skill.name== "Dialogue":
 			btn.disabled=true
-		btn.pressed.connect(Callable(self, "_on_camp_skill_pressed").bindv([skill, chara]))
+		btn.pressed.connect(Callable(self, "_on_camp_skill_pressed").bindv([skill, thechara]))
 
 		action_panel.add_child(btn)
 
@@ -254,3 +259,5 @@ func toggleshowMap():
 	subviewport.visible= !subviewport.visible
 	QuitmapButton.visible = !QuitmapButton.visible
 	contourMap.visible= !contourMap.visible
+func showMenuPerso():
+	MenuPerso.visible=true

@@ -7,6 +7,7 @@
 
 [node name="charaCombatUI" type="Node2D"]
 z_index = 3
+z_as_relative = false
 script = ExtResource("1_n50uc")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]

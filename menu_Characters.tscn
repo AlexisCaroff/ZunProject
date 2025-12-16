@@ -1,7 +1,6 @@
-[gd_scene load_steps=31 format=3 uid="uid://bvr5vf8uyqxhp"]
+[gd_scene load_steps=30 format=3 uid="uid://bvr5vf8uyqxhp"]
 
 [ext_resource type="Script" uid="uid://btg7pq0vcw8uk" path="res://InvetoryUI.gd" id="1_22r63"]
-[ext_resource type="Texture2D" uid="uid://2y35qfvr2gxv" path="res://Items/ItemIcons/emptyItemSlot.png" id="2_p2sg8"]
 [ext_resource type="Texture2D" uid="uid://lhncc7d02shi" path="res://UI/BigBox.png" id="2_tlc6u"]
 [ext_resource type="Texture2D" uid="uid://dsi4pii678hew" path="res://UI/longBox.png" id="3_gcq4s"]
 [ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="4_qryfk"]
@@ -49,7 +48,6 @@ grow_vertical = 2
 script = ExtResource("1_22r63")
 inventory_size_x = 3
 inventory_size_y = 6
-emptySlotTexture = ExtResource("2_p2sg8")
 metadata/_edit_vertical_guides_ = [-690.0, -635.0]
 
 [node name="background2" type="TextureRect" parent="."]

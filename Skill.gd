@@ -63,7 +63,8 @@ var target2 : Array[PositionSlot]
 var combatManager
 var reducecost : int=0
 var skill_effect_overridden := false
-
+@export var is_contact: bool = false 
+@export var distance_contact:float = 0.0
 
 func can_use() -> bool:
 	if owner == null:
@@ -78,6 +79,7 @@ func can_use() -> bool:
 	return true
 
 func use(target: PositionSlot = null, secondtarget : bool=false):
+	owner.current_skill=self
 	if combatManager :
 			combatManager.ui.log(owner.characterData.Charaname+ " use "+ descriptionName)
 	for eq in owner.characterData.equipped_items:
@@ -125,6 +127,7 @@ func _apply_second_effect(thetarget2: PositionSlot):
 	_apply_effect(thetarget2, second_effects)
 
 func select_targets(combat_manager:CombatManager):
+	owner.current_skill=self
 	combatManager=combat_manager
 	combat_manager.ui.log("Select a target for %s" % descriptionName)
 	match the_target_type:

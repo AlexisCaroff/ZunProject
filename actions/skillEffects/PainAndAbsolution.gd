@@ -23,21 +23,21 @@ var Chartarget:Character
 
 func apply(user: Character, target: PositionSlot) -> void:
 	Chartarget = target.occupant
-	if Chartarget.is_player_controlled:
+	if Chartarget.characterData.is_player_controlled:
 		match heal_target_stat:
 			healStat.STAMINA:
 				Chartarget.animate_heal(healamount,user)
-				Chartarget.current_stamina = min(Chartarget.max_stamina, Chartarget.current_stamina + healamount)
+				Chartarget.current_stamina = min(Chartarget.characterData.max_stamina, Chartarget.characterData.current_stamina + healamount)
 			healStat.HORNY:
 				Chartarget.animate_heal(healamount,user, Color.PURPLE)
-				Chartarget.current_horniness = max(0, Chartarget.current_horniness - healamount)
+				Chartarget.current_horniness = max(0, Chartarget.characterData.current_horniness - healamount)
 			healStat.STRESS:
 				Chartarget.animate_heal(healamount,user)
-				Chartarget.current_stress = max(0, Chartarget.current_stress - healamount)
+				Chartarget.current_stress = max(0, Chartarget.characterData.current_stress - healamount)
 		Chartarget.update_ui()
 	else:
-		if Chartarget.IsDemon && MagicDMG:
+		if Chartarget.characterData.IsDemon && MagicDMG:
 			DMGamount= DMGamount*2
-		if Chartarget.IsDemon && !MagicDMG:
+		if Chartarget.characterData.IsDemon && !MagicDMG:
 			DMGamount = int(DMGamount * 0.5)
-		Chartarget.take_damage(user, damage_target_stat, DMGamount+user.base_attack-Chartarget.base_defense,MagicDMG)
+		Chartarget.take_damage(user, damage_target_stat, DMGamount+user.characterData.base_attack-Chartarget.characterData.base_defense,MagicDMG)

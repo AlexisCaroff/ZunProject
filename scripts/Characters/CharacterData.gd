@@ -8,8 +8,8 @@ class_name CharacterData
 @export var initiative_icon: Texture2D
 @export var Dialogue_texture: Texture2D
 @export var textureCamp: Texture2D
-
-@export var Charaname: String = "name"
+@export var Name : String = "name"
+@export var Charaname: String = "Classe"
 @export var IsDemon: bool = false
 # ---- Affinity
 @export var affinity: Dictionary[String, int] = {}
@@ -66,7 +66,7 @@ class_name CharacterData
 @export var max_scale: float = 1.0
 
 
-
+var acte_twice : bool =false
 @export var camp_skill_resources: Array[CampSkill] = []
 @export var bark_scene: PackedScene = preload("res://UI/bark.tscn")
 @export var taunts := [

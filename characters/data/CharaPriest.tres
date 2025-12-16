@@ -30,6 +30,7 @@ Hit_texture = ExtResource("2_4vmab")
 initiative_icon = ExtResource("10_pcj8w")
 Dialogue_texture = ExtResource("1_4vmab")
 textureCamp = ExtResource("18_kpfpq")
+Name = "name"
 Charaname = "Priestess"
 IsDemon = false
 affinity = Dictionary[String, int]({})

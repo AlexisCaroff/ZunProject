@@ -27,7 +27,7 @@ func  select_Chara():
 func set_chara(character:CharacterData, affinity: int):
 	chara=character
 	thetexture.texture=character.explorationPortrait
-	print(character.Charaname+ " is updated")
+	#print(character.Charaname+ " is updated")
 	progressBar.value=affinity
 	update_affinity_crystals(affinity,AffinityCrystals)
 	

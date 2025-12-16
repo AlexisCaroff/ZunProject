@@ -3,7 +3,7 @@ class_name Character
 
 # --- Données visuelles
 @onready var name_label = $name
-@onready var sprite = $pivot/HerosTexture1
+@onready var sprite : TextureRect = $pivot/HerosTexture1
 var hp_Jauge
 var hornyJauge
 const MAX_EQUIPMENT = 2
@@ -30,7 +30,7 @@ var skills: Array[Skill] = []
 # --- Tags (type, classe, etc.)
 
 # combat
-var combat_manager: Node = null 
+var combat_manager: CombatManager = null 
 # --- Contrôle
 
 const HornyEffectScene := preload("res://actions/damageEffect/charmed-particules.tscn")
@@ -53,6 +53,9 @@ var exibBonusAtt = 0
 
 var current_bark: Bark = null
 @export var characterData : CharacterData
+var current_skill: Skill = null
+var cam : Camera2D
+var ShadowBackground: Sprite2D
 
 func set_current_slot(value):
 	_current_slot = value
@@ -61,6 +64,8 @@ func get_current_slot():
 	return _current_slot
 
 func _ready():
+	cam = get_viewport().get_camera_2d()
+	
 	arrow.visible=false
 	if characterData:
 		name_label.text = characterData.Charaname
@@ -69,7 +74,9 @@ func _ready():
 		_updateSkills(characterData.skill_resources)
 	else:
 		push_warning("CharacterData non assignée pour %s" % name)
-
+	if characterData.is_player_controlled==false :
+		sprite.flip_h=true
+		Selector.flip_h=true
 func _updateSkills(updated_skills: Array[Resource] ):
 	skills.clear()
 	for s in updated_skills:
@@ -248,8 +255,10 @@ func set_targetable(state: bool):
 	arrow.visible = state
 	if state:
 		sprite.modulate = Color(1, 1, 1)
+		Selector.visible=true
 	else:
 		sprite.modulate = Color(0.5, 0.5, 0.5)
+		Selector.visible=false
 
 func _input_event(_viewport, event, shape_idx):
 	if is_targetable and event is InputEventMouseButton and event.pressed:
@@ -276,20 +285,21 @@ func play_ai_turn(heroes : Array, enemies :Array):
 		resetVisuel()
 		return
 
-	var skill: Skill = decision["skill"]
+	current_skill = decision["skill"]
 	var targetPosistions: Array[PositionSlot] = decision.get("target", null)
 	var target = targetPosistions[0].occupant
-	combat_manager.pending_skill = skill
-	skill.owner = self
+	combat_manager.pending_skill = current_skill
+	current_skill.owner = self
 
 	if target == null:
-		skill.use()
-		combat_manager.ui.logennemi(characterData.Charaname + " use " + skill.descriptionName)
+		current_skill.use()
+		combat_manager.ui.logennemi(characterData.Charaname + " use " + current_skill.descriptionName)
 	else:
+		sprite.texture = current_skill.ImageSkill
 		await animate_attack(targetPosistions[0].occupant)
 		for thetarget in targetPosistions:
-			skill.use(thetarget)
-		combat_manager.ui.log(characterData.Charaname + " use " + skill.descriptionName)
+			current_skill.use(thetarget)
+		combat_manager.ui.log(characterData.Charaname + " use " + current_skill.descriptionName)
 		target.update_ui()
 
 	resetVisuel()
@@ -337,12 +347,12 @@ func select_as_target():
 	combat_manager.select_target(self)
 	arrow.visible = false
 
-func take_damage(source: Character, stat: int, amount: int, typeMagic:bool) -> void:
+func take_damage(source: Character, stat: int, amount: int, typeMagic:bool, skillused: Skill= null) -> void:
 	var damage := 0
 	for buff in buffs:
 		if buff.name == "Target":
 			combat_manager.pending_skill.reducecost = buff.amount
-
+	sprite.texture = characterData.Hit_texture
 	match stat:
 		DamageEffect.Stat.STAMINA:
 			for tag in characterData.tags:
@@ -380,7 +390,7 @@ func take_damage(source: Character, stat: int, amount: int, typeMagic:bool) -> v
 			if dead:
 				animate_bonk()
 			else:
-				animate_take_damage(damage, source)
+				await animate_take_damage(damage, source)
 
 		DamageEffect.Stat.HORNY:
 			damage = amount
@@ -392,7 +402,7 @@ func take_damage(source: Character, stat: int, amount: int, typeMagic:bool) -> v
 
 			for eq in characterData.equipped_items:
 				eq.on_receive_attack(self, source, damage)
-
+			
 			animate_get_horny(damage)
 			update_ui()
 
@@ -420,7 +430,7 @@ func take_damage(source: Character, stat: int, amount: int, typeMagic:bool) -> v
 	shake_camera(20.0)
 	update_ui()
 
-func resetVisuel() -> void:
+func resetVisuel():
 	sprite.modulate = CharaColor
 	self.scale = CharaScale
 	if _current_slot:
@@ -428,7 +438,13 @@ func resetVisuel() -> void:
 	if characterData and characterData.current_stamina > 0:
 		sprite.texture = characterData.portrait_texture
 		Selector.texture = characterData.portrait_texture
+	if characterData and characterData.current_stamina == 0:
+		sprite.texture =characterData.dead_portrait_texture
+		Selector.texture =characterData.dead_portrait_texture
+	print ("reset " + characterData.Charaname )
+	
 	update_ui()
+	
 
 func refresh_stats_from_equipment():
 	characterData.attack = characterData.base_attack
@@ -460,7 +476,12 @@ func get_affinity(target: Character) -> int:
 	return 0
 
 # ------------------------------- Animation ------------------------------------------------
-
+#--------Animation variables-----------------------
+var start_pos
+var normal_size
+var attack_pos : Vector2
+var target_pos : Vector2
+var start_target_pos : Vector2
 var outline : TextureRect
 signal skill_animation_started
 signal skill_animation_finished
@@ -478,6 +499,7 @@ func animate_start_Turn():
 
 func animate_get_horny(damage:int):
 	emit_signal("skill_animation_started")
+	sprite.texture = characterData.Hit_texture
 	var effect_instance = HornyEffectScene.instantiate()
 	get_tree().current_scene.add_child(effect_instance)
 	effect_instance.global_position = global_position + Vector2(0, -30)
@@ -489,43 +511,62 @@ func animate_get_horny(damage:int):
 	tween.tween_property(self, "scale", big_size, 0.2)
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	await tween.finished
+	sprite.texture = characterData.portrait_texture
 	emit_signal("skill_animation_finished")
 
-func animate_take_damage(damage:int, source:Character):
+func animate_take_damage(damage:int, source:Character, usedSkill :Skill = null):
+	
 	emit_signal("skill_animation_started")
+	await get_tree().create_timer(0.2).timeout
+	if characterData.current_stamina<=0:
+		Selector.texture=characterData.dead_portrait_texture
+		sprite.texture = characterData.dead_portrait_texture
+	if characterData.current_stamina>0:
+		sprite.texture = characterData.Hit_texture
 	var effect_instance = DamageEffectScene.instantiate()
 	get_tree().current_scene.add_child(effect_instance)
-	effect_instance.global_position = global_position + Vector2(0, -140)
+	effect_instance.global_position = global_position + Vector2(50, -140)
+	
 	if effect_instance.has_method("setup"):
 		effect_instance.setup(damage, Color(1,0.4,0.3))
-	var tween := create_tween() as Tween
-	var tween2 := create_tween() as Tween
+
 	var normal_size = CharaScale
 	var big_size= Vector2(normal_size.x*1.1,normal_size.y*1.3)
-	tween.tween_property(self, "scale", big_size, 0.2)
-	tween.tween_property(self, "scale", normal_size, 0.2)
 	var start_pos = position
 	var direction = (source.global_position - global_position).normalized()
 	var offset = direction * 10
-	var attack_pos = start_pos + offset
-	tween2.tween_property(self, "position", attack_pos, 0.02).set_delay(0.02)
-	tween2.tween_property(self, "position", start_pos, 0.2)
-	await tween.finished
+	var dam_pos = start_pos + offset
+	
+	if source== self:
+		var tween := create_tween() as Tween
+		var tween2 := create_tween() as Tween
+		tween.tween_property(self, "scale", big_size, 0.2)
+		tween.tween_property(self, "scale", normal_size, 0.2)
+		tween2.tween_property(self, "position", dam_pos, 0.02).set_delay(0.3)
+		tween2.tween_property(self, "position", start_pos, 0.2)
+		print ("self attacked------------------------------------------------------------")
+		
+		await tween.finished
 	emit_signal("skill_animation_finished")
 
 func animate_heal(damage:int, _source:Character, color=null):
 	emit_signal("skill_animation_started")
+	var delay =0.5
+	await get_tree().create_timer(0.2).timeout
+	if _source.characterData.Charaname == "Mystic":
+		delay=1.0
 	var effect_instance = healEffectScene.instantiate()
+	#if _source == self:
+	#	var tween := create_tween() as Tween
+	#	var normal_size = CharaScale
+	#	var big_size= Vector2(1.0,1.05)
+	#	tween.tween_property(self, "scale", big_size, 0.2).set_delay(delay)
+	#	tween.tween_property(self, "scale", normal_size, 0.2)
+	#	await tween.finished
 	get_tree().current_scene.add_child(effect_instance)
-	effect_instance.global_position = global_position + Vector2(0, -140)
+	effect_instance.global_position = global_position + Vector2(100, -240)
 	if effect_instance.has_method("setup"):
 		effect_instance.setup(damage,color)
-	var tween := create_tween() as Tween
-	var normal_size = CharaScale
-	var big_size= Vector2(1.0,1.05)
-	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
-	tween.tween_property(self, "scale", normal_size, 0.2)
-	await tween.finished
 	emit_signal("skill_animation_finished")
 
 func DebuffAnim(text):
@@ -537,37 +578,131 @@ func DebuffAnim(text):
 		effect_instance.setup(text)
 	emit_signal("skill_animation_finished")
 
-func animate_attack(target: Character):
+func animate_attack(target: Character, _duration = 1.0):
+	_duration = 1.0
 	emit_signal("skill_animation_started")
 	combat_manager.ui.log(characterData.Charaname + " use " + combat_manager._pending_skill.descriptionName)
-
-	if characterData.is_player_controlled:
-		combat_manager.SpriteHeros.attack_anim(self)
-	else:
-		combat_manager.SpriteEnnemies.attack_anim(self)
-
 	var tween := create_tween() as Tween
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	self.z_index = 10
+	var offset : Vector2
+	
+	sprite.texture = current_skill.ImageSkill
+	Selector.visible=false
+	print ("change for skill texture  " + characterData.Charaname )
+	start_pos = position
+	start_target_pos =target.position
+	target_pos = start_target_pos
+	target_pos.y += 50
+	
+	var cam_Zoom = Vector2(1.2,1.2)
 
-	var start_pos = position
+	
+	if target.characterData.is_player_controlled:
+		target_pos = Vector2(643,728)
+	else :
+		target_pos = Vector2(1300,728)
+		if target.characterData.Charaname == "Slime":
+			target_pos = Vector2(1300,628)
 	var direction = (target.global_position - global_position).normalized()
-	var offset = direction * -50
-	var attack_pos = start_pos + offset
-	var normal_size = self.scale
-	var big_size= Vector2(2,2)
+	if current_skill.is_contact:
+		offset = direction * -current_skill.distance_contact
+		attack_pos =  target_pos + offset
+		if target.characterData.Charaname == "Slime":
+			attack_pos.y += 100
+		if !target.characterData.is_player_controlled:
+			position=Vector2(-400,728)
+		else:
+			position=Vector2(2000,728)
+			
+				
+	
+	else :
+		offset = direction * 40
+		if characterData.is_player_controlled:
+			attack_pos = Vector2(643,728)
+			if target.characterData.is_player_controlled:
+				attack_pos = Vector2(443,628)
+				target_pos = Vector2(843,728)
+		else :
+			attack_pos = Vector2(1400,628)
+	
+	sprite.texture = current_skill.ImageSkill
 
-	tween.parallel().tween_property(self, "position", attack_pos, 0.1)
-	tween.parallel().tween_property(self, "scale", big_size, 0.1)
-	tween.parallel().tween_property(self, "modulate:a", 0.0, 0.15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_interval(1.0)
-	tween.parallel().tween_property(self, "position", start_pos, 0.2).set_delay(1.0)
-	tween.parallel().tween_property(self, "scale", normal_size, 0.2).set_delay(1.0)
-	tween.parallel().tween_property(self, "modulate:a", 1.0, 0.15).set_delay(1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	normal_size = self.scale
+	var big_size= normal_size*2
+
+
+	var timmmmmm = 0.2
+	
+	tween.parallel().tween_property(self, "position", attack_pos, timmmmmm)
+	tween.parallel().tween_property(self, "scale", big_size, timmmmmm)
+#	tween2.parallel().tween_property(target, "position", attack_pos, 0.1)
+	tween.parallel().tween_property(target, "scale", big_size, timmmmmm)
+	tween.parallel().tween_property(target, "position", target_pos, timmmmmm)
+	
+	tween.tween_callback(Callable(self, "_on_attack").bind(target, _duration))
+
+	tween.parallel().tween_property(ShadowBackground, "modulate:a", 1.0, 0.1)
+	tween.parallel().tween_property(cam, "zoom", cam_Zoom , timmmmmm)
+	if current_skill.is_contact:
+		offset = direction * -current_skill.distance_contact
+		attack_pos =  target_pos + offset
+		if !target.characterData.is_player_controlled:
+			
+			tween.parallel().tween_property(cam, "position", Vector2(1064,540) , timmmmmm)
+		else:
+			
+			tween.parallel().tween_property(cam, "position", Vector2(856,540) , timmmmmm)
+	
+	
+func _on_attack(target: Character, _duration: float =1.0):
+	self.z_index = 5
+	target.z_index = 5
+	var tween = null
+	var has_move := current_skill.effects.any(func(e): return e is MoveToPositionEffect)
+	var has_heal := current_skill.effects.any(func(e): return e is HealEffect)
+	tween = create_tween()
+	if !has_heal:
+		if target.characterData.current_stamina >0:
+			target.sprite.texture =target.characterData.Hit_texture
+			target.Selector.texture = target.characterData.Hit_texture
+
+	sprite.texture = current_skill.ImageSkill
+	
+	tween.parallel().tween_property(self, "position", start_pos, 0.2).set_delay(_duration)
+	tween.parallel().tween_property(self, "scale", normal_size, 0.2).set_delay(_duration)
+	tween.parallel().tween_property(target, "scale", normal_size, 0.3).set_delay(_duration)
+	if !has_move:
+		tween.parallel().tween_property(target, "position", start_target_pos, 0.3).set_delay(_duration)
+	tween.parallel().tween_property(cam, "zoom", Vector2(1.0,1.0), 0.3).set_delay(_duration)
+	tween.parallel().tween_property(ShadowBackground, "modulate:a", 0.0, 0.3).set_delay(_duration)
+	tween.parallel().tween_property(cam, "position", Vector2(960,540) ,0.3).set_delay(_duration)
 	await tween.finished
+	
+	after_skilluse(target)
+	
+	
+func after_skilluse(target: Character):
+	for eq in characterData.equipped_items:
+		eq.after_skill_use(self,current_skill, target)
+	sprite.texture = characterData.portrait_texture
+	
+	Selector.visible=true
+	if target.characterData.current_stamina>0:
+		target.Selector.texture=target.characterData.portrait_texture
+		target.sprite.texture = target.characterData.portrait_texture
+	if target.characterData.current_stamina<=0:
+		target.Selector.texture=target.characterData.dead_portrait_texture
+		target.sprite.texture = target.characterData.dead_portrait_texture
+	target.scale=target._current_slot.position_data.scale
+	if _current_slot:
+		self.z_index = _current_slot.z_index
+	if target._current_slot:
+		target.z_index = target._current_slot.z_index
 	emit_signal("skill_animation_finished")
-
+		
 func miss_animation(target: Character):
 	emit_signal("skill_animation_started")
 	var Misseffect_instance= MissEffectScene.instantiate()
@@ -587,20 +722,21 @@ func miss_animation(target: Character):
 
 func animate_bonk(): 
 	emit_signal("skill_animation_started")
-	var effect_instance = BonkEffectScene.instantiate()
-	get_tree().current_scene.add_child(effect_instance)
-	effect_instance.global_position = global_position + Vector2(0, -30)
-	if effect_instance.has_method("setup"):
-		effect_instance.setup(0)
-	var tween := create_tween() as Tween
-	var normal_size = CharaScale
-	var big_size= Vector2(normal_size.x*1.1,normal_size.y*1.3)
-	tween.tween_property(self, "scale", big_size, 0.2)
-	tween.tween_property(self, "scale", normal_size, 0.2)
-	await tween.finished
+	if !characterData.IsDemon:
+		var effect_instance = BonkEffectScene.instantiate()
+		get_tree().current_scene.add_child(effect_instance)
+		effect_instance.global_position = global_position + Vector2(0, -30)
+		if effect_instance.has_method("setup"):
+			effect_instance.setup(0)
+		var tween := create_tween() as Tween
+		var normal_size = CharaScale
+		var big_size= Vector2(normal_size.x*1.1,normal_size.y*1.3)
+		tween.tween_property(self, "scale", big_size, 0.2)
+		tween.tween_property(self, "scale", normal_size, 0.2)
+		await tween.finished
 	emit_signal("skill_animation_finished")
 
 func shake_camera(strength := 5.0):
-	var cam := get_viewport().get_camera_2d()
+	
 	if cam and cam.has_method("shake"):
 		cam.shake(strength)

@@ -1,14 +1,14 @@
 [gd_scene load_steps=29 format=3 uid="uid://dhetbwfnqklgn"]
 
-[ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_bcy54"]
+[ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="1_ymtos"]
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_yutei"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_pbg28"]
+[ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="4_3bi0y"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="4_vohl0"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="5_2ojad"]
 [ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="6_gxenu"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="7_3bv44"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="8_2ckgu"]
-[ext_resource type="Texture2D" uid="uid://c5gdj53xfb58w" path="res://UI/doorIconleft.png" id="9_ahcdp"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="10_e5tmw"]
 [ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="11_6r8aw"]
 [ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="12_0osig"]
@@ -41,7 +41,7 @@ grow_vertical = 2
 [node name="DoorBg" type="Sprite2D" parent="."]
 position = Vector2(960.5, 542)
 scale = Vector2(0.781352, 0.79562)
-texture = ExtResource("1_bcy54")
+texture = ExtResource("1_ymtos")
 
 [node name="exploUI" type="Sprite2D" parent="."]
 position = Vector2(961, 541)
@@ -50,6 +50,17 @@ texture = ExtResource("2_yutei")
 
 [node name="atmosphere" parent="." instance=ExtResource("3_pbg28")]
 position = Vector2(19, 447)
+
+[node name="Gradiant" type="Sprite2D" parent="."]
+position = Vector2(1658, 376)
+scale = Vector2(1, 1.5)
+texture = ExtResource("4_3bi0y")
+
+[node name="Gradiant2" type="Sprite2D" parent="."]
+position = Vector2(262, 376)
+rotation = -3.14117
+scale = Vector2(1, 1.5)
+texture = ExtResource("4_3bi0y")
 
 [node name="ActionPanel" type="HBoxContainer" parent="."]
 visible = false
@@ -197,7 +208,7 @@ script = ExtResource("8_2ckgu")
 layout_mode = 0
 offset_right = 242.0
 offset_bottom = 764.0
-icon = ExtResource("9_ahcdp")
+icon = ExtResource("11_6r8aw")
 flat = true
 expand_icon = true
 script = ExtResource("10_e5tmw")

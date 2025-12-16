@@ -1,14 +1,14 @@
-[gd_scene load_steps=33 format=3 uid="uid://dv04v6jagn4q1"]
+[gd_scene load_steps=36 format=3 uid="uid://dv04v6jagn4q1"]
 
-[ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_o6m4w"]
+[ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="1_o2neq"]
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_mdkvs"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_puy7d"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="3_6jptd"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="4_betcj"]
+[ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="4_itvqt"]
 [ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="5_lps75"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="6_nju53"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="7_mdkvs"]
-[ext_resource type="Texture2D" uid="uid://c5gdj53xfb58w" path="res://UI/doorIconleft.png" id="8_puy7d"]
 [ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="8_r3s01"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="9_6jptd"]
 [ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="9_7l14n"]
@@ -32,6 +32,12 @@
 [ext_resource type="Texture2D" uid="uid://badlboehrrx84" path="res://tuto/intro2.png" id="30_itvqt"]
 [ext_resource type="Script" uid="uid://b0ir2tk1oluly" path="res://lvl/Hall1/tuto.gd" id="31_5ypre"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2neq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_itvqt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ypre"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_crknv"]
 
 [node name="Door" type="Control"]
@@ -45,15 +51,27 @@ grow_vertical = 2
 [node name="DoorBg" type="Sprite2D" parent="."]
 position = Vector2(960.5, 542)
 scale = Vector2(0.781352, 0.79562)
-texture = ExtResource("1_o6m4w")
+texture = ExtResource("1_o2neq")
+
+[node name="atmosphere" parent="." instance=ExtResource("2_puy7d")]
+position = Vector2(19, 447)
+
+[node name="Gradiant" type="Sprite2D" parent="."]
+position = Vector2(1664.4, 379.091)
+rotation = -0.104899
+scale = Vector2(1.12179, 1.60929)
+texture = ExtResource("4_itvqt")
+
+[node name="Gradiant2" type="Sprite2D" parent="."]
+position = Vector2(266, 383)
+rotation = 3.25064
+scale = Vector2(1.27378, 1.72154)
+texture = ExtResource("4_itvqt")
 
 [node name="exploUI" type="Sprite2D" parent="."]
 position = Vector2(961, 541)
 scale = Vector2(0.782573, 0.789781)
 texture = ExtResource("2_mdkvs")
-
-[node name="atmosphere" parent="." instance=ExtResource("2_puy7d")]
-position = Vector2(19, 447)
 
 [node name="ActionPanel" type="HBoxContainer" parent="."]
 visible = false
@@ -201,7 +219,8 @@ script = ExtResource("7_mdkvs")
 layout_mode = 0
 offset_right = 242.0
 offset_bottom = 764.0
-icon = ExtResource("8_puy7d")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_o2neq")
+icon = ExtResource("10_betcj")
 flat = true
 expand_icon = true
 script = ExtResource("9_6jptd")
@@ -213,6 +232,7 @@ layout_mode = 0
 offset_left = 1676.0
 offset_right = 1918.0
 offset_bottom = 764.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_itvqt")
 icon = ExtResource("10_betcj")
 flat = true
 icon_alignment = 1
@@ -268,6 +288,7 @@ offset_left = 799.0
 offset_top = 151.0
 offset_right = 1084.0
 offset_bottom = 657.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5ypre")
 flat = true
 script = ExtResource("8_r3s01")
 
@@ -393,6 +414,7 @@ scale = Vector2(1.07026, 1.0878)
 texture = ExtResource("27_gf8ky")
 
 [node name="Intro2" type="Sprite2D" parent="."]
+visible = false
 z_index = 16
 position = Vector2(963, 538)
 scale = Vector2(0.72634, 0.72634)
@@ -415,6 +437,7 @@ offset_bottom = 42.0
 text = "didactitiel"
 
 [node name="Intro1" type="Sprite2D" parent="."]
+visible = false
 z_index = 20
 position = Vector2(955, 539)
 scale = Vector2(0.663709, 0.663709)

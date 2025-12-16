@@ -17,7 +17,7 @@ func apply(user: CharaCamp, target: CharaCamp):
 	var file_path := ""
 
 	# Choix du texte en fonction de la classe ou du nom du target
-	match target.Charaname:
+	match target.characterData.Charaname:
 		"Priestess":  file_path = dialoguePriest
 		"Mystic":  file_path = dialogueMystic
 		"Hunter":  file_path = dialogueHunter
@@ -29,13 +29,13 @@ func apply(user: CharaCamp, target: CharaCamp):
 
 	var dialogue_manager: DialogueManager = camp.get_node_or_null("DialogueManager")
 
-
-	
+	target.characterData.affinity[user.characterData.Charaname] += 20
+	user.characterData.affinity[target.characterData.Charaname] += 20
 	if dialogue_manager and file_path != "":
 			dialogue_manager.load_dialogue(file_path)
 			dialogue_manager.participants.clear()
-			dialogue_manager.participants.append(user.Charaname)
-			dialogue_manager.participants.append(target.Charaname)
+			dialogue_manager.participants.append(user.characterData.Charaname)
+			dialogue_manager.participants.append(target.characterData.Charaname)
 			dialogue_manager.start_dialogue()
 
 		

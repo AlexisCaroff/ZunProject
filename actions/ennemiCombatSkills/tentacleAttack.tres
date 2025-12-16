@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://6oj65xacpxi"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_pnk3y"]
-[ext_resource type="Texture2D" uid="uid://di6rn04xd5e1x" path="res://characters/charatexture/ENEMY_SPITTER_tentacle.png" id="1_xuyw1"]
+[ext_resource type="Texture2D" uid="uid://2wfiphdpwbq6" path="res://characters/charatexture/demo characters/ENEMY_spitter_jump.png" id="1_xuyw1"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_2a5gp"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_bjxpp"]
 [ext_resource type="Texture2D" uid="uid://ccnq4lbltabiy" path="res://actions/actiontexture/tentacles.png" id="3_xuyw1"]
@@ -36,4 +36,6 @@ precision = 100
 allways_hit = false
 duration = 0.3
 tags = Array[String]([])
+is_contact = true
+distance_contact = 300.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

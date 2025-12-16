@@ -22,15 +22,15 @@ func _on_button_button_down() -> void:
 	
 func use_cairn():
 	var target :CharaExplo = explomanage.characters[randi() % explomanage.characters.size()]
-	target.current_stamina = min(target.max_stamina, target.current_stamina + amount)
+	target.characterData.current_stamina = min(target.characterData.max_stamina, target.characterData.current_stamina + amount)
 	target.update_display()
-	GameState.update_hero_stat(target.Charaname, "stamina", target.current_stamina)
+	GameState.update_hero_stat(target.characterData.Charaname, "stamina", target.characterData.current_stamina)
 
 func destroy_cairn():
 	for target in explomanage.characters:
-		target.current_stress = max(0, target.current_stress - amount)
+		target.characterData.current_stress = max(0, target.characterData.current_stress - amount)
 		target.update_display()
-		GameState.update_hero_stat(target.Charaname, "stress", target.current_stress)
+		GameState.update_hero_stat(target.Charaname, "stress", target.characterData.current_stress)
 	self.visible=false
 
 func _on_button_mouse_entered() -> void:

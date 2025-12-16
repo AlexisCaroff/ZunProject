@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://doitrlqhfja4t"]
+[gd_scene load_steps=8 format=3 uid="uid://doitrlqhfja4t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_1rndn"]
 [ext_resource type="Resource" uid="uid://c3vy2fgg7t28x" path="res://characters/data/CharacterTestEnemySpitter1.tres" id="2_gbqy8"]
-[ext_resource type="Texture2D" uid="uid://bwlcc7mlf1iwx" path="res://characters/charatexture/enemy spitter.png" id="11_2uqc5"]
+[ext_resource type="Texture2D" uid="uid://chhccyohveiec" path="res://characters/charatexture/demo characters/ENEMY_spitter_idle.png" id="4_8scg0"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="11_ih6kd"]
-[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="12_e7hg0"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="13_3o24a"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="14_3o24a"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="15_bbnup"]
@@ -37,26 +36,28 @@ scalemini = 0.9
 max_duration = 0.7
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -117.0
-offset_top = -155.0
-offset_right = 54.0
-offset_bottom = 76.0
-scale = Vector2(1, 0.7)
+offset_left = -377.0
+offset_top = -446.0
+offset_right = -206.0
+offset_bottom = -215.0
+scale = Vector2(3.01881, 2.11316)
 mouse_filter = 2
-texture = ExtResource("11_2uqc5")
+texture = ExtResource("4_8scg0")
 expand_mode = 1
+flip_h = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Selector" type="TextureRect" parent="pivot"]
 self_modulate = Color(2, 2, 2, 0)
-offset_left = -117.0
-offset_top = -155.0
-offset_right = 54.0
-offset_bottom = 76.0
-scale = Vector2(1, 0.7)
+offset_left = -377.0
+offset_top = -446.0
+offset_right = -206.0
+offset_bottom = -215.0
+scale = Vector2(3.01881, 2.11316)
 mouse_filter = 2
-texture = ExtResource("12_e7hg0")
+texture = ExtResource("4_8scg0")
 expand_mode = 1
+flip_h = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Arrow" type="Sprite2D" parent="."]

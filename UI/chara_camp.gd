@@ -27,10 +27,10 @@ var campposition :CampPosition
 var targetable : bool = false 
 var CharaScale : Vector2
 const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
-var characterdata: CharacterData
+var characterData: CharacterData
 var CharaCampPoints : int = 2
 var camp : Campement
-
+var camp_skills: Array[CampSkill] = []
 
 func _ready() -> void:
 	CharaScale= self.scale
@@ -40,15 +40,17 @@ func _ready() -> void:
 
 # Appelée après instanciation, pour charger les données du GameStat
 func load_camp_chara(charaData : CharacterData) -> void:
-		characterdata=charaData 
+		characterData=charaData 
 		portrait_texture = charaData.textureCamp
+		_updateSkills(characterData.camp_skill_resources)
+	
 		
 func set_targetable(targe : bool):
 	targetable = targe 
 	Arrow.visible= targe
 func add_buff(buff: Buff):
 	var new_buff = buff.duplicate()
-	characterdata.buffs.append(new_buff)
+	characterData.buffs.append(new_buff)
 	var icon = TextureRect.new()
 	icon.texture = buff.icon
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -63,10 +65,10 @@ func update_display() -> void:
 		guilt_Jauge=$Stress/GuiltrogressBar
 		#horny_Jauge=$horny/HornyProgressBar
 		# return
-	hp_Jauge.value=characterdata.current_stamina
-	guilt_Jauge.value=characterdata.current_stress
+	hp_Jauge.value=characterData.current_stamina
+	guilt_Jauge.value=characterData.current_stress
 	#horny_Jauge.value=current_horny
-	name_label.text = characterdata.Charaname
+	name_label.text = characterData.Charaname
 
 	
 	sprite.texture = portrait_texture
@@ -104,3 +106,13 @@ func animate_selected():
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	await tween.finished
 	emit_signal("skill_animation_finished")
+	
+func _updateSkills(updated_skills: Array[CampSkill] ):
+	camp_skills.clear()
+	for s in updated_skills:
+		if s == null:
+			push_error("Une ressource de compétence est nulle dans %s" % name)
+			continue
+		var inst= s.duplicate()
+		
+		camp_skills.append(inst)

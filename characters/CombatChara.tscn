@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="8_osbnm"]
 
 [node name="Warrior" type="Node2D"]
+z_as_relative = false
 script = ExtResource("1_i21nx")
 metadata/converted = true
 metadata/character_data_path = "res://characters/data/CharaWarrior.tres"

@@ -1,14 +1,15 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=14 format=3 uid="uid://c3vy2fgg7t28x"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=15 format=3 uid="uid://c3vy2fgg7t28x"]
 
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_716pa"]
+[ext_resource type="Texture2D" uid="uid://4xabmn08n7nt" path="res://characters/charatexture/demo characters/ENEMY_spitter_hit.png" id="1_bxekq"]
 [ext_resource type="Script" uid="uid://cf2k68rgsdle0" path="res://characters/charatexture/braines/Ai_brain.gd" id="1_tavhp"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_tavhp"]
-[ext_resource type="Texture2D" uid="uid://dlcmqtbjarl35" path="res://characters/charatexture/enemy spitterDead.png" id="3_bxekq"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_kpmge"]
+[ext_resource type="Texture2D" uid="uid://dfbm6mf8pdux7" path="res://characters/charatexture/demo characters/ENEMY_slime_down.png" id="5_bxekq"]
 [ext_resource type="Texture2D" uid="uid://dbq25fw4dr1n0" path="res://characters/exploPortrait/SpitterExploPortrait.png" id="5_s2gjy"]
 [ext_resource type="Texture2D" uid="uid://cgnrms5owdhet" path="res://characters/characterInitiative/slimportini.png" id="6_tnthr"]
-[ext_resource type="Texture2D" uid="uid://bwlcc7mlf1iwx" path="res://characters/charatexture/enemy spitter.png" id="7_2lnkb"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="8_i4ffr"]
+[ext_resource type="Texture2D" uid="uid://chhccyohveiec" path="res://characters/charatexture/demo characters/ENEMY_spitter_idle.png" id="9_kpmge"]
 [ext_resource type="Resource" uid="uid://dwdi447w8ocvi" path="res://actions/ennemiCombatSkills/poisonHorny.tres" id="9_odt67"]
 [ext_resource type="Resource" uid="uid://6oj65xacpxi" path="res://actions/ennemiCombatSkills/tentacleAttack.tres" id="10_qbpw2"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="11_ev3yx"]
@@ -21,11 +22,13 @@ metadata/_custom_type_script = "uid://cf2k68rgsdle0"
 
 [resource]
 script = ExtResource("8_i4ffr")
-portrait_texture = ExtResource("7_2lnkb")
+portrait_texture = ExtResource("9_kpmge")
 explorationPortrait = ExtResource("5_s2gjy")
-dead_portrait_texture = ExtResource("3_bxekq")
+dead_portrait_texture = ExtResource("5_bxekq")
+Hit_texture = ExtResource("1_bxekq")
 initiative_icon = ExtResource("6_tnthr")
-Charaname = "Glarg"
+Name = "name"
+Charaname = "Slime"
 IsDemon = true
 affinity = Dictionary[String, int]({})
 base_max_stamina = 100

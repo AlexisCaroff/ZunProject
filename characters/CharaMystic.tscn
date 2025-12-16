@@ -1,17 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8lhes1w5ga1t"]
+[gd_scene load_steps=12 format=3 uid="uid://b8lhes1w5ga1t"]
 
-[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_nekcb"]
-[ext_resource type="Texture2D" uid="uid://df5ltgoqyf2jw" path="res://characters/charatexture/char mystic.png" id="2_bjjxo"]
+[ext_resource type="Texture2D" uid="uid://cnatta8x70i3r" path="res://characters/charatexture/demo characters/HERO_mystic_cc_idle22.png" id="4_25le5"]
+[ext_resource type="Texture2D" uid="uid://okan3l38r1ob" path="res://characters/charatexture/noise4.png" id="9_25le5"]
+[ext_resource type="Shader" uid="uid://ci6t01o8wrsor" path="res://characters/flame.gdshader" id="9_ej4w4"]
+[ext_resource type="Texture2D" uid="uid://bxu4jlsowu4up" path="res://characters/charatexture/demo characters/hand.png" id="10_1cl10"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="15_y67ho"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="16_ucs2x"]
-[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="18_2xt24"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="19_u2t1c"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="21_uj7tg"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="22_rwlb5"]
 [ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="24_ikc5x"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vro55"]
+shader = ExtResource("9_ej4w4")
+shader_parameter/deform_texture = ExtResource("9_25le5")
+shader_parameter/deform_strength_x = 0.05
+shader_parameter/deform_strength_y = 0.02
+shader_parameter/scroll_speed = 0.2
+
 [node name="Mystic" type="Node2D"]
-script = ExtResource("1_nekcb")
+position = Vector2(187, 264)
 metadata/character_data_path = "res://characters/data/CharaMystic.tres"
 
 [node name="name" type="Label" parent="."]
@@ -84,25 +92,25 @@ min_duration = 1.0
 max_duration = 1.5
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -107.5
-offset_top = -215.833
-offset_right = 63.5
-offset_bottom = 15.1667
-scale = Vector2(1.2, 1)
+offset_left = -147.5
+offset_top = -319.832
+offset_right = 23.5
+offset_bottom = -88.832
+scale = Vector2(2.10884, 1.38361)
 mouse_filter = 2
-texture = ExtResource("2_bjjxo")
+texture = ExtResource("4_25le5")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Selector" type="TextureRect" parent="pivot"]
 self_modulate = Color(2, 2, 2, 0)
-offset_left = -107.5
-offset_top = -215.833
-offset_right = 63.5
-offset_bottom = 15.1667
-scale = Vector2(1.2, 1)
+offset_left = -147.5
+offset_top = -319.832
+offset_right = 23.5
+offset_bottom = -88.832
+scale = Vector2(2.10884, 1.38361)
 mouse_filter = 2
-texture = ExtResource("18_2xt24")
+texture = ExtResource("4_25le5")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -147,6 +155,12 @@ z_index = -1
 position = Vector2(161, 28)
 scale = Vector2(2.34924, 0.637405)
 texture = ExtResource("24_ikc5x")
+
+[node name="Hand" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vro55")
+position = Vector2(69, -88)
+scale = Vector2(0.17907, 0.17907)
+texture = ExtResource("10_1cl10")
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

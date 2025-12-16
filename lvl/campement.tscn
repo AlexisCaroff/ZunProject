@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://c63m6eq381xm1"]
+[gd_scene load_steps=61 format=3 uid="uid://c63m6eq381xm1"]
 
 [ext_resource type="Script" uid="uid://w6xjpbgh5xei" path="res://scripts/camp/campement.gd" id="1_7mjgo"]
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_dks4i"]
@@ -20,7 +20,8 @@
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="17_luaer"]
 [ext_resource type="Texture2D" uid="uid://cc5eq6g7p535a" path="res://props/boles.png" id="18_03c8w"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="20_7788d"]
-[ext_resource type="Texture2D" uid="uid://dggwxrbeaep38" path="res://props/camp_bg.png" id="21_vn050"]
+[ext_resource type="Texture2D" uid="uid://b72rv8qoighv3" path="res://props/PROP_tent_back.png" id="20_nj740"]
+[ext_resource type="Texture2D" uid="uid://c0cu2ebq5pusr" path="res://props/PROP_tent_front.png" id="21_7tx7c"]
 [ext_resource type="Script" uid="uid://cklpwxrawneex" path="res://scripts/camp/tente.gd" id="22_jpnjt"]
 [ext_resource type="Texture2D" uid="uid://dek8m1gml45n4" path="res://tent scenes/TENT H001.png" id="23_2te02"]
 [ext_resource type="Texture2D" uid="uid://ch62hgh86rhbb" path="res://tent scenes/TENT H002.png" id="24_bg6vn"]
@@ -34,26 +35,52 @@
 [ext_resource type="Texture2D" uid="uid://bdy0agpnmylqa" path="res://tent scenes/TENT M001.png" id="32_qfpsl"]
 [ext_resource type="Texture2D" uid="uid://3e0i7e3706bs" path="res://tent scenes/TENT M002.png" id="33_1pem6"]
 [ext_resource type="Texture2D" uid="uid://bveudlsonot3y" path="res://tent scenes/TENT M003.png" id="34_7h8sq"]
-[ext_resource type="Texture2D" uid="uid://bmlnpvk7o2kwu" path="res://props/tente_bg.png" id="34_gwj3x"]
 [ext_resource type="Texture2D" uid="uid://csxp5q5mkr2g3" path="res://props/insidetenteUIBackground.png" id="35_bg6vn"]
 [ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="36_gwj3x"]
 [ext_resource type="Texture2D" uid="uid://cbbc3rht6f8fd" path="res://props/sac.png" id="38_fctf2"]
 [ext_resource type="Texture2D" uid="uid://dw7qyyxtv4puc" path="res://tuto/intro4.png" id="39_gofun"]
 [ext_resource type="Script" uid="uid://b0ir2tk1oluly" path="res://lvl/Hall1/tuto.gd" id="40_xmkko"]
+[ext_resource type="Shader" uid="uid://nehgn30c71ua" path="res://characters/flame2.gdshader" id="41_1pem6"]
+[ext_resource type="Shader" uid="uid://ci6t01o8wrsor" path="res://characters/flame.gdshader" id="41_qfpsl"]
+[ext_resource type="Texture2D" uid="uid://okan3l38r1ob" path="res://characters/charatexture/noise4.png" id="42_1pem6"]
+[ext_resource type="Texture2D" uid="uid://6bw7q7nqrbxc" path="res://props/flame.png" id="45_7h8sq"]
+[ext_resource type="Texture2D" uid="uid://6c6j120lvsba" path="res://props/flameHalo.png" id="45_qbnx0"]
+[ext_resource type="Script" uid="uid://0yy75ocbav52" path="res://lvl/haloFeu.gd" id="46_i1nuu"]
+[ext_resource type="Texture2D" uid="uid://dh6k7cso8hksn" path="res://UI/charaIcon.png" id="47_nj740"]
+[ext_resource type="Script" uid="uid://cxgw24yv778d8" path="res://lvl/chara_portraitButton.gd" id="48_7tx7c"]
+[ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="49_yy5dy"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_luaer"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1blth"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hfsnk"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7788d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hfsnk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gwj3x"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_03c8w"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wdxk4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qbnx0"]
+shader = ExtResource("41_1pem6")
+shader_parameter/deform_texture = ExtResource("42_1pem6")
+shader_parameter/deform_strength = 2.0
+shader_parameter/scroll_speed = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i1nuu"]
+shader = ExtResource("41_qfpsl")
+shader_parameter/deform_texture = ExtResource("42_1pem6")
+shader_parameter/deform_strength_x = 1.0
+shader_parameter/deform_strength_y = 0.5
+shader_parameter/scroll_speed = 0.4
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qbnx0"]
+blend_mode = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xthm3"]
 
 [node name="Campement" type="Node2D"]
 script = ExtResource("1_7mjgo")
@@ -68,8 +95,8 @@ z_index = 1
 position = Vector2(876, 653)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
-z_index = 3
-position = Vector2(-28, 18)
+z_index = 1
+position = Vector2(161, -11)
 scale = Vector2(1.3, 1.3)
 script = ExtResource("4_adv8w")
 
@@ -86,7 +113,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="position2" type="Node2D" parent="HeroPosition"]
 z_index = 3
-position = Vector2(718, 9)
+position = Vector2(714, 9)
 scale = Vector2(1.3, 1.3)
 script = ExtResource("4_adv8w")
 
@@ -101,9 +128,25 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_1blth")
 flat = true
 metadata/_edit_use_anchors_ = true
 
+[node name="position4" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(13, 29)
+scale = Vector2(1.3, 1.3)
+script = ExtResource("4_adv8w")
+
+[node name="Button" type="Button" parent="HeroPosition/position4"]
+z_index = 10
+y_sort_enabled = true
+offset_left = -82.0
+offset_top = -522.0
+offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7788d")
+flat = true
+metadata/_edit_use_anchors_ = true
+
 [node name="position3" type="Node2D" parent="HeroPosition"]
 z_index = 1
-position = Vector2(441, -26)
+position = Vector2(471, -26)
 scale = Vector2(1.3, 1.3)
 script = ExtResource("4_adv8w")
 
@@ -117,21 +160,6 @@ scale = Vector2(1.3, 1.3)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_hfsnk")
 flat = true
 metadata/_edit_use_anchors_ = true
-
-[node name="position4" type="Node2D" parent="HeroPosition"]
-z_index = 1
-position = Vector2(153, -13)
-scale = Vector2(1.3, 1.3)
-script = ExtResource("4_adv8w")
-
-[node name="Button" type="Button" parent="HeroPosition/position4"]
-z_index = 10
-y_sort_enabled = true
-offset_left = -82.0
-offset_top = -522.0
-offset_right = 67.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_7788d")
-flat = true
 
 [node name="atmosphere" parent="." instance=ExtResource("5_o6ov4")]
 position = Vector2(2, 352)
@@ -272,6 +300,7 @@ theme_override_font_sizes/font_size = 25
 text = "Camp points "
 horizontal_alignment = 1
 autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="CampPoint" type="Label" parent="."]
 offset_left = 886.0
@@ -283,6 +312,7 @@ theme_override_font_sizes/font_size = 25
 text = "1"
 horizontal_alignment = 1
 autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="AttLabel" type="Label" parent="."]
 offset_left = 283.0
@@ -340,14 +370,14 @@ offset_bottom = 975.0
 color = Color(0.501961, 0.407843, 0.207843, 1)
 
 [node name="Sac2" type="Sprite2D" parent="."]
-position = Vector2(1199, 577)
+position = Vector2(1304, 586)
 scale = Vector2(0.672222, 0.683908)
 texture = ExtResource("38_fctf2")
 flip_h = true
 
 [node name="CampFire" type="Sprite2D" parent="."]
 z_index = 3
-position = Vector2(1221, 607)
+position = Vector2(1221, 661)
 scale = Vector2(1.08411, 0.906955)
 texture = ExtResource("17_1blth")
 
@@ -357,39 +387,45 @@ script = ExtResource("20_7788d")
 
 [node name="TenteBack" type="Sprite2D" parent="."]
 modulate = Color(0.363281, 0.363281, 0.363281, 1)
-position = Vector2(440.546, 637.291)
-rotation = 0.0304331
-scale = Vector2(2.05629, 2.08725)
-texture = ExtResource("34_gwj3x")
-offset = Vector2(12.055, -102.525)
+position = Vector2(420.885, 586.758)
+rotation = -0.0262635
+scale = Vector2(0.406915, 0.413042)
+texture = ExtResource("20_nj740")
+offset = Vector2(12.055, -700)
 
 [node name="LoveImage" type="Sprite2D" parent="."]
-position = Vector2(506, 512.291)
+position = Vector2(450, 499)
 rotation = 0.0304331
 scale = Vector2(0.571926, 0.571926)
 offset = Vector2(3.8, -131.95)
 
 [node name="Tente" type="Sprite2D" parent="."]
-position = Vector2(440.546, 640.291)
-rotation = 0.0304331
-scale = Vector2(2.05629, 2.08725)
-texture = ExtResource("21_vn050")
-offset = Vector2(12.055, -102.525)
+position = Vector2(420.885, 589.758)
+rotation = -0.0262635
+scale = Vector2(0.406915, 0.413041)
+texture = ExtResource("21_7tx7c")
+offset = Vector2(12.055, -700)
 script = ExtResource("22_jpnjt")
 HunterImages = Array[Texture2D]([ExtResource("23_2te02"), ExtResource("24_bg6vn"), ExtResource("25_gwj3x")])
 PriestImages = Array[Texture2D]([ExtResource("26_wdxk4"), ExtResource("27_03c8w"), ExtResource("28_fctf2")])
 WarriorImages = Array[Texture2D]([ExtResource("29_gofun"), ExtResource("30_xmkko"), ExtResource("31_3vt2c")])
 MysticImages = Array[Texture2D]([ExtResource("32_qfpsl"), ExtResource("33_1pem6"), ExtResource("34_7h8sq")])
-bounce_height = 1.99
+bounce_height = 0.42
 bounce_duration = 0.3
 
 [node name="TenteButton" type="Button" parent="Tente"]
-offset_left = -224.0
-offset_top = -155.0
-offset_right = 138.0
-offset_bottom = 44.0
+anchors_preset = -1
+anchor_left = -0.343189
+anchor_top = 8.26269e-05
+anchor_right = 0.247143
+anchor_bottom = 0.3702
+offset_left = -12.6515
+offset_top = -814.906
+offset_right = 349.349
+offset_bottom = -615.905
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gwj3x")
 flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="BackgroundinsideTente" type="Sprite2D" parent="."]
 visible = false
@@ -426,6 +462,7 @@ offset_bottom = 146.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wdxk4")
 flat = true
 expand_icon = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Sprite2D" parent="Button"]
 position = Vector2(132, 50)
@@ -443,6 +480,7 @@ theme_override_font_sizes/font_size = 30
 text = "Sleep and return to the exploration"
 horizontal_alignment = 1
 autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="MapButton" type="Button" parent="."]
 z_index = 10
@@ -456,7 +494,7 @@ hover_color = Color(0.78125, 0.715135, 0.417796, 1)
 
 [node name="Boles2" type="Sprite2D" parent="."]
 z_index = 5
-position = Vector2(971, 654)
+position = Vector2(938, 685)
 scale = Vector2(1.19094, 1.16456)
 texture = ExtResource("18_03c8w")
 
@@ -496,6 +534,7 @@ scale = Vector2(0.839673, 0.858693)
 texture = ExtResource("38_fctf2")
 
 [node name="Intro2" type="Sprite2D" parent="."]
+visible = false
 z_index = 22
 position = Vector2(963, 538)
 scale = Vector2(0.72634, 0.72634)
@@ -515,11 +554,66 @@ z_index = 22
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Didaticiel"
+metadata/_edit_use_anchors_ = true
+
+[node name="Fire" type="Sprite2D" parent="."]
+z_index = 5
+material = SubResource("ShaderMaterial_qbnx0")
+position = Vector2(1221.25, 563.595)
+scale = Vector2(0.909094, 1.57411)
+texture = ExtResource("45_7h8sq")
+
+[node name="Fire2" type="Sprite2D" parent="."]
+z_index = 6
+material = SubResource("ShaderMaterial_i1nuu")
+position = Vector2(1217, 597.532)
+scale = Vector2(1.03052, 1.12944)
+texture = ExtResource("45_7h8sq")
+
+[node name="TextureRect" type="TextureRect" parent="Fire2"]
+material = SubResource("CanvasItemMaterial_qbnx0")
+offset_left = -255.21
+offset_top = -260.777
+offset_right = 272.79
+offset_bottom = 267.223
+mouse_filter = 2
+texture = ExtResource("45_qbnx0")
+script = ExtResource("46_i1nuu")
+min_alpha = 0.3
+max_alpha = 0.6
+speed = 4.0
+
+[node name="charaPortrait2" type="TextureRect" parent="."]
+z_index = 6
+offset_left = 915.0
+offset_top = 722.0
+offset_right = 1004.0
+offset_bottom = 811.0
+texture = ExtResource("47_nj740")
+expand_mode = 1
+script = ExtResource("48_7tx7c")
+
+[node name="charaPortraitButton" type="Button" parent="charaPortrait2"]
+layout_mode = 0
+offset_left = 43.0
+offset_right = 106.0
+offset_bottom = 64.0
+rotation = 0.787448
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xthm3")
+flat = true
+
+[node name="MenuPerso" parent="." instance=ExtResource("49_yy5dy")]
+visible = false
+z_index = 20
+offset_left = -6.0
+offset_top = 18.0
+offset_right = -6.0
+offset_bottom = 18.0
 
 [connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]
-[connection signal="button_down" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_button_down"]
+[connection signal="button_down" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_button_down"]
 [connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]
 [connection signal="button_down" from="ExitButton" to="." method="_on_exit_button_button_down"]

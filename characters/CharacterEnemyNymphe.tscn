@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://d3jx7ce6fpdr1"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_61pjh"]
-[ext_resource type="Texture2D" uid="uid://cugel0hxj5lwq" path="res://characters/charatexture/enemy nymph.png" id="2_i0xeg"]
 [ext_resource type="Resource" uid="uid://qau4rsq3wbf8" path="res://characters/data/CharacterEnemyNymphe.tres" id="2_ukx70"]
+[ext_resource type="Texture2D" uid="uid://cp18c4j8lgs6a" path="res://characters/charatexture/demo characters/ENEMY_nymph_F_idle.png" id="4_ukx70"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="7_065j3"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="7_xwnr5"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="8_0ot4w"]
@@ -22,25 +22,26 @@ min_scale = 1.0
 scalemini = 0.95
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -133.0
-offset_top = -214.0
-offset_right = 38.0
-offset_bottom = 17.0
-scale = Vector2(0.94799, 0.94799)
+offset_left = -307.0
+offset_top = -425.0
+offset_right = -136.0
+offset_bottom = -194.0
+scale = Vector2(2.33999, 1.95075)
 mouse_filter = 2
-texture = ExtResource("2_i0xeg")
+texture = ExtResource("4_ukx70")
 expand_mode = 1
+flip_h = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Selector" type="TextureRect" parent="pivot"]
 self_modulate = Color(2, 2, 2, 0)
-offset_left = -133.0
-offset_top = -214.0
-offset_right = 38.0
-offset_bottom = 17.0
-scale = Vector2(0.94799, 0.94799)
+offset_left = -307.0
+offset_top = -425.0
+offset_right = -136.0
+offset_bottom = -194.0
+scale = Vector2(2.33999, 1.95075)
 mouse_filter = 2
-texture = ExtResource("2_i0xeg")
+texture = ExtResource("4_ukx70")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 

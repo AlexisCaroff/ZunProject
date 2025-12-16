@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://dwdi447w8ocvi"]
 
-[ext_resource type="Texture2D" uid="uid://batofb2wer2nd" path="res://characters/charatexture/ENEMY_SPITTER_shoot.png" id="1_f2alv"]
+[ext_resource type="Texture2D" uid="uid://dmluhaejj5vxf" path="res://characters/charatexture/demo characters/ENEMY_spitter_spit.png" id="1_f2alv"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_tnww7"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_f2alv"]
 [ext_resource type="Texture2D" uid="uid://yyl7yyr5j4rv" path="res://UI/poisonHorny.png" id="3_tnww7"]
@@ -47,4 +47,6 @@ precision = 100
 allways_hit = false
 duration = 0.3
 tags = Array[String]([])
+is_contact = false
+distance_contact = 0.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

@@ -1,15 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://uo6aacbprsjm"]
 
-[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_djh4w"]
+[ext_resource type="Texture2D" uid="uid://768cfl5yiljq" path="res://scenes/backgrounds dungeon demo/BG_dungeon_corridor.png" id="1_3qxc3"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_6fig8"]
 [ext_resource type="PackedScene" uid="uid://h8pqs7tabdxj" path="res://lvl/CombatInterface.tscn" id="3_f31bl"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="4_4grq2"]
 
-[node name="CombatHall1" type="Node2D"]
+[node name="CombatCorridor" type="Node2D"]
 
 [node name="ZunBg" type="Sprite2D" parent="."]
-position = Vector2(961, 402)
-texture = ExtResource("1_djh4w")
+position = Vector2(960, 540)
+texture = ExtResource("1_3qxc3")
 
 [node name="atmosphere" parent="." instance=ExtResource("2_6fig8")]
 position = Vector2(2, 352)

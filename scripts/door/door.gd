@@ -1,4 +1,4 @@
-extends Node
+extends Button
 class_name Door
 @onready var Doortext : TextureRect= $DoorText
 @export var chara_explo_scene : PackedScene
@@ -30,7 +30,9 @@ func _ready():
 		print ("Find Game manager")
 	peek_scene = load("res://UI/peekScene.tscn").instantiate()
 	sub_viewport.add_child(peek_scene)
-	
+	var empty := StyleBoxEmpty.new()
+	add_theme_stylebox_override("focus", empty)
+	add_theme_stylebox_override("focus_visible", empty)
 	#print("next room ready")
 	#print(GameManager.current_room_Ressource.resource_name)
 	if Game_Manager.current_room_Ressource.encounter != null and Game_Manager.current_room_Ressource.ennemikilled ==false :

@@ -54,7 +54,7 @@ func startMasturbation(user:CharaCamp):
 	somoneInside=user
 	ButtonStopMasturb.visible=true
 	bounce_enabled=true
-	match user.Charaname:
+	match user.characterData.Charaname:
 		"Priestess":  images = PriestImages
 		"Mystic":  images = MysticImages
 		"Hunter":  images = HunterImages
@@ -65,8 +65,8 @@ func startMasturbation(user:CharaCamp):
 func startlove(user:CharaCamp, target: CharaCamp):
 	camp = user.camp
 	bounce_enabled=true
-	var key1 = "%s+%s" % [user.Charaname, target.Charaname]
-	var key2 = "%s+%s" % [target.Charaname, user.Charaname]
+	var key1 = "%s+%s" % [user.characterData.Charaname, target.characterData.Charaname]
+	var key2 = "%s+%s" % [target.characterData.Charaname, user.characterData.Charaname]
 	var littlebuff := load("res://characters/kink/bigAttackBuff.tres")
 	
 	user.campposition.visible=false
@@ -85,9 +85,9 @@ func startlove(user:CharaCamp, target: CharaCamp):
 		scene_path = love_scenes[key2]
 
 	if scene_path == "":
-		print("⚠️ Aucun visuel pour ", user.Charaname, " et ", target.Charaname)
+		print("⚠️ Aucun visuel pour ", user.Charaname, " et ", target.characterData.Charaname)
 		return
-	print(scene_path, user.Charaname, " et ", target.Charaname)
+	print(scene_path, user.characterData.Charaname, " et ", target.characterData.Charaname)
 
 
 
@@ -124,7 +124,7 @@ func _on_inside_tente_button_button_down() -> void:
 	ButtonStopMasturb.visible=false
 	timer.stop()
 	bounce_enabled=false
-	somoneInside.current_horny= max(0, somoneInside.current_horny - 20)
+	somoneInside.characterData.current_horniness= max(0, somoneInside.characterData.current_horniness - 20)
 	
 	var CampPosition = somoneInside.campposition
 	
@@ -153,7 +153,9 @@ func _on_tente_button_button_down() -> void:
 		var love_scene_packed: PackedScene = load(scene_path)
 		bounce_enabled=false
 		var littlebuff := load("res://characters/kink/bigAttackBuff.tres")
-				
+		twoInside[0].characterData.affinity[twoInside[1].characterData.Charaname] += 20
+		twoInside[1].characterData.affinity[twoInside[0].characterData.Charaname] += 20
+		print (twoInside[0].characterData.Charaname+" and "+ twoInside[1].characterData.Charaname +" love "+str(twoInside[1].characterData.affinity[twoInside[0].characterData.Charaname]))
 		if not love_scene_packed:
 			push_error("❌ Impossible de charger la scène : " + scene_path)
 			return
@@ -178,13 +180,17 @@ func loved_one_go_out():
 	love_sprite.visible = false
 	for chara in twoInside:
 		chara.campposition.visible = true
+	twoInside[0].characterData.affinity[twoInside[1].Charaname] += 100
+	twoInside[1].characterData.affinity[twoInside[0].Charaname] += 100
+	print (twoInside[0].Charaname+" and "+ twoInside[1].Charaname +" love "+str(twoInside[1].characterData.affinity[twoInside[0].Charaname]))
+	print("yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 	await get_tree().process_frame
 	twoInside.clear()
 	bounce_enabled = false
 	
 func show_love_image(user: CharaCamp, target: CharaCamp):
-	var key1 = "%s+%s" % [user.Charaname, target.Charaname]
-	var key2 = "%s+%s" % [target.Charaname, user.Charaname]
+	var key1 = "%s+%s" % [user.characterData.Charaname, target.characterData.Charaname]
+	var key2 = "%s+%s" % [target.characterData.Charaname, user.characterData.Charaname]
 	var texture: Texture2D = null
 
 	if love_images.has(key1):

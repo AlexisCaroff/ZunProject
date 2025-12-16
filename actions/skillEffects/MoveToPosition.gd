@@ -18,8 +18,6 @@ func apply(user: Character, target: PositionSlot):
 	if target_slot.is_occupied():
 		if !target_slot.occupant.characterData.can_be_moved:
 			return
-		if target_slot.occupant == target.occupant:
-			return
 
 		var target_current_slot = target
 		if target_current_slot == null:

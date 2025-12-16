@@ -11,6 +11,7 @@ var campement_node: Node = null
 @onready var end =$endGame
 @export var inventory: Array[Equipment] = []
 @export var characters: Array[CharacterData] = []
+@onready var sceneTransition = $SceneTransition
 
 func _ready():
 	var screen_index := 1
@@ -29,7 +30,7 @@ func _ready():
 		else:
 			push_error("❌ Start room introuvable pour ID : " + donjon.start_room_id)
 	initialize_affinities(characters)
-
+	await sceneTransition.fade_in()
 
 
 func enter_room(room: RoomResource, changedoor: bool = false):
@@ -39,7 +40,7 @@ func enter_room(room: RoomResource, changedoor: bool = false):
 	
 	
 	print("🏰 Current room is ", current_room_Ressource.room_id)
-
+	await sceneTransition.fade_out()
 	if current_room_node:
 		current_room_node.queue_free()
 		current_room_node = null
@@ -53,22 +54,23 @@ func enter_room(room: RoomResource, changedoor: bool = false):
 		var new_scene = scene_to_load.instantiate()
 		room_container.add_child(new_scene)
 		current_room_node = new_scene
-
+	await sceneTransition.fade_in()
 
 func go_back():
+	await sceneTransition.fade_out()
 	if current_room_node and is_instance_valid(current_room_node):
 		current_room_node.queue_free()
 		current_room_node = null
-
+	
 	var scene_to_load: PackedScene = null
 	if last_room_Ressource and last_room_Ressource.exploration_scene:
 		scene_to_load = last_room_Ressource.exploration_scene
-
+	
 	if scene_to_load:
 		var new_scene = scene_to_load.instantiate()
 		room_container.add_child(new_scene)
 		current_room_node = new_scene
-
+	await sceneTransition.fade_in()
 # 🔍 Retourne une RoomResource depuis son ID
 func get_room_by_id(room_id: String) -> RoomResource:
 	for r in donjon.rooms:
@@ -99,6 +101,7 @@ func _enter_scene_in_current_room(scene: PackedScene, ennemy_are_embushed: bool 
 	current_room_Ressource.explored = true
 	if get_room_by_id("Cellar").ennemikilled == true:
 		end.visible=true
+	await sceneTransition.fade_out()
 	if scene:
 		print("old scene is ", current_room_node.name)
 		if current_room_node:
@@ -126,10 +129,11 @@ func _enter_scene_in_current_room(scene: PackedScene, ennemy_are_embushed: bool 
 		room_container.add_child(new_scene)
 		current_room_node = new_scene
 		print("🌟 Start new room: ", new_scene.name)
-		
+		await sceneTransition.fade_in()
 			
 
 func go_to_campement():
+	await sceneTransition.fade_out()
 	if current_room_node and is_instance_valid(current_room_node):
 		current_room_node.queue_free()
 		current_room_node = null
@@ -137,9 +141,10 @@ func go_to_campement():
 	var campement_scene: PackedScene = load(campement_scene_path)
 	campement_node = campement_scene.instantiate()
 	room_container.add_child(campement_node)
-
+	await sceneTransition.fade_in()
 
 func return_to_exploration():
+	await sceneTransition.fade_out()
 	if campement_node and is_instance_valid(campement_node):
 		campement_node.queue_free()
 		campement_node = null
@@ -154,6 +159,7 @@ func return_to_exploration():
 		current_room_node = new_scene
 		var exploManager =new_scene.get_node("ExplorationManager") as ExplorationManager
 		exploManager.sortie_du_camp()
+	await sceneTransition.fade_in()
 func add_to_inventory(item: Equipment):
 	inventory.append(item)
 	
