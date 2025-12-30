@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8yik7glrdhdx"]
+[gd_scene load_steps=6 format=3 uid="uid://dxqu3uho8v45d"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_54qew"]
 [ext_resource type="Texture2D" uid="uid://j0hygaxu62ja" path="res://characters/charatexture/PriestBody.png" id="2_qqr4u"]

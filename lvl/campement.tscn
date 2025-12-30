@@ -1,8 +1,8 @@
-[gd_scene load_steps=61 format=3 uid="uid://c63m6eq381xm1"]
+[gd_scene load_steps=52 format=3 uid="uid://c63m6eq381xm1"]
 
 [ext_resource type="Script" uid="uid://w6xjpbgh5xei" path="res://scripts/camp/campement.gd" id="1_7mjgo"]
-[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="2_dks4i"]
 [ext_resource type="PackedScene" uid="uid://c2rn6c4jc5dlf" path="res://UI/chara_camp.tscn" id="2_ofeuf"]
+[ext_resource type="Texture2D" uid="uid://87y4s7750hu4" path="res://scenes/backgrounds dungeon demo/BG_dungeon_storeroom.png" id="3_gofun"]
 [ext_resource type="Script" uid="uid://bkiu5du6eeu5b" path="res://lvl/CampPosition.gd" id="4_adv8w"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="5_o6ov4"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="6_8yx0u"]
@@ -24,19 +24,9 @@
 [ext_resource type="Texture2D" uid="uid://c0cu2ebq5pusr" path="res://props/PROP_tent_front.png" id="21_7tx7c"]
 [ext_resource type="Script" uid="uid://cklpwxrawneex" path="res://scripts/camp/tente.gd" id="22_jpnjt"]
 [ext_resource type="Texture2D" uid="uid://dek8m1gml45n4" path="res://tent scenes/TENT H001.png" id="23_2te02"]
-[ext_resource type="Texture2D" uid="uid://ch62hgh86rhbb" path="res://tent scenes/TENT H002.png" id="24_bg6vn"]
-[ext_resource type="Texture2D" uid="uid://bopfwvw6md2u0" path="res://tent scenes/TENT H003.png" id="25_gwj3x"]
-[ext_resource type="Texture2D" uid="uid://2cble3hthjg4" path="res://tent scenes/TENT P001.png" id="26_wdxk4"]
-[ext_resource type="Texture2D" uid="uid://cneoh4qyrr5rh" path="res://tent scenes/TENT P002.png" id="27_03c8w"]
-[ext_resource type="Texture2D" uid="uid://cpcjthvkujxa8" path="res://tent scenes/TENT P003.png" id="28_fctf2"]
-[ext_resource type="Texture2D" uid="uid://c4afc4krobra1" path="res://tent scenes/TENT W001.png" id="29_gofun"]
-[ext_resource type="Texture2D" uid="uid://wupqfxng1a3b" path="res://tent scenes/TENT W002.png" id="30_xmkko"]
-[ext_resource type="Texture2D" uid="uid://d36nfw5mphqko" path="res://tent scenes/TENT W003.png" id="31_3vt2c"]
-[ext_resource type="Texture2D" uid="uid://bdy0agpnmylqa" path="res://tent scenes/TENT M001.png" id="32_qfpsl"]
-[ext_resource type="Texture2D" uid="uid://3e0i7e3706bs" path="res://tent scenes/TENT M002.png" id="33_1pem6"]
-[ext_resource type="Texture2D" uid="uid://bveudlsonot3y" path="res://tent scenes/TENT M003.png" id="34_7h8sq"]
 [ext_resource type="Texture2D" uid="uid://csxp5q5mkr2g3" path="res://props/insidetenteUIBackground.png" id="35_bg6vn"]
 [ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="36_gwj3x"]
+[ext_resource type="Texture2D" uid="uid://ctkoy8ysbicta" path="res://UI/iconMap.png" id="37_yy5dy"]
 [ext_resource type="Texture2D" uid="uid://cbbc3rht6f8fd" path="res://props/sac.png" id="38_fctf2"]
 [ext_resource type="Texture2D" uid="uid://dw7qyyxtv4puc" path="res://tuto/intro4.png" id="39_gofun"]
 [ext_resource type="Script" uid="uid://b0ir2tk1oluly" path="res://lvl/Hall1/tuto.gd" id="40_xmkko"]
@@ -49,6 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://dh6k7cso8hksn" path="res://UI/charaIcon.png" id="47_nj740"]
 [ext_resource type="Script" uid="uid://cxgw24yv778d8" path="res://lvl/chara_portraitButton.gd" id="48_7tx7c"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="49_yy5dy"]
+[ext_resource type="Texture2D" uid="uid://hfa6tl3x7v45" path="res://camp imgs/PROP_campfire_fire.png" id="50_yy5dy"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_luaer"]
 
@@ -87,8 +78,9 @@ script = ExtResource("1_7mjgo")
 chara_Camp_scene = ExtResource("2_ofeuf")
 
 [node name="ZunBg" type="Sprite2D" parent="."]
-position = Vector2(961, 402)
-texture = ExtResource("2_dks4i")
+position = Vector2(840, 510)
+scale = Vector2(1.12486, 1.12591)
+texture = ExtResource("3_gofun")
 
 [node name="HeroPosition" type="Node2D" parent="."]
 z_index = 1
@@ -96,7 +88,7 @@ position = Vector2(876, 653)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
 z_index = 1
-position = Vector2(161, -11)
+position = Vector2(221, -37)
 scale = Vector2(1.3, 1.3)
 script = ExtResource("4_adv8w")
 
@@ -113,7 +105,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="position2" type="Node2D" parent="HeroPosition"]
 z_index = 3
-position = Vector2(714, 9)
+position = Vector2(480, -32)
 scale = Vector2(1.3, 1.3)
 script = ExtResource("4_adv8w")
 
@@ -130,7 +122,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="position4" type="Node2D" parent="HeroPosition"]
 z_index = 1
-position = Vector2(13, 29)
+position = Vector2(28, -5)
 scale = Vector2(1.3, 1.3)
 script = ExtResource("4_adv8w")
 
@@ -146,7 +138,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="position3" type="Node2D" parent="HeroPosition"]
 z_index = 1
-position = Vector2(471, -26)
+position = Vector2(720, 3)
 scale = Vector2(1.3, 1.3)
 script = ExtResource("4_adv8w")
 
@@ -377,40 +369,39 @@ flip_h = true
 
 [node name="CampFire" type="Sprite2D" parent="."]
 z_index = 3
-position = Vector2(1221, 661)
+position = Vector2(1273, 641)
 scale = Vector2(1.08411, 0.906955)
 texture = ExtResource("17_1blth")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
+limit_smoothed = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
 script = ExtResource("20_7788d")
 
 [node name="TenteBack" type="Sprite2D" parent="."]
 modulate = Color(0.363281, 0.363281, 0.363281, 1)
-position = Vector2(420.885, 586.758)
+position = Vector2(420.885, 622.309)
 rotation = -0.0262635
-scale = Vector2(0.406915, 0.413042)
+scale = Vector2(0.365973, 0.371483)
 texture = ExtResource("20_nj740")
-offset = Vector2(12.055, -700)
+offset = Vector2(12.055, -800)
 
 [node name="LoveImage" type="Sprite2D" parent="."]
-position = Vector2(450, 499)
+position = Vector2(440, 469)
 rotation = 0.0304331
-scale = Vector2(0.571926, 0.571926)
+scale = Vector2(0.6, 0.6)
 offset = Vector2(3.8, -131.95)
 
 [node name="Tente" type="Sprite2D" parent="."]
-position = Vector2(420.885, 589.758)
+position = Vector2(420.885, 625.309)
 rotation = -0.0262635
-scale = Vector2(0.406915, 0.413041)
+scale = Vector2(0.365973, 0.371483)
 texture = ExtResource("21_7tx7c")
-offset = Vector2(12.055, -700)
+offset = Vector2(12.055, -800)
 script = ExtResource("22_jpnjt")
-HunterImages = Array[Texture2D]([ExtResource("23_2te02"), ExtResource("24_bg6vn"), ExtResource("25_gwj3x")])
-PriestImages = Array[Texture2D]([ExtResource("26_wdxk4"), ExtResource("27_03c8w"), ExtResource("28_fctf2")])
-WarriorImages = Array[Texture2D]([ExtResource("29_gofun"), ExtResource("30_xmkko"), ExtResource("31_3vt2c")])
-MysticImages = Array[Texture2D]([ExtResource("32_qfpsl"), ExtResource("33_1pem6"), ExtResource("34_7h8sq")])
-bounce_height = 0.42
+bounce_height = Vector2(0.36, 0.4)
 bounce_duration = 0.3
 
 [node name="TenteButton" type="Button" parent="Tente"]
@@ -484,11 +475,12 @@ metadata/_edit_use_anchors_ = true
 
 [node name="MapButton" type="Button" parent="."]
 z_index = 10
-offset_left = 1763.0
-offset_top = 822.0
-offset_right = 1879.0
-offset_bottom = 914.0
-text = "map"
+offset_left = 1803.0
+offset_top = 805.0
+offset_right = 1867.0
+offset_bottom = 881.0
+icon = ExtResource("37_yy5dy")
+flat = true
 script = ExtResource("16_ktrs2")
 hover_color = Color(0.78125, 0.715135, 0.417796, 1)
 
@@ -534,7 +526,6 @@ scale = Vector2(0.839673, 0.858693)
 texture = ExtResource("38_fctf2")
 
 [node name="Intro2" type="Sprite2D" parent="."]
-visible = false
 z_index = 22
 position = Vector2(963, 538)
 scale = Vector2(0.72634, 0.72634)
@@ -551,44 +542,46 @@ flat = true
 
 [node name="ShowTuto" type="Button" parent="."]
 z_index = 22
-offset_right = 8.0
-offset_bottom = 8.0
+offset_top = 161.0
+offset_right = 81.0
+offset_bottom = 192.0
 text = "Didaticiel"
 metadata/_edit_use_anchors_ = true
 
 [node name="Fire" type="Sprite2D" parent="."]
 z_index = 5
 material = SubResource("ShaderMaterial_qbnx0")
-position = Vector2(1221.25, 563.595)
+position = Vector2(1274.75, 429.783)
 scale = Vector2(0.909094, 1.57411)
 texture = ExtResource("45_7h8sq")
 
 [node name="Fire2" type="Sprite2D" parent="."]
 z_index = 6
 material = SubResource("ShaderMaterial_i1nuu")
-position = Vector2(1217, 597.532)
+position = Vector2(1270.5, 490.502)
 scale = Vector2(1.03052, 1.12944)
 texture = ExtResource("45_7h8sq")
 
 [node name="TextureRect" type="TextureRect" parent="Fire2"]
 material = SubResource("CanvasItemMaterial_qbnx0")
 offset_left = -255.21
-offset_top = -260.777
+offset_top = -225.335
 offset_right = 272.79
-offset_bottom = 267.223
+offset_bottom = 302.665
 mouse_filter = 2
 texture = ExtResource("45_qbnx0")
 script = ExtResource("46_i1nuu")
 min_alpha = 0.3
 max_alpha = 0.6
 speed = 4.0
+metadata/_edit_use_anchors_ = true
 
 [node name="charaPortrait2" type="TextureRect" parent="."]
 z_index = 6
-offset_left = 915.0
-offset_top = 722.0
-offset_right = 1004.0
-offset_bottom = 811.0
+offset_left = 1788.0
+offset_top = 885.0
+offset_right = 1877.0
+offset_bottom = 974.0
 texture = ExtResource("47_nj740")
 expand_mode = 1
 script = ExtResource("48_7tx7c")
@@ -609,6 +602,11 @@ offset_left = -6.0
 offset_top = 18.0
 offset_right = -6.0
 offset_bottom = 18.0
+
+[node name="CampFire2" type="Sprite2D" parent="."]
+position = Vector2(1257, 561)
+scale = Vector2(0.317018, 0.388832)
+texture = ExtResource("50_yy5dy")
 
 [connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]

@@ -8,7 +8,7 @@ var portrait_path: String = ""
 var dead_portrait_path: String = ""
 var initiative_icon_path: String = ""
 @onready var name_label = $name
-
+@onready var Selector =$pivot/Selector
 @onready var stress_label = $Stress
 
 @onready var sprite = $pivot/HerosTexture1
@@ -54,7 +54,9 @@ func add_buff(buff: Buff):
 	var icon = TextureRect.new()
 	icon.texture = buff.icon
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	icon.custom_minimum_size = Vector2(20, 20)
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.custom_minimum_size = Vector2(32, 32)
+	icon.size= Vector2(32, 32)
 	buff_bar.add_child(icon)
 	#buff_icons.add_child(icon)
 	print("add buff")
@@ -69,7 +71,7 @@ func update_display() -> void:
 	guilt_Jauge.value=characterData.current_stress
 	#horny_Jauge.value=current_horny
 	name_label.text = characterData.Charaname
-
+	Selector.texture =portrait_texture
 	
 	sprite.texture = portrait_texture
 	

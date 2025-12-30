@@ -1,14 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2rn6c4jc5dlf"]
+[gd_scene load_steps=6 format=3 uid="uid://c2rn6c4jc5dlf"]
 
 [ext_resource type="Script" uid="uid://jtrtg026w4al" path="res://UI/chara_camp.gd" id="1_n0x3i"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="1_tajnv"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="2_n0x3i"]
-[ext_resource type="Texture2D" uid="uid://cs8w5wjum3566" path="res://characters/CampementPorttrait/WarriorCampement.png" id="4_xv3i0"]
+[ext_resource type="Texture2D" uid="uid://dqk35k04yhaeb" path="res://camp imgs/Camp_char_sit_H.png" id="4_xv3i0"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="5_8qacs"]
-[ext_resource type="Texture2D" uid="uid://bx0r66uuskgf1" path="res://characters/CampementPorttrait/pristressCampement.png" id="5_vsk4x"]
 
 [node name="CharaCamp" type="Node2D"]
-rotation = 0.0125759
 script = ExtResource("1_n0x3i")
 
 [node name="name" type="Label" parent="."]
@@ -22,10 +20,11 @@ text = "name"
 horizontal_alignment = 1
 
 [node name="HBuffsContainer" type="HBoxContainer" parent="."]
-offset_left = -29.0
-offset_top = -248.0
-offset_right = 11.0
-offset_bottom = -229.0
+offset_left = -194.0
+offset_top = -237.0
+offset_right = 195.0
+offset_bottom = -218.0
+alignment = 1
 
 [node name="HPProgressBar" type="ProgressBar" parent="."]
 modulate = Color(2, 0.8, 0, 1)
@@ -69,25 +68,26 @@ min_duration = 1.5
 max_duration = 2.0
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -133.0
-offset_top = -229.0
-offset_right = 38.0
-offset_bottom = 2.0
-scale = Vector2(1.2, 1)
+offset_left = -261.15
+offset_top = -426.283
+offset_right = -30.1495
+offset_bottom = -195.283
+scale = Vector2(2, 2)
 mouse_filter = 2
 texture = ExtResource("4_xv3i0")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Selector" type="TextureRect" parent="pivot"]
-self_modulate = Color(2, 2, 2, 0)
-offset_left = -133.0
-offset_top = -229.0
-offset_right = 38.0
-offset_bottom = 2.0
-scale = Vector2(1.2, 1)
+visible = false
+modulate = Color(1.5, 1.5, 1.5, 1)
+offset_left = -261.15
+offset_top = -426.283
+offset_right = -30.1495
+offset_bottom = -195.283
+scale = Vector2(2, 2)
 mouse_filter = 2
-texture = ExtResource("5_vsk4x")
+texture = ExtResource("4_xv3i0")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 

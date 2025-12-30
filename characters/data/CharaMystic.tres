@@ -18,7 +18,7 @@
 [ext_resource type="Resource" uid="uid://duo5wcnmn0qo2" path="res://actions/HerosCombatSkills/vampire.tres" id="14_glo23"]
 [ext_resource type="Resource" uid="uid://bcvrdy48sagwa" path="res://actions/HerosCombatSkills/hook.tres" id="15_0yih5"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="16_buv78"]
-[ext_resource type="Texture2D" uid="uid://dtbnk3lssqj8l" path="res://characters/CampementPorttrait/Mysticcampement.png" id="17_eorem"]
+[ext_resource type="Texture2D" uid="uid://xvf1umygybrb" path="res://camp imgs/Camp_char_sit_M.png" id="19_woow1"]
 
 [resource]
 script = ExtResource("11_4khx0")
@@ -28,7 +28,7 @@ dead_portrait_texture = ExtResource("9_jg4jp")
 Hit_texture = ExtResource("2_woow1")
 initiative_icon = ExtResource("9_tsoqm")
 Dialogue_texture = ExtResource("1_woow1")
-textureCamp = ExtResource("17_eorem")
+textureCamp = ExtResource("19_woow1")
 Name = "name"
 Charaname = "Mystic"
 IsDemon = false

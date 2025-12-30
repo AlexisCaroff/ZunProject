@@ -34,6 +34,7 @@ var combatChara = 	preload("res://characters/CombatChara.tscn")
 
 #stat combat manager
 @onready var audio = $AudioStreamPlayer2D
+@onready var canvas =$"../CanvasLayer"
 
 enum CombatState {
 	IDLE,
@@ -83,7 +84,8 @@ func show_ambush_message(text: String, _color: Color):
 	var font: FontFile = ResourceLoader.load("res://UI/Euphorigenic.otf")
 	label.add_theme_font_override("font", font)
 	label.add_theme_font_size_override("font_size", 64)
-	label.position = get_viewport().get_visible_rect().size / 3
+	label.position = get_viewport().get_visible_rect().size / 3.2
+	label.position.y -= 100
 	add_child(label)
 	label.pivot_offset = label.size / 2
 
@@ -246,7 +248,7 @@ func next_turn():
 		if current_character.exclamation != null:
 			current_character.exclamation.free()
 			ui.log(current_character.characterData.Charaname +" is surprised")
-		
+		current_character.update_buffs()
 		current_character.sprite.self_modulate=Color(1,1,1,1)
 		while is_animation_playing():
 			await get_tree().process_frame
@@ -325,11 +327,11 @@ func _show_victory():
 
 	var victory_ui_scene = preload("res://UI/victory.tscn")
 	var victory_ui = victory_ui_scene.instantiate()
-	var cristal_item := Item.new()
+	var cristal_item := Equipment.new()
 	
 	cristal_item.name = (str(nb_crystaleloot)+" Cristal")
 	cristal_item.icon = cristal_texture
-	cristal_item.quantity = nb_crystaleloot
+	cristal_item.number = nb_crystaleloot
 	cristal_item.description = "Un cristal précieux obtenu en combat."
 	if nb_crystaleloot >0:
 		encounter.loots.append(cristal_item)
@@ -337,7 +339,8 @@ func _show_victory():
 	victory_ui.showLoot(encounter.loots, gm)
 	
 	gm.current_room_Ressource.ennemikilled=true
-	get_parent().add_child(victory_ui)
+	
+	canvas.add_child(victory_ui)
 
 
 	
@@ -366,7 +369,7 @@ func _on_target_selected(targets: Array[PositionSlot]):
 	match combat_state: 
 		CombatState.SELECTING_FIRST_TARGET :
 			if !pending_skill.two_target_Type:
-				if pending_skill.name != "move" && pending_skill.name != "ChangeMask" :
+				if pending_skill.name != "move" : #&& pending_skill.name != "ChangeMask" :
 					var slot
 					var occupied_slots = targets.filter(func(slot): return slot.occupant != null)
 					
@@ -395,7 +398,7 @@ func _on_target_selected(targets: Array[PositionSlot]):
 				combat_state = CombatState.SELECTING_SECOND_TARGET
 				start_target_selection(pending_skill)
 		CombatState.SELECTING_SECOND_TARGET :
-			if pending_skill.name != "move" && pending_skill.name != "ChangeMask" :
+			if pending_skill.name != "move" :# && pending_skill.name != "ChangeMask" :
 				
 				await current_character.animate_attack(pending_skill.target1[0].occupant)
 			if pending_skill.attack_sound != null:

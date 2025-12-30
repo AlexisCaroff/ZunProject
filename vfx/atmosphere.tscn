@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dxnw2d4wwdegc"]
+[gd_scene load_steps=8 format=3 uid="uid://dxnw2d4wwdegc"]
 
 [ext_resource type="Texture2D" uid="uid://k10dyj6s4n5i" path="res://vfx/noiseA.png" id="1_u75om"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_u75om"]
 
 [sub_resource type="Gradient" id="Gradient_yhkjj"]
 colors = PackedColorArray(0.864675, 0.864675, 0.864675, 1, 1, 1, 1, 1)
@@ -37,6 +39,7 @@ anim_speed_max = 10.89
 [node name="atmosphere" type="Node2D"]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_u75om")
 amount = 60
 texture = ExtResource("1_u75om")
 lifetime = 60.0

@@ -43,5 +43,5 @@ allways_hit = false
 duration = 1.0
 tags = Array[String]([])
 is_contact = true
-distance_contact = 300.0
+distance_contact = 350.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

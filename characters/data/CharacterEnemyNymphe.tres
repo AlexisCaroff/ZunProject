@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_yr1yc"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_j2yie"]
 [ext_resource type="Script" uid="uid://cf2k68rgsdle0" path="res://characters/charatexture/braines/Ai_brain.gd" id="2_uby0a"]
-[ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="3_uby0a"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_bq8kj"]
 [ext_resource type="Texture2D" uid="uid://bj4kyibf1he0q" path="res://characters/exploPortrait/NymphExploPortrait.png" id="5_csovy"]
+[ext_resource type="Texture2D" uid="uid://dfbm6mf8pdux7" path="res://characters/charatexture/demo characters/ENEMY_slime_down.png" id="5_uby0a"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="7_s7xrk"]
 [ext_resource type="Texture2D" uid="uid://cp18c4j8lgs6a" path="res://characters/charatexture/demo characters/ENEMY_nymph_F_idle.png" id="7_uby0a"]
 [ext_resource type="Resource" uid="uid://b12yj86cv1lo7" path="res://actions/ennemiCombatSkills/stickynet.tres" id="8_37cj1"]
@@ -24,7 +24,7 @@ metadata/_custom_type_script = "uid://cf2k68rgsdle0"
 script = ExtResource("7_s7xrk")
 portrait_texture = ExtResource("7_uby0a")
 explorationPortrait = ExtResource("5_csovy")
-dead_portrait_texture = ExtResource("3_uby0a")
+dead_portrait_texture = ExtResource("5_uby0a")
 Hit_texture = ExtResource("1_j2yie")
 initiative_icon = ExtResource("5_csovy")
 Name = "name"

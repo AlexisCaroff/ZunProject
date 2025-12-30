@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://cvpggc0yt3l4o"]
 
-[ext_resource type="Texture2D" uid="uid://ou5y44sq84ul" path="res://characters/charatexture/demo characters/ENEMY_nymph_M_charm.png" id="1_ngyod"]
+[ext_resource type="Texture2D" uid="uid://6wgub085a7ty" path="res://characters/charatexture/demo characters/ENEMY_nymph_F_charm.png" id="1_ngyod"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_8l48j"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_gfmg3"]
 [ext_resource type="Texture2D" uid="uid://c6ptbylmpvkdy" path="res://actions/CampSkill/masturbIcon.png" id="4_ngyod"]
@@ -36,6 +36,6 @@ precision = 100
 allways_hit = false
 duration = 1.0
 tags = Array[String]([])
-is_contact = false
-distance_contact = 0.0
+is_contact = true
+distance_contact = 200.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

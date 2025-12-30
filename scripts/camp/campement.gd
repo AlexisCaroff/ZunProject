@@ -61,6 +61,7 @@ func _ready():
 	mapButton.connect("button_down",toggleshowMap)
 	QuitmapButton.connect("button_down",toggleshowMap)
 	MenuPersoButton.connect("button_down",showMenuPerso)
+	
 #func startLovescene():
 	
 	
@@ -193,6 +194,8 @@ func _on_camp_skill_pressed(skill: CampSkill, user: CharaCamp) -> void:
 		return
 	if not TheTente.twoInside.is_empty(): 
 		TheTente.loved_one_go_out()
+	if TheTente.somoneInside != null:
+		TheTente.masturbin_go_out()
 	skillused= skill
 	match skill.target_type:
 		CampSkill.TargetType.SELF:
@@ -249,10 +252,7 @@ func _on_exit_button_button_down() -> void:
 	exitButton.visible = false
 
 func _on_button_button_down() -> void:
-	if GameState.saveRunning:
-		push_warning("Sauvegarde déjà en cours…")
-		return
-	GameState.save_party_from_camp(characters)
+
 	gm.return_to_exploration()
 func toggleshowMap():
 	var subviewport=$SubViewportContainer

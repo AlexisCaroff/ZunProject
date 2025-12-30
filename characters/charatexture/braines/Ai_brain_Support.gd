@@ -7,13 +7,13 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 		return {}
 
 	# --- 1️⃣ Cherche les alliés ennemis blessés (dans enemies)
-	var weak_allies: Array = enemies.filter(func(c): return not c.is_dead() and c.current_stamina < c.max_stamina * 0.6)
+	var weak_allies: Array = enemies.filter(func(c): return not c.is_dead() and c.characterData.current_stamina < c.characterData.max_stamina * 0.6)
 	var heal_skills: Array = usable_skills.filter(func(s): return s.Actiontype == "heal")
 
 	if not heal_skills.is_empty() and not weak_allies.is_empty():
 		var heal_skill: Skill = heal_skills.pick_random()
 		var Charatarget: Character = weak_allies.pick_random()
-		print("%s (AI Support) soigne %s avec %s" % [owner.name, Charatarget.name, heal_skill.descriptionName])
+		print("%s (AI Support) soigne %s avec %s" % [owner.characterData.Charaname, Charatarget.characterData.Charaname, heal_skill.descriptionName])
 		var target :Array[PositionSlot]
 		target.append(Charatarget. _current_slot)
 		return {
@@ -28,7 +28,7 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 		var possible_targets: Array[Character] = heroes.filter(func(h): return not h.is_dead())
 		var Charatarget: Character = possible_targets.pick_random() if possible_targets.size() > 0 else null
 		var target :Array[PositionSlot]
-		target.append(Charatarget. _current_slot)
+		target.append(Charatarget._current_slot)
 		#print("%s (AI Support) attaque %s avec %s" % [owner.name, target.name if target else "personne", attack_skill.descriptionName])
 		
 		return {
@@ -37,5 +37,5 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 		}
 
 	# --- 3️⃣ Si rien d’autre n’est possible, fallback sur le comportement par défaut
-	print("%s (AI Support) n’a trouvé aucune action utile, fallback sur IA basique." % owner.name)
+	print("%s (AI Support) n’a trouvé aucune action utile, fallback sur IA basique." % owner.characterData.Charaname)
 	return super.decide_action(owner, heroes, enemies)

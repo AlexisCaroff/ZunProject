@@ -1,14 +1,16 @@
-[gd_scene load_steps=29 format=3 uid="uid://brk5btnbeyoqb"]
+[gd_scene load_steps=31 format=3 uid="uid://brk5btnbeyoqb"]
 
-[ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_o6oqc"]
+[ext_resource type="Texture2D" uid="uid://2b7qegerplyc" path="res://scenes/BG doors demo/DOOR_dungeon_salon.png" id="1_gtfqe"]
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_gaey3"]
+[ext_resource type="Texture2D" uid="uid://cfwlbo0pguis6" path="res://UI/DOORR_dungeon_hall.png" id="2_xgqfk"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_tap5q"]
+[ext_resource type="Texture2D" uid="uid://dytsjthnt28u" path="res://UI/DOORL_dungeon_hall.png" id="3_vc537"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="4_s5xk2"]
+[ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="5_w1aom"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="5_ysqls"]
 [ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="6_ncdeo"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="7_qjs7e"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="8_2nj0j"]
-[ext_resource type="Texture2D" uid="uid://c5gdj53xfb58w" path="res://UI/doorIconleft.png" id="9_bhc0d"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="10_ck3sh"]
 [ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="11_jqubc"]
 [ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="12_7u1gt"]
@@ -41,15 +43,60 @@ grow_vertical = 2
 [node name="DoorBg" type="Sprite2D" parent="."]
 position = Vector2(960.5, 542)
 scale = Vector2(0.781352, 0.79562)
-texture = ExtResource("1_o6oqc")
+texture = ExtResource("1_gtfqe")
+
+[node name="ColorRect" type="ColorRect" parent="DoorBg"]
+anchors_preset = -1
+anchor_left = -0.0129241
+anchor_right = -0.0129241
+offset_left = -198.0
+offset_top = -422.0
+offset_right = 177.0
+offset_bottom = 116.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="DoorrDungeonHall" type="Sprite2D" parent="."]
+position = Vector2(1082, 420.59)
+rotation = 1.5708
+scale = Vector2(0.794935, 0.747183)
+texture = ExtResource("2_xgqfk")
+offset = Vector2(0, 101.44)
+
+[node name="DoorlDungeonHall" type="Sprite2D" parent="."]
+position = Vector2(781, 418.682)
+rotation = 1.5708
+scale = Vector2(0.791125, 0.759046)
+texture = ExtResource("3_vc537")
+offset = Vector2(0, -104.11)
+
+[node name="DoorBg2" type="Sprite2D" parent="."]
+position = Vector2(960.5, 98)
+scale = Vector2(0.781352, 0.79562)
+texture = ExtResource("1_gtfqe")
+region_enabled = true
+region_rect = Rect2(0, 0, 2476, 261.447)
+region_filter_clip_enabled = true
+
+[node name="atmosphere" parent="." instance=ExtResource("3_tap5q")]
+position = Vector2(19, 447)
+
+[node name="Gradiant" type="Sprite2D" parent="."]
+position = Vector2(1664.4, 379.091)
+rotation = -0.104899
+scale = Vector2(1.12179, 1.60929)
+texture = ExtResource("5_w1aom")
+
+[node name="Gradiant2" type="Sprite2D" parent="."]
+position = Vector2(266, 383)
+rotation = -3.03255
+scale = Vector2(1.27378, 1.72154)
+texture = ExtResource("5_w1aom")
 
 [node name="exploUI" type="Sprite2D" parent="."]
 position = Vector2(961, 541)
 scale = Vector2(0.782573, 0.789781)
 texture = ExtResource("2_gaey3")
-
-[node name="atmosphere" parent="." instance=ExtResource("3_tap5q")]
-position = Vector2(19, 447)
 
 [node name="ActionPanel" type="HBoxContainer" parent="."]
 visible = false
@@ -197,7 +244,7 @@ script = ExtResource("8_2nj0j")
 layout_mode = 0
 offset_right = 242.0
 offset_bottom = 764.0
-icon = ExtResource("9_bhc0d")
+icon = ExtResource("11_jqubc")
 flat = true
 expand_icon = true
 script = ExtResource("10_ck3sh")

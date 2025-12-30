@@ -158,11 +158,13 @@ func return_to_exploration():
 		room_container.add_child(new_scene)
 		current_room_node = new_scene
 		var exploManager =new_scene.get_node("ExplorationManager") as ExplorationManager
-		exploManager.sortie_du_camp()
+		
 	await sceneTransition.fade_in()
 func add_to_inventory(item: Equipment):
 	inventory.append(item)
-	
+	print ("add "+ item.name+" to inventory")
+	for i in inventory:
+		print ( i.name + " is in Inventory GM ")
 
 func initialize_affinities(thecharacters: Array[CharacterData]):
 	for chara in thecharacters:

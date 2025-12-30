@@ -103,10 +103,11 @@ scale = Vector2(0.816406, 0.816406)
 texture = ExtResource("8_soe0u")
 
 [node name="SceneTransition" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
 script = ExtResource("16_vbvj5")
 
 [node name="ColorRect" type="ColorRect" parent="SceneTransition"]
-offset_right = 1973.0
-offset_bottom = 1107.0
+offset_right = 4296.0
+offset_bottom = 2902.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)

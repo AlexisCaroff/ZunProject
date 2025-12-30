@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://2avrmp1dyhw5"]
 
 [ext_resource type="Script" uid="uid://cdva0owcmjo24" path="res://LoveScene/SexScene.gd" id="1_ikva5"]
-[ext_resource type="Texture2D" uid="uid://cudhpu3rgbodi" path="res://LoveScene/MysticxHunter.jpg" id="2_gucjp"]
+[ext_resource type="Texture2D" uid="uid://cyy6b634yl0ja" path="res://LoveScene/SCENE_CAMP_MxH.png" id="2_ikva5"]
 [ext_resource type="Texture2D" uid="uid://l7vod4fmaqrl" path="res://DialogueBox2.png" id="3_ikva5"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="4_tfso7"]
 
@@ -9,11 +9,12 @@
 script = ExtResource("1_ikva5")
 
 [node name="HunterxWarrior" type="Sprite2D" parent="."]
-position = Vector2(949, 539)
-texture = ExtResource("2_gucjp")
+position = Vector2(953.444, 541.5)
+scale = Vector2(0.485648, 0.485648)
+texture = ExtResource("2_ikva5")
 
 [node name="DialogueBox" type="Sprite2D" parent="."]
-position = Vector2(341.5, 529.346)
+position = Vector2(290, 529.346)
 scale = Vector2(1.39402, 1.39402)
 texture = ExtResource("3_ikva5")
 
@@ -27,7 +28,7 @@ offset_right = -183.991
 offset_bottom = -370.905
 theme_override_fonts/font = ExtResource("4_tfso7")
 theme_override_font_sizes/font_size = 30
-text = "the older warrior was gentle, almost wary. As if doubting the eagerness of his younder partner. He could feel his hands shaking slightly, but he resolved himself, and gripped the profered hips firmly"
+text = "The older warrior was gentle, almost wary. As if doubting the eagerness of his younder partner. He could feel his hands shaking slightly, but he resolved himself, and gripped the profered hips firmly"
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 

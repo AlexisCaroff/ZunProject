@@ -1,7 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://dhetbwfnqklgn"]
+[gd_scene load_steps=31 format=3 uid="uid://dhetbwfnqklgn"]
 
 [ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="1_ymtos"]
+[ext_resource type="Texture2D" uid="uid://cfwlbo0pguis6" path="res://UI/DOORR_dungeon_hall.png" id="2_eorq8"]
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_yutei"]
+[ext_resource type="Texture2D" uid="uid://dytsjthnt28u" path="res://UI/DOORL_dungeon_hall.png" id="3_l0702"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_pbg28"]
 [ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="4_3bi0y"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="4_vohl0"]
@@ -42,6 +44,36 @@ grow_vertical = 2
 position = Vector2(960.5, 542)
 scale = Vector2(0.781352, 0.79562)
 texture = ExtResource("1_ymtos")
+
+[node name="ColorRect" type="ColorRect" parent="DoorBg"]
+offset_left = -189.0
+offset_top = -424.0
+offset_right = 179.0
+offset_bottom = 117.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="DoorrDungeonHall" type="Sprite2D" parent="."]
+position = Vector2(1103, 420.59)
+rotation = 1.5708
+scale = Vector2(0.794935, 0.747183)
+texture = ExtResource("2_eorq8")
+offset = Vector2(0, 101.44)
+
+[node name="DoorlDungeonHall" type="Sprite2D" parent="."]
+position = Vector2(795, 419.615)
+rotation = 1.5708
+scale = Vector2(0.787713, 0.759046)
+texture = ExtResource("3_l0702")
+offset = Vector2(0, -104.11)
+
+[node name="DoorBg2" type="Sprite2D" parent="."]
+position = Vector2(960.5, 98)
+scale = Vector2(0.781352, 0.79562)
+texture = ExtResource("1_ymtos")
+region_enabled = true
+region_rect = Rect2(0, 0, 2476, 261.447)
+region_filter_clip_enabled = true
 
 [node name="exploUI" type="Sprite2D" parent="."]
 position = Vector2(961, 541)

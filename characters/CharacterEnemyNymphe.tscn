@@ -1,12 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3jx7ce6fpdr1"]
+[gd_scene load_steps=8 format=3 uid="uid://d3jx7ce6fpdr1"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_61pjh"]
 [ext_resource type="Resource" uid="uid://qau4rsq3wbf8" path="res://characters/data/CharacterEnemyNymphe.tres" id="2_ukx70"]
 [ext_resource type="Texture2D" uid="uid://cp18c4j8lgs6a" path="res://characters/charatexture/demo characters/ENEMY_nymph_F_idle.png" id="4_ukx70"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="7_065j3"]
-[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="7_xwnr5"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="8_0ot4w"]
-[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="8_065j3"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="12_owfhr"]
 [ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="17_qed37"]
 
@@ -15,36 +13,6 @@ script = ExtResource("1_61pjh")
 characterData = ExtResource("2_ukx70")
 metadata/character_data_path = "res://characters/data/CharacterEnemyNymphe.tres"
 
-[node name="pivot" type="Node2D" parent="."]
-position = Vector2(42, 38)
-script = ExtResource("7_065j3")
-min_scale = 1.0
-scalemini = 0.95
-
-[node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -307.0
-offset_top = -425.0
-offset_right = -136.0
-offset_bottom = -194.0
-scale = Vector2(2.33999, 1.95075)
-mouse_filter = 2
-texture = ExtResource("4_ukx70")
-expand_mode = 1
-flip_h = true
-metadata/_edit_use_anchors_ = true
-
-[node name="Selector" type="TextureRect" parent="pivot"]
-self_modulate = Color(2, 2, 2, 0)
-offset_left = -307.0
-offset_top = -425.0
-offset_right = -136.0
-offset_bottom = -194.0
-scale = Vector2(2.33999, 1.95075)
-mouse_filter = 2
-texture = ExtResource("4_ukx70")
-expand_mode = 1
-metadata/_edit_use_anchors_ = true
-
 [node name="name" type="Label" parent="."]
 visible = false
 offset_left = -46.0
@@ -52,30 +20,6 @@ offset_top = -267.0
 offset_right = -2.0
 offset_bottom = -244.0
 text = "name"
-
-[node name="Button" type="Button" parent="."]
-modulate = Color(1, 1, 1, 0)
-offset_left = -81.0
-offset_top = -257.203
-offset_right = 152.0
-offset_bottom = 124.797
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = -19.0
-offset_top = -189.0
-offset_right = 21.0
-offset_bottom = -170.0
-alignment = 1
-
-[node name="Skill" type="TextureRect" parent="."]
-visible = false
-offset_left = -158.0
-offset_top = -240.0
-offset_right = 418.0
-offset_bottom = 336.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_xwnr5")
-script = ExtResource("8_065j3")
 
 [node name="Arrow" type="Sprite2D" parent="."]
 position = Vector2(1, -286.203)
@@ -109,6 +53,43 @@ position = Vector2(161, 28)
 scale = Vector2(2.34924, 0.637405)
 texture = ExtResource("17_qed37")
 
-[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
-[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(-77, 23)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("7_065j3")
+min_scale = 1.15
+max_scale = 1.15
+scalemini = 1.1
+min_duration = 1.0
+max_duration = 1.5
+
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+offset_left = -171.833
+offset_top = -321.678
+offset_right = -0.832245
+offset_bottom = -90.6781
+scale = Vector2(2.05511, 1.55542)
+mouse_filter = 2
+texture = ExtResource("4_ukx70")
+expand_mode = 1
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Selector" type="TextureRect" parent="pivot"]
+self_modulate = Color(2.5, 2.5, 2.5, 0)
+offset_left = -171.833
+offset_top = -321.678
+offset_right = -0.832245
+offset_bottom = -90.6781
+scale = Vector2(2.05511, 1.55542)
+mouse_filter = 2
+texture = ExtResource("4_ukx70")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = -19.0
+offset_top = -189.0
+offset_right = 21.0
+offset_bottom = -170.0
+alignment = 1

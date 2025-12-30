@@ -1,12 +1,11 @@
-[gd_scene load_steps=36 format=3 uid="uid://dv04v6jagn4q1"]
+[gd_scene load_steps=38 format=3 uid="uid://dv04v6jagn4q1"]
 
 [ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="1_o2neq"]
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_mdkvs"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_puy7d"]
-[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="3_6jptd"]
-[ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="4_betcj"]
+[ext_resource type="Texture2D" uid="uid://cfwlbo0pguis6" path="res://UI/DOORR_dungeon_hall.png" id="2_uubir"]
+[ext_resource type="Texture2D" uid="uid://dytsjthnt28u" path="res://UI/DOORL_dungeon_hall.png" id="3_4xbl3"]
 [ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="4_itvqt"]
-[ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="5_lps75"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="6_nju53"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="7_mdkvs"]
 [ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="8_r3s01"]
@@ -15,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="10_betcj"]
 [ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/buttonexitepeek.gd" id="12_6jptd"]
 [ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="12_013hq"]
+[ext_resource type="Texture2D" uid="uid://cqp5sr6locjdw" path="res://UI/ArrowRt.png" id="13_itvqt"]
 [ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="13_njmpn"]
 [ext_resource type="Texture2D" uid="uid://drp4vk52vgk74" path="res://UI/doorebuscade/DOOR_caught_nymph.png" id="15_o6m4w"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="17_6jptd"]
@@ -36,6 +36,10 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_itvqt"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uubir"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4xbl3"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ypre"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_crknv"]
@@ -52,6 +56,36 @@ grow_vertical = 2
 position = Vector2(960.5, 542)
 scale = Vector2(0.781352, 0.79562)
 texture = ExtResource("1_o2neq")
+
+[node name="ColorRect" type="ColorRect" parent="DoorBg"]
+offset_left = -198.0
+offset_top = -422.0
+offset_right = 177.0
+offset_bottom = 116.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="DoorrDungeonHall" type="Sprite2D" parent="."]
+position = Vector2(1103, 420.59)
+rotation = 1.5708
+scale = Vector2(0.794935, 0.747183)
+texture = ExtResource("2_uubir")
+offset = Vector2(0, 101.44)
+
+[node name="DoorlDungeonHall" type="Sprite2D" parent="."]
+position = Vector2(795, 419.615)
+rotation = 1.5708
+scale = Vector2(0.787713, 0.759046)
+texture = ExtResource("3_4xbl3")
+offset = Vector2(0, -104.11)
+
+[node name="DoorBg2" type="Sprite2D" parent="."]
+position = Vector2(960.5, 98)
+scale = Vector2(0.781352, 0.79562)
+texture = ExtResource("1_o2neq")
+region_enabled = true
+region_rect = Rect2(0, 0, 2476, 261.447)
+region_filter_clip_enabled = true
 
 [node name="atmosphere" parent="." instance=ExtResource("2_puy7d")]
 position = Vector2(19, 447)
@@ -72,136 +106,6 @@ texture = ExtResource("4_itvqt")
 position = Vector2(961, 541)
 scale = Vector2(0.782573, 0.789781)
 texture = ExtResource("2_mdkvs")
-
-[node name="ActionPanel" type="HBoxContainer" parent="."]
-visible = false
-custom_minimum_size = Vector2(90, 90)
-layout_mode = 0
-offset_left = 579.0
-offset_top = 845.0
-offset_right = 1202.0
-offset_bottom = 945.0
-scale = Vector2(1.245, 1.245)
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Action1" type="Button" parent="ActionPanel"]
-custom_minimum_size = Vector2(90, 90)
-layout_mode = 2
-size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_6jptd")
-theme_override_font_sizes/font_size = 40
-icon = ExtResource("4_betcj")
-flat = true
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("5_lps75")
-
-[node name="cooldownA" type="Label" parent="ActionPanel/Action1"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Action2" type="Button" parent="ActionPanel"]
-custom_minimum_size = Vector2(90, 90)
-layout_mode = 2
-size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_6jptd")
-theme_override_font_sizes/font_size = 40
-icon = ExtResource("4_betcj")
-flat = true
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("5_lps75")
-
-[node name="cooldownA" type="Label" parent="ActionPanel/Action2"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Action3" type="Button" parent="ActionPanel"]
-custom_minimum_size = Vector2(90, 90)
-layout_mode = 2
-size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_6jptd")
-theme_override_font_sizes/font_size = 40
-icon = ExtResource("4_betcj")
-flat = true
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("5_lps75")
-
-[node name="cooldownA" type="Label" parent="ActionPanel/Action3"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Action4" type="Button" parent="ActionPanel"]
-custom_minimum_size = Vector2(90, 90)
-layout_mode = 2
-size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_6jptd")
-theme_override_font_sizes/font_size = 40
-icon = ExtResource("4_betcj")
-flat = true
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("5_lps75")
-
-[node name="cooldownA" type="Label" parent="ActionPanel/Action4"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Action5" type="Button" parent="ActionPanel"]
-custom_minimum_size = Vector2(90, 90)
-layout_mode = 2
-size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_6jptd")
-theme_override_font_sizes/font_size = 40
-icon = ExtResource("4_betcj")
-flat = true
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("5_lps75")
-
-[node name="cooldownA" type="Label" parent="ActionPanel/Action5"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="LabelAction" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 681.0
-offset_top = 982.0
-offset_right = 1260.0
-offset_bottom = 1066.0
-theme_override_fonts/font = ExtResource("6_nju53")
-theme_override_font_sizes/font_size = 25
-text = "Attaque1 
-et truc et bidule"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="TurnOrderPanel" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 28.0
-offset_right = 1921.0
-offset_bottom = 93.0
-mouse_filter = 2
-alignment = 1
-
-[node name="Charaname" type="Label" parent="."]
-layout_mode = 0
-offset_left = 562.0
-offset_top = 818.0
-offset_right = 872.0
-offset_bottom = 980.0
-theme_override_fonts/font = ExtResource("6_nju53")
-theme_override_font_sizes/font_size = 40
-autowrap_mode = 3
 
 [node name="charaPortrait" type="TextureRect" parent="."]
 layout_mode = 0
@@ -243,32 +147,46 @@ hover_color = Color(0.917962, 0.917029, 0.933333, 1)
 
 [node name="peekButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1102.0
-offset_top = 280.0
-offset_right = 1317.0
-offset_bottom = 481.0
+offset_left = 1098.0
+offset_top = 277.0
+offset_right = 1313.0
+offset_bottom = 478.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uubir")
 flat = true
 script = ExtResource("12_013hq")
 
 [node name="peek_texture" type="TextureRect" parent="peekButton"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 5.0
-offset_right = 200.0
-offset_bottom = 193.0
+offset_left = 5.0
+offset_top = -2.0
+offset_right = 204.0
+offset_bottom = 195.0
+mouse_filter = 2
 texture = ExtResource("13_njmpn")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="peekButton/peek_texture"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 28.0
+offset_right = 170.0
+offset_bottom = 153.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("6_nju53")
+theme_override_font_sizes/normal_font_size = 35
+text = "Peek"
+horizontal_alignment = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 331.0
+offset_left = 170.0
 offset_top = 27.0
-offset_right = 1611.0
-offset_bottom = 747.0
+offset_right = 1761.0
+offset_bottom = 782.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(1280, 720)
+size = Vector2i(1585, 755)
 render_target_update_mode = 0
 
 [node name="ExitPeek" type="Button" parent="."]
@@ -278,7 +196,12 @@ offset_left = 1598.0
 offset_top = 87.0
 offset_right = 1902.0
 offset_bottom = 749.0
+theme_override_fonts/font = ExtResource("6_nju53")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4xbl3")
 text = "exit"
+icon = ExtResource("13_itvqt")
+flat = true
 script = ExtResource("12_6jptd")
 
 [node name="Door" type="Button" parent="."]
@@ -414,7 +337,6 @@ scale = Vector2(1.07026, 1.0878)
 texture = ExtResource("27_gf8ky")
 
 [node name="Intro2" type="Sprite2D" parent="."]
-visible = false
 z_index = 16
 position = Vector2(963, 538)
 scale = Vector2(0.72634, 0.72634)
@@ -432,12 +354,14 @@ flat = true
 [node name="ShowTuto" type="Button" parent="."]
 z_index = 22
 layout_mode = 0
-offset_right = 91.0
-offset_bottom = 42.0
+offset_left = 7.0
+offset_top = 115.0
+offset_right = 98.0
+offset_bottom = 157.0
 text = "didactitiel"
+flat = true
 
 [node name="Intro1" type="Sprite2D" parent="."]
-visible = false
 z_index = 20
 position = Vector2(955, 539)
 scale = Vector2(0.663709, 0.663709)
@@ -452,16 +376,6 @@ offset_bottom = -954.771
 scale = Vector2(338.499, 233.869)
 flat = true
 
-[connection signal="mouse_entered" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ActionPanel/Action1" to="ActionPanel/Action1" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="ActionPanel/Action2" to="ActionPanel/Action2" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ActionPanel/Action2" to="ActionPanel/Action2" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="ActionPanel/Action3" to="ActionPanel/Action3" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ActionPanel/Action3" to="ActionPanel/Action3" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="ActionPanel/Action4" to="ActionPanel/Action4" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ActionPanel/Action4" to="ActionPanel/Action4" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="ActionPanel/Action5" to="ActionPanel/Action5" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ActionPanel/Action5" to="ActionPanel/Action5" method="_on_mouse_exited"]
 [connection signal="button_down" from="peekButton" to="peekButton" method="_on_button_down"]
 [connection signal="mouse_entered" from="peekButton" to="peekButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="peekButton" to="peekButton" method="_on_mouse_exited"]

@@ -9,6 +9,7 @@ icon = ExtResource("1_gb2yd")
 name = "Armor"
 description = ""
 isCursed = false
+number = 1
 Max_stamina_bonus = 5
 Max_lust_bonus = 0
 Max_Guilt_bonus = 0

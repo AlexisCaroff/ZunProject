@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://doydfjjogegnd"]
+[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://doydfjjogegnd"]
 
 [ext_resource type="Texture2D" uid="uid://ltw8c8afgkv8" path="res://characters/charatexture/demo characters/HERO_warrior_bash.png" id="1_k3ail"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_lxb6k"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="3_lxb6k"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_abm4e"]
 [ext_resource type="Texture2D" uid="uid://crbfh0ppjt6lh" path="res://actions/actiontexture/shieldbash.png" id="4_lxb6k"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="5_fkpvk"]
+[ext_resource type="Texture2D" uid="uid://c6qss13x88o50" path="res://actions/damageEffect/damageeffecttexture/hit.png" id="6_6dehc"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("2_lxb6k")
@@ -18,6 +20,15 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("3_lxb6k")
 metadata/_custom_type_script = "uid://tjywmaoy4ejj"
 
+[sub_resource type="Resource" id="Resource_qctpy"]
+script = ExtResource("5_fkpvk")
+name = "Stun"
+uitexture = ExtResource("6_6dehc")
+affected_stat = 0
+amount = 0
+duration = 1
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
 [resource]
 script = ExtResource("4_abm4e")
 name = "Shield Bash"
@@ -27,7 +38,7 @@ icon = ExtResource("4_lxb6k")
 required_position = 1
 ImageSkill = ExtResource("1_k3ail")
 the_target_type = 5
-effects = Array[ExtResource("2_slxy4")]([SubResource("Resource_i4eos"), SubResource("Resource_slxy4")])
+effects = Array[ExtResource("2_slxy4")]([SubResource("Resource_i4eos"), SubResource("Resource_slxy4"), SubResource("Resource_qctpy")])
 two_target_Type = false
 the_second_target_type = 0
 second_effects = Array[ExtResource("2_slxy4")]([])
@@ -42,5 +53,5 @@ allways_hit = false
 duration = 1.0
 tags = Array[String]([])
 is_contact = true
-distance_contact = 300.0
+distance_contact = 350.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

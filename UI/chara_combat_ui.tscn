@@ -26,6 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.700702, 0.700702)
 size_flags_vertical = 0
+mouse_filter = 2
 theme_override_constants/separation = 8
 alignment = 1
 
@@ -45,7 +46,7 @@ layout_mode = 2
 texture = ExtResource("1_qnl5p")
 
 [node name="DotAction4" type="TextureRect" parent="HBoxContainer2"]
-modulate = Color(0.14, 0.14, 0.14, 1)
+modulate = Color(0.642019, 0.561016, 0.364715, 1)
 layout_mode = 2
 texture = ExtResource("1_qnl5p")
 
@@ -61,6 +62,7 @@ offset_top = 1.02985
 offset_right = 62.0
 offset_bottom = 11.0299
 scale = Vector2(0.700702, 0.700702)
+mouse_filter = 2
 value = 100.0
 show_percentage = false
 

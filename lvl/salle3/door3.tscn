@@ -1,6 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://4krgtdd0p7pg"]
+[gd_scene load_steps=26 format=3 uid="uid://cdxidmh52hid8"]
 
-[ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_qvtik"]
+[ext_resource type="Texture2D" uid="uid://ego82bs05hdc" path="res://scenes/BG doors demo/DOOR_dungeon_storeroom.png" id="1_8p5et"]
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_1wbx2"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_tmhg0"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="4_i6tlh"]
@@ -38,7 +38,7 @@ grow_vertical = 2
 [node name="DoorBg" type="Sprite2D" parent="."]
 position = Vector2(960.5, 542)
 scale = Vector2(0.781352, 0.79562)
-texture = ExtResource("1_qvtik")
+texture = ExtResource("1_8p5et")
 
 [node name="exploUI" type="Sprite2D" parent="."]
 position = Vector2(959.889, 540)

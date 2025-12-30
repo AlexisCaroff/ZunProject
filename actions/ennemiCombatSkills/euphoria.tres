@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://daxgjjbu82mgo"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_11uf3"]
-[ext_resource type="Texture2D" uid="uid://bndt7mycyfcw4" path="res://characters/charatexture/ENEMY_ADDICT_euphoria.png" id="1_hmtly"]
+[ext_resource type="Texture2D" uid="uid://dk7w4qddh43na" path="res://characters/charatexture/demo characters/ENEMY_addict_euphoria.png" id="1_383f7"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_devca"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_jtbft"]
 [ext_resource type="Texture2D" uid="uid://bt3c7xnciduqy" path="res://actions/actiontexture/raving.png" id="3_hmtly"]
-[ext_resource type="Texture2D" uid="uid://bplqm5b3bso4j" path="res://actions/bufftexture/buffAtt.png" id="4_383f7"]
+[ext_resource type="Texture2D" uid="uid://dbuugeey6c5y4" path="res://UI/buffAtt.png" id="4_383f7"]
 
 [sub_resource type="Resource" id="Resource_383f7"]
 script = ExtResource("2_jtbft")
@@ -23,7 +23,7 @@ descriptionName = "Euphoria"
 description = "euphoria"
 icon = ExtResource("3_hmtly")
 required_position = 1
-ImageSkill = ExtResource("1_hmtly")
+ImageSkill = ExtResource("1_383f7")
 the_target_type = 2
 effects = Array[ExtResource("1_11uf3")]([SubResource("Resource_383f7")])
 two_target_Type = false

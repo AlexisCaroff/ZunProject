@@ -1,19 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqmvd8xedw2aj"]
+[gd_scene load_steps=5 format=3 uid="uid://dqmvd8xedw2aj"]
 
-[ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_cj48p"]
 [ext_resource type="Texture2D" uid="uid://c4wdk6bhq5nah" path="res://scenes/backgrounds dungeon demo/BG_dungeon_hall.png" id="2_rrxdd"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_cjibp"]
 [ext_resource type="PackedScene" uid="uid://h8pqs7tabdxj" path="res://lvl/CombatInterface.tscn" id="4_7orkf"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="5_yyko4"]
 
-[node name="CombatInterface" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_cj48p")
+[node name="CombatInterface" type="Node2D"]
 
 [node name="ZunBg" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
@@ -23,14 +15,12 @@ texture = ExtResource("2_rrxdd")
 position = Vector2(2, 352)
 
 [node name="CombatInterface" parent="." instance=ExtResource("4_7orkf")]
-layout_mode = 1
 offset_left = -1.0
 offset_right = -1.0
 
 [node name="MenuPerso" parent="." instance=ExtResource("5_yyko4")]
 visible = false
 z_index = 20
-layout_mode = 1
 offset_left = -6.0
 offset_top = 18.0
 offset_right = -6.0

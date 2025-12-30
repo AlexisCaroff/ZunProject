@@ -1,6 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://jb5e5hwgmau2"]
+[gd_scene load_steps=28 format=3 uid="uid://jb5e5hwgmau2"]
 
-[ext_resource type="Texture2D" uid="uid://bs72ddbhxv3ur" path="res://Enviro/door closed.png" id="1_63o5q"]
+[ext_resource type="Texture2D" uid="uid://2b7qegerplyc" path="res://scenes/BG doors demo/DOOR_dungeon_salon.png" id="1_5e0e5"]
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_3c7jp"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_5qg5o"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="4_m26mi"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="6_7xej6"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="7_cj8w4"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="8_cb77f"]
-[ext_resource type="Texture2D" uid="uid://c5gdj53xfb58w" path="res://UI/doorIconleft.png" id="9_0otmb"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="10_342in"]
 [ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="11_bf5r1"]
 [ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="12_ok2pb"]
@@ -41,7 +40,7 @@ grow_vertical = 2
 [node name="DoorBg" type="Sprite2D" parent="."]
 position = Vector2(960.5, 542)
 scale = Vector2(0.781352, 0.79562)
-texture = ExtResource("1_63o5q")
+texture = ExtResource("1_5e0e5")
 
 [node name="exploUI" type="Sprite2D" parent="."]
 position = Vector2(961, 541)
@@ -197,7 +196,7 @@ script = ExtResource("8_cb77f")
 layout_mode = 0
 offset_right = 242.0
 offset_bottom = 764.0
-icon = ExtResource("9_0otmb")
+icon = ExtResource("11_bf5r1")
 flat = true
 expand_icon = true
 script = ExtResource("10_342in")

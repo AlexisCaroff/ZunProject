@@ -4,7 +4,8 @@ extends Sprite2D
 var gm : GameManager
 func _ready() -> void:
 	button.connect("button_down",hideTuto)
-	ButtonShowTuto.connect("button_down",showTuto)
+	if ButtonShowTuto != null: 
+		ButtonShowTuto.connect("button_down",showTuto)
 	gm = get_tree().root.get_node("GameManager") as GameManager
 	if gm.current_room_Ressource.ennemikilled==true:
 		self.visible= false

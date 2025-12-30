@@ -1,5 +1,5 @@
 extends Sprite2D
-var occupant : CharaExplo
+var occupant : CharacterData
 @onready var button= $Button
 @onready var Doormanager = $"../../Door"
 @export var normal_scale: Vector2 = Vector2.ONE
@@ -24,7 +24,7 @@ func _on_mouse_exited():
 
 		
 
-func set_occupant(Chara:CharaExplo):
+func set_occupant(Chara:CharacterData):
 	occupant=Chara
 	self.texture= Chara.explorationPortrait
 	

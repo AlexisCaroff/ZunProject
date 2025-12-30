@@ -9,4 +9,4 @@ func apply(_user: Character, target: PositionSlot) -> void:
 	
 	for skill in Chartarget.skills:
 		skill.current_cooldown = max(0, skill.current_cooldown - amount)
-		print("Cooldown  %s pour %s réduit" % [skill.name, Chartarget.characterData.Charaname])
+		#print("Cooldown  %s pour %s réduit" % [skill.name, Chartarget.characterData.Charaname])

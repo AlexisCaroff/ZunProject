@@ -18,7 +18,7 @@
 [ext_resource type="Resource" uid="uid://clw258vbo2rq1" path="res://actions/HerosCombatSkills/Charge.tres" id="14_5iw64"]
 [ext_resource type="Resource" uid="uid://bpsapqkry8g3q" path="res://actions/HerosCombatSkills/attaque_basique.tres" id="15_aj6tx"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="16_ne2r0"]
-[ext_resource type="Texture2D" uid="uid://cs8w5wjum3566" path="res://characters/CampementPorttrait/WarriorCampement.png" id="17_17pm1"]
+[ext_resource type="Texture2D" uid="uid://c1vbgy6uvss1" path="res://camp imgs/Camp_char_sit_W.png" id="19_q5t8p"]
 
 [resource]
 script = ExtResource("11_vpitw")
@@ -28,7 +28,7 @@ dead_portrait_texture = ExtResource("9_k6dui")
 Hit_texture = ExtResource("2_q5t8p")
 initiative_icon = ExtResource("9_nsh6g")
 Dialogue_texture = ExtResource("1_q5t8p")
-textureCamp = ExtResource("17_17pm1")
+textureCamp = ExtResource("19_q5t8p")
 Name = "name"
 Charaname = "Warrior"
 IsDemon = false
@@ -39,13 +39,13 @@ base_max_horniness = 100
 base_attack = 12
 base_defense = 12
 base_willpower = 5
-base_initiative = 20
+base_initiative = 200
 base_evasion = 5
 attack = 12
 defense = 10
 willpower = 5
 evasion = 5
-initiative = 20
+initiative = 200
 peek = 0
 equipped_items = Array[ExtResource("8_af1mm")]([])
 stun = false

@@ -58,8 +58,8 @@ func _ready():
 		donjon_map.focus_on_room(gm.current_room_Ressource, viewport)
 
 	charaPortraitButton.connect("button_down", showMenuPerso)
-	MenuPerso.inventory_items = gm.inventory
-	MenuPerso.update_inventory_ui()
+	#MenuPerso.inventory_items = gm.inventory
+	#MenuPerso.update_inventory_ui()
 	log_panel.visible = false
 	contextennemi.visible = false
 
@@ -248,4 +248,4 @@ func set_MenuPerso(heroes:Array[CharacterData]):
 	MenuPerso.characters = heroes
 
 func showMenuPerso():
-	MenuPerso.visible = true
+	MenuPerso.showMenu() 

@@ -2,7 +2,7 @@ extends TextureRect
 
 var chara :CharacterData
 @onready var button =$Button
-@onready var inventory = $"../.."
+@onready var inventory = $"../../.."
 @export var normal_color: Color = Color.WHITE
 @export var hover_color: Color = Color.BISQUE
 

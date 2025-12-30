@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://badg2cpqmlnim"]
+[gd_scene load_steps=45 format=3 uid="uid://badg2cpqmlnim"]
 
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="3_a5t1m"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="4_e2h3q"]
@@ -9,20 +9,23 @@
 [ext_resource type="Script" uid="uid://km54mxly4gk4" path="res://lvl/exploration_manager.gd" id="9_p431l"]
 [ext_resource type="PackedScene" uid="uid://cifpdtrct42ek" path="res://UI/chara_combat_ui.tscn" id="9_urlx7"]
 [ext_resource type="PackedScene" uid="uid://dq282vipchnbq" path="res://characters/chara_explo.tscn" id="10_83p3o"]
+[ext_resource type="Texture2D" uid="uid://cnxub0g557exn" path="res://UI/box.png" id="11_hwivl"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="11_ijfhg"]
 [ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="11_tthlc"]
-[ext_resource type="Texture2D" uid="uid://df6e4btmrj1i8" path="res://props/campFire.png" id="12_16ala"]
+[ext_resource type="Texture2D" uid="uid://cqp5sr6locjdw" path="res://UI/ArrowRt.png" id="12_d8pyn"]
+[ext_resource type="Texture2D" uid="uid://baw3dj7ucjqsp" path="res://camp imgs/PROP_campfire_open.png" id="12_ijfhg"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="12_o4x5b"]
 [ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="13_llg3m"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="14_afmd4"]
+[ext_resource type="Texture2D" uid="uid://vxig1dgne8it" path="res://UI/box2.png" id="15_d8pyn"]
 [ext_resource type="Texture2D" uid="uid://jhd7rid3c1c1" path="res://actions/actiontexture/moveIcon.png" id="15_l06yh"]
 [ext_resource type="Script" uid="uid://conijhbkctdj2" path="res://lvl/moveExplo.gd" id="16_1gtvb"]
 [ext_resource type="Script" uid="uid://cvdsxgbtufa4g" path="res://lvl/interactible.gd" id="17_qi80w"]
-[ext_resource type="Texture2D" uid="uid://djit2m4icvw0k" path="res://Enviro/kairn.png" id="18_w4ixs"]
 [ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="19_gy2q5"]
 [ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="20_afdbq"]
 [ext_resource type="Script" uid="uid://gljyiwavrmws" path="res://lvl/Hall1/explo_portrait.gd" id="21_573td"]
 [ext_resource type="Texture2D" uid="uid://bl6qdsm60pd37" path="res://UI/exploCharaselector.png" id="22_01cjh"]
+[ext_resource type="Texture2D" uid="uid://blqbleyupuy20" path="res://props/PROP_altar.png" id="22_d8pyn"]
 [ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="23_h3qb4"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="24_n6ie4"]
 [ext_resource type="Texture2D" uid="uid://dh6k7cso8hksn" path="res://UI/charaIcon.png" id="25_ccycq"]
@@ -39,6 +42,8 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ln05l"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3g6r7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ijfhg"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rqfr"]
 
@@ -58,10 +63,6 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 1.0
-offset_right = 2.0
-offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -143,7 +144,7 @@ script = ExtResource("6_0n6ar")
 
 [node name="HeroPosition" type="Node2D" parent="."]
 z_index = 1
-position = Vector2(568, 642)
+position = Vector2(568, 677)
 scale = Vector2(1.4, 1.4)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
@@ -268,38 +269,93 @@ chara_explo_scene = ExtResource("10_83p3o")
 
 [node name="Button" type="Button" parent="ExplorationManager"]
 z_index = 2
-offset_left = 1523.0
+offset_left = 1675.0
 offset_top = 50.0
 offset_right = 1898.0
 offset_bottom = 638.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ijfhg")
 flat = true
 expand_icon = true
 
 [node name="Doortext" type="TextureRect" parent="ExplorationManager/Button"]
 modulate = Color(0.789063, 0.76634, 0.714831, 1)
 layout_mode = 0
-offset_left = 100.0
+offset_left = -12.0
 offset_top = 264.0
-offset_right = 341.0
+offset_right = 229.0
 offset_bottom = 520.0
 texture = ExtResource("11_tthlc")
 expand_mode = 1
 
+[node name="GoToCampement" type="Sprite2D" parent="ExplorationManager"]
+visible = false
+position = Vector2(1305, 525)
+texture = ExtResource("11_hwivl")
+offset = Vector2(0, -44.645)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ExplorationManager/GoToCampement"]
+offset_left = -105.0
+offset_top = -76.0
+offset_right = 103.0
+offset_bottom = -16.0
+theme_override_fonts/normal_font = ExtResource("5_furl3")
+theme_override_font_sizes/normal_font_size = 30
+text = "make camp"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowRt" type="Sprite2D" parent="ExplorationManager/GoToCampement"]
+modulate = Color(0.501961, 0.407843, 0.207843, 1)
+position = Vector2(-1, 4.00003)
+rotation = 1.5708
+scale = Vector2(0.602937, 0.602937)
+texture = ExtResource("12_d8pyn")
+
 [node name="Campement" type="Button" parent="ExplorationManager"]
 visible = false
-offset_left = 980.0
-offset_top = 449.0
-offset_right = 1190.0
-offset_bottom = 650.0
+offset_left = 1148.0
+offset_top = 488.0
+offset_right = 1407.8
+offset_bottom = 687.645
+scale = Vector2(2.68522, 1.06729)
 flat = true
 script = ExtResource("11_ijfhg")
-hover_color = Color(0.933333, 0.0872172, 0.108109, 1)
-hover_scale = Vector2(1.1, 1.1)
+hover_color = Color(0.94385, 0.569493, 0.53539, 1)
+normal_scale = Vector2(2.685, 1.067)
+hover_scale = Vector2(2.685, 1.167)
 metadata/_edit_use_anchors_ = true
 
-[node name="CampFire" type="Sprite2D" parent="ExplorationManager/Campement"]
-position = Vector2(100, 143)
-texture = ExtResource("12_16ala")
+[node name="CampFire2" type="Sprite2D" parent="ExplorationManager/Campement"]
+position = Vector2(133.695, 80.5779)
+scale = Vector2(0.0823496, 0.254119)
+texture = ExtResource("12_ijfhg")
+
+[node name="DoorTuto" type="TextureRect" parent="ExplorationManager"]
+offset_left = 1424.0
+offset_top = 383.0
+offset_right = 1665.0
+offset_bottom = 488.0
+pivot_offset = Vector2(276.41, 52.635)
+texture = ExtResource("15_d8pyn")
+expand_mode = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ExplorationManager/DoorTuto"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 12.0
+offset_right = 240.0
+offset_bottom = 88.0
+theme_override_fonts/normal_font = ExtResource("5_furl3")
+theme_override_font_sizes/normal_font_size = 30
+text = "Check the doors of the room"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowRt" type="Sprite2D" parent="ExplorationManager/DoorTuto"]
+modulate = Color(0.501961, 0.407843, 0.207843, 1)
+position = Vector2(259, 53)
+scale = Vector2(0.602937, 0.602937)
+texture = ExtResource("12_d8pyn")
 
 [node name="DialogueManager" type="Node2D" parent="." node_paths=PackedStringArray("external_choice_receiver")]
 z_index = 6
@@ -330,24 +386,15 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="Interactable" type="Sprite2D" parent="."]
+visible = false
 self_modulate = Color(1, 1, 1.2, 1)
-position = Vector2(266, 464)
+position = Vector2(1263, 531)
 script = ExtResource("17_qi80w")
 dialoguePass = "res://dialogue/dialogueTeste.txt"
 
-[node name="Button" type="Button" parent="Interactable"]
-offset_left = 680.0
-offset_top = -82.0
-offset_right = 960.0
-offset_bottom = 151.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_1rqfr")
-icon = ExtResource("18_w4ixs")
-flat = true
-expand_icon = true
-
 [node name="etiquette" type="Sprite2D" parent="Interactable"]
-visible = false
-position = Vector2(193.333, 6.66667)
+position = Vector2(163, -60.75)
+scale = Vector2(0.626316, 0.626316)
 texture = ExtResource("19_gy2q5")
 
 [node name="Label" type="Label" parent="Interactable/etiquette"]
@@ -355,9 +402,23 @@ offset_left = -92.0
 offset_top = -23.0
 offset_right = 125.0
 offset_bottom = 30.0
-theme_override_fonts/font = ExtResource("14_afmd4")
+theme_override_fonts/font = ExtResource("5_furl3")
 theme_override_font_sizes/font_size = 40
-text = "EXPLORE"
+text = "Investigate"
+
+[node name="Button" type="Button" parent="Interactable"]
+offset_left = -141.0
+offset_top = -143.0
+offset_right = 139.0
+offset_bottom = 90.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1rqfr")
+flat = true
+expand_icon = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Interactable/Button"]
+position = Vector2(147, 84)
+scale = Vector2(0.303681, 0.303681)
+texture = ExtResource("22_d8pyn")
 
 [node name="Portraits" type="Node2D" parent="."]
 scale = Vector2(0.779851, 0.779851)
@@ -432,18 +493,14 @@ texture = ExtResource("23_h3qb4")
 visible = false
 z_index = 20
 layout_mode = 1
-offset_left = -6.0
-offset_top = 18.0
-offset_right = -6.0
-offset_bottom = 18.0
 
 [node name="charaPortrait2" type="TextureRect" parent="."]
 z_index = 6
 layout_mode = 0
-offset_left = 1444.0
-offset_top = 727.0
-offset_right = 1533.0
-offset_bottom = 816.0
+offset_left = 1202.0
+offset_top = 894.0
+offset_right = 1291.0
+offset_bottom = 983.0
 scale = Vector2(0.996858, 1.01916)
 texture = ExtResource("25_ccycq")
 expand_mode = 1

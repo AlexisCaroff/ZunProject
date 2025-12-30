@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dxl3bwws31xu1"]
 
-[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_nqtcd"]
+[ext_resource type="Texture2D" uid="uid://c4wdk6bhq5nah" path="res://scenes/backgrounds dungeon demo/BG_dungeon_hall.png" id="1_og5u0"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_b4xhh"]
 [ext_resource type="PackedScene" uid="uid://badg2cpqmlnim" path="res://lvl/explorationInterface.tscn" id="3_og5u0"]
 
@@ -17,16 +17,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ZunBg" type="Sprite2D" parent="."]
-position = Vector2(959.5, 401)
+position = Vector2(960, 540)
 scale = Vector2(1.00157, 1.0025)
-texture = ExtResource("1_nqtcd")
+texture = ExtResource("1_og5u0")
 
 [node name="atmosphere" parent="." instance=ExtResource("2_b4xhh")]
 position = Vector2(2, 352)
 
 [node name="ExploInterface" parent="." instance=ExtResource("3_og5u0")]
 layout_mode = 1
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0

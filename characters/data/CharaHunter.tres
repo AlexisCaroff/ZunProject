@@ -19,7 +19,7 @@
 [ext_resource type="Resource" uid="uid://cbakapyjnht36" path="res://actions/HerosCombatSkills/lance.tres" id="15_yughv"]
 [ext_resource type="Resource" uid="uid://bmkp0brav8l87" path="res://actions/HerosCombatSkills/bollas.tres" id="16_itjcr"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="17_oyaaw"]
-[ext_resource type="Texture2D" uid="uid://b35vrdic1jyh" path="res://characters/CampementPorttrait/HunterCampement.png" id="18_egu01"]
+[ext_resource type="Texture2D" uid="uid://dqk35k04yhaeb" path="res://camp imgs/Camp_char_sit_H.png" id="20_404pk"]
 
 [resource]
 script = ExtResource("12_x3tfg")
@@ -29,7 +29,7 @@ dead_portrait_texture = ExtResource("9_4vg1p")
 Hit_texture = ExtResource("2_404pk")
 initiative_icon = ExtResource("10_j4cyw")
 Dialogue_texture = ExtResource("1_y4sil")
-textureCamp = ExtResource("18_egu01")
+textureCamp = ExtResource("20_404pk")
 Name = "name"
 Charaname = "Hunter"
 IsDemon = false

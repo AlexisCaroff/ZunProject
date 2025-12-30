@@ -1,36 +1,42 @@
 [gd_scene load_steps=5 format=3 uid="uid://cyds6t8cudlnw"]
 
 [ext_resource type="Script" uid="uid://cdva0owcmjo24" path="res://LoveScene/SexScene.gd" id="1_rjks7"]
-[ext_resource type="Texture2D" uid="uid://dwdxqq1h2u4l2" path="res://LoveScene/WarriorxMystic.jpg" id="2_rjks7"]
-[ext_resource type="Texture2D" uid="uid://l7vod4fmaqrl" path="res://DialogueBox2.png" id="3_lpkng"]
+[ext_resource type="Texture2D" uid="uid://o1fti82sru6e" path="res://LoveScene/SCENE_CAMP_WxM.png" id="2_rjks7"]
+[ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="3_4cn4k"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="4_pr8ww"]
 
 [node name="HunterxWarrior" type="Node2D"]
 script = ExtResource("1_rjks7")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1967.0
+offset_bottom = 1135.0
+color = Color(0, 0, 0, 0.8)
+
 [node name="HunterxWarrior" type="Sprite2D" parent="."]
-position = Vector2(949, 539)
+position = Vector2(953.444, 541.5)
+scale = Vector2(0.485648, 0.485648)
 texture = ExtResource("2_rjks7")
 
 [node name="DialogueBox" type="Sprite2D" parent="."]
-position = Vector2(341.5, 529.346)
-scale = Vector2(1.39402, 1.39402)
-texture = ExtResource("3_lpkng")
+position = Vector2(939, 923)
+scale = Vector2(1.58427, 1.58427)
+texture = ExtResource("3_4cn4k")
 
 [node name="Label" type="Label" parent="DialogueBox"]
+z_index = 2
 anchors_preset = -1
-anchor_top = -4.80197e-05
-anchor_right = 0.893998
-anchor_bottom = 0.882
-offset_left = -153.872
-offset_top = -285.72
-offset_right = -176.863
-offset_bottom = -308.687
+anchor_left = 0.021
+anchor_top = 0.169
+anchor_right = 0.98
+anchor_bottom = 0.961
+offset_left = -511.504
+offset_top = -89.082
+offset_right = -511.52
+offset_bottom = -89.058
 theme_override_fonts/font = ExtResource("4_pr8ww")
 theme_override_font_sizes/font_size = 30
-text = "Now this was better.
-She'd been wanting to try one of these slimes since she saw them, and here was a man who could make them take on any shape?
-She was going to ride this toy til she was sore."
+text = "Now this was better. She'd been wanting to try one of these slimes since she saw them, and here was a man who could make them take on any shape? She was going to ride this toy til she was sore."
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 

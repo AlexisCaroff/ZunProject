@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://doitrlqhfja4t" path="res://characters/CharacterTestEnemySpitter1.tscn" id="2_on2qe"]
 [ext_resource type="Texture2D" uid="uid://dt647tob5tjil" path="res://UI/doorebuscade/DOOR_caught_temptress.png" id="3_cd18s"]
 [ext_resource type="Script" uid="uid://dmxcru3ra8jg" path="res://lvl/CombatEncounter.gd" id="3_q0ldw"]
-[ext_resource type="Script" uid="uid://bguggfgjsike1" path="res://scripts/Item.gd" id="4_36kb1"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_36kb1"]
 
 [resource]
 script = ExtResource("3_q0ldw")

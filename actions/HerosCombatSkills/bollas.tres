@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://bmkp0brav8l87"]
+[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://bmkp0brav8l87"]
 
-[ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="1_ey0n4"]
 [ext_resource type="Texture2D" uid="uid://fe1y4mug6b75" path="res://characters/charatexture/demo characters/HERO_hunter_throw.png" id="1_n3hnu"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="3_ofqht"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_vlstb"]
 [ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="4_qoo6w"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_bx3cj"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="5_r265m"]
+[ext_resource type="Texture2D" uid="uid://c6qss13x88o50" path="res://actions/damageEffect/damageeffecttexture/hit.png" id="6_iabra"]
 [ext_resource type="Texture2D" uid="uid://7qfwhdd5o7m6" path="res://actions/actiontexture/actionbollas.png" id="6_n3hnu"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
@@ -19,17 +20,25 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("4_qoo6w")
 metadata/_custom_type_script = "uid://tjywmaoy4ejj"
 
+[sub_resource type="Resource" id="Resource_jigks"]
+script = ExtResource("5_r265m")
+name = "Stunn"
+uitexture = ExtResource("6_iabra")
+affected_stat = 2
+amount = 0
+duration = 1
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
 [resource]
 script = ExtResource("5_bx3cj")
 name = "bollas"
 descriptionName = "bollas"
-description = "stun one ennemie"
+description = "Stuns a backline enemy and deals minor damage."
 icon = ExtResource("6_n3hnu")
-attack_sound = ExtResource("1_ey0n4")
 required_position = null
 ImageSkill = ExtResource("1_n3hnu")
 the_target_type = 6
-effects = Array[ExtResource("3_ofqht")]([SubResource("Resource_i4eos"), SubResource("Resource_vlstb")])
+effects = Array[ExtResource("3_ofqht")]([SubResource("Resource_i4eos"), SubResource("Resource_vlstb"), SubResource("Resource_jigks")])
 two_target_Type = null
 the_second_target_type = 1
 second_effects = null

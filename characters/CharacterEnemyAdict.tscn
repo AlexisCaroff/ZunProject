@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dasi42qwl63md"]
+[gd_scene load_steps=11 format=3 uid="uid://dasi42qwl63md"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_f5x8r"]
 [ext_resource type="Resource" uid="uid://cbctectxxmpkc" path="res://characters/data/CharacterEnemyAdict.tres" id="2_3kvr5"]
-[ext_resource type="Texture2D" uid="uid://kpc43243oyss" path="res://characters/charatexture/ENEMY_ADDICT_idle.png" id="2_jdh3h"]
+[ext_resource type="Texture2D" uid="uid://dg73ll2dweg01" path="res://characters/charatexture/demo characters/ENEMY_addict_idle.png" id="4_5b3bt"]
+[ext_resource type="Texture2D" uid="uid://cfbwrknqf04rn" path="res://characters/charatexture/demo characters/HERO_warrior_idle.png" id="5_8x73c"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="9_qu7su"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="10_sb46e"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="11_lw1ij"]
@@ -16,31 +17,38 @@ characterData = ExtResource("2_3kvr5")
 metadata/character_data_path = "res://characters/data/CharacterEnemyAdict.tres"
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(58, 29)
+position = Vector2(51, 23)
+scale = Vector2(1.2, 1.2)
 script = ExtResource("9_qu7su")
-min_scale = 1.0
-scalemini = 0.95
+min_scale = 1.15
+max_scale = 1.15
+scalemini = 1.1
+min_duration = 1.0
+max_duration = 1.5
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -197.0
-offset_top = -270.0
-offset_right = -26.0
-offset_bottom = -39.0
-scale = Vector2(1.6947, 1.27485)
+offset_left = -258.333
+offset_top = -315.0
+offset_right = -87.333
+offset_bottom = -84.0
+scale = Vector2(1.87875, 1.51287)
 mouse_filter = 2
-texture = ExtResource("2_jdh3h")
+texture = ExtResource("4_5b3bt")
 expand_mode = 1
+flip_h = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Selector" type="TextureRect" parent="pivot"]
-self_modulate = Color(2, 2, 2, 0)
-offset_left = -197.0
-offset_top = -270.0
-offset_right = -26.0
-offset_bottom = -39.0
-scale = Vector2(1.6947, 1.27485)
+self_modulate = Color(2.5, 2.5, 2.5, 0)
+offset_left = -258.333
+offset_top = -315.0
+offset_right = -87.333
+offset_bottom = -84.0
+scale = Vector2(1.87875, 1.51287)
 mouse_filter = 2
-texture = ExtResource("2_jdh3h")
+texture = ExtResource("5_8x73c")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="name" type="Label" parent="."]
 visible = false
@@ -56,13 +64,6 @@ offset_left = -81.0
 offset_top = -257.203
 offset_right = 152.0
 offset_bottom = 124.797
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = -19.0
-offset_top = -189.0
-offset_right = 21.0
-offset_bottom = -170.0
-alignment = 1
 
 [node name="Skill" type="TextureRect" parent="."]
 visible = false
@@ -105,6 +106,14 @@ z_index = -1
 position = Vector2(161, 28)
 scale = Vector2(2.34924, 0.637405)
 texture = ExtResource("14_l8mbh")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(32, 32)
+offset_left = -20.0
+offset_top = -176.0
+offset_right = 12.0
+offset_bottom = -144.0
+alignment = 1
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

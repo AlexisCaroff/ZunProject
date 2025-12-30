@@ -6,44 +6,44 @@ class_name InventoryUI
 @export var inventory_size_y := 5
 @export var emptySlotTexture : Texture2D = preload("res://UI/emptyItemSlot.png")
 # --- Références
-
-@onready var inventory_grid = $InventoryGrid
-@onready var slots_panel = $EquipmentSlots
-@onready var drag_icon = $DragIcon
-@onready var Selected_Chara_icon =$pivot/HerosTexture1
-@onready var Charaname=$Charaname
-@onready var Att=$AttLabel
-@onready var Def=$DefLabel
-@onready var Stamina=$Stamina
-@onready var Horny=$Horny
-@onready var Guilt=$Guilt
-@onready var WillPower=$WillPower
-@onready var ExitButton= $ExitButton
-@onready var CharactersPanelAffinity= $CharactersPanelAffinity
+@onready var canvasLayer = $CanvasLayer
+@onready var inventory_grid = $CanvasLayer/InventoryGrid
+@onready var slots_panel = $CanvasLayer/EquipmentSlots
+@onready var drag_icon = $CanvasLayer/DragIcon
+@onready var Selected_Chara_icon =$CanvasLayer/pivot/HerosTexture1
+@onready var Charaname=$CanvasLayer/Charaname
+@onready var Att=$CanvasLayer/AttLabel
+@onready var Def=$CanvasLayer/DefLabel
+@onready var Stamina=$CanvasLayer/Stamina
+@onready var Horny=$CanvasLayer/Horny
+@onready var Guilt=$CanvasLayer/Guilt
+@onready var WillPower=$CanvasLayer/WillPower
+@onready var ExitButton= $CanvasLayer/ExitButton
+@onready var CharactersPanelAffinity= $CanvasLayer/CharactersPanelAffinity
 @onready var CharactersAffinity= [
-	$CharactersPanelAffinity/chara1,
-	$CharactersPanelAffinity/chara2,
-	$CharactersPanelAffinity/chara3
+	$CanvasLayer/CharactersPanelAffinity/chara1,
+	$CanvasLayer/CharactersPanelAffinity/chara2,
+	$CanvasLayer/CharactersPanelAffinity/chara3
 ]
 @onready var skill_buttons = [
-	$ActionPanel/Action1,
-	$ActionPanel/Action2,
-	$ActionPanel/Action3,
-	$ActionPanel/Action4,
+	$CanvasLayer/ActionPanel/Action1,
+	$CanvasLayer/ActionPanel/Action2,
+	$CanvasLayer/ActionPanel/Action3,
+	$CanvasLayer/ActionPanel/Action4,
 ]
 @onready var cooldown_bars = [
-		$ActionPanel/Action1/CooldownBar,
-		$ActionPanel/Action2/CooldownBar,
-		$ActionPanel/Action3/CooldownBar,
-		$ActionPanel/Action4/CooldownBar,
+		$CanvasLayer/ActionPanel/Action1/CooldownBar,
+		$CanvasLayer/ActionPanel/Action2/CooldownBar,
+		$CanvasLayer/ActionPanel/Action3/CooldownBar,
+		$CanvasLayer/ActionPanel/Action4/CooldownBar,
 		]
-@onready var ButtonCharacter1=$ButtonCharacter1
-@onready var ButtonCharacter2=$ButtonCharacter2
-@onready var LabelAction= $LabelAction
-@onready var StaminaProgressBar=$StaminaProgressBar
-@onready var LustProgressBar=$LustProgressBar
-@onready var GuiltProgressBar=$GuiltProgressBar
-@onready var KinksList=$KinksList
+@onready var ButtonCharacter1=$CanvasLayer/ButtonCharacter1
+@onready var ButtonCharacter2=$CanvasLayer/ButtonCharacter2
+@onready var LabelAction= $CanvasLayer/LabelAction
+@onready var StaminaProgressBar=$CanvasLayer/StaminaProgressBar
+@onready var LustProgressBar=$CanvasLayer/LustProgressBar
+@onready var GuiltProgressBar=$CanvasLayer/GuiltProgressBar
+@onready var KinksList=$CanvasLayer/KinksList
 # Instances des personnages
 var characters : Array[CharacterData]= [
 	
@@ -66,16 +66,25 @@ signal change_in_equipment(character: CharacterData)
 
 func _ready():
 	gm = get_tree().root.get_node("GameManager") as GameManager
-	inventory_items.resize(3*6)
+	hideMenu()
 	create_inventory_grid()
-	#inventory_items=gm.inventory
+
 	ExitButton.connect("button_down", hideMenu)
 	drag_icon.visible = false
-
-	# inventaire vide pour l’instant
+	var theinventory = inventory_items.duplicate()
+	
 	inventory_items.resize(inventory_size_x * inventory_size_y)
+	
 	for i in range(inventory_items.size()):
 		inventory_items[i] = null
+		
+	for i in gm.inventory:
+		if i != null:
+			print (i.name + " is in Game manager inventory")
+			addItemToInventory(i)
+	
+
+		
 	if characters.is_empty():
 		characters=gm.characters
 	select_character(characters[0])
@@ -204,9 +213,9 @@ func select_character(chara:CharacterData):
 			if chara.affinity.has(target.Charaname):
 				value = chara.affinity[target.Charaname]
 			slot.set_chara(target, value)
-			# Couleur facultative selon la valeur
+		
 
-			# Texte affiché
+			
 			rtl.text = target.Charaname
 
 			slot.visible = true
@@ -320,7 +329,14 @@ func place_item_in_inventory(index: int):
 	dragged_item = temp
 	update_inventory_ui()
 
+func addItemToInventory(item: Equipment):
+	for idx in range(inventory_items.size()):
+		if inventory_items[idx] == null:
+			inventory_items[idx] = item
+			print("add item ", item.name)
+			break
 
+	update_inventory_ui()
 # --------------------------------------------------------------------
 # EQUIPMENT SLOTS UI
 # --------------------------------------------------------------------
@@ -368,7 +384,7 @@ func unequip(slot_index: int):
 # DROP SUR SLOT ÉQUIPEMENT
 # --------------------------------------------------------------------
 
-func _gui_input(event):
+func _input(event):
 	
 
 	if event is InputEventMouseButton :
@@ -381,7 +397,7 @@ func _gui_input(event):
 		finish_drag()
 
 func try_equip_on_character():
-
+	print ("try_equip_on_character")
 	if selected_character == null:
 		return
 
@@ -400,10 +416,10 @@ func try_equip_on_character():
 # --------------------------------------------------------------------
 
 func update_inventory_ui():
-	#print("update_inventory_ui_______________________________________________________")
-	#for item in inventory_items:
-	#	if item != null:
-	#		print ( item.name)
+	print("update_inventory_ui_______________________________________________________")
+	for item in inventory_items:
+		if item != null:
+			print ( item.name + "is in inventory")
 	
 	for i in range(inventory_items.size()):
 		var item = inventory_items[i]
@@ -414,8 +430,9 @@ func update_inventory_ui():
 	emit_signal("change_in_equipment", selected_character)
 	
 func hideMenu():
-	self.visible=false
-	
+	canvasLayer.visible=false
+func showMenu():
+	canvasLayer.visible=true
 func update_cooldown_bar(container: HBoxContainer, skill):
 	
 	for child in container.get_children():

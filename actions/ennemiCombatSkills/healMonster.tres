@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://c6phd3e1sln7n"]
 
-[ext_resource type="Texture2D" uid="uid://dqhjo8q8i7brp" path="res://actions/actiontexture/SkillImage/ENEMY_TEMPTRESS_buff.png" id="1_80rpu"]
+[ext_resource type="Texture2D" uid="uid://ddcx2dm6to566" path="res://characters/charatexture/demo characters/ENEMY_temptress_cast.png" id="1_80rpu"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_nhirv"]
 [ext_resource type="Script" uid="uid://bp8u5at2ojgse" path="res://actions/skillEffects/healEffect.gd" id="3_lh1si"]
 [ext_resource type="Texture2D" uid="uid://ccyi8n3i3daxa" path="res://actions/actiontexture/heal.png" id="4_htmn0"]

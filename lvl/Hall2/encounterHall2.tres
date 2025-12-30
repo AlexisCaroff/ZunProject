@@ -1,18 +1,17 @@
-[gd_resource type="Resource" script_class="CombatEncounter" load_steps=9 format=3 uid="uid://fucrgg8lejvy"]
+[gd_resource type="Resource" script_class="CombatEncounter" load_steps=8 format=3 uid="uid://fucrgg8lejvy"]
 
 [ext_resource type="PackedScene" uid="uid://doitrlqhfja4t" path="res://characters/CharacterTestEnemySpitter1.tscn" id="1_yn520"]
 [ext_resource type="PackedScene" uid="uid://dasi42qwl63md" path="res://characters/CharacterEnemyAdict.tscn" id="2_8gxcd"]
 [ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharaEnnemyTemptress.tscn" id="3_qnr0f"]
 [ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterEnemyNymphe.tscn" id="4_l8rn2"]
 [ext_resource type="Texture2D" uid="uid://drp4vk52vgk74" path="res://UI/doorebuscade/DOOR_caught_nymph.png" id="5_hatco"]
-[ext_resource type="Script" uid="uid://bguggfgjsike1" path="res://scripts/Item.gd" id="6_hfksw"]
-[ext_resource type="Resource" uid="uid://c0xhq36vxqgm7" path="res://lvl/Hall2/goldCombatHall2.tres" id="7_22ty5"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_v6j47"]
 [ext_resource type="Script" uid="uid://dmxcru3ra8jg" path="res://lvl/CombatEncounter.gd" id="8_j3031"]
 
 [resource]
 script = ExtResource("8_j3031")
 enemy_scenes = Array[PackedScene]([ExtResource("1_yn520"), ExtResource("2_8gxcd"), ExtResource("3_qnr0f"), ExtResource("4_l8rn2")])
-loots = Array[ExtResource("6_hfksw")]([ExtResource("7_22ty5")])
+loots = Array[ExtResource("6_v6j47")]([])
 description = ""
 imageEmbuscade = ExtResource("5_hatco")
 metadata/_custom_type_script = "uid://dmxcru3ra8jg"

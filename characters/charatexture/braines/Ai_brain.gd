@@ -24,7 +24,7 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 	
 	match skill.the_target_type:
 		skill.target_type.SELF:
-			var selfpositions 
+			var selfpositions :Array[PositionSlot]
 			selfpositions.append(owner._current_slot)
 			return {"skill": skill, "target": selfpositions}
 		skill.target_type.ALLY:

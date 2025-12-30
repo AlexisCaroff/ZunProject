@@ -78,10 +78,11 @@ min_duration = 0.5
 max_duration = 0.5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = -20.0
-offset_top = -176.36
-offset_right = 20.0
-offset_bottom = -157.36
+custom_minimum_size = Vector2(32, 32)
+offset_left = -257.0
+offset_top = -176.0
+offset_right = 258.0
+offset_bottom = -144.0
 alignment = 1
 
 [node name="contexte" type="Label" parent="."]

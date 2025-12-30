@@ -38,7 +38,7 @@ func load_chara() -> void:
 	sprite.texture =characterData.portrait_texture
 
 	for buff in characterData.buffs:
-		add_buff(buff)
+		add_buff(buff, true)
 	
 
 func update_display() -> void:
@@ -58,16 +58,19 @@ func want_to_move():
 func move():
 	selector.self_modulate.a =0.0
 	
-func add_buff(buff: Buff):
+func add_buff(buff: Buff, load:bool =false):
 	if buff_bar ==null:
 		buff_bar = $HBoxContainer
 	var new_buff = buff.duplicate()
 	var icon = TextureRect.new()
 	icon.texture = new_buff.icon
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	icon.custom_minimum_size = Vector2(20, 20)
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.custom_minimum_size = Vector2(32, 32)
+	icon.size= Vector2(32, 32)
 	buff_bar.add_child(icon)
-	characterData.buffs.append(buff)
+	if !load:
+		characterData.buffs.append(buff)
 	#buff_icons.add_child(icon)
 	print("add buff")
 	

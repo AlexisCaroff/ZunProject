@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://batqp2vro3cfl"]
+[gd_scene load_steps=7 format=3 uid="uid://batqp2vro3cfl"]
 
 [ext_resource type="Texture2D" uid="uid://c4wdk6bhq5nah" path="res://scenes/backgrounds dungeon demo/BG_dungeon_hall.png" id="1_gd6am"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_gd6am"]
 [ext_resource type="PackedScene" uid="uid://h8pqs7tabdxj" path="res://lvl/CombatInterface.tscn" id="3_e5in0"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="4_gd6am"]
+[ext_resource type="Texture2D" uid="uid://b1thgnhggbr0w" path="res://tuto/intro3.png" id="5_lrolr"]
+[ext_resource type="Script" uid="uid://b0ir2tk1oluly" path="res://lvl/Hall1/tuto.gd" id="6_psgqu"]
 
 [node name="CombatHall1" type="Node2D"]
 
@@ -19,9 +21,28 @@ offset_left = -1.0
 offset_right = -1.0
 
 [node name="MenuPerso" parent="." instance=ExtResource("4_gd6am")]
-visible = false
 z_index = 20
+z_as_relative = true
 offset_left = -6.0
 offset_top = 18.0
 offset_right = -6.0
 offset_bottom = 18.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+follow_viewport_enabled = true
+
+[node name="Intro2" type="Sprite2D" parent="CanvasLayer"]
+z_index = 20
+position = Vector2(963, 538)
+scale = Vector2(0.72634, 0.72634)
+texture = ExtResource("5_lrolr")
+script = ExtResource("6_psgqu")
+
+[node name="HideTuto" type="Button" parent="CanvasLayer/Intro2"]
+offset_left = -1349.99
+offset_top = -962.771
+offset_right = -1341.99
+offset_bottom = -954.771
+scale = Vector2(338.499, 233.869)
+flat = true

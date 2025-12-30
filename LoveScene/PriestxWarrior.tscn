@@ -1,41 +1,47 @@
 [gd_scene load_steps=5 format=3 uid="uid://nqy5y0yj20tq"]
 
 [ext_resource type="Script" uid="uid://cdva0owcmjo24" path="res://LoveScene/SexScene.gd" id="1_evfe3"]
-[ext_resource type="Texture2D" uid="uid://dxbyufpox70bj" path="res://LoveScene/PriestxWarrior.jpg" id="2_evfe3"]
-[ext_resource type="Texture2D" uid="uid://l7vod4fmaqrl" path="res://DialogueBox2.png" id="3_aw24d"]
+[ext_resource type="Texture2D" uid="uid://4esjxhirq1wp" path="res://LoveScene/SCENE_CAMP_WxP.png" id="2_evfe3"]
+[ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="3_n5v0x"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="4_6g5sb"]
 
 [node name="HunterxWarrior" type="Node2D"]
 script = ExtResource("1_evfe3")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1967.0
+offset_bottom = 1135.0
+color = Color(0, 0, 0, 0.8)
+
 [node name="HunterxWarrior" type="Sprite2D" parent="."]
-position = Vector2(949, 539)
+position = Vector2(953.444, 541.5)
+scale = Vector2(0.485648, 0.485648)
 texture = ExtResource("2_evfe3")
-
-[node name="DialogueBox" type="Sprite2D" parent="."]
-position = Vector2(341.5, 529.346)
-scale = Vector2(1.39402, 1.39402)
-texture = ExtResource("3_aw24d")
-
-[node name="Label" type="Label" parent="DialogueBox"]
-anchors_preset = -1
-anchor_left = -0.00743207
-anchor_top = -4.80197e-05
-anchor_right = 1.0
-anchor_bottom = 0.806
-offset_left = -144.265
-offset_top = -272.967
-offset_right = -223.0
-offset_bottom = -364.722
-theme_override_fonts/font = ExtResource("4_6g5sb")
-theme_override_font_sizes/font_size = 30
-text = "The priestess couldn't contain herself anymore. She needed relief, even if she had to sin for it.
-She also needed to shut that mouthy barbarian up.
-A perfect solution to both her problems."
-autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="."]
 offset_right = 1909.0
 offset_bottom = 1079.0
 flat = true
+
+[node name="DialogueBox" type="Sprite2D" parent="."]
+position = Vector2(939, 944)
+scale = Vector2(1.58427, 1.34832)
+texture = ExtResource("3_n5v0x")
+
+[node name="Label" type="Label" parent="DialogueBox"]
+z_index = 2
+anchors_preset = -1
+anchor_left = 0.021
+anchor_top = 0.187
+anchor_right = 0.98
+anchor_bottom = 0.822
+offset_left = -511.504
+offset_top = -88.9111
+offset_right = -511.52
+offset_bottom = -88.9411
+theme_override_fonts/font = ExtResource("4_6g5sb")
+theme_override_font_sizes/font_size = 30
+text = "The priestess couldn't contain herself anymore. She needed relief, even if she had to sin for it.
+She also needed to shut that mouthy barbarian up. A perfect solution to both her problems."
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true

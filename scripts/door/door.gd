@@ -7,11 +7,13 @@ var startsize = Vector2(1.0,1.0)
 var current_tween: Tween = null
 var Game_Manager:GameManager
 var timePeeking : float = 0.0
+@onready var peekButton=$"../peekButton"
 @onready var left_button: Button = $"../LastDoor"
 @onready var right_button: Button = $"../NextDoor"
 var current_index: int = -1
 var connected_ids: Array = []
 var peeking: bool = true
+@onready var subViewportContainer= $"../SubViewportContainer"
 @onready var sub_viewport : Viewport= $"../SubViewportContainer/SubViewport"
 var encounter_for_this_door: CombatEncounter
 @onready var embuscadeUI: TextureRect = $"../EmbuscadeUI"
@@ -21,13 +23,18 @@ var heroes_are_embushed : bool = false
 @onready var viewport: Viewport = $"../SubViewportContainer2/SubViewport"
 @onready var donjon_map: Map = $"../SubViewportContainer2/SubViewport/map"
 @onready var portrait_selector = $"../Portraits/ExploCharaselector"
-var characters: Array[Node] = []
+var characters: Array[CharacterData] = []
 @onready var portraits = $"../Portraits".get_children()
-var selected_character: CharaExplo
+var selected_character: CharacterData
+@onready var doorRight:=$"../DoorrDungeonHall"
+@onready var doorLeft:=$"../DoorlDungeonHall"
+
+
 func _ready():
 	Game_Manager = get_tree().root.get_node("GameManager") 
 	if Game_Manager:
 		print ("Find Game manager")
+	characters=Game_Manager.characters
 	peek_scene = load("res://UI/peekScene.tscn").instantiate()
 	sub_viewport.add_child(peek_scene)
 	var empty := StyleBoxEmpty.new()
@@ -67,26 +74,22 @@ func _ready():
 		right_button.modulate.a = 0.2
 	
 	await get_tree().process_frame  # attendre que la frame d'instanciation soit finie
-
+	load_chara()
+		
 	if donjon_map:
 		donjon_map.focus_door(Game_Manager.current_room_Ressource, viewport)
 		#donjon_map.move_to_position(donjon_map.curentposition)
 		
-func load_characters_from_gamestat():
-	characters.clear()
-	print("try to load characters, saved character are "+ str(GameState.saved_heroes_data.size()))
-	for i in GameState.saved_heroes_data.size():
-		var hero_data = GameState.saved_heroes_data[i]
-		var chara = chara_explo_scene.instantiate()
-		chara.load_from_dict(hero_data)
-		
-		characters.append(chara)
-		
-		# Placement dans le slot correspondant
-		var slot_index = hero_data.get("Chara_position")
-		portraits[slot_index].set_occupant(chara)
-		chara.exploPortrait=portraits[slot_index]
-		
+
+func load_chara():
+		for i in characters.size():
+			var chara = characters[i]
+
+
+			var slot_index = chara.Chara_position			
+			portraits[slot_index].set_occupant(chara)
+			
+			
 func _on_mouse_exited() -> void:
 	Doortext.scale = big_size	
 	Doortext.set_pivot_offset(Doortext.size/ 2)
@@ -114,6 +117,15 @@ func _on_mouse_entered() -> void:
 
 
 func _on_button_down() -> void:
+	var cam : Camera =$"../Camera2D"
+	var pose = cam.base_position
+	pose.y -=120
+	
+	if doorLeft:
+		open_door(1.5)
+	Game_Manager.sceneTransition.fade_out(1.5)
+	await cam.zoom_to_position(pose,2.0,1.0 )
+	
 	call_deferred("_advance_in_room")
 	
 	
@@ -168,12 +180,33 @@ func check_detection() -> void:
 			# on stoppe la boucle si le combat démarre
 			return
 		check_detection()
-
+func get_ambushed():
+	heroes_are_embushed = true
+	ennemy_are_embushed = false
+	_start_combat()
+	
+func win_ambush():
+	heroes_are_embushed = false
+	ennemy_are_embushed = true
+	_start_combat()
+	
+	
 func _start_combat():
-	embuscadeUI.texture = encounter_for_this_door.imageEmbuscade
-	embuscadeUI.visible = true
+	if heroes_are_embushed:
+		embuscadeUI.texture = encounter_for_this_door.imageEmbuscade
+		embuscadeUI.visible = true
 	await get_tree().create_timer(1.0).timeout
+	subViewportContainer.visible=false
+	var cam : Camera =$"../Camera2D"
+	var pose = cam.base_position
+	pose.y -=120
+	if doorLeft:
+		open_door(1.5)
+	Game_Manager.sceneTransition.fade_out(1.5)
+	await cam.zoom_to_position(pose,2.0,1.0 )
 	call_deferred("_advance_in_room")
+	
+	
 func _on_left_pressed():
 	if connected_ids.is_empty():
 		return
@@ -203,8 +236,21 @@ func _go_to_connected_room(index: int):
 
 	print("🚪 Door → Passage à la room suivante :", next_room.room_id)
 	Game_Manager.enter_room(next_room, true)
-func selectCharacter(chara: CharaExplo):
+func selectCharacter(chara: CharacterData):
 
 		selected_character = chara
 		var i = characters.find(chara)
 		portrait_selector.position = portraits[i].position
+func open_door(duration:float):
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_IN)
+	var targetScale =doorLeft.scale.y*0.2
+	tween.parallel().tween_property(Doortext, "modulate:a",0.0 , 0.3)
+	tween.parallel().tween_property(peekButton, "modulate:a",0.0 , 0.3)
+	tween.parallel().tween_property(embuscadeUI, "modulate:a",0.0 , 0.3)
+	tween.parallel().tween_property(doorLeft, "scale:y",targetScale , duration)
+	tween.parallel().tween_property(doorRight, "scale:y",targetScale , duration)
+	tween.parallel().tween_property(doorRight, "skew",0.2 , duration)
+	tween.parallel().tween_property(doorLeft, "skew",-0.2 , duration)
+	
+	

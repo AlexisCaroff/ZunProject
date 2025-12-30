@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://rxp2q7eq2hr5"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_0d46u"]
-[ext_resource type="Texture2D" uid="uid://q26qd56ebss" path="res://actions/actiontexture/SkillImage/ENEMY_TEMPTRESS_charm.png" id="1_0w17e"]
+[ext_resource type="Texture2D" uid="uid://dbis8kchulhhc" path="res://characters/charatexture/demo characters/ENEMY_temptress_charm.png" id="1_0w17e"]
 [ext_resource type="Texture2D" uid="uid://c6ptbylmpvkdy" path="res://actions/CampSkill/masturbIcon.png" id="1_lqogb"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_vyqw8"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_0w17e"]

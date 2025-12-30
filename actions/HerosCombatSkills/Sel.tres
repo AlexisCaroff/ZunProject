@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="3_wlhg8"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="4_iy76m"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_7c32x"]
-[ext_resource type="Texture2D" uid="uid://dh3aguia4vq63" path="res://actions/bufftexture/debuff.png" id="6_wlhg8"]
+[ext_resource type="Texture2D" uid="uid://drpnss51hobsj" path="res://UI/debuffAtt.png" id="6_vtysm"]
 [ext_resource type="Texture2D" uid="uid://cchaa16vi0eht" path="res://actions/actiontexture/salt.png" id="7_vtysm"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
@@ -19,7 +19,7 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 [sub_resource type="Resource" id="Resource_nv4t7"]
 script = ExtResource("4_iy76m")
 name = "name"
-uitexture = ExtResource("6_wlhg8")
+uitexture = ExtResource("6_vtysm")
 affected_stat = 0
 amount = -5
 duration = 3
@@ -29,7 +29,7 @@ metadata/_custom_type_script = "uid://c3dw018knk8mk"
 script = ExtResource("5_7c32x")
 name = "Salt "
 descriptionName = "Salt "
-description = "debuff ennemies and deal smal dmg"
+description = "Reduces all enemies’ attack and deals minor damage"
 icon = ExtResource("7_vtysm")
 attack_sound = ExtResource("1_a6kki")
 required_position = 0

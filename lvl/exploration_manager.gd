@@ -4,6 +4,7 @@ class_name ExplorationManager
 
 @export var chara_explo_scene : PackedScene
 @onready var Doortext = $Button/Doortext
+@onready var DoorButton = $Button
 @onready var slots : Array[ExplorationPosition] = []
 var characters: Array[Node] = []
 var big_size = Vector2(1.1, 1.1)
@@ -18,7 +19,7 @@ var move_mode: bool = false
 @onready var portrait_selector =$"../Portraits/ExploCharaselector"
 var DoorNumber:int =0
 var gm : GameManager
-var campButton: Button
+@onready var campButton: Button = $Campement
 @onready var interactable =  $"../Interactable"
 @onready var menuPerso = $"../MenuPerso"
 @onready var bouton_menuPerso=$"../charaPortrait2/charaPortraitButton"
@@ -35,25 +36,37 @@ var campButton: Button
 @onready var Items =$"../Items"
 const SELECTOR_TEX = preload("res://UI/selectorCombatChara.png")
 var selectorChara : Sprite2D
-
-
+@onready var campTexture=$Campement/CampFire2
+@onready var GoToCampement=$GoToCampement
+@onready var DoorTuto=$DoorTuto
 func _ready():
 	for child in $"../HeroPosition".get_children():
 		if child is ExplorationPosition:
 			slots.append(child)
-			
+	DoorButton.connect("mouse_entered",Door_over)
+	DoorButton.connect("mouse_exited",Door_notover)
+	DoorTuto.visible=false
 	gm = get_tree().root.get_node("GameManager") as GameManager
+	GoToCampement.visible=false
+	GoToCampement.scale=Vector2(0.0,0.0)
 	if gm.current_room_Ressource.CanCamp:
 		campButton=$Campement
 		campButton.visible=true
 		interactable.visible=false
 		campButton.connect("button_down",go_to_campement)
+		campButton.connect("mouse_entered",campement_over)
+		campButton.connect("mouse_exited",campement_notover)
 		if gm.current_room_Ressource.CampDone:
 			campButton.disabled=true
+			campTexture.texture=preload("res://camp imgs/PROP_campfire_closed.png")
+			campTexture.modulate= Color.DARK_GRAY
+	else :
+		campButton.visible=false
+		#interactable.visible=true
 	menuPerso.characters=gm.characters
 	print ("characters atribués ")
 	menuPerso.change_in_equipment.connect(_on_character_equipment_changed)
-	menuPerso.inventory_items=gm.inventory
+
 	load_characters_from_gamestat()
 	selected_character =characters[0]
 	
@@ -67,6 +80,7 @@ func _ready():
 		#donjon_map.move_to_position(donjon_map.curentposition)
 	create_selector_sprite()
 	selectorChara.position= selected_character.CharaPosition.charaUI.global_position if selected_character.CharaPosition else Vector2.ZERO
+	selectorChara.position.y -=0
 	selectCharacter(characters[0]) 
 	
 func load_characters_from_gamestat():
@@ -141,7 +155,7 @@ func _swap_characters(chara1: CharaExplo, chara2: CharaExplo) -> void:
 	portrait1.set_occupant(chara2)
 	move_mode = false
 	selectorChara.position= selected_character.CharaPosition.charaUI.global_position if selected_character.CharaPosition else Vector2.ZERO
-
+	#selectorChara.position.y -=46
 func selectCharacter(thechara: CharaExplo):
 	thechara.animate_selected()
 	var chara = thechara.characterData
@@ -150,7 +164,7 @@ func selectCharacter(thechara: CharaExplo):
 		var i = characters.find(thechara)
 		portrait_selector.position = portraits[i].position
 		selectorChara.position= selected_character.CharaPosition.charaUI.global_position if selected_character != null else Vector2.ZERO
-		
+		#selectorChara.position.y -=46
 		NameLabel.text=chara.Charaname
 		Def.bbcode_enabled = true
 		Att.bbcode_enabled = true
@@ -237,7 +251,7 @@ func sortie_du_camp():
 		chara.update_display()
 		
 func showMenuPerso():
-	menuPerso.visible = true
+	menuPerso.showMenu()
 
 func create_selector_sprite():
 	var sprite := Sprite2D.new()
@@ -247,3 +261,20 @@ func create_selector_sprite():
 	selectorChara.scale= Vector2(0.9,1.1)
 	selectorChara.offset.y =-4.0
 	selectorChara.z_index = 3
+func campement_over():
+	GoToCampement.scale= Vector2(0.0,0.0)
+	GoToCampement.visible=true
+	var tween : Tween = create_tween()
+	
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(GoToCampement,"scale",Vector2(1.0,1.0),0.3).set_delay(0.3)
+func campement_notover():
+	GoToCampement.visible=false
+func Door_over():
+	DoorTuto.scale= Vector2(0.0,0.0)
+	DoorTuto.visible=true
+	var tween : Tween = create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(DoorTuto,"scale",Vector2(1.0,1.0),0.3).set_delay(0.8)
+func Door_notover():
+	DoorTuto.visible=false

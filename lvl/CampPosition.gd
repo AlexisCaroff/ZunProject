@@ -4,8 +4,11 @@ var occupant : CharaCamp
 @onready var campement = $"../.."
 var skill : CampSkill
 var selfoccupant :  Array[CharaCamp]
+@onready var button =$Button
 
-
+func _ready() -> void:
+	button.connect("mouse_entered",over)
+	button.connect("mouse_exited",out)
 func _on_button_button_down() -> void:
 	if occupant.targetable:
 		skill= campement.skillused
@@ -21,4 +24,8 @@ func _on_button_button_down() -> void:
 	else :
 		campement.changeSelectedCharacter(occupant)
 
-		
+func over():
+	occupant.animate_selected()
+	occupant.Selector.visible = true
+func out():
+	occupant.Selector.visible = false

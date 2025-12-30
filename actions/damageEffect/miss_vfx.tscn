@@ -88,6 +88,8 @@ _data = {
 }
 
 [node name="missVFX" type="Node2D"]
+z_index = 22
+z_as_relative = false
 script = ExtResource("1_c5gcb")
 
 [node name="Label" type="Label" parent="."]
