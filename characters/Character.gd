@@ -698,8 +698,8 @@ func animate_attack(target: Character, _duration = 1.0):
 	
 	
 func _on_attack(target: Character, _duration: float =1.0):
-	self.z_index = 5
-	target.z_index = 5
+	self.z_index = 6
+	target.z_index = 6
 	var tween = null
 	var has_changeMask := current_skill.effects.any(func(e): return e is ChangeSkill)
 	var has_heal := current_skill.effects.any(func(e): return e is HealEffect)

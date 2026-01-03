@@ -1163,6 +1163,7 @@ scale = Vector2(338.499, 233.869)
 flat = true
 
 [node name="ShowTuto" type="Button" parent="CanvasLayer"]
+visible = false
 offset_top = 151.0
 offset_right = 114.0
 offset_bottom = 248.0
