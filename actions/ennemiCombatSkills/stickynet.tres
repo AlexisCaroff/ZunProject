@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://b12yj86cv1lo7"]
+[gd_resource type="Resource" script_class="Skill" load_steps=14 format=3 uid="uid://b12yj86cv1lo7"]
 
 [ext_resource type="Texture2D" uid="uid://dflxvs46sww1w" path="res://characters/charatexture/demo characters/ENEMY_nymph_F_shoot.png" id="1_4y5k8"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_nya7c"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bhhvdopw8nqlu" path="res://actions/actiontexture/vampire.png" id="4_j4j7o"]
 [ext_resource type="Texture2D" uid="uid://btvnbxbbjq1w4" path="res://UI/debuffDeff.png" id="5_coij5"]
 [ext_resource type="Texture2D" uid="uid://drpnss51hobsj" path="res://UI/debuffAtt.png" id="5_j4j7o"]
+[ext_resource type="Texture2D" uid="uid://c6qss13x88o50" path="res://actions/damageEffect/damageeffecttexture/hit.png" id="7_g6l6p"]
 
 [sub_resource type="Resource" id="Resource_coij5"]
 script = ExtResource("2_g222q")
@@ -31,6 +32,15 @@ amount = -5
 duration = 3
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
+[sub_resource type="Resource" id="Resource_vgxbl"]
+script = ExtResource("3_4y5k8")
+name = "Stunn"
+uitexture = ExtResource("7_g6l6p")
+affected_stat = 2
+amount = 0
+duration = 1
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
 [resource]
 script = ExtResource("2_kcvw8")
 name = "Stickynet"
@@ -40,7 +50,7 @@ icon = ExtResource("4_j4j7o")
 required_position = 2
 ImageSkill = ExtResource("1_4y5k8")
 the_target_type = 0
-effects = Array[ExtResource("1_nya7c")]([SubResource("Resource_coij5"), SubResource("Resource_g6l6p"), SubResource("Resource_df3d6")])
+effects = Array[ExtResource("1_nya7c")]([SubResource("Resource_coij5"), SubResource("Resource_g6l6p"), SubResource("Resource_df3d6"), SubResource("Resource_vgxbl")])
 two_target_Type = false
 the_second_target_type = 0
 second_effects = Array[ExtResource("1_nya7c")]([])

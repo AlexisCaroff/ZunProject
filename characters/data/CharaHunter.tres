@@ -33,6 +33,7 @@ textureCamp = ExtResource("20_404pk")
 Name = "name"
 Charaname = "Hunter"
 IsDemon = false
+size = "Small"
 affinity = Dictionary[String, int]({})
 base_max_stamina = 100
 base_max_stress = 100

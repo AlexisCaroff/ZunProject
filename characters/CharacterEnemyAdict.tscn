@@ -27,28 +27,26 @@ min_duration = 1.0
 max_duration = 1.5
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -258.333
-offset_top = -315.0
-offset_right = -87.333
-offset_bottom = -84.0
-scale = Vector2(1.87875, 1.51287)
+offset_left = -298.333
+offset_top = -364.167
+offset_right = -127.333
+offset_bottom = -133.167
+scale = Vector2(2.22937, 1.79521)
 mouse_filter = 2
 texture = ExtResource("4_5b3bt")
 expand_mode = 1
 flip_h = true
-metadata/_edit_use_anchors_ = true
 
 [node name="Selector" type="TextureRect" parent="pivot"]
 self_modulate = Color(2.5, 2.5, 2.5, 0)
-offset_left = -258.333
-offset_top = -315.0
-offset_right = -87.333
-offset_bottom = -84.0
-scale = Vector2(1.87875, 1.51287)
+offset_left = -298.333
+offset_top = -364.167
+offset_right = -127.333
+offset_bottom = -133.167
+scale = Vector2(2.22937, 1.79521)
 mouse_filter = 2
 texture = ExtResource("5_8x73c")
 expand_mode = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="name" type="Label" parent="."]
 visible = false

@@ -31,6 +31,7 @@ initiative_icon = ExtResource("6_ruvyt")
 Name = "name"
 Charaname = "Temptress"
 IsDemon = false
+size = "average"
 affinity = Dictionary[String, int]({})
 base_max_stamina = 100
 base_max_stress = 100

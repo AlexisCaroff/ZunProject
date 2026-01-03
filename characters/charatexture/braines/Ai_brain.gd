@@ -13,7 +13,7 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 	if usable_skills.is_empty():
 		print("%s n'a aucune compétence utilisable." % owner.characterData.Charaname)
 		return {}
-	print ("usable skills for" + owner.characterData.Charaname+ " :")
+	#print ("usable skills for" + owner.characterData.Charaname+ " :")
 	for skill in usable_skills:
 		if usable_skills.size() >1 and skill.name=="move":
 			usable_skills.erase(skill)
@@ -51,7 +51,7 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 				targetPositions = ennemisPositions.filter(func(p): return not p.position_data.isFront)
 	print (targetPositions )
 	possible_targets = possible_targets.filter(func(c): return not c.is_dead())
-
+	possible_targets = possible_targets.filter(func(c): return not c.characterData.current_horniness>=100)
 	var target: Character = null
 	var targetPos: Array[PositionSlot]
 	if owner.taunted_by != null and skill.the_target_type == skill.target_type.ENNEMY:

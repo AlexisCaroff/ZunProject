@@ -111,7 +111,8 @@ func update_ui_for_current_character(character: Character):
 			button.Actiontext = skill.descriptionName + "\n" + skill.description
 			button.disabled = !skill.can_use()
 			button.icon = skill.icon
-
+			if character.characterData.current_horniness>=100 or character.characterData.stun:
+				button.disabled = true
 			var index = i
 			button.pressed.connect(func(): combat_manager.use_skill(index))
 

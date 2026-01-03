@@ -551,16 +551,16 @@ func animate_take_damage(damage:int, source:Character, usedSkill :Skill = null):
 	var offset = direction * 10
 	var dam_pos = start_pos + offset
 	
-	if source== self:
-		var tween := create_tween() as Tween
-		var tween2 := create_tween() as Tween
-		tween.tween_property(self, "scale", big_size, 0.2)
-		tween.tween_property(self, "scale", normal_size, 0.2)
-		tween2.tween_property(self, "position", dam_pos, 0.02).set_delay(0.3)
-		tween2.tween_property(self, "position", start_pos, 0.2)
-		print ("self attacked------------------------------------------------------------")
+	#if source== self:
+	#	var tween := create_tween() as Tween
+	#	var tween2 := create_tween() as Tween
+	#	tween.tween_property(self, "scale", big_size, 0.2)
+	#	tween.tween_property(self, "scale", normal_size, 0.2)
+	#	tween2.tween_property(self, "position", dam_pos, 0.02).set_delay(0.3)
+	#	tween2.tween_property(self, "position", start_pos, 0.2)
+	#	print ("self attacked------------------------------------------------------------")
 		
-		await tween.finished
+	#	await tween.finished
 	emit_signal("skill_animation_finished")
 
 func animate_heal(damage:int, _source:Character, color=null):
@@ -619,27 +619,34 @@ func animate_attack(target: Character, _duration = 1.0):
 		self.global_position =Vector2(-200,728)
 	else :
 		self.global_position  =Vector2(2000,728)
-		
+	
 		
 	if target.characterData.is_player_controlled:
 		target_pos = Vector2(643,728)
 	else :
 		target_pos = Vector2(1300,728)
-		if target.characterData.Charaname == "Slime":
-			target_pos = Vector2(1300,680)
+
+#--------------------contact---------------------------
+	if target.characterData.size == "Small":
+		target_pos.y -= 80
+		if characterData.size == "Big":
+			attack_pos.y +=210
 	var direction = (target.global_position - global_position).normalized()
 	if current_skill.is_contact:
 		offset = direction * -current_skill.distance_contact
 		attack_pos =  target_pos + offset
 		if target.characterData.Charaname == "Slime":
 			attack_pos.y += 70
+		if target.characterData.size == "Big":
+			target_pos.y += 70
+			
 		if !target.characterData.is_player_controlled:
 			position=Vector2(-400,728)
 		else:
 			position=Vector2(2000,728)
 			
 				
-	
+#--------------------distance---------------------------
 	else :
 		offset = direction * 40
 		if characterData.is_player_controlled:
@@ -652,7 +659,7 @@ func animate_attack(target: Character, _duration = 1.0):
 			if !target.characterData.is_player_controlled:
 				attack_pos = Vector2(1500,750)
 				target_pos = Vector2(1043,728)
-				if target.characterData.Charaname == "Slime":
+				if target.characterData.Charaname == "Small":
 					target_pos.y -= 100
 			if characterData.Charaname == "Slime":
 				attack_pos.y -= 70

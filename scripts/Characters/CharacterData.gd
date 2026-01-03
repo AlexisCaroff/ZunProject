@@ -11,6 +11,7 @@ class_name CharacterData
 @export var Name : String = "name"
 @export var Charaname: String = "Classe"
 @export var IsDemon: bool = false
+@export var size : String= "average"
 # ---- Affinity
 @export var affinity: Dictionary[String, int] = {}
 # --- Stats de combat

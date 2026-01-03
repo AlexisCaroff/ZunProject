@@ -49,7 +49,7 @@ var heroes_are_ambushed : bool = false
 const SELECTOR_TEX = preload("res://UI/selectorCombatChara.png")
 var selectorChara : Sprite2D
 var gm: GameManager
-
+var combatEnd: bool = false
 
 func _ready():
 	gm= get_tree().root.get_node("GameManager") as GameManager
@@ -198,6 +198,8 @@ func next_turn():
 
 	_check_victory()
 	_check_defeat()
+	if combatEnd:
+		return
 	turnNumber += 1
 	if turn_queue.is_empty():
 		turn_queue = build_turn_queue(heroes + enemies)
@@ -215,6 +217,7 @@ func next_turn():
 			position.CharaUI.visible=false
 
 	ui.hide_Panel_action()
+	
 	selectorChara.position= current_character._current_slot.CharaUI.global_position if current_character._current_slot else Vector2.ZERO
 	if current_character.characterData.is_player_controlled:
 		selectorChara.modulate = Color(0.9,0.95,0.7)
@@ -224,11 +227,12 @@ func next_turn():
 	
 	for chara in turn_queue:
 		chara.update_ui()
-	await current_character.skill_animation_finished
 	
-	# checks using characterData (runtime stats kept in resource)
+	
+
 	if current_character.characterData.current_stamina <= 0:
 		ui.log(current_character.characterData.Charaname +" is tired")
+		current_character.update_buffs()
 		while is_animation_playing():
 			await get_tree().process_frame
 		turn_queue.append(current_character)
@@ -236,9 +240,15 @@ func next_turn():
 		return
 	if current_character.characterData.current_horniness >= 100: 
 		current_character.characterData.current_horniness =100
+		print (current_character.characterData.Charaname + "is too horny to fight")
 		ui.log(current_character.characterData.Charaname +" is too horny to fight")
+		current_character.update_buffs()
+		for button:Button in ui.skill_buttons :
+			button.disabled = true
 		while is_animation_playing():
+			print ("-----")
 			await get_tree().process_frame
+		await get_tree().create_timer(1.5).timeout
 		turn_queue.append(current_character)
 		next_turn()
 		return
@@ -248,6 +258,8 @@ func next_turn():
 		if current_character.exclamation != null:
 			current_character.exclamation.free()
 			ui.log(current_character.characterData.Charaname +" is surprised")
+		for button:Button in ui.skill_buttons :
+			button.disabled = true
 		current_character.update_buffs()
 		current_character.sprite.self_modulate=Color(1,1,1,1)
 		while is_animation_playing():
@@ -289,7 +301,7 @@ func create_selector_sprite():
 
 func _on_skill_animation_started():
 	active_animations += 1
-
+	print("-_-_-_-_  "+ str(active_animations) )
 func _on_skill_animation_finished():
 	active_animations -= 1
 
@@ -309,19 +321,23 @@ func _check_victory():
 	
 func _check_defeat():
 	for ally in heroes.duplicate():
-		if not ally.dead:
+		if !ally.dead && ally.characterData.current_horniness<100:
 			return 
-		else:
+		if ally.dead:
 			turn_queue.erase(ally)
 			if ally._current_slot:
 				ally._current_slot.remove_character()
 			heroes.erase(ally)
 			ally.queue_free()
+	combatEnd=true
 	_show_defeat()
 	
 func _show_defeat():
 	ResultScreen_label.text = "Defeat !"
+	ResultScreen_label.visible=true
 	ResultScreen_label.modulate = Color(1, 1, 1, 1)
+	
+	
 	
 func _show_victory():
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=73 format=3 uid="uid://h8pqs7tabdxj"]
+[gd_scene load_steps=74 format=3 uid="uid://h8pqs7tabdxj"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_3b7mk"]
 [ext_resource type="Texture2D" uid="uid://b1t6ygc3nxo7c" path="res://characters/charatexture/warriorHit.png" id="2_5brbe"]
+[ext_resource type="Texture2D" uid="uid://dq5wghvib7cq7" path="res://bg_test_colour2.jpg" id="2_p4emy"]
 [ext_resource type="Script" uid="uid://ds3vigal0aygx" path="res://lvl/Hall1/SpriteActionCombat.gd" id="3_mhvks"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="4_p4emy"]
 [ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="5_0p2u2"]
@@ -166,6 +167,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3b7mk")
 
+[node name="BgTestColour2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(960, 540)
+texture = ExtResource("2_p4emy")
+
 [node name="SpriteHeros" type="Sprite2D" parent="."]
 z_index = 6
 position = Vector2(1460, 728)
@@ -272,7 +278,7 @@ ignore_rotation = false
 script = ExtResource("14_j11dg")
 
 [node name="HeroPosition" type="Node2D" parent="."]
-position = Vector2(174, 597)
+position = Vector2(174, 600)
 scale = Vector2(0.9, 0.9)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
@@ -372,11 +378,11 @@ texture = ExtResource("17_171ar")
 [node name="TextureRect2" type="TextureRect" parent="HeroPosition/position3"]
 modulate = Color(1, 1, 1, 0.34902)
 z_index = -1
-offset_left = -191.0
-offset_top = 1.0
-offset_right = 99.0
-offset_bottom = 71.0
-scale = Vector2(1.03444, 1)
+offset_left = -182.333
+offset_top = -0.888977
+offset_right = 132.667
+offset_bottom = 78.111
+scale = Vector2(1.01712, 1)
 mouse_filter = 2
 texture = ExtResource("18_3bg3v")
 expand_mode = 1
@@ -396,7 +402,7 @@ scale = Vector2(1.8, 1.8)
 
 [node name="position4" type="Node2D" parent="HeroPosition"]
 z_index = 1
-position = Vector2(625, -9.00002)
+position = Vector2(671.111, -9.00002)
 script = ExtResource("15_hvocy")
 position_data = SubResource("Resource_t7hjh")
 
@@ -434,12 +440,12 @@ position = Vector2(-42.7778, 109.833)
 scale = Vector2(1.8, 1.8)
 
 [node name="ennemiePosition" type="Node2D" parent="."]
-position = Vector2(1439, 615)
+position = Vector2(1459, 600)
 scale = Vector2(0.9, 0.9)
 
 [node name="position1" type="Node2D" parent="ennemiePosition"]
 z_index = 1
-position = Vector2(-326.667, -25)
+position = Vector2(-326.667, -9)
 script = ExtResource("15_hvocy")
 position_data = SubResource("Resource_ehgg6")
 enemy_scene = ExtResource("21_5g2vc")
@@ -460,23 +466,23 @@ offset_bottom = 158.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_xwqlg")
 flat = true
 
-[node name="charaCombatUI" parent="ennemiePosition/position1" instance=ExtResource("19_uqdvq")]
-visible = false
-position = Vector2(16.6667, 119)
-scale = Vector2(1.8, 1.8)
-
 [node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position1"]
 modulate = Color(1, 1, 1, 0.34902)
 z_index = -1
-offset_left = -153.333
-offset_top = -10.5555
-offset_right = 130.667
-offset_bottom = 68.4445
-scale = Vector2(1.13211, 0.939242)
+offset_left = -182.333
+offset_top = -14.3333
+offset_right = 119.667
+offset_bottom = 64.6667
+scale = Vector2(1.08675, 1)
 mouse_filter = 2
 texture = ExtResource("18_3bg3v")
 expand_mode = 1
 flip_h = true
+
+[node name="charaCombatUI" parent="ennemiePosition/position1" instance=ExtResource("19_uqdvq")]
+visible = false
+position = Vector2(0.000228882, 103)
+scale = Vector2(1.8, 1.8)
 
 [node name="position2" type="Node2D" parent="ennemiePosition"]
 z_index = 2
@@ -496,11 +502,11 @@ texture = ExtResource("17_171ar")
 [node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position2"]
 modulate = Color(1, 1, 1, 0.34902)
 z_index = -1
-offset_left = -156.667
-offset_top = -9.55551
-offset_right = 151.333
-offset_bottom = 69.4445
-scale = Vector2(1.10549, 0.887636)
+offset_left = -182.333
+offset_top = -0.888855
+offset_right = 132.667
+offset_bottom = 78.1111
+scale = Vector2(1.01712, 1)
 mouse_filter = 2
 texture = ExtResource("18_3bg3v")
 expand_mode = 1
@@ -521,7 +527,7 @@ scale = Vector2(1.8, 1.8)
 
 [node name="position4" type="Node2D" parent="ennemiePosition"]
 z_index = 1
-position = Vector2(132.222, -26.0001)
+position = Vector2(93.3334, -26.0001)
 script = ExtResource("15_hvocy")
 position_data = SubResource("Resource_euc7u")
 
@@ -533,19 +539,6 @@ offset_right = 19.0
 offset_bottom = -274.0
 texture = ExtResource("17_171ar")
 
-[node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position4"]
-modulate = Color(1, 1, 1, 0.34902)
-z_index = -1
-offset_left = -192.0
-offset_top = -14.0
-offset_right = 87.0
-offset_bottom = 65.0
-scale = Vector2(1.35545, 0.939801)
-mouse_filter = 2
-texture = ExtResource("18_3bg3v")
-expand_mode = 1
-flip_h = true
-
 [node name="Button" type="Button" parent="ennemiePosition/position4"]
 offset_left = -72.2222
 offset_top = -310.667
@@ -553,15 +546,30 @@ offset_right = 97.7778
 offset_bottom = 159.333
 theme_override_styles/focus = SubResource("StyleBoxEmpty_iaf2c")
 flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="charaCombatUI" parent="ennemiePosition/position4" instance=ExtResource("19_uqdvq")]
 visible = false
 position = Vector2(21.2221, 117)
 scale = Vector2(1.8, 1.8)
 
+[node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position4"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -182.333
+offset_top = -0.888895
+offset_right = 132.667
+offset_bottom = 78.1111
+scale = Vector2(1.01712, 1)
+mouse_filter = 2
+texture = ExtResource("18_3bg3v")
+expand_mode = 1
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
 [node name="position3" type="Node2D" parent="ennemiePosition"]
 z_index = 2
-position = Vector2(368.889, 23.3333)
+position = Vector2(330, 23.3333)
 script = ExtResource("15_hvocy")
 position_data = SubResource("Resource_if0a6")
 enemy_scene = SubResource("PackedScene_qbte2")
@@ -573,6 +581,19 @@ offset_top = -334.0
 offset_right = 19.0
 offset_bottom = -274.0
 texture = ExtResource("17_171ar")
+
+[node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position3"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -182.333
+offset_top = -0.888855
+offset_right = 132.667
+offset_bottom = 78.1111
+scale = Vector2(1.01712, 1)
+mouse_filter = 2
+texture = ExtResource("18_3bg3v")
+expand_mode = 1
+flip_h = true
 
 [node name="Button" type="Button" parent="ennemiePosition/position3"]
 offset_left = -109.0
@@ -586,19 +607,6 @@ flat = true
 visible = false
 position = Vector2(-8.00005, 68)
 scale = Vector2(1.8, 1.8)
-
-[node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position3"]
-modulate = Color(1, 1, 1, 0.34902)
-z_index = -1
-offset_left = -175.556
-offset_top = -9.55551
-offset_right = 132.444
-offset_bottom = 69.4445
-scale = Vector2(1.10549, 0.887636)
-mouse_filter = 2
-texture = ExtResource("18_3bg3v")
-expand_mode = 1
-flip_h = true
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
@@ -1158,7 +1166,7 @@ flat = true
 offset_top = 151.0
 offset_right = 114.0
 offset_bottom = 248.0
-text = "didatitiel"
+text = "didactitiel"
 flat = true
 
 [node name="Gradiant" type="Sprite2D" parent="."]

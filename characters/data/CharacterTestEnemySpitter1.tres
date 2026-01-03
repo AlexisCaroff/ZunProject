@@ -30,6 +30,7 @@ initiative_icon = ExtResource("6_tnthr")
 Name = "name"
 Charaname = "Slime"
 IsDemon = true
+size = "average"
 affinity = Dictionary[String, int]({})
 base_max_stamina = 100
 base_max_stress = 100
