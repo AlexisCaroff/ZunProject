@@ -6,7 +6,7 @@ class_name PositionSlot
 var occupant: Character = null
 @export var spawner : bool= false
 var combat_manager 
-@onready var imageinside = $TextureRect
+@onready var  button: Button = $Button
 var selfposition: Array[PositionSlot] = []
 @onready var CharaUI = $"charaCombatUI"
 @onready var shadow =$"TextureRect2"
@@ -30,6 +30,9 @@ func _ready():
 	selfposition.append(self)
 	is_ready= true
 	
+	button.connect("mouse_entered",_on_button_mouse_entered )
+	button.connect("mouse_exited",_on_button_mouse_exited )
+	button.connect("button_down",_on_button_button_down)
 	if GameState.current_phase == GameStat.GamePhase.COMBAT:
 		combat_manager = $"../../CombatManager"
 

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bb0bi4txbvapv"]
+
+[ext_resource type="Script" uid="uid://cs3eeitiay6ba" path="res://scripts/History/history_scene_overlay.gd" id="1_0dl1g"]
+[ext_resource type="Texture2D" uid="uid://dq5wghvib7cq7" path="res://bg_test_colour2.jpg" id="1_k4u4g"]
+[ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="3_awdr4"]
+[ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="4_c0c2v"]
+
+[node name="History" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_0dl1g")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960, 500)
+scale = Vector2(0.874425, 0.874425)
+texture = ExtResource("1_k4u4g")
+
+[node name="dialogueManager" type="Node2D" parent="."]
+script = ExtResource("3_awdr4")
+portraits_resource = ExtResource("4_c0c2v")

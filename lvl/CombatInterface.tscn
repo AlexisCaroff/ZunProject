@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://h8pqs7tabdxj"]
+[gd_scene load_steps=72 format=3 uid="uid://h8pqs7tabdxj"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_3b7mk"]
 [ext_resource type="Texture2D" uid="uid://b1t6ygc3nxo7c" path="res://characters/charatexture/warriorHit.png" id="2_5brbe"]
@@ -107,8 +107,6 @@ is_enemy = true
 isFront = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xtuat"]
-
 [sub_resource type="Resource" id="Resource_euc7u"]
 script = ExtResource("16_113pv")
 index = 3
@@ -134,13 +132,11 @@ _bundled = {
 "editable_instances": [],
 "names": PackedStringArray("CharacterTestennemie3", "Node2D", "script", "portrait_texture", "dead_portrait_texture", "initiative_icon", "Charaname", "IsDemon", "Chara_position", "skill_resources", "is_player_controlled", "pivot", "Node2D", "position", "script", "HerosTexture1", "TextureRect", "offset_left", "offset_top", "offset_right", "offset_bottom", "mouse_filter", "texture", "expand_mode", "metadata/_edit_use_anchors_", "Selector", "TextureRect", "self_modulate", "offset_left", "offset_top", "offset_right", "offset_bottom", "mouse_filter", "texture", "expand_mode", "metadata/_edit_use_anchors_", "name", "Label", "visible", "offset_left", "offset_top", "offset_right", "offset_bottom", "text", "Button", "Button", "modulate", "offset_left", "offset_top", "offset_right", "offset_bottom", "HBoxContainer", "HBoxContainer", "offset_left", "offset_top", "offset_right", "offset_bottom", "Skill", "TextureRect", "visible", "offset_left", "offset_top", "offset_right", "offset_bottom", "scale", "texture", "script", "Arrow", "Sprite2D", "position", "scale", "texture", "offset", "script", "min_scale", "max_scale", "scalemini", "min_duration", "max_duration", "HP", "Label", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "text", "HPProgressBar", "ProgressBar", "modulate", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "value", "show_percentage", "Stress", "Label", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "text", "GuiltrogressBar", "ProgressBar", "modulate", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "show_percentage", "horny", "Label", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "text", "HornyProgressBar", "ProgressBar", "modulate", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "show_percentage", "_on_button_button_down", "button_down", "_on_button_mouse_entered", "mouse_entered", "_on_button_mouse_exited", "mouse_exited"),
 "node_count": 15,
-"node_paths": [NodePath("."), NodePath("./pivot"), NodePath("./pivot"), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("./HP"), NodePath("."), NodePath("./Stress"), NodePath("."), NodePath("./horny"), NodePath("."), NodePath("Button"), NodePath("."), NodePath("Button"), NodePath("."), NodePath("Button")],
+"node_paths": [NodePath("."), NodePath("./pivot"), NodePath("./pivot"), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("./HP"), NodePath("."), NodePath("./Stress"), NodePath("."), NodePath("./horny"), NodePath("."), NodePath(""), NodePath("."), NodePath(""), NodePath("."), NodePath("")],
 "nodes": PackedInt32Array(-1, -1, 1, 0, -1, 9, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 10, 8, 0, 1073741824, 0, 12, 11, -1, 2, 13, 9, 14, 10, 0, 1073741825, 0, 16, 15, -1, 8, 17, 11, 18, 12, 19, 13, 20, 14, 21, 15, 22, 16, 23, 17, 24, 18, 0, 1073741826, 0, 26, 25, -1, 9, 27, 19, 28, 20, 29, 21, 30, 22, 31, 23, 32, 24, 33, 25, 34, 26, 35, 27, 0, 1073741827, 0, 37, 36, -1, 6, 38, 28, 39, 29, 40, 30, 41, 31, 42, 32, 43, 33, 0, 1073741828, 0, 45, 44, -1, 5, 46, 34, 47, 35, 48, 36, 49, 37, 50, 38, 0, 1073741829, 0, 52, 51, -1, 4, 53, 39, 54, 40, 55, 41, 56, 42, 0, 1073741830, 0, 58, 57, -1, 8, 59, 43, 60, 44, 61, 45, 62, 46, 63, 47, 64, 48, 65, 49, 66, 50, 0, 1073741831, 0, 68, 67, -1, 10, 69, 51, 70, 52, 71, 53, 72, 54, 73, 55, 74, 56, 75, 57, 76, 58, 77, 59, 78, 60, 0, 1073741832, 0, 80, 79, -1, 7, 81, 61, 82, 62, 83, 63, 84, 64, 85, 65, 86, 66, 87, 67, 0, 1073741833, 0, 89, 88, -1, 8, 90, 68, 91, 69, 92, 70, 93, 71, 94, 72, 95, 73, 96, 74, 97, 75, 0, 1073741834, 0, 99, 98, -1, 7, 100, 76, 101, 77, 102, 78, 103, 79, 104, 80, 105, 81, 106, 82, 0, 1073741835, 0, 108, 107, -1, 7, 109, 83, 110, 84, 111, 85, 112, 86, 113, 87, 114, 88, 115, 89, 0, 1073741836, 0, 117, 116, -1, 7, 118, 90, 119, 91, 120, 92, 121, 93, 122, 94, 123, 95, 124, 96, 0, 1073741837, 0, 126, 125, -1, 7, 127, 97, 128, 98, 129, 99, 130, 100, 131, 101, 132, 102, 133, 103, 0),
 "variants": [ExtResource("22_f8625"), ExtResource("23_tqpdb"), ExtResource("24_7x5ke"), ExtResource("25_agocc"), "Bulub", true, 2, Array[Resource]([ExtResource("26_twjx6"), ExtResource("26_twjx6"), ExtResource("26_twjx6"), ExtResource("26_twjx6"), ExtResource("27_ibx7i")]), false, Vector2(0, -21), ExtResource("28_tgyd1"), -133.0, -229.0, 38.0, 2.0, 2, ExtResource("23_tqpdb"), 1, true, Color(2, 2, 2, 0), -133.0, -229.0, 38.0, 2.0, 2, ExtResource("23_tqpdb"), 1, true, false, -82.0, -265.0, -38.0, -242.0, "name", Color(1, 1, 1, 0), -123.0, -325.0, 110.0, 57.0, 22.0, -252.0, 62.0, -233.0, false, -176.0, -305.0, 400.0, 271.0, Vector2(0.5, 0.5), ExtResource("29_vn84m"), ExtResource("30_awrpq"), Vector2(-52, -351), Vector2(0.38, 0.38), ExtResource("31_fmgae"), Vector2(0, 117.335), ExtResource("28_tgyd1"), 0.38, 0.38, 0.3, 0.5, 0.5, -108.0, -33.0, -65.0, -14.0, ExtResource("8_qx47d"), 15, "Stamina:", Color(0.690751, 1, 0, 1), 0, 50.0, 7.0, 146.0, 17.0, 100.0, false, -91.0, -15.0, -66.0, 4.0, ExtResource("8_qx47d"), 15, "Guilt:", Color(1, 0.257036, 0, 1), 0, 32.0, 7.0, 128.0, 17.0, false, -99.0, 2.0, -67.0, 21.0, ExtResource("8_qx47d"), 15, "Horny:", Color(0.905484, 0, 1, 1), 0, 39.0, 7.0, 135.0, 17.0, false],
 "version": 3
 }
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c7ruu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kiw3p"]
 
@@ -450,14 +446,6 @@ script = ExtResource("15_hvocy")
 position_data = SubResource("Resource_ehgg6")
 enemy_scene = ExtResource("21_5g2vc")
 
-[node name="TextureRect" type="TextureRect" parent="ennemiePosition/position1"]
-visible = false
-offset_left = -47.0
-offset_top = -334.0
-offset_right = 19.0
-offset_bottom = -274.0
-texture = ExtResource("17_171ar")
-
 [node name="Button" type="Button" parent="ennemiePosition/position1"]
 offset_left = -76.6666
 offset_top = -317.0
@@ -491,14 +479,6 @@ script = ExtResource("15_hvocy")
 position_data = SubResource("Resource_fs52m")
 enemy_scene = ExtResource("20_3i4o3")
 
-[node name="TextureRect" type="TextureRect" parent="ennemiePosition/position2"]
-visible = false
-offset_left = -47.0
-offset_top = -334.0
-offset_right = 19.0
-offset_bottom = -274.0
-texture = ExtResource("17_171ar")
-
 [node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position2"]
 modulate = Color(1, 1, 1, 0.34902)
 z_index = -1
@@ -512,46 +492,24 @@ texture = ExtResource("18_3bg3v")
 expand_mode = 1
 flip_h = true
 
-[node name="Button" type="Button" parent="ennemiePosition/position2"]
-offset_left = -129.222
-offset_top = -354.0
-offset_right = 65.7776
-offset_bottom = 101.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xtuat")
-flat = true
-
 [node name="charaCombatUI" parent="ennemiePosition/position2" instance=ExtResource("19_uqdvq")]
 visible = false
 position = Vector2(-3.33317, 70)
 scale = Vector2(1.8, 1.8)
+
+[node name="Button" type="Button" parent="ennemiePosition/position2"]
+offset_left = -85.5555
+offset_top = -317.0
+offset_right = 103.444
+offset_bottom = 158.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xwqlg")
+flat = true
 
 [node name="position4" type="Node2D" parent="ennemiePosition"]
 z_index = 1
 position = Vector2(93.3334, -26.0001)
 script = ExtResource("15_hvocy")
 position_data = SubResource("Resource_euc7u")
-
-[node name="TextureRect" type="TextureRect" parent="ennemiePosition/position4"]
-visible = false
-offset_left = -47.0
-offset_top = -334.0
-offset_right = 19.0
-offset_bottom = -274.0
-texture = ExtResource("17_171ar")
-
-[node name="Button" type="Button" parent="ennemiePosition/position4"]
-offset_left = -72.2222
-offset_top = -310.667
-offset_right = 97.7778
-offset_bottom = 159.333
-theme_override_styles/focus = SubResource("StyleBoxEmpty_iaf2c")
-flat = true
-metadata/_edit_use_anchors_ = true
-
-[node name="charaCombatUI" parent="ennemiePosition/position4" instance=ExtResource("19_uqdvq")]
-visible = false
-position = Vector2(21.2221, 117)
-scale = Vector2(1.8, 1.8)
 
 [node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position4"]
 modulate = Color(1, 1, 1, 0.34902)
@@ -567,20 +525,26 @@ expand_mode = 1
 flip_h = true
 metadata/_edit_use_anchors_ = true
 
+[node name="charaCombatUI" parent="ennemiePosition/position4" instance=ExtResource("19_uqdvq")]
+visible = false
+position = Vector2(21.222, 117)
+scale = Vector2(1.8, 1.8)
+
+[node name="Button" type="Button" parent="ennemiePosition/position4"]
+offset_left = -72.2223
+offset_top = -310.667
+offset_right = 97.7777
+offset_bottom = 159.333
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iaf2c")
+flat = true
+metadata/_edit_use_anchors_ = true
+
 [node name="position3" type="Node2D" parent="ennemiePosition"]
 z_index = 2
 position = Vector2(330, 23.3333)
 script = ExtResource("15_hvocy")
 position_data = SubResource("Resource_if0a6")
 enemy_scene = SubResource("PackedScene_qbte2")
-
-[node name="TextureRect" type="TextureRect" parent="ennemiePosition/position3"]
-visible = false
-offset_left = -47.0
-offset_top = -334.0
-offset_right = 19.0
-offset_bottom = -274.0
-texture = ExtResource("17_171ar")
 
 [node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position3"]
 modulate = Color(1, 1, 1, 0.34902)
@@ -595,18 +559,18 @@ texture = ExtResource("18_3bg3v")
 expand_mode = 1
 flip_h = true
 
-[node name="Button" type="Button" parent="ennemiePosition/position3"]
-offset_left = -109.0
-offset_top = -364.0
-offset_right = 69.0
-offset_bottom = 106.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_c7ruu")
-flat = true
-
 [node name="charaCombatUI" parent="ennemiePosition/position3" instance=ExtResource("19_uqdvq")]
 visible = false
 position = Vector2(-8.00005, 68)
 scale = Vector2(1.8, 1.8)
+
+[node name="Button" type="Button" parent="ennemiePosition/position3"]
+offset_left = -100.0
+offset_top = -317.0
+offset_right = 88.9996
+offset_bottom = 158.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xwqlg")
+flat = true
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
@@ -1179,30 +1143,6 @@ scale = Vector2(2, 4)
 texture = ExtResource("47_mhvks")
 metadata/_edit_lock_ = true
 
-[connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
-[connection signal="mouse_entered" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_mouse_exited"]
-[connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]
-[connection signal="mouse_entered" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_mouse_exited"]
-[connection signal="button_down" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_button_down"]
-[connection signal="mouse_entered" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_mouse_exited"]
-[connection signal="button_down" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_button_down"]
-[connection signal="mouse_entered" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_mouse_exited"]
-[connection signal="button_down" from="ennemiePosition/position1/Button" to="ennemiePosition/position1" method="_on_button_button_down"]
-[connection signal="mouse_entered" from="ennemiePosition/position1/Button" to="ennemiePosition/position1" method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="ennemiePosition/position1/Button" to="ennemiePosition/position1" method="_on_button_mouse_exited"]
-[connection signal="button_down" from="ennemiePosition/position2/Button" to="ennemiePosition/position2" method="_on_button_button_down"]
-[connection signal="mouse_entered" from="ennemiePosition/position2/Button" to="ennemiePosition/position2" method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="ennemiePosition/position2/Button" to="ennemiePosition/position2" method="_on_button_mouse_exited"]
-[connection signal="button_down" from="ennemiePosition/position4/Button" to="ennemiePosition/position4" method="_on_button_button_down"]
-[connection signal="mouse_entered" from="ennemiePosition/position4/Button" to="ennemiePosition/position4" method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="ennemiePosition/position4/Button" to="ennemiePosition/position4" method="_on_button_mouse_exited"]
-[connection signal="button_down" from="ennemiePosition/position3/Button" to="ennemiePosition/position3" method="_on_button_button_down"]
-[connection signal="mouse_entered" from="ennemiePosition/position3/Button" to="ennemiePosition/position3" method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="ennemiePosition/position3/Button" to="ennemiePosition/position3" method="_on_button_mouse_exited"]
 [connection signal="button_down" from="Button" to="Button" method="_on_button_down"]
 [connection signal="mouse_entered" from="CanvasLayer/ActionPanel/Action1" to="CanvasLayer/ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/ActionPanel/Action1" to="CanvasLayer/ActionPanel/Action1" method="_on_mouse_exited"]

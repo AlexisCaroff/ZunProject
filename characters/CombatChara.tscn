@@ -83,6 +83,7 @@ offset_left = -257.0
 offset_top = -176.0
 offset_right = 258.0
 offset_bottom = -144.0
+theme_override_constants/separation = 32
 alignment = 1
 
 [node name="contexte" type="Label" parent="."]

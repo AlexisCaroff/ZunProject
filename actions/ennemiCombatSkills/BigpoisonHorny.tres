@@ -12,7 +12,7 @@
 script = ExtResource("2_vb7f5")
 name = "poisonHorny"
 uitexture = ExtResource("3_w1vbh")
-affected_stat = 5
+affected_stat = 6
 amount = 10
 duration = 3
 metadata/_custom_type_script = "uid://c3dw018knk8mk"

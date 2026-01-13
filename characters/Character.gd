@@ -39,7 +39,7 @@ const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
 const MissEffectScene:= preload("res://actions/damageEffect/miss_vfx.tscn")
 const DebuffEffectScene:= preload("res://actions/damageEffect/debuffVfx.tscn")
 const BonkEffectScene:= preload("res://actions/damageEffect/bonkVFX.tscn")
-
+const buffui:= preload("res://UI/buffUi.tscn")
 signal target_selected()
 var is_targetable: bool = false
 @onready var arrow = $Arrow
@@ -190,18 +190,16 @@ func update_ui():
 func add_buff(buff: Buff):
 	var new_buff = buff.duplicate()
 	buffs.append(new_buff)
-	var icon = TextureRect.new()
-	icon.texture = buff.icon
-	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	icon.custom_minimum_size = Vector2(32, 32)
-	icon.size= Vector2(32, 32)
+	var icon =buffui.instantiate()
+	icon.updatebuff(buff)
 	if buff_bar == null:
 		buff_bar = $HBoxContainer
 	buff_bar.add_child(icon)
 	buff_icons.append(icon)
 	update_stats()
 	print( " add buff "+buff.name+ " to "+characterData.Charaname)
+	
+	
 func process_taunt():
 	if taunt_duration > 0:
 		taunt_duration -= 1
@@ -622,13 +620,13 @@ func animate_attack(target: Character, _duration = 1.0):
 	
 		
 	if target.characterData.is_player_controlled:
-		target_pos = Vector2(643,728)
+		target_pos = Vector2(643,700)
 	else :
-		target_pos = Vector2(1300,728)
+		target_pos = Vector2(1300,700)
 
 #--------------------contact---------------------------
 	if target.characterData.size == "Small":
-		target_pos.y -= 80
+		target_pos.y -= 40
 		if characterData.size == "Big":
 			attack_pos.y +=210
 	var direction = (target.global_position - global_position).normalized()
@@ -660,11 +658,12 @@ func animate_attack(target: Character, _duration = 1.0):
 				attack_pos = Vector2(1500,750)
 				target_pos = Vector2(1043,728)
 				if target.characterData.Charaname == "Small":
-					target_pos.y -= 100
+					target_pos.y -= 00
 			if characterData.Charaname == "Slime":
 				attack_pos.y -= 70
-	if target.sprite.texture == target.characterData.dead_portrait_texture:
-		target_pos.y -= 100
+	if target.sprite.texture == target.characterData.dead_portrait_texture && target.characterData.IsDemon:
+		target_pos.y = 600
+		
 	sprite.texture = current_skill.ImageSkill
 
 	normal_size = self.scale
