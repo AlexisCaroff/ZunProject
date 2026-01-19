@@ -46,8 +46,8 @@ func zoom_to_position(	target_pos: Vector2,target_zoom: float, duration := 0.5):
 	
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_IN_OUT)
-
+	tween.set_ease(Tween.EASE_OUT)
+	
 	tween.parallel().tween_property(self,"position",target_pos,	duration)
 
 	tween.parallel().tween_property(self,"zoom",Vector2(target_zoom, target_zoom),duration)
