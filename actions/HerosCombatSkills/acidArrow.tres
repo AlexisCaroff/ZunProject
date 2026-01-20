@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://ccixqa86qlsqa"]
 
-[ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="1_j6ayg"]
 [ext_resource type="Texture2D" uid="uid://bcxmyora8jiw7" path="res://characters/charatexture/demo characters/HERO_mystic_ranged_shoot.png" id="1_v6eo7"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_j6ayg"]
+[ext_resource type="AudioStream" uid="uid://cxxmgoai7q8bb" path="res://actions/sound/Weapon Arrow Shot 01.wav" id="2_v6eo7"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_0vj4x"]
 [ext_resource type="Texture2D" uid="uid://b6gv81bd6sq1o" path="res://actions/actiontexture/acideArrow.png" id="4_04q3t"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_bsyl5"]
@@ -20,24 +20,24 @@ name = "Acid Arrow"
 descriptionName = "Acid Arrow"
 description = "attaque,un ennemi"
 icon = ExtResource("4_04q3t")
-attack_sound = ExtResource("1_j6ayg")
-required_position = null
+attack_sound = ExtResource("2_v6eo7")
+required_position = 0
 ImageSkill = ExtResource("1_v6eo7")
-the_target_type = null
+the_target_type = 0
 effects = Array[ExtResource("2_j6ayg")]([SubResource("Resource_i4eos")])
-two_target_Type = null
+two_target_Type = false
 the_second_target_type = 1
-second_effects = null
-usable_when_horny = null
-needtarget = null
-Actiontype = null
-cost = null
+second_effects = Array[ExtResource("2_j6ayg")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
 cooldown = 4
-current_cooldown = null
-precision = null
-allways_hit = null
+current_cooldown = 0
+precision = 100
+allways_hit = false
 duration = 1.0
-tags = null
+tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

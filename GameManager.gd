@@ -12,6 +12,10 @@ var campement_node: Node = null
 @export var inventory: Array[Equipment] = []
 @export var characters: Array[CharacterData] = []
 @onready var sceneTransition = $SceneTransition
+@export var start_menu_scene: PackedScene = preload("res://UI/menuBase.tscn")
+
+var start_menu: StartMenu = null
+var game_started: bool = false
 
 func _ready():
 	var screen_index := 1
@@ -22,6 +26,31 @@ func _ready():
 	if not room_container:
 		room_container = Node2D.new()
 		add_child(room_container)
+	spawn_start_menu()
+	
+	initialize_affinities(characters)
+	await sceneTransition.fade_in()
+
+func spawn_start_menu():
+	if start_menu_scene == null:
+		push_error("❌ Start menu scene not set")
+		return
+
+	start_menu = start_menu_scene.instantiate()
+	add_child(start_menu)
+
+	start_menu.game_manager = self
+	
+	
+func start_game():
+	if game_started:
+		return
+
+	game_started = true
+
+	if start_menu and is_instance_valid(start_menu):
+		start_menu.queue_free()
+		start_menu = null
 
 	if donjon and donjon.start_room_id != "":
 		var start_room = get_room_by_id(donjon.start_room_id)
@@ -29,10 +58,8 @@ func _ready():
 			call_deferred("enter_room", start_room)
 		else:
 			push_error("❌ Start room introuvable pour ID : " + donjon.start_room_id)
-	initialize_affinities(characters)
-	await sceneTransition.fade_in()
-
-
+			
+		
 func enter_room(room: RoomResource, changedoor: bool = false):
 	if not changedoor:
 		last_room_Ressource = current_room_Ressource
@@ -173,3 +200,11 @@ func initialize_affinities(thecharacters: Array[CharacterData]):
 			if other != chara:
 				chara.affinity[other.Charaname] = 20
 	
+func show_history_scene(history_res: HistoryScene) -> Node:
+	var overlay_scene := preload("res://scripts/History/history.tscn")
+	var overlay := overlay_scene.instantiate()
+
+	overlay.history_scene = history_res
+	get_tree().current_scene.add_child(overlay)
+
+	return overlay

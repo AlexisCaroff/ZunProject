@@ -40,7 +40,7 @@ min_duration = 0.5
 max_duration = 0.5
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(51, 23)
+position = Vector2(49, 31)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("5_gg7eq")
 min_scale = 1.15

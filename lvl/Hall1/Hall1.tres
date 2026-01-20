@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="RoomResource" load_steps=6 format=3 uid="uid://b5nqhfedb63on"]
+[gd_resource type="Resource" script_class="RoomResource" load_steps=8 format=3 uid="uid://b5nqhfedb63on"]
 
+[ext_resource type="Resource" uid="uid://dyk6rku0gme1e" path="res://dialogue/historiTest.tres" id="1_ah7tj"]
 [ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="1_bdslr"]
 [ext_resource type="PackedScene" uid="uid://batqp2vro3cfl" path="res://lvl/Hall1/combat_hall_1.tscn" id="1_yjhvl"]
+[ext_resource type="Resource" uid="uid://e5cgv814n22d" path="res://dialogue/historyTheforest.tres" id="2_vr0bi"]
 [ext_resource type="PackedScene" uid="uid://dv04v6jagn4q1" path="res://lvl/Hall1/door1.tscn" id="2_yjhvl"]
 [ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://lvl/Hall1/encounter1.tres" id="4_85uva"]
 [ext_resource type="PackedScene" uid="uid://dqnjuxw77ebnb" path="res://lvl/Hall1/exploration1.tscn" id="5_an7sa"]
@@ -11,8 +13,12 @@ script = ExtResource("1_bdslr")
 room_id = "Hall1"
 position_on_map = 0
 door_scene = ExtResource("2_yjhvl")
+door_scene_History = ExtResource("1_ah7tj")
+before_combat_scene_History = ExtResource("2_vr0bi")
 combat_scene = ExtResource("1_yjhvl")
+Post_combat_scene_History = ExtResource("1_ah7tj")
 exploration_scene = ExtResource("5_an7sa")
+exploration_scene_history = ExtResource("1_ah7tj")
 encounter = ExtResource("4_85uva")
 CanCamp = false
 connected_room_ids = Array[String](["Corridor1"])

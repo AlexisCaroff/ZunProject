@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HistoryScene" load_steps=3 format=3 uid="uid://jucbob2ssyup"]
+
+[ext_resource type="Texture2D" uid="uid://xdp4bjx1ati" path="res://bg_city_clean.jpg" id="1_27nq5"]
+[ext_resource type="Script" uid="uid://du5qr73uxmcdu" path="res://scripts/History/HistoryScene.gd" id="2_8mqxa"]
+
+[resource]
+script = ExtResource("2_8mqxa")
+illustration = ExtResource("1_27nq5")
+dialogue_file = "res://dialogue/dialogueIntro.txt"
+title = ""
+participants = Array[String]([])
+is_choice = false
+choice_1_text = ""
+choice_2_text = ""
+metadata/_custom_type_script = "uid://du5qr73uxmcdu"

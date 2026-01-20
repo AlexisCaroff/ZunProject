@@ -167,12 +167,28 @@ func _start():
 		
 		ui.set_MenuPerso(gm.characters)
 		
-		start_combat()
+		_start_combat_flow()
 		
 	for chara in heroes + enemies:
 		chara.skill_animation_started.connect(_on_skill_animation_started)
 		chara.skill_animation_finished.connect(_on_skill_animation_finished)
+
+func _start_combat_flow() -> void:
 	
+	if ui:
+		ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+
+	if gm.current_room_Ressource.before_combat_scene_History:
+		var overlay = gm.show_history_scene(gm.current_room_Ressource.before_combat_scene_History)
+		await overlay.history_finished
+
+
+	if ui:
+		ui.mouse_filter = Control.MOUSE_FILTER_STOP
+
+	start_combat()
+
 	
 func start_combat():
 	combat_state = CombatState.IDLE
@@ -402,7 +418,7 @@ func _on_target_selected(targets: Array[PositionSlot]):
 						ui.update_ui_for_current_character(current_character)
 				if pending_skill.attack_sound != null:
 					audio.stream= pending_skill.attack_sound
-					audio.pitch_scale = randf_range(0.3, 0.5)
+					#audio.pitch_scale = randf_range(0.9,1.0)
 					audio.play()
 				
 				ui.log(pending_skill.name)
@@ -419,7 +435,7 @@ func _on_target_selected(targets: Array[PositionSlot]):
 				await current_character.animate_attack(pending_skill.target1[0].occupant)
 			if pending_skill.attack_sound != null:
 				audio.stream= pending_skill.attack_sound
-				audio.pitch_scale = randf_range(0.3, 0.5)
+				audio.pitch_scale = randf_range(0.9, 1.0)
 				audio.play()
 			ui.log(pending_skill.name)
 			stop_target_selection()

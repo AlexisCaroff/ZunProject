@@ -118,7 +118,7 @@ func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = eff
 					if tag == "degrader":
 						if target != owner._current_slot:
 							target.occupant.characterData.current_stress +=2
-							owner.slur()
+						
 		for effect in effects_array:
 			effect.apply(owner, target)
 

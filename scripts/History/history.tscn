@@ -1,20 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://bb0bi4txbvapv"]
+[gd_scene load_steps=7 format=3 uid="uid://bb0bi4txbvapv"]
 
 [ext_resource type="Script" uid="uid://cs3eeitiay6ba" path="res://scripts/History/history_scene_overlay.gd" id="1_0dl1g"]
-[ext_resource type="Texture2D" uid="uid://dq5wghvib7cq7" path="res://bg_test_colour2.jpg" id="1_k4u4g"]
+[ext_resource type="Resource" uid="uid://dyk6rku0gme1e" path="res://dialogue/historiTest.tres" id="2_0dl1g"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="3_awdr4"]
+[ext_resource type="Texture2D" uid="uid://xdp4bjx1ati" path="res://bg_city_clean.jpg" id="3_c0c2v"]
 [ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="4_c0c2v"]
+[ext_resource type="Texture2D" uid="uid://d162na82h3g2m" path="res://UI/exite.png" id="6_awdr4"]
 
 [node name="History" type="Control"]
+z_index = 400
+z_as_relative = false
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_0dl1g")
+history_scene = ExtResource("2_0dl1g")
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(960, 500)
-scale = Vector2(0.874425, 0.874425)
-texture = ExtResource("1_k4u4g")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 20
 
-[node name="dialogueManager" type="Node2D" parent="."]
+[node name="Background" type="Sprite2D" parent="CanvasLayer"]
+z_index = 20
+position = Vector2(973.326, 533)
+scale = Vector2(1.2389, 1.2389)
+texture = ExtResource("3_c0c2v")
+
+[node name="CloseButton" type="Button" parent="CanvasLayer"]
+z_index = 60
+z_as_relative = false
+offset_left = 1765.0
+offset_top = 818.0
+offset_right = 1837.0
+offset_bottom = 890.0
+icon = ExtResource("6_awdr4")
+
+[node name="DialogueManager" type="Node2D" parent="CanvasLayer"]
 script = ExtResource("3_awdr4")
 portraits_resource = ExtResource("4_c0c2v")

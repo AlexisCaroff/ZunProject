@@ -8,11 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="5_0p2u2"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="6_hil1e"]
 [ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="7_hg6i8"]
+[ext_resource type="AudioStream" uid="uid://bv7eg2rwowxuj" path="res://actions/sound/magicSlurp.mp3" id="8_p4emy"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="8_qx47d"]
 [ext_resource type="Texture2D" uid="uid://0x6um7xfv678" path="res://characters/exploPortrait/BossExploPortrait.png" id="9_junmr"]
 [ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="10_8up0w"]
 [ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://lvl/Hall1/encounter1.tres" id="11_yspa4"]
-[ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="12_t6og6"]
 [ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="13_6ueg6"]
 [ext_resource type="Script" uid="uid://cxgw24yv778d8" path="res://lvl/chara_portraitButton.gd" id="14_5brbe"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="14_j11dg"]
@@ -214,9 +214,7 @@ target_scene = "uid://dqnjuxw77ebnb"
 encounter = ExtResource("11_yspa4")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CombatManager"]
-stream = ExtResource("12_t6og6")
-volume_db = 4.455
-pitch_scale = 0.67
+stream = ExtResource("8_p4emy")
 
 [node name="ResultScreen" type="Label" parent="."]
 visible = false

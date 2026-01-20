@@ -32,8 +32,9 @@ var selected_character: CharacterData
 
 func _ready():
 	Game_Manager = get_tree().root.get_node("GameManager") 
-	if Game_Manager:
-		print ("Find Game manager")
+	if Game_Manager.current_room_Ressource.door_scene_History != null:
+		print("find history Scene")
+		Game_Manager.show_history_scene(Game_Manager.current_room_Ressource.door_scene_History)
 	characters=Game_Manager.characters
 	peek_scene = load("res://UI/peekScene.tscn").instantiate()
 	sub_viewport.add_child(peek_scene)

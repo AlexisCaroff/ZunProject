@@ -186,7 +186,7 @@ func update_ui():
 			else:
 				dot.modulate = Color(0.1,0.1,0.1)
 				dot.size = Vector2(0.5, 0.5)
-
+	
 func add_buff(buff: Buff):
 	var new_buff = buff.duplicate()
 	buffs.append(new_buff)
@@ -411,7 +411,7 @@ func take_damage(source: Character, stat: int, amount: int, typeMagic:bool, skil
 			for eq in characterData.equipped_items:
 				eq.on_receive_attack(self, source, damage)
 			
-			animate_get_horny(damage)
+			animate_get_horny(damage,source)
 			update_ui()
 
 		DamageEffect.Stat.STRESS:
@@ -525,7 +525,7 @@ func animate_get_horny(damage:int, source: Character = null):
 		tween.tween_property(self, "scale", big_size, 0.2)
 		tween.tween_property(self, "scale", normal_size, 0.2)
 		await tween.finished
-	#sprite.texture = characterData.portrait_texture
+		sprite.texture = characterData.portrait_texture
 	emit_signal("skill_animation_finished")
 
 func animate_take_damage(damage:int, source:Character, usedSkill :Skill = null):
@@ -548,7 +548,10 @@ func animate_take_damage(damage:int, source:Character, usedSkill :Skill = null):
 	var direction = (source.global_position - global_position).normalized()
 	var offset = direction * 10
 	var dam_pos = start_pos + offset
-	
+	await get_tree().create_timer(0.5).timeout
+	if source== self:
+		if characterData.current_stamina>0:
+			sprite.texture = characterData.portrait_texture
 	#if source== self:
 	#	var tween := create_tween() as Tween
 	#	var tween2 := create_tween() as Tween
@@ -732,6 +735,9 @@ func _on_attack(target: Character, _duration: float =1.0):
 func after_skilluse(target: Character):
 	attacking =false
 	target.getattacked=false
+	for tag in characterData.tags:
+					if tag == "degrader":
+						slur()
 	for eq in characterData.equipped_items:
 		eq.after_skill_use(self,current_skill, target)
 	sprite.texture = characterData.portrait_texture

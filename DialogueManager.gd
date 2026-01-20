@@ -2,6 +2,8 @@ extends Node
 class_name DialogueManager
 
 signal dialogue_finished
+signal dialogue_choice_requested
+signal choice_made(choice_index: int)
 
 var dialogue_lines: Array = []
 var current_index: int = 0
@@ -93,15 +95,21 @@ func start_dialogue():
 
 
 
+
 func show_line():
 	if current_index >= dialogue_lines.size():
 		ui.visible = false
-		emit_signal("dialogue_finished")
+
 		if is_Choice and choix:
 			choix.Choice1.text = text_choice1
 			choix.Choice2.text = text_choice2
 			choix.visible = true
 			dialogue_started = false
+
+			emit_signal("dialogue_choice_requested")
+		else:
+			emit_signal("dialogue_finished")
+
 		return
 
 	var line = dialogue_lines[current_index]
@@ -147,6 +155,8 @@ func hideChoix():
 
 func _on_Choice1_button_down() -> void:
 	hideChoix()
+	emit_signal("choice_made", 0)
 
 func _on_Choice2_button_down() -> void:
 	hideChoix()
+	emit_signal("choice_made", 1)

@@ -51,7 +51,7 @@ func _ready():
 	var current_character = combat_manager.get_current_character()
 	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
 	await get_tree().process_frame
-	call_deferred("update_ui_for_current_character", current_character)
+	#call_deferred("update_ui_for_current_character", current_character)
 	
 	
 	if donjon_map:

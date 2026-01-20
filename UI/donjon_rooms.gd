@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var game_manager: Node = get_tree().get_root().get_node("GameManager") # 🧩 adapte le chemin si besoin
 @onready var map=$".."
+
 func _ready() -> void:
 	set_process_input(true)
 

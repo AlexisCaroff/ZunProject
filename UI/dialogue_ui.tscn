@@ -17,6 +17,8 @@ scale = Vector2(1.01624, 1.01624)
 script = ExtResource("1_6e3n1")
 
 [node name="ColorRect2" type="ColorRect" parent="."]
+z_index = 18
+z_as_relative = false
 layout_mode = 0
 offset_left = -154.0
 offset_top = -57.0

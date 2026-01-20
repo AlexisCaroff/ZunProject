@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://clw258vbo2rq1"]
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://clw258vbo2rq1"]
 
 [ext_resource type="Texture2D" uid="uid://bo0t0247dws8k" path="res://characters/charatexture/demo characters/HERO_warrior_kick.png" id="1_gv1de"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_0evjx"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_acaj7"]
+[ext_resource type="AudioStream" uid="uid://bistgpj4eyle0" path="res://actions/sound/Impact Human Grab And Pulled By Clothes 01.wav" id="2_y1vkq"]
 [ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="3_acaj7"]
 [ext_resource type="Texture2D" uid="uid://cn8mh7x1j6vs" path="res://actions/actiontexture/charge.png" id="4_acaj7"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_bbjmb"]
@@ -25,6 +26,7 @@ name = "Charge"
 descriptionName = "Charge !"
 description = "Inflicts damage and pushes an enemy away"
 icon = ExtResource("4_acaj7")
+attack_sound = ExtResource("2_y1vkq")
 required_position = 0
 ImageSkill = ExtResource("1_gv1de")
 the_target_type = 5

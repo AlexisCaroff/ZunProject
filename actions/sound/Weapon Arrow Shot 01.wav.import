@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cxxmgoai7q8bb"
+path="res://.godot/imported/Weapon Arrow Shot 01.wav-5dbbe6fd652da82b2d85a06cc7335770.sample"
+
+[deps]
+
+source_file="res://actions/sound/Weapon Arrow Shot 01.wav"
+dest_files=["res://.godot/imported/Weapon Arrow Shot 01.wav-5dbbe6fd652da82b2d85a06cc7335770.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

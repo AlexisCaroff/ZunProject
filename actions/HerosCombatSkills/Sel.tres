@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://dn00l75vs5ctm"]
 
-[ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="1_a6kki"]
 [ext_resource type="Texture2D" uid="uid://fe1y4mug6b75" path="res://characters/charatexture/demo characters/HERO_hunter_throw.png" id="1_vtysm"]
+[ext_resource type="AudioStream" uid="uid://cxxmgoai7q8bb" path="res://actions/sound/Weapon Arrow Shot 01.wav" id="2_vtysm"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_nv4t7"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="3_wlhg8"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="4_iy76m"]
@@ -31,7 +31,7 @@ name = "Salt "
 descriptionName = "Salt "
 description = "Reduces all enemies’ attack and deals minor damage"
 icon = ExtResource("7_vtysm")
-attack_sound = ExtResource("1_a6kki")
+attack_sound = ExtResource("2_vtysm")
 required_position = 0
 ImageSkill = ExtResource("1_vtysm")
 the_target_type = 4

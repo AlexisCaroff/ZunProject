@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://bmkp0brav8l87"]
+[gd_resource type="Resource" script_class="Skill" load_steps=13 format=3 uid="uid://bmkp0brav8l87"]
 
 [ext_resource type="Texture2D" uid="uid://fe1y4mug6b75" path="res://characters/charatexture/demo characters/HERO_hunter_throw.png" id="1_n3hnu"]
+[ext_resource type="AudioStream" uid="uid://cyqpgjkdqkdr3" path="res://actions/sound/Weapon Whips 02.wav" id="2_iabra"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="3_ofqht"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_vlstb"]
 [ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="4_qoo6w"]
@@ -35,23 +36,24 @@ name = "bollas"
 descriptionName = "bollas"
 description = "Stuns a backline enemy and deals minor damage."
 icon = ExtResource("6_n3hnu")
-required_position = null
+attack_sound = ExtResource("2_iabra")
+required_position = 0
 ImageSkill = ExtResource("1_n3hnu")
 the_target_type = 6
 effects = Array[ExtResource("3_ofqht")]([SubResource("Resource_i4eos"), SubResource("Resource_vlstb"), SubResource("Resource_jigks")])
-two_target_Type = null
+two_target_Type = false
 the_second_target_type = 1
-second_effects = null
-usable_when_horny = null
-needtarget = null
-Actiontype = null
-cost = null
+second_effects = Array[ExtResource("3_ofqht")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
 cooldown = 4
-current_cooldown = null
-precision = null
-allways_hit = null
+current_cooldown = 0
+precision = 100
+allways_hit = false
 duration = 1.0
-tags = null
+tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
