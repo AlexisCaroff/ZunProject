@@ -1,6 +1,7 @@
 extends Node2D
 @export var ennemies: CombatEncounter
 @onready var danger_bar:ProgressBar =$ProgressBar
+@onready var eye=$Eye
 @onready var slots = [
 $PortraitSlot1,
 $PortraitSlot2,
@@ -117,6 +118,7 @@ func update_danger_bar():
 		danger_bar.value = 0
 	else:
 		danger_bar.value = total / active_count
+		eye.modulate.a=total / active_count
 func _on_enemy_revealed(_enemy):
 	seeParticule(_enemy)
 	if enemies.all(func(e): return e.revealed):

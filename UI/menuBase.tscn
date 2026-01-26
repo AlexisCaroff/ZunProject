@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b56xf3f3pkdwt"]
+[gd_scene load_steps=7 format=3 uid="uid://b56xf3f3pkdwt"]
 
 [ext_resource type="Script" uid="uid://bu142a7nwheqf" path="res://UI/menu_base.gd" id="1_552u3"]
 [ext_resource type="Texture2D" uid="uid://lhncc7d02shi" path="res://UI/BigBox.png" id="2_v1j00"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="3_11mpg"]
 [ext_resource type="Texture2D" uid="uid://ccfldj30sasp8" path="res://characters/charatexture/boss.png" id="4_kppfi"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="4_v1j00"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="6_11mpg"]
 
 [node name="Menu" type="Control"]
 z_index = 100
@@ -17,8 +18,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_552u3")
 
-[node name="background4" type="TextureRect" parent="."]
-layout_mode = 0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="background4" type="TextureRect" parent="CanvasLayer"]
 offset_left = -42.0
 offset_top = -44.0
 offset_right = 1966.0
@@ -26,8 +29,7 @@ offset_bottom = 1078.0
 texture = ExtResource("2_v1j00")
 expand_mode = 1
 
-[node name="background2" type="TextureRect" parent="."]
-layout_mode = 0
+[node name="background2" type="TextureRect" parent="CanvasLayer"]
 offset_left = 40.0
 offset_top = 28.0
 offset_right = 1866.0
@@ -35,7 +37,7 @@ offset_bottom = 1022.0
 texture = ExtResource("2_v1j00")
 expand_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="background2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/background2"]
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 0
 offset_left = 88.0
@@ -44,7 +46,7 @@ offset_right = 488.0
 offset_bottom = 949.0
 theme_override_constants/separation = 5
 
-[node name="ButtonStart" type="Button" parent="background2/VBoxContainer"]
+[node name="ButtonStart" type="Button" parent="CanvasLayer/background2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_11mpg")
@@ -53,7 +55,7 @@ text = "Start"
 flat = true
 script = ExtResource("4_v1j00")
 
-[node name="Buttonoption" type="Button" parent="background2/VBoxContainer"]
+[node name="Buttonoption" type="Button" parent="CanvasLayer/background2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_11mpg")
@@ -62,7 +64,7 @@ text = "Options"
 flat = true
 script = ExtResource("4_v1j00")
 
-[node name="ButtonGallerie" type="Button" parent="background2/VBoxContainer"]
+[node name="ButtonGallerie" type="Button" parent="CanvasLayer/background2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_11mpg")
@@ -71,7 +73,7 @@ text = "Gallerie"
 flat = true
 script = ExtResource("4_v1j00")
 
-[node name="ButtonGlossaire" type="Button" parent="background2/VBoxContainer"]
+[node name="ButtonGlossaire" type="Button" parent="CanvasLayer/background2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_11mpg")
@@ -80,7 +82,7 @@ text = "Glossair"
 flat = true
 script = ExtResource("4_v1j00")
 
-[node name="ButtonDitactitiel" type="Button" parent="background2/VBoxContainer"]
+[node name="ButtonDitactitiel" type="Button" parent="CanvasLayer/background2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_11mpg")
@@ -89,7 +91,7 @@ text = "Didacticiels"
 flat = true
 script = ExtResource("4_v1j00")
 
-[node name="Button2Quit" type="Button" parent="background2/VBoxContainer"]
+[node name="Button2Quit" type="Button" parent="CanvasLayer/background2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_11mpg")
@@ -98,8 +100,7 @@ text = "Quit"
 flat = true
 script = ExtResource("4_v1j00")
 
-[node name="background3" type="TextureRect" parent="."]
-layout_mode = 0
+[node name="background3" type="TextureRect" parent="CanvasLayer"]
 offset_left = 741.0
 offset_top = 149.0
 offset_right = 1845.0
@@ -107,8 +108,7 @@ offset_bottom = 991.0
 texture = ExtResource("4_kppfi")
 expand_mode = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-layout_mode = 0
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
 offset_left = 535.0
 offset_top = 66.0
 offset_right = 1204.0
@@ -117,3 +117,8 @@ theme_override_fonts/normal_font = ExtResource("3_11mpg")
 theme_override_font_sizes/normal_font_size = 90
 text = "Dark Side Of Zun"
 horizontal_alignment = 1
+
+[node name="Camera" type="Camera2D" parent="."]
+offset = Vector2(960, 540)
+script = ExtResource("6_11mpg")
+metadata/_custom_type_script = "uid://devdej4xpva2i"

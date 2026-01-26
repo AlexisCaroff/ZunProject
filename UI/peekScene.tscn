@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dg3aat08m30vy"]
+[gd_scene load_steps=11 format=3 uid="uid://dg3aat08m30vy"]
 
 [ext_resource type="Script" uid="uid://blgghrqrf6qji" path="res://peek.gd" id="1_2c73c"]
 [ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://lvl/Hall1/encounter1.tres" id="2_amsrx"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dmywh27l7sqm1" path="res://UI/mask.png" id="5_4c7x2"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="5_knem7"]
 [ext_resource type="Script" uid="uid://wv6mo6dmik54" path="res://UI/doorshadows.gd" id="6_knem7"]
+[ext_resource type="Texture2D" uid="uid://b06vh0at651m6" path="res://UI/eye.png" id="8_sdumx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7bfl"]
 bg_color = Color(0.116614, 0.109248, 0.109598, 1)
@@ -15,7 +16,7 @@ bg_color = Color(0.116614, 0.109248, 0.109598, 1)
 bg_color = Color(0.277318, 0.0213547, 0.202412, 1)
 
 [node name="peek" type="Node2D"]
-z_index = 23
+z_index = 400
 z_as_relative = false
 script = ExtResource("1_2c73c")
 ennemies = ExtResource("2_amsrx")
@@ -71,7 +72,7 @@ z_index = 11
 offset_left = 247.0
 offset_top = 182.0
 offset_right = 287.0
-offset_bottom = 867.0
+offset_bottom = 745.0
 theme_override_styles/background = SubResource("StyleBoxFlat_e7bfl")
 theme_override_styles/fill = SubResource("StyleBoxFlat_sdumx")
 max_value = 1.0
@@ -84,3 +85,9 @@ position = Vector2(960, 540)
 
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(1920, 1080)
+
+[node name="Eye" type="Sprite2D" parent="."]
+z_index = 20
+position = Vector2(269, 838)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_sdumx")

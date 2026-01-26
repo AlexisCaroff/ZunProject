@@ -1,11 +1,11 @@
 extends Control
 class_name StartMenu
-@onready var button_start: Button = $background2/VBoxContainer/ButtonStart
-@onready var button_option: Button = $background2/VBoxContainer/Buttonoption
-@onready var button_gallerie: Button = $background2/VBoxContainer/ButtonGallerie
-@onready var button_glossaire: Button = $background2/VBoxContainer/ButtonGlossaire
-@onready var button_didacticiel: Button = $background2/VBoxContainer/ButtonDitactitiel
-@onready var button_quit: Button = $background2/VBoxContainer/Button2Quit
+@onready var button_start: Button = $CanvasLayer/background2/VBoxContainer/ButtonStart
+@onready var button_option: Button = $CanvasLayer/background2/VBoxContainer/Buttonoption
+@onready var button_gallerie: Button = $CanvasLayer/background2/VBoxContainer/ButtonGallerie
+@onready var button_glossaire: Button = $CanvasLayer/background2/VBoxContainer/ButtonGlossaire
+@onready var button_didacticiel: Button =$CanvasLayer/background2/VBoxContainer/ButtonDitactitiel
+@onready var button_quit: Button = $CanvasLayer/background2/VBoxContainer/Button2Quit
 @onready var game_manager: GameManager = get_parent() as GameManager
 
 func _ready():

@@ -59,6 +59,8 @@ var cam : Camera
 var ShadowBackground: Sprite2D
 var getattacked:bool=false
 var attacking: bool = false
+var turncount:int =0
+
 
 func set_current_slot(value):
 	_current_slot = value
@@ -317,6 +319,7 @@ func reduce_cooldowns() -> void:
 			skill.current_cooldown -= 1
 
 func start_turn():
+	turncount +=1
 	if not characterData:
 		return
 	print(characterData.Charaname + " start turn")

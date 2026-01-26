@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bb0bi4txbvapv"]
+[gd_scene load_steps=8 format=3 uid="uid://bb0bi4txbvapv"]
 
 [ext_resource type="Script" uid="uid://cs3eeitiay6ba" path="res://scripts/History/history_scene_overlay.gd" id="1_0dl1g"]
 [ext_resource type="Resource" uid="uid://dyk6rku0gme1e" path="res://dialogue/historiTest.tres" id="2_0dl1g"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://xdp4bjx1ati" path="res://bg_city_clean.jpg" id="3_c0c2v"]
 [ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="4_c0c2v"]
 [ext_resource type="Texture2D" uid="uid://d162na82h3g2m" path="res://UI/exite.png" id="6_awdr4"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="7_c0c2v"]
 
 [node name="History" type="Control"]
 z_index = 400
@@ -17,6 +18,7 @@ history_scene = ExtResource("2_0dl1g")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 20
+follow_viewport_enabled = true
 
 [node name="Background" type="Sprite2D" parent="CanvasLayer"]
 z_index = 20
@@ -36,3 +38,7 @@ icon = ExtResource("6_awdr4")
 [node name="DialogueManager" type="Node2D" parent="CanvasLayer"]
 script = ExtResource("3_awdr4")
 portraits_resource = ExtResource("4_c0c2v")
+
+[node name="Camera" type="Camera2D" parent="."]
+script = ExtResource("7_c0c2v")
+metadata/_custom_type_script = "uid://devdej4xpva2i"
