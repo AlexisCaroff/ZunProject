@@ -8,7 +8,14 @@ var Doors: Array[Node2D] = []
 @onready var TeamPositisonIndicator = $Position
 @export var move_time: float = 1.0   
 var tween: Tween
-@onready var camera= $Camera2D
+@onready var camera: Camera2D= $Camera2D
+var is_dragging := false
+var last_mouse_pos := Vector2.ZERO
+
+var zoom_step := 0.1
+var min_zoom := 0.4
+var max_zoom := 2.5
+
 var gm : GameManager
 @export var colorDoorFocus : Color
 @export var colorDoorExplored : Color
@@ -28,6 +35,52 @@ func _ready() -> void:
 		Doors.append(child)
 	# Exemple : aller à la première position si elle existe
 	
+func _input(event: InputEvent) -> void:
+	if camera == null:
+		return
+
+	var mouse_pos := camera.get_global_mouse_position()
+
+	# -------- Hover --------
+
+
+	if is_dragging:
+		var delta = last_mouse_pos - mouse_pos
+		camera.position += delta
+		last_mouse_pos = mouse_pos
+
+	# -------- Clic gauche --------
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				is_dragging = true
+				last_mouse_pos = mouse_pos
+			else:
+				is_dragging = false
+
+				# clic simple → sélection room
+
+
+		# -------- Zoom molette --------
+		if event.pressed:
+			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				_zoom_at(mouse_pos, 1.0 - zoom_step)
+
+			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				_zoom_at(mouse_pos, 1.0 + zoom_step)
+func _zoom_at(mouse_pos: Vector2, factor: float) -> void:
+	var old_zoom = camera.zoom
+	var new_zoom = (old_zoom * factor).clamp(Vector2(min_zoom, min_zoom), Vector2(max_zoom, max_zoom))
+
+	if new_zoom == old_zoom:
+		return
+
+	# Compense le déplacement pour zoomer sous la souris
+	var before = mouse_pos
+	camera.zoom = new_zoom
+	var after = camera.get_global_mouse_position()
+
+	camera.position += before - after
 
 func focus_on_room(room: RoomResource, _viewport=null ):
 	var focusedRoom
@@ -35,7 +88,7 @@ func focus_on_room(room: RoomResource, _viewport=null ):
 		var room_res = gm.get_room_by_id(salle.name)
 		if room_res and room_res.explored:
 			salle.self_modulate = colorRoomExplored
-			for thedoor :MapDoor in Doors:
+			for thedoor in Doors:
 				for roomname in thedoor.connectedRooms:
 					if roomname == room_res.room_id:
 				
@@ -76,7 +129,7 @@ func peek_next_Room(room : RoomResource, _viewport=null):
 			focusedRoom=salle
 			focusedRoom.self_modulate=colorRoomFocus
 			
-	for thedoor :MapDoor in Doors:	
+	for thedoor in Doors:	
 		for roomname in thedoor.connectedRooms:
 			if roomname == room.room_id:
 				thedoor.self_modulate=colorDoorToExplor
@@ -88,21 +141,7 @@ func peek_next_Room(room : RoomResource, _viewport=null):
 					
 				
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-					
+
 
 		
 func focus_door(room : RoomResource, _viewport=null):

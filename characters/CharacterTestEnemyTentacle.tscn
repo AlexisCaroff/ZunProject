@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://wasovspg3yc4"]
+
+[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_ayi6g"]
+[ext_resource type="Resource" uid="uid://d3i2h10vsjlsj" path="res://characters/data/CharacterTestEnemyTentacle.tres" id="2_ayi6g"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="3_q08qa"]
+[ext_resource type="Texture2D" uid="uid://kysl4qntumom" path="res://characters/charatexture/demo characters/tentacle.png" id="4_fttex"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="5_bn1pm"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="6_i1oh6"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="7_vlb8v"]
+
+[node name="Tentacle" type="Node2D"]
+script = ExtResource("1_ayi6g")
+characterData = ExtResource("2_ayi6g")
+metadata/character_data_path = "res://characters/data/CharacterTestEnemySpitter1.tres"
+
+[node name="name" type="Label" parent="."]
+visible = false
+offset_left = -35.0
+offset_top = -261.0
+offset_right = 9.0
+offset_bottom = -238.0
+text = "name"
+
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(37, 29)
+script = ExtResource("3_q08qa")
+min_scale = 1.0
+scalemini = 0.9
+max_duration = 0.7
+
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+offset_left = -377.0
+offset_top = -446.0
+offset_right = -206.0
+offset_bottom = -215.0
+scale = Vector2(3.01881, 2.11316)
+mouse_filter = 2
+texture = ExtResource("4_fttex")
+expand_mode = 1
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Selector" type="TextureRect" parent="pivot"]
+self_modulate = Color(2, 2, 2, 0)
+offset_left = -377.0
+offset_top = -446.0
+offset_right = -206.0
+offset_bottom = -215.0
+scale = Vector2(3.01881, 2.11316)
+mouse_filter = 2
+texture = ExtResource("4_fttex")
+expand_mode = 1
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Arrow" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(2, -242)
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("5_bn1pm")
+offset = Vector2(0, 117.335)
+script = ExtResource("3_q08qa")
+min_scale = 0.38
+max_scale = 0.38
+scalemini = 0.3
+min_duration = 0.5
+max_duration = 0.5
+
+[node name="Skill" type="TextureRect" parent="."]
+visible = false
+offset_left = -133.0
+offset_top = -316.0
+offset_right = 443.0
+offset_bottom = 260.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_i1oh6")
+script = ExtResource("7_vlb8v")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = -21.0
+offset_top = -104.0
+offset_right = 19.0
+offset_bottom = -85.0
+alignment = 1

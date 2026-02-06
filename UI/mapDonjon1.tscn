@@ -117,59 +117,157 @@ self_modulate = Color(0, 0, 0, 1)
 z_index = 2
 position = Vector2(-804, -50)
 rotation = 1.5708
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_oc32i")
 script = ExtResource("18_b056a")
 connectedRooms = Array[String](["Hall1", "Salle0"])
+normal_scale = Vector2(1.5, 1.5)
+
+[node name="Button" type="Button" parent="DonjonDoor/Door1"]
+anchors_preset = -1
+anchor_left = -0.6
+anchor_top = -0.506849
+anchor_right = -0.6
+anchor_bottom = -0.506849
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Door2" type="Sprite2D" parent="DonjonDoor"]
 self_modulate = Color(0, 0, 0, 1)
 z_index = 2
 position = Vector2(-462, 120)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_oc32i")
 script = ExtResource("18_b056a")
 connectedRooms = Array[String](["Corridor1", "Hall1"])
+normal_scale = Vector2(1.5, 1.5)
+
+[node name="Button" type="Button" parent="DonjonDoor/Door2"]
+anchors_preset = -1
+anchor_left = -0.64
+anchor_top = -0.506849
+anchor_right = -0.64
+anchor_bottom = -0.506849
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Door3" type="Sprite2D" parent="DonjonDoor"]
 self_modulate = Color(0, 0, 0, 1)
 z_index = 2
 position = Vector2(-581, 259)
 rotation = 1.5708
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_oc32i")
 script = ExtResource("18_b056a")
 connectedRooms = Array[String](["Corridor1", "Room3"])
+normal_scale = Vector2(1.5, 1.5)
+
+[node name="Button" type="Button" parent="DonjonDoor/Door3"]
+anchors_preset = -1
+anchor_left = -0.64
+anchor_top = -0.534247
+anchor_right = -0.64
+anchor_bottom = -0.534247
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Door4" type="Sprite2D" parent="DonjonDoor"]
 self_modulate = Color(0, 0, 0, 1)
 z_index = 2
 position = Vector2(-355, 215)
 rotation = 1.5708
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_oc32i")
 script = ExtResource("18_b056a")
 connectedRooms = Array[String](["Corridor1", "Salon1"])
+normal_scale = Vector2(1.5, 1.5)
+
+[node name="Button" type="Button" parent="DonjonDoor/Door4"]
+anchors_preset = -1
+anchor_left = -0.62
+anchor_top = -0.547945
+anchor_right = -0.62
+anchor_bottom = -0.547945
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Door5" type="Sprite2D" parent="DonjonDoor"]
 self_modulate = Color(0, 0, 0, 1)
 z_index = 2
 position = Vector2(12, 356)
 rotation = 1.0302
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_oc32i")
 script = ExtResource("18_b056a")
 connectedRooms = Array[String](["Corridor1", "Room1"])
+normal_scale = Vector2(1.5, 1.5)
+
+[node name="Button" type="Button" parent="DonjonDoor/Door5"]
+anchors_preset = -1
+anchor_left = -0.62
+anchor_top = -0.520548
+anchor_right = -0.62
+anchor_bottom = -0.520548
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Door6" type="Sprite2D" parent="DonjonDoor"]
 self_modulate = Color(0, 0, 0, 1)
 z_index = 2
 position = Vector2(177, 398)
 rotation = 2.57914
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_oc32i")
 script = ExtResource("18_b056a")
 connectedRooms = Array[String](["Cellar", "Room1"])
+normal_scale = Vector2(1.5, 1.5)
+
+[node name="Button" type="Button" parent="DonjonDoor/Door6"]
+offset_left = -27.0
+offset_top = -32.0
+offset_right = 26.0
+offset_bottom = 36.0
+flat = true
 
 [node name="Door7" type="Sprite2D" parent="DonjonDoor"]
 self_modulate = Color(0, 0, 0, 1)
 z_index = 2
 position = Vector2(146, 83)
 rotation = 2.07029
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_oc32i")
 script = ExtResource("18_b056a")
 connectedRooms = Array[String](["Salon1", "Hall2"])
+normal_scale = Vector2(1.5, 1.5)
+
+[node name="Button" type="Button" parent="DonjonDoor/Door7"]
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+flat = true

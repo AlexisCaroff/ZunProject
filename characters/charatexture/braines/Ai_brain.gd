@@ -17,6 +17,11 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 	for skill in usable_skills:
 		if usable_skills.size() >1 and skill.name=="move":
 			usable_skills.erase(skill)
+		if usable_skills.size() >1 and skill.name=="spawnEnnemi":
+			usable_skills.erase(skill)
+		if usable_skills.size() >1 and skill.name=="Mommy Grab":
+			usable_skills.erase(skill)
+		
 	for skill in usable_skills:
 		print(skill.name)
 	var skill: Skill = usable_skills[randi() % usable_skills.size()]
@@ -66,4 +71,3 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 	else:
 		targetPos.append(target._current_slot)
 	return {"skill": skill, "target": targetPos }
-	

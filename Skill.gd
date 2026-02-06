@@ -85,25 +85,33 @@ func use(target: PositionSlot = null, secondtarget : bool=false):
 	for eq in owner.characterData.equipped_items:
 		eq.on_skill_use(owner, self, target.occupant)
 	
-	if target.occupant != null:
-		
-		target.combat_manager.stop_target_selection()
-		if not can_use():
-			return
-		
-		if allways_hit == false:
-			for tag in owner.characterData.tags:
-				if tag == "voyeur":
-					precision+=5
-			var chance = precision - target.occupant.characterData.evasion
-			var rand = randi() % 100
-			if rand >= chance:
-				target.occupant.miss_animation(owner)
+	if target != null :
+		if target.occupant != null:
+			
+			target.combat_manager.stop_target_selection()
+			if not can_use():
 				return
-		if secondtarget:
-			_apply_second_effect(target)
+			
+			if allways_hit == false:
+				for tag in owner.characterData.tags:
+					if tag == "voyeur":
+						precision+=5
+				var chance = precision - target.occupant.characterData.evasion
+				var rand = randi() % 100
+				if rand >= chance:
+					target.occupant.miss_animation(owner)
+					return
+			if secondtarget:
+				_apply_second_effect(target)
+			else:
+				_apply_effect(target, effects)
 		else:
-			_apply_effect(target, effects)
+			target.combat_manager.stop_target_selection()
+			if secondtarget:
+				_apply_second_effect(target)
+			else:
+				_apply_effect(target, effects)
+			
 
 func pay_cost():
 	owner.characterData.current_stamina-= cost

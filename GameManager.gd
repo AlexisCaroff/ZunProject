@@ -208,3 +208,12 @@ func show_history_scene(history_res: HistoryScene) -> Node:
 	get_tree().current_scene.add_child(overlay)
 
 	return overlay
+func show_Animatic_scene(Anim: Animatic, cam: Camera) -> Node:
+	var Animatic_scene := preload("res://animatic/animatic_scene.tscn")
+	var overlay := Animatic_scene.instantiate()
+	
+	overlay.animatic = Anim
+	overlay.cam=cam
+	get_tree().current_scene.add_child(overlay)
+
+	return overlay

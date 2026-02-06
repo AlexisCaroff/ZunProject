@@ -109,7 +109,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="Resource" id="Resource_euc7u"]
 script = ExtResource("16_113pv")
-index = 3
+index = 5
 scale = Vector2(1.6, 1.6)
 is_enemy = true
 isFront = false
@@ -524,7 +524,6 @@ flip_h = true
 metadata/_edit_use_anchors_ = true
 
 [node name="charaCombatUI" parent="ennemiePosition/position4" instance=ExtResource("19_uqdvq")]
-visible = false
 position = Vector2(21.222, 117)
 scale = Vector2(1.8, 1.8)
 
@@ -536,6 +535,41 @@ offset_bottom = 159.333
 theme_override_styles/focus = SubResource("StyleBoxEmpty_iaf2c")
 flat = true
 metadata/_edit_use_anchors_ = true
+
+[node name="position5" type="Node2D" parent="ennemiePosition"]
+z_index = 1
+position = Vector2(92.2223, -65.5556)
+script = ExtResource("15_hvocy")
+position_data = SubResource("Resource_euc7u")
+
+[node name="charaCombatUI" parent="ennemiePosition/position5" instance=ExtResource("19_uqdvq")]
+visible = false
+position = Vector2(21.222, 117)
+scale = Vector2(1.8, 1.8)
+
+[node name="Button" type="Button" parent="ennemiePosition/position5"]
+visible = false
+offset_left = -72.2223
+offset_top = -310.667
+offset_right = 97.7777
+offset_bottom = 159.333
+theme_override_styles/focus = SubResource("StyleBoxEmpty_iaf2c")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position5"]
+visible = false
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -182.333
+offset_top = -0.888855
+offset_right = 132.667
+offset_bottom = 78.1111
+scale = Vector2(1.01712, 1)
+mouse_filter = 2
+texture = ExtResource("18_3bg3v")
+expand_mode = 1
+flip_h = true
 
 [node name="position3" type="Node2D" parent="ennemiePosition"]
 z_index = 2
@@ -578,6 +612,26 @@ offset_right = 1944.0
 offset_bottom = 61.0
 flat = true
 script = ExtResource("32_a5bh2")
+
+[node name="positionPrison" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(1428, 409)
+scale = Vector2(0.9, 0.9)
+script = ExtResource("15_hvocy")
+position_data = SubResource("Resource_ehgg6")
+
+[node name="Button" type="Button" parent="positionPrison"]
+offset_left = -76.6666
+offset_top = -317.0
+offset_right = 112.333
+offset_bottom = 158.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xwqlg")
+flat = true
+
+[node name="charaCombatUI" parent="positionPrison" instance=ExtResource("19_uqdvq")]
+visible = false
+position = Vector2(0.000228882, 103)
+scale = Vector2(1.8, 1.8)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true

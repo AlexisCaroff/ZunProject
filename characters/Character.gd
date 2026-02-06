@@ -50,7 +50,7 @@ var exclamation :TextureRect
 var CharaColor =Color(1.0,1.0,1.0,1.0)
 var acte_twice : bool = false
 var exibBonusAtt = 0
-
+var CharaGrab: Character = null
 var current_bark: Bark = null
 @export var characterData : CharacterData
 var current_skill: Skill = null
@@ -292,22 +292,29 @@ func play_ai_turn(heroes : Array, enemies :Array):
 		print("no decision")
 		resetVisuel()
 		return
-
+	
 	current_skill = decision["skill"]
-	var targetPosistions: Array[PositionSlot] = decision.get("target", null)
-	var target = targetPosistions[0].occupant
+	combat_manager.ui.log(characterData.Charaname + " use " + current_skill.descriptionName)
+	var targetPositions: Array[PositionSlot] = []
+
+	for t in decision.get("target", []):
+		if t is PositionSlot:
+			targetPositions.append(t)
+	if targetPositions.is_empty():
+		print("no target !!!!!!!!!")
+	else :
+		print(targetPositions[0].name)
+	var target =targetPositions[0].occupant
 	combat_manager.pending_skill = current_skill
 	current_skill.owner = self
 
-	if target == null:
-		current_skill.use()
-		combat_manager.ui.logennemi(characterData.Charaname + " use " + current_skill.descriptionName)
-	else:
-		sprite.texture = current_skill.ImageSkill
-		await animate_attack(targetPosistions[0].occupant)
-		for thetarget in targetPosistions:
-			current_skill.use(thetarget)
-		combat_manager.ui.log(characterData.Charaname + " use " + current_skill.descriptionName)
+	
+	sprite.texture = current_skill.ImageSkill
+	if targetPositions[0].occupant:
+		await animate_attack(targetPositions[0].occupant)
+	for thetarget in targetPositions:
+		current_skill.use(thetarget)
+	if target:
 		target.update_ui()
 		#current_skill.end_turn(combat_manager)
 	update_buffs()

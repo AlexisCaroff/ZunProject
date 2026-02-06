@@ -50,9 +50,11 @@ const SELECTOR_TEX = preload("res://UI/selectorCombatChara.png")
 var selectorChara : Sprite2D
 var gm: GameManager
 var combatEnd: bool = false
+var cam : Camera
 
 func _ready():
 	gm= get_tree().root.get_node("GameManager") as GameManager
+	cam = get_viewport().get_camera_2d()
 	for child in $"../HeroPosition".get_children():
 		if child is PositionSlot:
 			hero_positions.append(child)
@@ -108,7 +110,8 @@ func _start():
 			$"../ennemiePosition/position1",
 			$"../ennemiePosition/position2",
 			$"../ennemiePosition/position3",
-			$"../ennemiePosition/position4",]
+			$"../ennemiePosition/position4",
+			$"../ennemiePosition/position5",]
 
 		# Spawn héros
 
@@ -151,7 +154,8 @@ func _start():
 			var slot_index = i
 			var slot = enemy_positions[slot_index]
 			move_character_to(chara, slot, 0)
-
+			if chara.characterData.Charaname=="Mommy":
+				enemy_positions[slot_index+1].occupant=chara
 			# initialise stats runtime si la ressource existe
 			if chara.characterData:
 				chara.update_stats()
@@ -182,11 +186,12 @@ func _start_combat_flow() -> void:
 	if gm.current_room_Ressource.before_combat_scene_History:
 		var overlay = gm.show_history_scene(gm.current_room_Ressource.before_combat_scene_History)
 		await overlay.history_finished
-
-
+	if gm.current_room_Ressource.before_combat_Animatic_scene:
+		var overlay = gm.show_Animatic_scene(gm.current_room_Ressource.before_combat_Animatic_scene,cam)
+		await overlay.Animatic_finished
 	if ui:
 		ui.mouse_filter = Control.MOUSE_FILTER_STOP
-
+	
 	start_combat()
 
 	
@@ -325,9 +330,14 @@ func is_animation_playing() -> bool:
 	return active_animations > 0
 
 func _check_victory():
-	for enemy in enemies.duplicate():
+	for enemy:Character in enemies.duplicate():
 		if enemy.dead:
 			turn_queue.erase(enemy)
+			if enemy.CharaGrab != null:
+				enemy.CharaGrab.characterData.stun=false
+				for pos :PositionSlot in hero_positions:
+					if !pos.is_occupied():
+						pos.assign_character(enemy.CharaGrab,0.3)
 			if enemy._current_slot:
 				enemy._current_slot.remove_character()
 			enemies.erase(enemy)

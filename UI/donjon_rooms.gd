@@ -2,57 +2,110 @@ extends Node2D
 
 @onready var game_manager: Node = get_tree().get_root().get_node("GameManager") # 🧩 adapte le chemin si besoin
 @onready var map=$".."
+var hovered_sprite: Sprite2D = null
+var hover_scale := Vector2(1.05, 1.05)
+var normal_scale := Vector2.ONE
+
 
 func _ready() -> void:
 	set_process_input(true)
 
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		var mouse_pos = get_viewport().get_camera_2d().get_global_mouse_position()
+		_check_hover(mouse_pos)
+
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		_check_room_click(event.position)
+		var mouse_pos = get_viewport().get_mouse_position()
+		_check_room_click(mouse_pos)
 
 
-func _check_room_click(click_pos: Vector2) -> void:
-	# Parcourt tous les Sprite2D enfants
+func _check_room_click(_click_pos: Vector2) -> void:
+	var mouse_pos = get_viewport().get_mouse_position()
+
 	for room_sprite in get_children():
-		if not (room_sprite is Sprite2D):
-			continue
-
-		if _is_click_on_visible_pixel(room_sprite, click_pos):
-			_on_room_clicked(room_sprite)
-			break
+		if room_sprite is Sprite2D:
+			if _is_click_on_visible_pixel(room_sprite, mouse_pos):
+				_on_room_clicked(room_sprite)
+				break
 
 
 func _is_click_on_visible_pixel(sprite: Sprite2D, click_position: Vector2) -> bool:
-	if not sprite.texture:
-		return false
-
-	# Convertit la position du clic dans le repère local du sprite
+	# Transforme le clic en coordonnées locales du sprite
 	var local_pos = sprite.to_local(click_position)
-	var tex = sprite.texture
-	var tex_size = tex.get_size() * sprite.scale
-	var origin = -tex_size / 2.0
-	var tex_pos = ((local_pos - origin) / sprite.scale).floor()
 
-	# Vérifie les limites
-	if tex_pos.x < 0 or tex_pos.y < 0 or tex_pos.x >= tex.get_width() or tex_pos.y >= tex.get_height():
+	var texture := sprite.texture
+	if texture == null:
 		return false
 
-	# Récupère l'image et la couleur du pixel
-	var img: Image = tex.get_image()
-	if img.is_empty():
+	var image := texture.get_image()
+	if image == null:
 		return false
 
-	var pixel_color = img.get_pixelv(tex_pos)
-	return pixel_color.a > 0.1
+	# Prend en compte l’échelle du sprite
+	var tex_size = texture.get_size()
+	var sprite_size = tex_size * sprite.scale
 
+	# Convertit en coordonnées UV
+	var uv = (local_pos + sprite_size * 0.5) / sprite_size
+
+	if uv.x < 0 or uv.x > 1 or uv.y < 0 or uv.y > 1:
+		return false
+
+	var pixel_pos = Vector2i(
+		int(uv.x * tex_size.x),
+		int(uv.y * tex_size.y)
+	)
+
+	var color := image.get_pixelv(pixel_pos)
+
+	return color.a > 0.1
 
 func _on_room_clicked(room_sprite: Sprite2D) -> void:
-	if room_sprite != null:
-		var room_name = room_sprite.name
-		var room= game_manager.get_room_by_id(room_name)
-		if room != null:
-			map.focus_on_room(room)
-		#	game_manager.current_room_Ressource = room
-		#	game_manager._enter_scene_in_current_room(game_manager.current_room_Ressource.exploration_scene)
-	
+	if room_sprite == null:
+		return
+
+	var room_name = room_sprite.name
+	var room = game_manager.get_room_by_id(room_name)
+
+	if room == null:
+		return
+
+	if not room.explored:
+		return # ❌ room non explorée → pas de téléport
+
+	map.focus_on_room(room)
+	game_manager.current_room_Ressource = room
+	game_manager._enter_scene_in_current_room(game_manager.current_room_Ressource.exploration_scene)
+
+func _check_hover(mouse_pos: Vector2) -> void:
+	var new_hovered: Sprite2D = null
+
+	for room_sprite in get_children():
+		if not room_sprite is Sprite2D:
+			continue
+
+		var room = game_manager.get_room_by_id(room_sprite.name)
+		if room == null or not room.explored:
+			continue
+
+		if _is_click_on_visible_pixel(room_sprite, mouse_pos):
+			new_hovered = room_sprite
+			break
+
+	if new_hovered != hovered_sprite:
+		if hovered_sprite:
+			
+			var tween = create_tween()
+			tween.tween_property(hovered_sprite, "scale", normal_scale, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		
+			hovered_sprite.z_index-=4
+		hovered_sprite = new_hovered
+
+		if hovered_sprite:
+			
+			var tween = create_tween()
+			tween.tween_property(hovered_sprite, "scale", hover_scale, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		
+			hovered_sprite.z_index+=4

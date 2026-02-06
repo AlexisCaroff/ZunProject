@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c4tmv66skkgd5"]
+[gd_scene load_steps=35 format=3 uid="uid://ddkmd6tfxrluh"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_8flqu"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="1_32lil"]
@@ -428,10 +428,10 @@ position_data = SubResource("Resource_if0a6")
 enemy_scene = SubResource("PackedScene_qbte2")
 
 [node name="Button" type="Button" parent="ennemiePosition/position3"]
-offset_left = -95.0
-offset_top = -271.0
-offset_right = 87.0
-offset_bottom = 18.0
+offset_left = -113.0
+offset_top = -262.0
+offset_right = 69.0
+offset_bottom = 27.0
 theme_override_styles/focus = SubResource("StyleBoxTexture_roj6a")
 button_mask = 0
 

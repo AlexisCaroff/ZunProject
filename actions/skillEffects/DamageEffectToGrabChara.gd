@@ -1,0 +1,26 @@
+extends SkillEffect
+class_name DamageEffectGrab
+
+
+@export var MagicDMG: bool = false
+@export var amount: int = 20
+enum Stat {
+	STAMINA,
+	HORNY,
+	STRESS
+}
+@export_enum("STAMINA", "HORNY", "STRESS")
+var damage_target_stat: int = Stat.STAMINA
+var Chartarget:Character
+
+
+func apply(user: Character, target: PositionSlot) -> void:
+	Chartarget = user.CharaGrab
+	Chartarget.characterData.stun=true
+	if Chartarget != null:
+		if Chartarget.characterData.IsDemon && MagicDMG:
+			amount= amount*2
+			
+		if Chartarget.characterData.IsDemon && !MagicDMG:
+			amount= amount/2.0
+		Chartarget.take_damage(user, damage_target_stat, amount,MagicDMG)

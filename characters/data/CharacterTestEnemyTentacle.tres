@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=10 format=3 uid="uid://d3i2h10vsjlsj"]
+
+[ext_resource type="Texture2D" uid="uid://kysl4qntumom" path="res://characters/charatexture/demo characters/tentacle.png" id="1_jdbjj"]
+[ext_resource type="Script" uid="uid://cf2k68rgsdle0" path="res://characters/charatexture/braines/Ai_brain.gd" id="2_y0omi"]
+[ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="3_rmig6"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="4_xpfno"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_jf3mf"]
+[ext_resource type="Texture2D" uid="uid://b25krvl6etj57" path="res://characters/exploPortrait/BossTentacleExploPortrait.png" id="6_kl24q"]
+[ext_resource type="Resource" uid="uid://byc26r5u5smx0" path="res://actions/ennemiCombatSkills/TentacleSquishes.tres" id="8_3a7ml"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="10_uqb7o"]
+
+[sub_resource type="Resource" id="Resource_bxekq"]
+script = ExtResource("2_y0omi")
+name = "Default AI"
+description = "IA basique qui choisit une compétence aléatoire utilisable et une cible valide."
+metadata/_custom_type_script = "uid://cf2k68rgsdle0"
+
+[resource]
+script = ExtResource("10_uqb7o")
+portrait_texture = ExtResource("1_jdbjj")
+explorationPortrait = ExtResource("6_kl24q")
+dead_portrait_texture = ExtResource("1_jdbjj")
+Hit_texture = ExtResource("1_jdbjj")
+initiative_icon = ExtResource("6_kl24q")
+Name = "Tentacle"
+Charaname = "Tentacle"
+IsDemon = true
+size = "average"
+affinity = Dictionary[String, int]({})
+base_max_stamina = 15
+base_max_stress = 100
+base_max_horniness = 100
+base_attack = 7
+base_defense = 5
+base_willpower = 5
+base_initiative = 20
+base_evasion = 5
+attack = 10
+defense = 5
+willpower = 5
+evasion = 5
+initiative = 3
+peek = 0
+equipped_items = Array[ExtResource("6_jf3mf")]([])
+stun = false
+Chara_position = 3
+max_stamina = 15
+max_stress = 100
+max_horniness = 100
+current_stamina = 15
+current_stress = 0
+current_horniness = 0
+skill_resources = Array[Resource]([ExtResource("8_3a7ml"), ExtResource("8_3a7ml"), ExtResource("8_3a7ml"), ExtResource("8_3a7ml"), ExtResource("8_3a7ml")])
+tags = Array[String]([])
+is_player_controlled = false
+ai_brain = SubResource("Resource_bxekq")
+can_be_moved = true
+min_durationIddle = 0.6
+max_durationIddle = 1.0
+min_scale = 0.95
+max_scale = 1.0
+camp_skill_resources = Array[ExtResource("4_xpfno")]([])
+bark_scene = ExtResource("3_rmig6")
+taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide open!", "You fight like a wet noodle!", "Oops! Did that hurt?"]

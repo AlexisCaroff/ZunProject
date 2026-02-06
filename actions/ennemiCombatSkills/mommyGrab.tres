@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://deybvri8mc0gg"]
+
+[ext_resource type="Texture2D" uid="uid://k2qvyob47pj4" path="res://characters/charatexture/demo characters/Boss.png" id="1_canl4"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_0gssa"]
+[ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="3_c2rjk"]
+[ext_resource type="PackedScene" uid="uid://wasovspg3yc4" path="res://characters/CharacterTestEnemyTentacle.tscn" id="4_5oaeq"]
+[ext_resource type="Script" uid="uid://cnu1tkps1688s" path="res://actions/skillEffects/SpawnTentacle.gd" id="4_merpb"]
+[ext_resource type="Texture2D" uid="uid://bhhvdopw8nqlu" path="res://actions/actiontexture/vampire.png" id="8_cy45l"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="9_u2hyo"]
+
+[sub_resource type="Resource" id="Resource_coij5"]
+script = ExtResource("3_c2rjk")
+metadata/_custom_type_script = "uid://tjywmaoy4ejj"
+
+[sub_resource type="Resource" id="Resource_5oaeq"]
+script = ExtResource("4_merpb")
+enemy_scene = ExtResource("4_5oaeq")
+max_spawn = 1
+spawn_delay = 0.5
+metadata/_custom_type_script = "uid://cnu1tkps1688s"
+
+[resource]
+script = ExtResource("9_u2hyo")
+name = "Mommy Grab"
+descriptionName = "Mommy Grab"
+description = "Mommy Grab"
+icon = ExtResource("8_cy45l")
+required_position = 2
+ImageSkill = ExtResource("1_canl4")
+the_target_type = 0
+effects = Array[ExtResource("2_0gssa")]([SubResource("Resource_coij5"), SubResource("Resource_5oaeq")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("2_0gssa")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+is_contact = false
+distance_contact = 0.0
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

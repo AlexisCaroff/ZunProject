@@ -2,7 +2,7 @@ class_name MoveToPositionEffect
 extends SkillEffect
 
 @export var target_index: int
-
+@export var isTentacle:bool=false
 
 func apply(user: Character, target: PositionSlot):
 	var cm = user.combat_manager
@@ -12,9 +12,9 @@ func apply(user: Character, target: PositionSlot):
 	if target_index < 0 or target_index >= slots.size():
 		push_warning("Index de position cible invalide.")
 		return
-
+	
 	var target_slot = slots[target_index]
-
+	
 	if target_slot.is_occupied():
 		if !target_slot.occupant.characterData.can_be_moved:
 			return

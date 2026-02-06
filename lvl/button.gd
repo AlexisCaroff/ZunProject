@@ -30,15 +30,11 @@ func _on_mouse_entered():
 		tween.tween_property(self, "scale", hover_scale, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		if icon :
 			tween.tween_property(self, "self_modulate", hover_color, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-		if get_child(0) != null:
-			var obj = get_child(0)
-			tween.tween_property(obj, "self_modulate", hover_color, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		
 func _on_mouse_exited():
 	if not disabled:
 		var tween = create_tween()
 		tween.tween_property(self, "scale", normal_scale, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		if icon :
 			tween.tween_property(self, "self_modulate", normal_color, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-		if get_child(0) != null:
-			var obj = get_child(0)
-			tween.tween_property(obj, "self_modulate", normal_color, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		

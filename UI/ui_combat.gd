@@ -83,6 +83,7 @@ func update_turn_queue_ui(queue: Array[Character]):
 		turnOrderPanel.add_child(portraitChara)
 
 
+
 # -------------------------------------------------------------------------
 # ➤ MET À JOUR L’UI DU PERSONNAGE ACTIF
 # -------------------------------------------------------------------------
@@ -111,7 +112,7 @@ func update_ui_for_current_character(character: Character):
 			button.Actiontext = skill.descriptionName + "\n" + skill.description
 			button.disabled = !skill.can_use()
 			button.icon = skill.icon
-			if character.characterData.current_horniness>=100 or character.characterData.stun:
+			if character.characterData.current_horniness>=100 or character.characterData.stun ==true:
 				button.disabled = true
 			var index = i
 			button.pressed.connect(func(): combat_manager.use_skill(index))

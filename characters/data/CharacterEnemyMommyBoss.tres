@@ -1,25 +1,34 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=12 format=3 uid="uid://dm75andeiexh0"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=13 format=3 uid="uid://dm75andeiexh0"]
 
+[ext_resource type="Texture2D" uid="uid://k2qvyob47pj4" path="res://characters/charatexture/demo characters/Boss.png" id="1_kgh6k"]
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_od2up"]
+[ext_resource type="Script" uid="uid://b6a37g0gbkyla" path="res://characters/charatexture/braines/Ai_brain_MommyBoss.gd" id="2_6dkli"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_kgh6k"]
 [ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="3_6dkli"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_tr8hi"]
 [ext_resource type="Texture2D" uid="uid://0x6um7xfv678" path="res://characters/exploPortrait/BossExploPortrait.png" id="5_2ne5h"]
-[ext_resource type="Texture2D" uid="uid://ccfldj30sasp8" path="res://characters/charatexture/boss.png" id="6_je6pe"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="7_dyn70"]
-[ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/HerosCombatSkills/Ennemi_attaque_basique.tres" id="8_k2iw4"]
+[ext_resource type="Resource" uid="uid://deybvri8mc0gg" path="res://actions/ennemiCombatSkills/mommyGrab.tres" id="9_6dkli"]
 [ext_resource type="Resource" uid="uid://cvpggc0yt3l4o" path="res://actions/ennemiCombatSkills/Ennemi_charme.tres" id="9_swgmx"]
 [ext_resource type="Resource" uid="uid://b4okliodacjdm" path="res://actions/ennemiCombatSkills/spawnEnnemie.tres" id="10_rphim"]
-[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="11_qx417"]
+
+[sub_resource type="Resource" id="Resource_tr8hi"]
+script = ExtResource("2_6dkli")
+name = "Default AI"
+description = "IA basique qui choisit une compétence aléatoire utilisable et une cible valide."
+metadata/_custom_type_script = "uid://b6a37g0gbkyla"
 
 [resource]
 script = ExtResource("7_dyn70")
-portrait_texture = ExtResource("6_je6pe")
+portrait_texture = ExtResource("1_kgh6k")
 explorationPortrait = ExtResource("5_2ne5h")
 dead_portrait_texture = ExtResource("3_6dkli")
+Hit_texture = ExtResource("1_kgh6k")
 initiative_icon = ExtResource("5_2ne5h")
-Charaname = "ennemie1"
+Name = "name"
+Charaname = "Mommy"
 IsDemon = true
+size = "average"
 affinity = Dictionary[String, int]({})
 base_max_stamina = 100
 base_max_stress = 100
@@ -27,13 +36,13 @@ base_max_horniness = 100
 base_attack = 10
 base_defense = 5
 base_willpower = 5
-base_initiative = 1
+base_initiative = 2000
 base_evasion = 5
 attack = 10
 defense = 5
 willpower = 5
 evasion = 5
-initiative = 1
+initiative = 2000
 peek = 0
 equipped_items = Array[ExtResource("4_tr8hi")]([])
 stun = false
@@ -44,9 +53,10 @@ max_horniness = 100
 current_stamina = 100
 current_stress = 0
 current_horniness = 0
-skill_resources = Array[Resource]([ExtResource("8_k2iw4"), ExtResource("9_swgmx"), ExtResource("10_rphim"), ExtResource("9_swgmx"), ExtResource("11_qx417")])
+skill_resources = Array[Resource]([ExtResource("9_6dkli"), ExtResource("9_swgmx"), ExtResource("10_rphim"), ExtResource("9_6dkli"), ExtResource("9_6dkli")])
 tags = Array[String]([])
 is_player_controlled = false
+ai_brain = SubResource("Resource_tr8hi")
 can_be_moved = false
 min_durationIddle = 0.6
 max_durationIddle = 1.0

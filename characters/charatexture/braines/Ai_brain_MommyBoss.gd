@@ -2,38 +2,63 @@ extends AiBrain
 class_name AiBrain_MommyBoss
 
 func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionary:
-	print (" Mommy Decide!")
-	var usable_skills := owner.skills.filter(func(s): return s.can_use())
-	if usable_skills.is_empty():
-		return {}
+	print("Mommy Decide!")
 
-	var enemy_positions = owner.combat_manager.enemy_positions
-	if enemy_positions == null or enemy_positions.is_empty():
-		push_error("⚠️ Aucune position d'ennemi trouvée pour le summoner.")
+	var base_usable_skills := owner.skills.filter(func(s): return s.can_use())
+	if base_usable_skills.is_empty():
 		return super.decide_action(owner, heroes, enemies)
 
-	# 🔍 Cherche une position libre OU avec un ennemi mort
+	var cm := owner.combat_manager
+	var enemy_positions := cm.enemy_positions
+
+	# =========================
+	# 1️⃣ SPAWN LOGIC (prioritaire)
+	# =========================
 	var valid_slot: PositionSlot = null
 	for slot in enemy_positions:
 		if not slot.is_occupied():
-			valid_slot = slot
-			print ("empty slot for Mommy")
-			break
-		elif slot.occupant != null and slot.occupant.is_dead:
-			
-			valid_slot = slot
-			break
+			if slot != cm.enemy_positions[4]:
+				valid_slot = slot
+				break
+		elif slot.occupant != null and slot.occupant.is_dead():
+			if slot != cm.enemy_positions[4]:
+				valid_slot = slot
+				break
 
-	# 🎯 Sélectionne les skills de type 'spawn'
-	var spawn_skills = usable_skills.filter(func(s): return s.Actiontype == "spawn")
+	var spawn_skills := base_usable_skills.filter(
+		func(s): return s.Actiontype == "spawn"
+	)
 
-	# Si un skill de spawn est dispo ET qu’une position est libre ou contient un mort → on l’utilise
-	if not spawn_skills.is_empty() and valid_slot != null:
-		print ("try to spawn")
-		return {
-			"skill": spawn_skills.pick_random(),
-			"target": valid_slot
-		}
+	if valid_slot != null and not spawn_skills.is_empty():
+		# ta logique de proba éventuelle ici
+		if randf() < 0.5:
+			print("👶 Mommy chooses spawn")
+			var target_positions: Array[PositionSlot] = [valid_slot]
+			return {
+				"skill": spawn_skills.pick_random(),
+				"target": target_positions
+			}
 
-	# Sinon comportement normal
+	# =========================
+	# 2️⃣ MOMMY GRAB FORCÉ
+	# =========================
+	var grab_skills := base_usable_skills.filter(
+		func(s): return s.name == "Mommy Grab"
+	)
+
+	if not grab_skills.is_empty():
+		print("🤲 Mommy FORCES Grab")
+
+		# 👉 utilise la logique STANDARD pour la cible
+		var action := super.decide_action(owner, heroes, enemies)
+
+		# ⚠️ Sécurité : si l’AI standard ne choisit pas Grab
+		if action.has("skill") and action.skill.name != "Mommy Grab":
+			action.skill = grab_skills.pick_random()
+
+		return action
+
+	# =========================
+	# 3️⃣ FALLBACK
+	# =========================
 	return super.decide_action(owner, heroes, enemies)

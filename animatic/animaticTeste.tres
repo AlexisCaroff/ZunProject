@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="Animatic" load_steps=15 format=3 uid="uid://bmgxbqdxxsh6v"]
+
+[ext_resource type="Script" uid="uid://ck7b0nag3kik0" path="res://animatic/AnimaticFrame.gd" id="1_6fe8f"]
+[ext_resource type="Texture2D" uid="uid://e8s7i3il2u2f" path="res://animatic/img1.png" id="2_gbs3m"]
+[ext_resource type="Script" uid="uid://p5vhivlgwttt" path="res://animatic/Animatic.gd" id="2_rq0tq"]
+[ext_resource type="Texture2D" uid="uid://kbygdyiumk7" path="res://animatic/img2.png" id="3_3ow5p"]
+[ext_resource type="Texture2D" uid="uid://bknmmhqkiiw0g" path="res://animatic/img3.png" id="4_bc4ln"]
+[ext_resource type="Texture2D" uid="uid://rlrov4w81xbu" path="res://animatic/img4.png" id="5_fl88r"]
+[ext_resource type="Texture2D" uid="uid://bjj0t10iq24tq" path="res://animatic/img5.png" id="6_74p2y"]
+[ext_resource type="Texture2D" uid="uid://cvw8h0d7hkktj" path="res://animatic/img6.png" id="7_ta64p"]
+
+[sub_resource type="Resource" id="Resource_fl88r"]
+script = ExtResource("1_6fe8f")
+texture = ExtResource("2_gbs3m")
+at = 0.0
+metadata/_custom_type_script = "uid://ck7b0nag3kik0"
+
+[sub_resource type="Resource" id="Resource_74p2y"]
+script = ExtResource("1_6fe8f")
+texture = ExtResource("3_3ow5p")
+at = 1.0
+metadata/_custom_type_script = "uid://ck7b0nag3kik0"
+
+[sub_resource type="Resource" id="Resource_ta64p"]
+script = ExtResource("1_6fe8f")
+texture = ExtResource("4_bc4ln")
+at = 1.5
+metadata/_custom_type_script = "uid://ck7b0nag3kik0"
+
+[sub_resource type="Resource" id="Resource_jd7xi"]
+script = ExtResource("1_6fe8f")
+texture = ExtResource("5_fl88r")
+at = 2.0
+metadata/_custom_type_script = "uid://ck7b0nag3kik0"
+
+[sub_resource type="Resource" id="Resource_g5ofa"]
+script = ExtResource("1_6fe8f")
+texture = ExtResource("6_74p2y")
+at = 2.5
+metadata/_custom_type_script = "uid://ck7b0nag3kik0"
+
+[sub_resource type="Resource" id="Resource_ufsu4"]
+script = ExtResource("1_6fe8f")
+texture = ExtResource("7_ta64p")
+at = 3.0
+metadata/_custom_type_script = "uid://ck7b0nag3kik0"
+
+[resource]
+script = ExtResource("2_rq0tq")
+fade_duration = 0.5
+final_hold_time = 2.0
+frames = Array[ExtResource("1_6fe8f")]([SubResource("Resource_fl88r"), SubResource("Resource_74p2y"), SubResource("Resource_ta64p"), SubResource("Resource_jd7xi"), SubResource("Resource_g5ofa"), SubResource("Resource_ufsu4")])
+pan = Vector2(960, 400)
+zoom = 1.5
+zoomTime = 4.0
+text = ""
+metadata/_custom_type_script = "uid://p5vhivlgwttt"

@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://byc26r5u5smx0"]
+
+[ext_resource type="Texture2D" uid="uid://kysl4qntumom" path="res://characters/charatexture/demo characters/tentacle.png" id="1_wrj23"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_2ne05"]
+[ext_resource type="Script" uid="uid://devwsgwqxadac" path="res://actions/skillEffects/DamageEffectToGrabChara.gd" id="3_dmdws"]
+[ext_resource type="Texture2D" uid="uid://ccnq4lbltabiy" path="res://actions/actiontexture/tentacles.png" id="4_786br"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_53mw8"]
+
+[sub_resource type="Resource" id="Resource_8mjdd"]
+script = ExtResource("3_dmdws")
+MagicDMG = false
+amount = 20
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://devwsgwqxadac"
+
+[resource]
+script = ExtResource("5_53mw8")
+name = "Tentacle squishes"
+descriptionName = "Tentacle squishes"
+description = "dmg an ennemi grab"
+icon = ExtResource("4_786br")
+required_position = 0
+ImageSkill = ExtResource("1_wrj23")
+the_target_type = 2
+effects = Array[ExtResource("2_2ne05")]([SubResource("Resource_8mjdd")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("2_2ne05")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+is_contact = true
+distance_contact = 300.0
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
