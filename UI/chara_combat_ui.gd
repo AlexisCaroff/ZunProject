@@ -8,12 +8,16 @@ extends Node2D
 ]
 
 @onready var HPProgressBar= $HPProgressBar
+@onready var LustProgressBar=$LustProgressBar
 @onready var HornyBar=$HornyJauge/HornyJaugePleine
 @onready var TheHornyBar=$HornyJauge
 
 func getHpbar():
 	HPProgressBar= $HPProgressBar
 	return  HPProgressBar
+func getLustbar():
+	LustProgressBar=$LustProgressBar
+	return LustProgressBar
 func getactionpoints():
 	actionpoints= [
 	$HBoxContainer2/DotAction1,

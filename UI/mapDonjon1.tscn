@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cl2ysrfuwgkhh"]
+[gd_scene load_steps=21 format=3 uid="uid://cl2ysrfuwgkhh"]
 
 [ext_resource type="Script" uid="uid://c318tknfh3cm2" path="res://Map.gd" id="1_mkjtd"]
 [ext_resource type="Texture2D" uid="uid://c1ce3m6pqbp3y" path="res://lvl/donjon2/dungeon_map2.png" id="2_ydegi"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://b4tsh3gx5rbxg" path="res://lvl/donjon2/bossRoom.png" id="14_qsvxc"]
 [ext_resource type="Texture2D" uid="uid://dphxs3npuk1lg" path="res://lvl/donjon2/salle0.png" id="17_pnf5p"]
 [ext_resource type="Script" uid="uid://b708qawpt0c8s" path="res://UI/MapDoor.gd" id="18_b056a"]
+[ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="18_q6d3n"]
 
 [node name="map1" type="Node2D"]
 script = ExtResource("1_mkjtd")
@@ -115,13 +116,13 @@ scale_amplitude = 0.1
 [node name="Door1" type="Sprite2D" parent="DonjonDoor"]
 self_modulate = Color(0, 0, 0, 1)
 z_index = 2
-position = Vector2(-804, -50)
-rotation = 1.5708
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("4_oc32i")
+position = Vector2(-810, -48)
+scale = Vector2(0.233398, 0.233398)
+texture = ExtResource("18_q6d3n")
 script = ExtResource("18_b056a")
 connectedRooms = Array[String](["Hall1", "Salle0"])
-normal_scale = Vector2(1.5, 1.5)
+normal_scale = Vector2(0.2, 0.2)
+hover_scale = Vector2(0.3, 0.3)
 
 [node name="Button" type="Button" parent="DonjonDoor/Door1"]
 anchors_preset = -1

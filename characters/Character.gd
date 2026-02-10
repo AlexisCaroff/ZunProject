@@ -162,22 +162,25 @@ func slur():
 		show_bark(characterData.taunts.pick_random())
 
 func update_ui():
+	var LustProgressBar
 	if hp_Jauge == null and _current_slot != null:
 		_current_slot.Set_CharaUI()
 		hp_Jauge = _current_slot.CharaUI.getHpbar()
 		hornyJauge = _current_slot.CharaUI.get_HornyBar()
 		dotsActions = _current_slot.CharaUI.getactionpoints()
-
+		
 	if not characterData:
 		return
-
+	if LustProgressBar== null:
+		LustProgressBar =_current_slot.CharaUI.getLustbar()
 	if hp_Jauge:
 		hp_Jauge.max_value = characterData.max_stamina
 		hp_Jauge.value = characterData.current_stamina
 
 	if hornyJauge:
 		hornyJauge.self_modulate.a = (characterData.current_horniness * 2.0) / characterData.max_horniness
-
+		LustProgressBar.max_value = characterData.max_horniness
+		LustProgressBar.value = characterData.current_horniness
 	for i in range(skills.size()):
 		if i < dotsActions.size():
 			var dot = dotsActions[i]

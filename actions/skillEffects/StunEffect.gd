@@ -19,4 +19,4 @@ func apply(user: Character, target: PositionSlot) -> void:
 		for tag in hero.characterData.tags:
 			if tag =="captive":
 				hero.characterData.current_horniness+=2
-	Chartarget.sprite.self_modulate=Color(1,0,0,)
+	#Chartarget.sprite.self_modulate=Color(1,0,0,)
