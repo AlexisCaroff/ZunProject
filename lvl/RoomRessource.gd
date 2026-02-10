@@ -17,3 +17,4 @@ extends Resource
 @export var explored: bool = false
 @export var ennemikilled: bool =false
 @export var CampDone: bool =false
+@export var interactable: InteractableObjectResource

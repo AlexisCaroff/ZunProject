@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://cbakapyjnht36"]
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://cbakapyjnht36"]
 
 [ext_resource type="Texture2D" uid="uid://cdhidvnxb6h10" path="res://characters/charatexture/demo characters/HERO_hunter_thrust.png" id="1_na1tf"]
 [ext_resource type="AudioStream" uid="uid://dovp7wcqjx7ux" path="res://actions/sound/Weapon Sword Whips 02.wav" id="2_na1tf"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_58yna"]
+[ext_resource type="PackedScene" uid="uid://8vmc6rbjidyt" path="res://actions/damageEffect/trailAttackVFX.tscn" id="3_nweak"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="3_uogve"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_1dvb3"]
 [ext_resource type="Texture2D" uid="uid://b3kf5qxfdrv0k" path="res://actions/actiontexture/actionSpear.png" id="5_na1tf"]
@@ -40,4 +41,5 @@ duration = 1.0
 tags = Array[String]([])
 is_contact = true
 distance_contact = 600.0
+effect = ExtResource("3_nweak")
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

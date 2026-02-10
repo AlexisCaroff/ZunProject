@@ -58,7 +58,7 @@ func want_to_move():
 func move():
 	selector.self_modulate.a =0.0
 	
-func add_buff(buff: Buff, load:bool =false):
+func add_buff(buff: Buff, isload:bool =false):
 	if buff_bar ==null:
 		buff_bar = $HBoxContainer
 	var new_buff = buff.duplicate()

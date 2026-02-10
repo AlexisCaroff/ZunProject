@@ -1,0 +1,117 @@
+[gd_scene load_steps=12 format=3 uid="uid://8vmc6rbjidyt"]
+
+[ext_resource type="Texture2D" uid="uid://bp4qegapg1h2u" path="res://UI/cost_circle.png" id="1_p27me"]
+
+[sub_resource type="Gradient" id="Gradient_lnhv2"]
+offsets = PackedFloat32Array(0, 0.467871, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gqb8d"]
+gradient = SubResource("Gradient_lnhv2")
+
+[sub_resource type="Curve" id="Curve_rs0eh"]
+_data = [Vector2(0, 0.955079), 0.0, 0.0, 0, 0, Vector2(0.835878, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_b6o25"]
+curve_x = SubResource("Curve_rs0eh")
+
+[sub_resource type="Curve" id="Curve_jsytc"]
+_data = [Vector2(0, 0.115521), 0.0, 0.0, 0, 0, Vector2(0.492366, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.000354409), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_jsytc"]
+curve = SubResource("Curve_jsytc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ob8fu"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape_scale = Vector3(1, 200, 4)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -9.99999
+angle_max = 10.0
+velocity_pivot = Vector3(20, 20, 0)
+direction = Vector3(200, 200, 0)
+spread = 0.0
+initial_velocity_min = 300.0
+initial_velocity_max = 300.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = -1.60933e-05
+directional_velocity_min = 5000.0
+directional_velocity_max = 5000.0
+directional_velocity_curve = SubResource("CurveXYZTexture_b6o25")
+orbit_velocity_min = -0.206
+orbit_velocity_max = -0.206
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 200, 0)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+attractor_interaction_enabled = false
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_jsytc")
+color_ramp = SubResource("GradientTexture1D_gqb8d")
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.02
+turbulence_noise_strength = 2.0
+
+[sub_resource type="Animation" id="Animation_ob8fu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("heartParticules:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_jjclw"]
+resource_name = "charmed"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("heartParticules:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pel5j"]
+_data = {
+&"RESET": SubResource("Animation_ob8fu"),
+&"charmed": SubResource("Animation_jjclw")
+}
+
+[node name="charmed" type="Node2D"]
+z_index = 40
+
+[node name="heartParticules" type="GPUParticles2D" parent="."]
+position = Vector2(1, 0)
+scale = Vector2(0.2, 0.2)
+amount = 4
+texture = ExtResource("1_p27me")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.2
+trail_sections = 10
+process_material = SubResource("ParticleProcessMaterial_ob8fu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_pel5j")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

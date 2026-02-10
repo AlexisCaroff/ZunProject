@@ -21,7 +21,7 @@
 script = ExtResource("1_838hb")
 donjon = ExtResource("2_soe0u")
 last_room_Ressource = ExtResource("3_0q5so")
-inventory = Array[ExtResource("4_0q5so")]([ExtResource("5_dhxbs"), ExtResource("5_dhxbs")])
+inventory = Array[ExtResource("4_0q5so")]([ExtResource("5_dhxbs")])
 characters = Array[ExtResource("6_1xubm")]([ExtResource("7_vbvj5"), ExtResource("8_6kqjp"), ExtResource("9_43qkp"), ExtResource("10_nm67f")])
 
 [node name="Label" type="Label" parent="."]

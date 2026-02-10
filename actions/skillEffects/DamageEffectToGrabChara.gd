@@ -14,7 +14,7 @@ var damage_target_stat: int = Stat.STAMINA
 var Chartarget:Character
 
 
-func apply(user: Character, target: PositionSlot) -> void:
+func apply(user: Character, _target: PositionSlot) -> void:
 	Chartarget = user.CharaGrab
 	Chartarget.characterData.stun=true
 	if Chartarget != null:

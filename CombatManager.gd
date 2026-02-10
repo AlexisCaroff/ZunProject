@@ -291,7 +291,6 @@ func next_turn():
 		return
 	
 	if current_character.characterData.is_player_controlled:
-
 		ui.MenuPerso.select_character(current_character.characterData)
 		await get_tree().process_frame
 		ui.update_ui_for_current_character(current_character)
@@ -491,7 +490,7 @@ func move_character_to(character: Character, slot: PositionSlot, movetime: int):
 	character._current_slot = slot
 	character.update_ui()
 		
-func swap_characters(slot_a: PositionSlot, slot_b: PositionSlot,movetime: int):
+func swap_characters(slot_a: PositionSlot, slot_b: PositionSlot,movetime: float):
 	var char_a = slot_a.occupant
 	var char_b = slot_b.occupant
 

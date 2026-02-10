@@ -67,8 +67,10 @@ signal change_in_equipment(character: CharacterData)
 func _ready():
 	gm = get_tree().root.get_node("GameManager") as GameManager
 	hideMenu()
-	create_inventory_grid()
+	gm.inventory_changed.connect(_on_inventory_changed)
 
+	create_inventory_grid()
+	
 	ExitButton.connect("button_down", hideMenu)
 	drag_icon.visible = false
 	var theinventory = inventory_items.duplicate()
@@ -386,30 +388,33 @@ func unequip(slot_index: int):
 
 func _input(event):
 	
-
-	if event is InputEventMouseButton :
-		# On relâche
-		
+	if event is InputEventMouseButton:
 		if dragged_item == null:
 			return
-		#print(dragged_item.name+ "is try to equipe")
-		try_equip_on_character()
-		finish_drag()
 
-func try_equip_on_character():
-	print ("try_equip_on_character")
+		var equipped := try_equip_on_character()
+
+		if not equipped:
+			# remettre l’objet là où il était
+			if dragged_slot_index >= 0:
+				inventory_items[dragged_slot_index] = dragged_item
+			else:
+				addItemToInventory(dragged_item)
+
+		finish_drag()
+		update_inventory_ui()
+
+func try_equip_on_character() -> bool:
 	if selected_character == null:
-		return
+		return false
 
 	if selected_character.equipped_items.size() >= 2:
-		
-		return # Deux slots déjà remplis
+		return false
 
 	selected_character.equipped_items.append(dragged_item)
-	
 	update_equipment_slots()
 	update_inventory_ui()
-
+	return true
 
 # --------------------------------------------------------------------
 # UPDATE UI
@@ -417,6 +422,7 @@ func try_equip_on_character():
 
 func update_inventory_ui():
 	print("update_inventory_ui_______________________________________________________")
+	
 	for item in inventory_items:
 		if item != null:
 			print ( item.name + "is in inventory")
@@ -457,3 +463,5 @@ func update_cooldown_bar(container: HBoxContainer, skill):
 		if i <= charged :
 			rect.color = Color(0.64,0.56,0.36)
 		container.add_child(rect)
+func _on_inventory_changed(item: Equipment):
+	addItemToInventory(item)

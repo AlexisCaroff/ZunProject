@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=13 format=3 uid="uid://doydfjjogegnd"]
+[gd_resource type="Resource" script_class="Skill" load_steps=14 format=3 uid="uid://doydfjjogegnd"]
 
 [ext_resource type="Texture2D" uid="uid://ltw8c8afgkv8" path="res://characters/charatexture/demo characters/HERO_warrior_bash.png" id="1_k3ail"]
 [ext_resource type="AudioStream" uid="uid://daejgs7ixjjp3" path="res://actions/sound/Weapon Sword Whips 01.wav" id="2_6dehc"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_lxb6k"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_slxy4"]
 [ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="3_lxb6k"]
+[ext_resource type="PackedScene" uid="uid://8vmc6rbjidyt" path="res://actions/damageEffect/trailAttackVFX.tscn" id="3_qctpy"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_abm4e"]
 [ext_resource type="Texture2D" uid="uid://crbfh0ppjt6lh" path="res://actions/actiontexture/shieldbash.png" id="4_lxb6k"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="5_fkpvk"]
@@ -56,4 +57,5 @@ duration = 1.0
 tags = Array[String]([])
 is_contact = true
 distance_contact = 350.0
+effect = ExtResource("3_qctpy")
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

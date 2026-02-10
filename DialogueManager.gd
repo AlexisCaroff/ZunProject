@@ -18,7 +18,7 @@ var ui: Node =null
 var scene: PackedScene = preload("res://UI/dialogue_ui.tscn")
 @export var participants: Array[String] = [] # ex: ["Hero", "Guide"]
 func _ready():
-	
+	self.global_position=Vector2(0,0)
 	if ui==null:
 		
 		ui = scene.instantiate()

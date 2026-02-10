@@ -613,26 +613,6 @@ offset_bottom = 61.0
 flat = true
 script = ExtResource("32_a5bh2")
 
-[node name="positionPrison" type="Node2D" parent="."]
-z_index = 1
-position = Vector2(1428, 409)
-scale = Vector2(0.9, 0.9)
-script = ExtResource("15_hvocy")
-position_data = SubResource("Resource_ehgg6")
-
-[node name="Button" type="Button" parent="positionPrison"]
-offset_left = -76.6666
-offset_top = -317.0
-offset_right = 112.333
-offset_bottom = 158.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xwqlg")
-flat = true
-
-[node name="charaCombatUI" parent="positionPrison" instance=ExtResource("19_uqdvq")]
-visible = false
-position = Vector2(0.000228882, 103)
-scale = Vector2(1.8, 1.8)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 

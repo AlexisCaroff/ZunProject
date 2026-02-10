@@ -83,6 +83,8 @@ func _ready():
 	selectorChara.position.y -=0
 	selectCharacter(characters[0]) 
 	
+	load_interactable()
+	
 func load_characters_from_gamestat():
 	characters.clear()
 	
@@ -278,3 +280,14 @@ func Door_over():
 	tween.tween_property(DoorTuto,"scale",Vector2(1.0,1.0),0.3).set_delay(0.8)
 func Door_notover():
 	DoorTuto.visible=false
+	
+func load_interactable():
+	var room := gm.current_room_Ressource
+	if room.interactable == null:
+		return
+		print("no interactable in this room")
+
+	var obj := room.interactable.scene.instantiate()
+	obj.data = room.interactable
+	interactable.add_child(obj)
+	

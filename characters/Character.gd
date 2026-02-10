@@ -209,7 +209,7 @@ func process_taunt():
 			taunted_by = null
 
 func update_buffs() -> void:
-	print("update buff for " + characterData.Charaname+ " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+	#print("update buff for " + characterData.Charaname+ " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	for buff in buffs:
 		buff.duration -= 1
 		if buff.duration <= 0:
@@ -609,6 +609,8 @@ func animate_attack(target: Character, _duration = 1.0):
 	attacking = true
 	target.getattacked=true
 	_duration = 1.1
+	var has_changeMask := current_skill.effects.any(func(e): return e is ChangeSkill)
+	var has_heal := current_skill.effects.any(func(e): return e is HealEffect)
 	emit_signal("skill_animation_started")
 	combat_manager.ui.log(characterData.Charaname + " use " + combat_manager._pending_skill.descriptionName)
 	var tween := create_tween() as Tween
@@ -629,7 +631,7 @@ func animate_attack(target: Character, _duration = 1.0):
 	start_target_pos =target.position
 	target_pos = start_target_pos
 	target_pos.y += 50
-	
+
 	var cam_bigZoom = Vector2(cam.baseZoom*1.1)
 	if characterData.is_player_controlled:
 		self.global_position =Vector2(-200,728)
@@ -723,16 +725,17 @@ func _on_attack(target: Character, _duration: float =1.0):
 	tween = create_tween()
 	tween.set_ease(Tween.EASE_IN)
 	if !has_heal:
+		print("is heal")
 		if target.characterData.current_stamina >0:
 			target.sprite.texture =target.characterData.Hit_texture
 			target.Selector.texture = target.characterData.Hit_texture
 
 	sprite.texture = current_skill.ImageSkill
-	
+ 
 	tween.parallel().tween_property(self, "position", _current_slot.global_position, 0.2).set_delay(_duration)
 	tween.parallel().tween_property(self, "scale", normal_size, 0.2).set_delay(_duration)
 	tween.parallel().tween_property(target, "scale", normal_size, 0.3).set_delay(_duration)
-	
+		
 	tween.parallel().tween_property(target, "position", target._current_slot.global_position, 0.3).set_delay(_duration)
 	tween.parallel().tween_property(cam, "zoom", cam.baseZoom, 0.3).set_delay(_duration)
 	tween.parallel().tween_property(ShadowBackground, "modulate:a", 0.0, 0.3).set_delay(_duration)
@@ -780,7 +783,7 @@ func miss_animation(target: Character):
 	else :
 		start_pose = Vector2(1643,728)
 
-	var direction = (target.global_position - global_position).normalized()
+
 	
 	var esquiv_pose= start_pose
 	esquiv_pose.x -= 100

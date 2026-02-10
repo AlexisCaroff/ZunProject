@@ -1,15 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://fvl38cdlmapy"]
+[gd_scene load_steps=8 format=3 uid="uid://fvl38cdlmapy"]
 
 [ext_resource type="Script" uid="uid://cspa2tuof385o" path="res://lvl/ChoiceUI.gd" id="1_msup4"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="2_2sm2f"]
+[ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="3_i22b5"]
+[ext_resource type="Texture2D" uid="uid://vxig1dgne8it" path="res://UI/box2.png" id="4_cuvdp"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="5_cuvdp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vquci"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ugto1"]
 
 [node name="Choix" type="Control"]
+z_index = 20
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.601257, 0.601257)
 script = ExtResource("1_msup4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 0
+offset_left = -151.0
+offset_top = -121.0
+offset_right = 3232.0
+offset_bottom = 1848.0
+color = Color(0, 0, 0, 0.552)
 
 [node name="Choice1" type="Button" parent="."]
 layout_mode = 0
@@ -19,7 +36,16 @@ offset_right = 1369.93
 offset_bottom = 707.667
 theme_override_fonts/font = ExtResource("2_2sm2f")
 theme_override_font_sizes/font_size = 60
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vquci")
 text = "Choice 1"
+flat = true
+script = ExtResource("3_i22b5")
+
+[node name="Box2" type="Sprite2D" parent="Choice1"]
+z_index = -1
+position = Vector2(191.266, 43.6164)
+scale = Vector2(1.61745, 1)
+texture = ExtResource("4_cuvdp")
 
 [node name="Choice2" type="Button" parent="."]
 layout_mode = 0
@@ -29,4 +55,18 @@ offset_right = 2244.76
 offset_bottom = 707.667
 theme_override_fonts/font = ExtResource("2_2sm2f")
 theme_override_font_sizes/font_size = 60
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ugto1")
 text = "Choice 2"
+flat = true
+script = ExtResource("3_i22b5")
+
+[node name="Box2" type="Sprite2D" parent="Choice2"]
+z_index = -1
+position = Vector2(191.266, 43.6164)
+scale = Vector2(1.61745, 1)
+texture = ExtResource("4_cuvdp")
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(1596.65, 898.118)
+script = ExtResource("5_cuvdp")
+metadata/_custom_type_script = "uid://devdej4xpva2i"

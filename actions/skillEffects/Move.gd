@@ -27,7 +27,7 @@ func apply(user: Character, target: PositionSlot):
 		Chartarget.update_ui()
 		
 	else:
-		cm.move_character_to(Chartarget, user_slot,.7)
+		cm.move_character_to(Chartarget, user_slot,0.7)
 		Chartarget.update_ui()
 		
 	

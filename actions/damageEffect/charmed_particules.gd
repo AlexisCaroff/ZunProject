@@ -4,8 +4,9 @@ extends Node2D
 @onready var particles = $heartParticules
 @onready var anim = $AnimationPlayer
 
-func setup(damage_amount: int ):
-	label.text = "-" + str(damage_amount)
+func setup(damage_amount: int=-18884657 ):
+	if damage_amount != -18884657:
+		label.text = "-" + str(damage_amount)
 	particles.emitting = true
 	anim.play("charmed")
 

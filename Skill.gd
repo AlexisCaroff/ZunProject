@@ -65,6 +65,7 @@ var reducecost : int=0
 var skill_effect_overridden := false
 @export var is_contact: bool = false 
 @export var distance_contact:float = 0.0
+@export var effect : PackedScene
 
 func can_use() -> bool:
 	if owner == null:
@@ -87,8 +88,13 @@ func use(target: PositionSlot = null, secondtarget : bool=false):
 	
 	if target != null :
 		if target.occupant != null:
-			
-			target.combat_manager.stop_target_selection()
+			if effect !=null:
+				var effect_instance= effect.instantiate()
+				owner.add_child(effect_instance)
+				
+				if effect_instance.has_method("setup"):
+					effect_instance.setup()
+				target.combat_manager.stop_target_selection()
 			if not can_use():
 				return
 			

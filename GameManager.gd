@@ -187,8 +187,14 @@ func return_to_exploration():
 		var exploManager =new_scene.get_node("ExplorationManager") as ExplorationManager
 		
 	await sceneTransition.fade_in()
+
+
+#------------------------------------------------------
+signal inventory_changed
+
 func add_to_inventory(item: Equipment):
 	inventory.append(item)
+	emit_signal("inventory_changed", item)
 	print ("add "+ item.name+" to inventory")
 	for i in inventory:
 		print ( i.name + " is in Inventory GM ")
