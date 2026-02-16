@@ -9,6 +9,7 @@ extends Node2D
 
 @onready var HPProgressBar= $HPProgressBar
 @onready var LustProgressBar=$LustProgressBar
+@onready var LustProgressBarSeparator=$HBoxContainer3
 @onready var HornyBar=$HornyJauge/HornyJaugePleine
 @onready var TheHornyBar=$HornyJauge
 

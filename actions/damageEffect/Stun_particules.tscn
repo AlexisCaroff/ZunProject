@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://lwjriy2lqwpd"]
+
+[ext_resource type="Script" uid="uid://dyid0mi3j2dwd" path="res://actions/damageEffect/stun_particules.gd" id="1_msn7y"]
+[ext_resource type="Texture2D" uid="uid://qx0s5ypu8xhq" path="res://UI/star.png" id="2_msn7y"]
+
+[sub_resource type="Gradient" id="Gradient_lnhv2"]
+offsets = PackedFloat32Array(0, 0.633962, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gqb8d"]
+gradient = SubResource("Gradient_lnhv2")
+
+[sub_resource type="Curve" id="Curve_jsytc"]
+_data = [Vector2(0, 0.516854), 0.0, 0.0, 0, 0, Vector2(1, 0.678476), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jsytc"]
+curve = SubResource("Curve_jsytc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ob8fu"]
+lifetime_randomness = 0.8
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape_scale = Vector3(1, 1, 0)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 30.0
+emission_ring_inner_radius = 5.7
+emission_ring_cone_angle = 90.0
+angle_min = -9.99999
+angle_max = 10.0
+direction = Vector3(0, -1, 0)
+spread = 0.0
+gravity = Vector3(0, -10, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_jsytc")
+color = Color(1, 1, 1, 0.3)
+color_ramp = SubResource("GradientTexture1D_gqb8d")
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.02
+turbulence_noise_strength = 2.0
+
+[node name="Stun" type="Node2D"]
+z_index = 40
+script = ExtResource("1_msn7y")
+
+[node name="heartParticules" type="GPUParticles2D" parent="."]
+modulate = Color(0.843, 0.752, 0, 1)
+amount = 4
+texture = ExtResource("2_msn7y")
+lifetime = 1.5
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ob8fu")

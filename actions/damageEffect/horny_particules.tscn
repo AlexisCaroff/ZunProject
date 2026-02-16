@@ -1,0 +1,98 @@
+[gd_scene load_steps=14 format=3 uid="uid://beu7asy6k5yls"]
+
+[ext_resource type="Script" uid="uid://diekbtt615pcm" path="res://actions/damageEffect/hornyParticules.gd" id="1_01c3a"]
+[ext_resource type="Texture2D" uid="uid://ckit6w6521v7t" path="res://actions/damageEffect/damageeffecttexture/charmesmog.png" id="2_nmg6i"]
+[ext_resource type="Texture2D" uid="uid://swq5187cxrl" path="res://UI/Circle.png" id="3_nmg6i"]
+
+[sub_resource type="Gradient" id="Gradient_lnhv2"]
+offsets = PackedFloat32Array(0, 0.633962, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gqb8d"]
+gradient = SubResource("Gradient_lnhv2")
+
+[sub_resource type="Curve" id="Curve_jsytc"]
+_data = [Vector2(0, 0.516854), 0.0, 0.0, 0, 0, Vector2(1, 0.678476), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jsytc"]
+curve = SubResource("Curve_jsytc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ob8fu"]
+lifetime_randomness = 0.24
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape_scale = Vector3(1, 1, 0)
+emission_shape = 1
+emission_sphere_radius = 20.0
+angle_min = -9.99999
+angle_max = 10.0
+direction = Vector3(0, -1, 0)
+spread = 0.0
+gravity = Vector3(0, -10, 0)
+scale_min = 3.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_jsytc")
+color = Color(1, 1, 1, 0.3)
+color_ramp = SubResource("GradientTexture1D_gqb8d")
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.02
+turbulence_noise_strength = 2.0
+
+[sub_resource type="Gradient" id="Gradient_guu50"]
+offsets = PackedFloat32Array(0, 0.515, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.515, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eh3gh"]
+gradient = SubResource("Gradient_guu50")
+
+[sub_resource type="Curve" id="Curve_bphwe"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.50885, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5yasp"]
+width = 255
+curve = SubResource("Curve_bphwe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sapdt"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 32.0
+inherit_velocity_ratio = 1.0
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, -40, 0)
+damping_min = 0.5
+damping_max = 1.0
+scale_min = 0.2
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_5yasp")
+color_ramp = SubResource("GradientTexture1D_eh3gh")
+turbulence_enabled = true
+
+[node name="charmed" type="Node2D"]
+z_index = 40
+script = ExtResource("1_01c3a")
+
+[node name="heartParticules" type="GPUParticles2D" parent="."]
+modulate = Color(0.877806, 0.188578, 0.999997, 0.5)
+amount = 6
+texture = ExtResource("2_nmg6i")
+lifetime = 2.0
+explosiveness = 0.2
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ob8fu")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -249.0
+offset_top = -221.0
+offset_right = 338.0
+offset_bottom = 406.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(0.806404, 0.00087829, 0.865641, 1)
+amount = 20
+texture = ExtResource("3_nmg6i")
+lifetime = 5.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_sapdt")

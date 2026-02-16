@@ -4,7 +4,8 @@ class_name Character
 # --- Données visuelles
 @onready var name_label = $name
 @onready var sprite : TextureRect = $pivot/HerosTexture1
-var hp_Jauge
+var hp_Jauge : ProgressBar
+var LustProgressBar : ProgressBar
 var hornyJauge
 const MAX_EQUIPMENT = 2
 
@@ -39,6 +40,10 @@ const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
 const MissEffectScene:= preload("res://actions/damageEffect/miss_vfx.tscn")
 const DebuffEffectScene:= preload("res://actions/damageEffect/debuffVfx.tscn")
 const BonkEffectScene:= preload("res://actions/damageEffect/bonkVFX.tscn")
+const hornyPart : = preload("res://actions/damageEffect/horny_particules.tscn")
+const stunPart := preload("res://actions/damageEffect/Stun_particules.tscn")
+var StunParticules
+var hornyParticules
 const buffui:= preload("res://UI/buffUi.tscn")
 signal target_selected()
 var is_targetable: bool = false
@@ -83,6 +88,14 @@ func _ready():
 	if characterData.is_player_controlled==false :
 		sprite.flip_h=true
 		Selector.flip_h=true
+	else:
+		hornyParticules= hornyPart.instantiate()
+		print ( "horny particules spawn for "+ characterData.Charaname)
+		
+		add_child(hornyParticules)
+		hornyParticules.position += characterData.headPosition
+		hornyParticules.setParticulesAlpha(0.0)
+		
 func _updateSkills(updated_skills: Array[Resource] ):
 	skills.clear()
 	for s in updated_skills:
@@ -162,7 +175,7 @@ func slur():
 		show_bark(characterData.taunts.pick_random())
 
 func update_ui():
-	var LustProgressBar
+
 	if hp_Jauge == null and _current_slot != null:
 		_current_slot.Set_CharaUI()
 		hp_Jauge = _current_slot.CharaUI.getHpbar()
@@ -179,8 +192,16 @@ func update_ui():
 
 	if hornyJauge:
 		hornyJauge.self_modulate.a = (characterData.current_horniness * 2.0) / characterData.max_horniness
-		LustProgressBar.max_value = characterData.max_horniness
+		LustProgressBar.max_value = characterData.max_horniness 
 		LustProgressBar.value = characterData.current_horniness
+
+	
+	if hornyParticules&& characterData.current_horniness>=50.0:
+		hornyParticules.setParticulesAlpha(characterData.current_horniness/100.0)
+	else :
+		if hornyParticules:
+			hornyParticules.setParticulesAlpha(0.0)
+		
 	for i in range(skills.size()):
 		if i < dotsActions.size():
 			var dot = dotsActions[i]
@@ -191,6 +212,13 @@ func update_ui():
 			else:
 				dot.modulate = Color(0.1,0.1,0.1)
 				dot.size = Vector2(0.5, 0.5)
+	if characterData.stun:
+		StunParticules=stunPart.instantiate()
+		add_child(StunParticules)
+		StunParticules.position+= characterData.headPosition
+	else :
+		if StunParticules != null:
+			StunParticules.remove()
 	
 func add_buff(buff: Buff):
 	var new_buff = buff.duplicate()
@@ -465,7 +493,7 @@ func resetVisuel():
 		sprite.texture =characterData.dead_portrait_texture
 		Selector.texture =characterData.dead_portrait_texture
 	
-	if !characterData.stun && characterData.current_stamina>0:
+	if characterData.current_stamina>0:
 		modulate=Color(1.0,1.0,1.0)
 	#print ("reset " + characterData.Charaname )
 	

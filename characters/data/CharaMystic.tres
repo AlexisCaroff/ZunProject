@@ -22,6 +22,7 @@
 
 [resource]
 script = ExtResource("11_4khx0")
+headPosition = Vector2(20, -90)
 portrait_texture = ExtResource("12_n62aw")
 explorationPortrait = ExtResource("9_tsoqm")
 dead_portrait_texture = ExtResource("9_jg4jp")

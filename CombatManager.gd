@@ -273,22 +273,7 @@ func next_turn():
 		turn_queue.append(current_character)
 		next_turn()
 		return
-	if current_character.characterData.stun == true:
-		current_character.characterData.stun = false
-		ui.log(current_character.characterData.Charaname +" is stun")
-		if current_character.exclamation != null:
-			current_character.exclamation.free()
-			ui.log(current_character.characterData.Charaname +" is surprised")
-		for button:Button in ui.skill_buttons :
-			button.disabled = true
-		current_character.update_buffs()
-		current_character.sprite.self_modulate=Color(1,1,1,1)
-		while is_animation_playing():
-			await get_tree().process_frame
-		await get_tree().create_timer(1.5).timeout
-		turn_queue.append(current_character)
-		next_turn()
-		return
+
 	
 	if current_character.characterData.is_player_controlled:
 		ui.MenuPerso.select_character(current_character.characterData)
@@ -305,7 +290,24 @@ func next_turn():
 			await get_tree().process_frame
 		turn_queue.append(current_character)
 		next_turn()
-
+	if current_character.characterData.stun == true:
+		
+		ui.log(current_character.characterData.Charaname +" is stun")
+		if current_character.exclamation != null:
+			current_character.exclamation.free()
+			ui.log(current_character.characterData.Charaname +" is surprised")
+		for button:Button in ui.skill_buttons :
+			button.disabled = true
+		current_character.update_buffs()
+		current_character.sprite.self_modulate=Color(1,1,1,1)
+		while is_animation_playing():
+			await get_tree().process_frame
+		await get_tree().create_timer(1.5).timeout
+		turn_queue.append(current_character)
+		current_character.characterData.stun = false
+		next_turn()
+		
+		return
 
 var active_animations := 0
 

@@ -56,6 +56,8 @@ func assign_character(character: Character, movetime:float):
 		for actionpoint in CharaUI.actionpoints:
 			actionpoint.visible=false
 		CharaUI.TheHornyBar.visible=false
+		CharaUI.LustProgressBar.visible=false
+		CharaUI.LustProgressBarSeparator.visible=false
 		
 	#print("chara assigned to position")
 	if not is_ready:

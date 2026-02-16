@@ -101,6 +101,7 @@ flat = true
 script = ExtResource("4_v1j00")
 
 [node name="background3" type="TextureRect" parent="CanvasLayer"]
+visible = false
 offset_left = 741.0
 offset_top = 149.0
 offset_right = 1845.0
