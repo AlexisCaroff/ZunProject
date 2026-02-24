@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="RoomResource" load_steps=6 format=3 uid="uid://bcvwbh3fvvtx2"]
+
+[ext_resource type="PackedScene" uid="uid://bmfv5svlavwoq" path="res://lvl/Corridor2/combat_Corridor2.tscn" id="1_mro5j"]
+[ext_resource type="PackedScene" uid="uid://bp6igea4o686p" path="res://lvl/Corridor2/doorCorridor2.tscn" id="2_lfkdf"]
+[ext_resource type="Resource" uid="uid://ca8cj1nuvfp3j" path="res://lvl/Corridor2/encounterCorridor2.tres" id="3_0us6x"]
+[ext_resource type="PackedScene" uid="uid://ce26kfk16kg3b" path="res://lvl/Corridor2/explorationCorridor2.tscn" id="4_4quw3"]
+[ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="5_me5dh"]
+
+[resource]
+script = ExtResource("5_me5dh")
+room_id = "Corridor2"
+position_on_map = 1
+door_scene = ExtResource("2_lfkdf")
+combat_scene = ExtResource("1_mro5j")
+exploration_scene = ExtResource("4_4quw3")
+encounter = ExtResource("3_0us6x")
+CanCamp = false
+connected_room_ids = Array[String](["Room2", "Hall1"])
+explored = false
+ennemikilled = false
+CampDone = false
+keyName = ""
+locked = false
+metadata/_custom_type_script = "uid://oj44pgv34ji0"

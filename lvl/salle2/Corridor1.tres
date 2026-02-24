@@ -19,4 +19,6 @@ connected_room_ids = Array[String](["Room3", "Salon1", "Room1", "Hall1"])
 explored = false
 ennemikilled = false
 CampDone = false
+keyName = ""
+locked = false
 metadata/_custom_type_script = "uid://oj44pgv34ji0"

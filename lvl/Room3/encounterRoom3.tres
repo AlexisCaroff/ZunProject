@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CombatEncounter" load_steps=8 format=3 uid="uid://b8rj6jugqjbm0"]
+
+[ext_resource type="PackedScene" uid="uid://dasi42qwl63md" path="res://characters/CharacterEnemyAdict.tscn" id="1_yqii5"]
+[ext_resource type="PackedScene" uid="uid://doitrlqhfja4t" path="res://characters/CharacterTestEnemySpitter1.tscn" id="2_gdjqf"]
+[ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterEnemyNymphe.tscn" id="3_gk63c"]
+[ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharaEnnemyTemptress.tscn" id="4_8w46f"]
+[ext_resource type="Texture2D" uid="uid://drp4vk52vgk74" path="res://UI/doorebuscade/DOOR_caught_nymph.png" id="5_l5fve"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_l5vm1"]
+[ext_resource type="Script" uid="uid://dmxcru3ra8jg" path="res://lvl/CombatEncounter.gd" id="7_gjukk"]
+
+[resource]
+script = ExtResource("7_gjukk")
+enemy_scenes = Array[PackedScene]([ExtResource("1_yqii5"), ExtResource("2_gdjqf"), ExtResource("3_gk63c"), ExtResource("4_8w46f")])
+loots = Array[ExtResource("6_l5vm1")]([])
+description = ""
+imageEmbuscade = ExtResource("5_l5fve")
+metadata/_custom_type_script = "uid://dmxcru3ra8jg"

@@ -20,7 +20,7 @@ var move_mode: bool = false
 var DoorNumber:int =0
 var gm : GameManager
 @onready var campButton: Button = $Campement
-@onready var interactable =  $"../Interactable"
+@onready var interactable =  $Interactable
 @onready var menuPerso = $"../MenuPerso"
 @onready var bouton_menuPerso=$"../charaPortrait2/charaPortraitButton"
 @onready var NameLabel= $"../Name"
@@ -39,6 +39,8 @@ var selectorChara : Sprite2D
 @onready var campTexture=$Campement/CampFire2
 @onready var GoToCampement=$GoToCampement
 @onready var DoorTuto=$DoorTuto
+
+
 func _ready():
 	for child in $"../HeroPosition".get_children():
 		if child is ExplorationPosition:
@@ -52,7 +54,7 @@ func _ready():
 	if gm.current_room_Ressource.CanCamp:
 		campButton=$Campement
 		campButton.visible=true
-		interactable.visible=false
+		#interactable.visible=false
 		campButton.connect("button_down",go_to_campement)
 		campButton.connect("mouse_entered",campement_over)
 		campButton.connect("mouse_exited",campement_notover)

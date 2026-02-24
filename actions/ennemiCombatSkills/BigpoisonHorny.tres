@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://nri716ki3ipb"]
+[gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://nri716ki3ipb"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_jh1m6"]
 [ext_resource type="Texture2D" uid="uid://dflxvs46sww1w" path="res://characters/charatexture/demo characters/ENEMY_nymph_F_shoot.png" id="1_vb7f5"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_vb7f5"]
+[ext_resource type="PackedScene" uid="uid://d0tjxl5jqwvvn" path="res://actions/damageEffect/smockAttackVFX.tscn" id="2_w1vbh"]
 [ext_resource type="Texture2D" uid="uid://yyl7yyr5j4rv" path="res://UI/poisonHorny.png" id="3_w1vbh"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="4_j3em7"]
 [ext_resource type="Texture2D" uid="uid://bw10cun1t2x4g" path="res://actions/actiontexture/poison.png" id="5_n6mpd"]
@@ -49,4 +50,5 @@ duration = 0.3
 tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
+effect = ExtResource("2_w1vbh")
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

@@ -1,0 +1,381 @@
+[gd_scene load_steps=30 format=3 uid="uid://bywlbiembylwi"]
+
+[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_yhi7b"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_l34ca"]
+[ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="3_gvkw5"]
+[ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="4_2rt2q"]
+[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="5_kfvn3"]
+[ext_resource type="Texture2D" uid="uid://jhd7rid3c1c1" path="res://actions/actiontexture/moveIcon.png" id="6_8oh7u"]
+[ext_resource type="Script" uid="uid://conijhbkctdj2" path="res://lvl/moveExplo.gd" id="7_6l51a"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="8_2evoa"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="9_qllyq"]
+[ext_resource type="Script" uid="uid://tq0nr5tg2b3k" path="res://lvl/positionexplo.gd" id="10_4go1b"]
+[ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="11_6uk3h"]
+[ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="12_si4it"]
+[ext_resource type="Script" uid="uid://cvdsxgbtufa4g" path="res://lvl/interactible.gd" id="13_bsvbr"]
+[ext_resource type="Texture2D" uid="uid://djit2m4icvw0k" path="res://Enviro/kairn.png" id="14_bmo3s"]
+[ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="15_mo56i"]
+[ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="16_y64gw"]
+[ext_resource type="Script" uid="uid://gljyiwavrmws" path="res://lvl/Hall1/explo_portrait.gd" id="17_lve1y"]
+[ext_resource type="Texture2D" uid="uid://bl6qdsm60pd37" path="res://UI/exploCharaselector.png" id="18_4j33k"]
+[ext_resource type="Script" uid="uid://km54mxly4gk4" path="res://lvl/exploration_manager.gd" id="19_lg2uc"]
+[ext_resource type="PackedScene" uid="uid://dq282vipchnbq" path="res://characters/chara_explo.tscn" id="20_mk1vb"]
+[ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="21_oqrt4"]
+[ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="22_8xuef"]
+[ext_resource type="Texture2D" uid="uid://df6e4btmrj1i8" path="res://props/campFire.png" id="23_lcr6n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qg4ur"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mlu07"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ln05l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3g6r7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rqfr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fyasy"]
+
+[node name="ExploInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ZunBg" type="Sprite2D" parent="."]
+position = Vector2(959.5, 401)
+scale = Vector2(1.00157, 1.0025)
+texture = ExtResource("1_yhi7b")
+
+[node name="atmosphere" parent="." instance=ExtResource("2_l34ca")]
+position = Vector2(2, 352)
+
+[node name="exploUI" type="Sprite2D" parent="."]
+position = Vector2(959, 539.5)
+scale = Vector2(0.780945, 0.787591)
+texture = ExtResource("3_gvkw5")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_left = 1454.0
+offset_top = 804.0
+offset_right = 1854.0
+offset_bottom = 1204.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(400, 400)
+render_target_update_mode = 4
+
+[node name="map" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_2rt2q")]
+position = Vector2(254, 135)
+scale = Vector2(0.5, 0.5)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 681.0
+offset_top = 974.0
+offset_right = 1265.0
+offset_bottom = 975.0
+color = Color(0.501961, 0.407843, 0.207843, 1)
+
+[node name="moveButton" type="Button" parent="."]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+offset_left = 917.0
+offset_top = 854.0
+offset_right = 1007.0
+offset_bottom = 954.0
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("5_kfvn3")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("6_8oh7u")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_6l51a")
+
+[node name="cooldownA" type="Label" parent="moveButton"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="LabelAction" type="Label" parent="."]
+layout_mode = 0
+offset_left = 681.0
+offset_top = 982.0
+offset_right = 1260.0
+offset_bottom = 1066.0
+theme_override_fonts/font = ExtResource("8_2evoa")
+theme_override_font_sizes/font_size = 25
+text = "Move"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TurnOrderPanel" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 28.0
+offset_right = 1921.0
+offset_bottom = 93.0
+mouse_filter = 2
+alignment = 1
+
+[node name="contexte" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1517.0
+offset_top = 736.0
+offset_right = 1827.0
+offset_bottom = 898.0
+theme_override_font_sizes/font_size = 40
+text = "ce qu'il se passe"
+autowrap_mode = 3
+
+[node name="charaPortrait" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 756.0
+offset_right = 183.0
+offset_bottom = 872.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+ignore_rotation = false
+script = ExtResource("9_qllyq")
+
+[node name="HeroPosition" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(178, 615)
+scale = Vector2(1.4, 1.4)
+
+[node name="position1" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(-22, 1)
+scale = Vector2(1.1, 1.1)
+script = ExtResource("10_4go1b")
+
+[node name="Button" type="Button" parent="HeroPosition/position1"]
+z_index = 10
+y_sort_enabled = true
+offset_left = -82.0
+offset_top = -522.0
+offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qg4ur")
+flat = true
+
+[node name="position2" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(132, 24)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("10_4go1b")
+
+[node name="Button" type="Button" parent="HeroPosition/position2"]
+z_index = 14
+z_as_relative = false
+y_sort_enabled = true
+offset_left = -82.0
+offset_top = -525.0
+offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mlu07")
+flat = true
+
+[node name="position3" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(298, 2)
+scale = Vector2(1.1, 1.1)
+script = ExtResource("10_4go1b")
+
+[node name="Button" type="Button" parent="HeroPosition/position3"]
+z_index = 10
+y_sort_enabled = true
+offset_left = -82.0
+offset_top = -505.0
+offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ln05l")
+flat = true
+
+[node name="position4" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(479, 24)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("10_4go1b")
+
+[node name="Button" type="Button" parent="HeroPosition/position4"]
+z_index = 10
+y_sort_enabled = true
+offset_left = -82.0
+offset_top = -539.0
+offset_right = 67.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3g6r7")
+flat = true
+
+[node name="DialogueManager" type="Node2D" parent="." node_paths=PackedStringArray("external_choice_receiver")]
+z_index = 6
+script = ExtResource("11_6uk3h")
+portraits_resource = ExtResource("12_si4it")
+is_Choice = true
+external_choice_receiver = NodePath("../Kairn")
+
+[node name="Kairn" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1.2, 1)
+position = Vector2(266, 464)
+script = ExtResource("13_bsvbr")
+dialoguePass = "res://dialogue/dialogueTeste.txt"
+
+[node name="Button" type="Button" parent="Kairn"]
+offset_left = -146.0
+offset_top = -80.0
+offset_right = 134.0
+offset_bottom = 153.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1rqfr")
+icon = ExtResource("14_bmo3s")
+flat = true
+expand_icon = true
+
+[node name="etiquette" type="Sprite2D" parent="Kairn"]
+visible = false
+position = Vector2(193.333, 6.66667)
+texture = ExtResource("15_mo56i")
+
+[node name="Label" type="Label" parent="Kairn/etiquette"]
+offset_left = -92.0
+offset_top = -23.0
+offset_right = 125.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("5_kfvn3")
+theme_override_font_sizes/font_size = 40
+text = "EXPLORE"
+
+[node name="Portraits" type="Node2D" parent="."]
+scale = Vector2(0.779851, 0.779851)
+
+[node name="ExploPortrait1" type="Sprite2D" parent="Portraits"]
+position = Vector2(121.017, 1266.91)
+texture = ExtResource("16_y64gw")
+script = ExtResource("17_lve1y")
+
+[node name="Button" type="Button" parent="Portraits/ExploPortrait1"]
+offset_left = -82.5479
+offset_top = -73.0908
+offset_right = 73.4521
+offset_bottom = 79.9092
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fyasy")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ExploPortrait2" type="Sprite2D" parent="Portraits"]
+position = Vector2(251.33, 1133.55)
+texture = ExtResource("16_y64gw")
+script = ExtResource("17_lve1y")
+
+[node name="Button" type="Button" parent="Portraits/ExploPortrait2"]
+offset_left = -82.5479
+offset_top = -73.0908
+offset_right = 73.4521
+offset_bottom = 79.9092
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fyasy")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ExploPortrait3" type="Sprite2D" parent="Portraits"]
+position = Vector2(383.888, 1266.11)
+texture = ExtResource("16_y64gw")
+script = ExtResource("17_lve1y")
+
+[node name="Button" type="Button" parent="Portraits/ExploPortrait3"]
+offset_left = -76.1363
+offset_top = -76.1364
+offset_right = 79.8637
+offset_bottom = 76.8636
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fyasy")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ExploPortrait4" type="Sprite2D" parent="Portraits"]
+position = Vector2(514.201, 1132.75)
+texture = ExtResource("16_y64gw")
+script = ExtResource("17_lve1y")
+
+[node name="Button" type="Button" parent="Portraits/ExploPortrait4"]
+offset_left = -76.1363
+offset_top = -76.1364
+offset_right = 79.8637
+offset_bottom = 76.8636
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fyasy")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ExploCharaselector" type="Sprite2D" parent="Portraits"]
+position = Vector2(385.971, 1265.63)
+scale = Vector2(1.12354, 1.12354)
+texture = ExtResource("18_4j33k")
+
+[node name="ExplorationManager" type="Node2D" parent="."]
+script = ExtResource("19_lg2uc")
+chara_explo_scene = ExtResource("20_mk1vb")
+
+[node name="Button" type="Button" parent="ExplorationManager"]
+z_index = 2
+offset_left = 1537.0
+offset_top = 43.0
+offset_right = 1912.0
+offset_bottom = 753.0
+flat = true
+expand_icon = true
+
+[node name="Doortext" type="TextureRect" parent="ExplorationManager/Button"]
+modulate = Color(0.703125, 0.642877, 0.387902, 1)
+layout_mode = 0
+offset_left = 16.0
+offset_top = 125.0
+offset_right = 378.0
+offset_bottom = 504.0
+texture = ExtResource("21_oqrt4")
+expand_mode = 1
+
+[node name="Button2" type="Button" parent="ExplorationManager"]
+visible = false
+z_index = 2
+offset_left = 589.0
+offset_top = 65.0
+offset_right = 964.0
+offset_bottom = 653.0
+flat = true
+expand_icon = true
+
+[node name="Campement" type="Button" parent="ExplorationManager"]
+offset_left = 1142.0
+offset_top = 404.0
+offset_right = 1352.0
+offset_bottom = 605.0
+flat = true
+script = ExtResource("22_8xuef")
+hover_color = Color(0.933333, 0.0872172, 0.108109, 1)
+hover_scale = Vector2(1.1, 1.1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CampFire" type="Sprite2D" parent="ExplorationManager/Campement"]
+position = Vector2(100, 143)
+texture = ExtResource("23_lcr6n")
+
+[connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="moveButton" to="moveButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
+[connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]
+[connection signal="button_down" from="HeroPosition/position3/Button" to="HeroPosition/position3" method="_on_button_button_down"]
+[connection signal="button_down" from="HeroPosition/position4/Button" to="HeroPosition/position4" method="_on_button_button_down"]
+[connection signal="button_down" from="Kairn/Button" to="Kairn" method="_on_button_button_down"]
+[connection signal="mouse_entered" from="Kairn/Button" to="Kairn" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Kairn/Button" to="Kairn" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="ExplorationManager/Button" to="ExplorationManager" method="_on_button_button_down"]
+[connection signal="mouse_entered" from="ExplorationManager/Button" to="ExplorationManager" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="ExplorationManager/Button" to="ExplorationManager" method="_on_button_mouse_exited"]
+[connection signal="button_down" from="ExplorationManager/Button2" to="ExplorationManager" method="_on_button_2_button_down"]
+[connection signal="button_down" from="ExplorationManager/Campement" to="ExplorationManager" method="_on_campement_button_down"]

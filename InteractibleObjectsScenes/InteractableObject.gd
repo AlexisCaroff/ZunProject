@@ -10,6 +10,9 @@ class_name InteractableObject
 @export  var big_size = Vector2(0.8, 0.8)
 @export  var startsize = Vector2(0.6,0.6)
 var current_tween: Tween = null
+@export var item_ui_scene: PackedScene = preload("res://UI/item_ui.tscn")
+
+
 func _ready():
 	button.connect("button_down",start_interaction)
 	button.connect("mouse_entered",_on_button_mouse_entered)
@@ -50,6 +53,14 @@ func resolve_choice(choice: InteractableChoice):
 			pass
 
 		InteractableChoice.EffectType.ITEM:
+			var item_ui = item_ui_scene.instantiate()
+			item_ui.setObject(choice.item.icon, choice.item.name)
+			get_tree().current_scene.add_child(item_ui)
+			item_ui.global_position= get_viewport_rect().size / 2 - item_ui.size / 2
+			item_ui.global_position.y -= 200
+			item_ui.despawn =true
+			await item_ui.animation_finished
+		
 			gm.add_to_inventory(choice.item)
 
 		InteractableChoice.EffectType.BUFF:

@@ -282,6 +282,10 @@ offset_bottom = 520.0
 texture = ExtResource("11_tthlc")
 expand_mode = 1
 
+[node name="Interactable" type="Sprite2D" parent="ExplorationManager"]
+self_modulate = Color(1, 1, 1.2, 1)
+position = Vector2(1277, 513)
+
 [node name="GoToCampement" type="Sprite2D" parent="ExplorationManager"]
 visible = false
 position = Vector2(1305, 525)
@@ -307,11 +311,10 @@ scale = Vector2(0.602937, 0.602937)
 texture = ExtResource("12_d8pyn")
 
 [node name="Campement" type="Button" parent="ExplorationManager"]
-visible = false
-offset_left = 1148.0
-offset_top = 488.0
-offset_right = 1407.8
-offset_bottom = 687.645
+offset_left = 1150.0
+offset_top = 559.0
+offset_right = 1409.8
+offset_bottom = 758.645
 scale = Vector2(2.68522, 1.06729)
 flat = true
 script = ExtResource("11_ijfhg")
@@ -378,10 +381,6 @@ script = ExtResource("16_1gtvb")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-
-[node name="Interactable" type="Sprite2D" parent="."]
-self_modulate = Color(1, 1, 1.2, 1)
-position = Vector2(1263, 531)
 
 [node name="Portraits" type="Node2D" parent="."]
 scale = Vector2(0.779851, 0.779851)
@@ -460,14 +459,45 @@ layout_mode = 1
 [node name="charaPortrait2" type="TextureRect" parent="."]
 z_index = 6
 layout_mode = 0
-offset_left = 1202.0
-offset_top = 894.0
-offset_right = 1291.0
-offset_bottom = 983.0
+offset_left = 1770.0
+offset_top = 699.0
+offset_right = 1859.0
+offset_bottom = 788.0
 scale = Vector2(0.996858, 1.01916)
 texture = ExtResource("25_ccycq")
 expand_mode = 1
 script = ExtResource("26_prpp8")
+
+[node name="ColorRect" type="ColorRect" parent="charaPortrait2"]
+z_index = -1
+layout_mode = 0
+offset_left = 9.02837
+offset_top = 8.8308
+offset_right = 96.0284
+offset_bottom = 96.8308
+scale = Vector2(0.804318, 0.804318)
+color = Color(0.313726, 0.235294, 0.0823529, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="charaPortrait2"]
+z_index = -1
+layout_mode = 0
+offset_left = 44.0
+offset_top = 3.0
+offset_right = 117.0
+offset_bottom = 75.0
+rotation = 0.787779
+scale = Vector2(0.804318, 0.804318)
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="charaPortrait2"]
+z_index = -1
+layout_mode = 0
+offset_left = 11.0346
+offset_top = 11.7744
+offset_right = 92.0346
+offset_bottom = 93.7744
+scale = Vector2(0.804318, 0.804318)
+color = Color(0, 0, 0, 1)
 
 [node name="charaPortraitButton" type="Button" parent="charaPortrait2"]
 layout_mode = 0

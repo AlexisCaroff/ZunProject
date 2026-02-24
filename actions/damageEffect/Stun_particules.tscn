@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://dyid0mi3j2dwd" path="res://actions/damageEffect/stun_particules.gd" id="1_msn7y"]
 [ext_resource type="Texture2D" uid="uid://qx0s5ypu8xhq" path="res://UI/star.png" id="2_msn7y"]
 
-[sub_resource type="Gradient" id="Gradient_lnhv2"]
-offsets = PackedFloat32Array(0, 0.633962, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+[sub_resource type="Gradient" id="Gradient_msn7y"]
+offsets = PackedFloat32Array(0, 0.327869, 0.586885, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_gqb8d"]
-gradient = SubResource("Gradient_lnhv2")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_v34dm"]
+gradient = SubResource("Gradient_msn7y")
 
 [sub_resource type="Curve" id="Curve_jsytc"]
 _data = [Vector2(0, 0.516854), 0.0, 0.0, 0, 0, Vector2(1, 0.678476), 0.0, 0.0, 0, 0]
@@ -25,24 +25,27 @@ emission_shape_scale = Vector3(1, 1, 0)
 emission_shape = 6
 emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
-emission_ring_radius = 30.0
-emission_ring_inner_radius = 5.7
+emission_ring_radius = 20.0
+emission_ring_inner_radius = 15.0
 emission_ring_cone_angle = 90.0
 angle_min = -9.99999
 angle_max = 10.0
 direction = Vector3(0, -1, 0)
 spread = 0.0
-gravity = Vector3(0, -10, 0)
-scale_min = 0.5
+gravity = Vector3(0, -20, 0)
+scale_min = 0.8
+scale_max = 1.5
 scale_curve = SubResource("CurveTexture_jsytc")
-color = Color(1, 1, 1, 0.3)
-color_ramp = SubResource("GradientTexture1D_gqb8d")
+color_ramp = SubResource("GradientTexture1D_v34dm")
 hue_variation_min = -2.23517e-08
 hue_variation_max = 0.02
+turbulence_enabled = true
 turbulence_noise_strength = 2.0
+turbulence_influence_min = 0.97
+turbulence_influence_max = 1.0
 
 [node name="Stun" type="Node2D"]
-z_index = 40
+z_index = 1
 script = ExtResource("1_msn7y")
 
 [node name="heartParticules" type="GPUParticles2D" parent="."]

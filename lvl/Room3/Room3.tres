@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="RoomResource" load_steps=15 format=3 uid="uid://hsq4jpscmjyc"]
+
+[ext_resource type="PackedScene" uid="uid://brk5btnbeyoqb" path="res://lvl/Room3/doorRoom3.tscn" id="1_dq3si"]
+[ext_resource type="PackedScene" uid="uid://cwnx8j1ha2w3o" path="res://lvl/Room3/combatRoom3.tscn" id="1_phmcn"]
+[ext_resource type="PackedScene" uid="uid://dij2pp4dl13e8" path="res://lvl/Room3/explorationRoom3.tscn" id="2_2flfs"]
+[ext_resource type="Resource" uid="uid://b8rj6jugqjbm0" path="res://lvl/Room3/encounterRoom3.tres" id="3_kfvg1"]
+[ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="3_uxp7k"]
+[ext_resource type="Texture2D" uid="uid://dbuugeey6c5y4" path="res://UI/buffAtt.png" id="5_rymr6"]
+[ext_resource type="Script" uid="uid://bkvdwvrmdt5aw" path="res://actions/skillEffects/Buff.gd" id="6_fc2n3"]
+[ext_resource type="Script" uid="uid://b5vho57xy7r3r" path="res://scripts/InteractableChoice.gd" id="7_nvcrf"]
+[ext_resource type="PackedScene" uid="uid://6ww3jejinbp0" path="res://InteractibleObjectsScenes/object1.tscn" id="8_37vjq"]
+[ext_resource type="Script" uid="uid://n028octb10a5" path="res://scripts/InteractableObjectResource.gd" id="9_vj3oh"]
+
+[sub_resource type="Resource" id="Resource_osxcn"]
+script = ExtResource("6_fc2n3")
+name = "Buff"
+description = "Effet temporaire sur les statistiques."
+icon = ExtResource("5_rymr6")
+stat = 0
+amount = 6
+duration = 3
+metadata/_custom_type_script = "uid://bkvdwvrmdt5aw"
+
+[sub_resource type="Resource" id="Resource_05the"]
+script = ExtResource("7_nvcrf")
+text = "take"
+effect_type = 0
+buff = SubResource("Resource_osxcn")
+tag = ""
+metadata/_custom_type_script = "uid://b5vho57xy7r3r"
+
+[sub_resource type="Resource" id="Resource_u06hx"]
+script = ExtResource("7_nvcrf")
+text = "leave"
+effect_type = 0
+tag = ""
+metadata/_custom_type_script = "uid://b5vho57xy7r3r"
+
+[sub_resource type="Resource" id="Resource_wf3oc"]
+script = ExtResource("9_vj3oh")
+scene = ExtResource("8_37vjq")
+dialogue_file = "res://scripts/InteractableObjectResource.gd"
+choice_1 = SubResource("Resource_05the")
+choice_2 = SubResource("Resource_u06hx")
+metadata/_custom_type_script = "uid://n028octb10a5"
+
+[resource]
+script = ExtResource("3_uxp7k")
+room_id = "Room3"
+position_on_map = 2
+door_scene = ExtResource("1_dq3si")
+combat_scene = ExtResource("1_phmcn")
+exploration_scene = ExtResource("2_2flfs")
+encounter = ExtResource("3_kfvg1")
+CanCamp = false
+connected_room_ids = Array[String](["Corridor1"])
+blocked_room_ids = Array[String]([])
+explored = false
+ennemikilled = false
+CampDone = false
+interactable = SubResource("Resource_wf3oc")
+keyName = "keyRoom3"
+locked = true
+metadata/_custom_type_script = "uid://oj44pgv34ji0"

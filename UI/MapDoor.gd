@@ -26,22 +26,25 @@ func _ready():
 	button.connect("mouse_exited", Callable(self, "_on_mouse_exited"))
 	button.connect("button_down", Callable(self, "_on_button_down"))
 func _on_mouse_entered():
-	if not button.disabled:
-		var tween = create_tween()
-		tween.tween_property(self, "scale", hover_scale, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	if GameState.current_phase == GameStat.GamePhase.EXPLORATION:
+		if not button.disabled:
+			var tween = create_tween()
+			tween.tween_property(self, "scale", hover_scale, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		
 func _on_mouse_exited():
-	if not button.disabled:
-		var tween = create_tween()
-		tween.tween_property(self, "scale", normal_scale, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-		
-		if get_child(0) != null:
-			var obj = get_child(0)
-			tween.tween_property(obj, "self_modulate", normal_color, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	if GameState.current_phase == GameStat.GamePhase.EXPLORATION:
+		if not button.disabled:
+			var tween = create_tween()
+			tween.tween_property(self, "scale", normal_scale, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+			
+			if get_child(0) != null:
+				var obj = get_child(0)
+				tween.tween_property(obj, "self_modulate", normal_color, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 func _on_button_down():
-	for room in connectedRooms:
-		var theroom = gm.get_room_by_id(room)
-		if not theroom.explored:
-			gm.enter_room( theroom)
-	
+	if GameState.current_phase == GameStat.GamePhase.EXPLORATION:
+		for room in connectedRooms:
+			var theroom = gm.get_room_by_id(room)
+			if not theroom.explored:
+				gm.enter_room( theroom)
+		

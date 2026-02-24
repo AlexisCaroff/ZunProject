@@ -90,8 +90,10 @@ func use(target: PositionSlot = null, secondtarget : bool=false):
 		if target.occupant != null:
 			if effect !=null:
 				var effect_instance= effect.instantiate()
-				owner.add_child(effect_instance)
-				
+				if is_contact:
+					owner.add_child(effect_instance)
+				else :
+					target.add_child(effect_instance)
 				if effect_instance.has_method("setup"):
 					effect_instance.setup()
 				target.combat_manager.stop_target_selection()

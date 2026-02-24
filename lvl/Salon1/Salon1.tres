@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="RoomResource" load_steps=7 format=3 uid="uid://y8m0h6ous7ho"]
+
+[ext_resource type="PackedScene" uid="uid://dav6dq1leko0x" path="res://lvl/Salon1/combatSalon1.tscn" id="1_2jpjt"]
+[ext_resource type="PackedScene" uid="uid://iijorvrcwpoh" path="res://lvl/Salon1/doorSalon1.tscn" id="2_6240r"]
+[ext_resource type="Resource" uid="uid://b4ig6c0yaidlp" path="res://lvl/Salon1/encounter4.tres" id="3_b1rhb"]
+[ext_resource type="PackedScene" uid="uid://bise8ff8v1l71" path="res://lvl/Salon1/explorationSalon1.tscn" id="4_hc1tu"]
+[ext_resource type="Resource" uid="uid://vhkxxo14ww4u" path="res://InteractibleObjectsScenes/PhilacterrySalon.tres" id="5_8g4a1"]
+[ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="6_fa3gq"]
+
+[resource]
+script = ExtResource("6_fa3gq")
+room_id = "Salon1"
+position_on_map = 3
+door_scene = ExtResource("2_6240r")
+combat_scene = ExtResource("1_2jpjt")
+exploration_scene = ExtResource("4_hc1tu")
+encounter = ExtResource("3_b1rhb")
+CanCamp = false
+connected_room_ids = Array[String](["Hall2", "Corridor1", "Salon2"])
+blocked_room_ids = Array[String]([])
+explored = false
+ennemikilled = false
+CampDone = false
+interactable = ExtResource("5_8g4a1")
+keyName = ""
+locked = false
+metadata/_custom_type_script = "uid://oj44pgv34ji0"

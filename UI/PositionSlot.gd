@@ -29,7 +29,7 @@ func is_occupied() -> bool:
 func _ready():
 	selfposition.append(self)
 	is_ready= true
-	
+	button.mouse_filter = Control.MOUSE_FILTER_PASS
 	button.connect("mouse_entered",_on_button_mouse_entered )
 	button.connect("mouse_exited",_on_button_mouse_exited )
 	button.connect("button_down",_on_button_button_down)
@@ -70,10 +70,10 @@ func assign_character(character: Character, movetime:float):
 	tween.parallel().tween_property(character, "global_position", self.global_position, movetime).set_delay(0.2)
 	tween.parallel().tween_property(character, "scale", position_data.scale, movetime).set_delay(0.2)
 	await tween.finished
-
-	character.CharaScale= position_data.scale
-	character.global_position=self.global_position
-	character.set_scale(position_data.scale)
+	if character != null:
+		character.CharaScale= position_data.scale
+		character.global_position=self.global_position
+		character.set_scale(position_data.scale)
 	
 	if position_data.buff:
 		position_data.buff.apply(character, character)

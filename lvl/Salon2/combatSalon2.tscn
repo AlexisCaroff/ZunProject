@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://348jd7hm3532"]
+
+[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_bquoe"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_ux8iq"]
+[ext_resource type="PackedScene" uid="uid://h8pqs7tabdxj" path="res://lvl/CombatInterface.tscn" id="3_84l6s"]
+[ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="4_d2fo7"]
+
+[node name="CombatInterface" type="Node2D"]
+
+[node name="ZunBg" type="Sprite2D" parent="."]
+position = Vector2(961, 402)
+texture = ExtResource("1_bquoe")
+
+[node name="atmosphere" parent="." instance=ExtResource("2_ux8iq")]
+position = Vector2(2, 352)
+
+[node name="CombatInterface" parent="." instance=ExtResource("3_84l6s")]
+
+[node name="MenuPerso" parent="." instance=ExtResource("4_d2fo7")]

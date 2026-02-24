@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="RoomResource" load_steps=8 format=3 uid="uid://cnhkp6oueda3f"]
+
+[ext_resource type="PackedScene" uid="uid://dav6dq1leko0x" path="res://lvl/Salon1/combatSalon1.tscn" id="1_31tca"]
+[ext_resource type="PackedScene" uid="uid://com154cakyaev" path="res://lvl/Salon2/BlockeddoorSalon2.tscn" id="1_qt6hv"]
+[ext_resource type="Resource" uid="uid://b4ig6c0yaidlp" path="res://lvl/Salon1/encounter4.tres" id="3_m0pqm"]
+[ext_resource type="PackedScene" uid="uid://b45c38mgblp1f" path="res://lvl/Salon2/doorSalon2.tscn" id="3_uyg3h"]
+[ext_resource type="PackedScene" uid="uid://bise8ff8v1l71" path="res://lvl/Salon1/explorationSalon1.tscn" id="4_mac0j"]
+[ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="5_prjwg"]
+[ext_resource type="Resource" uid="uid://c6gynm41y6wah" path="res://InteractibleObjectsScenes/CoffreSalon2.tres" id="6_uyg3h"]
+
+[resource]
+script = ExtResource("5_prjwg")
+room_id = "Salon2"
+position_on_map = 3
+door_scene = ExtResource("3_uyg3h")
+Blocked_door_scene = ExtResource("1_qt6hv")
+combat_scene = ExtResource("1_31tca")
+exploration_scene = ExtResource("4_mac0j")
+encounter = ExtResource("3_m0pqm")
+CanCamp = true
+connected_room_ids = Array[String](["Salon1", "Room2"])
+blocked_room_ids = Array[String]([])
+explored = false
+ennemikilled = false
+CampDone = false
+interactable = ExtResource("6_uyg3h")
+keyName = ""
+locked = false
+metadata/_custom_type_script = "uid://oj44pgv34ji0"

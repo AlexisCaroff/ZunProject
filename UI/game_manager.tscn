@@ -20,6 +20,8 @@
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_838hb")
 donjon = ExtResource("2_soe0u")
+TheRoom_we_are_in = ExtResource("3_0q5so")
+LastRoom_we_were_in = ExtResource("3_0q5so")
 last_room_Ressource = ExtResource("3_0q5so")
 inventory = Array[ExtResource("4_0q5so")]([ExtResource("5_dhxbs")])
 characters = Array[ExtResource("6_1xubm")]([ExtResource("7_vbvj5"), ExtResource("8_6kqjp"), ExtResource("9_43qkp"), ExtResource("10_nm67f")])

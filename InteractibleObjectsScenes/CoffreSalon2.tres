@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="InteractableObjectResource" load_steps=7 format=3 uid="uid://c6gynm41y6wah"]
+
+[ext_resource type="Resource" uid="uid://ciw7rc628eq41" path="res://Items/itemsRessources/keyRoom3.tres" id="1_pkqor"]
+[ext_resource type="Script" uid="uid://b5vho57xy7r3r" path="res://scripts/InteractableChoice.gd" id="2_6av3b"]
+[ext_resource type="PackedScene" uid="uid://c66s1enb5m070" path="res://InteractibleObjectsScenes/CoffreSalon2.tscn" id="3_pkqor"]
+[ext_resource type="Script" uid="uid://n028octb10a5" path="res://scripts/InteractableObjectResource.gd" id="4_3kaf6"]
+
+[sub_resource type="Resource" id="Resource_dmmkg"]
+script = ExtResource("2_6av3b")
+text = "Take"
+effect_type = 1
+item = ExtResource("1_pkqor")
+tag = ""
+metadata/_custom_type_script = "uid://b5vho57xy7r3r"
+
+[sub_resource type="Resource" id="Resource_pkqor"]
+script = ExtResource("2_6av3b")
+text = "Leave"
+effect_type = 0
+tag = ""
+metadata/_custom_type_script = "uid://b5vho57xy7r3r"
+
+[resource]
+script = ExtResource("4_3kaf6")
+scene = ExtResource("3_pkqor")
+dialogue_file = "res://scripts/InteractableObjectResource.gd"
+choice_1 = SubResource("Resource_dmmkg")
+choice_2 = SubResource("Resource_pkqor")
+metadata/_custom_type_script = "uid://n028octb10a5"

@@ -28,8 +28,12 @@ var characters: Array[CharacterData] = []
 var selected_character: CharacterData
 @onready var doorRight:=$"../DoorrDungeonHall"
 @onready var doorLeft:=$"../DoorlDungeonHall"
-
-
+var locked : bool =false
+@export var Blocked : bool =false
+@export var keyName: String = "key1"
+const lockedUI = preload("res://UI/scripts/LokedUI.tscn")
+const OpenUI = preload("res://UI/scripts/OpenDoorKeyUI.tscn")
+const BlockedUI= preload("res://UI/scripts/BlockedUI.tscn")
 func _ready():
 	Game_Manager = get_tree().root.get_node("GameManager") 
 	if Game_Manager.current_room_Ressource.door_scene_History != null:
@@ -45,6 +49,8 @@ func _ready():
 	#print(GameManager.current_room_Ressource.resource_name)
 	if Game_Manager.current_room_Ressource.encounter != null and Game_Manager.current_room_Ressource.ennemikilled ==false :
 		encounter_for_this_door= Game_Manager.current_room_Ressource.encounter
+	locked = Game_Manager.current_room_Ressource.locked
+	keyName = Game_Manager.current_room_Ressource.keyName
 	if Game_Manager.last_room_Ressource :
 		if Game_Manager.last_room_Ressource.connected_room_ids.size()>1:
 			connected_ids = Game_Manager.last_room_Ressource.connected_room_ids.duplicate()
@@ -80,7 +86,7 @@ func _ready():
 	if donjon_map:
 		donjon_map.focus_door(Game_Manager.current_room_Ressource, viewport)
 		#donjon_map.move_to_position(donjon_map.curentposition)
-		
+	
 
 func load_chara():
 		for i in characters.size():
@@ -118,17 +124,38 @@ func _on_mouse_entered() -> void:
 
 
 func _on_button_down() -> void:
-	var cam : Camera =$"../Camera2D"
-	var pose = cam.base_position
-	pose.y -=120
-	
-	if doorLeft:
-		open_door(1.5)
-	Game_Manager.sceneTransition.fade_out(1.5)
-	await cam.zoom_to_position(pose,2.0,1.0 )
-	
-	call_deferred("_advance_in_room")
-	
+	var keyfound: bool = false
+	for item in Game_Manager.inventory:
+		if item.name == keyName:
+			keyfound = true
+			locked = false
+			Game_Manager.inventory.erase(item)
+			Game_Manager.current_room_Ressource.locked=false
+			break
+			
+	if keyfound:
+		var UIOpen= OpenUI.instantiate()
+		add_child(UIOpen )
+		UIOpen.position+= Vector2(150,150)
+	if Blocked:
+		var UIBlocked= BlockedUI.instantiate()
+		add_child(UIBlocked )
+		UIBlocked.position+= Vector2(150,150)
+	if !locked:
+		var cam : Camera =$"../Camera2D"
+		var pose = cam.base_position
+		pose.y -=120
+		
+		if doorLeft:
+			open_door(1.5)
+		Game_Manager.sceneTransition.fade_out(1.5)
+		await cam.zoom_to_position(pose,2.0,1.0 )
+		
+		call_deferred("_advance_in_room")
+	else:
+		var UILocked = lockedUI.instantiate()
+		add_child(UILocked )
+		UILocked.position+= Vector2(150,150)
 	
 
 func _advance_in_room():

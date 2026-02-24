@@ -3,28 +3,40 @@ class_name buffUI
 
 var buff : Buff= null
 @onready var texture: TextureRect = $TextureBuff
-@onready var button=$Button
+
 @onready var textconteneur = $TextLabel
 
-func _ready() -> void:
-	button.connect("mouse_entered",btover)
-	button.connect("mouse_exited",btexit)
+var offset: Vector2 = Vector2.ZERO
+
+
 	
-func updatebuff(thebuff:Buff):
+func _process(delta):
+	
+	var hovering = Rect2(Vector2.ZERO, texture.size).has_point(texture.get_local_mouse_position())
+	textconteneur.visible = hovering
+
+func updatebuff(thebuff: Buff):
+	buff = thebuff
+	if texture==null:
 		texture = $TextureBuff
-		textconteneur = $TextLabel
-		buff = thebuff
-		texture.texture = buff.icon
-		if buff.amount!=0:
-			textconteneur.text= " %s  %d \n  %d turns." % [
+	texture.texture = buff.icon
+	
+	refresh()
+
+func refresh():
+	if buff == null:
+		return
+	#global_position = get_parent().global_position + offset
+	if buff.amount != 0:
+		textconteneur.text = " %s  %d \n  %d turns." % [
 			buff.Stat.keys()[buff.stat],
 			buff.amount,
 			buff.duration]
-		else :
-			textconteneur.text= " %s  \n  %d turns." % [
+	else:
+		textconteneur.text = " %s  \n  %d turns." % [
 			buff.Stat.keys()[buff.stat],
 			buff.duration]
-	
+
 func btover():
 	textconteneur.visible=true
 

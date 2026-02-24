@@ -77,8 +77,10 @@ texture = ExtResource("6_i1oh6")
 script = ExtResource("7_vlb8v")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = -21.0
-offset_top = -104.0
-offset_right = 19.0
-offset_bottom = -85.0
+custom_minimum_size = Vector2(32, 32)
+offset_left = -257.0
+offset_top = -176.0
+offset_right = 258.0
+offset_bottom = -144.0
+theme_override_constants/separation = 32
 alignment = 1

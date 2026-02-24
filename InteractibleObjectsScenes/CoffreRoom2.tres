@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="InteractableObjectResource" load_steps=7 format=3 uid="uid://cn1ct38jd5svj"]
+
+[ext_resource type="Script" uid="uid://n028octb10a5" path="res://scripts/InteractableObjectResource.gd" id="1_d4fg4"]
+[ext_resource type="Resource" uid="uid://msi3wq2l6s3t" path="res://Items/itemsRessources/SilkGloves.tres" id="1_nvxa8"]
+[ext_resource type="Script" uid="uid://b5vho57xy7r3r" path="res://scripts/InteractableChoice.gd" id="2_w0ymi"]
+[ext_resource type="PackedScene" uid="uid://dfjofst08bmen" path="res://InteractibleObjectsScenes/CoffreRoom2.tscn" id="3_p2w61"]
+
+[sub_resource type="Resource" id="Resource_dmmkg"]
+script = ExtResource("2_w0ymi")
+text = "take the gloves"
+effect_type = 1
+item = ExtResource("1_nvxa8")
+tag = ""
+metadata/_custom_type_script = "uid://b5vho57xy7r3r"
+
+[sub_resource type="Resource" id="Resource_nvxa8"]
+script = ExtResource("2_w0ymi")
+text = "Leave"
+effect_type = 0
+tag = ""
+metadata/_custom_type_script = "uid://b5vho57xy7r3r"
+
+[resource]
+script = ExtResource("1_d4fg4")
+scene = ExtResource("3_p2w61")
+dialogue_file = "res://dialogue/dialogueTeste.txt"
+choice_1 = SubResource("Resource_dmmkg")
+choice_2 = SubResource("Resource_nvxa8")
+metadata/_custom_type_script = "uid://n028octb10a5"

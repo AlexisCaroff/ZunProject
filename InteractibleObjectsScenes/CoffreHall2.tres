@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="InteractableObjectResource" load_steps=7 format=3 uid="uid://dj4jicvbqcudu"]
+
+[ext_resource type="Resource" uid="uid://cvdyu43xainie" path="res://Items/itemsRessources/Armor.tres" id="1_1sv5p"]
+[ext_resource type="Script" uid="uid://b5vho57xy7r3r" path="res://scripts/InteractableChoice.gd" id="2_r6qdp"]
+[ext_resource type="PackedScene" uid="uid://dfjofst08bmen" path="res://InteractibleObjectsScenes/CoffreRoom2.tscn" id="3_trdsn"]
+[ext_resource type="Script" uid="uid://n028octb10a5" path="res://scripts/InteractableObjectResource.gd" id="4_a5gw0"]
+
+[sub_resource type="Resource" id="Resource_dmmkg"]
+script = ExtResource("2_r6qdp")
+text = "open"
+effect_type = 1
+item = ExtResource("1_1sv5p")
+tag = ""
+metadata/_custom_type_script = "uid://b5vho57xy7r3r"
+
+[sub_resource type="Resource" id="Resource_1sv5p"]
+script = ExtResource("2_r6qdp")
+text = "leave"
+effect_type = 0
+tag = ""
+metadata/_custom_type_script = "uid://b5vho57xy7r3r"
+
+[resource]
+script = ExtResource("4_a5gw0")
+scene = ExtResource("3_trdsn")
+dialogue_file = "res://dialogue/dialogueTeste.txt"
+choice_1 = SubResource("Resource_dmmkg")
+choice_2 = SubResource("Resource_1sv5p")
+metadata/_custom_type_script = "uid://n028octb10a5"

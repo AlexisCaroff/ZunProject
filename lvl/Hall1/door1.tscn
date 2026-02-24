@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dv04v6jagn4q1"]
+[gd_scene load_steps=39 format=3 uid="uid://dv04v6jagn4q1"]
 
 [ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="1_o2neq"]
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_mdkvs"]
@@ -8,10 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="4_itvqt"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="6_nju53"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="7_mdkvs"]
+[ext_resource type="Texture2D" uid="uid://c5gdj53xfb58w" path="res://UI/doorIconleft.png" id="8_5ypre"]
 [ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="8_r3s01"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="9_6jptd"]
 [ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="9_7l14n"]
-[ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="10_betcj"]
+[ext_resource type="Texture2D" uid="uid://0eqnf7lwa3ra" path="res://UI/doorIconRight.png" id="10_uubir"]
 [ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/buttonexitepeek.gd" id="12_6jptd"]
 [ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="12_013hq"]
 [ext_resource type="Texture2D" uid="uid://cqp5sr6locjdw" path="res://UI/ArrowRt.png" id="13_itvqt"]
@@ -124,7 +125,7 @@ layout_mode = 0
 offset_right = 242.0
 offset_bottom = 764.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_o2neq")
-icon = ExtResource("10_betcj")
+icon = ExtResource("8_5ypre")
 flat = true
 expand_icon = true
 script = ExtResource("9_6jptd")
@@ -137,7 +138,7 @@ offset_left = 1676.0
 offset_right = 1918.0
 offset_bottom = 764.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_itvqt")
-icon = ExtResource("10_betcj")
+icon = ExtResource("10_uubir")
 flat = true
 icon_alignment = 1
 expand_icon = true

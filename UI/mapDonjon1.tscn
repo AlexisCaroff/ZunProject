@@ -162,11 +162,106 @@ scale = Vector2(2, 2)
 flat = true
 metadata/_edit_use_anchors_ = true
 
+[node name="Door8" type="Sprite2D" parent="DonjonDoor"]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 2
+position = Vector2(-476, -223)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_oc32i")
+script = ExtResource("18_b056a")
+connectedRooms = Array[String](["Corridor2", "Hall1"])
+normal_scale = Vector2(1.5, 1.5)
+
+[node name="Button" type="Button" parent="DonjonDoor/Door8"]
+anchors_preset = -1
+anchor_left = -0.64
+anchor_top = -0.506849
+anchor_right = -0.64
+anchor_bottom = -0.506849
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Door9" type="Sprite2D" parent="DonjonDoor"]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 2
+position = Vector2(120, -385)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_oc32i")
+script = ExtResource("18_b056a")
+connectedRooms = Array[String](["Corridor2", "Room2"])
+normal_scale = Vector2(1.5, 1.5)
+
+[node name="Button" type="Button" parent="DonjonDoor/Door9"]
+anchors_preset = -1
+anchor_left = -0.64
+anchor_top = -0.506849
+anchor_right = -0.64
+anchor_bottom = -0.506849
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Door10" type="Sprite2D" parent="DonjonDoor"]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 2
+position = Vector2(57, -54)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_oc32i")
+script = ExtResource("18_b056a")
+connectedRooms = Array[String](["Salon1", "Salon2"])
+normal_scale = Vector2(1.5, 1.5)
+
+[node name="Button" type="Button" parent="DonjonDoor/Door10"]
+anchors_preset = -1
+anchor_left = -0.64
+anchor_top = -0.506849
+anchor_right = -0.64
+anchor_bottom = -0.506849
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Door11" type="Sprite2D" parent="DonjonDoor"]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 2
+position = Vector2(124, -231)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_oc32i")
+script = ExtResource("18_b056a")
+connectedRooms = Array[String](["Salon2", "Room2"])
+normal_scale = Vector2(1.5, 1.5)
+
+[node name="Button" type="Button" parent="DonjonDoor/Door11"]
+anchors_preset = -1
+anchor_left = -0.64
+anchor_top = -0.506849
+anchor_right = -0.64
+anchor_bottom = -0.506849
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
+
 [node name="Door3" type="Sprite2D" parent="DonjonDoor"]
 self_modulate = Color(0, 0, 0, 1)
 z_index = 2
 position = Vector2(-581, 259)
-rotation = 1.5708
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_oc32i")
 script = ExtResource("18_b056a")
@@ -191,7 +286,6 @@ metadata/_edit_use_anchors_ = true
 self_modulate = Color(0, 0, 0, 1)
 z_index = 2
 position = Vector2(-355, 215)
-rotation = 1.5708
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_oc32i")
 script = ExtResource("18_b056a")
@@ -216,7 +310,6 @@ metadata/_edit_use_anchors_ = true
 self_modulate = Color(0, 0, 0, 1)
 z_index = 2
 position = Vector2(12, 356)
-rotation = 1.0302
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_oc32i")
 script = ExtResource("18_b056a")
@@ -241,7 +334,6 @@ metadata/_edit_use_anchors_ = true
 self_modulate = Color(0, 0, 0, 1)
 z_index = 2
 position = Vector2(177, 398)
-rotation = 2.57914
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_oc32i")
 script = ExtResource("18_b056a")
@@ -259,7 +351,6 @@ flat = true
 self_modulate = Color(0, 0, 0, 1)
 z_index = 2
 position = Vector2(146, 83)
-rotation = 2.07029
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_oc32i")
 script = ExtResource("18_b056a")

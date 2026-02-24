@@ -42,7 +42,7 @@ const DebuffEffectScene:= preload("res://actions/damageEffect/debuffVfx.tscn")
 const BonkEffectScene:= preload("res://actions/damageEffect/bonkVFX.tscn")
 const hornyPart : = preload("res://actions/damageEffect/horny_particules.tscn")
 const stunPart := preload("res://actions/damageEffect/Stun_particules.tscn")
-var StunParticules
+var StunParticule : StunParticules
 var hornyParticules
 const buffui:= preload("res://UI/buffUi.tscn")
 signal target_selected()
@@ -113,7 +113,9 @@ func _updateSkills(updated_skills: Array[Resource] ):
 func update_stats():
 	if not characterData:
 		return
-
+	if StunParticule && !characterData.stun:
+		StunParticule.remove()
+		StunParticule=null
 	characterData.max_stamina = characterData.base_max_stamina
 	characterData.max_horniness = characterData.base_max_horniness
 	characterData.max_stress = characterData.base_max_stress
@@ -212,23 +214,26 @@ func update_ui():
 			else:
 				dot.modulate = Color(0.1,0.1,0.1)
 				dot.size = Vector2(0.5, 0.5)
-	if characterData.stun:
-		StunParticules=stunPart.instantiate()
-		add_child(StunParticules)
-		StunParticules.position+= characterData.headPosition
-	else :
-		if StunParticules != null:
-			StunParticules.remove()
+	if characterData.stun :
+		if StunParticule == null:
+			StunParticule =stunPart.instantiate()
+			add_child(StunParticule)
+			StunParticule.position = characterData.headPosition
+	else:
+		if StunParticule != null:
+			StunParticule.remove()
+			StunParticule= null
 	
 func add_buff(buff: Buff):
 	var new_buff = buff.duplicate()
 	buffs.append(new_buff)
 	var icon =buffui.instantiate()
-	icon.updatebuff(buff)
+	
 	if buff_bar == null:
 		buff_bar = $HBoxContainer
 	buff_bar.add_child(icon)
 	buff_icons.append(icon)
+	icon.updatebuff(new_buff)
 	update_stats()
 	print( " add buff "+buff.name+ " to "+characterData.Charaname)
 	
@@ -240,23 +245,27 @@ func process_taunt():
 			taunted_by = null
 
 func update_buffs() -> void:
-	#print("update buff for " + characterData.Charaname+ " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-	for buff in buffs:
+	for i in range(buffs.size() - 1, -1, -1):
+		var buff = buffs[i]
 		buff.duration -= 1
+		
 		if buff.duration <= 0:
-			remove_buff(buff)
+			remove_buff_at(i)
+		else:
+			buff_icons[i].refresh()
+	
 	update_stats()
 
-func remove_buff(buff: Buff):
-	var index := buffs.find(buff)
-	
+func remove_buff_at(index: int):
+
+	var buff = buffs[index]
 	buffs.remove_at(index)
+	
 	var icon = buff_icons[index]
-	if is_instance_valid(icon):
-		icon.queue_free()
 	buff_icons.remove_at(index)
-	print ("remove buff "+ buff.name)
-	update_stats()
+	icon.queue_free()
+	
+	print("remove buff " + buff.name)
 
 func get_stat(stat_enum: int) -> int:
 	var base_value = 0

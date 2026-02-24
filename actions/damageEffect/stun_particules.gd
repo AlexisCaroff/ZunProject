@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name StunParticules
 @onready var particles :GPUParticles2D = $heartParticules
 
 func _ready() -> void:
@@ -12,4 +12,5 @@ func setParticulesAlpha(alpha: float):
 	
 	particles.modulate.a = alpha
 func remove():
+	print( "remove Stun Particules")
 	queue_free()

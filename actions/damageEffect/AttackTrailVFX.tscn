@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://qtgd10tcdk6s"]
+[gd_scene load_steps=7 format=3 uid="uid://b1jfa2qq3wxod"]
 
 [ext_resource type="Script" uid="uid://n3dvhwwiawh4" path="res://HitVFX.gd" id="1_bdy47"]
 [ext_resource type="Texture2D" uid="uid://ck4b75iyuey2c" path="res://actions/HerosCombatSkills/hit.png" id="3_knbua"]

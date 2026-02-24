@@ -12,23 +12,25 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		var mouse_pos = get_viewport().get_camera_2d().get_global_mouse_position()
-		_check_hover(mouse_pos)
+	if GameState.current_phase == GameStat.GamePhase.EXPLORATION:
+		if event is InputEventMouseMotion:
+			var mouse_pos = get_viewport().get_camera_2d().get_global_mouse_position()
+			_check_hover(mouse_pos)
 
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		var mouse_pos = get_viewport().get_mouse_position()
-		_check_room_click(mouse_pos)
+		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			var mouse_pos = get_viewport().get_mouse_position()
+			_check_room_click(mouse_pos)
 
 
 func _check_room_click(_click_pos: Vector2) -> void:
-	var mouse_pos = get_viewport().get_mouse_position()
+	
+		var mouse_pos = get_viewport().get_mouse_position()
 
-	for room_sprite in get_children():
-		if room_sprite is Sprite2D:
-			if _is_click_on_visible_pixel(room_sprite, mouse_pos):
-				_on_room_clicked(room_sprite)
-				break
+		for room_sprite in get_children():
+			if room_sprite is Sprite2D:
+				if _is_click_on_visible_pixel(room_sprite, mouse_pos):
+					_on_room_clicked(room_sprite)
+					break
 
 
 func _is_click_on_visible_pixel(sprite: Sprite2D, click_position: Vector2) -> bool:
@@ -100,7 +102,7 @@ func _check_hover(mouse_pos: Vector2) -> void:
 			var tween = create_tween()
 			tween.tween_property(hovered_sprite, "scale", normal_scale, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		
-			hovered_sprite.z_index-=4
+			#hovered_sprite.z_index-=4
 		hovered_sprite = new_hovered
 
 		if hovered_sprite:
@@ -108,4 +110,4 @@ func _check_hover(mouse_pos: Vector2) -> void:
 			var tween = create_tween()
 			tween.tween_property(hovered_sprite, "scale", hover_scale, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		
-			hovered_sprite.z_index+=4
+			#hovered_sprite.z_index+=4

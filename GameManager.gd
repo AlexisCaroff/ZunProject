@@ -4,6 +4,8 @@ class_name GameManager
 @export var donjon: DonjonResource
 var room_container: Node
 var current_room_Ressource: RoomResource
+@export var TheRoom_we_are_in : RoomResource
+@export var LastRoom_we_were_in :RoomResource
 @export var last_room_Ressource: RoomResource
 @export var current_room_node: Node
 @export_file("*.tscn") var campement_scene_path: String = "res://lvl/campement.tscn"
@@ -54,6 +56,7 @@ func start_game():
 
 	if donjon and donjon.start_room_id != "":
 		var start_room = get_room_by_id(donjon.start_room_id)
+		
 		if start_room:
 			call_deferred("enter_room", start_room)
 		else:
@@ -125,6 +128,9 @@ func go_to_connected_room(index: int):
 
 
 func _enter_scene_in_current_room(scene: PackedScene, ennemy_are_embushed: bool = false, heroes_are_embushed: bool = false):
+	if TheRoom_we_are_in != current_room_Ressource:
+		LastRoom_we_were_in = TheRoom_we_are_in
+		TheRoom_we_are_in = current_room_Ressource
 	current_room_Ressource.explored = true
 	if get_room_by_id("Cellar").ennemikilled == true:
 		end.visible=true

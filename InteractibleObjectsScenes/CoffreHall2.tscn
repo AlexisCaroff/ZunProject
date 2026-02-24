@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjupsvl8kodbx"]
+
+[ext_resource type="Script" uid="uid://b2fldnbm4784m" path="res://InteractibleObjectsScenes/InteractableObject.gd" id="1_38tqj"]
+[ext_resource type="Texture2D" uid="uid://dw1tcf1oi3i5v" path="res://InteractibleObjectsScenes/PROP_chest.png" id="2_38tqj"]
+[ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="3_okxww"]
+[ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="4_jf0wp"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="5_1enym"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6te7v"]
+
+[node name="Object1" type="Node2D"]
+script = ExtResource("1_38tqj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, -1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_38tqj")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -107.0
+offset_top = -171.0
+offset_right = 94.0
+offset_bottom = 134.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6te7v")
+flat = true
+
+[node name="DialogueManager" type="Node2D" parent="."]
+script = ExtResource("3_okxww")
+is_Choice = true
+
+[node name="etiquette" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(170, -32)
+scale = Vector2(0.626316, 0.626316)
+texture = ExtResource("4_jf0wp")
+
+[node name="Label" type="Label" parent="etiquette"]
+offset_left = -92.0
+offset_top = -23.0
+offset_right = 125.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("5_1enym")
+theme_override_font_sizes/font_size = 40
+text = "Investigate"

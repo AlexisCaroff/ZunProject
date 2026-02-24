@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://71apwvspfpxy"]
+[gd_scene load_steps=32 format=3 uid="uid://71apwvspfpxy"]
 
 [ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="1_agxcq"]
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_8068f"]
@@ -12,10 +12,11 @@
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="7_hehb7"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="8_urxdk"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="10_3hut4"]
-[ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="11_jddxa"]
 [ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="12_4hk1d"]
+[ext_resource type="Texture2D" uid="uid://c5gdj53xfb58w" path="res://UI/doorIconleft.png" id="12_bxj7q"]
 [ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="13_lovbd"]
 [ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/buttonexitepeek.gd" id="14_rey8l"]
+[ext_resource type="Texture2D" uid="uid://0eqnf7lwa3ra" path="res://UI/doorIconRight.png" id="14_y867u"]
 [ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="15_n5q1j"]
 [ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="16_wdq54"]
 [ext_resource type="Texture2D" uid="uid://drp4vk52vgk74" path="res://UI/doorebuscade/DOOR_caught_nymph.png" id="17_l6nrk"]
@@ -233,7 +234,7 @@ script = ExtResource("8_urxdk")
 layout_mode = 0
 offset_right = 242.0
 offset_bottom = 764.0
-icon = ExtResource("11_jddxa")
+icon = ExtResource("12_bxj7q")
 flat = true
 expand_icon = true
 script = ExtResource("10_3hut4")
@@ -245,7 +246,7 @@ layout_mode = 0
 offset_left = 1676.0
 offset_right = 1918.0
 offset_bottom = 764.0
-icon = ExtResource("11_jddxa")
+icon = ExtResource("14_y867u")
 flat = true
 icon_alignment = 1
 expand_icon = true

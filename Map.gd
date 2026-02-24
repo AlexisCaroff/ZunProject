@@ -121,7 +121,7 @@ func peek_next_Room(room : RoomResource, _viewport=null):
 	var lastRoom
 
 	if gm.last_room_Ressource != null:
-		lastRoom = gm.last_room_Ressource.room_id
+		lastRoom = gm.TheRoom_we_are_in.room_id
 	
 	var focusedRoom
 	for salle in Rooms:
@@ -158,13 +158,12 @@ func focus_door(room : RoomResource, _viewport=null):
 
 	var focusedRoom
 	var lastRoom
-	if gm.last_room_Ressource != null:
-		lastRoom = gm.last_room_Ressource.room_id
+	if gm.LastRoom_we_were_in != null:
+		lastRoom = gm.TheRoom_we_are_in.room_id
 	for salle in Rooms:
 		if salle.name==room.room_id:
 			focusedRoom=salle
-			#focusedRoom.self_modulate=colorRoomFocus
-		
+			
 
 	var target_pos 
 	
@@ -178,7 +177,7 @@ func focus_door(room : RoomResource, _viewport=null):
 			if focusedRoom.name in thedoor.connectedRooms and lastRoom in thedoor.connectedRooms:
 				thedoor.self_modulate=colorDoorFocus
 				target_pos=thedoor.position
-				print ("find door")
+				#print ("find door")
 		else:
 			for roomname in thedoor.connectedRooms:
 				if roomname == "Salle0":

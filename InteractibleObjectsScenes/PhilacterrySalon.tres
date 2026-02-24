@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="InteractableObjectResource" load_steps=7 format=3 uid="uid://vhkxxo14ww4u"]
+
+[ext_resource type="Resource" uid="uid://carva5p7ronwp" path="res://Items/itemsRessources/Phylactery.tres" id="1_c6sic"]
+[ext_resource type="Script" uid="uid://b5vho57xy7r3r" path="res://scripts/InteractableChoice.gd" id="2_c48p6"]
+[ext_resource type="PackedScene" uid="uid://dfjofst08bmen" path="res://InteractibleObjectsScenes/CoffreRoom2.tscn" id="3_80usg"]
+[ext_resource type="Script" uid="uid://n028octb10a5" path="res://scripts/InteractableObjectResource.gd" id="4_ygp1k"]
+
+[sub_resource type="Resource" id="Resource_dmmkg"]
+script = ExtResource("2_c48p6")
+text = ""
+effect_type = 1
+item = ExtResource("1_c6sic")
+tag = ""
+metadata/_custom_type_script = "uid://b5vho57xy7r3r"
+
+[sub_resource type="Resource" id="Resource_c6sic"]
+script = ExtResource("2_c48p6")
+text = "Leave"
+effect_type = 0
+tag = ""
+metadata/_custom_type_script = "uid://b5vho57xy7r3r"
+
+[resource]
+script = ExtResource("4_ygp1k")
+scene = ExtResource("3_80usg")
+dialogue_file = "res://scripts/InteractableObjectResource.gd"
+choice_1 = SubResource("Resource_dmmkg")
+choice_2 = SubResource("Resource_c6sic")
+metadata/_custom_type_script = "uid://n028octb10a5"

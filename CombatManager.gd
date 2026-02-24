@@ -282,14 +282,15 @@ func next_turn():
 		current_character.CharaColor =Color(1.8,1.8,1.8,1)
 		current_character.sprite.modulate =current_character.CharaColor
 	else:
-		ui.update_ui_for_current_character(current_character)
-		await get_tree().create_timer(1.0).timeout
-		current_character.play_ai_turn(heroes,enemies)
-		await get_tree().create_timer(2.5).timeout
-		while is_animation_playing():
-			await get_tree().process_frame
-		turn_queue.append(current_character)
-		next_turn()
+		if current_character.characterData.stun == false:
+			ui.update_ui_for_current_character(current_character)
+			await get_tree().create_timer(1.0).timeout
+			current_character.play_ai_turn(heroes,enemies)
+			await get_tree().create_timer(2.5).timeout
+			while is_animation_playing():
+				await get_tree().process_frame
+			turn_queue.append(current_character)
+			next_turn()
 	if current_character.characterData.stun == true:
 		
 		ui.log(current_character.characterData.Charaname +" is stun")
@@ -305,6 +306,7 @@ func next_turn():
 		await get_tree().create_timer(1.5).timeout
 		turn_queue.append(current_character)
 		current_character.characterData.stun = false
+		
 		next_turn()
 		
 		return
