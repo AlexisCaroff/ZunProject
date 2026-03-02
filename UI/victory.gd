@@ -1,10 +1,17 @@
 extends Control
-
+class_name Victory_UI
 @onready var itemsContainer = $VictoryBox/HBoxContainer
 @onready var continue_button = $ContinueButton
 @export var item_ui_scene: PackedScene = preload("res://UI/item_ui.tscn")
 
 func showLoot(items: Array[Equipment], gm:GameManager):
+	for i in min(gm.characters.size(), $HBoxContainer.get_child_count()):
+		var chara = gm.characters[i]
+		for key in chara.affinity:
+				chara.affinity[key] += 20
+		var portrait_rect: TextureRect = $HBoxContainer.get_child(i).get_node("chara")
+		portrait_rect.texture = chara.explorationPortrait
+		portrait_rect.visible=true
 	if itemsContainer == null:
 		itemsContainer = $VictoryBox/HBoxContainer
 		continue_button =$ContinueButton
@@ -13,7 +20,7 @@ func showLoot(items: Array[Equipment], gm:GameManager):
 	for child in itemsContainer.get_children():
 		if is_instance_valid(child):
 			child.queue_free()
-		
+	
 	for item in items:
 		if item == null:
 			continue
@@ -23,7 +30,10 @@ func showLoot(items: Array[Equipment], gm:GameManager):
 		await item_ui.animation_finished
 		
 		gm.add_to_inventory(item)
-		
+
+
+
+	
 func _on_continue_pressed() -> void:
 	GameState.current_phase = GameStat.GamePhase.EXPLORATION
 
@@ -32,15 +42,14 @@ func _on_continue_pressed() -> void:
 		push_error("GameManager introuvable ou current_room vide")
 		return
 
-	# ⏸️ SI une history est définie → on attend
+	
 	if gm.current_room_Ressource.Post_combat_scene_History != null:
 		var history = gm.current_room_Ressource.Post_combat_scene_History
 		var overlay = gm.show_history_scene(history)
 
-		# ⏳ ON BLOQUE ICI
+	
 		await overlay.history_finished
 
-	# ▶️ LE CODE REPREND ICI APRÈS LE DIALOGUE
 	if gm.current_room_Ressource.exploration_scene:
 		call_deferred("_enter_exploration_scene", gm)
 	else:

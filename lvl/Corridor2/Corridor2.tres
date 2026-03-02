@@ -16,6 +16,7 @@ exploration_scene = ExtResource("4_4quw3")
 encounter = ExtResource("3_0us6x")
 CanCamp = false
 connected_room_ids = Array[String](["Room2", "Hall1"])
+blocked_room_ids = Array[String]([])
 explored = false
 ennemikilled = false
 CampDone = false

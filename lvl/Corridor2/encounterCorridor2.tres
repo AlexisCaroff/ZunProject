@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharaEnnemyTemptress.tscn" id="3_qt51q"]
 [ext_resource type="Texture2D" uid="uid://d2o4777ydrwc8" path="res://UI/doorebuscade/DOOR_caught_slime.png" id="4_q0qtt"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="5_oq70c"]
-[ext_resource type="Resource" uid="uid://bovg8sutwbfkk" path="res://Items/itemsRessources/keyHall1.tres" id="5_qndcs"]
+[ext_resource type="Resource" uid="uid://bovg8sutwbfkk" path="res://Items/itemsRessources/keyRoom1.tres" id="5_qndcs"]
 [ext_resource type="Script" uid="uid://dmxcru3ra8jg" path="res://lvl/CombatEncounter.gd" id="6_k6vdb"]
 
 [resource]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4046lfpxkgqu"]
+[gd_scene load_steps=10 format=3 uid="uid://b4046lfpxkgqu"]
 
 [ext_resource type="Script" uid="uid://smmc6d506a52" path="res://UI/victory.gd" id="1_a5iy6"]
 [ext_resource type="Texture2D" uid="uid://de0bi1tg31an0" path="res://UI/victoryBox.png" id="1_x0fca"]
@@ -6,7 +6,9 @@
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="2_a5iy6"]
 [ext_resource type="Script" uid="uid://xgcdntldtp3u" path="res://UI/rotateSprite.gd" id="3_rybpl"]
 [ext_resource type="Texture2D" uid="uid://cnxub0g557exn" path="res://UI/box.png" id="4_tbef5"]
+[ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="4_yancd"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="5_blfgt"]
+[ext_resource type="Script" uid="uid://do2e4rnkriin4" path="res://UI/GrowingUI.gd" id="5_w7a3p"]
 
 [node name="Victory" type="Control"]
 z_index = 20
@@ -70,6 +72,122 @@ script = ExtResource("3_rybpl")
 vitesse = 0.4
 scale_speed = 0.3
 base_scale = Vector2(1.2, 1.2)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 624.0
+offset_top = 625.0
+offset_right = 1264.0
+offset_bottom = 725.0
+theme_override_constants/separation = 200
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="chara" type="TextureRect" parent="HBoxContainer/Control"]
+visible = false
+z_index = 6
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+offset_left = -49.0
+offset_right = 51.0
+offset_bottom = 100.0
+texture = ExtResource("4_yancd")
+expand_mode = 1
+script = ExtResource("5_w7a3p")
+animation_Start_Delay = 0.2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Control/chara"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 111.0
+offset_right = 110.0
+offset_bottom = 218.0
+text = "+5 Affinity with all party members"
+horizontal_alignment = 1
+script = ExtResource("5_w7a3p")
+animation_Start_Delay = 0.4
+
+[node name="Control2" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="chara" type="TextureRect" parent="HBoxContainer/Control2"]
+visible = false
+z_index = 6
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+offset_left = -49.0
+offset_right = 51.0
+offset_bottom = 100.0
+texture = ExtResource("4_yancd")
+expand_mode = 1
+script = ExtResource("5_w7a3p")
+animation_Start_Delay = 0.2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Control2/chara"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 111.0
+offset_right = 110.0
+offset_bottom = 218.0
+text = "+5 Affinity with all party members"
+horizontal_alignment = 1
+script = ExtResource("5_w7a3p")
+animation_Start_Delay = 0.4
+
+[node name="Control3" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="chara" type="TextureRect" parent="HBoxContainer/Control3"]
+visible = false
+z_index = 6
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+offset_left = -49.0
+offset_right = 51.0
+offset_bottom = 100.0
+texture = ExtResource("4_yancd")
+expand_mode = 1
+script = ExtResource("5_w7a3p")
+animation_Start_Delay = 0.2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Control3/chara"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 111.0
+offset_right = 110.0
+offset_bottom = 218.0
+text = "+5 Affinity with all party members"
+horizontal_alignment = 1
+script = ExtResource("5_w7a3p")
+animation_Start_Delay = 0.4
+
+[node name="Control4" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="chara" type="TextureRect" parent="HBoxContainer/Control4"]
+visible = false
+z_index = 6
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+offset_left = -49.0
+offset_right = 51.0
+offset_bottom = 100.0
+texture = ExtResource("4_yancd")
+expand_mode = 1
+script = ExtResource("5_w7a3p")
+animation_Start_Delay = 0.2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Control4/chara"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 111.0
+offset_right = 110.0
+offset_bottom = 218.0
+text = "+5 Affinity with all party members"
+horizontal_alignment = 1
+script = ExtResource("5_w7a3p")
+animation_Start_Delay = 0.4
 
 [node name="VictoryBox" type="TextureRect" parent="."]
 layout_mode = 1

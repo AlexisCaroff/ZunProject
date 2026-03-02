@@ -39,7 +39,13 @@ var combatChara = 	preload("res://characters/CombatChara.tscn")
 enum CombatState {
 	IDLE,
 	SELECTING_FIRST_TARGET,
-	SELECTING_SECOND_TARGET
+	SELECTING_SECOND_TARGET,
+	TURN_START,
+	TURN_PRE_EFFECTS,
+	TURN_ACTION_SELECTION,
+	TURN_ACTION_EXECUTION,
+	TURN_POST_EFFECTS,
+	TURN_END
 }
 var combat_state: CombatState = CombatState.IDLE
 var startcombat = true
