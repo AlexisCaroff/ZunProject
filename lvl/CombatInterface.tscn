@@ -340,7 +340,7 @@ scale = Vector2(1.8, 1.8)
 [node name="position3" type="Node2D" parent="HeroPosition"]
 z_index = 2
 z_as_relative = false
-position = Vector2(391.111, 30.833)
+position = Vector2(404.444, 30.833)
 script = ExtResource("15_hvocy")
 position_data = SubResource("Resource_x8qlv")
 
