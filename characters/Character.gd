@@ -158,7 +158,19 @@ func get_equipement_cooldown_reduction_for(skill: Skill) -> int: # for equipemen
 			reduction += eq.skill_specific_cooldown[skill.name]
 
 	return reduction
+func protect(Chara_Name:String) -> void:
+	await animate_start_Turn()
+	await show_bark("I protect you "+ Chara_Name+ " !")
 
+func Heal(Chara_Name:String) -> void:
+	await animate_start_Turn()
+	await show_bark("Don't worry "+ Chara_Name+ " !")
+func helpTarget(Chara_Name:String) -> void:
+	await animate_start_Turn()
+	await show_bark("you are the best  "+ Chara_Name+ " !")
+func inspire(Chara_Name:String) -> void:
+	await animate_start_Turn()
+	await show_bark("Good job "+ Chara_Name+ " !")
 func show_bark(text:String):
 	if not characterData or characterData.bark_scene == null:
 		return
@@ -171,6 +183,7 @@ func show_bark(text:String):
 	current_bark.set_text(text)
 	var bark_offset_y := -240
 	current_bark.position = Vector2(-60, bark_offset_y)
+	await get_tree().create_timer(0.5)
 
 func slur():
 	if characterData:
@@ -340,20 +353,22 @@ func play_ai_turn(heroes : Array, enemies :Array):
 	for t in decision.get("target", []):
 		if t is PositionSlot:
 			targetPositions.append(t)
-	if targetPositions.is_empty():
-		print("no target !!!!!!!!!")
-	else :
-		print(targetPositions[0].name)
+	#if targetPositions.is_empty():
+	#	print("no target !!!!!!!!!")
+	#else :
+	#	print(targetPositions[0].name)
 	var target =targetPositions[0].occupant
 	combat_manager.pending_skill = current_skill
 	current_skill.owner = self
 
 	
 	sprite.texture = current_skill.ImageSkill
+	for thetarget in targetPositions:
+		targetPositions[0]= await current_skill.use(thetarget)
+		
 	if targetPositions[0].occupant:
 		await animate_attack(targetPositions[0].occupant)
-	for thetarget in targetPositions:
-		current_skill.use(thetarget)
+
 	if target:
 		target.update_ui()
 		#current_skill.end_turn(combat_manager)

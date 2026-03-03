@@ -1,0 +1,115 @@
+[gd_scene load_steps=17 format=3 uid="uid://dg0coy6r6f1ww"]
+
+[ext_resource type="Script" uid="uid://d12jn42j03tgg" path="res://GameManager.gd" id="1_838hb"]
+[ext_resource type="Resource" uid="uid://7dlbup10473y" path="res://lvl/donjonTestePorte.tres" id="2_soe0u"]
+[ext_resource type="Resource" uid="uid://bjupnilvigvhl" path="res://lvl/salle0/Salle0.tres" id="3_0q5so"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_0q5so"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="4_dhxbs"]
+[ext_resource type="Resource" uid="uid://b7ana3ldrsk7j" path="res://Items/itemsRessources/golds.tres" id="5_dhxbs"]
+[ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="5_twojc"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="6_1xubm"]
+[ext_resource type="Texture2D" uid="uid://c7i05i2v2djk1" path="res://UI/seau.png" id="6_fuquo"]
+[ext_resource type="Script" uid="uid://bhsro7sspbgqw" path="res://UI/button.gd" id="7_k66he"]
+[ext_resource type="Resource" uid="uid://uf5x5dpfh5ln" path="res://characters/data/CharaHunter.tres" id="7_vbvj5"]
+[ext_resource type="Resource" uid="uid://feukv2xbt3m6" path="res://characters/data/CharaMystic.tres" id="8_6kqjp"]
+[ext_resource type="Texture2D" uid="uid://u4r16y7nxe6o" path="res://logo.png" id="8_soe0u"]
+[ext_resource type="Resource" uid="uid://cw65x7yfthrul" path="res://characters/data/CharaPriest.tres" id="9_43qkp"]
+[ext_resource type="Resource" uid="uid://b5k1alktrg3t4" path="res://characters/data/CharaWarrior.tres" id="10_nm67f"]
+[ext_resource type="Script" uid="uid://nd54d0xcos1m" path="res://UI/SceneTransition.gd" id="16_vbvj5"]
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_838hb")
+donjon = ExtResource("2_soe0u")
+TheRoom_we_are_in = ExtResource("3_0q5so")
+LastRoom_we_were_in = ExtResource("3_0q5so")
+last_room_Ressource = ExtResource("3_0q5so")
+inventory = Array[ExtResource("4_0q5so")]([ExtResource("5_dhxbs")])
+characters = Array[ExtResource("6_1xubm")]([ExtResource("7_vbvj5"), ExtResource("8_6kqjp"), ExtResource("9_43qkp"), ExtResource("10_nm67f")])
+
+[node name="Label" type="Label" parent="."]
+z_index = 6
+offset_left = 133.0
+offset_top = 31.0
+offset_right = 377.0
+offset_bottom = 86.0
+theme_override_fonts/font = ExtResource("4_dhxbs")
+theme_override_font_sizes/font_size = 30
+text = "Explore the dungeon"
+
+[node name="DialogueBox" type="Sprite2D" parent="Label"]
+z_index = -1
+position = Vector2(107, 21)
+scale = Vector2(0.256716, 0.325843)
+texture = ExtResource("5_twojc")
+
+[node name="Seau" type="Sprite2D" parent="Label"]
+position = Vector2(-59, 21)
+scale = Vector2(1.12691, 1.07276)
+texture = ExtResource("6_fuquo")
+
+[node name="Label" type="Label" parent="Label"]
+z_index = 6
+layout_mode = 0
+offset_left = 1513.0
+offset_top = -8.0
+offset_right = 1757.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("4_dhxbs")
+theme_override_font_sizes/font_size = 30
+text = "Pre-Alpha test"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+z_index = 6
+offset_left = 384.0
+offset_top = 23.0
+offset_right = 607.0
+offset_bottom = 81.0
+theme_override_fonts/font = ExtResource("4_dhxbs")
+theme_override_font_sizes/font_size = 40
+text = "Quitter"
+flat = true
+script = ExtResource("7_k66he")
+
+[node name="DialogueBox" type="Sprite2D" parent="Button"]
+z_index = -1
+position = Vector2(112, 29)
+scale = Vector2(0.217285, 0.325843)
+texture = ExtResource("5_twojc")
+
+[node name="endGame" type="ColorRect" parent="."]
+visible = false
+offset_right = 1978.0
+offset_bottom = 1059.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="endGame"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 231.0
+offset_right = 1397.0
+offset_bottom = 715.0
+theme_override_fonts/font = ExtResource("4_dhxbs")
+theme_override_font_sizes/font_size = 50
+text = "You've beaten the boss!
+
+Thanks for taking part in this first playtest!
+
+Leave us your feedback in the discord!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Logo" type="Sprite2D" parent="endGame"]
+position = Vector2(951, 842)
+scale = Vector2(0.816406, 0.816406)
+texture = ExtResource("8_soe0u")
+
+[node name="SceneTransition" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+script = ExtResource("16_vbvj5")
+
+[node name="ColorRect" type="ColorRect" parent="SceneTransition"]
+offset_right = 4296.0
+offset_bottom = 2902.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

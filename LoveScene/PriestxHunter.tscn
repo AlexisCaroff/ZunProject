@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://flk0ijhjw2g6"]
 
 [ext_resource type="Script" uid="uid://cdva0owcmjo24" path="res://LoveScene/SexScene.gd" id="1_dbirp"]
-[ext_resource type="Texture2D" uid="uid://bdl0mlwru2rcm" path="res://LoveScene/PriestxHunter.jpg" id="2_dbirp"]
+[ext_resource type="Texture2D" uid="uid://coxf8kf83pbt6" path="res://LoveScene/SCENE_CAMP_PxH.png" id="2_dbirp"]
 [ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="3_bacjl"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="4_1t4vq"]
 
@@ -9,11 +9,12 @@
 script = ExtResource("1_dbirp")
 
 [node name="HunterxWarrior" type="Sprite2D" parent="."]
-position = Vector2(949, 539)
+position = Vector2(948, 457.5)
+scale = Vector2(0.421759, 0.421759)
 texture = ExtResource("2_dbirp")
 
 [node name="DialogueBox" type="Sprite2D" parent="."]
-position = Vector2(939, 876)
+position = Vector2(939, 921)
 scale = Vector2(1.58427, 1.58427)
 texture = ExtResource("3_bacjl")
 

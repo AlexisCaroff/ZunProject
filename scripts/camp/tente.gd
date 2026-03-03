@@ -1,26 +1,11 @@
 extends Node
 class_name  tente
-@export var masturbe_images := {
-	"Priestess": [
-		preload("res://camp imgs/camp_char_solo_P1.png"),
-		preload("res://camp imgs/camp_char_solo_P2.png"),
-		preload("res://camp imgs/camp_char_solo_P3.png")
-	],
-	"Mystic": [
-		preload("res://camp imgs/camp_char_solo_M1.png"),
-		preload("res://camp imgs/camp_char_solo_M2.png"),
-		preload("res://camp imgs/camp_char_solo_M3.png")
-	],
-	"Hunter": [
-		preload("res://camp imgs/camp_char_solo_H1.png"),
-		preload("res://camp imgs/camp_char_solo_H2.png"),
-		preload("res://camp imgs/camp_char_solo_H3.png")
-	],
-	"Warrior": [
-		preload("res://camp imgs/camp_char_solo_W1.png"),
-		preload("res://camp imgs/camp_char_solo_W2.png"),
-		preload("res://camp imgs/camp_char_solo_W3.png")
-	]}
+@export var solo_folders := {
+	"Hunter": "res://camp imgs/solo/Hunter/",
+	"Mystic": "res://camp imgs/solo/Mystic/",
+	"Priestess": "res://camp imgs/solo/Pristress/",
+	"Warrior": "res://camp imgs/solo/Warrior/"
+}
 @export var switch_time =0.5
 @onready var thetexture:Sprite2D =$"../animMasturbate"
 @onready var backgroundCadre =$"../BackgroundinsideTente"
@@ -39,32 +24,16 @@ var somoneInside : CharaCamp
 var twoInside : Array[CharaCamp]
 var Tentescale : Vector2 
 @onready var love_sprite: Sprite2D = $"../LoveImage"
-
-@export var love_images := {
-	"Priestess+Mystic": [
-		preload("res://camp imgs/camp_char_duo_MP1.png"),
-		preload("res://camp imgs/camp_char_duo_MP2.png")
-	],
-	"Mystic+Hunter": [
-		preload("res://camp imgs/camp_char_duo_MH1.png"),
-		preload("res://camp imgs/camp_char_duo_MH2.png")
-	],
-	"Hunter+Warrior": [
-		preload("res://camp imgs/camp_char_duo_WH1.png"),
-		preload("res://camp imgs/camp_char_duo_WH2.png")
-	],
-	"Mystic+Warrior": [
-		preload("res://camp imgs/camp_char_duo_WM1.png"),
-		preload("res://camp imgs/camp_char_duo_WM2.png")
-	],
-	"Priestess+Hunter": [
-		preload("res://camp imgs/camp_char_duo_PH1.png"),
-		preload("res://camp imgs/camp_char_duo_PH2.png")
-	],
-
-
-	"Priestess+Warrior": preload("res://LoveScene/LoveSceneimage/PriestWarriorAnim.png")
+@export var duo_folders := {
+	"Hunter+Warrior": "res://camp imgs/duo/HunterWarrior/",
+	"Mystic+Hunter": "res://camp imgs/duo/MysticHunter/",
+	"Mystic+Warrior": "res://camp imgs/duo/MysticWarrior/",
+	"Priestess+Mystic": "res://camp imgs/duo/PriestessMystic/",
+	"Priestess+Hunter": "res://camp imgs/duo/PristressHunter/",
+	"Priestess+Warrior": "res://camp imgs/duo/PristressWarrior/"
 }
+
+
 @export var love_scenes := {
 	"Priestess+Mystic": "res://LoveScene/PriestxMystic.tscn",
 	"Mystic+Hunter": "res://LoveScene/MysticxHunter.tscn",
@@ -94,34 +63,43 @@ func startMasturbation(user:CharaCamp):
 	user.gomasturbate()
 	for child in love_sprite.get_children():
 		child.queue_free()
-	somoneInside=user
+
+	somoneInside = user
+	bounce_enabled = true
+
+	var char_name = user.characterData.Charaname
 	
-	bounce_enabled=true
-	var data = null
-	if masturbe_images.has(user.characterData.Charaname):
-		data = masturbe_images[user.characterData.Charaname]
+	if !solo_folders.has(char_name):
+		print("❌ Aucun dossier pour ", char_name)
+		return
+
+	var folder_path = solo_folders[char_name]
+	var all_frames := load_textures_from_folder(folder_path)
+
+	if all_frames.size() < 3:
+		print("❌ Pas assez d'images dans ", folder_path)
+		return
+
+	# 🔥 On retire les 2 dernières images
+	var frames := all_frames.slice(0, all_frames.size() - 2)
+
 	love_sprite.visible = true
 	love_sprite.texture = null
-	if data == null:
-		print ("data is null")
-	if data is Array:
-		var frames: Array = [data[0],data[1]]
 
-		anim = SpriteFrames.new()
-		anim.set_animation_loop("default", true)
-		anim.set_animation_speed("default", 4.0) 
+	anim = SpriteFrames.new()
+	anim.set_animation_loop("default", true)
+	anim.set_animation_speed("default", 12.0)
 
-		for tex in frames:
-			anim.add_frame("default", tex)
+	for tex in frames:
+		anim.add_frame("default", tex)
 
-		var animated_sprite := AnimatedSprite2D.new()
-		animated_sprite.frames = anim
-		animated_sprite.scale = Vector2(0.6, 0.6)
-		animated_sprite.position.y = -250
-		animated_sprite.play("default")
+	var animated_sprite := AnimatedSprite2D.new()
+	animated_sprite.frames = anim
+	animated_sprite.scale = Vector2(0.6, 0.6)
+	animated_sprite.position.y = -250
+	animated_sprite.play("default")
 
-		love_sprite.add_child(animated_sprite)
-		
+	love_sprite.add_child(animated_sprite)
 	
 
 	
@@ -194,10 +172,24 @@ func _on_tente_button_button_down() -> void:
 	if somoneInside!= null :
 		bounce_enabled=false
 		somoneInside.characterData.current_horniness= max(0, somoneInside.characterData.current_horniness - 20)
-		var data = masturbe_images[somoneInside.characterData.Charaname]
+		var char_name = somoneInside.characterData.Charaname
+
+		if !solo_folders.has(char_name):
+			print("❌ Aucun dossier pour ", char_name)
+			return
+
+		var folder_path = solo_folders[char_name]
+		var all_frames := load_textures_from_folder(folder_path)
+
+		if all_frames.size() < 2:
+			print("❌ Pas assez d'images pour final anim")
+			return
+
+# 🔥 On prend uniquement les 2 dernières
+		var frames := all_frames.slice(all_frames.size() - 2, all_frames.size())
 		is_anim_zoom_playing =true
 		var campPosition = somoneInside.campposition
-		var frames: Array = [data[2]]
+	
 		for child in love_sprite.get_children():
 			child.queue_free()
 		anim = SpriteFrames.new()
@@ -244,7 +236,7 @@ func _on_tente_button_button_down() -> void:
 		tween.parallel().tween_property(anim, "speed_scale", 100, 0.50)
 		if anim.get_animation_speed("default")==2.0:
 			anim.set_animation_speed("default", 4.0) 
-		else : anim.set_animation_speed("default", 60.0) 
+		else : anim.set_animation_speed("default", 12.0) 
 		await cam.zoom_to_position(cam_pos, cam.baseZoom.x*1.5 ,2.0)
 		
 		
@@ -302,78 +294,91 @@ func loved_one_go_out():
 	
 	
 func show_love_image(user: CharaCamp, target: CharaCamp):
+
 	var key1 = "%s+%s" % [user.characterData.Charaname, target.characterData.Charaname]
 	var key2 = "%s+%s" % [target.characterData.Charaname, user.characterData.Charaname]
 
-	var data = null
-	if love_images.has(key1):
-		data = love_images[key1]
-	elif love_images.has(key2):
-		data = love_images[key2]
+	var folder_path := ""
 
-	if data == null:
-		print("⚠️ Pas d'image pour cette combinaison :", key1)
+	if duo_folders.has(key1):
+		folder_path = duo_folders[key1]
+	elif duo_folders.has(key2):
+		folder_path = duo_folders[key2]
+
+	if folder_path == "":
+		print("⚠️ Pas d’images pour :", key1)
 		return
 
-	# Nettoyage
+	var frames := load_textures_from_folder(folder_path)
+
+	if frames.is_empty():
+		print("⚠️ Dossier vide :", folder_path)
+		return
+
 	for child in love_sprite.get_children():
 		child.queue_free()
 
 	love_sprite.visible = true
 	love_sprite.texture = null
 
-	# 🔥 CAS SPÉCIAL : Priestess + Warrior (spritesheet 7x5)
-	if data is Texture2D:
-		var sprite_sheet: Texture2D = data
+	anim = SpriteFrames.new()
+	anim.set_animation_loop("default", true)
+	anim.set_animation_speed("default", 12)
 
-		anim = SpriteFrames.new()
-		anim.set_animation_loop("default", true)
-		anim.set_animation_speed("default", 50.0)
-	
-		var frame_width = sprite_sheet.get_width() / 7
-		var frame_height = sprite_sheet.get_height() / 5
+	for tex in frames:
+		anim.add_frame("default", tex) 
 
-		for y in range(5):
-			for x in range(7):
-				var region = Rect2(x * frame_width, y * frame_height, frame_width, frame_height)
-				var frame_tex := AtlasTexture.new()
-				frame_tex.atlas = sprite_sheet
-				frame_tex.region = region
-				anim.add_frame("default", frame_tex)
+	var animated_sprite := AnimatedSprite2D.new()
+	animated_sprite.frames = anim
+	animated_sprite.scale = Vector2(0.6, 0.6)
+	animated_sprite.position.y = -250
+	animated_sprite.play("default")
 
-		var animated_sprite := AnimatedSprite2D.new()
-		animated_sprite.frames = anim
-		animated_sprite.scale = Vector2(2.0, 2.0)
-		animated_sprite.position.y = -10
-		animated_sprite.play("default")
-
-		love_sprite.add_child(animated_sprite)
-		return
-
-	# ❤️ CAS NORMAL : animation 2 images
-	if data is Array:
-		var frames: Array = data
-
-		anim = SpriteFrames.new()
-		anim.set_animation_loop("default", true)
-		anim.set_animation_speed("default", 2.0) 
-
-		for tex in frames:
-			anim.add_frame("default", tex)
-
-		var animated_sprite := AnimatedSprite2D.new()
-		animated_sprite.frames = anim
-		animated_sprite.scale = Vector2(0.6, 0.6)
-		animated_sprite.position.y = -250
-		animated_sprite.play("default")
-
-		love_sprite.add_child(animated_sprite)
+	love_sprite.add_child(animated_sprite)
 
 func _on_mouse_entered():
 	if !is_anim_zoom_playing:
 		self.modulate.a = 0.2  # 50% d’opacité
-
+		bounce_enabled=false
 func _on_mouse_exited():
 	if !is_anim_zoom_playing:
 		self.modulate.a = 1.0  
+		if !twoInside.is_empty():
+			bounce_enabled=true
+func load_textures_from_folder(path: String) -> Array[Texture2D]:
+	var textures: Array[Texture2D] = []
+
+	var dir := DirAccess.open(path)
+	if dir == null:
+		push_error("Impossible d’ouvrir : " + path)
+		return textures
+
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+
+	while file_name != "":
+		if !dir.current_is_dir():
+			if file_name.get_extension().to_lower() in ["png","jpg","webp"]:
+				var tex: Texture2D = load(path + file_name)
+				if tex:
+					textures.append(tex)
+		file_name = dir.get_next()
+
+	dir.list_dir_end()
+
+	textures.sort_custom(func(a,b): return a.resource_path < b.resource_path)
+
+	return textures
 	
+func get_solo_frames(character_name: String) -> Array[Texture2D]:
+	if !solo_folders.has(character_name):
+		push_error("Pas de dossier solo pour : " + character_name)
+		return []
+
+	var folder_path = solo_folders[character_name]
+	var frames := load_textures_from_folder(folder_path)
+
+	if frames.is_empty():
+		push_error("Dossier vide : " + folder_path)
+
+	return frames

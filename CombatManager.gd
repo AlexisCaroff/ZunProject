@@ -513,3 +513,8 @@ func swap_characters(slot_a: PositionSlot, slot_b: PositionSlot,movetime: float)
 		char_a.update_ui()
 	if char_b:
 		char_b.update_ui()
+func get_hero_by_name(chara_name: String) -> Character:
+	for hero in heroes:
+		if hero.characterData.Charaname == chara_name:
+			return hero
+	return null

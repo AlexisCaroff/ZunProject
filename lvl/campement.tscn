@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://c63m6eq381xm1"]
+[gd_scene load_steps=51 format=3 uid="uid://c63m6eq381xm1"]
 
 [ext_resource type="Script" uid="uid://w6xjpbgh5xei" path="res://scripts/camp/campement.gd" id="1_7mjgo"]
 [ext_resource type="PackedScene" uid="uid://c2rn6c4jc5dlf" path="res://UI/chara_camp.tscn" id="2_ofeuf"]
@@ -20,11 +20,10 @@
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="17_luaer"]
 [ext_resource type="Texture2D" uid="uid://cc5eq6g7p535a" path="res://props/boles.png" id="18_03c8w"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="20_7788d"]
-[ext_resource type="Texture2D" uid="uid://b72rv8qoighv3" path="res://props/PROP_tent_back.png" id="20_nj740"]
-[ext_resource type="Texture2D" uid="uid://c0cu2ebq5pusr" path="res://props/PROP_tent_front.png" id="21_7tx7c"]
+[ext_resource type="Texture2D" uid="uid://b6mfq3s6sv7s7" path="res://camp imgs/PROP_tent_back.png" id="20_fctf2"]
+[ext_resource type="Texture2D" uid="uid://8dghn3albj01" path="res://camp imgs/PROP_tent_front.png" id="21_gofun"]
 [ext_resource type="Script" uid="uid://cklpwxrawneex" path="res://scripts/camp/tente.gd" id="22_jpnjt"]
 [ext_resource type="Texture2D" uid="uid://dek8m1gml45n4" path="res://tent scenes/TENT H001.png" id="23_2te02"]
-[ext_resource type="Texture2D" uid="uid://csxp5q5mkr2g3" path="res://props/insidetenteUIBackground.png" id="35_bg6vn"]
 [ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="36_gwj3x"]
 [ext_resource type="Texture2D" uid="uid://ctkoy8ysbicta" path="res://UI/iconMap.png" id="37_yy5dy"]
 [ext_resource type="Texture2D" uid="uid://cbbc3rht6f8fd" path="res://props/sac.png" id="38_fctf2"]
@@ -385,7 +384,7 @@ modulate = Color(0.363281, 0.363281, 0.363281, 1)
 position = Vector2(420.885, 622.309)
 rotation = -0.0262635
 scale = Vector2(0.365973, 0.371483)
-texture = ExtResource("20_nj740")
+texture = ExtResource("20_fctf2")
 offset = Vector2(12.055, -800)
 
 [node name="LoveImage" type="Sprite2D" parent="."]
@@ -398,7 +397,7 @@ offset = Vector2(3.8, -131.95)
 position = Vector2(420.885, 625.309)
 rotation = -0.0262635
 scale = Vector2(0.365973, 0.371483)
-texture = ExtResource("21_7tx7c")
+texture = ExtResource("21_gofun")
 offset = Vector2(12.055, -800)
 script = ExtResource("22_jpnjt")
 bounce_height = Vector2(0.36, 0.4)
@@ -417,13 +416,6 @@ offset_bottom = -615.905
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gwj3x")
 flat = true
 metadata/_edit_use_anchors_ = true
-
-[node name="BackgroundinsideTente" type="Sprite2D" parent="."]
-visible = false
-z_index = 2
-position = Vector2(394.582, 394.327)
-scale = Vector2(0.62955, 0.63903)
-texture = ExtResource("35_bg6vn")
 
 [node name="animMasturbate" type="Sprite2D" parent="."]
 visible = false
@@ -526,6 +518,7 @@ scale = Vector2(0.839673, 0.858693)
 texture = ExtResource("38_fctf2")
 
 [node name="Intro2" type="Sprite2D" parent="."]
+visible = false
 z_index = 22
 position = Vector2(963, 538)
 scale = Vector2(0.72634, 0.72634)

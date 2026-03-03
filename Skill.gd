@@ -60,7 +60,7 @@ var owner: Character
 var target1 : Array[PositionSlot]
 var target2 : Array[PositionSlot]
 @export var tags: Array[String] = []
-var combatManager
+var combatManager : CombatManager
 var reducecost : int=0
 var skill_effect_overridden := false
 @export var is_contact: bool = false 
@@ -79,48 +79,61 @@ func can_use() -> bool:
 	
 	return true
 
-func use(target: PositionSlot = null, secondtarget : bool=false):
-	owner.current_skill=self
-	if combatManager :
-			combatManager.ui.log(owner.characterData.Charaname+ " use "+ descriptionName)
+func use(target: PositionSlot = null, secondtarget: bool = false) -> PositionSlot:
+	owner.current_skill = self
+
+	if combatManager:
+		combatManager.ui.log(owner.characterData.Charaname + " use " + descriptionName)
+
 	for eq in owner.characterData.equipped_items:
 		eq.on_skill_use(owner, self, target.occupant)
-	
-	if target != null :
-		if target.occupant != null:
-			if effect !=null:
-				var effect_instance= effect.instantiate()
-				if is_contact:
-					owner.add_child(effect_instance)
-				else :
-					target.add_child(effect_instance)
-				if effect_instance.has_method("setup"):
-					effect_instance.setup()
-				target.combat_manager.stop_target_selection()
-			if not can_use():
-				return
-			
-			if allways_hit == false:
-				for tag in owner.characterData.tags:
-					if tag == "voyeur":
-						precision+=5
-				var chance = precision - target.occupant.characterData.evasion
-				var rand = randi() % 100
-				if rand >= chance:
-					target.occupant.miss_animation(owner)
-					return
-			if secondtarget:
-				_apply_second_effect(target)
-			else:
-				_apply_effect(target, effects)
-		else:
-			target.combat_manager.stop_target_selection()
-			if secondtarget:
-				_apply_second_effect(target)
-			else:
-				_apply_effect(target, effects)
-			
 
+	if target == null:
+		return null
+
+	if target.occupant != null:
+
+		if effect != null:
+			var effect_instance = effect.instantiate()
+			if is_contact:
+				owner.add_child(effect_instance)
+			else:
+				target.add_child(effect_instance)
+
+			if effect_instance.has_method("setup"):
+				effect_instance.setup()
+
+			target.combat_manager.stop_target_selection()
+
+		if not can_use():
+			return target
+
+		if allways_hit == false:
+			for tag in owner.characterData.tags:
+				if tag == "voyeur":
+					precision += 5
+
+			var chance := precision - target.occupant.characterData.evasion
+			var rand := randi() % 100
+
+			if rand >= chance:
+				target.occupant.miss_animation(owner)
+				return target
+
+		if secondtarget:
+			target = await _apply_second_effect(target)
+		else:
+			target = await _apply_effect(target, effects)
+
+	else:
+		target.combat_manager.stop_target_selection()
+
+		if secondtarget:
+			target = await _apply_second_effect(target)
+		else:
+			target = await _apply_effect(target, effects)
+
+	return target
 func pay_cost():
 	owner.characterData.current_stamina-= cost
 	if cooldown > 0:
@@ -128,7 +141,36 @@ func pay_cost():
 		reducecost =0
 	owner.update_ui()
 
-func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = effects):
+func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = effects)-> PositionSlot:
+	var heallovedOnesTrigger : bool = false
+	if !combatManager:
+		combatManager = target.occupant.combat_manager
+	for effect in effects_array:
+		if effect is DamageEffect:
+			var Hunter_value :int = owner.characterData.affinity.get("Hunter", 0)
+			var Priestess_value :int = target.occupant.characterData.affinity.get("Priestess", 0)
+			var warrior_value :int = target.occupant.characterData.affinity.get("Warrior", 0)
+			if Hunter_value > 50:
+				var Hunter = combatManager.get_hero_by_name("Hunter")
+				if Hunter :
+						if randf() < 0.5:
+							await Hunter.helpTarget(owner.characterData.Name)
+							var littlebuff := load("res://characters/kink/littleattackbuff.tres")
+							owner.add_buff(littlebuff)
+							
+			if warrior_value > 50:
+					
+					var warrior = combatManager.get_hero_by_name("Warrior")
+					if warrior:
+						if randf() < 0.5:
+							await warrior.protect(target.occupant.characterData.Name)
+							target = warrior.get_current_slot()
+			
+			if Priestess_value > 5:
+					var Priestess = combatManager.get_hero_by_name("Priestess")
+					if Priestess:
+						heallovedOnesTrigger=true
+						
 	if not skill_effect_overridden:
 		for tag in owner.characterData.tags:
 					if tag == "degrader":
@@ -137,10 +179,29 @@ func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = eff
 						
 		for effect in effects_array:
 			effect.apply(owner, target)
+	if heallovedOnesTrigger:
+		if randf() < 0.3:
+			var Priestess = combatManager.get_hero_by_name("Priestess")
+			Priestess.Heal(target.occupant.characterData.Name)
+			await target.occupant.animate_heal(10, Priestess)
+			target.occupant.characterData.current_stamina +=10
+	
+	var Mistic_value :int = owner.characterData.affinity.get("Mystic", 0)
+	if Mistic_value > 5:
+		if !combatManager:
+			combatManager = target.occupant.combat_manager
+		if randf() < 0.3:
+			var Mystic = combatManager.get_hero_by_name("Mystic")
+			Mystic.inspire(owner.characterData.Name)
+			if current_cooldown>0:
+				current_cooldown -=1
+			
+	return target
 
-func _apply_second_effect(thetarget2: PositionSlot):
+func _apply_second_effect(thetarget2: PositionSlot)-> PositionSlot:
 	#print("apply second effect")
-	_apply_effect(thetarget2, second_effects)
+	thetarget2 = await _apply_effect(thetarget2, second_effects)
+	return thetarget2
 
 func select_targets(combat_manager:CombatManager):
 	owner.current_skill=self
