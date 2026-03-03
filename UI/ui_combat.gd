@@ -17,11 +17,18 @@ class_name UI_combat
 @onready var combat_manager = $CombatManager
 @onready var turnOrderPanel = $TurnOrderPanel
 
-@onready var AttLabel = $CanvasLayer/AttLabel
-@onready var DefLabel = $CanvasLayer/DefLabel
+@onready var AttLabel = $CanvasLayer/AttLabel2
+@onready var DefLabel = $CanvasLayer/DefLabel2
+@onready var WillPower = $CanvasLayer/WillPower2
 @onready var Stamina = $CanvasLayer/Stamina
+@onready var StaminaNumber = $CanvasLayer/Stamina2
+@onready var StaminaBar=$CanvasLayer/StaminaProgressBar
 @onready var guilt= $CanvasLayer/Guilt
+@onready var guiltNumber=$CanvasLayer/Guilt2
+@onready var guiltBar=$CanvasLayer/GuiltProgressBar
 @onready var horny = $CanvasLayer/Horny
+@onready var hornyNumber = $CanvasLayer/Horny2
+@onready var hornyBar=$CanvasLayer/LustProgressBar
 
 @onready var charaPortrait2 = $CanvasLayer/overmenu/charaPortrait2
 @onready var Charaname2 = $CanvasLayer/overmenu/Charaname2
@@ -125,23 +132,33 @@ func update_ui_for_current_character(character: Character):
 		else:
 			button.text = "—"
 			button.disabled = true
-
-	# --- CHANGED (toutes les stats viennent maintenant de characterData)
-	AttLabel.text = "Attack: %d" % character.characterData.attack
-	DefLabel.text = "Defense: %d" % character.characterData.defense
-	Stamina.text = "Stamina: %d / %d" % [
+	var chara = character.characterData
+	AttLabel.bbcode_enabled = true
+	DefLabel.bbcode_enabled = true
+	WillPower.bbcode_enabled = true
+	
+	AttLabel.text = "Attack: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
+		chara.attack, chara.base_attack, (chara.attack - chara.base_attack)]
+	DefLabel.text = "Defense: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
+		chara.defense, chara.base_defense, (chara.defense - chara.base_defense)]
+	WillPower.text = "Willpower: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
+		chara.willpower, chara.base_willpower, (chara.willpower - chara.base_willpower)]
+	
+	StaminaNumber.text = "%d / %d" % [
 		character.characterData.current_stamina,
 		character.characterData.max_stamina
 	]
-	guilt.text = "Guilt: %d / %d" % [
+	StaminaBar.value=character.characterData.current_stamina
+	guiltNumber.text = "%d / %d" % [
 		character.characterData.current_stress,
 		character.characterData.max_stress
 	]
-	horny.text = "Horny: %d / %d" % [
+	guiltBar.value=character.characterData.current_stress
+	hornyNumber.text = "%d / %d" % [
 		character.characterData.current_horniness,
 		character.characterData.max_horniness
 	]
-
+	hornyBar.value=character.characterData.current_horniness
 
 # -------------------------------------------------------------------------
 # ➤ ÉQUIPEMENT (basé sur characterData)

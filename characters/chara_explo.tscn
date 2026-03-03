@@ -17,9 +17,9 @@ text = "name"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = -48.0
-offset_top = -208.0
+offset_top = -324.0
 offset_right = 51.0
-offset_bottom = -189.0
+offset_bottom = -305.0
 alignment = 1
 
 [node name="pivot" type="Node2D" parent="."]

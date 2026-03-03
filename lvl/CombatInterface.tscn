@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://h8pqs7tabdxj"]
+[gd_scene load_steps=73 format=3 uid="uid://h8pqs7tabdxj"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_3b7mk"]
 [ext_resource type="Texture2D" uid="uid://b1t6ygc3nxo7c" path="res://characters/charatexture/warriorHit.png" id="2_5brbe"]
@@ -152,6 +152,13 @@ _bundled = {
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rem33"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c35ka"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mhvks"]
+bg_color = Color(0, 0, 0, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p4emy"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="CombatInterface" type="Control"]
 layout_mode = 3
@@ -733,6 +740,7 @@ text = "Warrior"
 uppercase = true
 
 [node name="AttLabel" type="Label" parent="CanvasLayer"]
+visible = false
 z_index = 6
 offset_left = 268.0
 offset_top = 872.0
@@ -743,6 +751,7 @@ theme_override_font_sizes/font_size = 20
 text = "Attaque :"
 
 [node name="DefLabel" type="Label" parent="CanvasLayer"]
+visible = false
 z_index = 6
 offset_left = 268.0
 offset_top = 905.0
@@ -753,6 +762,7 @@ theme_override_font_sizes/font_size = 20
 text = "Defence:"
 
 [node name="Stamina" type="Label" parent="CanvasLayer"]
+visible = false
 z_index = 6
 offset_left = 269.0
 offset_top = 958.0
@@ -764,6 +774,7 @@ text = "Stamina :
 "
 
 [node name="Horny" type="Label" parent="CanvasLayer"]
+visible = false
 z_index = 6
 offset_left = 268.0
 offset_top = 982.0
@@ -775,6 +786,7 @@ text = "Lust:
 "
 
 [node name="Guilt" type="Label" parent="CanvasLayer"]
+visible = false
 z_index = 6
 offset_left = 268.0
 offset_top = 1010.0
@@ -1026,8 +1038,8 @@ texture = ExtResource("39_3v7hs")
 
 [node name="Items" type="Sprite2D" parent="CanvasLayer"]
 z_index = 8
-position = Vector2(205, 997)
-scale = Vector2(0.90566, 0.90566)
+position = Vector2(196, 997)
+scale = Vector2(0.782237, 0.782237)
 
 [node name="Item1" type="Sprite2D" parent="CanvasLayer/Items"]
 z_index = 8
@@ -1042,6 +1054,7 @@ offset_right = 81.0
 offset_bottom = 21.0
 rotation = 0.790096
 flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Items/Item1"]
 visible = false
@@ -1083,17 +1096,26 @@ theme_override_font_sizes/bold_font_size = 30
 horizontal_alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
 z_index = 6
-offset_left = 681.0
-offset_top = 974.0
-offset_right = 1265.0
-offset_bottom = 975.0
-color = Color(0.501961, 0.407843, 0.207843, 1)
+offset_left = 200.0
+offset_top = 939.0
+offset_right = 283.0
+offset_bottom = 1019.0
+rotation = 0.785398
+color = Color(0.0235294, 0.0196078, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+z_index = 6
+offset_left = 78.0
+offset_top = 935.0
+offset_right = 160.0
+offset_bottom = 1021.0
+rotation = 0.785398
+color = Color(0.0235294, 0.0196078, 0, 1)
 
 [node name="EnnemiTurn" type="ColorRect" parent="CanvasLayer"]
 z_index = 15
-offset_left = 448.0
+offset_left = 543.0
 offset_top = 838.0
 offset_right = 1416.0
 offset_bottom = 1074.0
@@ -1101,7 +1123,7 @@ color = Color(0.0235294, 0.0196078, 0, 1)
 
 [node name="Ennemiturn" type="Sprite2D" parent="CanvasLayer/EnnemiTurn"]
 self_modulate = Color(0.385493, 0.385492, 0.385492, 0.635)
-position = Vector2(512, 109)
+position = Vector2(418, 109)
 scale = Vector2(0.784465, 0.752116)
 texture = ExtResource("40_qn3ef")
 
@@ -1127,6 +1149,162 @@ offset_right = 114.0
 offset_bottom = 248.0
 text = "didactitiel"
 flat = true
+
+[node name="AttLabel2" type="RichTextLabel" parent="CanvasLayer"]
+z_index = 7
+offset_left = 257.0
+offset_top = 975.0
+offset_right = 598.0
+offset_bottom = 1030.0
+scale = Vector2(1.01194, 1.01194)
+theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
+theme_override_fonts/normal_font = ExtResource("8_qx47d")
+theme_override_fonts/italics_font = ExtResource("8_qx47d")
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+text = "Attack :"
+
+[node name="DefLabel2" type="RichTextLabel" parent="CanvasLayer"]
+z_index = 7
+offset_left = 257.0
+offset_top = 1007.0
+offset_right = 603.0
+offset_bottom = 1062.0
+scale = Vector2(1.01194, 1.01194)
+theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
+theme_override_fonts/normal_font = ExtResource("8_qx47d")
+theme_override_fonts/italics_font = ExtResource("8_qx47d")
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+text = "Defence:"
+
+[node name="WillPower2" type="RichTextLabel" parent="CanvasLayer"]
+z_index = 7
+offset_left = 257.0
+offset_top = 1039.0
+offset_right = 592.0
+offset_bottom = 1094.0
+scale = Vector2(1.01194, 1.01194)
+theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
+theme_override_fonts/normal_font = ExtResource("8_qx47d")
+theme_override_fonts/italics_font = ExtResource("8_qx47d")
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+text = "Willpower:"
+
+[node name="StaminaProgressBar" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(0.878431, 0.584314, 0.341176, 1)
+z_index = 7
+offset_left = 323.0
+offset_top = 881.0
+offset_right = 504.0
+offset_bottom = 903.0
+scale = Vector2(0.479065, 0.446353)
+theme_override_styles/background = SubResource("StyleBoxFlat_mhvks")
+theme_override_styles/fill = SubResource("StyleBoxFlat_p4emy")
+value = 72.93
+show_percentage = false
+
+[node name="LustProgressBar" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(0.933333, 0.109804, 0.72549, 1)
+z_index = 7
+offset_left = 323.0
+offset_top = 914.0
+offset_right = 505.0
+offset_bottom = 936.0
+scale = Vector2(0.479065, 0.446353)
+theme_override_styles/background = SubResource("StyleBoxFlat_mhvks")
+theme_override_styles/fill = SubResource("StyleBoxFlat_p4emy")
+value = 72.93
+show_percentage = false
+
+[node name="GuiltProgressBar" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(0.266667, 0.294118, 0.364706, 1)
+z_index = 7
+offset_left = 323.0
+offset_top = 947.0
+offset_right = 505.0
+offset_bottom = 969.0
+scale = Vector2(0.479065, 0.446353)
+theme_override_styles/background = SubResource("StyleBoxFlat_mhvks")
+theme_override_styles/fill = SubResource("StyleBoxFlat_p4emy")
+value = 72.93
+show_percentage = false
+
+[node name="Stamina2" type="RichTextLabel" parent="CanvasLayer"]
+z_index = 7
+offset_left = 414.0
+offset_top = 876.0
+offset_right = 482.0
+offset_bottom = 907.0
+scale = Vector2(0.795336, 0.795336)
+theme_override_colors/default_color = Color(0.886275, 0.588235, 0.345098, 1)
+theme_override_fonts/normal_font = ExtResource("8_qx47d")
+theme_override_font_sizes/normal_font_size = 20
+text = "120/120"
+
+[node name="Horny2" type="RichTextLabel" parent="CanvasLayer"]
+z_index = 7
+offset_left = 414.0
+offset_top = 909.0
+offset_right = 487.0
+offset_bottom = 937.0
+scale = Vector2(0.795336, 0.795336)
+theme_override_colors/default_color = Color(1, 0.113725, 0.776471, 1)
+theme_override_fonts/normal_font = ExtResource("8_qx47d")
+theme_override_font_sizes/normal_font_size = 20
+text = "80/100"
+
+[node name="Guilt2" type="RichTextLabel" parent="CanvasLayer"]
+z_index = 7
+offset_left = 414.0
+offset_top = 945.0
+offset_right = 476.0
+offset_bottom = 975.0
+scale = Vector2(0.795336, 0.795336)
+theme_override_colors/default_color = Color(0.270588, 0.298039, 0.372549, 1)
+theme_override_fonts/normal_font = ExtResource("8_qx47d")
+theme_override_font_sizes/normal_font_size = 20
+text = "10/100"
+
+[node name="Stamina3" type="RichTextLabel" parent="CanvasLayer"]
+z_index = 7
+offset_left = 258.0
+offset_top = 870.0
+offset_right = 329.0
+offset_bottom = 925.0
+scale = Vector2(1.01194, 1.01194)
+theme_override_colors/default_color = Color(0.886275, 0.588235, 0.345098, 1)
+theme_override_fonts/normal_font = ExtResource("8_qx47d")
+theme_override_font_sizes/normal_font_size = 20
+text = "Stamina:
+"
+
+[node name="Horny3" type="RichTextLabel" parent="CanvasLayer"]
+z_index = 7
+offset_left = 258.0
+offset_top = 903.0
+offset_right = 327.0
+offset_bottom = 958.0
+scale = Vector2(1.01194, 1.01194)
+theme_override_colors/default_color = Color(1, 0.113725, 0.776471, 1)
+theme_override_fonts/normal_font = ExtResource("8_qx47d")
+theme_override_font_sizes/normal_font_size = 20
+text = "Lust:
+"
+
+[node name="Guilt3" type="RichTextLabel" parent="CanvasLayer"]
+z_index = 7
+offset_left = 258.0
+offset_top = 939.0
+offset_right = 477.0
+offset_bottom = 994.0
+scale = Vector2(1.01194, 1.01194)
+theme_override_colors/default_color = Color(0.270588, 0.298039, 0.372549, 1)
+theme_override_fonts/normal_font = ExtResource("8_qx47d")
+theme_override_font_sizes/normal_font_size = 20
+text = "Guilt:
+"
 
 [node name="Gradiant" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
