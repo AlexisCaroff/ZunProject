@@ -58,7 +58,9 @@ func start_game():
 		var start_room = get_room_by_id(donjon.start_room_id)
 		
 		if start_room:
-			call_deferred("enter_room", start_room)
+			current_room_Ressource=start_room
+			
+			call_deferred("_enter_scene_in_current_room", start_room.exploration_scene)
 		else:
 			push_error("❌ Start room introuvable pour ID : " + donjon.start_room_id)
 			
@@ -136,8 +138,9 @@ func _enter_scene_in_current_room(scene: PackedScene, ennemy_are_embushed: bool 
 		end.visible=true
 	await sceneTransition.fade_out()
 	if scene:
-		print("old scene is ", current_room_node.name)
+		
 		if current_room_node:
+			print("old scene is ", current_room_node.name)
 			print ("free old room")
 			current_room_node.free()
 			

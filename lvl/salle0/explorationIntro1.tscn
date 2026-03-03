@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0tw3ef8bhc71"]
+
+[ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="1_76nbu"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_32aph"]
+[ext_resource type="PackedScene" uid="uid://badg2cpqmlnim" path="res://lvl/explorationInterface.tscn" id="3_2a6qa"]
+
+[node name="ExploInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ZunBg" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_76nbu")
+
+[node name="atmosphere" parent="." instance=ExtResource("2_32aph")]
+position = Vector2(2, 352)
+
+[node name="ExploInterface" parent="." instance=ExtResource("3_2a6qa")]
+layout_mode = 1
