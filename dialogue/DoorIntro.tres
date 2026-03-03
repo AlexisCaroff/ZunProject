@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HistoryScene" load_steps=2 format=3 uid="uid://dobv35hol5cxe"]
+
+[ext_resource type="Script" uid="uid://du5qr73uxmcdu" path="res://scripts/History/HistoryScene.gd" id="1_fehwa"]
+
+[resource]
+script = ExtResource("1_fehwa")
+dialogue_file = "res://dialogue/doorIntro.txt"
+title = ""
+participants = Array[String]([])
+is_choice = false
+choice_1_text = ""
+choice_2_text = ""
+metadata/_custom_type_script = "uid://du5qr73uxmcdu"

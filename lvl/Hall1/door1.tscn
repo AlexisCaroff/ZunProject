@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dv04v6jagn4q1"]
+[gd_scene load_steps=37 format=3 uid="uid://dv04v6jagn4q1"]
 
 [ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="1_o2neq"]
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_mdkvs"]
@@ -28,8 +28,6 @@
 [ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="25_njmpn"]
 [ext_resource type="Texture2D" uid="uid://bpgas6hnffbe0" path="res://UI/sideButton.png" id="26_50xwi"]
 [ext_resource type="Texture2D" uid="uid://ctkoy8ysbicta" path="res://UI/iconMap.png" id="27_gf8ky"]
-[ext_resource type="Texture2D" uid="uid://b5cqyywvqxjb8" path="res://tuto/intro1.png" id="28_vgldn"]
-[ext_resource type="Script" uid="uid://csoytl280uijb" path="res://lvl/Hall1/tuto1.gd" id="29_o2neq"]
 [ext_resource type="Texture2D" uid="uid://badlboehrrx84" path="res://tuto/intro2.png" id="30_itvqt"]
 [ext_resource type="Script" uid="uid://b0ir2tk1oluly" path="res://lvl/Hall1/tuto.gd" id="31_5ypre"]
 
@@ -360,21 +358,6 @@ offset_top = 115.0
 offset_right = 98.0
 offset_bottom = 157.0
 text = "didactitiel"
-flat = true
-
-[node name="Intro1" type="Sprite2D" parent="."]
-z_index = 20
-position = Vector2(955, 539)
-scale = Vector2(0.663709, 0.663709)
-texture = ExtResource("28_vgldn")
-script = ExtResource("29_o2neq")
-
-[node name="HideTuto" type="Button" parent="Intro1"]
-offset_left = -1349.99
-offset_top = -962.771
-offset_right = -1341.99
-offset_bottom = -954.771
-scale = Vector2(338.499, 233.869)
 flat = true
 
 [connection signal="button_down" from="peekButton" to="peekButton" method="_on_button_down"]

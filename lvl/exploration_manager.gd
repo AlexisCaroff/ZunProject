@@ -68,10 +68,12 @@ func _ready():
 	menuPerso.characters=gm.characters
 	print ("characters atribués ")
 	menuPerso.change_in_equipment.connect(_on_character_equipment_changed)
-
+	
 	load_characters_from_gamestat()
 	selected_character =characters[0]
-	
+	if gm.current_room_Ressource.exploration_scene_history != null:
+		print("find history Scene")
+		gm.show_history_scene(gm.current_room_Ressource.exploration_scene_history)
 	
 	portrait_selector.position = portraits[0].position
 	bouton_menuPerso.connect("button_down", showMenuPerso)

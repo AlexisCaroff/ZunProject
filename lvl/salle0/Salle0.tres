@@ -1,13 +1,17 @@
-[gd_resource type="Resource" script_class="RoomResource" load_steps=2 format=3 uid="uid://bjupnilvigvhl"]
+[gd_resource type="Resource" script_class="RoomResource" load_steps=4 format=3 uid="uid://bjupnilvigvhl"]
 
 [ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="1_1aoju"]
+[ext_resource type="PackedScene" uid="uid://d0tw3ef8bhc71" path="res://lvl/salle0/explorationIntro1.tscn" id="1_2v3uc"]
+[ext_resource type="Resource" uid="uid://jucbob2ssyup" path="res://dialogue/historiIntro.tres" id="2_wn2dl"]
 
 [resource]
 script = ExtResource("1_1aoju")
 room_id = "Salle0"
 position_on_map = 0
+exploration_scene = ExtResource("1_2v3uc")
+exploration_scene_history = ExtResource("2_wn2dl")
 CanCamp = false
-connected_room_ids = Array[String](["Salle1"])
+connected_room_ids = Array[String](["Hall1"])
 blocked_room_ids = Array[String]([])
 explored = true
 ennemikilled = false

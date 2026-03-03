@@ -27,5 +27,6 @@ func set_occupant(chara : CharaExplo):
 	occupant.hp_Jauge = charaUI.HPProgressBar
 	chara.global_position = self.global_position
 	occupant.CharaPosition=self
+	occupant.z_index=self.z_index
 	occupant.update_display()
 	print ("set "+occupant.characterData.Charaname)

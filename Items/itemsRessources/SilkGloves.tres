@@ -10,6 +10,7 @@ icon = ExtResource("1_aubnq")
 name = "Silk Gloves"
 description = "+5 att et autres"
 isCursed = true
+number = 1
 Max_stamina_bonus = 0
 Max_lust_bonus = 0
 Max_Guilt_bonus = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://fvl38cdlmapy"]
+[gd_scene load_steps=8 format=3 uid="uid://d2pc2d7ox25tk"]
 
 [ext_resource type="Script" uid="uid://cspa2tuof385o" path="res://lvl/ChoiceUI.gd" id="1_msup4"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="2_2sm2f"]

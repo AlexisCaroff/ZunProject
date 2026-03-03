@@ -12,6 +12,7 @@ icon = ExtResource("2_hbnfo")
 name = "Torn Whip"
 description = ""
 isCursed = true
+number = 1
 Max_stamina_bonus = 0
 Max_lust_bonus = 0
 Max_Guilt_bonus = 0

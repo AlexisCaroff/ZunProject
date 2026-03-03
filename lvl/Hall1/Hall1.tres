@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="RoomResource" load_steps=13 format=3 uid="uid://b5nqhfedb63on"]
+[gd_resource type="Resource" script_class="RoomResource" load_steps=14 format=3 uid="uid://b5nqhfedb63on"]
 
 [ext_resource type="PackedScene" uid="uid://batqp2vro3cfl" path="res://lvl/Hall1/combat_hall_1.tscn" id="1_yjhvl"]
 [ext_resource type="PackedScene" uid="uid://dv04v6jagn4q1" path="res://lvl/Hall1/door1.tscn" id="2_ah7tj"]
 [ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://lvl/Hall1/encounter1.tres" id="3_vr0bi"]
+[ext_resource type="Resource" uid="uid://dobv35hol5cxe" path="res://dialogue/DoorIntro.tres" id="3_yl2n5"]
 [ext_resource type="PackedScene" uid="uid://dqnjuxw77ebnb" path="res://lvl/Hall1/exploration1.tscn" id="4_kuqls"]
 [ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="5_rbnqj"]
 [ext_resource type="Resource" uid="uid://ddokwgifpnrcf" path="res://Items/itemsRessources/ring.tres" id="5_yl2n5"]
@@ -38,6 +39,7 @@ script = ExtResource("5_rbnqj")
 room_id = "Hall1"
 position_on_map = 0
 door_scene = ExtResource("2_ah7tj")
+door_scene_History = ExtResource("3_yl2n5")
 combat_scene = ExtResource("1_yjhvl")
 exploration_scene = ExtResource("4_kuqls")
 encounter = ExtResource("3_vr0bi")

@@ -9,6 +9,7 @@ icon = ExtResource("1_ffytr")
 name = "Phylactery"
 description = ""
 isCursed = true
+number = 1
 Max_stamina_bonus = 0
 Max_lust_bonus = -20
 Max_Guilt_bonus = 0
