@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="PortraitsResource" load_steps=6 format=3 uid="uid://dpejhug6a0i4d"]
 
-[ext_resource type="Texture2D" uid="uid://swykom377bt4" path="res://characters/portraits/POTRIAT_hero_hunter.png" id="1_hsate"]
+[ext_resource type="Texture2D" uid="uid://xbjwv5qg2xmp" path="res://characters/portraits/PORTRAIT_hero_hunter.png" id="1_hsate"]
 [ext_resource type="Script" uid="uid://bckoqne0r03nj" path="res://dialogue/dialoguescripte/PortraitsResource.gd" id="1_q5l30"]
-[ext_resource type="Texture2D" uid="uid://bbqblmhppagf6" path="res://characters/portraits/POTRIAT_hero_mystic.png" id="2_n0cmy"]
-[ext_resource type="Texture2D" uid="uid://dli75wc6gnurn" path="res://characters/portraits/POTRIAT_hero_priestess.png" id="3_bp3gk"]
-[ext_resource type="Texture2D" uid="uid://c3g5ytg2lrny1" path="res://characters/portraits/POTRIAT_hero_warrior.png" id="4_wl34g"]
+[ext_resource type="Texture2D" uid="uid://diwmoyaawsxq6" path="res://characters/portraits/PORTRAIT_hero_mystic.png" id="2_n0cmy"]
+[ext_resource type="Texture2D" uid="uid://dx8h5r3u15vy5" path="res://characters/portraits/PORTRAIT_hero_priestess.png" id="3_bp3gk"]
+[ext_resource type="Texture2D" uid="uid://c32ucvj4qas4v" path="res://characters/portraits/PORTRAIT_hero_warrior.png" id="4_wl34g"]
 
 [resource]
 script = ExtResource("1_q5l30")

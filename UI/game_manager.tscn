@@ -125,6 +125,7 @@ texture = ExtResource("17_43qkp")
 script = ExtResource("17_6kqjp")
 
 [node name="HideTuto" type="Button" parent="SceneTransition/TextureRect"]
+layout_mode = 0
 offset_left = -9.0
 offset_top = -100.0
 offset_right = -1.0

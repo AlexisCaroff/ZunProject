@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="HistoryScene" load_steps=2 format=3 uid="uid://dobv35hol5cxe"]
+[gd_resource type="Resource" script_class="HistoryScene" load_steps=3 format=3 uid="uid://dobv35hol5cxe"]
 
 [ext_resource type="Script" uid="uid://du5qr73uxmcdu" path="res://scripts/History/HistoryScene.gd" id="1_fehwa"]
+[ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="1_lsxfr"]
 
 [resource]
 script = ExtResource("1_fehwa")
+illustration = ExtResource("1_lsxfr")
 dialogue_file = "res://dialogue/doorIntro.txt"
 title = ""
 participants = Array[String]([])

@@ -27,13 +27,13 @@ func apply(user: Character, target: PositionSlot) -> void:
 		match heal_target_stat:
 			healStat.STAMINA:
 				Chartarget.animate_heal(healamount,user)
-				Chartarget.current_stamina = min(Chartarget.characterData.max_stamina, Chartarget.characterData.current_stamina + healamount)
+				Chartarget.characterData.current_stamina = min(Chartarget.characterData.max_stamina, Chartarget.characterData.current_stamina + healamount)
 			healStat.HORNY:
 				Chartarget.animate_heal(healamount,user, Color.PURPLE)
-				Chartarget.current_horniness = max(0, Chartarget.characterData.current_horniness - healamount)
+				Chartarget.characterData.current_horniness  = max(0, Chartarget.characterData.current_horniness - healamount)
 			healStat.STRESS:
 				Chartarget.animate_heal(healamount,user)
-				Chartarget.current_stress = max(0, Chartarget.characterData.current_stress - healamount)
+				Chartarget.characterData.current_stress = max(0, Chartarget.characterData.current_stress - healamount)
 		Chartarget.update_ui()
 	else:
 		if Chartarget.characterData.IsDemon && MagicDMG:

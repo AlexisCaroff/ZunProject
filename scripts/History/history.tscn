@@ -22,8 +22,8 @@ follow_viewport_enabled = true
 
 [node name="Background" type="Sprite2D" parent="CanvasLayer"]
 z_index = 20
-position = Vector2(973.326, 533)
-scale = Vector2(1.2389, 1.2389)
+position = Vector2(1042, 635)
+scale = Vector2(0.942806, 0.905678)
 texture = ExtResource("3_c0c2v")
 
 [node name="CloseButton" type="Button" parent="CanvasLayer"]
@@ -40,5 +40,6 @@ script = ExtResource("3_awdr4")
 portraits_resource = ExtResource("4_c0c2v")
 
 [node name="Camera" type="Camera2D" parent="."]
+position = Vector2(967, 542)
 script = ExtResource("7_c0c2v")
 metadata/_custom_type_script = "uid://devdej4xpva2i"
