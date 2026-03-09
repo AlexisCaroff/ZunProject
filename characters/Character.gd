@@ -95,6 +95,12 @@ func _ready():
 		add_child(hornyParticules)
 		hornyParticules.position += characterData.headPosition
 		hornyParticules.setParticulesAlpha(0.0)
+	for buff in characterData.buffs:
+		add_buff(buff)
+
+	characterData.buffs.clear()
+	for buff in buffs:
+		buff.apply_to(self)
 		
 func _updateSkills(updated_skills: Array[Resource] ):
 	skills.clear()
@@ -131,9 +137,7 @@ func update_stats():
 			characterData.attack += 2
 		elif tag == "maso":
 			characterData.evasion = max(0, characterData.evasion - 2)
-	for buff in characterData.buffs:
-		add_buff(buff)
-	characterData.buffs.clear()
+
 	for buff in buffs:
 		buff.apply_to(self)
 

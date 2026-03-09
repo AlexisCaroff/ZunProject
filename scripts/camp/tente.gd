@@ -8,7 +8,7 @@ class_name  tente
 }
 @export var switch_time =0.5
 @onready var thetexture:Sprite2D =$"../animMasturbate"
-@onready var backgroundCadre =$"../BackgroundinsideTente"
+
 @onready var tenteback = $"../TenteBack"
 var images:Array[Texture2D]
 var current_state: bool = true

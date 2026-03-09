@@ -11,7 +11,7 @@
 [sub_resource type="Resource" id="Resource_whrmr"]
 script = ExtResource("3_o4kai")
 name = "ActTwice"
-description = "Effet temporaire sur les statistiques."
+description = "Play two turn in a row"
 icon = ExtResource("2_ol1y1")
 stat = 2
 amount = 0

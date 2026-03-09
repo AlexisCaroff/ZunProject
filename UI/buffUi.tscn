@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bufvnbnqs8ks8"]
+[gd_scene load_steps=5 format=3 uid="uid://bufvnbnqs8ks8"]
 
 [ext_resource type="Script" uid="uid://bduxwd78pfd1e" path="res://buffUi.gd" id="1_1wixs"]
 [ext_resource type="Texture2D" uid="uid://drpnss51hobsj" path="res://UI/debuffAtt.png" id="2_qot2a"]
 [ext_resource type="FontFile" uid="uid://dy4n8qboodyud" path="res://font/MarcellusSC-Regular.ttf" id="3_qot2a"]
+[ext_resource type="Texture2D" uid="uid://vxig1dgne8it" path="res://UI/box2.png" id="4_dpiv7"]
 
 [node name="Buff" type="Control"]
 z_index = 15
@@ -31,19 +32,24 @@ texture = ExtResource("2_qot2a")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Box2" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.398)
+z_index = -1
+position = Vector2(16, -32.5)
+scale = Vector2(0.382812, 0.351563)
+texture = ExtResource("4_dpiv7")
+
 [node name="TextLabel" type="Label" parent="."]
-visible = false
 clip_contents = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.019
-anchor_top = -0.051
-anchor_right = 0.035
-offset_left = -24.52
-offset_top = -39.92
-offset_right = -5.2
-offset_bottom = -35.0
+anchor_left = 0.002
+anchor_right = 0.002
+offset_left = -34.84
+offset_top = -59.0
+offset_right = 59.16
+offset_bottom = -8.0
 theme_override_fonts/font = ExtResource("3_qot2a")
 theme_override_font_sizes/font_size = 10
 text = "5+ attack 

@@ -56,7 +56,9 @@ const SELECTOR_TEX = preload("res://UI/selectorCombatChara.png")
 var selectorChara : Sprite2D
 var gm: GameManager
 var combatEnd: bool = false
+@onready var ScreenLooseChara= $"../CanvasLayer/BadEnd"
 var cam : Camera
+var pause: bool = false
 
 func _ready():
 	gm= get_tree().root.get_node("GameManager") as GameManager
@@ -218,13 +220,17 @@ func build_turn_queue(characters: Array[Character]) -> Array[Character]:
 		return a.characterData.initiative > b.characterData.initiative
 	)
 	return queue
-
+func is_pause() -> bool:
+	return pause
 func next_turn():
+	
 	while is_animation_playing():
 			await get_tree().process_frame
 
 	_check_victory()
 	_check_defeat()
+	while is_pause():
+		await get_tree().process_frame
 	if combatEnd:
 		return
 	turnNumber += 1
@@ -235,9 +241,10 @@ func next_turn():
 	current_character = turn_queue.pop_front()
 	for char in turn_queue:
 		char.resetVisuel()
-	if current_character.acte_twice:
-		current_character.acte_twice=false
+	if current_character.characterData.acte_twice:
+		current_character.characterData.acte_twice=false
 		turn_queue.push_front(current_character)
+		print ("Hunter Acte_twice")
 	await get_tree().process_frame
 	for position in enemy_positions:
 		if position.occupant==null :
@@ -355,17 +362,21 @@ func _check_victory():
 		_show_victory()
 	
 func _check_defeat():
+	var alive:bool= false 
 	for ally in heroes.duplicate():
 		if !ally.dead && ally.characterData.current_horniness<100:
-			return 
+			alive =true
 		if ally.dead:
 			turn_queue.erase(ally)
 			if ally._current_slot:
 				ally._current_slot.remove_character()
+			ScreenLooseChara.visible =true
+			pause = true 
 			heroes.erase(ally)
 			ally.queue_free()
-	combatEnd=true
-	_show_defeat()
+	if !alive :
+		combatEnd=true
+		_show_defeat()
 	
 func _show_defeat():
 	ResultScreen_label.text = "Defeat !"

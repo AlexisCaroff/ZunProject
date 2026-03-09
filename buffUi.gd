@@ -1,6 +1,6 @@
 extends Control
 class_name buffUI
-
+@onready var  back = $Box2
 var buff : Buff= null
 @onready var texture: TextureRect = $TextureBuff
 
@@ -14,7 +14,7 @@ func _process(delta):
 	
 	var hovering = Rect2(Vector2.ZERO, texture.size).has_point(texture.get_local_mouse_position())
 	textconteneur.visible = hovering
-
+	back.visible = hovering
 func updatebuff(thebuff: Buff):
 	buff = thebuff
 	if texture==null:
@@ -39,7 +39,8 @@ func refresh():
 
 func btover():
 	textconteneur.visible=true
-
+	back.visible =true
 	
 func btexit():
 	textconteneur.visible=false
+	back.visible =false

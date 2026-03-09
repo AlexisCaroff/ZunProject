@@ -1,10 +1,8 @@
 extends TextureRect
-@onready var button =$HideTuto
+@onready var cine =$"../Cinematic"
 
-var gm
-func _ready() -> void:
-	button.connect("button_down",hideTuto)
-	gm = get_tree().root.get_node("GameManager") as GameManager
-
-func hideTuto():
-	self.visible= false
+func _input(event):
+	if event is InputEventMouseButton and event.pressed and self.visible:
+		cine.visible=true
+		cine._Start()
+		self.visible=false 
