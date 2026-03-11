@@ -65,7 +65,7 @@ class_name CharacterData
 @export var max_durationIddle: float = 1.0
 @export var min_scale: float = 0.95
 @export var max_scale: float = 1.0
-
+@export var corruption: int = 0
 
 var acte_twice : bool =false
 @export var camp_skill_resources: Array[CampSkill] = []

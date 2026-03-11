@@ -6,7 +6,7 @@ extends Node2D
 @export var scroll_speed = 20
 var started:bool=false
 func _Start():
-	text.position.y = get_viewport_rect().size.y/1.2
+	text.position.y = get_viewport_rect().size.y/1.8
 	voice.play()
 
 func _process(delta):

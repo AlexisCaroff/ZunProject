@@ -67,6 +67,7 @@ min_durationIddle = 0.6
 max_durationIddle = 1.0
 min_scale = 0.95
 max_scale = 1.0
+corruption = 0
 camp_skill_resources = Array[ExtResource("2_y4sil")]([ExtResource("3_404pk"), ExtResource("4_4vg1p"), ExtResource("5_isn0k"), ExtResource("6_swvsv")])
 bark_scene = ExtResource("1_3p432")
 taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide open!", "You fight like a wet noodle!", "Oops! Did that hurt?"]

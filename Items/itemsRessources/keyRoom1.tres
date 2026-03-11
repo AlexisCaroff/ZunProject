@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_6cy5q")
 icon = ExtResource("1_hop5s")
-name = "keyRoom1"
+name = "CellarKey"
 description = ""
 isCursed = false
 number = 1

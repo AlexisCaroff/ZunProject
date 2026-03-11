@@ -25,16 +25,16 @@ var stat: int = Stat.ATTACK
 @export var duration: int = 3
 
 # Méthode appelée à chaque recalcul des stats
-func apply_to(target: Character) -> void:
+func apply_to(target: CharacterData) -> void:
 	match stat:
 		Stat.ATTACK:
-			target.characterData.attack += amount
+			target.attack += amount
 		Stat.DEFENSE:
-			target.characterData.defense += amount
+			target.defense += amount
 		Stat.SPEED:
-			target.characterData.initiative += amount
+			target.initiative += amount
 		Stat.WILL_POWER:
-			target.characterData.willpower += amount
+			target.willpower += amount
 		Stat.EVASION:
-			target.characterData.evasion +=amount
+			target.evasion +=amount
 	

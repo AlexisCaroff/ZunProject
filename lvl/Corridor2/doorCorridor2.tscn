@@ -310,6 +310,7 @@ offset_right = 1084.0
 offset_bottom = 657.0
 flat = true
 script = ExtResource("18_8g6pv")
+keyName = "CellarKey"
 
 [node name="DoorText" type="TextureRect" parent="Door"]
 layout_mode = 0

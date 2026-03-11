@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4akql58x7e18"]
+[gd_scene load_steps=6 format=3 uid="uid://b4akql58x7e18"]
 
 [ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_gblgf"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_5etjj"]
 [ext_resource type="PackedScene" uid="uid://badg2cpqmlnim" path="res://lvl/explorationInterface.tscn" id="3_3t1ag"]
+[ext_resource type="Script" uid="uid://xdr1vvpbf7k0" path="res://lvl/Room2/open_room.gd" id="4_2rxg7"]
+[ext_resource type="Resource" uid="uid://bcvwbh3fvvtx2" path="res://lvl/Corridor2/Corridor2.tres" id="5_abl21"]
 
 [node name="ExploInterface" type="Control"]
 layout_mode = 3
@@ -26,3 +28,7 @@ position = Vector2(2, 352)
 
 [node name="ExploInterface" parent="." instance=ExtResource("3_3t1ag")]
 layout_mode = 1
+
+[node name="OpenRoom" type="Node2D" parent="."]
+script = ExtResource("4_2rxg7")
+roomToChange = ExtResource("5_abl21")

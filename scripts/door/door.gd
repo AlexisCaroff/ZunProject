@@ -34,7 +34,10 @@ var locked : bool =false
 const lockedUI = preload("res://UI/scripts/LokedUI.tscn")
 const OpenUI = preload("res://UI/scripts/OpenDoorKeyUI.tscn")
 const BlockedUI= preload("res://UI/scripts/BlockedUI.tscn")
+
+
 func _ready():
+	GameState.current_phase = GameStat.GamePhase.DOOR
 	Game_Manager = get_tree().root.get_node("GameManager") 
 	if Game_Manager.current_room_Ressource.door_scene_History != null:
 		print("find history Scene")
@@ -184,7 +187,7 @@ func startpeeking():
 	peek_scene.door = self
 	donjon_map.peek_next_Room(Game_Manager.current_room_Ressource, viewport)
 	peek_scene.set_encounter(encounter_for_this_door)
-	
+	GameState.current_phase = GameStat.GamePhase.PEEK
 		
 
 func stop_peekink():

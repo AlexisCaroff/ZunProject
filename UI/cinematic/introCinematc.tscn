@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvgh80ryq8f31"]
+[gd_scene load_steps=6 format=3 uid="uid://bvgh80ryq8f31"]
 
 [ext_resource type="Script" uid="uid://ct64b0qv3yqau" path="res://intoCinematic.gd" id="1_fng0t"]
 [ext_resource type="AudioStream" uid="uid://q3roq2qp53je" path="res://Vox/introVox.mp3" id="2_jmmwi"]
 [ext_resource type="Texture2D" uid="uid://cqnomcu1ehsmj" path="res://UI/cinematic/INTRO_dungeon_entrance.png" id="3_8s6rg"]
 [ext_resource type="FontFile" uid="uid://dy4n8qboodyud" path="res://font/MarcellusSC-Regular.ttf" id="3_16exp"]
+[ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="4_2w6gd"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_fng0t")
@@ -15,11 +16,19 @@ stream = ExtResource("2_jmmwi")
 position = Vector2(960, 540)
 texture = ExtResource("3_8s6rg")
 
+[node name="Gradiant" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.918)
+position = Vector2(921.492, 640.636)
+rotation = 1.5708
+scale = Vector2(2.66047, 3.83376)
+texture = ExtResource("4_2w6gd")
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_right = 1868.0
-offset_bottom = 1081.0
+offset_left = 355.0
+offset_right = 1555.0
+offset_bottom = 1096.0
 theme_override_fonts/normal_font = ExtResource("3_16exp")
-theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/normal_font_size = 50
 text = "Daemons. Vile creatures of darkness, feeding on people’s most base desires.
 
 For centuries, the Inquisition has been the shield of the Holy empire. 

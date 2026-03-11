@@ -4,7 +4,10 @@ class_name Item
 @export var name: String = ""
 @export var icon: Texture2D
 @export var description: String = ""
+@export var descriptionHide: String = ""
 @export var quantity: int = 1
+@export var used:bool = false
+@export var cursed :bool = false
 
 # Tu peux stocker les effets sous forme de tableau de dictionnaires, ou de Resources personnalisées
 @export var effects: Array[Dictionary] = []

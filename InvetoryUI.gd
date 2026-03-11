@@ -6,6 +6,7 @@ class_name InventoryUI
 @export var inventory_size_y := 5
 @export var emptySlotTexture : Texture2D = preload("res://UI/emptyItemSlot.png")
 # --- Références
+@onready var startMenuButton = $CanvasLayer/ButtonMenu
 @onready var canvasLayer = $CanvasLayer
 @onready var inventory_grid = $CanvasLayer/InventoryGrid
 @onready var slots_panel = $CanvasLayer/EquipmentSlots
@@ -57,6 +58,12 @@ var inventory_items: Array[Equipment] = []
 
 var dragged_item : Equipment = null
 var dragged_slot_index : int = -1
+
+@onready var tooltip_panel = $CanvasLayer/ToolTipPanel
+@onready var tooltip_name = $CanvasLayer/ToolTipPanel/VBoxContainer/ToolTipName
+@onready var tooltip_desc = $CanvasLayer/ToolTipPanel/VBoxContainer/ToolTipDesc
+
+
 var gm: GameManager
 signal change_in_equipment(character: CharacterData)
 
@@ -65,10 +72,11 @@ signal change_in_equipment(character: CharacterData)
 
 
 func _ready():
+	
 	gm = get_tree().root.get_node("GameManager") as GameManager
 	hideMenu()
 	gm.inventory_changed.connect(_on_inventory_changed)
-
+	startMenuButton.connect("button_down", startmenu)
 	create_inventory_grid()
 	
 	ExitButton.connect("button_down", hideMenu)
@@ -117,7 +125,8 @@ func select_character_by_index(index: int):
 	current_character_index = clamp(index, 0, characters.size() - 1)
 	var chara = characters[current_character_index]
 	select_character(chara)
-	
+
+
 func select_character(chara:CharacterData):
 	selected_character = chara
 	update_equipment_slots()
@@ -127,7 +136,30 @@ func select_character(chara:CharacterData):
 		#print(eq.name)
 	KinksList.bbcode_enabled = true
 	KinksList.text = ""
+	chara.max_stamina = chara.base_max_stamina
+	chara.max_horniness = chara.base_max_horniness
+	chara.max_stress = chara.base_max_stress
 
+	chara.attack = chara.base_attack
+	chara.defense = chara.base_defense
+	chara.initiative = chara.base_initiative
+	chara.willpower = chara.base_willpower
+	chara.evasion = chara.base_evasion
+	
+	for eq in chara.equipped_items:
+		
+		chara.attack += eq.attack_bonus
+		chara.defense += eq.defense_bonus
+		chara.max_horniness += eq.Max_lust_bonus
+		chara.max_stamina += eq.Max_stamina_bonus
+		chara.max_stress += eq.Max_Guilt_bonus 
+		chara.willpower += eq.willpower_bonus
+		chara.evasion += eq.evasion_bonus
+		chara.initiative += eq.initiative_bonus 
+	
+	for buff in chara.buffs:
+		buff.apply_to(chara)
+	
 	for tag in chara.tags:
 		KinksList.text += tag + "\n"
 	Charaname.text=chara.Charaname
@@ -225,10 +257,7 @@ func select_character(chara:CharacterData):
 		else:
 			slot.visible = false
 			 
-	
-# --------------------------------------------------------------------
-# INVENTORY GRID
-# --------------------------------------------------------------------
+
 
 func create_inventory_grid():
 	inventory_grid.columns = inventory_size_x
@@ -239,7 +268,6 @@ func create_inventory_grid():
 	#print ("inventory gride created for " +str(inventory_size_x))
 
 func create_inventory_cell(index: int) -> Control:
-
 	var container = Control.new()
 	container.custom_minimum_size = Vector2(64, 64)
 
@@ -247,27 +275,32 @@ func create_inventory_cell(index: int) -> Control:
 	icon.name = "Icon"
 	icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	icon.custom_minimum_size=Vector2(120, 120)
+	icon.custom_minimum_size = Vector2(120, 120)
 	container.add_child(icon)
 
 	var btn = Button.new()
 	btn.name = "Btn"
 	btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	btn.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	btn.size=Vector2(120, 120)
-	btn.flat=true
+	btn.size = Vector2(120, 120)
+	btn.flat = true
 	
 	var emptyStyle = StyleBoxEmpty.new()
 	btn.add_theme_stylebox_override("focus", emptyStyle)
 	
 	btn.connect("pressed", func(): on_inventory_slot_pressed(index))
-	container.add_child(btn)
+	
 
+	btn.mouse_entered.connect(func(): _on_slot_hovered(index))
+	btn.mouse_exited.connect(func(): hide_tooltip())
+	
+	container.add_child(btn)
 	return container
 
-# --------------------------------------------------------------------
-# INVENTORY SLOT CLICK
-# --------------------------------------------------------------------
+func _on_slot_hovered(index: int):
+	var item = inventory_items[index]
+	var cell = inventory_grid.get_child(index)
+	show_tooltip(item, cell.global_position + Vector2(120, 0))
 
 func on_inventory_slot_pressed(index: int):
 	#if index < 0 or index >= inventory_items.size():
@@ -330,6 +363,7 @@ func place_item_in_inventory(index: int):
 	inventory_items[index] = dragged_item
 	dragged_item = temp
 	update_inventory_ui()
+	
 
 func addItemToInventory(item: Equipment):
 	for idx in range(inventory_items.size()):
@@ -337,7 +371,7 @@ func addItemToInventory(item: Equipment):
 			inventory_items[idx] = item
 			print("add item ", item.name)
 			break
-
+	
 	update_inventory_ui()
 # --------------------------------------------------------------------
 # EQUIPMENT SLOTS UI
@@ -361,6 +395,7 @@ func update_equipment_slots():
 		else:
 			icon.texture = null
 			btn.disabled = true
+	
 
 
 func unequip(slot_index: int):
@@ -380,14 +415,14 @@ func unequip(slot_index: int):
 			update_equipment_slots()
 			#print('unequip '+ item.name)
 			return
-
+	
+	select_character(selected_character)
 
 # --------------------------------------------------------------------
 # DROP SUR SLOT ÉQUIPEMENT
 # --------------------------------------------------------------------
 
 func _input(event):
-	
 	if event is InputEventMouseButton:
 		if dragged_item == null:
 			return
@@ -414,19 +449,13 @@ func try_equip_on_character() -> bool:
 	selected_character.equipped_items.append(dragged_item)
 	update_equipment_slots()
 	update_inventory_ui()
+	select_character(selected_character)
 	return true
 
-# --------------------------------------------------------------------
-# UPDATE UI
-# --------------------------------------------------------------------
+
 
 func update_inventory_ui():
-	print("update_inventory_ui_______________________________________________________")
-	
-	for item in inventory_items:
-		if item != null:
-			print ( item.name + "is in inventory")
-	
+
 	for i in range(inventory_items.size()):
 		var item = inventory_items[i]
 		var cell = inventory_grid.get_child(i)
@@ -465,3 +494,65 @@ func update_cooldown_bar(container: HBoxContainer, skill):
 		container.add_child(rect)
 func _on_inventory_changed(item: Equipment):
 	addItemToInventory(item)
+func show_tooltip(item: Equipment, cell_position: Vector2):
+	if item == null:
+		hide_tooltip()
+		return
+	
+	tooltip_name.text = item.name
+	
+	
+	
+	# Construit les stats dynamiquement
+	var stats := ""
+	if item.attack_bonus != 0:
+		stats += "[color=FF6666]  ⚔ Attaque: +%d[/color]\n" % item.attack_bonus
+	if item.defense_bonus != 0:
+		stats += "[color=6699FF]  🛡 Défense: +%d[/color]\n" % item.defense_bonus
+	if item.willpower_bonus != 0:
+		stats += "[color=CC99FF]  ✦ Volonté: +%d[/color]\n" % item.willpower_bonus
+	if item.evasion_bonus != 0:
+		stats += "[color=99FFCC]  ◎ Esquive: +%d[/color]\n" % item.evasion_bonus
+	if item.initiative_bonus != 0:
+		stats += "[color=FFFF66]  ⚡ Initiative: +%d[/color]\n" % item.initiative_bonus
+	if item.Max_stamina_bonus != 0:
+		stats += "[color=FF9966]  ♥ Stamina max: +%d[/color]\n" % item.Max_stamina_bonus
+	if item.Max_lust_bonus != 0:
+		stats += "[color=FF66AA]  ♦ Lust max: +%d[/color]\n" % item.Max_lust_bonus
+	if item.Max_Guilt_bonus != 0:
+		stats += "[color=AAAAAA]  ● Stress max: +%d[/color]\n" % item.Max_Guilt_bonus
+
+	tooltip_desc.bbcode_enabled = true
+	tooltip_desc.text = "  " + item.description if item.get("description") else "" + stats
+	
+	tooltip_panel.visible = true
+	_reposition_tooltip(cell_position)
+
+func startmenu():
+	gm.spawn_start_menu()
+	gm.current_room_node.queue_free()
+
+func hide_tooltip():
+	tooltip_panel.visible = false
+
+func _reposition_tooltip(near: Vector2):
+	
+	
+	var viewport_size = get_viewport().get_visible_rect().size
+	var tp_size = tooltip_panel.size
+	var pos = near + Vector2(-16, 0)
+	
+	# Déborde à droite → passer à gauche du slot
+	if pos.x + tp_size.x+500 > viewport_size.x:
+		pos.x = near.x - tp_size.x - 136  # 136 = largeur slot (120) + marge (16)
+		print("repo")
+	
+	# Déborde en bas → remonter
+	if pos.y + tp_size.y > viewport_size.y:
+		pos.y = viewport_size.y - tp_size.y - 8
+	
+	# Déborde en haut (si tooltip très grand)
+	if pos.y < 0:
+		pos.y = 8
+	
+	tooltip_panel.global_position = pos

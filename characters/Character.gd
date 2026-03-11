@@ -100,7 +100,7 @@ func _ready():
 
 	characterData.buffs.clear()
 	for buff in buffs:
-		buff.apply_to(self)
+		buff.apply_to(self.characterData)
 		
 func _updateSkills(updated_skills: Array[Resource] ):
 	skills.clear()
@@ -139,7 +139,7 @@ func update_stats():
 			characterData.evasion = max(0, characterData.evasion - 2)
 
 	for buff in buffs:
-		buff.apply_to(self)
+		buff.apply_to(self.characterData)
 
 	for eq in characterData.equipped_items:
 		characterData.attack += eq.attack_bonus

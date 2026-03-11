@@ -59,6 +59,7 @@ var combatEnd: bool = false
 @onready var ScreenLooseChara= $"../CanvasLayer/BadEnd"
 var cam : Camera
 var pause: bool = false
+@onready var passButton=$"../CanvasLayer/ActionPass"
 
 func _ready():
 	gm= get_tree().root.get_node("GameManager") as GameManager
@@ -72,30 +73,22 @@ func _ready():
 			enemy_positions.append(child)
 			
 	if heroes_are_ambushed:
-		show_ambush_message("You're ambushed!", Color(1, 0.2, 0.2))
+		show_ambush_message("heroes surprised!", Color(1, 0.2, 0.2))
 	elif ennemy_are_ambushed:
-		show_ambush_message("You surprise your enemies!", Color(0.2, 1, 0.2))
+		show_ambush_message("ennemies are surprised ", Color(0.2, 1, 0.2))
 	if startcombat ==true:
 		_start()
+	passButton.connect("button_down",next_turn)
 
 func show_ambush_message(text: String, _color: Color):
-	var label = Label.new()
+	var label = $"../CanvasLayer/AmbushLabel"
 	label.text = text
 	label.z_index=21
 	label.scale = Vector2(0.1, 0.1)
 	label.modulate.a = 0.0
-	label.add_theme_font_size_override("font_size", 68)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.anchor_left = 0.5
-	label.anchor_top = 0.5
-	label.anchor_right = 0.5
-	label.anchor_bottom = 0.5
-	var font: FontFile = ResourceLoader.load("res://UI/Euphorigenic.otf")
-	label.add_theme_font_override("font", font)
-	label.add_theme_font_size_override("font_size", 64)
-	label.position = get_viewport().get_visible_rect().size / 3.2
-	label.position.y -= 100
+	label.visible=true
+
+
 	add_child(label)
 	label.pivot_offset = label.size / 2
 
@@ -261,7 +254,6 @@ func next_turn():
 	
 	for chara in turn_queue:
 		chara.update_ui()
-	
 	
 
 	if current_character.characterData.current_stamina <= 0:

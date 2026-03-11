@@ -18,6 +18,6 @@ blocked_room_ids = Array[String]([])
 explored = false
 ennemikilled = false
 CampDone = false
-keyName = "keyRoom1"
+keyName = "CellarKey"
 locked = true
 metadata/_custom_type_script = "uid://oj44pgv34ji0"
