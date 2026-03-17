@@ -39,7 +39,7 @@ var selectorChara : Sprite2D
 @onready var campTexture=$Campement/CampFire2
 @onready var GoToCampement=$GoToCampement
 @onready var DoorTuto=$DoorTuto
-
+@export var showselector = true
 
 func _ready():
 	for child in $"../HeroPosition".get_children():
@@ -71,11 +71,13 @@ func _ready():
 	
 	load_characters_from_gamestat()
 	selected_character =characters[0]
+	selected_character.animate_selected()
 	if gm.current_room_Ressource.exploration_scene_history != null:
 		print("find history Scene")
 		gm.show_history_scene(gm.current_room_Ressource.exploration_scene_history)
 	
 	portrait_selector.position = portraits[0].position
+	
 	bouton_menuPerso.connect("button_down", showMenuPerso)
 	
 	if donjon_map== null:
@@ -163,9 +165,11 @@ func _swap_characters(chara1: CharaExplo, chara2: CharaExplo) -> void:
 	selectorChara.position= selected_character.CharaPosition.charaUI.global_position if selected_character.CharaPosition else Vector2.ZERO
 	#selectorChara.position.y -=46
 func selectCharacter(thechara: CharaExplo):
+	
 	thechara.animate_selected()
 	var chara = thechara.characterData
 	if !move_mode:
+		selected_character.unselected()
 		selected_character = thechara
 		var i = characters.find(thechara)
 		portrait_selector.position = portraits[i].position
@@ -267,6 +271,8 @@ func create_selector_sprite():
 	selectorChara.scale= Vector2(0.9,1.1)
 	selectorChara.offset.y =-4.0
 	selectorChara.z_index = 3
+	if !showselector:
+		selectorChara.modulate.a=0.0
 func campement_over():
 	GoToCampement.scale= Vector2(0.0,0.0)
 	GoToCampement.visible=true

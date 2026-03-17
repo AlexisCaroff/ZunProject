@@ -60,6 +60,9 @@ var combatEnd: bool = false
 var cam : Camera
 var pause: bool = false
 @onready var passButton=$"../CanvasLayer/ActionPass"
+var endTurn_affinity_reaction_queue: Array[Callable] = []
+var startSkills_affinity_reaction_queue: Array[Callable]=[]
+
 
 func _ready():
 	gm= get_tree().root.get_node("GameManager") as GameManager
@@ -78,7 +81,7 @@ func _ready():
 		show_ambush_message("ennemies are surprised ", Color(0.2, 1, 0.2))
 	if startcombat ==true:
 		_start()
-	passButton.connect("button_down",next_turn)
+	passButton.connect("button_down",PassButtonDown)
 
 func show_ambush_message(text: String, _color: Color):
 	var label = $"../CanvasLayer/AmbushLabel"
@@ -215,6 +218,8 @@ func build_turn_queue(characters: Array[Character]) -> Array[Character]:
 	return queue
 func is_pause() -> bool:
 	return pause
+	
+	
 func next_turn():
 	
 	while is_animation_playing():
@@ -222,23 +227,34 @@ func next_turn():
 
 	_check_victory()
 	_check_defeat()
+	
 	while is_pause():
 		await get_tree().process_frame
+		
 	if combatEnd:
 		return
+	
 	turnNumber += 1
+	
+	
 	if turn_queue.is_empty():
 		turn_queue = build_turn_queue(heroes + enemies)
 		ui.update_turn_queue_ui(turn_queue)
 	ui.update_turn_queue_ui(turn_queue)
 	current_character = turn_queue.pop_front()
+	
+	
 	for char in turn_queue:
 		char.resetVisuel()
+		
+		
 	if current_character.characterData.acte_twice:
 		current_character.characterData.acte_twice=false
 		turn_queue.push_front(current_character)
 		print ("Hunter Acte_twice")
 	await get_tree().process_frame
+	
+	
 	for position in enemy_positions:
 		if position.occupant==null :
 			position.CharaUI.visible=false
@@ -250,33 +266,26 @@ func next_turn():
 		selectorChara.modulate = Color(0.9,0.95,0.7)
 	else:
 		selectorChara.modulate = Color(0.1,0.1,0.1)
+		
 	current_character.start_turn()
 	
 	for chara in turn_queue:
 		chara.update_ui()
-	
-
+		
 	if current_character.characterData.current_stamina <= 0:
 		ui.log(current_character.characterData.Charaname +" is tired")
-		current_character.update_buffs()
-		while is_animation_playing():
-			await get_tree().process_frame
-		turn_queue.append(current_character)
-		next_turn()
+		end_currentChara_Turn()
 		return
+		
 	if current_character.characterData.current_horniness >= 100: 
 		current_character.characterData.current_horniness =100
 		print (current_character.characterData.Charaname + "is too horny to fight")
 		ui.log(current_character.characterData.Charaname +" is too horny to fight")
-		current_character.update_buffs()
 		for button:Button in ui.skill_buttons :
 			button.disabled = true
-		while is_animation_playing():
-			print ("-----")
-			await get_tree().process_frame
+		
 		await get_tree().create_timer(1.5).timeout
-		turn_queue.append(current_character)
-		next_turn()
+		end_currentChara_Turn()
 		return
 
 	
@@ -289,13 +298,9 @@ func next_turn():
 	else:
 		if current_character.characterData.stun == false:
 			ui.update_ui_for_current_character(current_character)
-			await get_tree().create_timer(1.0).timeout
+			await get_tree().create_timer(1.5).timeout
 			current_character.play_ai_turn(heroes,enemies)
-			await get_tree().create_timer(2.5).timeout
-			while is_animation_playing():
-				await get_tree().process_frame
-			turn_queue.append(current_character)
-			next_turn()
+			end_currentChara_Turn()
 	if current_character.characterData.stun == true:
 		
 		ui.log(current_character.characterData.Charaname +" is stun")
@@ -304,17 +309,26 @@ func next_turn():
 			ui.log(current_character.characterData.Charaname +" is surprised")
 		for button:Button in ui.skill_buttons :
 			button.disabled = true
-		current_character.update_buffs()
-		current_character.sprite.self_modulate=Color(1,1,1,1)
-		while is_animation_playing():
-			await get_tree().process_frame
-		await get_tree().create_timer(1.5).timeout
-		turn_queue.append(current_character)
+		
+		
+		
+		
 		current_character.characterData.stun = false
 		
-		next_turn()
+		end_currentChara_Turn()
 		
 		return
+
+func end_currentChara_Turn():
+	
+	current_character.update_buffs()
+	current_character.update_ui()
+	while is_animation_playing():
+		await get_tree().process_frame
+	await get_tree().create_timer(1.5).timeout
+	turn_queue.append(current_character)
+	await flush_endTurn_affinity_reactions()
+	next_turn()
 
 var active_animations := 0
 
@@ -421,32 +435,30 @@ func start_target_selection(skill: Skill):
 func _on_target_selected(targets: Array[PositionSlot]):
 	stop_target_selection()
 	match combat_state: 
-		CombatState.SELECTING_FIRST_TARGET :
+		CombatState.SELECTING_FIRST_TARGET:
 			if !pending_skill.two_target_Type:
-				if pending_skill.name != "move" : #&& pending_skill.name != "ChangeMask" :
-					var slot
-					var occupied_slots = targets.filter(func(slot): return slot.occupant != null)
-					
-					if occupied_slots.size() > 0:
-						slot = occupied_slots[0] 
+				if pending_skill.name != "move":
+					var occupied_slots = targets.filter(func(s): return s.occupant != null)
+					var slot = occupied_slots[0] if occupied_slots.size() > 0 else null
 					current_character.sprite.texture = current_character.current_skill.ImageSkill
-					await current_character.animate_attack(slot.occupant,current_character.current_skill.duration)
-				
+					await current_character.animate_attack(slot.occupant, current_character.current_skill.duration)
+
+				# Les effets sont appliqués — les réactions sont mises en file, pas encore jouées
 				for target in targets:
 					if target.occupant != null:
-						pending_skill.use(target)
-						print(target.occupant.characterData.Charaname)
+						await pending_skill.use(target)   # ← await ici
 						target.occupant.update_ui()
 						ui.update_ui_for_current_character(current_character)
+
 				if pending_skill.attack_sound != null:
-					audio.stream= pending_skill.attack_sound
-					#audio.pitch_scale = randf_range(0.9,1.0)
+					audio.stream = pending_skill.attack_sound
 					audio.play()
+
 				
+
 				ui.log(pending_skill.name)
 				pending_skill.end_turn(self)
-				
-				pending_skill=null
+				pending_skill = null
 			else:
 				pending_skill.target1 = targets
 				combat_state = CombatState.SELECTING_SECOND_TARGET
@@ -462,11 +474,11 @@ func _on_target_selected(targets: Array[PositionSlot]):
 			ui.log(pending_skill.name)
 			stop_target_selection()
 			for target in pending_skill.target1:
-				pending_skill.use(target)
+				await pending_skill.use(target)
 				print(target.occupant.characterData.Charaname)
 				target.occupant.update_ui()
 			for target2 in targets:
-				pending_skill.use(target2,true)
+				await pending_skill.use(target2,true)
 				print(target2.occupant.characterData.Charaname)
 				target2.occupant.update_ui()
 			pending_skill.end_turn(self)
@@ -521,3 +533,22 @@ func get_hero_by_name(chara_name: String) -> Character:
 		if hero.characterData.Charaname == chara_name:
 			return hero
 	return null
+func queue_endTurn_affinity_reaction(reaction: Callable) -> void:
+	endTurn_affinity_reaction_queue.append(reaction)
+
+func queue_startSkills_affinity_reaction (reaction: Callable) -> void:
+	startSkills_affinity_reaction_queue.append(reaction)
+	
+func flush_startSkills_affinity_reaction()->void:
+	for reaction in startSkills_affinity_reaction_queue:
+		await reaction.call()
+		
+	startSkills_affinity_reaction_queue.clear()
+	
+func flush_endTurn_affinity_reactions() -> void:
+	for reaction in endTurn_affinity_reaction_queue:
+		await reaction.call()
+	endTurn_affinity_reaction_queue.clear()
+	
+func PassButtonDown():
+	pass

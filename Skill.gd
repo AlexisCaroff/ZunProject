@@ -141,63 +141,75 @@ func pay_cost():
 		reducecost =0
 	owner.update_ui()
 
-func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = effects)-> PositionSlot:
-	var heallovedOnesTrigger : bool = false
+func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = effects) -> PositionSlot:
+	var heallovedOnesTrigger: bool = false
+
 	if !combatManager:
 		combatManager = target.occupant.combat_manager
+
 	for effect in effects_array:
 		if effect is DamageEffect:
-			var Hunter_value :int = owner.characterData.affinity.get("Hunter", 0)
-			var Priestess_value :int = target.occupant.characterData.affinity.get("Priestess", 0)
-			var warrior_value :int = target.occupant.characterData.affinity.get("Warrior", 0)
+			var Hunter_value: int = owner.characterData.affinity.get("Hunter", 0)
+			var Priestess_value: int = target.occupant.characterData.affinity.get("Priestess", 0)
+			var warrior_value: int = target.occupant.characterData.affinity.get("Warrior", 0)
+
 			if Hunter_value > 50:
 				var Hunter = combatManager.get_hero_by_name("Hunter")
-				if Hunter :
-						if randf() < 0.5:
-							await Hunter.helpTarget(owner.characterData.Name)
-							var littlebuff := load("res://characters/kink/littleattackbuff.tres")
-							owner.add_buff(littlebuff)
-							
-			if warrior_value > 50:
-					
-					var warrior = combatManager.get_hero_by_name("Warrior")
-					if warrior:
-						if randf() < 0.5:
-							await warrior.protect(target.occupant.characterData.Name)
-							target = warrior.get_current_slot()
-			
-			if Priestess_value > 5:
-					var Priestess = combatManager.get_hero_by_name("Priestess")
-					if Priestess:
-						heallovedOnesTrigger=true
-						
+				if Hunter and randf() < 0.5:
+					var buff_ref := load("res://characters/kink/littleattackbuff.tres")
+					var owner_ref := owner  # capture locale pour le Callable
+					combatManager.queue_startSkills_affinity_reaction(func():
+						await Hunter.play_affinity_reaction("You are the best " + owner_ref.characterData.Charaname + " !")
+						owner_ref.add_buff(buff_ref)
+					)
+
+			if warrior_value > 5:
+				var warrior = combatManager.get_hero_by_name("Warrior")
+				if warrior and randf() < 10.5:
+					var target_name := target.occupant.characterData.Name
+					combatManager.queue_startSkills_affinity_reaction(func():
+						await warrior.play_affinity_reaction("I protect you " + target_name + " !")
+						  # retarget si nécessaire
+					)
+				target = warrior.get_current_slot()
+
+			if Priestess_value > 50:
+				var Priestess = combatManager.get_hero_by_name("Priestess")
+				if Priestess:
+					heallovedOnesTrigger = true
+	await combatManager.flush_startSkills_affinity_reaction()
+	# Application des effets normaux — inchangée
 	if not skill_effect_overridden:
 		for tag in owner.characterData.tags:
-					if tag == "degrader":
-						if target != owner._current_slot:
-							target.occupant.characterData.current_stress +=2
-						
+			if tag == "degrader" and target != owner._current_slot:
+				target.occupant.characterData.current_stress += 2
 		for effect in effects_array:
 			effect.apply(owner, target)
-	if heallovedOnesTrigger:
-		if randf() < 0.3:
-			var Priestess = combatManager.get_hero_by_name("Priestess")
-			Priestess.Heal(target.occupant.characterData.Name)
-			await target.occupant.animate_heal(10, Priestess)
-			target.occupant.characterData.current_stamina +=10
-	
-	var Mistic_value :int = owner.characterData.affinity.get("Mystic", 0)
-	if Mistic_value > 5:
-		if !combatManager:
-			combatManager = target.occupant.combat_manager
-		if randf() < 0.3:
-			var Mystic = combatManager.get_hero_by_name("Mystic")
-			Mystic.inspire(owner.characterData.Name)
-			if current_cooldown>0:
-				current_cooldown -=1
-			
-	return target
 
+	# Priestess en file après les dégâts
+	if heallovedOnesTrigger and randf() < 0.99:
+		var Priestess = combatManager.get_hero_by_name("Priestess")
+		var target_ref := target
+		combatManager.queue_endTurn_affinity_reaction(func():
+			await Priestess.play_affinity_reaction("Don't worry " + target_ref.occupant.characterData.Charaname + " !")
+			target_ref.occupant.characterData.current_stamina += 10
+			await target_ref.occupant.animate_heal(10, Priestess)
+		)
+		heallovedOnesTrigger= false
+
+	# Mystic en file en dernier
+	var Mystic_value: int = owner.characterData.affinity.get("Mystic", 0)
+	if Mystic_value > 5:
+		var Mystic = combatManager.get_hero_by_name("Mystic")
+		if Mystic and randf() < 0.3:
+			var skill_ref := self
+			combatManager.queue_endTurn_affinity_reaction(func():
+				await Mystic.play_affinity_reaction("Good job " + skill_ref.owner.characterData.Name + " !")
+				if skill_ref.current_cooldown > 0:
+					skill_ref.current_cooldown -= 1
+			)
+
+	return target
 func _apply_second_effect(thetarget2: PositionSlot)-> PositionSlot:
 	#print("apply second effect")
 	thetarget2 = await _apply_effect(thetarget2, second_effects)

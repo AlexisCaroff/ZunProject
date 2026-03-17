@@ -1,9 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://cifpdtrct42ek"]
+[gd_scene load_steps=9 format=3 uid="uid://cifpdtrct42ek"]
 
 [ext_resource type="Script" uid="uid://ckeut5nsvwp2s" path="res://UI/chara_combat_ui.gd" id="1_n50uc"]
 [ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="1_qnl5p"]
 [ext_resource type="Texture2D" uid="uid://bri15xc6cn1ul" path="res://actions/hornyJauge.png" id="2_n50uc"]
 [ext_resource type="Texture2D" uid="uid://bk1gu5cgtgkfy" path="res://actions/hornyJaugePleine.png" id="3_50q8f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_72423"]
+bg_color = Color(0.292969, 0.292969, 0.292969, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkmsr"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n50uc"]
 bg_color = Color(0.372549, 0.372549, 0.372549, 1)
@@ -62,14 +68,16 @@ layout_mode = 2
 texture = ExtResource("1_qnl5p")
 
 [node name="HPProgressBar" type="ProgressBar" parent="."]
-modulate = Color(1, 0.714937, 0, 1)
+modulate = Color(0.87, 0.64264, 0.4437, 1)
 offset_left = -34.0
 offset_top = 1.02985
 offset_right = 62.0
 offset_bottom = 11.0299
 scale = Vector2(0.700702, 0.700702)
 mouse_filter = 2
-value = 100.0
+theme_override_styles/background = SubResource("StyleBoxFlat_72423")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vkmsr")
+value = 30.0
 show_percentage = false
 
 [node name="LustProgressBar" type="ProgressBar" parent="."]

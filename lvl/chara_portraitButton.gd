@@ -12,6 +12,7 @@ var normal_scale: Vector2
 func _ready():
 	button.connect("mouse_entered", over)
 	button.connect("mouse_exited",exit)
+	button.connect("button_down",openMenuChara)
 	normal_scale= scale
 	pivot_offset = size / 2
 	
@@ -26,9 +27,10 @@ func over():
 	tween.tween_property(self, "self_modulate", hover_color, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
 	
-func exit():
-	
-	
+func exit():	
 	var tween = create_tween()
 	tween.tween_property(self, "scale", normal_scale, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "self_modulate", normal_color, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+func openMenuChara():
+	var menu =$"../MenuPerso"
+	menu.showMenu()

@@ -162,19 +162,12 @@ func get_equipement_cooldown_reduction_for(skill: Skill) -> int: # for equipemen
 			reduction += eq.skill_specific_cooldown[skill.name]
 
 	return reduction
-func protect(Chara_Name:String) -> void:
+func play_affinity_reaction(bark_text: String) -> void:
+	emit_signal("skill_animation_started")
 	await animate_start_Turn()
-	await show_bark("I protect you "+ Chara_Name+ " !")
-
-func Heal(Chara_Name:String) -> void:
-	await animate_start_Turn()
-	await show_bark("Don't worry "+ Chara_Name+ " !")
-func helpTarget(Chara_Name:String) -> void:
-	await animate_start_Turn()
-	await show_bark("you are the best  "+ Chara_Name+ " !")
-func inspire(Chara_Name:String) -> void:
-	await animate_start_Turn()
-	await show_bark("Good job "+ Chara_Name+ " !")
+	await show_bark(bark_text)
+	emit_signal("skill_animation_finished")
+	
 func show_bark(text:String):
 	if not characterData or characterData.bark_scene == null:
 		return
@@ -187,7 +180,7 @@ func show_bark(text:String):
 	current_bark.set_text(text)
 	var bark_offset_y := -240
 	current_bark.position = Vector2(-60, bark_offset_y)
-	await get_tree().create_timer(0.5)
+	await get_tree().create_timer(1.0)
 
 func slur():
 	if characterData:
@@ -389,7 +382,7 @@ func start_turn():
 	if not characterData:
 		return
 	print(characterData.Charaname + " start turn")
-
+	Selector.self_modulate.a =1.0
 	var dmg = 0
 	var dmgHorny = 0
 	for buff in buffs:
@@ -398,9 +391,9 @@ func start_turn():
 		if buff.name == "poisonHorny":
 			dmgHorny += buff.amount
 	if dmg > 0:
-		take_damage(self, DamageEffect.Stat.STAMINA, dmg, false)
+		await take_damage(self, DamageEffect.Stat.STAMINA, dmg, false)
 	elif dmgHorny > 0:
-		take_damage(self, DamageEffect.Stat.HORNY, dmgHorny, false)
+		await take_damage(self, DamageEffect.Stat.HORNY, dmgHorny, false)
 	else:
 		await animate_start_Turn()
 
@@ -480,14 +473,14 @@ func take_damage(source: Character, stat: int, amount: int, typeMagic:bool, skil
 			for eq in characterData.equipped_items:
 				eq.on_receive_attack(self, source, damage)
 			
-			animate_get_horny(damage,source)
+			await animate_get_horny(damage,source)
 			update_ui()
 
 		DamageEffect.Stat.STRESS:
 			for tag in characterData.tags:
 				if tag == "exib":
 					amount -= 2
-					take_damage(self, DamageEffect.Stat.STAMINA, 2, false)
+					await take_damage(self, DamageEffect.Stat.STAMINA, 2, false)
 					characterData.attack -= exibBonusAtt
 					exibBonusAtt = floor(characterData.current_stress / 10)
 					characterData.attack += exibBonusAtt
@@ -611,12 +604,7 @@ func animate_take_damage(damage:int, source:Character, usedSkill :Skill = null):
 	if effect_instance.has_method("setup"):
 		effect_instance.setup(damage, Color(1,0.4,0.3))
 
-	var normal_size = CharaScale
-	var big_size= Vector2(normal_size.x*1.1,normal_size.y*1.3)
-	var start_pos = position
-	var direction = (source.global_position - global_position).normalized()
-	var offset = direction * 10
-	var dam_pos = start_pos + offset
+	
 	await get_tree().create_timer(0.5).timeout
 	if source== self:
 		if characterData.current_stamina>0:
@@ -784,7 +772,7 @@ func _on_attack(target: Character, _duration: float =1.0):
 	tween = create_tween()
 	tween.set_ease(Tween.EASE_IN)
 	if !has_heal:
-		print("is heal")
+		print("is not heal")
 		if target.characterData.current_stamina >0:
 			target.sprite.texture =target.characterData.Hit_texture
 			target.Selector.texture = target.characterData.Hit_texture

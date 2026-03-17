@@ -1,45 +1,42 @@
 extends CampEffect
 class_name CampDialogueEffect
 
-@export var name : String
-@export_file("*.txt") var dialoguePriest : String
-@export_file("*.txt") var dialogueMystic : String
-@export_file("*.txt") var dialogueHunter : String
-@export_file("*.txt") var dialogueWarrior : String
+@export var name: String
+@export_file("*.txt") var dialoguePriest: String
+@export_file("*.txt") var dialogueMystic: String
+@export_file("*.txt") var dialogueHunter: String
+@export_file("*.txt") var dialogueWarrior: String
 
 func apply(user: CharaCamp, target: CharaCamp):
 	var camp = user.camp
-	for chara in camp.characters:
-		chara.set_targetable(false)
 	if not camp:
 		return
 
-	var file_path := ""
+	for chara in camp.characters:
+		chara.set_targetable(false)
 
-	# Choix du texte en fonction de la classe ou du nom du target
+	var file_path := ""
 	match target.characterData.Charaname:
-		"Priestess":  file_path = dialoguePriest
-		"Mystic":  file_path = dialogueMystic
-		"Hunter":  file_path = dialogueHunter
-		"Warrior": file_path = dialogueWarrior
-		_: 
-			print(" Aucun dialogue défini pour ", target.Charaname)
+		"Priestess": file_path = dialoguePriest
+		"Mystic":    file_path = dialogueMystic
+		"Hunter":    file_path = dialogueHunter
+		"Warrior":   file_path = dialogueWarrior
+		_:
+			print("Aucun dialogue défini pour ", target.characterData.Charaname)
 			return
 
-
 	var dialogue_manager: DialogueManager = camp.get_node_or_null("DialogueManager")
+	if not dialogue_manager or file_path == "":
+		return
 
 	target.characterData.affinity[user.characterData.Charaname] += 20
 	user.characterData.affinity[target.characterData.Charaname] += 20
-	if dialogue_manager and file_path != "":
-			dialogue_manager.load_dialogue(file_path)
-			dialogue_manager.participants.clear()
-			dialogue_manager.participants.append(user.characterData.Charaname)
-			dialogue_manager.participants.append(target.characterData.Charaname)
-			dialogue_manager.start_dialogue()
 
-		
-			dialogue_manager.dialogue_finished.connect(func():
-				camp.After_camp_skill(user.camp.skillused),
-				CONNECT_ONE_SHOT
-			)
+	# load_dialogue détecte automatiquement les participants et configure le layout
+	dialogue_manager.load_dialogue(file_path)
+	dialogue_manager.start_dialogue()
+
+	dialogue_manager.dialogue_finished.connect(
+		func(): camp.After_camp_skill(user.camp.skillused),
+		CONNECT_ONE_SHOT
+	)

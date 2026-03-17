@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterData" load_steps=20 format=3 uid="uid://b5k1alktrg3t4"]
 
-[ext_resource type="Texture2D" uid="uid://cbtwm47mnjttj" path="res://characters/charatexture/CroiséBody2.png" id="1_q5t8p"]
+[ext_resource type="Texture2D" uid="uid://c32ucvj4qas4v" path="res://characters/portraits/PORTRAIT_hero_warrior.png" id="1_q5t8p"]
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_qo24v"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_elmwn"]
 [ext_resource type="Texture2D" uid="uid://c18klaue4evao" path="res://characters/charatexture/demo characters/HERO_warrior_hit.png" id="2_q5t8p"]

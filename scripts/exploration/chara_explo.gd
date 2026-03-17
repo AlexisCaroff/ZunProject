@@ -92,9 +92,10 @@ func animate_heal(damage:int, _source:CharaExplo, color=null):
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	await tween.finished
 	emit_signal("skill_animation_finished")
-	
+
 func animate_selected():
 	emit_signal("skill_animation_started")
+	selector.self_modulate.a =1.0
 	var tween := create_tween() as Tween
 	var CharaScale = self.scale
 	var normal_size = CharaScale
@@ -103,3 +104,5 @@ func animate_selected():
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	await tween.finished
 	emit_signal("skill_animation_finished")
+func unselected():
+	selector.self_modulate.a =0.0

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bg44l1eibyvid"]
+[gd_scene load_steps=8 format=3 uid="uid://bg44l1eibyvid"]
 
 [ext_resource type="Script" uid="uid://2yw45k1rwvdf" path="res://DialogueUI.gd" id="1_6e3n1"]
-[ext_resource type="Texture2D" uid="uid://dli75wc6gnurn" path="res://characters/portraits/POTRIAT_hero_priestess.png" id="2_mr142"]
-[ext_resource type="Texture2D" uid="uid://c3g5ytg2lrny1" path="res://characters/portraits/POTRIAT_hero_warrior.png" id="3_l3nt5"]
+[ext_resource type="Texture2D" uid="uid://xbjwv5qg2xmp" path="res://characters/portraits/PORTRAIT_hero_hunter.png" id="2_om3t3"]
+[ext_resource type="Texture2D" uid="uid://dx8h5r3u15vy5" path="res://characters/portraits/PORTRAIT_hero_priestess.png" id="3_l3nt5"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="3_om3t3"]
 [ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="3_vl2if"]
+[ext_resource type="Texture2D" uid="uid://diwmoyaawsxq6" path="res://characters/portraits/PORTRAIT_hero_mystic.png" id="4_tvu71"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="5_om3t3"]
 
 [node name="DialogueUI" type="Control"]
@@ -27,23 +28,48 @@ offset_bottom = 173.0
 scale = Vector2(2.07695, 4.90172)
 color = Color(0, 0, 0, 0.580392)
 
+[node name="Portrait3" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 140.715
+offset_top = -91.5138
+offset_right = 1238.71
+offset_bottom = 1272.49
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("2_om3t3")
+expand_mode = 1
+
 [node name="Portrait" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -224.356
-offset_top = -258.797
-offset_right = 1370.64
-offset_bottom = 1789.2
+offset_left = -170.235
+offset_top = -91.5138
+offset_right = 927.765
+offset_bottom = 1272.49
 scale = Vector2(0.65, 0.65)
-texture = ExtResource("2_mr142")
+texture = ExtResource("3_l3nt5")
+expand_mode = 1
+
+[node name="Portrait4" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 931.867
+offset_top = -107.0
+offset_right = 2063.87
+offset_bottom = 1300.0
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("4_tvu71")
+expand_mode = 1
+flip_h = true
 
 [node name="Portrait2" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 1025.35
-offset_top = -258.797
-offset_right = 2620.35
-offset_bottom = 1789.2
+offset_left = 1293.99
+offset_top = -107.0
+offset_right = 2425.99
+offset_bottom = 1300.0
 scale = Vector2(0.65, 0.65)
 texture = ExtResource("3_l3nt5")
+expand_mode = 1
 flip_h = true
 
 [node name="ColorRect3" type="ColorRect" parent="."]
@@ -54,6 +80,14 @@ offset_right = 897.0
 offset_bottom = 847.0
 scale = Vector2(2.07695, 4.90172)
 color = Color(0, 0, 0, 0.763)
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+offset_left = 29.0
+offset_top = 697.0
+offset_right = 321.0
+offset_bottom = 801.0
+texture = ExtResource("3_vl2if")
+expand_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -85,9 +119,9 @@ color = Color(0.672005, 0.66772, 0.643124, 1)
 [node name="Speaker" type="Label" parent="."]
 layout_mode = 0
 offset_left = 54.0
-offset_top = 804.928
+offset_top = 709.478
 offset_right = 296.0
-offset_bottom = 867.928
+offset_bottom = 772.478
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("5_om3t3")
 theme_override_font_sizes/font_size = 50
@@ -121,7 +155,7 @@ grow_vertical = 2
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 132.0
-offset_top = 861.0
+offset_top = 814.0
 offset_right = 1794.0
 offset_bottom = 1039.0
 theme_override_fonts/normal_font = ExtResource("5_om3t3")

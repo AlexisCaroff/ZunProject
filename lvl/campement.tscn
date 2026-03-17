@@ -589,7 +589,6 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_xthm3")
 flat = true
 
 [node name="MenuPerso" parent="." instance=ExtResource("49_yy5dy")]
-visible = false
 z_index = 20
 offset_left = -6.0
 offset_top = 18.0

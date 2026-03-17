@@ -45,6 +45,7 @@ offset_top = 154.0
 offset_right = 488.0
 offset_bottom = 949.0
 theme_override_constants/separation = 5
+alignment = 1
 
 [node name="ButtonStart" type="Button" parent="CanvasLayer/background2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
@@ -56,6 +57,7 @@ flat = true
 script = ExtResource("4_v1j00")
 
 [node name="Buttonoption" type="Button" parent="CanvasLayer/background2/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_11mpg")
@@ -69,11 +71,13 @@ custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_11mpg")
 theme_override_font_sizes/font_size = 35
-text = "Gallerie"
+disabled = true
+text = "Pictures Gallery "
 flat = true
 script = ExtResource("4_v1j00")
 
 [node name="ButtonGlossaire" type="Button" parent="CanvasLayer/background2/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_11mpg")
@@ -83,6 +87,7 @@ flat = true
 script = ExtResource("4_v1j00")
 
 [node name="ButtonDitactitiel" type="Button" parent="CanvasLayer/background2/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_11mpg")

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterData" load_steps=21 format=3 uid="uid://uf5x5dpfh5ln"]
 
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_3p432"]
-[ext_resource type="Texture2D" uid="uid://xil5mbkowvn" path="res://characters/charatexture/hunter2.png" id="1_y4sil"]
+[ext_resource type="Texture2D" uid="uid://xbjwv5qg2xmp" path="res://characters/portraits/PORTRAIT_hero_hunter.png" id="1_404pk"]
 [ext_resource type="Texture2D" uid="uid://dlo2fppwhny1b" path="res://characters/charatexture/demo characters/HERO_hunter_hit.png" id="2_404pk"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_y4sil"]
 [ext_resource type="Resource" uid="uid://mkaq7ws2yox8" path="res://actions/CampSkill/ActeTwiceSkill.tres" id="3_404pk"]
@@ -29,7 +29,7 @@ explorationPortrait = ExtResource("10_j4cyw")
 dead_portrait_texture = ExtResource("9_4vg1p")
 Hit_texture = ExtResource("2_404pk")
 initiative_icon = ExtResource("10_j4cyw")
-Dialogue_texture = ExtResource("1_y4sil")
+Dialogue_texture = ExtResource("1_404pk")
 textureCamp = ExtResource("20_404pk")
 Name = "Kalid"
 Charaname = "Hunter"
