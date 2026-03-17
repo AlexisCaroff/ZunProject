@@ -31,8 +31,8 @@ metadata/_custom_type_script = "uid://cwdlfpy6jfr4w"
 
 [resource]
 script = ExtResource("2_fyxek")
-name = "Dialogue"
-description = "engage une discution"
+name = "Confession"
+description = ""
 icon = ExtResource("6_4dxr3")
 cost = 2
 standarEnd = true

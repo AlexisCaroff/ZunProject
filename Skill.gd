@@ -6,6 +6,7 @@ class_name Skill
 @export var description: String = "Inflige des dégâts à un ennemi"
 @export var icon: Texture2D
 @export var attack_sound: AudioStream 
+@export var barkSkill:= ""
 enum position_requirement {
 	ANY,      
 	FRONT,    
@@ -159,7 +160,7 @@ func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = eff
 					var buff_ref := load("res://characters/kink/littleattackbuff.tres")
 					var owner_ref := owner  # capture locale pour le Callable
 					combatManager.queue_startSkills_affinity_reaction(func():
-						await Hunter.play_affinity_reaction("You are the best " + owner_ref.characterData.Charaname + " !")
+						await Hunter.play_affinity_reaction("there ! target that spot ! " + owner_ref.characterData.Charaname + " !")
 						owner_ref.add_buff(buff_ref)
 					)
 
@@ -168,7 +169,7 @@ func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = eff
 				if warrior and randf() < 10.5:
 					var target_name := target.occupant.characterData.Name
 					combatManager.queue_startSkills_affinity_reaction(func():
-						await warrior.play_affinity_reaction("I protect you " + target_name + " !")
+						await warrior.play_affinity_reaction("look out " + target_name + " !")
 						  # retarget si nécessaire
 					)
 				target = warrior.get_current_slot()
@@ -187,11 +188,11 @@ func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = eff
 			effect.apply(owner, target)
 
 	# Priestess en file après les dégâts
-	if heallovedOnesTrigger and randf() < 0.99:
+	if heallovedOnesTrigger and randf() < 0.5:
 		var Priestess = combatManager.get_hero_by_name("Priestess")
 		var target_ref := target
 		combatManager.queue_endTurn_affinity_reaction(func():
-			await Priestess.play_affinity_reaction("Don't worry " + target_ref.occupant.characterData.Charaname + " !")
+			await Priestess.play_affinity_reaction("May Zun shine on " + target_ref.occupant.characterData.Charaname + " !")
 			target_ref.occupant.characterData.current_stamina += 10
 			await target_ref.occupant.animate_heal(10, Priestess)
 		)
@@ -204,7 +205,7 @@ func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = eff
 		if Mystic and randf() < 0.3:
 			var skill_ref := self
 			combatManager.queue_endTurn_affinity_reaction(func():
-				await Mystic.play_affinity_reaction("Good job " + skill_ref.owner.characterData.Name + " !")
+				await Mystic.play_affinity_reaction(" Sprites please aid " + skill_ref.owner.characterData.Name + " strenght !")
 				if skill_ref.current_cooldown > 0:
 					skill_ref.current_cooldown -= 1
 			)

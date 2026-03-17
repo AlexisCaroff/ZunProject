@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterData" load_steps=20 format=3 uid="uid://feukv2xbt3m6"]
 
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_3bk0l"]
-[ext_resource type="Texture2D" uid="uid://62i56yrriret" path="res://characters/charatexture/occultiste2.png" id="1_woow1"]
+[ext_resource type="Texture2D" uid="uid://diwmoyaawsxq6" path="res://characters/portraits/PORTRAIT_hero_mystic.png" id="1_woow1"]
 [ext_resource type="Texture2D" uid="uid://chqvuss7wfueq" path="res://characters/charatexture/demo characters/HERO_mystic_cc_hit.png" id="2_woow1"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_xua2o"]
 [ext_resource type="Resource" uid="uid://cryoy3w5uet08" path="res://actions/CampSkill/buffskillCamp.tres" id="3_woow1"]
@@ -69,4 +69,6 @@ max_scale = 1.0
 corruption = 0
 camp_skill_resources = Array[ExtResource("2_xua2o")]([ExtResource("3_woow1"), ExtResource("4_jg4jp"), ExtResource("5_n62aw"), ExtResource("6_vs65e")])
 bark_scene = ExtResource("1_3bk0l")
-taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide open!", "You fight like a wet noodle!", "Oops! Did that hurt?"]
+taunts = ["Spirties grand me strenght"]
+reaction = ["", "", ""]
+affinityReaction = ["", "", ""]

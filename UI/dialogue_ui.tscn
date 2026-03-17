@@ -82,6 +82,7 @@ scale = Vector2(2.07695, 4.90172)
 color = Color(0, 0, 0, 0.763)
 
 [node name="TextureRect3" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 29.0
 offset_top = 697.0
 offset_right = 321.0

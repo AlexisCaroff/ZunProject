@@ -8,7 +8,7 @@ func showLoot(items: Array[Equipment], gm:GameManager):
 	for i in min(gm.characters.size(), $HBoxContainer.get_child_count()):
 		var chara = gm.characters[i]
 		for key in chara.affinity:
-				chara.affinity[key] += 20
+				chara.affinity[key] += 5
 		var portrait_rect: TextureRect = $HBoxContainer.get_child(i).get_node("chara")
 		portrait_rect.texture = chara.explorationPortrait
 		portrait_rect.visible=true

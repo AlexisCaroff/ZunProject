@@ -79,5 +79,15 @@ var acte_twice : bool =false
 	"Oops! Did that hurt?",
 	
 ]
+@export var reaction := [
+	"",
+	"",
+	""
+]
+@export var affinityReaction := [
+	"",
+	"",
+	""
+]
 var buffs: Array[Buff] = []
 var current_bark: Bark = null
