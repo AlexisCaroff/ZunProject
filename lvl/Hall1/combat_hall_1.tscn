@@ -29,7 +29,6 @@ offset_right = -6.0
 offset_bottom = 18.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 follow_viewport_enabled = true
 
 [node name="Intro2" type="Sprite2D" parent="CanvasLayer"]

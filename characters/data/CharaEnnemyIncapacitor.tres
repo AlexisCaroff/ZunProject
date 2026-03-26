@@ -1,0 +1,75 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=16 format=3 uid="uid://dqtcfynrhhbmj"]
+
+[ext_resource type="Texture2D" uid="uid://dw6mlmcxoge8o" path="res://characters/charatexture/demo characters/ENEMY_temptress_hit.png" id="1_wu1tc"]
+[ext_resource type="Script" uid="uid://db1m8vwgp38yx" path="res://characters/charatexture/braines/Ai_brain_Support.gd" id="2_0pyt8"]
+[ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="3_hh3cm"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="4_6n72b"]
+[ext_resource type="Texture2D" uid="uid://djdgehyta1mx" path="res://characters/charatexture/demo characters/ENEMY_temptress_down.png" id="5_sf87c"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_ln5hi"]
+[ext_resource type="Texture2D" uid="uid://bodt30r3mnj1m" path="res://characters/exploPortrait/temptressPortrait.png" id="7_bjmf6"]
+[ext_resource type="Texture2D" uid="uid://cufk7lvwclm45" path="res://characters/characterInitiative/TemptressIni.png" id="8_ro0wr"]
+[ext_resource type="Texture2D" uid="uid://duqexi8su8ffh" path="res://characters/charatexture/demo characters/ENEMY_temptress_idle.png" id="9_e70e4"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="10_tvkt1"]
+[ext_resource type="Resource" uid="uid://rxp2q7eq2hr5" path="res://actions/ennemiCombatSkills/charme.tres" id="11_6w3pr"]
+[ext_resource type="Resource" uid="uid://xgqxannip7id" path="res://actions/ennemiCombatSkills/Encouragement.tres" id="12_jan3d"]
+[ext_resource type="Resource" uid="uid://daik6fj7sis15" path="res://actions/ennemiCombatSkills/vampire.tres" id="13_dtcju"]
+[ext_resource type="Resource" uid="uid://c6phd3e1sln7n" path="res://actions/ennemiCombatSkills/healMonster.tres" id="14_fs2yt"]
+
+[sub_resource type="Resource" id="Resource_ocqyt"]
+script = ExtResource("2_0pyt8")
+name = "Default AI"
+description = "IA basique qui choisit une compétence aléatoire utilisable et une cible valide."
+metadata/_custom_type_script = "uid://db1m8vwgp38yx"
+
+[resource]
+script = ExtResource("10_tvkt1")
+headPosition = Vector2(1, -110)
+portrait_texture = ExtResource("9_e70e4")
+explorationPortrait = ExtResource("7_bjmf6")
+dead_portrait_texture = ExtResource("5_sf87c")
+Hit_texture = ExtResource("1_wu1tc")
+initiative_icon = ExtResource("8_ro0wr")
+Name = "name"
+Charaname = "Temptress"
+IsDemon = false
+size = "average"
+affinity = Dictionary[String, int]({})
+base_max_stamina = 100
+base_max_stress = 100
+base_max_horniness = 100
+base_attack = 10
+base_defense = 5
+base_willpower = 5
+base_initiative = 1
+base_evasion = 5
+attack = 10
+defense = 5
+willpower = 5
+evasion = 5
+initiative = 0
+peek = 0
+equipped_items = Array[ExtResource("6_ln5hi")]([])
+stun = false
+Chara_position = 0
+max_stamina = 100
+max_stress = 100
+max_horniness = 100
+current_stamina = 100
+current_stress = 0
+current_horniness = 0
+isOneshot = false
+skill_resources = Array[Resource]([ExtResource("11_6w3pr"), ExtResource("11_6w3pr"), ExtResource("12_jan3d"), ExtResource("13_dtcju"), ExtResource("14_fs2yt")])
+tags = Array[String]([])
+is_player_controlled = false
+ai_brain = SubResource("Resource_ocqyt")
+can_be_moved = true
+min_durationIddle = 0.6
+max_durationIddle = 1.0
+min_scale = 0.95
+max_scale = 1.0
+corruption = 0
+camp_skill_resources = Array[ExtResource("4_6n72b")]([])
+bark_scene = ExtResource("3_hh3cm")
+taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide open!", "You fight like a wet noodle!", "Oops! Did that hurt?"]
+reaction = ["", "", ""]
+affinityReaction = ["", "", ""]

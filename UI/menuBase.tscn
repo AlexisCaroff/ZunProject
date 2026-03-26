@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b56xf3f3pkdwt"]
+[gd_scene load_steps=8 format=3 uid="uid://b56xf3f3pkdwt"]
 
 [ext_resource type="Script" uid="uid://bu142a7nwheqf" path="res://UI/menu_base.gd" id="1_552u3"]
 [ext_resource type="Texture2D" uid="uid://lhncc7d02shi" path="res://UI/BigBox.png" id="2_v1j00"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ccfldj30sasp8" path="res://characters/charatexture/boss.png" id="4_kppfi"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="4_v1j00"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="6_11mpg"]
+[ext_resource type="PackedScene" uid="uid://bccubg8vkrr7f" path="res://UI/Menu/OptionMenu.tscn" id="6_kppfi"]
 
 [node name="Menu" type="Control"]
 z_index = 100
@@ -57,7 +58,6 @@ flat = true
 script = ExtResource("4_v1j00")
 
 [node name="Buttonoption" type="Button" parent="CanvasLayer/background2/VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_11mpg")
@@ -124,6 +124,9 @@ theme_override_fonts/normal_font = ExtResource("3_11mpg")
 theme_override_font_sizes/normal_font_size = 90
 text = "Dark Side Of Zun"
 horizontal_alignment = 1
+
+[node name="OptionsPanel" parent="CanvasLayer" instance=ExtResource("6_kppfi")]
+visible = false
 
 [node name="Camera" type="Camera2D" parent="."]
 offset = Vector2(960, 540)

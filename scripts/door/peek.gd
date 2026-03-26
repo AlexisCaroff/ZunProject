@@ -1,4 +1,4 @@
-extends Node
+extends Button
 @onready var peektext : TextureRect=$peek_texture
 @onready var peekscene =$"../SubViewportContainer"
 @onready var doorbutton =$"../Door"
@@ -9,7 +9,11 @@ var current_tween: Tween = null
 @onready var sub_viewport = $"../SubViewportContainer/SubViewport"
 @onready var ExitPeekButton = $"../ExitPeek"
 
-	
+func _ready() -> void:
+	if doorbutton.locked:
+		disabled=true
+	var empty := StyleBoxEmpty.new()
+	add_theme_stylebox_override("focus", empty)
 	
 func _on_mouse_entered() -> void:
 	peektext.scale = startsize 	
@@ -35,8 +39,9 @@ func _on_mouse_exited() -> void:
 
 
 func _on_button_down() -> void:
-	peekscene.visible=true
-	doorbutton.position=pose2.position
-	doorbutton.peeking=true
-	doorbutton.startpeeking()
-	ExitPeekButton.visible=true
+	if !doorbutton.locked:
+		peekscene.visible=true
+		doorbutton.position=pose2.position
+		doorbutton.peeking=true
+		doorbutton.startpeeking()
+		ExitPeekButton.visible=true

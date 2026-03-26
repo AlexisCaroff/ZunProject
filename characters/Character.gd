@@ -125,7 +125,9 @@ func update_stats():
 	characterData.max_stamina = characterData.base_max_stamina
 	characterData.max_horniness = characterData.base_max_horniness
 	characterData.max_stress = characterData.base_max_stress
-
+	characterData.evasion     = characterData.base_evasion
+	characterData.precision   = characterData.base_precision   # ← ajouter
+	characterData.immobilized = false    
 	characterData.attack = characterData.base_attack
 	characterData.defense = characterData.base_defense
 	characterData.initiative = characterData.base_initiative
@@ -180,7 +182,7 @@ func show_bark(text:String):
 	current_bark.set_text(text)
 	var bark_offset_y := -240
 	current_bark.position = Vector2(-60, bark_offset_y)
-	await get_tree().create_timer(1.0)
+	await get_tree().create_timer(2.0).timeout
 
 func slur():
 	if characterData:
@@ -255,15 +257,24 @@ func process_taunt():
 			taunted_by = null
 
 func update_buffs() -> void:
+	
 	for i in range(buffs.size() - 1, -1, -1):
 		var buff = buffs[i]
 		buff.duration -= 1
-		
 		if buff.duration <= 0:
 			remove_buff_at(i)
 		else:
 			buff_icons[i].refresh()
-	
+ 
+	# ── Décompte immobilisation ──────────────────────────────
+	if characterData.get("immobilized") == true:
+		characterData.immobilized_turns -= 1
+		if characterData.immobilized_turns <= 0:
+			characterData.immobilized       = false
+			characterData.immobilized_turns = 0
+			print(characterData.Charaname + " n'est plus immobilisé.")
+	# ────────────────────────────────────────────────────────
+ 
 	update_stats()
 
 func remove_buff_at(index: int):
@@ -350,25 +361,25 @@ func play_ai_turn(heroes : Array, enemies :Array):
 	for t in decision.get("target", []):
 		if t is PositionSlot:
 			targetPositions.append(t)
-	#if targetPositions.is_empty():
-	#	print("no target !!!!!!!!!")
-	#else :
-	#	print(targetPositions[0].name)
-	var target =targetPositions[0].occupant
+
+	var target = targetPositions[0].occupant
 	combat_manager.pending_skill = current_skill
 	current_skill.owner = self
-
+	await get_tree().create_timer(0.5).timeout
 	
-	sprite.texture = current_skill.ImageSkill
+
+	# Applique les effets et remplit la file des réactions
 	for thetarget in targetPositions:
-		targetPositions[0]= await current_skill.use(thetarget)
-		
+		targetPositions[0] = await current_skill.use(thetarget)
+
+	# ✅ Attendre que les barks d'affinité soient joués AVANT animate_attack
+	await combat_manager.flush_startSkills_affinity_reaction()
+	
 	if targetPositions[0].occupant:
 		await animate_attack(targetPositions[0].occupant)
 
 	if target:
 		target.update_ui()
-		#current_skill.end_turn(combat_manager)
 	update_buffs()
 	resetVisuel()
 
@@ -449,8 +460,8 @@ func take_damage(source: Character, stat: int, amount: int, typeMagic:bool, skil
 
 			if characterData.current_stamina > 0:
 				characterData.current_stamina = clamp(characterData.current_stamina - damage, 0, characterData.max_stamina)
-				if characterData.current_stamina == 0:
-					sprite.self_modulate = Color(0.8, 0.1, 0.1)
+				if characterData.current_stamina == 0 && characterData.isOneshot:
+					isdead()
 					
 			else:
 				if characterData.IsDemon and typeMagic==true:
@@ -660,6 +671,15 @@ func animate_attack(target: Character, _duration = 1.0):
 	var has_heal := current_skill.effects.any(func(e): return e is HealEffect)
 	emit_signal("skill_animation_started")
 	combat_manager.ui.log(characterData.Charaname + " use " + combat_manager._pending_skill.descriptionName)
+	if current_skill.effect != null:
+		var effect_instance = current_skill.effect.instantiate()
+		if current_skill.is_contact:
+			add_child(effect_instance)
+		else:
+			target.add_child(effect_instance)
+		if effect_instance.has_method("setup"):
+			effect_instance.setup()
+	
 	var tween := create_tween() as Tween
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
@@ -825,10 +845,9 @@ func miss_animation(target: Character):
 		Misseffect_instance.setup()
 	var tween := create_tween() as Tween
 	var start_pose 
-	if characterData.is_player_controlled:
-		start_pose = Vector2(543,728)
-	else :
-		start_pose = Vector2(1643,728)
+	
+	start_pose = self.position
+	
 
 
 	

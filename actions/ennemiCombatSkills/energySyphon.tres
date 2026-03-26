@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://cwxukwuwcmaka"]
+
+[ext_resource type="Texture2D" uid="uid://dv6wvl4ulee8e" path="res://characters/charatexture/demo characters/INQUISITION_chainmaiden_grab.png" id="1_vf8rk"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_2rco6"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_ovvd6"]
+[ext_resource type="Texture2D" uid="uid://ccnq4lbltabiy" path="res://actions/actiontexture/tentacles.png" id="4_xi680"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_c0ok3"]
+
+[sub_resource type="Resource" id="Resource_3q5jt"]
+script = ExtResource("3_ovvd6")
+MagicDMG = false
+amount = 15
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[resource]
+script = ExtResource("5_c0ok3")
+name = "Chain"
+descriptionName = "Chain"
+description = "30 dmg"
+icon = ExtResource("4_xi680")
+barkSkill = ""
+required_position = 0
+ImageSkill = ExtResource("1_vf8rk")
+the_target_type = 0
+effects = Array[ExtResource("2_2rco6")]([SubResource("Resource_3q5jt")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("2_2rco6")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+is_contact = true
+distance_contact = 300.0
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

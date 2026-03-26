@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://uo6aacbprsjm"]
+[gd_scene load_steps=10 format=3 uid="uid://uo6aacbprsjm"]
 
 [ext_resource type="Texture2D" uid="uid://768cfl5yiljq" path="res://scenes/backgrounds dungeon demo/BG_dungeon_corridor.png" id="1_3qxc3"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_6fig8"]
 [ext_resource type="PackedScene" uid="uid://h8pqs7tabdxj" path="res://lvl/CombatInterface.tscn" id="3_f31bl"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="4_4grq2"]
+[ext_resource type="Script" uid="uid://bc58s10203bjl" path="res://lvl/Cellar/BossIntroSequence.gd" id="5_t2jrm"]
+[ext_resource type="Resource" uid="uid://bmgxbqdxxsh6v" path="res://animatic/animaticTeste.tres" id="6_tmsuc"]
+[ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="7_qy23p"]
+[ext_resource type="Resource" uid="uid://ulv47dtbemlo" path="res://lvl/Cellar/encounterCellar.tres" id="8_yeibi"]
+[ext_resource type="Resource" uid="uid://y5sfj1t81c86" path="res://lvl/Cellar/encounterCellaInquisitionr.tres" id="9_o08im"]
 
 [node name="CombatCorridor" type="Node2D"]
 
@@ -25,3 +30,14 @@ offset_left = -6.0
 offset_top = 18.0
 offset_right = -6.0
 offset_bottom = 18.0
+
+[node name="BossIntroSequence" type="Node" parent="."]
+script = ExtResource("5_t2jrm")
+intro_animatic = ExtResource("6_tmsuc")
+portraits_resource = ExtResource("7_qy23p")
+boss_encounter = ExtResource("8_yeibi")
+inquisition_encounter = ExtResource("9_o08im")
+dialogue_intro_path = "res://dialogue/Boss/intro.txt"
+dialogue_corrupt_path = "res://dialogue/Boss/corrupt.txt"
+dialogue_resist_path = "res://dialogue/Boss/resist.txt"
+dialogue_give_in_path = "res://dialogue/Boss/give_in.txt"

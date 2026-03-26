@@ -69,3 +69,5 @@ corruption = 0
 camp_skill_resources = Array[ExtResource("2_tavhp")]([])
 bark_scene = ExtResource("1_716pa")
 taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide open!", "You fight like a wet noodle!", "Oops! Did that hurt?"]
+reaction = ["", "", ""]
+affinityReaction = ["", "", ""]

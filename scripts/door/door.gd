@@ -34,7 +34,7 @@ var locked : bool =false
 const lockedUI = preload("res://UI/scripts/LokedUI.tscn")
 const OpenUI = preload("res://UI/scripts/OpenDoorKeyUI.tscn")
 const BlockedUI= preload("res://UI/scripts/BlockedUI.tscn")
-
+var animation: bool=false
 
 func _ready():
 	GameState.current_phase = GameStat.GamePhase.DOOR
@@ -127,41 +127,52 @@ func _on_mouse_entered() -> void:
 
 
 func _on_button_down() -> void:
-	var keyfound: bool = false
-	for item in Game_Manager.inventory:
-		if item.name == keyName:
-			keyfound = true
-			locked = false
-			Game_Manager.inventory.erase(item)
-			Game_Manager.current_room_Ressource.locked=false
-			break
+	if animation:
+		return
+	if !animation:
+		animation=true
+		disabled = true
+		var keyfound: bool = false
+		for item in Game_Manager.inventory:
+			if item.name == keyName:
+				keyfound = true
+				locked = false
+				Game_Manager.inventory.erase(item)
+				Game_Manager.current_room_Ressource.locked=false
+				break
+				
+		if keyfound:
+			var UIOpen= OpenUI.instantiate()
+			add_child(UIOpen )
+			UIOpen.position+= Vector2(150,150)
+		if Blocked:
+			var UIBlocked= BlockedUI.instantiate()
+			add_child(UIBlocked )
+			UIBlocked.position+= Vector2(150,150)
+			animation = false
+			disabled=false
+		if !locked:
 			
-	if keyfound:
-		var UIOpen= OpenUI.instantiate()
-		add_child(UIOpen )
-		UIOpen.position+= Vector2(150,150)
-	if Blocked:
-		var UIBlocked= BlockedUI.instantiate()
-		add_child(UIBlocked )
-		UIBlocked.position+= Vector2(150,150)
-	if !locked:
-		var cam : Camera =$"../Camera2D"
-		var pose = cam.base_position
-		pose.y -=120
-		
-		if doorLeft:
-			open_door(1.5)
-		Game_Manager.sceneTransition.fade_out(1.5)
-		await cam.zoom_to_position(pose,2.0,1.0 )
-		
-		call_deferred("_advance_in_room")
-	else:
-		var UILocked = lockedUI.instantiate()
-		add_child(UILocked )
-		UILocked.position+= Vector2(150,150)
+			var cam : Camera =$"../Camera2D"
+			var pose = cam.base_position
+			pose.y -=120
+			
+			if doorLeft:
+				open_door(1.5)
+			Game_Manager.sceneTransition.fade_out(1.5)
+			await cam.zoom_to_position(pose,2.0,1.0 )
+			
+			call_deferred("_advance_in_room")
+		else:
+			var UILocked = lockedUI.instantiate()
+			add_child(UILocked )
+			UILocked.position+= Vector2(150,150)
+			animation = false
+			disabled=false
 	
 
 func _advance_in_room():
+	
 	GameState.current_phase = GameStat.GamePhase.COMBAT
 	if not Game_Manager.current_room_Ressource:
 		push_error("No current_room defined in GameManager")

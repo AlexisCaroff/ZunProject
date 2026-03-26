@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bp6igea4o686p"]
+[gd_scene load_steps=33 format=3 uid="uid://bp6igea4o686p"]
 
 [ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="1_62mxk"]
 [ext_resource type="Texture2D" uid="uid://cfwlbo0pguis6" path="res://UI/DOORR_dungeon_hall.png" id="2_8msop"]
@@ -30,6 +30,8 @@
 [ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="28_gcv8u"]
 [ext_resource type="Texture2D" uid="uid://bpgas6hnffbe0" path="res://UI/sideButton.png" id="29_fdls5"]
 [ext_resource type="Texture2D" uid="uid://ctkoy8ysbicta" path="res://UI/iconMap.png" id="30_pdsdy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2tiu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_crknv"]
 
@@ -267,6 +269,7 @@ offset_left = 1102.0
 offset_top = 280.0
 offset_right = 1317.0
 offset_bottom = 481.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_o2tiu")
 flat = true
 script = ExtResource("15_r2pto")
 

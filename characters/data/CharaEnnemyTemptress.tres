@@ -1,19 +1,18 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=16 format=3 uid="uid://yecuio874dy4"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=15 format=3 uid="uid://yecuio874dy4"]
 
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_mcmpk"]
-[ext_resource type="Texture2D" uid="uid://dw6mlmcxoge8o" path="res://characters/charatexture/demo characters/ENEMY_temptress_hit.png" id="1_xii84"]
+[ext_resource type="Texture2D" uid="uid://cdekmtx01rbg8" path="res://characters/charatexture/demo characters/INQUISITION_incapacitor_hit.png" id="1_xii84"]
 [ext_resource type="Script" uid="uid://db1m8vwgp38yx" path="res://characters/charatexture/braines/Ai_brain_Support.gd" id="2_183tr"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_xii84"]
-[ext_resource type="Texture2D" uid="uid://djdgehyta1mx" path="res://characters/charatexture/demo characters/ENEMY_temptress_down.png" id="4_183tr"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_ocqyt"]
-[ext_resource type="Texture2D" uid="uid://bodt30r3mnj1m" path="res://characters/exploPortrait/temptressPortrait.png" id="5_airwf"]
-[ext_resource type="Texture2D" uid="uid://cufk7lvwclm45" path="res://characters/characterInitiative/TemptressIni.png" id="6_ruvyt"]
+[ext_resource type="Texture2D" uid="uid://dk0l8jac6ln3n" path="res://characters/charatexture/demo characters/INQUISITION_incapacitor_down.png" id="5_183tr"]
+[ext_resource type="Texture2D" uid="uid://bu74rv62dasvj" path="res://characters/exploPortrait/incapacitorExploPortrait.png" id="7_ocqyt"]
+[ext_resource type="Texture2D" uid="uid://bre80a2pkbpsw" path="res://characters/charatexture/demo characters/INQUISITION_incapacitor_idle.png" id="8_airwf"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="8_lnpek"]
-[ext_resource type="Texture2D" uid="uid://duqexi8su8ffh" path="res://characters/charatexture/demo characters/ENEMY_temptress_idle.png" id="9_183tr"]
-[ext_resource type="Resource" uid="uid://rxp2q7eq2hr5" path="res://actions/ennemiCombatSkills/charme.tres" id="9_rfywr"]
-[ext_resource type="Resource" uid="uid://xgqxannip7id" path="res://actions/ennemiCombatSkills/Encouragement.tres" id="10_brc4x"]
-[ext_resource type="Resource" uid="uid://daik6fj7sis15" path="res://actions/ennemiCombatSkills/vampire.tres" id="11_0y6su"]
-[ext_resource type="Resource" uid="uid://c6phd3e1sln7n" path="res://actions/ennemiCombatSkills/healMonster.tres" id="12_1xwni"]
+[ext_resource type="Resource" uid="uid://o3alq0k34b2r" path="res://actions/ennemiCombatSkills/Salt.tres" id="10_xii84"]
+[ext_resource type="Resource" uid="uid://bp426legb2qkr" path="res://actions/ennemiCombatSkills/Immobilise.tres" id="11_183tr"]
+[ext_resource type="Resource" uid="uid://3g8pbhljpdj0" path="res://actions/ennemiCombatSkills/Stun.tres" id="12_ocqyt"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="13_airwf"]
 
 [sub_resource type="Resource" id="Resource_ocqyt"]
 script = ExtResource("2_183tr")
@@ -24,13 +23,13 @@ metadata/_custom_type_script = "uid://db1m8vwgp38yx"
 [resource]
 script = ExtResource("8_lnpek")
 headPosition = Vector2(1, -110)
-portrait_texture = ExtResource("9_183tr")
-explorationPortrait = ExtResource("5_airwf")
-dead_portrait_texture = ExtResource("4_183tr")
+portrait_texture = ExtResource("8_airwf")
+explorationPortrait = ExtResource("7_ocqyt")
+dead_portrait_texture = ExtResource("5_183tr")
 Hit_texture = ExtResource("1_xii84")
-initiative_icon = ExtResource("6_ruvyt")
-Name = "name"
-Charaname = "Temptress"
+initiative_icon = ExtResource("7_ocqyt")
+Name = "Incapacitor"
+Charaname = "Incapacitor"
 IsDemon = false
 size = "average"
 affinity = Dictionary[String, int]({})
@@ -42,6 +41,7 @@ base_defense = 5
 base_willpower = 5
 base_initiative = 1
 base_evasion = 5
+base_precision = 100
 attack = 10
 defense = 5
 willpower = 5
@@ -57,7 +57,8 @@ max_horniness = 100
 current_stamina = 100
 current_stress = 0
 current_horniness = 0
-skill_resources = Array[Resource]([ExtResource("9_rfywr"), ExtResource("9_rfywr"), ExtResource("10_brc4x"), ExtResource("11_0y6su"), ExtResource("12_1xwni")])
+isOneshot = false
+skill_resources = Array[Resource]([ExtResource("10_xii84"), ExtResource("11_183tr"), ExtResource("12_ocqyt"), ExtResource("13_airwf")])
 tags = Array[String]([])
 is_player_controlled = false
 ai_brain = SubResource("Resource_ocqyt")
@@ -70,3 +71,7 @@ corruption = 0
 camp_skill_resources = Array[ExtResource("2_xii84")]([])
 bark_scene = ExtResource("1_mcmpk")
 taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide open!", "You fight like a wet noodle!", "Oops! Did that hurt?"]
+reaction = ["", "", ""]
+affinityReaction = ["", "", ""]
+immobilized = false
+immobilized_turns = 0

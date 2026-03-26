@@ -21,6 +21,7 @@ descriptionName = "mitaille"
 description = "attack all ennemies"
 icon = ExtResource("4_dtk8s")
 attack_sound = ExtResource("1_54gp4")
+barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_3yijc")
 the_target_type = 4

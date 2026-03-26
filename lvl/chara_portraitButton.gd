@@ -32,5 +32,5 @@ func exit():
 	tween.tween_property(self, "scale", normal_scale, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "self_modulate", normal_color, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 func openMenuChara():
-	var menu =$"../MenuPerso"
+	var menu = get_tree().current_scene.find_child("MenuPerso", true, false)
 	menu.showMenu()

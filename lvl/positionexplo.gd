@@ -15,7 +15,7 @@ func _ready() -> void:
 	movebutton.visible=false
 	
 func showMove():
-	if !explo_manager.move_mode:
+	if !explo_manager.move_mode && explo_manager.showselector:
 		movebutton.position= Vector2(self.global_position.x-40, (self.global_position.y-340) )
 		movebutton.visible=true
 	explo_manager.over_chara = occupant

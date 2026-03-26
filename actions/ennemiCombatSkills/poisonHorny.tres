@@ -30,6 +30,7 @@ name = "Poison"
 descriptionName = "Horny Poison"
 description = "Aphrodisiac on an enemy"
 icon = ExtResource("5_fmjc0")
+barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_f2alv")
 the_target_type = 0

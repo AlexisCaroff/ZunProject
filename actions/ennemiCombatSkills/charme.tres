@@ -20,6 +20,7 @@ name = "Charme"
 descriptionName = "Charme"
 description = "get an ennemi Horny"
 icon = ExtResource("1_lqogb")
+barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_0w17e")
 the_target_type = 0

@@ -1,0 +1,61 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://c4nfaoik03hsb"]
+
+[ext_resource type="Texture2D" uid="uid://bgwids84xh2rv" path="res://characters/charatexture/demo characters/INQUISITION_punisher_shield.png" id="1_002ci"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_oe01q"]
+[ext_resource type="Script" uid="uid://cjfkha61akav3" path="res://actions/skillEffects/TauntEffect.gd" id="3_oe01q"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="4_exsrh"]
+[ext_resource type="Texture2D" uid="uid://dlcjkvugg0br8" path="res://characters/exploPortrait/PunisherExploPortrait.png" id="5_vipaf"]
+[ext_resource type="Texture2D" uid="uid://b4oubet2ttcx0" path="res://actions/actiontexture/UI icons/ICON_hunter_bolas.png" id="7_7i31r"]
+[ext_resource type="Texture2D" uid="uid://blaxr6boo4hkf" path="res://UI/buffDeff.png" id="8_exsrh"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="8_u6rdn"]
+
+[sub_resource type="Resource" id="Resource_rhjvp"]
+script = ExtResource("3_oe01q")
+duration = 1
+metadata/_custom_type_script = "uid://cjfkha61akav3"
+
+[sub_resource type="Resource" id="Resource_tdhku"]
+script = ExtResource("4_exsrh")
+name = "name"
+uitexture = ExtResource("5_vipaf")
+affected_stat = 0
+amount = 0
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[sub_resource type="Resource" id="Resource_qg1gn"]
+script = ExtResource("4_exsrh")
+name = "Shield"
+uitexture = ExtResource("8_exsrh")
+affected_stat = 1
+amount = 10
+duration = 2
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[resource]
+script = ExtResource("8_u6rdn")
+name = "Salt"
+descriptionName = "Salt"
+description = "debuff att and add miss chance"
+icon = ExtResource("7_7i31r")
+barkSkill = ""
+required_position = 0
+ImageSkill = ExtResource("1_002ci")
+the_target_type = 4
+effects = Array[ExtResource("2_oe01q")]([SubResource("Resource_rhjvp"), SubResource("Resource_tdhku")])
+two_target_Type = false
+the_second_target_type = 2
+second_effects = Array[ExtResource("2_oe01q")]([SubResource("Resource_qg1gn")])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+is_contact = true
+distance_contact = 300.0
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

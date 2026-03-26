@@ -94,17 +94,9 @@ func use(target: PositionSlot = null, secondtarget: bool = false) -> PositionSlo
 
 	if target.occupant != null:
 
-		if effect != null:
-			var effect_instance = effect.instantiate()
-			if is_contact:
-				owner.add_child(effect_instance)
-			else:
-				target.add_child(effect_instance)
+		
 
-			if effect_instance.has_method("setup"):
-				effect_instance.setup()
-
-			target.combat_manager.stop_target_selection()
+		target.combat_manager.stop_target_selection()
 
 		if not can_use():
 			return target
@@ -114,7 +106,8 @@ func use(target: PositionSlot = null, secondtarget: bool = false) -> PositionSlo
 				if tag == "voyeur":
 					precision += 5
 
-			var chance := precision - target.occupant.characterData.evasion
+			var effective_precision := precision + (owner.characterData.precision - 100)
+			var chance := effective_precision - target.occupant.characterData.evasion
 			var rand := randi() % 100
 
 			if rand >= chance:
@@ -146,7 +139,7 @@ func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = eff
 	var heallovedOnesTrigger: bool = false
 
 	if !combatManager:
-		combatManager = target.occupant.combat_manager
+		combatManager = owner.combat_manager
 
 	for effect in effects_array:
 		if effect is DamageEffect:
@@ -156,17 +149,17 @@ func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = eff
 
 			if Hunter_value > 50:
 				var Hunter = combatManager.get_hero_by_name("Hunter")
-				if Hunter and randf() < 0.5:
+				if Hunter and randf() < 0.3:
 					var buff_ref := load("res://characters/kink/littleattackbuff.tres")
 					var owner_ref := owner  # capture locale pour le Callable
 					combatManager.queue_startSkills_affinity_reaction(func():
-						await Hunter.play_affinity_reaction("there ! target that spot ! " + owner_ref.characterData.Charaname + " !")
+						await Hunter.play_affinity_reaction("there ! target that spot ! " + owner_ref.characterData.Name + " !")
 						owner_ref.add_buff(buff_ref)
 					)
 
-			if warrior_value > 5:
+			if warrior_value > 50:
 				var warrior = combatManager.get_hero_by_name("Warrior")
-				if warrior and randf() < 10.5:
+				if warrior and randf() < 0.3:
 					var target_name := target.occupant.characterData.Name
 					combatManager.queue_startSkills_affinity_reaction(func():
 						await warrior.play_affinity_reaction("look out " + target_name + " !")
@@ -200,12 +193,12 @@ func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = eff
 
 	# Mystic en file en dernier
 	var Mystic_value: int = owner.characterData.affinity.get("Mystic", 0)
-	if Mystic_value > 5:
+	if Mystic_value > 50:
 		var Mystic = combatManager.get_hero_by_name("Mystic")
 		if Mystic and randf() < 0.3:
 			var skill_ref := self
 			combatManager.queue_endTurn_affinity_reaction(func():
-				await Mystic.play_affinity_reaction(" Sprites please aid " + skill_ref.owner.characterData.Name + " strenght !")
+				await Mystic.play_affinity_reaction(" Sprites please aid " + skill_ref.owner.characterData.Name + " !")
 				if skill_ref.current_cooldown > 0:
 					skill_ref.current_cooldown -= 1
 			)

@@ -19,6 +19,7 @@ name = "Attaque basique"
 descriptionName = "Attaque"
 description = "Inflige des dégâts à un ennemi."
 icon = ExtResource("4_f3ma5")
+barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_87yr0")
 the_target_type = 0

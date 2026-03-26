@@ -21,6 +21,7 @@ name = "Whip"
 descriptionName = "Whip"
 description = "remove horny on Ally and deal dmg to ennemy"
 icon = ExtResource("4_2julc")
+barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_1rmu3")
 the_target_type = 9

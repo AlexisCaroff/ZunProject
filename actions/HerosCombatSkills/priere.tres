@@ -28,6 +28,7 @@ name = "priere"
 descriptionName = "priere"
 description = "buff and resset cooldown of all allies"
 icon = ExtResource("4_hd7w4")
+barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_rgbct")
 the_target_type = 3

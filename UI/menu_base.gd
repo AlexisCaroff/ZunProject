@@ -7,6 +7,8 @@ class_name StartMenu
 @onready var button_didacticiel: Button =$CanvasLayer/background2/VBoxContainer/ButtonDitactitiel
 @onready var button_quit: Button = $CanvasLayer/background2/VBoxContainer/Button2Quit
 @onready var game_manager: GameManager = get_parent() as GameManager
+@onready var options_panel: OptionsPanel = $CanvasLayer/OptionsPanel 
+
 
 func _ready():
 	button_start.pressed.connect(_on_start_pressed)
@@ -15,6 +17,17 @@ func _ready():
 	button_glossaire.pressed.connect(_on_glossaire_pressed)
 	button_didacticiel.pressed.connect(_on_didacticiel_pressed)
 	button_quit.pressed.connect(_on_quit_pressed)
+	options_panel.hide()
+	AudioManager.register_tracks(
+		[preload("res://Audio/Music/track_01.ogg"),
+		 preload("res://Audio/Music/track_02.ogg"), 
+		preload("res://Audio/Music/boss01.ogg"), 
+		preload("res://Audio/Music/camp01.ogg"), 
+		preload("res://Audio/Music/dungeon01.ogg")],
+		
+		["Thème 01", "Camp 02","Boss 01","Camp01","Dungeon 01"]
+	)
+	AudioManager.play()
 	
 func _on_start_pressed():
 	
@@ -24,7 +37,9 @@ func _on_start_pressed():
 
 
 func _on_option_pressed():
-	print("Options")
+	
+	options_panel.refresh()
+	options_panel.show()
 	# open_options_menu()
 
 

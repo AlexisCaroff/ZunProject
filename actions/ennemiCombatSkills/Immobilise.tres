@@ -1,0 +1,60 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=13 format=3 uid="uid://bp426legb2qkr"]
+
+[ext_resource type="Texture2D" uid="uid://5sxx1j4x2jr3" path="res://characters/charatexture/demo characters/INQUISITION_incapacitor_pin.png" id="1_36e8l"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_36e8l"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_g0hup"]
+[ext_resource type="Script" uid="uid://dvysavdlqaph" path="res://actions/skillEffects/addcooldownEffect.gd" id="4_g0hup"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_ixvgo"]
+[ext_resource type="Texture2D" uid="uid://b4oubet2ttcx0" path="res://actions/actiontexture/UI icons/ICON_hunter_bolas.png" id="5_mfcwu"]
+[ext_resource type="Script" uid="uid://bp8u5at2ojgse" path="res://actions/skillEffects/healEffect.gd" id="6_4ktlx"]
+[ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="7_ljpvx"]
+
+[sub_resource type="Resource" id="Resource_3q5jt"]
+script = ExtResource("3_g0hup")
+MagicDMG = false
+amount = 5
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[sub_resource type="Resource" id="Resource_ixvgo"]
+script = ExtResource("4_g0hup")
+metadata/_custom_type_script = "uid://dvysavdlqaph"
+
+[sub_resource type="Resource" id="Resource_0ntxy"]
+script = ExtResource("6_4ktlx")
+heal_target_stat = 0
+amount = 20
+metadata/_custom_type_script = "uid://bp8u5at2ojgse"
+
+[sub_resource type="Resource" id="Resource_opj7a"]
+script = ExtResource("7_ljpvx")
+amount = 2
+metadata/_custom_type_script = "uid://2vsqpp6jqiow"
+
+[resource]
+script = ExtResource("5_ixvgo")
+name = "Ennergie syphon"
+descriptionName = "Ennergie syphon"
+description = "deal dmg , heal and reduce cooldown"
+icon = ExtResource("5_mfcwu")
+barkSkill = ""
+required_position = 0
+ImageSkill = ExtResource("1_36e8l")
+the_target_type = 0
+effects = Array[ExtResource("2_36e8l")]([SubResource("Resource_3q5jt"), SubResource("Resource_ixvgo")])
+two_target_Type = true
+the_second_target_type = 2
+second_effects = Array[ExtResource("2_36e8l")]([SubResource("Resource_0ntxy"), SubResource("Resource_opj7a")])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+is_contact = true
+distance_contact = 300.0
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

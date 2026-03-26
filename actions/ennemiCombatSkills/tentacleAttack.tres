@@ -19,6 +19,7 @@ name = "Tentacles Attack"
 descriptionName = "Tentacles Attack"
 description = "dmg an ennemi"
 icon = ExtResource("3_xuyw1")
+barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_xuyw1")
 the_target_type = 0

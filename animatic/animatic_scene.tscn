@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://ri78lkeg2ktr"]
+[gd_scene load_steps=8 format=3 uid="uid://ri78lkeg2ktr"]
 
-[ext_resource type="Script" uid="uid://c7hhy0u3l2y32" path="res://animatic_scene.gd" id="1_8lrs3"]
+[ext_resource type="Script" uid="uid://c7hhy0u3l2y32" path="res://animatic/animatic_scene.gd" id="1_8lrs3"]
 [ext_resource type="Resource" uid="uid://bmgxbqdxxsh6v" path="res://animatic/animaticTeste.tres" id="2_vitre"]
+[ext_resource type="Texture2D" uid="uid://cpu41lwc3cwna" path="res://INTRO_boss/INTRO_boss_001.png" id="3_0khhs"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="3_svk4j"]
+[ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="4_o6an6"]
+[ext_resource type="FontFile" uid="uid://dy4n8qboodyud" path="res://font/MarcellusSC-Regular.ttf" id="6_8733h"]
 
-[node name="AnimaticSceneContainer" type="Control"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_svk4j"]
+
+[node name="AnimaticPlayer" type="Control"]
 z_index = 40
 layout_mode = 3
 anchors_preset = 15
@@ -25,6 +30,12 @@ offset_right = 2160.0
 offset_bottom = 1117.0
 color = Color(0, 0, 0, 1)
 
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer"]
+offset_left = 108.0
+offset_right = 1769.0
+offset_bottom = 936.0
+color = Color(0.670588, 0.513726, 0.388235, 1)
+
 [node name="Images" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
@@ -32,13 +43,15 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="ImageA" type="TextureRect" parent="CanvasLayer/Images"]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.987
-offset_right = 1882.0
+offset_left = 111.0
+offset_right = 1993.0
 offset_bottom = 1044.52
+scale = Vector2(0.860984, 0.860984)
+texture = ExtResource("3_0khhs")
 expand_mode = 1
 
 [node name="ImageB" type="TextureRect" parent="CanvasLayer/Images"]
@@ -47,13 +60,52 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.987
-offset_right = 1882.0
+offset_left = 111.0
+offset_right = 1993.0
 offset_bottom = 1044.52
+scale = Vector2(0.860984, 0.860984)
 expand_mode = 1
 
 [node name="Camera" type="Camera2D" parent="CanvasLayer"]
-position = Vector2(970, 542)
+position = Vector2(960, 540)
 script = ExtResource("3_svk4j")
 metadata/_custom_type_script = "uid://devdej4xpva2i"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CanvasLayer"]
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+offset_left = 342.0
+offset_top = 875.0
+offset_right = 1566.0
+offset_bottom = 1117.0
+color = Color(0, 0, 0, 1)
+
+[node name="DialogueBox" type="TextureRect" parent="CanvasLayer"]
+offset_left = 340.0
+offset_top = 873.0
+offset_right = 1364.0
+offset_bottom = 1051.0
+scale = Vector2(1.2, 1.15385)
+texture = ExtResource("4_o6an6")
+
+[node name="SubtitleLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 395.0
+offset_top = 885.0
+offset_right = 1567.0
+offset_bottom = 1062.0
+scale = Vector2(0.959999, 1)
+theme_override_fonts/normal_font = ExtResource("6_8733h")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClickArea" type="Button" parent="CanvasLayer"]
+offset_left = 14.0
+offset_top = 1.0
+offset_right = 1925.0
+offset_bottom = 1080.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_svk4j")
+flat = true

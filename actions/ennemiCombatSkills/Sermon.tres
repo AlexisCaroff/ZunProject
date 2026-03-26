@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://cmpo3p42diyix"]
+
+[ext_resource type="Texture2D" uid="uid://b2prk8wkajghq" path="res://characters/charatexture/demo characters/INQUISITION_inquisitor_whip.png" id="1_71118"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_fkuie"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_fkuie"]
+[ext_resource type="Texture2D" uid="uid://ccyi8n3i3daxa" path="res://actions/actiontexture/heal.png" id="4_3bird"]
+[ext_resource type="Script" uid="uid://d34budn3ew6qb" path="res://actions/skillEffects/ConditionalEffect.gd" id="4_dho85"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_hlfvf"]
+
+[sub_resource type="Resource" id="Resource_3bird"]
+script = ExtResource("3_fkuie")
+MagicDMG = false
+amount = 20
+damage_target_stat = 2
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[sub_resource type="Resource" id="Resource_hlfvf"]
+script = ExtResource("3_fkuie")
+MagicDMG = false
+amount = 20
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[sub_resource type="Resource" id="Resource_vs6o4"]
+script = ExtResource("4_dho85")
+condition = 4
+effect_if_true = SubResource("Resource_hlfvf")
+metadata/_custom_type_script = "uid://d34budn3ew6qb"
+
+[resource]
+script = ExtResource("5_hlfvf")
+name = "Sermon"
+descriptionName = "hymne d’encouragement"
+description = "add guilt  and 30 stamina if 70% guilt or more"
+icon = ExtResource("4_3bird")
+barkSkill = ""
+required_position = 0
+ImageSkill = ExtResource("1_71118")
+the_target_type = 3
+effects = Array[ExtResource("2_fkuie")]([SubResource("Resource_3bird"), SubResource("Resource_vs6o4")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("2_fkuie")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "heal"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = true
+duration = 1.0
+tags = Array[String](["heal"])
+is_contact = false
+distance_contact = 0.0
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

@@ -20,7 +20,7 @@ var start_menu: StartMenu = null
 var game_started: bool = false
 
 func _ready():
-	var screen_index := 1
+	var screen_index := 0
 	
 	if screen_index < DisplayServer.get_screen_count():
 		DisplayServer.window_set_current_screen(screen_index)
@@ -213,7 +213,7 @@ func initialize_affinities(thecharacters: Array[CharacterData]):
 		chara.affinity = {}
 		for other in thecharacters:
 			if other != chara:
-				chara.affinity[other.Charaname] = 20
+				chara.affinity[other.Charaname] = 0
 	
 func show_history_scene(history_res: HistoryScene) -> Node:
 	var overlay_scene := preload("res://scripts/History/history.tscn")
@@ -228,7 +228,7 @@ func show_Animatic_scene(Anim: Animatic, cam: Camera) -> Node:
 	var overlay := Animatic_scene.instantiate()
 	
 	overlay.animatic = Anim
-	overlay.cam=cam
+	#overlay.cam=cam
 	get_tree().current_scene.add_child(overlay)
 
 	return overlay

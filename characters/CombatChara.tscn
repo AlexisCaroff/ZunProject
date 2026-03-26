@@ -67,9 +67,10 @@ texture = ExtResource("4_qgiwc")
 script = ExtResource("5_5cv4u")
 
 [node name="Arrow" type="Sprite2D" parent="."]
-position = Vector2(1, -232)
+position = Vector2(1, -282)
 scale = Vector2(0.38, 0.38)
 texture = ExtResource("6_fn4af")
+offset = Vector2(0, 116.49)
 script = ExtResource("2_uoxmb")
 min_scale = 0.38
 max_scale = 0.38

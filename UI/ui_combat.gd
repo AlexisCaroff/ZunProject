@@ -102,7 +102,7 @@ func update_ui_for_current_character(character: Character):
 
 	update_equipment_icons(character)
 
-	Charaname_panel.text = character.characterData.Charaname
+	Charaname_panel.text = character.characterData.Name
 	charaPortrait.texture = character.characterData.explorationPortrait
 
 	# Clear anciens signaux
@@ -207,7 +207,7 @@ func update_cooldown_bar(container: HBoxContainer, skill):
 # -------------------------------------------------------------------------
 func update_ui_for_overed_character(character: Character):
 
-	Charaname2.text = character.characterData.Charaname
+	Charaname2.text = character.characterData.Name
 	charaPortrait2.texture = character.characterData.explorationPortrait
 
 	for button in skills2:
@@ -248,7 +248,7 @@ func update_ui_for_overed_character(character: Character):
 func log(text):
 	var cc = combat_manager.current_character
 	if cc.characterData.is_player_controlled:
-		log_panel.visible = true
+		log_panel.visible = false
 		contextennemi.visible = false
 		log_panel.text = text
 		contextennemi.text = ""

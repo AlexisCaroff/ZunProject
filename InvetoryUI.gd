@@ -506,21 +506,21 @@ func show_tooltip(item: Equipment, cell_position: Vector2):
 	# Construit les stats dynamiquement
 	var stats := ""
 	if item.attack_bonus != 0:
-		stats += "[color=FF6666]  ⚔ Attaque: +%d[/color]\n" % item.attack_bonus
+		stats += "[color=FF6666]    Attaque: +%d[/color]\n" % item.attack_bonus
 	if item.defense_bonus != 0:
-		stats += "[color=6699FF]  🛡 Défense: +%d[/color]\n" % item.defense_bonus
+		stats += "[color=6699FF]    Défense: +%d[/color]\n" % item.defense_bonus
 	if item.willpower_bonus != 0:
-		stats += "[color=CC99FF]  ✦ Volonté: +%d[/color]\n" % item.willpower_bonus
+		stats += "[color=CC99FF]    Volonté: +%d[/color]\n" % item.willpower_bonus
 	if item.evasion_bonus != 0:
-		stats += "[color=99FFCC]  ◎ Esquive: +%d[/color]\n" % item.evasion_bonus
+		stats += "[color=99FFCC]    Esquive: +%d[/color]\n" % item.evasion_bonus
 	if item.initiative_bonus != 0:
-		stats += "[color=FFFF66]  ⚡ Initiative: +%d[/color]\n" % item.initiative_bonus
+		stats += "[color=FFFF66]    Initiative: +%d[/color]\n" % item.initiative_bonus
 	if item.Max_stamina_bonus != 0:
-		stats += "[color=FF9966]  ♥ Stamina max: +%d[/color]\n" % item.Max_stamina_bonus
+		stats += "[color=FF9966]    Stamina max: +%d[/color]\n" % item.Max_stamina_bonus
 	if item.Max_lust_bonus != 0:
-		stats += "[color=FF66AA]  ♦ Lust max: +%d[/color]\n" % item.Max_lust_bonus
+		stats += "[color=FF66AA]    Lust max: +%d[/color]\n" % item.Max_lust_bonus
 	if item.Max_Guilt_bonus != 0:
-		stats += "[color=AAAAAA]  ● Stress max: +%d[/color]\n" % item.Max_Guilt_bonus
+		stats += "[color=AAAAAA]    Stress max: +%d[/color]\n" % item.Max_Guilt_bonus
 
 	tooltip_desc.bbcode_enabled = true
 	tooltip_desc.text = "  " + item.description if item.get("description") else "" + stats

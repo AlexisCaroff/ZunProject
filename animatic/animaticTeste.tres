@@ -1,57 +1,52 @@
 [gd_resource type="Resource" script_class="Animatic" load_steps=15 format=3 uid="uid://bmgxbqdxxsh6v"]
 
 [ext_resource type="Script" uid="uid://ck7b0nag3kik0" path="res://animatic/AnimaticFrame.gd" id="1_6fe8f"]
-[ext_resource type="Texture2D" uid="uid://e8s7i3il2u2f" path="res://animatic/img1.png" id="2_gbs3m"]
+[ext_resource type="Texture2D" uid="uid://cpu41lwc3cwna" path="res://INTRO_boss/INTRO_boss_001.png" id="2_fl88r"]
+[ext_resource type="AudioStream" uid="uid://birghx8q2o5ns" path="res://INTRO_boss/boss intro pieces/INTRO_BOSS_001.wav" id="2_g5ofa"]
 [ext_resource type="Script" uid="uid://p5vhivlgwttt" path="res://animatic/Animatic.gd" id="2_rq0tq"]
-[ext_resource type="Texture2D" uid="uid://kbygdyiumk7" path="res://animatic/img2.png" id="3_3ow5p"]
-[ext_resource type="Texture2D" uid="uid://bknmmhqkiiw0g" path="res://animatic/img3.png" id="4_bc4ln"]
-[ext_resource type="Texture2D" uid="uid://rlrov4w81xbu" path="res://animatic/img4.png" id="5_fl88r"]
-[ext_resource type="Texture2D" uid="uid://bjj0t10iq24tq" path="res://animatic/img5.png" id="6_74p2y"]
-[ext_resource type="Texture2D" uid="uid://cvw8h0d7hkktj" path="res://animatic/img6.png" id="7_ta64p"]
+[ext_resource type="Texture2D" uid="uid://b61cmtgknx2nd" path="res://INTRO_boss/INTRO_boss_002.png" id="3_74p2y"]
+[ext_resource type="Texture2D" uid="uid://cwdit0wq7rdp7" path="res://INTRO_boss/INTRO_boss_003.png" id="4_ta64p"]
+[ext_resource type="AudioStream" uid="uid://li4duob6vh8r" path="res://INTRO_boss/boss intro pieces/INTRO_BOSS_002.wav" id="4_ufsu4"]
+[ext_resource type="Texture2D" uid="uid://bqete1glp3p65" path="res://INTRO_boss/INTRO_boss_004.png" id="5_jd7xi"]
+[ext_resource type="AudioStream" uid="uid://b7gyn5rl2g48a" path="res://INTRO_boss/boss intro pieces/INTRO_BOSS_003.wav" id="6_d6mcu"]
+[ext_resource type="AudioStream" uid="uid://cjjkwsxrpcxdy" path="res://INTRO_boss/boss intro pieces/INTRO_BOSS_004.wav" id="8_vxekl"]
 
 [sub_resource type="Resource" id="Resource_fl88r"]
 script = ExtResource("1_6fe8f")
-texture = ExtResource("2_gbs3m")
-at = 0.0
+texture = ExtResource("2_fl88r")
+audio = ExtResource("2_g5ofa")
+subtitle_file = "res://INTRO_boss/Subtitles/subBoss1.txt"
+skip_on_click = true
 metadata/_custom_type_script = "uid://ck7b0nag3kik0"
 
 [sub_resource type="Resource" id="Resource_74p2y"]
 script = ExtResource("1_6fe8f")
-texture = ExtResource("3_3ow5p")
-at = 1.0
+texture = ExtResource("3_74p2y")
+audio = ExtResource("4_ufsu4")
+subtitle_file = "res://INTRO_boss/Subtitles/subBoss2.txt"
+skip_on_click = true
 metadata/_custom_type_script = "uid://ck7b0nag3kik0"
 
 [sub_resource type="Resource" id="Resource_ta64p"]
 script = ExtResource("1_6fe8f")
-texture = ExtResource("4_bc4ln")
-at = 1.5
+texture = ExtResource("4_ta64p")
+audio = ExtResource("6_d6mcu")
+subtitle_file = "res://INTRO_boss/Subtitles/subBoss3.txt"
+skip_on_click = true
 metadata/_custom_type_script = "uid://ck7b0nag3kik0"
 
 [sub_resource type="Resource" id="Resource_jd7xi"]
 script = ExtResource("1_6fe8f")
-texture = ExtResource("5_fl88r")
-at = 2.0
-metadata/_custom_type_script = "uid://ck7b0nag3kik0"
-
-[sub_resource type="Resource" id="Resource_g5ofa"]
-script = ExtResource("1_6fe8f")
-texture = ExtResource("6_74p2y")
-at = 2.5
-metadata/_custom_type_script = "uid://ck7b0nag3kik0"
-
-[sub_resource type="Resource" id="Resource_ufsu4"]
-script = ExtResource("1_6fe8f")
-texture = ExtResource("7_ta64p")
-at = 3.0
+texture = ExtResource("5_jd7xi")
+audio = ExtResource("8_vxekl")
+subtitle_file = "res://INTRO_boss/Subtitles/subBoss4.txt"
+skip_on_click = true
 metadata/_custom_type_script = "uid://ck7b0nag3kik0"
 
 [resource]
 script = ExtResource("2_rq0tq")
-fade_duration = 0.5
-final_hold_time = 2.0
-frames = Array[ExtResource("1_6fe8f")]([SubResource("Resource_fl88r"), SubResource("Resource_74p2y"), SubResource("Resource_ta64p"), SubResource("Resource_jd7xi"), SubResource("Resource_g5ofa"), SubResource("Resource_ufsu4")])
-pan = Vector2(960, 400)
-zoom = 1.5
-zoomTime = 4.0
-text = ""
+frames = Array[ExtResource("1_6fe8f")]([SubResource("Resource_fl88r"), SubResource("Resource_74p2y"), SubResource("Resource_ta64p"), SubResource("Resource_jd7xi")])
+fade_duration = 1.0
+final_hold_time = 0.0
+auto_advance = true
 metadata/_custom_type_script = "uid://p5vhivlgwttt"

@@ -24,6 +24,9 @@ class_name CharacterData
 @export var base_willpower: int = 5
 @export var base_initiative: int = 1
 @export var base_evasion: int = 5
+@export var base_precision: int = 100
+var precision: int = 100        # recalculé chaque update_stats
+
 @export var attack: int = 10
 @export var defense: int = 5
 @export var willpower: int = 5
@@ -49,7 +52,7 @@ class_name CharacterData
 @export var current_stress: int = 0
 @export var current_horniness: int = 0
 
-
+@export var isOneshot : bool= false
 
 @export var skill_resources: Array[Resource] = []
 # --- Tags (type, classe, etc.)
@@ -91,3 +94,6 @@ var acte_twice : bool =false
 ]
 var buffs: Array[Buff] = []
 var current_bark: Bark = null
+
+@export var immobilized: bool  = false
+@export var immobilized_turns: int = 0

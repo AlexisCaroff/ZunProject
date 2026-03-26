@@ -19,6 +19,7 @@ name = "exorcisme"
 descriptionName = "exorcisme"
 description = "deal magic dmg "
 icon = ExtResource("3_dxqn5")
+barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_i6idu")
 the_target_type = 0

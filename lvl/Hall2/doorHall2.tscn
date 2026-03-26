@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://71apwvspfpxy"]
+[gd_scene load_steps=33 format=3 uid="uid://71apwvspfpxy"]
 
 [ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="1_agxcq"]
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_8068f"]
@@ -19,9 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://0eqnf7lwa3ra" path="res://UI/doorIconRight.png" id="14_y867u"]
 [ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="15_n5q1j"]
 [ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="16_wdq54"]
-[ext_resource type="Texture2D" uid="uid://drp4vk52vgk74" path="res://UI/doorebuscade/DOOR_caught_nymph.png" id="17_l6nrk"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="18_xmsjb"]
 [ext_resource type="Texture2D" uid="uid://dwu2rkneujev8" path="res://characters/exploPortrait/pristressExploPortrait.png" id="19_e16el"]
+[ext_resource type="Texture2D" uid="uid://gqne2ra0vvf7" path="res://UI/doorebuscade/PEEK_scare_addict.png" id="20_bxj7q"]
 [ext_resource type="Script" uid="uid://byensau5ptguo" path="res://lvl/Hall1/door_portrait.gd" id="20_v8jnd"]
 [ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="21_ryg05"]
 [ext_resource type="Texture2D" uid="uid://dd4k5wxaesfo4" path="res://characters/exploPortrait/MysticExploPortrait.png" id="22_thaqs"]
@@ -30,6 +30,8 @@
 [ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="25_283kc"]
 [ext_resource type="Texture2D" uid="uid://bpgas6hnffbe0" path="res://UI/sideButton.png" id="26_ra4p2"]
 [ext_resource type="Texture2D" uid="uid://ctkoy8ysbicta" path="res://UI/iconMap.png" id="27_si4cy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bxj7q"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_crknv"]
 
@@ -260,6 +262,7 @@ offset_left = 1102.0
 offset_top = 280.0
 offset_right = 1317.0
 offset_bottom = 481.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bxj7q")
 flat = true
 script = ExtResource("12_4hk1d")
 
@@ -322,11 +325,11 @@ position = Vector2(791, 374)
 visible = false
 z_index = 12
 layout_mode = 0
-offset_left = 567.0
-offset_top = -7.0
-offset_right = 1463.0
-offset_bottom = 1051.0
-texture = ExtResource("17_l6nrk")
+offset_left = -8.0
+offset_top = 4.0
+offset_right = 1912.0
+offset_bottom = 1084.0
+texture = ExtResource("20_bxj7q")
 
 [node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
 layout_mode = 0

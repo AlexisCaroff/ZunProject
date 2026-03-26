@@ -110,46 +110,66 @@ func show_ambush_message(text: String, _color: Color):
 func _start():
 	if GameState.current_phase == GameStat.GamePhase.COMBAT:
 		ui = get_parent()
-		enemy_positions=[
+		enemy_positions = [
 			$"../ennemiePosition/position1",
 			$"../ennemiePosition/position2",
 			$"../ennemiePosition/position3",
 			$"../ennemiePosition/position4",
-			$"../ennemiePosition/position5",]
-
+			$"../ennemiePosition/position5",
+		]
+ 
+		# ── Séquence d'intro boss AVANT le spawn ─────────────────────────
+		var boss_intro := get_parent().get_parent().get_node_or_null("BossIntroSequence") as BossIntroSequence
+		if boss_intro:
+			await get_tree().process_frame
+			var result: Dictionary = await boss_intro.run_sequence(cam)
+ 
+			var chosen_scene: PackedScene = result.get("scene", null)
+			if chosen_scene != null:
+				# Le joueur a cédé → on quitte cette scène et on en charge une autre.
+				# On met à jour l'encounter dans le RoomResource avant de partir
+				# pour que la nouvelle scène le récupère si besoin.
+				var chosen_encounter: CombatEncounter = result.get("encounter", null)
+				if chosen_encounter != null:
+					gm.current_room_Ressource.encounter = chosen_encounter
+				gm._enter_scene_in_current_room(chosen_scene)
+				return   # ← stoppe _start(), rien ne se spawne ici
+ 
+			# Branche normale (résistance) : on change juste l'encounter
+			var chosen_encounter: CombatEncounter = result.get("encounter", null)
+			if chosen_encounter != null:
+				encounter = chosen_encounter
+		# ─────────────────────────────────────────────────────────────────
+ 
 		# Spawn héros
-
 		print("Aucune sauvegarde -> Spawn des héros par défaut")
 		for i in gm.characters.size():
-			var charaData = gm.characters[i] 
-			
-			var chara : Character= combatChara.instantiate()
+			var charaData = gm.characters[i]
+			var chara: Character = combatChara.instantiate()
 			chara.characterData = charaData
 			chara.characterData.Chara_position = i
 			add_child(chara)
 			chara.combat_manager = self
 			heroes.append(chara)
-			print ("spawn " + chara.characterData.Charaname)
-
-			# place in slot
+			print("spawn " + chara.characterData.Charaname)
+ 
 			var slot_index = clamp(chara.characterData.Chara_position, 0, hero_positions.size() - 1)
 			var slot = hero_positions[slot_index]
 			move_character_to(chara, slot, 0)
-
-				# initialise les stats runtime depuis la ressource (si besoin)
+ 
 			chara.update_stats()
 			chara.characterData.current_stamina = chara.characterData.max_stamina
 			chara.characterData.current_stress = clamp(chara.characterData.current_stress, 0, chara.characterData.max_stress)
 			chara.characterData.current_horniness = clamp(chara.characterData.current_horniness, 0, chara.characterData.max_horniness)
 			chara.ShadowBackground = ShadowBackground
-
+ 
 			if heroes_are_ambushed:
 				chara.surprised()
 			chara.update_ui()
-		
-		# Spawn ennemis
+ 
+		# Spawn ennemis (encounter est maintenant le bon)
 		for i in encounter.enemy_scenes.size():
-			var chara :Character = encounter.enemy_scenes[i].instantiate()
+			var chara: Character = encounter.enemy_scenes[i].instantiate()
 			chara.characterData = chara.characterData.duplicate()
 			add_child(chara)
 			chara.combat_manager = self
@@ -158,46 +178,42 @@ func _start():
 			var slot_index = i
 			var slot = enemy_positions[slot_index]
 			move_character_to(chara, slot, 0)
-			if chara.characterData.Charaname=="Mommy":
-				enemy_positions[slot_index+1].occupant=chara
-			# initialise stats runtime si la ressource existe
+			if chara.characterData.Charaname == "Mommy":
+				enemy_positions[slot_index + 1].occupant = chara
 			if chara.characterData:
 				chara.update_stats()
 				chara.characterData.current_stamina = chara.characterData.max_stamina
 				chara.characterData.current_stress = clamp(chara.characterData.current_stress, 0, chara.characterData.max_stress)
 				chara.characterData.current_horniness = clamp(chara.characterData.current_horniness, 0, chara.characterData.max_horniness)
-
+ 
 			if ennemy_are_ambushed:
 				chara.surprised()
-			
 			chara.update_ui()
-			
-		
+ 
 		ui.set_MenuPerso(gm.characters)
-		
 		_start_combat_flow()
-		
+ 
 	for chara in heroes + enemies:
 		chara.skill_animation_started.connect(_on_skill_animation_started)
 		chara.skill_animation_finished.connect(_on_skill_animation_finished)
 
 func _start_combat_flow() -> void:
-	
 	if ui:
 		ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
-
-
+ 
+	# Animatique et histoire pré-combat (système existant)
 	if gm.current_room_Ressource.before_combat_scene_History:
 		var overlay = gm.show_history_scene(gm.current_room_Ressource.before_combat_scene_History)
 		await overlay.history_finished
 	if gm.current_room_Ressource.before_combat_Animatic_scene:
-		var overlay = gm.show_Animatic_scene(gm.current_room_Ressource.before_combat_Animatic_scene,cam)
+		var overlay = gm.show_Animatic_scene(gm.current_room_Ressource.before_combat_Animatic_scene, cam)
 		await overlay.Animatic_finished
+
+ 
 	if ui:
 		ui.mouse_filter = Control.MOUSE_FILTER_STOP
-	
+ 
 	start_combat()
-
 	
 func start_combat():
 	combat_state = CombatState.IDLE
@@ -229,6 +245,8 @@ func next_turn():
 	_check_defeat()
 	
 	while is_pause():
+		await get_tree().process_frame
+	while GameState.Pause:
 		await get_tree().process_frame
 		
 	if combatEnd:
@@ -413,8 +431,10 @@ func _show_victory():
 
 	
 func use_skill(index: int):
+	if is_animation_playing():
+		return
 	var skill = current_character.get_skill(index)
-	pending_skill=skill
+	pending_skill = skill
 	combat_state = CombatState.SELECTING_FIRST_TARGET
 	if skill.can_use():
 		pending_skill = skill
@@ -437,24 +457,27 @@ func _on_target_selected(targets: Array[PositionSlot]):
 	match combat_state: 
 		CombatState.SELECTING_FIRST_TARGET:
 			if !pending_skill.two_target_Type:
+				# 1. Appliquer les effets d'abord
+				for target in targets:
+					if target.occupant != null:
+						await pending_skill.use(target)
+						target.occupant.update_ui()
+						ui.update_ui_for_current_character(current_character)
+
+				# 2. Attendre les barks d'affinité
+				await flush_startSkills_affinity_reaction()
+
+				# 3. Lancer l'animation
 				if pending_skill.name != "move":
 					var occupied_slots = targets.filter(func(s): return s.occupant != null)
 					var slot = occupied_slots[0] if occupied_slots.size() > 0 else null
-					current_character.sprite.texture = current_character.current_skill.ImageSkill
-					await current_character.animate_attack(slot.occupant, current_character.current_skill.duration)
-
-				# Les effets sont appliqués — les réactions sont mises en file, pas encore jouées
-				for target in targets:
-					if target.occupant != null:
-						await pending_skill.use(target)   # ← await ici
-						target.occupant.update_ui()
-						ui.update_ui_for_current_character(current_character)
+					if slot:
+						current_character.sprite.texture = current_character.current_skill.ImageSkill
+						await current_character.animate_attack(slot.occupant, current_character.current_skill.duration)
 
 				if pending_skill.attack_sound != null:
 					audio.stream = pending_skill.attack_sound
 					audio.play()
-
-				
 
 				ui.log(pending_skill.name)
 				pending_skill.end_turn(self)
@@ -463,27 +486,33 @@ func _on_target_selected(targets: Array[PositionSlot]):
 				pending_skill.target1 = targets
 				combat_state = CombatState.SELECTING_SECOND_TARGET
 				start_target_selection(pending_skill)
-		CombatState.SELECTING_SECOND_TARGET :
-			if pending_skill.name != "move" :# && pending_skill.name != "ChangeMask" :
-				
-				await current_character.animate_attack(pending_skill.target1[0].occupant)
-			if pending_skill.attack_sound != null:
-				audio.stream= pending_skill.attack_sound
-				audio.pitch_scale = randf_range(0.9, 1.0)
-				audio.play()
-			ui.log(pending_skill.name)
-			stop_target_selection()
+
+		CombatState.SELECTING_SECOND_TARGET:
+			# 1. Appliquer les effets sur la première cible
 			for target in pending_skill.target1:
 				await pending_skill.use(target)
-				print(target.occupant.characterData.Charaname)
 				target.occupant.update_ui()
+
+			# 2. Appliquer les effets sur la deuxième cible
 			for target2 in targets:
-				await pending_skill.use(target2,true)
-				print(target2.occupant.characterData.Charaname)
+				await pending_skill.use(target2, true)
 				target2.occupant.update_ui()
+
+			# 3. Attendre les barks d'affinité
+			await flush_startSkills_affinity_reaction()
+
+			# 4. Lancer l'animation
+			if pending_skill.name != "move":
+				await current_character.animate_attack(pending_skill.target1[0].occupant)
+
+			if pending_skill.attack_sound != null:
+				audio.stream = pending_skill.attack_sound
+				audio.pitch_scale = randf_range(0.9, 1.0)
+				audio.play()
+
+			ui.log(pending_skill.name)
 			pending_skill.end_turn(self)
-			pending_skill=null
-			
+			pending_skill = null
 
 func stop_target_selection():
 	for enemy in enemies:
@@ -551,4 +580,5 @@ func flush_endTurn_affinity_reactions() -> void:
 	endTurn_affinity_reaction_queue.clear()
 	
 func PassButtonDown():
-	pass
+	if current_character and current_character.characterData.is_player_controlled:
+		end_currentChara_Turn()

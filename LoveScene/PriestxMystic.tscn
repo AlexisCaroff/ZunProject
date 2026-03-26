@@ -1,12 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkqcghxo5xns2"]
+[gd_scene load_steps=4 format=3 uid="uid://dkqcghxo5xns2"]
 
 [ext_resource type="Script" uid="uid://cdva0owcmjo24" path="res://LoveScene/SexScene.gd" id="1_a4eqb"]
 [ext_resource type="Texture2D" uid="uid://b6p083ebvag7i" path="res://LoveScene/SCENE_CAMP_MxP.png" id="2_a4eqb"]
-[ext_resource type="Texture2D" uid="uid://dw2naje7rq7g" path="res://UI/DialogueBox.png" id="3_mioyq"]
-[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="4_4xlxo"]
+[ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="3_6fgpt"]
 
 [node name="HunterxWarrior" type="Node2D"]
 script = ExtResource("1_a4eqb")
+dialogue_path = "res://dialogue/love/PristessMystic.txt"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1967.0
@@ -18,29 +18,10 @@ position = Vector2(953.444, 541.5)
 scale = Vector2(0.485648, 0.485648)
 texture = ExtResource("2_a4eqb")
 
-[node name="DialogueBox" type="Sprite2D" parent="."]
-position = Vector2(939, 923)
-scale = Vector2(1.58427, 1.58427)
-texture = ExtResource("3_mioyq")
-
-[node name="Label" type="Label" parent="DialogueBox"]
-z_index = 2
-anchors_preset = -1
-anchor_left = 0.0210002
-anchor_top = 0.168327
-anchor_right = 0.98
-anchor_bottom = 0.949
-offset_left = -511.504
-offset_top = -88.9622
-offset_right = -511.52
-offset_bottom = -88.922
-theme_override_fonts/font = ExtResource("4_4xlxo")
-theme_override_font_sizes/font_size = 30
-text = "The Priestess was loath to admit it, but this barbarian was very good with his hands... And that strange mixture was making her feel tingly..."
-autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
-
 [node name="Button" type="Button" parent="."]
 offset_right = 1909.0
 offset_bottom = 1079.0
 flat = true
+
+[node name="DialogueManager" type="Node2D" parent="."]
+script = ExtResource("3_6fgpt")

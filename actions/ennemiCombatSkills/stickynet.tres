@@ -47,6 +47,7 @@ name = "Stickynet"
 descriptionName = "Stickynet"
 description = "Stickynet"
 icon = ExtResource("4_j4j7o")
+barkSkill = ""
 required_position = 2
 ImageSkill = ExtResource("1_4y5k8")
 the_target_type = 0

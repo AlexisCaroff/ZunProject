@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://doitrlqhfja4t" path="res://characters/CharacterTestEnemySpitter1.tscn" id="2_xuodd"]
 [ext_resource type="PackedScene" uid="uid://d3jx7ce6fpdr1" path="res://characters/CharacterEnemyNymphe.tscn" id="3_5s1dq"]
 [ext_resource type="PackedScene" uid="uid://cr7722t3ktcl4" path="res://characters/CharaEnnemyTemptress.tscn" id="4_5cb41"]
-[ext_resource type="Texture2D" uid="uid://drp4vk52vgk74" path="res://UI/doorebuscade/DOOR_caught_nymph.png" id="5_tgw0l"]
+[ext_resource type="Texture2D" uid="uid://bacup67pknpax" path="res://UI/doorebuscade/PEEK_scare_witch.png" id="5_x0bms"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_eqpy5"]
 [ext_resource type="Script" uid="uid://dmxcru3ra8jg" path="res://lvl/CombatEncounter.gd" id="7_muiqm"]
 
@@ -13,5 +13,5 @@ script = ExtResource("7_muiqm")
 enemy_scenes = Array[PackedScene]([ExtResource("1_p8dsd"), ExtResource("2_xuodd"), ExtResource("3_5s1dq"), ExtResource("4_5cb41")])
 loots = Array[ExtResource("6_eqpy5")]([])
 description = ""
-imageEmbuscade = ExtResource("5_tgw0l")
+imageEmbuscade = ExtResource("5_x0bms")
 metadata/_custom_type_script = "uid://dmxcru3ra8jg"

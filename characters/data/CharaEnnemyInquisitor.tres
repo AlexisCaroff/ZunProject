@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=14 format=3 uid="uid://ce5erf8nv7cca"]
+
+[ext_resource type="Texture2D" uid="uid://cmbc5iua15q72" path="res://characters/charatexture/demo characters/INQUISITION_inquisitor_hit.png" id="1_c5xmt"]
+[ext_resource type="Script" uid="uid://db1m8vwgp38yx" path="res://characters/charatexture/braines/Ai_brain_Support.gd" id="2_lbmoj"]
+[ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="3_qidbc"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="4_gio1x"]
+[ext_resource type="Texture2D" uid="uid://lll7favsplso" path="res://characters/charatexture/demo characters/INQUISITION_inquisitor_down.png" id="5_in4ng"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_fgfnc"]
+[ext_resource type="Texture2D" uid="uid://cr7dbkl3oeulx" path="res://characters/exploPortrait/InquisitorExploPortrait.png" id="7_lbmoj"]
+[ext_resource type="Texture2D" uid="uid://bj56jynpgi8ca" path="res://characters/charatexture/demo characters/INQUISITION_inquisitor_idle.png" id="8_qidbc"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="10_h7mmf"]
+[ext_resource type="Resource" uid="uid://dibkowmk40eu3" path="res://actions/ennemiCombatSkills/hymne_d_encouragement.tres" id="10_i7j3r"]
+[ext_resource type="Resource" uid="uid://cfjjaolic6nab" path="res://actions/ennemiCombatSkills/Holy_ray.tres" id="11_c5xmt"]
+[ext_resource type="Resource" uid="uid://cmpo3p42diyix" path="res://actions/ennemiCombatSkills/Sermon.tres" id="12_in4ng"]
+
+[sub_resource type="Resource" id="Resource_ocqyt"]
+script = ExtResource("2_lbmoj")
+name = "Default AI"
+description = "IA basique qui choisit une compétence aléatoire utilisable et une cible valide."
+metadata/_custom_type_script = "uid://db1m8vwgp38yx"
+
+[resource]
+script = ExtResource("10_h7mmf")
+headPosition = Vector2(1, -110)
+portrait_texture = ExtResource("8_qidbc")
+explorationPortrait = ExtResource("7_lbmoj")
+dead_portrait_texture = ExtResource("5_in4ng")
+Hit_texture = ExtResource("1_c5xmt")
+initiative_icon = ExtResource("7_lbmoj")
+Name = "Inquisitor"
+Charaname = "Inquisitor"
+IsDemon = false
+size = "average"
+affinity = Dictionary[String, int]({})
+base_max_stamina = 100
+base_max_stress = 100
+base_max_horniness = 100
+base_attack = 10
+base_defense = 5
+base_willpower = 5
+base_initiative = 1
+base_evasion = 5
+base_precision = 100
+attack = 10
+defense = 5
+willpower = 5
+evasion = 5
+initiative = 0
+peek = 0
+equipped_items = Array[ExtResource("6_fgfnc")]([])
+stun = false
+Chara_position = 0
+max_stamina = 100
+max_stress = 100
+max_horniness = 100
+current_stamina = 100
+current_stress = 0
+current_horniness = 0
+isOneshot = false
+skill_resources = Array[Resource]([ExtResource("10_i7j3r"), ExtResource("11_c5xmt"), ExtResource("12_in4ng")])
+tags = Array[String]([])
+is_player_controlled = false
+ai_brain = SubResource("Resource_ocqyt")
+can_be_moved = true
+min_durationIddle = 0.6
+max_durationIddle = 1.0
+min_scale = 0.95
+max_scale = 1.0
+corruption = 0
+camp_skill_resources = Array[ExtResource("4_gio1x")]([])
+bark_scene = ExtResource("3_qidbc")
+taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide open!", "You fight like a wet noodle!", "Oops! Did that hurt?"]
+reaction = ["", "", ""]
+affinityReaction = ["", "", ""]
+immobilized = false
+immobilized_turns = 0

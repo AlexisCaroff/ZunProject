@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://deybvri8mc0gg"]
 
-[ext_resource type="Texture2D" uid="uid://k2qvyob47pj4" path="res://characters/charatexture/demo characters/Boss.png" id="1_canl4"]
+[ext_resource type="Texture2D" uid="uid://4v2py6qxhw2o" path="res://characters/boss assets/BOSS_broodM_grab.png" id="1_merpb"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_0gssa"]
 [ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="3_c2rjk"]
 [ext_resource type="PackedScene" uid="uid://wasovspg3yc4" path="res://characters/CharacterTestEnemyTentacle.tscn" id="4_5oaeq"]
@@ -15,7 +15,6 @@ metadata/_custom_type_script = "uid://tjywmaoy4ejj"
 [sub_resource type="Resource" id="Resource_5oaeq"]
 script = ExtResource("4_merpb")
 enemy_scene = ExtResource("4_5oaeq")
-max_spawn = 1
 spawn_delay = 0.5
 metadata/_custom_type_script = "uid://cnu1tkps1688s"
 
@@ -25,8 +24,9 @@ name = "Mommy Grab"
 descriptionName = "Mommy Grab"
 description = "Mommy Grab"
 icon = ExtResource("8_cy45l")
+barkSkill = ""
 required_position = 2
-ImageSkill = ExtResource("1_canl4")
+ImageSkill = ExtResource("1_merpb")
 the_target_type = 0
 effects = Array[ExtResource("2_0gssa")]([SubResource("Resource_coij5"), SubResource("Resource_5oaeq")])
 two_target_Type = false

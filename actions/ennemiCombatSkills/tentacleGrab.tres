@@ -26,6 +26,7 @@ name = "TentacleGrab"
 descriptionName = "Tentacle Grab"
 description = "Inflige des dégâts à un ennemi"
 icon = ExtResource("4_2x4hl")
+barkSkill = ""
 required_position = 1
 ImageSkill = ExtResource("1_7m3nb")
 the_target_type = 0

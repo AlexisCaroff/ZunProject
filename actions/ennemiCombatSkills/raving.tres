@@ -19,6 +19,7 @@ name = "Raving"
 descriptionName = "Raving"
 description = "scary"
 icon = ExtResource("3_hcnd1")
+barkSkill = ""
 required_position = 1
 ImageSkill = ExtResource("1_hcnd1")
 the_target_type = 4

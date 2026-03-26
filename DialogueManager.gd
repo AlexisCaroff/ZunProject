@@ -13,16 +13,28 @@ var choix: Control
 @export var text_choice1: String
 @export var text_choice2: String
 @export var external_choice_receiver: Node = null
+@onready var endButton
 var dialogue_started: bool = false
 var ui: Node = null
 var scene: PackedScene = preload("res://UI/dialogue_ui.tscn")
 
+# Speakers sans portrait — n'occupent pas de slot visuel (ex: "Narrator")
+@export var no_portrait_speakers: Array[String] = ["Narrator"]
+
+# Alias de portrait : même slot, texture différente selon le contexte
+# ex: {"InquisitorD": "Inquisitor"} → InquisitorD utilise le slot d'Inquisitor
+#     mais affiche son propre portrait si disponible, sinon celui d'Inquisitor
+@export var portrait_aliases: Dictionary = {}
+
 # Détectés automatiquement à la lecture du fichier — ne pas remplir manuellement
 var participants: Array[String] = []
 
+# Portrait actuellement verrouillé par slot : { "Inquisitor": "Inquisitor" }
+# Une fois le portrait canonique affiché, il ne repasse plus sur un alias.
+var _slot_current_portrait: Dictionary = {}
+
 
 func _ready():
-	self.global_position = Vector2(0, 0)
 	if ui == null:
 		ui = scene.instantiate()
 		add_child(ui)
@@ -59,14 +71,15 @@ func load_dialogue(file_path: String):
 	dialogue_lines.clear()
 	current_index = 0
 	participants.clear()
+	_slot_current_portrait.clear()
 
 	var file := FileAccess.open(file_path, FileAccess.READ)
 	if not file:
 		push_error("Impossible de lire " + file_path)
 		return
 
-	# Première passe : collecte des lignes et détection des personnages (ordre d'apparition)
-	var seen_speakers: Array[String] = []
+	var seen_slots: Array[String] = []   # noms de slots (après résolution des alias)
+
 	while not file.eof_reached():
 		var line := file.get_line().strip_edges()
 		if line == "":
@@ -76,18 +89,28 @@ func load_dialogue(file_path: String):
 			var speaker = parts[0].strip_edges()
 			var text    = parts[1].strip_edges()
 			dialogue_lines.append({"speaker": speaker, "text": text})
-			if speaker not in seen_speakers:
-				seen_speakers.append(speaker)
+
+			# Ignore les speakers sans portrait
+			if speaker in no_portrait_speakers:
+				continue
+
+			# Résout l'alias → nom de slot
+			var slot_name := _resolve_slot(speaker)
+
+			if slot_name not in seen_slots:
+				seen_slots.append(slot_name)
+				# Initialise le portrait du slot avec le premier speaker qui l'utilise.
+				# ex: InquisitorD arrive en premier → slot "Inquisitor" commence avec "InquisitorD"
+				_slot_current_portrait[slot_name] = speaker
 	file.close()
 
-	# On garde au maximum 4 personnages (ordre d'apparition)
-	for i in range(min(seen_speakers.size(), 4)):
-		participants.append(seen_speakers[i])
+	# On garde au maximum 4 slots
+	for i in range(min(seen_slots.size(), 4)):
+		participants.append(seen_slots[i])
 
-	# Informe l'UI du nombre de participants pour qu'elle ajuste la mise en page
 	ui.setup_layout(participants.size())
-	print("Participants:", participants)
-	
+	print("Participants (slots):", participants)
+
 
 func start_dialogue():
 	dialogue_started = true
@@ -120,15 +143,34 @@ func show_line():
 	var speaker = line["speaker"]
 	var text    = line["text"]
 
-	# Calcule l'index du locuteur dans la liste des participants (0–3)
-	var speaker_index: int = participants.find(speaker)
+	# ── Cas Narrator (pas de portrait) ──────────────────────────────
+	if speaker in no_portrait_speakers:
+		# Tous les portraits en inactif, nom du speaker quand même affiché
+		_dim_all_portraits()
+		ui.set_text(speaker, text)
+		return
 
-	# Récupère les textures dans l'ordre des participants
+	# ── Résolution slot + portrait ────────────────────────────────────
+	var slot_name     := _resolve_slot(speaker)
+	var speaker_index := participants.find(slot_name)
+
+	# Mise à jour du portrait du slot, sauf si déjà verrouillé sur le canonique.
+	# Un slot est verrouillé quand son portrait stocké == le nom du slot lui-même
+	# (c'est-à-dire que le personnage canonique a déjà parlé).
+	var already_locked: bool = _slot_current_portrait.get(slot_name, "") == slot_name
+	if not already_locked:
+		_slot_current_portrait[slot_name] = speaker
+
+	# Construit le tableau de textures en utilisant le portrait verrouillé de chaque slot
 	var textures: Array[Texture2D] = []
 	for p in participants:
+		var portrait_name: String = _slot_current_portrait.get(p, p)
 		var tex: Texture2D = null
-		if portraits_resource and portraits_resource.portraits.has(p):
-			tex = portraits_resource.portraits[p]
+		if portraits_resource:
+			if portraits_resource.portraits.has(portrait_name):
+				tex = portraits_resource.portraits[portrait_name]
+			elif portraits_resource.portraits.has(p):
+				tex = portraits_resource.portraits[p]
 		textures.append(tex)
 
 	ui.set_portraits_multi(textures, speaker_index)
@@ -152,3 +194,30 @@ func _on_Choice1_button_down() -> void:
 func _on_Choice2_button_down() -> void:
 	hideChoix()
 	emit_signal("choice_made", 1)
+
+
+# ─────────────────────────────────────────────
+#  Helpers
+# ─────────────────────────────────────────────
+
+## Retourne le nom de slot d'un speaker (résout les alias)
+func _resolve_slot(speaker: String) -> String:
+	if portrait_aliases.has(speaker):
+		return portrait_aliases[speaker]
+	return speaker
+
+
+## Met tous les portraits en inactif (pour le Narrator)
+func _dim_all_portraits() -> void:
+	var dummy_textures: Array[Texture2D] = []
+	for p in participants:
+		var portrait_name: String = _slot_current_portrait.get(p, p)
+		var tex: Texture2D = null
+		if portraits_resource:
+			if portraits_resource.portraits.has(portrait_name):
+				tex = portraits_resource.portraits[portrait_name]
+			elif portraits_resource.portraits.has(p):
+				tex = portraits_resource.portraits[p]
+		dummy_textures.append(tex)
+	# speaker_index = -1 → aucun portrait actif dans set_portraits_multi
+	ui.set_portraits_multi(dummy_textures, -1)

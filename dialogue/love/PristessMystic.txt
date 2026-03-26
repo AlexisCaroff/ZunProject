@@ -1,86 +1,84 @@
-M: Azun’bir. You look haggard. Perhaps you should get some rest in the tent.
-P: I’m perfectly fine. We need to keep going soon.
-M: Your channeling is essential to our success, Azun’bir. You must not overburden yourself.
-P: The priestess sets her jaw and grumbles. 
-I am not sleepy.
-M: The mystic sighs, but doesn’t relent. Then would you at least allow me to help you with a ritual? I have some ointments that help relieve fatigue.
-P: I have little trust in your pagan nonsense, demon wielder. I will be fine.
-M: You must restore your energies, Azun’bir. Please, allow me to help.
-W: He’s not wrong, Chief. If you fall, the rest of us won’t last long in this place.
-P: … Very well, if I must. But this doesn’t mean I trust you yet, barbarian.
+Mystic: Azun’bir. You look haggard. Perhaps you should get some rest in the tent.
+Pristess: I’m perfectly fine. We need to keep going soon.
+Mystic: Your channeling is essential to our success, Azun’bir. You must not overburden yourself.
+Pristess: The priestess sets her jaw and grumbles. I am not sleepy.
+Mystic: The mystic sighs, but doesn’t relent. Then would you at least allow me to help you with a ritual? I have some ointments that help relieve fatigue.
+Pristess: I have little trust in your pagan nonsense, demon wielder. I will be fine.
+Mystic: You must restore your energies, Azun’bir. Please, allow me to help.
+Warrior: He’s not wrong, Chief. If you fall, the rest of us won’t last long in this place.
+Pristess: … Very well, if I must. But this doesn’t mean I trust you yet, barbarian.
 
 
-Inside the tent, the mystic sets his bag down, pulling out small earthen jars, seashell containers, and dried herbs. He starts mixing ingredients together in a wooden bowl.
-The priestess watches him with a suspicious eye, asking about every ingredient and its purpose. 
-“The herbs and reagents are mostly to give relief and warm the body, Azun’bir. The most important ingredient is this.”
-Setting the bowl down, the mystic gently grabs the slime familiar perching on his shoulder, murmuring to it in a strange language, and stroking it. The watery spirit seems to enjoy the attention, its form bouncing and roiling in the mystic’s hands.
-The viscous liquids coating the slime start dripping copiously, collecting into the bowl below. 
-The mystic even squeezes the goopy creature, as if wringing dry a soft fruit.
-Finally, he sets the slime down on his bag, and starts stirring the mixture with a spoon. The Priestess looks on, horrified.  
-“You expect me to drink this… this disgusting… daemon spittle?”
-The mystic laughs as he dries his hands. 
-“No, no, Azun’bir. This is an ointment. It will be ready in a moment”
-“We’ve been slathered and covered in these creatures’ secretions every time we fight them. How is more of it going to help?”
-The mystic smiles and caresses his familiar. 
-“Spirits are beings of pure energy. While we mages may learn how to channel these energies, spirits have evolved to draw directly on them, like trees feed on water.
-So, where the corrupted spirits try to leech our energies, I just asked my friend to help you regain some.”
-The mystic finishes stirring the bowl, and puts away his tools.
-“It is ready. This will make your body more receptive to the natural energies surrounding us. 
-Let us begin.”
+Narrator: Inside the tent, the mystic sets his bag down, pulling out small earthen jars, seashell containers, and dried herbs. He starts mixing ingredients together in a wooden bowl.
+Narrator: The priestess watches him with a suspicious eye, asking about every ingredient and its purpose. 
+Narrator: “The herbs and reagents are mostly to give relief and warm the body, Azun’bir. The most important ingredient is this.”
+Narrator: Setting the bowl down, the mystic gently grabs the slime familiar perching on his shoulder, murmuring to it in a strange language, and stroking it. The watery spirit seems to enjoy the attention, its form bouncing and roiling in the mystic’s hands.
+Narrator: The viscous liquids coating the slime start dripping copiously, collecting into the bowl below. 
+Narrator: The mystic even squeezes the goopy creature, as if wringing dry a soft fruit.
+Narrator: Finally, he sets the slime down on his bag, and starts stirring the mixture with a spoon. The Priestess looks on, horrified.  
+Narrator: “You expect me to drink this… this disgusting… daemon spittle?”
+Narrator: The mystic laughs as he dries his hands. 
+Narrator: “No, no, Azun’bir. This is an ointment. It will be ready in a moment”
+Narrator: “We’ve been slathered and covered in these creatures’ secretions every time we fight them. How is more of it going to help?”
+Narrator: The mystic smiles and caresses his familiar. 
+Narrator: “Spirits are beings of pure energy. While we mages may learn how to channel these energies, spirits have evolved to draw directly on them, like trees feed on water.
+Narrator: So, where the corrupted spirits try to leech our energies, I just asked my friend to help you regain some.”
+Narrator: The mystic finishes stirring the bowl, and puts away his tools.
+Narrator: “It is ready. This will make your body more receptive to the natural energies surrounding us. Let us begin.”
 
-Grudgingly, the priestess disrobes and sits herself with her back towards the mystic, muttering about heathen nonsense. The mystic takes the smallest dab of ointment on his hands, and starts to massage her shoulder and back, all while continuing to chant in the strange language. 
+Narrator: Grudgingly, the priestess disrobes and sits herself with her back towards the mystic, muttering about heathen nonsense. The mystic takes the smallest dab of ointment on his hands, and starts to massage her shoulder and back, all while continuing to chant in the strange language. 
 
-The effects are immediately felt. A soothing warmth spreads through the priestess’ weary muscles. At first, she resists the massage, but soon her breathing slows, and she relaxes her posture. She feels the energy slowly filling her, a steady trickle directed by the Mystic’s channeling.
+Narrator: The effects are immediately felt. A soothing warmth spreads through the priestess’ weary muscles. At first, she resists the massage, but soon her breathing slows, and she relaxes her posture. She feels the energy slowly filling her, a steady trickle directed by the Mystic’s channeling.
 
-But after a while, she starts fidgeting.
-“This is pleasant, I admit. But how long is it going to take?”
-“To fully recover your energies, I would say another hour”, responds the mystic, focused on her back. “We have to be careful, and filter the..”
+Narrator: But after a while, she starts fidgeting.
+Narrator: “This is pleasant, I admit. But how long is it going to take?”
+Narrator: “To fully recover your energies, I would say another hour”, responds the mystic, focused on her back. “We have to be careful, and filter the..”
 
-The priestess sighs and dips her hand into the bowl.
-“I’ll just do the front myself then, get it done faster.” 
-“Azun’bir, NO! Remember where we are!”
+Narrator: The priestess sighs and dips her hand into the bowl.
+Narrator: “I’ll just do the front myself then, get it done faster.” 
+Narrator: “Azun’bir, NO! Remember where we are!”
 
-Too late. The priestess has already started rubbing a big blob of ointment over her chest and arms. Almost immediately, a moan escapes her lips, and she starts sweating, overcome by the sudden heat spreading all throughout her body.
-“Oooh Mother, what is…happening…I feel so…so…tiiinglyyyy…”
+Narrator: Too late. The priestess has already started rubbing a big blob of ointment over her chest and arms. Almost immediately, a moan escapes her lips, and she starts sweating, overcome by the sudden heat spreading all throughout her body.
+Narrator: “Oooh Mother, what is…happening…I feel so…so…tiiinglyyyy…”
 
-The Mystic grabs the priestess’ arms anxiously, turning her around to wipe away as much of the remaining ointment as he can. 
-“You are too open, Azun’bir! The corruption in this place is clouding your mind! We must disperse the energies, quickly!”
+Narrator: The Mystic grabs the priestess’ arms anxiously, turning her around to wipe away as much of the remaining ointment as he can. 
+Narrator: “You are too open, Azun’bir! The corruption in this place is clouding your mind! We must disperse the energies, quickly!”
 
-“Disperse? aww, but whyyy, it feels so gooood…”
-“Please focus, Azun’bir. We must remove the taint before it turns you!”
-“Don’t you want to feel good with meee?”
+Narrator: “Disperse? aww, but whyyy, it feels so gooood…”
+Narrator: “Please focus, Azun’bir. We must remove the taint before it turns you!”
+Narrator: “Don’t you want to feel good with meee?”
 
-The possessed priestess moves her body close to the now panicking mystic, her naked skin and soft breasts pressing against him, her warm hands caressing his face and chest, her tongue playing on his neck. Before the mystic can stop her, she has pulled up another glob of ointment, and smeared it over his face.
+Narrator: The possessed priestess moves her body close to the now panicking mystic, her naked skin and soft breasts pressing against him, her warm hands caressing his face and chest, her tongue playing on his neck. Before the mystic can stop her, she has pulled up another glob of ointment, and smeared it over his face.
 
-“Let’s feel good togetheeeerrrr… “
+Narrator: “Let’s feel good togetheeeerrrr… “
 
-Overwhelming heat courses through the Mystic’s veins, and a drunken fog threatens to overtake his mind. An intense NEED to be touched, to seek pleasure, to let himself go.
-The priestess’ hands are everywhere, removing his clothes, caressing his body, each small touch sending a wave of pleasure to batter against his defenses.
-Furiously battling for control of his mind against the tide of corruption, the mystic cries out as the priestess takes his throbbing, pulsating shaft in her hand, moving to sit herself on it.
+Narrator: Overwhelming heat courses through the Mystic’s veins, and a drunken fog threatens to overtake his mind. An intense NEED to be touched, to seek pleasure, to let himself go.
+Narrator: The priestess’ hands are everywhere, removing his clothes, caressing his body, each small touch sending a wave of pleasure to batter against his defenses.
+Narrator: Furiously battling for control of his mind against the tide of corruption, the mystic cries out as the priestess takes his throbbing, pulsating shaft in her hand, moving to sit herself on it.
 
-With the strength of desperation, he pulls her down on the floor, wrestling to seat her back against him. His hands grab on to her feverishly as she struggles to get back on top. 
-“MMmmhhh…Come ooooon, I need to feeeeeel youuu…”
-“I…apologize, Azun’bir. I must… disperse the energies”.
+Narrator: With the strength of desperation, he pulls her down on the floor, wrestling to seat her back against him. His hands grab on to her feverishly as she struggles to get back on top. 
+Narrator: “MMmmhhh…Come ooooon, I need to feeeeeel youuu…”
+Narrator: “I…apologize, Azun’bir. I must… disperse the energies”.
 
-Holding her close to him, his fingers reach down to her soaked slit and start grinding. 
-This finally calms the lecherous priestess down, and she leans her head back, her hungry lips searching for his. When he turns his head to avoid her kiss, she settles for his ear, moaning and licking it.
+Narrator: Holding her close to him, his fingers reach down to her soaked slit and start grinding. 
+Narrator: This finally calms the lecherous priestess down, and she leans her head back, her hungry lips searching for his. When he turns his head to avoid her kiss, she settles for his ear, moaning and licking it.
 
-Still struggling against the fog, the mystic forces himself to start channeling, and begins siphoning off the corrupted energies suffusing the priestess. 
-His familiars, initially overcome by his panic, now lend their aid to focus the flow of energy.
+Narrator: Still struggling against the fog, the mystic forces himself to start channeling, and begins siphoning off the corrupted energies suffusing the priestess. 
+Narrator: His familiars, initially overcome by his panic, now lend their aid to focus the flow of energy.
 
-Slowly, the mystic builds up the flow, his hand going faster and faster as the priestess’ moans ring louder and louder. She bucks in his arms, grinding herself on him and begging for more. Sweat pours down his face, stinging his eyes. His wrist cries out in pain as he forces it to keep pistoning back and forth. 
+Narrator: Slowly, the mystic builds up the flow, his hand going faster and faster as the priestess’ moans ring louder and louder. She bucks in his arms, grinding herself on him and begging for more. Sweat pours down his face, stinging his eyes. His wrist cries out in pain as he forces it to keep pistoning back and forth. 
 
-“Yes, yes! There, right theeeere! Keep going!! It feels so gooooood!!”
-The priestess screams as the climax courses through her, thrashing around, almost slipping out of the Mystic’s faltering grip. With the last of his mental strength, the mystic rips the flow off, forcing the last of the corruption away in an ethereal shockwave. 
+Narrator: “Yes, yes! There, right theeeere! Keep going!! It feels so gooooood!!”
+Narrator: The priestess screams as the climax courses through her, thrashing around, almost slipping out of the Mystic’s faltering grip. With the last of his mental strength, the mystic rips the flow off, forcing the last of the corruption away in an ethereal shockwave. 
 
-Two exhausted, sweating bodies lie on the bedding, breath ragged, limbs cramped.
-As the fog lifts, the priestess’ expression changes from satisfied bliss, to confusion, and abject horror as she slowly realises what transpired.
+Narrator: Two exhausted, sweating bodies lie on the bedding, breath ragged, limbs cramped.
+Narrator: As the fog lifts, the priestess’ expression changes from satisfied bliss, to confusion, and abject horror as she slowly realises what transpired.
 
-With a start, she sits up and starts putting her clothes back on. 
-The mystic struggles to sit up, reaching out for her, but she recoils at his touch.
-“Azun’bir, are you all right? I’m so sorry, I should have warned you earlier…’
-“Nothing happened here.” She hisses at him. 
-“...But, Azu..”
-“I said NOTHING HAPPENED! You will not speak of this to anyone, do you hear me?!”
+Narrator: With a start, she sits up and starts putting her clothes back on. 
+Narrator: The mystic struggles to sit up, reaching out for her, but she recoils at his touch.
+Narrator: “Azun’bir, are you all right? I’m so sorry, I should have warned you earlier…’
+Narrator: “Nothing happened here.” She hisses at him. 
+Narrator: “...But, Azu..”
+Narrator: “I said NOTHING HAPPENED! You will not speak of this to anyone, do you hear me?!”
 
-Before he can answer, she stumbles out of the tent, leaving the exhausted and distraught mystic alone to collect himself.
+Narrator: Before he can answer, she stumbles out of the tent, leaving the exhausted and distraught mystic alone to collect himself.

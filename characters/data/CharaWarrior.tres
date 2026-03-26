@@ -71,3 +71,4 @@ camp_skill_resources = Array[ExtResource("2_elmwn")]([ExtResource("3_q5t8p"), Ex
 bark_scene = ExtResource("1_qo24v")
 taunts = ["Is that all you've got?", "Bring it on !", "You arre Pathetic!", "You're wide open!", "You fight like a wet noodle!", "Oops! Did that hurt?"]
 reaction = ["Bring it on !", "", ""]
+affinityReaction = ["", "", ""]

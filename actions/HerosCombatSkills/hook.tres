@@ -26,6 +26,7 @@ name = "hook"
 descriptionName = "tentacle grabe"
 description = "pulls an enemy forward"
 icon = ExtResource("5_b0cgj")
+barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_b0cgj")
 the_target_type = 0

@@ -85,12 +85,15 @@ func _ready():
 	donjon_map.focus_on_room(gm.current_room_Ressource,viewport)
 		#donjon_map.move_to_position(donjon_map.curentposition)
 	create_selector_sprite()
-	selectorChara.position= selected_character.CharaPosition.charaUI.global_position if selected_character.CharaPosition else Vector2.ZERO
-	selectorChara.position.y -=0
-	selectCharacter(characters[0]) 
+	call_deferred("_init_selection")
 	
 	load_interactable()
-	
+
+func _init_selection():
+	selectCharacter(characters[0])
+	var i = characters.find(characters[0])
+	portrait_selector.position = portraits[i].position
+	selectorChara.position = selected_character.CharaPosition.charaUI.global_position if selected_character.CharaPosition else Vector2.ZERO
 func load_characters_from_gamestat():
 	characters.clear()
 	

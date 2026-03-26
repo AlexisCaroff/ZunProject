@@ -5,7 +5,10 @@ class_name Crosshair
 @export var min_x := 200
 @export var max_y := 300
 @export var min_y := 200
+@export var locked :bool = false
 func _process(_delta):
+	if locked:
+		return
 	var viewport_size = get_viewport().get_visible_rect().size
 	var mouse_pos = get_global_mouse_position()
 

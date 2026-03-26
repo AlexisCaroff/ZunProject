@@ -44,6 +44,7 @@ name = "Taunt"
 descriptionName = "Taunt"
 description = "taunt one ennemi and reset 2 cooldown on skills"
 icon = ExtResource("3_ukosw")
+barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_3o4k5")
 the_target_type = 0

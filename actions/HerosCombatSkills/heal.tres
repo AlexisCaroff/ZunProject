@@ -18,6 +18,7 @@ name = "Heal"
 descriptionName = "Heal"
 description = "heal for some amount"
 icon = ExtResource("1_1rdmq")
+barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_hfoqm")
 the_target_type = 1

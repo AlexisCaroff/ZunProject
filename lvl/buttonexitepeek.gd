@@ -10,3 +10,4 @@ func _on_button_down() -> void:
 	self.visible=false
 	doorbutton.position=pose1.position
 	peekScene.visible=false
+	doorbutton.peeking=false

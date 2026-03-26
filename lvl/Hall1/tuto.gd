@@ -11,5 +11,10 @@ func _ready() -> void:
 		self.visible= false
 func hideTuto():
 	self.visible= false
+	GameState.Pause=false
 func showTuto():
 	self.visible= true
+	
+func _process(_delta):
+	if self.visible:
+		GameState.Pause=true

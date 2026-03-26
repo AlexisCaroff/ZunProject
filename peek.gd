@@ -129,9 +129,11 @@ func win_game():
 	game_over = true
 	door.win_ambush()
 func lose_game():
+	
 	game_over = true
+	await _animate_defeat()
 	door.get_ambushed()
-	print("💀 DÉFAITE — un ennemi est devenu dangereux")
+	
 	
 
 func preview_encounter(encounter: CombatEncounter) -> void:
@@ -170,3 +172,11 @@ func move_randomly_in_area(node: Node2D):
 	var random_x = randf_range(-550, 550)
 	var random_y = randf_range(-300, -100)
 	node.position += Vector2(random_x, random_y)
+func _animate_defeat() -> void:
+	var center_x := (crosshair.min_x + crosshair.max_x) / 2.0  # milieu de la zone de jeu
+	crosshair.locked = true  # stoppe le suivi souris
+
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(crosshair, "position", Vector2(center_x, 200), 0.4)
+	await tween.finished

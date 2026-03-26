@@ -8,6 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_mdx25"]
 script = ExtResource("2_r0oxv")
+name = "name"
 uitexture = ExtResource("3_mdx25")
 affected_stat = 0
 amount = 100
@@ -20,6 +21,7 @@ name = "Buff attack"
 descriptionName = "Attaque"
 description = "buff your attack"
 icon = ExtResource("3_yk0rw")
+barkSkill = ""
 required_position = 0
 the_target_type = 2
 effects = Array[ExtResource("1_mdx25")]([SubResource("Resource_mdx25")])
@@ -35,4 +37,7 @@ current_cooldown = 0
 precision = 100
 allways_hit = true
 duration = 0.3
+tags = Array[String]([])
+is_contact = false
+distance_contact = 0.0
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

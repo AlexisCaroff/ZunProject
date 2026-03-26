@@ -28,6 +28,7 @@ descriptionName = "Charge !"
 description = "Inflicts damage and pushes an enemy away"
 icon = ExtResource("4_acaj7")
 attack_sound = ExtResource("2_y1vkq")
+barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_gv1de")
 the_target_type = 5

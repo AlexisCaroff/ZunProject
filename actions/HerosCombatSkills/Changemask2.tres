@@ -33,6 +33,7 @@ name = "ChangeMask2"
 descriptionName = "ChangeMask2"
 description = "Change skills and move character"
 icon = ExtResource("3_tj43s")
+barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_hjdfo")
 the_target_type = 1

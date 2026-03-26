@@ -21,9 +21,9 @@
 [ext_resource type="Texture2D" uid="uid://barnu2syc2ays" path="res://UI/menuCharacterBoxChara.png" id="20_nsfhk"]
 [ext_resource type="Texture2D" uid="uid://cqp5sr6locjdw" path="res://UI/ArrowRt.png" id="21_13e1g"]
 [ext_resource type="Texture2D" uid="uid://ctkoy8ysbicta" path="res://UI/iconMap.png" id="21_v4oee"]
-[ext_resource type="Texture2D" uid="uid://xil5mbkowvn" path="res://characters/charatexture/hunter2.png" id="22_13e1g"]
 [ext_resource type="Texture2D" uid="uid://bswj3ifksudqi" path="res://UI/journalIcon.png" id="22_nsfhk"]
 [ext_resource type="Texture2D" uid="uid://53cn2wxevdr3" path="res://UI/menuiCON.png" id="23_a3lxb"]
+[ext_resource type="Texture2D" uid="uid://xbjwv5qg2xmp" path="res://characters/portraits/PORTRAIT_hero_hunter.png" id="24_2m5xi"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22r63"]
 
@@ -55,6 +55,7 @@ metadata/_edit_vertical_guides_ = [-690.0, -635.0]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 128
+visible = false
 follow_viewport_enabled = true
 
 [node name="background2" type="TextureRect" parent="CanvasLayer"]
@@ -1085,7 +1086,7 @@ flat = true
 script = ExtResource("12_wlqro")
 
 [node name="pivot" type="Node2D" parent="CanvasLayer"]
-position = Vector2(683, 840)
+position = Vector2(527, 871)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("8_ls6yl")
 min_scale = 1.15
@@ -1095,17 +1096,21 @@ min_duration = 1.0
 max_duration = 1.5
 
 [node name="HerosTexture1" type="TextureRect" parent="CanvasLayer/pivot"]
+anchors_preset = -1
+anchor_right = 0.0880208
 offset_left = -166.667
-offset_top = -510.833
-offset_right = 498.333
-offset_bottom = 313.167
-scale = Vector2(0.65, 0.65)
+offset_top = -660.833
+offset_right = 660.833
+offset_bottom = 166.667
+scale = Vector2(0.8, 0.8)
 mouse_filter = 2
-texture = ExtResource("22_13e1g")
+texture = ExtResource("24_2m5xi")
+expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="ToolTipPanel" type="PanelContainer" parent="CanvasLayer"]
-offset_right = 271.0
+offset_left = -304.0
+offset_right = -33.0
 offset_bottom = 176.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ToolTipPanel"]

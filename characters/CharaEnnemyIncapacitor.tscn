@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://1n2wip3x21ri"]
+
+[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_fmmg3"]
+[ext_resource type="Resource" uid="uid://yecuio874dy4" path="res://characters/data/CharaEnnemyTemptress.tres" id="2_v1n5l"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="3_15pi7"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="4_yhjim"]
+[ext_resource type="Texture2D" uid="uid://duqexi8su8ffh" path="res://characters/charatexture/demo characters/ENEMY_temptress_idle.png" id="5_0q0cv"]
+[ext_resource type="Texture2D" uid="uid://cfbwrknqf04rn" path="res://characters/charatexture/demo characters/HERO_warrior_idle.png" id="6_afawn"]
+
+[node name="CharacterTestennemie2" type="Node2D"]
+script = ExtResource("1_fmmg3")
+characterData = ExtResource("2_v1n5l")
+metadata/character_data_path = "res://characters/data/CharaEnnemyTemptress.tres"
+
+[node name="name" type="Label" parent="."]
+visible = false
+offset_left = -76.0
+offset_top = -256.0
+offset_right = -32.0
+offset_bottom = -233.0
+text = "name"
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(0, -268.05)
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("3_15pi7")
+offset = Vector2(0, 107.08)
+script = ExtResource("4_yhjim")
+min_scale = 0.38
+max_scale = 0.38
+scalemini = 0.3
+min_duration = 0.5
+max_duration = 0.5
+
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(49, 31)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("4_yhjim")
+min_scale = 1.15
+max_scale = 1.15
+scalemini = 1.1
+min_duration = 1.0
+max_duration = 1.5
+
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+offset_left = -289.167
+offset_top = -353.333
+offset_right = -118.166
+offset_bottom = -122.333
+scale = Vector2(2.09679, 1.68845)
+mouse_filter = 2
+texture = ExtResource("5_0q0cv")
+expand_mode = 1
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Selector" type="TextureRect" parent="pivot"]
+self_modulate = Color(2.5, 2.5, 2.5, 0)
+offset_left = -289.167
+offset_top = -353.333
+offset_right = -118.166
+offset_bottom = -122.333
+scale = Vector2(2.09679, 1.68845)
+mouse_filter = 2
+texture = ExtResource("6_afawn")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(32, 32)
+offset_left = -257.0
+offset_top = -176.0
+offset_right = 258.0
+offset_bottom = -144.0
+theme_override_constants/separation = 32
+alignment = 1

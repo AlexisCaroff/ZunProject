@@ -40,6 +40,7 @@ name = "targeting"
 descriptionName = "Weak Point"
 description = "Marks an enemy for 2 turns: skills used against them have reduced cooldowns"
 icon = ExtResource("3_47d3i")
+barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_47d3i")
 the_target_type = 0

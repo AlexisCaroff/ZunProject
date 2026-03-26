@@ -1,11 +1,14 @@
 extends Resource
 class_name Animatic
-@export var fade_duration := 1.0
-@export var final_hold_time := 2.0 # durée écran de la dernière image
 
+## Liste ordonnée des frames
 @export var frames: Array[AnimaticFrame]
-@export var pan := Vector2(960.0,540.0)
-@export var zoom := 1.0
-@export var zoomTime := 0.0
-@export var text := ""
-@export var sound: AudioStream
+
+## Durée du fondu enchaîné en secondes
+@export var fade_duration: float = 1.0
+
+## Durée d'affichage de la dernière frame après la fin de son audio
+@export var final_hold_time: float = 2.0
+
+## Si true, avance automatiquement quand l'audio est fini (sinon attend un clic)
+@export var auto_advance: bool = true

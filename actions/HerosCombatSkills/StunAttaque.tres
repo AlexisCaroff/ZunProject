@@ -38,6 +38,7 @@ descriptionName = "Shield Bash"
 description = "Stun one ennemy"
 icon = ExtResource("4_lxb6k")
 attack_sound = ExtResource("2_6dehc")
+barkSkill = ""
 required_position = 1
 ImageSkill = ExtResource("1_k3ail")
 the_target_type = 5

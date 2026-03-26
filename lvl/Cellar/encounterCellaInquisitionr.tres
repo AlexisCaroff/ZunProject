@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CombatEncounter" load_steps=8 format=3 uid="uid://y5sfj1t81c86"]
+
+[ext_resource type="PackedScene" uid="uid://byk67h4ois80w" path="res://characters/CharaEnnemyPunisher.tscn" id="1_v11h2"]
+[ext_resource type="PackedScene" uid="uid://wyba7w1bbwk2" path="res://characters/CharaEnnemyChainMaiden.tscn" id="2_sgdjo"]
+[ext_resource type="PackedScene" uid="uid://1n2wip3x21ri" path="res://characters/CharaEnnemyIncapacitor.tscn" id="3_8y8g6"]
+[ext_resource type="Texture2D" uid="uid://c8uxagkudf0xe" path="res://UI/doorebuscade/PEEK_scare_nymphM.png" id="3_v11h2"]
+[ext_resource type="PackedScene" uid="uid://dwnihw5ttm6m2" path="res://characters/CharaEnnemyInquisitor.tscn" id="4_kax1c"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_sgdjo"]
+[ext_resource type="Script" uid="uid://dmxcru3ra8jg" path="res://lvl/CombatEncounter.gd" id="5_8y8g6"]
+
+[resource]
+script = ExtResource("5_8y8g6")
+enemy_scenes = Array[PackedScene]([ExtResource("1_v11h2"), ExtResource("2_sgdjo"), ExtResource("3_8y8g6"), ExtResource("4_kax1c")])
+loots = Array[ExtResource("4_sgdjo")]([])
+description = ""
+imageEmbuscade = ExtResource("3_v11h2")
+metadata/_custom_type_script = "uid://dmxcru3ra8jg"

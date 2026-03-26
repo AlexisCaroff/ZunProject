@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=13 format=3 uid="uid://dm75andeiexh0"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=14 format=3 uid="uid://dm75andeiexh0"]
 
-[ext_resource type="Texture2D" uid="uid://k2qvyob47pj4" path="res://characters/charatexture/demo characters/Boss.png" id="1_kgh6k"]
+[ext_resource type="Texture2D" uid="uid://dsndrfk4royid" path="res://characters/boss assets/BOSS_broodM_hit.png" id="1_kgh6k"]
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_od2up"]
 [ext_resource type="Script" uid="uid://b6a37g0gbkyla" path="res://characters/charatexture/braines/Ai_brain_MommyBoss.gd" id="2_6dkli"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_kgh6k"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_tr8hi"]
 [ext_resource type="Texture2D" uid="uid://0x6um7xfv678" path="res://characters/exploPortrait/BossExploPortrait.png" id="5_2ne5h"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="7_dyn70"]
+[ext_resource type="Texture2D" uid="uid://s02pnbcj1wa5" path="res://characters/boss assets/BOSS_broodM_idle.png" id="8_6dkli"]
 [ext_resource type="Resource" uid="uid://deybvri8mc0gg" path="res://actions/ennemiCombatSkills/mommyGrab.tres" id="9_6dkli"]
 [ext_resource type="Resource" uid="uid://cvpggc0yt3l4o" path="res://actions/ennemiCombatSkills/Ennemi_charme.tres" id="9_swgmx"]
 [ext_resource type="Resource" uid="uid://b4okliodacjdm" path="res://actions/ennemiCombatSkills/spawnEnnemie.tres" id="10_rphim"]
@@ -21,7 +22,7 @@ metadata/_custom_type_script = "uid://b6a37g0gbkyla"
 [resource]
 script = ExtResource("7_dyn70")
 headPosition = Vector2(1, -310)
-portrait_texture = ExtResource("1_kgh6k")
+portrait_texture = ExtResource("8_6dkli")
 explorationPortrait = ExtResource("5_2ne5h")
 dead_portrait_texture = ExtResource("3_6dkli")
 Hit_texture = ExtResource("1_kgh6k")
@@ -63,6 +64,9 @@ min_durationIddle = 0.6
 max_durationIddle = 1.0
 min_scale = 0.95
 max_scale = 1.0
+corruption = 0
 camp_skill_resources = Array[ExtResource("2_kgh6k")]([])
 bark_scene = ExtResource("1_od2up")
 taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide open!", "You fight like a wet noodle!", "Oops! Did that hurt?"]
+reaction = ["", "", ""]
+affinityReaction = ["", "", ""]

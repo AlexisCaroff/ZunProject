@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=3 uid="uid://bccubg8vkrr7f"]
+
+[ext_resource type="Script" uid="uid://bd2yejnv2gdjp" path="res://Option_panel.gd" id="1_dhs46"]
+[ext_resource type="Texture2D" uid="uid://lhncc7d02shi" path="res://UI/BigBox.png" id="2_scs4a"]
+[ext_resource type="Texture2D" uid="uid://d162na82h3g2m" path="res://UI/exite.png" id="2_v6vnp"]
+[ext_resource type="FontFile" uid="uid://dy4n8qboodyud" path="res://font/MarcellusSC-Regular.ttf" id="4_1e227"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_scs4a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v6vnp"]
+
+[node name="OptionPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dhs46")
+
+[node name="background4" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -42.0
+offset_top = -44.0
+offset_right = 1966.0
+offset_bottom = 1078.0
+texture = ExtResource("2_scs4a")
+expand_mode = 1
+
+[node name="background2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 28.0
+offset_right = 1866.0
+offset_bottom = 1022.0
+texture = ExtResource("2_scs4a")
+expand_mode = 1
+
+[node name="BtnClose" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1832.0
+offset_top = 43.0
+offset_right = 1904.0
+offset_bottom = 115.0
+icon = ExtResource("2_v6vnp")
+flat = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 802.0
+offset_top = 101.0
+offset_right = 1089.0
+offset_bottom = 202.0
+theme_override_fonts/font = ExtResource("4_1e227")
+theme_override_font_sizes/font_size = 80
+text = "Options"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 835.0
+offset_top = 374.0
+offset_right = 943.0
+offset_bottom = 533.0
+scale = Vector2(2.35405, 2.35405)
+
+[node name="Music" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_1e227")
+theme_override_font_sizes/font_size = 30
+text = "Music"
+
+[node name="ToggleMusic" type="CheckButton" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_1e227")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_scs4a")
+text = "ON/OFF"
+
+[node name="SliderVolume" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
+[node name="HBoxTracks" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="BtnPrev" type="Button" parent="VBoxContainer/HBoxTracks"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v6vnp")
+text = "‹"
+flat = true
+
+[node name="TrackLabel" type="Label" parent="VBoxContainer/HBoxTracks"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_1e227")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnNext" type="Button" parent="VBoxContainer/HBoxTracks"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v6vnp")
+text = "›"
+flat = true

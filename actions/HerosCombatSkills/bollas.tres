@@ -37,6 +37,7 @@ descriptionName = "bollas"
 description = "Stuns a backline enemy and deals minor damage."
 icon = ExtResource("6_n3hnu")
 attack_sound = ExtResource("2_iabra")
+barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_n3hnu")
 the_target_type = 6
