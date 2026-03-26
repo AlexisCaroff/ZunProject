@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="1_jdsf0"]
 [ext_resource type="AudioStream" uid="uid://daejgs7ixjjp3" path="res://actions/sound/Weapon Sword Whips 01.wav" id="2_g7ohb"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_qkv4v"]
-[ext_resource type="Texture2D" uid="uid://dfeafue752ymx" path="res://actions/actiontexture/actionCharge.png" id="3_8u6nw"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="3_i4eos"]
+[ext_resource type="Texture2D" uid="uid://d24gv8aeirsdm" path="res://actions/actiontexture/UI icons/ICON_warrior_slash.png" id="5_g7ohb"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("2_qkv4v")
@@ -17,9 +17,9 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 [resource]
 script = ExtResource("1_jdsf0")
 name = "Large swing"
-descriptionName = "Large swing"
+descriptionName = "Heavy swing"
 description = "attack one ennemi"
-icon = ExtResource("3_8u6nw")
+icon = ExtResource("5_g7ohb")
 attack_sound = ExtResource("2_g7ohb")
 barkSkill = ""
 required_position = 1

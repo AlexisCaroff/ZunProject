@@ -384,7 +384,6 @@ offset_right = 73.4521
 offset_bottom = 79.9092
 theme_override_styles/focus = SubResource("StyleBoxEmpty_crknv")
 flat = true
-metadata/_edit_use_anchors_ = true
 
 [node name="DoorPortrait3" type="Sprite2D" parent="Portraits"]
 position = Vector2(383.888, 1266.11)

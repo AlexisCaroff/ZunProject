@@ -21,8 +21,6 @@ metadata/character_data_path = "res://characters/data/CharacterEnemyMommyBoss.tr
 [node name="pivot2" type="Node2D" parent="."]
 position = Vector2(-82, 40)
 script = ExtResource("3_sqe47")
-min_scale = 1.0
-scalemini = 0.95
 
 [node name="HerosTexture2" type="TextureRect" parent="pivot2"]
 offset_left = -57.0
@@ -51,8 +49,6 @@ metadata/_edit_use_anchors_ = true
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2(-74, 41)
 script = ExtResource("3_sqe47")
-min_scale = 1.0
-scalemini = 0.95
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
 offset_left = -145.0
@@ -116,9 +112,6 @@ scale = Vector2(0.38, 0.38)
 texture = ExtResource("7_6olh6")
 offset = Vector2(0, 115.375)
 script = ExtResource("3_sqe47")
-min_scale = 0.38
-max_scale = 0.38
-scalemini = 0.3
 min_duration = 0.5
 max_duration = 0.5
 

@@ -85,9 +85,6 @@ offset_bottom = -142.0
 position = Vector2(29, 35.798)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("16_ucs2x")
-min_scale = 1.15
-max_scale = 1.15
-scalemini = 1.1
 min_duration = 1.0
 max_duration = 1.5
 
@@ -120,9 +117,6 @@ scale = Vector2(0.38, 0.38)
 texture = ExtResource("19_u2t1c")
 offset = Vector2(0, 115.375)
 script = ExtResource("16_ucs2x")
-min_scale = 0.38
-max_scale = 0.38
-scalemini = 0.3
 min_duration = 0.5
 max_duration = 0.5
 

@@ -510,7 +510,7 @@ flat = true
 
 [node name="Items" type="Sprite2D" parent="."]
 z_index = 8
-position = Vector2(1055, 886)
+position = Vector2(1263, 886)
 scale = Vector2(0.90566, 0.90566)
 
 [node name="Item1" type="Sprite2D" parent="Items"]
@@ -535,7 +535,6 @@ offset_right = 81.0
 offset_bottom = 21.0
 rotation = 0.790096
 flat = true
-metadata/_edit_use_anchors_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Items/Item1"]
 visible = false

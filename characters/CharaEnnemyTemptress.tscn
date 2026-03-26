@@ -26,9 +26,6 @@ scale = Vector2(0.38, 0.38)
 texture = ExtResource("8_7pso5")
 offset = Vector2(0, 107.08)
 script = ExtResource("5_gg7eq")
-min_scale = 0.38
-max_scale = 0.38
-scalemini = 0.3
 min_duration = 0.5
 max_duration = 0.5
 
@@ -36,9 +33,6 @@ max_duration = 0.5
 position = Vector2(49, 31)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("5_gg7eq")
-min_scale = 1.15
-max_scale = 1.15
-scalemini = 1.1
 min_duration = 1.0
 max_duration = 1.5
 

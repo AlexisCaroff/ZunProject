@@ -20,9 +20,6 @@ metadata/character_data_path = "res://characters/data/CharacterEnemyAdict.tres"
 position = Vector2(51, 23)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("9_qu7su")
-min_scale = 1.15
-max_scale = 1.15
-scalemini = 1.1
 min_duration = 1.0
 max_duration = 1.5
 
@@ -79,9 +76,6 @@ scale = Vector2(0.38, 0.38)
 texture = ExtResource("12_flf2m")
 offset = Vector2(0, 115.375)
 script = ExtResource("9_qu7su")
-min_scale = 0.38
-max_scale = 0.38
-scalemini = 0.3
 min_duration = 0.5
 max_duration = 0.5
 
@@ -107,10 +101,10 @@ texture = ExtResource("14_l8mbh")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(32, 32)
-offset_left = -20.0
-offset_top = -176.0
-offset_right = 12.0
-offset_bottom = -144.0
+offset_left = -122.0
+offset_top = 37.0
+offset_right = 122.0
+offset_bottom = 69.0
 alignment = 1
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

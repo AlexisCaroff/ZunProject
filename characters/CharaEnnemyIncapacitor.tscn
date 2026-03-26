@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_fmmg3"]
 [ext_resource type="Resource" uid="uid://yecuio874dy4" path="res://characters/data/CharaEnnemyTemptress.tres" id="2_v1n5l"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="3_15pi7"]
+[ext_resource type="Texture2D" uid="uid://bre80a2pkbpsw" path="res://characters/charatexture/demo characters/INQUISITION_incapacitor_idle.png" id="4_fmmg3"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="4_yhjim"]
-[ext_resource type="Texture2D" uid="uid://duqexi8su8ffh" path="res://characters/charatexture/demo characters/ENEMY_temptress_idle.png" id="5_0q0cv"]
-[ext_resource type="Texture2D" uid="uid://cfbwrknqf04rn" path="res://characters/charatexture/demo characters/HERO_warrior_idle.png" id="6_afawn"]
+[ext_resource type="Script" uid="uid://cf5uoxm4f4cop" path="res://characters/arrow.gd" id="6_v1n5l"]
 
 [node name="CharacterTestennemie2" type="Node2D"]
 script = ExtResource("1_fmmg3")
@@ -20,18 +20,6 @@ offset_right = -32.0
 offset_bottom = -233.0
 text = "name"
 
-[node name="Arrow" type="Sprite2D" parent="."]
-position = Vector2(0, -268.05)
-scale = Vector2(0.38, 0.38)
-texture = ExtResource("3_15pi7")
-offset = Vector2(0, 107.08)
-script = ExtResource("4_yhjim")
-min_scale = 0.38
-max_scale = 0.38
-scalemini = 0.3
-min_duration = 0.5
-max_duration = 0.5
-
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2(49, 31)
 scale = Vector2(1.2, 1.2)
@@ -43,26 +31,24 @@ min_duration = 1.0
 max_duration = 1.5
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -289.167
-offset_top = -353.333
-offset_right = -118.166
-offset_bottom = -122.333
-scale = Vector2(2.09679, 1.68845)
+offset_left = -167.5
+offset_top = -345.0
+offset_right = 3.50099
+offset_bottom = -114.0
+scale = Vector2(2.13624, 1.68478)
 mouse_filter = 2
-texture = ExtResource("5_0q0cv")
+texture = ExtResource("4_fmmg3")
 expand_mode = 1
-flip_h = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Selector" type="TextureRect" parent="pivot"]
-self_modulate = Color(2.5, 2.5, 2.5, 0)
-offset_left = -289.167
-offset_top = -353.333
-offset_right = -118.166
-offset_bottom = -122.333
-scale = Vector2(2.09679, 1.68845)
+offset_left = -167.5
+offset_top = -345.0
+offset_right = 3.50099
+offset_bottom = -114.0
+scale = Vector2(2.13624, 1.68478)
 mouse_filter = 2
-texture = ExtResource("6_afawn")
+texture = ExtResource("4_fmmg3")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -74,3 +60,11 @@ offset_right = 258.0
 offset_bottom = -144.0
 theme_override_constants/separation = 32
 alignment = 1
+
+[node name="Arrow" type="Sprite2D" parent="."]
+modulate = Color(0.77, 0.616513, 0.4158, 1)
+position = Vector2(2, -182)
+scale = Vector2(0.0897035, 0.0897035)
+texture = ExtResource("3_15pi7")
+offset = Vector2(0, 116.49)
+script = ExtResource("6_v1n5l")

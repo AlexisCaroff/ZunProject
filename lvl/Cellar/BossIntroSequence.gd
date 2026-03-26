@@ -21,8 +21,8 @@ class_name BossIntroSequence
 @export_file("*.txt") var dialogue_resist_path:   String = "res://dialogues/boss/resist.txt"
 @export_file("*.txt") var dialogue_give_in_path:  String = "res://dialogues/boss/give_in.txt"
 @export var no_portrait_speakers: Array[String] = ["Narrator"]
-@export var portrait_aliases: Dictionary = {"InquisitorD": "Inquisitor"}
-## Cochez pour forcer la branche corruption sans items maudits (debug)
+@export var portrait_aliases: Dictionary = {"Hooded figure": "Inquisitor.","Inquisitor.": "Inquisitor"}
+
 @export var debug_force_corrupt: bool = false
 
 # ─────────────────────────────────────────────

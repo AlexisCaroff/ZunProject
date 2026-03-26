@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=14 format=3 uid="uid://ce5erf8nv7cca"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=15 format=3 uid="uid://ce5erf8nv7cca"]
 
 [ext_resource type="Texture2D" uid="uid://cmbc5iua15q72" path="res://characters/charatexture/demo characters/INQUISITION_inquisitor_hit.png" id="1_c5xmt"]
 [ext_resource type="Script" uid="uid://db1m8vwgp38yx" path="res://characters/charatexture/braines/Ai_brain_Support.gd" id="2_lbmoj"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://dibkowmk40eu3" path="res://actions/ennemiCombatSkills/hymne_d_encouragement.tres" id="10_i7j3r"]
 [ext_resource type="Resource" uid="uid://cfjjaolic6nab" path="res://actions/ennemiCombatSkills/Holy_ray.tres" id="11_c5xmt"]
 [ext_resource type="Resource" uid="uid://cmpo3p42diyix" path="res://actions/ennemiCombatSkills/Sermon.tres" id="12_in4ng"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="13_c5xmt"]
 
 [sub_resource type="Resource" id="Resource_ocqyt"]
 script = ExtResource("2_lbmoj")
@@ -57,7 +58,7 @@ current_stamina = 100
 current_stress = 0
 current_horniness = 0
 isOneshot = false
-skill_resources = Array[Resource]([ExtResource("10_i7j3r"), ExtResource("11_c5xmt"), ExtResource("12_in4ng")])
+skill_resources = Array[Resource]([ExtResource("10_i7j3r"), ExtResource("11_c5xmt"), ExtResource("12_in4ng"), ExtResource("13_c5xmt"), ExtResource("13_c5xmt")])
 tags = Array[String]([])
 is_player_controlled = false
 ai_brain = SubResource("Resource_ocqyt")

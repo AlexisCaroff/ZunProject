@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://qffxu8t8mvlx"]
+[gd_scene load_steps=10 format=3 uid="uid://qffxu8t8mvlx"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i21nx"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="2_uoxmb"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="5_5cv4u"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="6_fn4af"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="7_pv5ss"]
+[ext_resource type="Script" uid="uid://cf5uoxm4f4cop" path="res://characters/arrow.gd" id="7_uoxmb"]
 [ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="8_osbnm"]
 
 [node name="Warrior" type="Node2D"]
@@ -27,17 +28,16 @@ text = "name"
 position = Vector2(51, 23)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("2_uoxmb")
-min_scale = 1.15
-max_scale = 1.15
-scalemini = 1.1
-min_duration = 1.0
-max_duration = 1.5
+min_scale = 1.2
+max_scale = 1.25
+scalemini = 1.2
+min_duration = 0.8
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
 offset_left = -154.167
-offset_top = -315.0
+offset_top = -313.333
 offset_right = 16.8333
-offset_bottom = -84.0
+offset_bottom = -82.3333
 scale = Vector2(1.87875, 1.51287)
 mouse_filter = 2
 texture = ExtResource("3_i21nx")
@@ -47,9 +47,9 @@ metadata/_edit_use_anchors_ = true
 [node name="Selector" type="TextureRect" parent="pivot"]
 self_modulate = Color(2.5, 2.5, 2.5, 0)
 offset_left = -154.167
-offset_top = -315.0
+offset_top = -313.333
 offset_right = 16.8333
-offset_bottom = -84.0
+offset_bottom = -82.3333
 scale = Vector2(1.87875, 1.51287)
 mouse_filter = 2
 texture = ExtResource("3_i21nx")
@@ -67,23 +67,19 @@ texture = ExtResource("4_qgiwc")
 script = ExtResource("5_5cv4u")
 
 [node name="Arrow" type="Sprite2D" parent="."]
-position = Vector2(1, -282)
-scale = Vector2(0.38, 0.38)
+modulate = Color(0.77, 0.616513, 0.4158, 1)
+position = Vector2(2, -178)
+scale = Vector2(0.0897035, 0.0897035)
 texture = ExtResource("6_fn4af")
 offset = Vector2(0, 116.49)
-script = ExtResource("2_uoxmb")
-min_scale = 0.38
-max_scale = 0.38
-scalemini = 0.3
-min_duration = 0.5
-max_duration = 0.5
+script = ExtResource("7_uoxmb")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(32, 32)
-offset_left = -257.0
-offset_top = -176.0
-offset_right = 258.0
-offset_bottom = -144.0
+offset_left = -260.0
+offset_top = 39.0
+offset_right = 255.0
+offset_bottom = 71.0
 theme_override_constants/separation = 32
 alignment = 1
 

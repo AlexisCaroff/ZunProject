@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://bv7eg2rwowxuj" path="res://actions/sound/magicSlurp.mp3" id="2_ngn0m"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_rn6hm"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_jbp84"]
-[ext_resource type="Texture2D" uid="uid://bxq5hur2lwg3e" path="res://actions/actiontexture/vamp2.png" id="4_nbap8"]
+[ext_resource type="Texture2D" uid="uid://cq4lyjh8qvpuy" path="res://actions/actiontexture/UI icons/ICON_mystic_cc_syphon.png" id="5_ngn0m"]
 [ext_resource type="Script" uid="uid://bp8u5at2ojgse" path="res://actions/skillEffects/healEffect.gd" id="5_rn6hm"]
 [ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="6_4lsex"]
 
@@ -30,9 +30,9 @@ metadata/_custom_type_script = "uid://2vsqpp6jqiow"
 [resource]
 script = ExtResource("4_jbp84")
 name = "Drain"
-descriptionName = "Attaque"
-description = "deal psy dmg and steal stamina"
-icon = ExtResource("4_nbap8")
+descriptionName = "Drain"
+description = "Deal magic dmg and steal stamina"
+icon = ExtResource("5_ngn0m")
 attack_sound = ExtResource("2_ngn0m")
 barkSkill = ""
 required_position = 0

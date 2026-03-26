@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_acaj7"]
 [ext_resource type="AudioStream" uid="uid://bistgpj4eyle0" path="res://actions/sound/Impact Human Grab And Pulled By Clothes 01.wav" id="2_y1vkq"]
 [ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="3_acaj7"]
-[ext_resource type="Texture2D" uid="uid://cn8mh7x1j6vs" path="res://actions/actiontexture/charge.png" id="4_acaj7"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_bbjmb"]
+[ext_resource type="Texture2D" uid="uid://dwa3fwsoeg6bc" path="res://actions/actiontexture/UI icons/ICON_warrior_kick.png" id="6_y1vkq"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("2_acaj7")
@@ -24,9 +24,9 @@ metadata/_custom_type_script = "uid://cxxxcftffxxjh"
 [resource]
 script = ExtResource("4_bbjmb")
 name = "Charge"
-descriptionName = "Charge !"
-description = "Inflicts damage and pushes an enemy away"
-icon = ExtResource("4_acaj7")
+descriptionName = "Kick"
+description = "Inflict damage and push an enemy away"
+icon = ExtResource("6_y1vkq")
 attack_sound = ExtResource("2_y1vkq")
 barkSkill = ""
 required_position = 0

@@ -1,12 +1,12 @@
 Narrator: A pink haze falls over the cellar. Fatigue, pain, and fears are forgotten. A dulling, soothing warmth spreads throughout the body, and the bond fades out, and snaps.
 Narrator: Only Mommy matters now, as she spreads her tentacles to embrace her new children.
-InquisitorD: A cold voice rings out of the cellar entrance. So this is the nest.
+Hooded figure: A cold voice rings out of the cellar entrance. So this is the nest.
 Priestess: The priestess lifts her head at the familiar voice, struggling to speak. M… Mentor?
 Broodmother: More guests? How lovely! No need to hide, please join us…We welcome all.
 Narrator: A cloaked figure steps into the light, the brilliant staff at her side proclaiming her high rank in the Inquisition. Her faithful retinue follows, but stays in the shadows.
-InquisitorD: I should have known you'd get in over your head, daughter. You were too eager.
+Inquisitor.: I should have known you'd get in over your head, daughter. You were too eager.
 Priestess: Mentor.. I… I did it for you…
-InquisitorD: I suppose the failure is mine. I didn't discipline you enough.
+Inquisitor.: I suppose the failure is mine. I didn't discipline you enough.
 Priestess: Please.. I.. was just trying… to make you proud…
 Inquisitor: The Inquisitor nearly spits out the words as she removes her cloak, baring her blessed figure. Her party gets into battle positions. You needn't try anymore, heretic.
 Priestess: I...

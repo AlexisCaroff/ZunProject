@@ -22,6 +22,6 @@ autowrap_mode = 3
 
 [node name="DialogueBox" type="Sprite2D" parent="Label"]
 z_index = -1
-position = Vector2(95.5, 22)
-scale = Vector2(0.204102, 0.314607)
+position = Vector2(106.5, 25.5)
+scale = Vector2(0.24707, 0.353933)
 texture = ExtResource("2_7fg1b")

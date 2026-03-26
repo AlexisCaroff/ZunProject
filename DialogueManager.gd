@@ -13,7 +13,7 @@ var choix: Control
 @export var text_choice1: String
 @export var text_choice2: String
 @export var external_choice_receiver: Node = null
-@onready var endButton
+
 var dialogue_started: bool = false
 var ui: Node = null
 var scene: PackedScene = preload("res://UI/dialogue_ui.tscn")

@@ -3,11 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://f8o3t710mcxl" path="res://characters/charatexture/demo characters/HERO_warrior_roar.png" id="1_3o4k5"]
 [ext_resource type="Script" uid="uid://cjfkha61akav3" path="res://actions/skillEffects/TauntEffect.gd" id="2_wwy36"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_yu2gj"]
-[ext_resource type="Texture2D" uid="uid://b4a5l81b2i8a5" path="res://actions/actiontexture/taunt.png" id="3_ukosw"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="3_wwy36"]
 [ext_resource type="Texture2D" uid="uid://cnxu4nek43q22" path="res://UI/taunt.png" id="5_v6fax"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="6_aki42"]
 [ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="6_ukosw"]
+[ext_resource type="Texture2D" uid="uid://8idtahv35xc6" path="res://actions/actiontexture/UI icons/ICON_warrior_roar.png" id="6_v6fax"]
 [ext_resource type="Texture2D" uid="uid://blaxr6boo4hkf" path="res://UI/buffDeff.png" id="8_3o4k5"]
 
 [sub_resource type="Resource" id="Resource_yu2gj"]
@@ -41,9 +41,9 @@ metadata/_custom_type_script = "uid://c3dw018knk8mk"
 [resource]
 script = ExtResource("3_wwy36")
 name = "Taunt"
-descriptionName = "Taunt"
-description = "taunt one ennemi and reset 2 cooldown on skills"
-icon = ExtResource("3_ukosw")
+descriptionName = "Roar"
+description = "Taunt one ennemi and reset 2 cooldowns on skills"
+icon = ExtResource("6_v6fax")
 barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_3o4k5")

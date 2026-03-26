@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://doitrlqhfja4t"]
+[gd_scene load_steps=9 format=3 uid="uid://doitrlqhfja4t"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_1rndn"]
 [ext_resource type="Resource" uid="uid://c3vy2fgg7t28x" path="res://characters/data/CharacterTestEnemySpitter1.tres" id="2_gbqy8"]
 [ext_resource type="Texture2D" uid="uid://chhccyohveiec" path="res://characters/charatexture/demo characters/ENEMY_spitter_idle.png" id="4_8scg0"]
+[ext_resource type="Script" uid="uid://cf5uoxm4f4cop" path="res://characters/arrow.gd" id="8_gbqy8"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="11_ih6kd"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="13_3o24a"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="14_3o24a"]
@@ -22,17 +23,15 @@ offset_bottom = -238.0
 text = "name"
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(37, 29)
+position = Vector2(37, 30)
 script = ExtResource("11_ih6kd")
-min_scale = 1.0
-scalemini = 0.9
 max_duration = 0.7
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
 offset_left = -377.0
-offset_top = -446.0
+offset_top = -435.0
 offset_right = -206.0
-offset_bottom = -215.0
+offset_bottom = -204.0
 scale = Vector2(3.01881, 2.11316)
 mouse_filter = 2
 texture = ExtResource("4_8scg0")
@@ -43,28 +42,15 @@ metadata/_edit_use_anchors_ = true
 [node name="Selector" type="TextureRect" parent="pivot"]
 self_modulate = Color(2, 2, 2, 0)
 offset_left = -377.0
-offset_top = -446.0
+offset_top = -435.0
 offset_right = -206.0
-offset_bottom = -215.0
+offset_bottom = -204.0
 scale = Vector2(3.01881, 2.11316)
 mouse_filter = 2
 texture = ExtResource("4_8scg0")
 expand_mode = 1
 flip_h = true
 metadata/_edit_use_anchors_ = true
-
-[node name="Arrow" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(2, -242)
-scale = Vector2(0.38, 0.38)
-texture = ExtResource("13_3o24a")
-offset = Vector2(0, 117.335)
-script = ExtResource("11_ih6kd")
-min_scale = 0.38
-max_scale = 0.38
-scalemini = 0.3
-min_duration = 0.5
-max_duration = 0.5
 
 [node name="Skill" type="TextureRect" parent="."]
 visible = false
@@ -80,9 +66,17 @@ script = ExtResource("15_bbnup")
 z_index = 20
 custom_minimum_size = Vector2(32, 32)
 offset_left = -251.0
-offset_top = -121.0
+offset_top = 43.0
 offset_right = 264.0
-offset_bottom = -89.0
+offset_bottom = 75.0
 mouse_filter = 2
 theme_override_constants/separation = 32
 alignment = 1
+
+[node name="Arrow" type="Sprite2D" parent="."]
+modulate = Color(0.77, 0.616513, 0.4158, 1)
+position = Vector2(2, -97)
+scale = Vector2(0.0897035, 0.0897035)
+texture = ExtResource("13_3o24a")
+offset = Vector2(0, 116.49)
+script = ExtResource("8_gbqy8")

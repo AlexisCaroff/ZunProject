@@ -26,9 +26,6 @@ text = "name"
 position = Vector2(51, 51)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("13_y06sh")
-min_scale = 1.15
-max_scale = 1.15
-scalemini = 1.1
 min_duration = 1.0
 max_duration = 1.5
 
@@ -70,9 +67,6 @@ position = Vector2(1, -232)
 scale = Vector2(0.38, 0.38)
 texture = ExtResource("16_373rw")
 script = ExtResource("13_y06sh")
-min_scale = 0.38
-max_scale = 0.38
-scalemini = 0.3
 min_duration = 0.5
 max_duration = 0.5
 

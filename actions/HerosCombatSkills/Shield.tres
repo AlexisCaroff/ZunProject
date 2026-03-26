@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_48161"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_r53j6"]
 [ext_resource type="Texture2D" uid="uid://blaxr6boo4hkf" path="res://UI/buffDeff.png" id="4_gk65l"]
-[ext_resource type="Texture2D" uid="uid://cl38awhldtrly" path="res://actions/actiontexture/actionShield.png" id="5_gk65l"]
+[ext_resource type="Texture2D" uid="uid://bwuqlyu77xyb6" path="res://actions/actiontexture/UI icons/ICON_mystic_cc_harden.png" id="5_gk65l"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_jbk0m"]
 
 [sub_resource type="Resource" id="Resource_mdx25"]
@@ -19,8 +19,8 @@ metadata/_custom_type_script = "uid://c3dw018knk8mk"
 [resource]
 script = ExtResource("5_jbk0m")
 name = "Shield"
-descriptionName = "Shield"
-description = "buff defence"
+descriptionName = "Harden"
+description = "Buff defence"
 icon = ExtResource("5_gk65l")
 barkSkill = ""
 required_position = 0
