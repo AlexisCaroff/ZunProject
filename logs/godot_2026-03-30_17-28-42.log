@@ -1,0 +1,13 @@
+Godot Engine v3.2.3.stable.official - https://godotengine.org
+OpenGL ES 3.0 Renderer: NVIDIA GeForce RTX 3060/PCIe/SSE2
+ 
+Project is missing: C:/Users/akaroff/Documents/testScreen/project.godot
+Project is missing: C:/Users/akaroff/Documents/runner/project.godot
+Project is missing: C:/Users/akaroff/Documents/runner-2-inputs-proto/project.godot
+Project is missing: C:/Users/akaroff/Documents/deck-city-builder-proto/project.godot
+Project is missing: C:/Users/akaroff/Documents/testeDa/project.godot
+Project is missing: E:/Zun/zunProject/project.godot
+**ERROR**: ConfigFile parse error at E:/Zun/Nouveau dossier/godot-open-rpg-main/godot-open-rpg-main/project.godot:7: Unexpected identifier: 'PackedStringArray'..
+   At: core/io/config_file.cpp:296:_parse() - ConfigFile parse error at E:/Zun/Nouveau dossier/godot-open-rpg-main/godot-open-rpg-main/project.godot:7: Unexpected identifier: 'PackedStringArray'..
+**ERROR**: Condition "default_certs != __null" is true.
+   At: modules/mbedtls/crypto_mbedtls.cpp:201:load_default_certificates() - Condition "default_certs != __null" is true.

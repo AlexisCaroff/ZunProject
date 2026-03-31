@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c5gdj53xfb58w" path="res://UI/doorIconleft.png" id="12_ugql8"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="13_ufv1f"]
 [ext_resource type="Texture2D" uid="uid://0eqnf7lwa3ra" path="res://UI/doorIconRight.png" id="14_hhxex"]
-[ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="15_r2pto"]
+[ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/Doorpeek.gd" id="15_r2pto"]
 [ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="16_uohh7"]
 [ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/buttonexitepeek.gd" id="17_cliek"]
 [ext_resource type="Script" uid="uid://cvrybm4x5u0k7" path="res://scripts/door/door.gd" id="18_8g6pv"]

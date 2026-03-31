@@ -10,11 +10,13 @@ var initiative_icon_path: String = ""
 @onready var name_label = $name
 @onready var Selector =$pivot/Selector
 @onready var stress_label = $Stress
-
+@onready var ui :CharaUi = $charaCombatUI
 @onready var sprite = $pivot/HerosTexture1
 @onready var buff_bar = $HBuffsContainer
-@onready var hp_Jauge=$HPProgressBar
-@onready var guilt_Jauge=$Stress/GuiltrogressBar
+@onready var hp_Jauge = ui.getHpbar()
+@onready var horny_Jauge = ui.getLustbar()
+@onready var horny_Rect = ui.get_HornyBar()
+@onready var actionspoints : Array[TextureRect] =ui.getactionpoints()
 
 @onready var Arrow = $Arrow
 # --- Infos de base
@@ -33,6 +35,8 @@ var camp : Campement
 var camp_skills: Array[CampSkill] = []
 
 func _ready() -> void:
+	for p in actionspoints:
+		p.visible =false
 	CharaScale= self.scale
 	print("chara ready")
 	
@@ -62,15 +66,15 @@ func add_buff(buff: Buff):
 	print("add buff")
 	
 func update_display() -> void:
-	if not hp_Jauge or not guilt_Jauge :
+	if not hp_Jauge or not horny_Jauge :
 		hp_Jauge=$HPProgressBar
-		guilt_Jauge=$Stress/GuiltrogressBar
-		#horny_Jauge=$horny/HornyProgressBar
+		horny_Jauge= ui.getHpbar()
+		horny_Rect = ui.get_HornyBar()
 		# return
 	hp_Jauge.value=characterData.current_stamina
-	guilt_Jauge.value=characterData.current_stress
-	#horny_Jauge.value=current_horny
-	name_label.text = characterData.Charaname
+	horny_Jauge.value=characterData.current_horniness
+	horny_Rect.modulate.a =characterData.current_horniness
+	name_label.text = characterData.Name
 	Selector.texture =portrait_texture
 	
 	sprite.texture = portrait_texture

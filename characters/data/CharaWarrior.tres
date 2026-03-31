@@ -74,5 +74,6 @@ bark_scene = ExtResource("1_qo24v")
 taunts = ["Is that all you've got?", "Bring it on !", "You fight like a wet noodle!"]
 reaction = ["Bring it on !", "Is that all you've got?", ""]
 affinityReaction = ["", "", ""]
+corrupted = false
 immobilized = false
 immobilized_turns = 0

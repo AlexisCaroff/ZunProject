@@ -152,7 +152,10 @@ func _start():
 			chara.combat_manager = self
 			heroes.append(chara)
 			print("spawn " + chara.characterData.Charaname)
- 
+			#if chara.characterData.corrupted:
+			chara.sprite.flip_h=true
+			chara.Selector.flip_h=true
+			chara.pivot.position.x += -150 
 			var slot_index = clamp(chara.characterData.Chara_position, 0, hero_positions.size() - 1)
 			var slot = hero_positions[slot_index]
 			move_character_to(chara, slot, 0)

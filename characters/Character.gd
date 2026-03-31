@@ -8,7 +8,7 @@ var hp_Jauge : ProgressBar
 var LustProgressBar : ProgressBar
 var hornyJauge
 const MAX_EQUIPMENT = 2
-
+@onready var pivot = $pivot
 @onready var Selector:TextureRect =$pivot/Selector
 
 # état
@@ -85,7 +85,8 @@ func _ready():
 		_updateSkills(characterData.skill_resources)
 	else:
 		push_warning("CharacterData non assignée pour %s" % name)
-	if characterData.is_player_controlled==false :
+	await  get_tree().process_frame
+	if characterData.is_player_controlled==false && combat_manager.heroes[0].characterData.corrupted==false :
 		sprite.flip_h=true
 		Selector.flip_h=true
 	else:
@@ -700,13 +701,13 @@ func animate_attack(target: Character, _duration = 1.0):
 	target_pos.y += 50
 
 	var cam_bigZoom = Vector2(cam.baseZoom*1.1)
-	if characterData.is_player_controlled:
+	if characterData.is_player_controlled :
 		self.global_position =Vector2(-200,728)
 	else :
 		self.global_position  =Vector2(2000,728)
 	
 		
-	if target.characterData.is_player_controlled:
+	if target.characterData.is_player_controlled :
 		target_pos = Vector2(643,700)
 	else :
 		target_pos = Vector2(1300,700)
@@ -725,7 +726,7 @@ func animate_attack(target: Character, _duration = 1.0):
 		if target.characterData.size == "Big":
 			target_pos.y += 70
 			
-		if !target.characterData.is_player_controlled:
+		if !target.characterData.is_player_controlled :
 			position=Vector2(-400,728)
 		else:
 			position=Vector2(2000,728)
@@ -787,7 +788,7 @@ func _on_attack(target: Character, _duration: float =1.0):
 	self.z_index = 6
 	target.z_index = 6
 	var tween = null
-	var has_changeMask := current_skill.effects.any(func(e): return e is ChangeSkill)
+	
 	var has_heal := current_skill.effects.any(func(e): return e is HealEffect)
 	tween = create_tween()
 	tween.set_ease(Tween.EASE_IN)

@@ -96,25 +96,6 @@ offset_right = 1778.0
 offset_bottom = 1031.0
 texture = ExtResource("3_vl2if")
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 24.0
-offset_top = 708.0
-offset_right = 323.0
-offset_bottom = 785.0
-texture = ExtResource("3_vl2if")
-expand_mode = 1
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 37.0
-offset_top = 772.0
-offset_right = 1829.0
-offset_bottom = 1033.0
-color = Color(0.672005, 0.66772, 0.643124, 1)
-
 [node name="Speaker" type="Label" parent="."]
 layout_mode = 0
 offset_left = 161.724

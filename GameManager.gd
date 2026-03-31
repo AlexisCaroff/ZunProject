@@ -15,7 +15,7 @@ var campement_node: Node = null
 @export var characters: Array[CharacterData] = []
 @onready var sceneTransition = $SceneTransition
 @export var start_menu_scene: PackedScene = preload("res://UI/menuBase.tscn")
-
+@export var teamCorrupted = false
 var start_menu: StartMenu = null
 var game_started: bool = false
 

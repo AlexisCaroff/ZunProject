@@ -94,6 +94,7 @@ var acte_twice : bool =false
 ]
 var buffs: Array[Buff] = []
 var current_bark: Bark = null
-
+@export var corrupted: bool  = false
+@export var inquisition :bool  = false
 @export var immobilized: bool  = false
 @export var immobilized_turns: int = 0

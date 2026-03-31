@@ -54,40 +54,40 @@
 
 [sub_resource type="Resource" id="Resource_i1s1q"]
 script = ExtResource("14_lp3u3")
-index = 0
+index = 3
 scale = Vector2(1.8, 1.8)
 is_enemy = false
-isFront = false
+isFront = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s6b88"]
 
 [sub_resource type="Resource" id="Resource_8flqu"]
 script = ExtResource("14_lp3u3")
-index = 1
+index = 2
 scale = Vector2(1.7, 1.7)
 is_enemy = false
-isFront = false
+isFront = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hxbks"]
 
 [sub_resource type="Resource" id="Resource_x8qlv"]
 script = ExtResource("14_lp3u3")
-index = 2
+index = 0
 scale = Vector2(1.8, 1.8)
-is_enemy = false
-isFront = true
+is_enemy = true
+isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtu61"]
 
 [sub_resource type="Resource" id="Resource_t7hjh"]
 script = ExtResource("14_lp3u3")
-index = 3
+index = 1
 scale = Vector2(1.7, 1.7)
 is_enemy = false
-isFront = true
+isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m2l43"]
@@ -195,7 +195,7 @@ outsidePos = Vector2(2200, 500)
 esquivPos = Vector2(1700, 500)
 
 [node name="BossBroodMIdle" type="Sprite2D" parent="."]
-position = Vector2(1743, 296)
+position = Vector2(1743, 338)
 scale = Vector2(0.362061, 0.362061)
 texture = ExtResource("4_dxit8")
 flip_h = true

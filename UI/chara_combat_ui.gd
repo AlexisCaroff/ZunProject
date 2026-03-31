@@ -1,4 +1,5 @@
 extends Node2D
+class_name CharaUi
 @onready var actionpoints: Array[TextureRect]= [
 	$HBoxContainer2/DotAction1,
 	$HBoxContainer2/DotAction2,

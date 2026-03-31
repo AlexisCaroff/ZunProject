@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://badg2cpqmlnim"]
+[gd_scene load_steps=43 format=3 uid="uid://badg2cpqmlnim"]
 
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="3_a5t1m"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="4_e2h3q"]
@@ -31,6 +31,8 @@
 [ext_resource type="Texture2D" uid="uid://ch8bpedx177r3" path="res://UI/itemBack.png" id="28_w6rvj"]
 [ext_resource type="Script" uid="uid://d35u47t7s0fv4" path="res://UI/UICombatItem.gd" id="29_ijfhg"]
 [ext_resource type="FontFile" uid="uid://dy4n8qboodyud" path="res://font/MarcellusSC-Regular.ttf" id="30_16ala"]
+[ext_resource type="Texture2D" uid="uid://ckki2ygke5r3x" path="res://actions/actiontexture/UI icons/ICON_move.png" id="32_hwivl"]
+[ext_resource type="Texture2D" uid="uid://bufr3w56ilg6r" path="res://actions/actiontexture/UI icons/ICON_priestess_whip.png" id="33_d8pyn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qg4ur"]
 
@@ -740,6 +742,16 @@ theme_override_fonts/normal_font = ExtResource("5_furl3")
 theme_override_font_sizes/normal_font_size = 20
 text = "Guilt:
 "
+
+[node name="IconMove" type="Sprite2D" parent="."]
+position = Vector2(1081, 874)
+scale = Vector2(0.249023, 0.249023)
+texture = ExtResource("32_hwivl")
+
+[node name="IconPriestessWhip" type="Sprite2D" parent="."]
+position = Vector2(1078, 972)
+scale = Vector2(0.260742, 0.260742)
+texture = ExtResource("33_d8pyn")
 
 [connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]

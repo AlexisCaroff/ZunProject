@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dv04v6jagn4q1"]
+[gd_scene load_steps=39 format=3 uid="uid://dv04v6jagn4q1"]
 
 [ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="1_o2neq"]
 [ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_mdkvs"]
@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://ds2ccuqik2vml" path="res://UI/door_button_enter.png" id="9_7l14n"]
 [ext_resource type="Texture2D" uid="uid://0eqnf7lwa3ra" path="res://UI/doorIconRight.png" id="10_uubir"]
 [ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/buttonexitepeek.gd" id="12_6jptd"]
-[ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/peek.gd" id="12_013hq"]
+[ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/Doorpeek.gd" id="12_013hq"]
 [ext_resource type="Texture2D" uid="uid://cqp5sr6locjdw" path="res://UI/ArrowRt.png" id="13_itvqt"]
 [ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="13_njmpn"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="17_6jptd"]
@@ -42,6 +42,13 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ypre"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_crknv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o2neq"]
+bg_color = Color(0, 0, 0, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_itvqt"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="Door" type="Control"]
 layout_mode = 3
@@ -189,7 +196,6 @@ size = Vector2i(1585, 755)
 render_target_update_mode = 0
 
 [node name="ExitPeek" type="Button" parent="."]
-visible = false
 layout_mode = 2
 offset_left = 1598.0
 offset_top = 87.0
@@ -334,6 +340,7 @@ scale = Vector2(1.07026, 1.0878)
 texture = ExtResource("27_gf8ky")
 
 [node name="Intro2" type="Sprite2D" parent="."]
+visible = false
 z_index = 16
 position = Vector2(963, 538)
 scale = Vector2(0.72634, 0.72634)
@@ -357,6 +364,187 @@ offset_right = 98.0
 offset_bottom = 157.0
 text = "didactitiel"
 flat = true
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 558.0
+offset_top = 801.0
+offset_right = 1137.0
+offset_bottom = 885.0
+theme_override_fonts/font = ExtResource("6_nju53")
+theme_override_font_sizes/font_size = 40
+text = "Eron"
+autowrap_mode = 3
+
+[node name="AttLabel" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 563.0
+offset_top = 972.0
+offset_right = 904.0
+offset_bottom = 1027.0
+theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
+theme_override_fonts/normal_font = ExtResource("6_nju53")
+theme_override_fonts/italics_font = ExtResource("6_nju53")
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+text = "Attack :"
+
+[node name="DefLabel" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 563.0
+offset_top = 1004.0
+offset_right = 909.0
+offset_bottom = 1059.0
+theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
+theme_override_fonts/normal_font = ExtResource("6_nju53")
+theme_override_fonts/italics_font = ExtResource("6_nju53")
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+text = "Defence:"
+
+[node name="DefLabel2" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 1061.0
+offset_top = 847.0
+offset_right = 1407.0
+offset_bottom = 902.0
+theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
+theme_override_fonts/normal_font = ExtResource("6_nju53")
+theme_override_fonts/italics_font = ExtResource("6_nju53")
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+text = "Spy : "
+
+[node name="WillPower" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 563.0
+offset_top = 1036.0
+offset_right = 898.0
+offset_bottom = 1091.0
+theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
+theme_override_fonts/normal_font = ExtResource("6_nju53")
+theme_override_fonts/italics_font = ExtResource("6_nju53")
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+text = "Willpower:"
+
+[node name="StaminaProgressBar" type="ProgressBar" parent="."]
+modulate = Color(0.878431, 0.584314, 0.341176, 1)
+layout_mode = 0
+offset_left = 638.0
+offset_top = 864.0
+offset_right = 819.0
+offset_bottom = 886.0
+scale = Vector2(1.00234, 0.561213)
+theme_override_styles/background = SubResource("StyleBoxFlat_o2neq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_itvqt")
+value = 72.93
+show_percentage = false
+
+[node name="LustProgressBar" type="ProgressBar" parent="."]
+modulate = Color(0.933333, 0.109804, 0.72549, 1)
+layout_mode = 0
+offset_left = 638.0
+offset_top = 897.0
+offset_right = 820.0
+offset_bottom = 919.0
+scale = Vector2(1.00234, 0.561213)
+theme_override_styles/background = SubResource("StyleBoxFlat_o2neq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_itvqt")
+value = 72.93
+show_percentage = false
+
+[node name="GuiltProgressBar" type="ProgressBar" parent="."]
+modulate = Color(0.266667, 0.294118, 0.364706, 1)
+layout_mode = 0
+offset_left = 638.0
+offset_top = 930.0
+offset_right = 820.0
+offset_bottom = 952.0
+scale = Vector2(1.00234, 0.561213)
+theme_override_styles/background = SubResource("StyleBoxFlat_o2neq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_itvqt")
+value = 72.93
+show_percentage = false
+
+[node name="Stamina" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 831.0
+offset_top = 855.0
+offset_right = 952.0
+offset_bottom = 910.0
+theme_override_colors/default_color = Color(0.886275, 0.588235, 0.345098, 1)
+theme_override_fonts/normal_font = ExtResource("6_nju53")
+theme_override_font_sizes/normal_font_size = 20
+text = "120/120"
+
+[node name="Horny" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 831.0
+offset_top = 888.0
+offset_right = 947.0
+offset_bottom = 943.0
+theme_override_colors/default_color = Color(1, 0.113725, 0.776471, 1)
+theme_override_fonts/normal_font = ExtResource("6_nju53")
+theme_override_font_sizes/normal_font_size = 20
+text = "80/100"
+
+[node name="Guilt" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 831.0
+offset_top = 924.0
+offset_right = 945.0
+offset_bottom = 979.0
+theme_override_colors/default_color = Color(0.270588, 0.298039, 0.372549, 1)
+theme_override_fonts/normal_font = ExtResource("6_nju53")
+theme_override_font_sizes/normal_font_size = 20
+text = "10/100"
+
+[node name="Stamina2" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 564.0
+offset_top = 855.0
+offset_right = 635.0
+offset_bottom = 910.0
+theme_override_colors/default_color = Color(0.886275, 0.588235, 0.345098, 1)
+theme_override_fonts/normal_font = ExtResource("6_nju53")
+theme_override_font_sizes/normal_font_size = 20
+text = "Stamina :	
+"
+
+[node name="Horny2" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 564.0
+offset_top = 888.0
+offset_right = 633.0
+offset_bottom = 943.0
+theme_override_colors/default_color = Color(1, 0.113725, 0.776471, 1)
+theme_override_fonts/normal_font = ExtResource("6_nju53")
+theme_override_font_sizes/normal_font_size = 20
+text = "Lust:
+"
+
+[node name="Guilt2" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 564.0
+offset_top = 924.0
+offset_right = 783.0
+offset_bottom = 979.0
+theme_override_colors/default_color = Color(0.270588, 0.298039, 0.372549, 1)
+theme_override_fonts/normal_font = ExtResource("6_nju53")
+theme_override_font_sizes/normal_font_size = 20
+text = "Guilt:
+"
 
 [connection signal="button_down" from="peekButton" to="peekButton" method="_on_button_down"]
 [connection signal="mouse_entered" from="peekButton" to="peekButton" method="_on_mouse_entered"]

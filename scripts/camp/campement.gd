@@ -5,11 +5,14 @@ class_name Campement
 @onready var portraitCharaselect = $charaPortrait
 @export var chara_Camp_scene : PackedScene
 @onready var action_panel = $ActionPanel
-@onready var AttLabel = $AttLabel
-@onready var DefLabel = $DefLabel
-@onready var Stamina = $Stamina
-@onready var guilt= $Guilt
-@onready var horny = $Horny
+@onready var AttLabel = $AttLabel2
+@onready var DefLabel = $DefLabel2
+@onready var Stamina = $Stamina2
+@onready var StaminaBar: ProgressBar = $StaminaProgressBar
+@onready var guilt= $Guilt2
+@onready var guiltBar: ProgressBar= $GuiltProgressBar
+@onready var horny = $Horny2
+@onready var hornyBar: ProgressBar = $LustProgressBar
 @onready var CharacterName = $Charaname
 var selected_chara: CharaCamp = null
 @onready var exitButton =$ExitButton
@@ -101,9 +104,16 @@ func updateUICharacter(character:CharacterData):
 	CharacterName.text = character.Charaname
 	AttLabel.text = "Attaque: %d" % [character.attack]
 	DefLabel.text = "Defence: %d" % [character.defense]
-	Stamina.text = "Stamina: %d / %d" % [character.current_stamina, character.max_stamina]
-	guilt.text = "Guilt: %d / %d" % [character.current_stress, character.max_stress]
-	horny.text = "Horny: %d / %d" % [character.current_horniness, character.max_horniness]
+	Stamina.text = " %d / %d" % [character.current_stamina, character.max_stamina]
+	StaminaBar.max_value = character.max_stamina
+	StaminaBar.value=character.current_stamina
+	guilt.text = " %d / %d" % [character.current_stress, character.max_stress]
+	guiltBar.max_value=character.max_stress
+	guiltBar.value=character.current_stress
+	horny.text = " %d / %d" % [character.current_horniness, character.max_horniness]
+	hornyBar.max_value = character.max_horniness
+	hornyBar.value =character.current_horniness
+	
 	selected_chara.update_display()
 	MenuPerso.select_character(MenuPerso.selected_character)
 		

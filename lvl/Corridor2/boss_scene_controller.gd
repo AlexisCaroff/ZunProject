@@ -68,6 +68,9 @@ func _run_corrupt_path() -> void:
 	
 	if gave_in:
 		await _play_dialogue(dialogue_give_in_path, false)
+		var gm := _get_game_manager()
+		for chara in gm.characters:
+			chara.corrupted=true
 		_start_combat(inquisition_encounter, true, false)  # héros embusqués par l'inquisition
 	else:
 		await _play_dialogue(dialogue_resist_path, false)

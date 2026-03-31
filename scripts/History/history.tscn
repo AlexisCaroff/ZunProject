@@ -26,15 +26,6 @@ position = Vector2(989, 498)
 scale = Vector2(0.760162, 0.697283)
 texture = ExtResource("3_c0c2v")
 
-[node name="CloseButton" type="Button" parent="CanvasLayer"]
-z_index = 60
-z_as_relative = false
-offset_left = 1765.0
-offset_top = 818.0
-offset_right = 1837.0
-offset_bottom = 890.0
-icon = ExtResource("6_awdr4")
-
 [node name="DialogueManager" type="Node2D" parent="CanvasLayer"]
 script = ExtResource("3_awdr4")
 portraits_resource = ExtResource("4_c0c2v")
@@ -43,6 +34,20 @@ portraits_resource = ExtResource("4_c0c2v")
 offset_right = 2014.0
 offset_bottom = 1142.0
 color = Color(0, 0, 0, 1)
+
+[node name="CloseButton" type="Button" parent="CanvasLayer"]
+z_index = 60
+z_as_relative = false
+offset_left = 1794.0
+offset_top = 818.0
+offset_right = 1837.0
+offset_bottom = 862.0
+flat = true
+
+[node name="Exite" type="Sprite2D" parent="CanvasLayer/CloseButton"]
+position = Vector2(21.5001, 21)
+scale = Vector2(0.671875, 0.687501)
+texture = ExtResource("6_awdr4")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(967, 542)
