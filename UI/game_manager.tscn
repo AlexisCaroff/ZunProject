@@ -28,7 +28,6 @@ LastRoom_we_were_in = ExtResource("3_0q5so")
 last_room_Ressource = ExtResource("3_0q5so")
 inventory = Array[ExtResource("4_0q5so")]([ExtResource("5_dhxbs")])
 characters = Array[ExtResource("6_1xubm")]([ExtResource("9_43qkp"), ExtResource("7_vbvj5"), ExtResource("8_6kqjp"), ExtResource("10_nm67f")])
-teamCorrupted = true
 
 [node name="Label" type="Label" parent="."]
 z_index = 6

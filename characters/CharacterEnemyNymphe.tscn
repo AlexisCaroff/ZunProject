@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3jx7ce6fpdr1"]
+[gd_scene load_steps=9 format=3 uid="uid://d3jx7ce6fpdr1"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_61pjh"]
 [ext_resource type="Resource" uid="uid://qau4rsq3wbf8" path="res://characters/data/CharacterEnemyNymphe.tres" id="2_ukx70"]
 [ext_resource type="Texture2D" uid="uid://cp18c4j8lgs6a" path="res://characters/charatexture/demo characters/ENEMY_nymph_F_idle.png" id="4_ukx70"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="7_065j3"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="8_0ot4w"]
+[ext_resource type="Script" uid="uid://cf5uoxm4f4cop" path="res://characters/arrow.gd" id="8_dk1ag"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="12_owfhr"]
 [ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="17_qed37"]
 
@@ -83,10 +84,8 @@ alignment = 1
 
 [node name="Arrow" type="Sprite2D" parent="."]
 modulate = Color(0.77, 0.616513, 0.4158, 1)
-position = Vector2(2, -174)
+position = Vector2(2, -191)
 scale = Vector2(0.0897035, 0.0897035)
 texture = ExtResource("8_0ot4w")
 offset = Vector2(0, 116.49)
-script = ExtResource("7_065j3")
-min_duration = 0.5
-max_duration = 0.53
+script = ExtResource("8_dk1ag")

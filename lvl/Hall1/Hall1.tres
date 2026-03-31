@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="RoomResource" load_steps=14 format=3 uid="uid://b5nqhfedb63on"]
 
-[ext_resource type="PackedScene" uid="uid://dc4g65o3bmvmr" path="res://lvl/Cellar/combatRoomCellar.tscn" id="1_yl2n5"]
+[ext_resource type="PackedScene" uid="uid://batqp2vro3cfl" path="res://lvl/Hall1/combat_hall_1.tscn" id="1_yl2n5"]
 [ext_resource type="PackedScene" uid="uid://dv04v6jagn4q1" path="res://lvl/Hall1/door1.tscn" id="2_ah7tj"]
 [ext_resource type="Resource" uid="uid://dobv35hol5cxe" path="res://dialogue/DoorIntro.tres" id="3_yl2n5"]
 [ext_resource type="PackedScene" uid="uid://dqnjuxw77ebnb" path="res://lvl/Hall1/exploration1.tscn" id="4_kuqls"]
-[ext_resource type="Resource" uid="uid://y5sfj1t81c86" path="res://lvl/Cellar/encounterCellaInquisitionr.tres" id="4_yl2n5"]
+[ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://lvl/Hall1/encounter1.tres" id="4_yl2n5"]
 [ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="5_rbnqj"]
 [ext_resource type="Resource" uid="uid://ddokwgifpnrcf" path="res://Items/itemsRessources/ring.tres" id="5_yl2n5"]
 [ext_resource type="Script" uid="uid://b5vho57xy7r3r" path="res://scripts/InteractableChoice.gd" id="6_nrlk4"]
@@ -43,7 +43,7 @@ door_scene_History = ExtResource("3_yl2n5")
 combat_scene = ExtResource("1_yl2n5")
 exploration_scene = ExtResource("4_kuqls")
 encounter = ExtResource("4_yl2n5")
-CanCamp = false
+CanCamp = true
 connected_room_ids = Array[String](["Corridor1", "Corridor2"])
 blocked_room_ids = Array[String]([])
 explored = false

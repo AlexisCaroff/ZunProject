@@ -21,7 +21,9 @@ class_name BossIntroSequence
 @export_file("*.txt") var dialogue_resist_path:   String = "res://dialogues/boss/resist.txt"
 @export_file("*.txt") var dialogue_give_in_path:  String = "res://dialogues/boss/give_in.txt"
 @export var no_portrait_speakers: Array[String] = ["Narrator"]
-@export var portrait_aliases: Dictionary = {"Hooded figure": "Inquisitor.","Inquisitor.": "Inquisitor"}
+@export var portrait_aliases: Dictionary = {"Hooded figure": "Inquisitor", "Inquisitor.": "Inquisitor"}
+## Slots absents du layout initial — entrent dynamiquement quand leur speaker parle.
+@export var late_entry_slots: Array[String] = ["Inquisitor"]
 
 @export var debug_force_corrupt: bool = false
 
@@ -122,6 +124,7 @@ func _build_dialogue_managers() -> void:
 	
 	_dm_simple.no_portrait_speakers = no_portrait_speakers
 	_dm_simple.portrait_aliases     = portrait_aliases
+	_dm_simple.late_entry_slots     = late_entry_slots
 	_canvas.add_child(_dm_simple)
 	# DialogueManager avec choix (corruption)
 	_dm_choice = DialogueManager.new()

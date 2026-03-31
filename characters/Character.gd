@@ -1,139 +1,150 @@
 extends Node2D
 class_name Character
 
-# --- Données visuelles
-@onready var name_label = $name
-@onready var sprite : TextureRect = $pivot/HerosTexture1
-var hp_Jauge : ProgressBar
+# ── Données visuelles ─────────────────────────────────────
+@onready var name_label                    = $name
+@onready var sprite        : TextureRect   = $pivot/HerosTexture1
+@onready var pivot                         = $pivot
+@onready var Selector      : TextureRect   = $pivot/Selector
+@onready var arrow                         = $Arrow
+@onready var buff_bar                      = $HBoxContainer
+## Marqueurs anatomiques pour les VFX — nœuds Node2D enfants de HerosTexture1
+@onready var head_marker   : Node2D        = $pivot/HerosTexture1/HeadMarker
+@onready var torso_marker  : Node2D        = $pivot/HerosTexture1/TorsoMarker
+
+var hp_Jauge        : ProgressBar
 var LustProgressBar : ProgressBar
 var hornyJauge
 const MAX_EQUIPMENT = 2
-@onready var pivot = $pivot
-@onready var Selector:TextureRect =$pivot/Selector
 
-# état
-var taunted_by: Character = null
-var taunt_duration: int = 0
-var buffs: Array[Buff] = []
-var _current_slot: PositionSlot = null
+# ── État ──────────────────────────────────────────────────
+var taunted_by     : Character    = null
+var taunt_duration : int          = 0
+var buffs          : Array[Buff]  = []
+var _current_slot  : PositionSlot = null
+var CharaScale     : Vector2      = Vector2(1.0, 1.0)
+var dead           : bool         = false
+var buff_icons     : Array        = []
+var skills         : Array[Skill] = []
+var combat_manager : CombatManager = null
+var dotsActions    : Array[TextureRect]
 
-
-var CharaScale:Vector2 = Vector2(1.0, 1.0)
-
-var dead: bool = false
-
-var buff_icons: Array = []
-
-# --- Compétences
-var skills: Array[Skill] = []
-
-
-# --- Tags (type, classe, etc.)
-
-# combat
-var combat_manager: CombatManager = null 
-# --- Contrôle
-
-const HornyEffectScene := preload("res://actions/damageEffect/charmed-particules.tscn")
+# ── VFX constants ─────────────────────────────────────────
+const HornyEffectScene  := preload("res://actions/damageEffect/charmed-particules.tscn")
 const DamageEffectScene := preload("res://actions/damageEffect/HitVFX.tscn")
-const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
-const MissEffectScene:= preload("res://actions/damageEffect/miss_vfx.tscn")
-const DebuffEffectScene:= preload("res://actions/damageEffect/debuffVfx.tscn")
-const BonkEffectScene:= preload("res://actions/damageEffect/bonkVFX.tscn")
-const hornyPart : = preload("res://actions/damageEffect/horny_particules.tscn")
-const stunPart := preload("res://actions/damageEffect/Stun_particules.tscn")
-var StunParticule : StunParticules
+const healEffectScene   := preload("res://actions/damageEffect/HealVFX.tscn")
+const MissEffectScene   := preload("res://actions/damageEffect/miss_vfx.tscn")
+const DebuffEffectScene := preload("res://actions/damageEffect/debuffVfx.tscn")
+const BonkEffectScene   := preload("res://actions/damageEffect/bonkVFX.tscn")
+const hornyPart         := preload("res://actions/damageEffect/horny_particules.tscn")
+const stunPart          := preload("res://actions/damageEffect/Stun_particules.tscn")
+const buffui            := preload("res://UI/buffUi.tscn")
+
+var StunParticule  : StunParticules
 var hornyParticules
-const buffui:= preload("res://UI/buffUi.tscn")
+
+# ── Signaux ───────────────────────────────────────────────
 signal target_selected()
-var is_targetable: bool = false
-@onready var arrow = $Arrow
-@onready var buff_bar=$HBoxContainer
-@onready var dotsActions : Array[TextureRect]  
+signal skill_animation_started
+signal skill_animation_finished
 
-var exclamation :TextureRect
-var CharaColor =Color(1.0,1.0,1.0,1.0)
-var acte_twice : bool = false
-var exibBonusAtt = 0
-var CharaGrab: Character = null
-var current_bark: Bark = null
+# ── Divers ────────────────────────────────────────────────
+var is_targetable  : bool      = false
+var exclamation    : TextureRect
+var CharaColor                 = Color(1.0, 1.0, 1.0, 1.0)
+var acte_twice     : bool      = false
+var exibBonusAtt               = 0
+var CharaGrab      : Character = null
+var current_bark   : Bark      = null
 @export var characterData : CharacterData
-var current_skill: Skill = null
-var cam : Camera
+var current_skill  : Skill     = null
+var cam            : Camera
+var ShadowBackground : Sprite2D
+var getattacked    : bool      = false
+var attacking      : bool      = false
+var turncount      : int       = 0
 
-var ShadowBackground: Sprite2D
-var getattacked:bool=false
-var attacking: bool = false
-var turncount:int =0
+# ── Variables d'animation ─────────────────────────────────
+var start_pos
+var normal_size
+var attack_pos      : Vector2
+var target_pos      : Vector2
+var start_target_pos: Vector2
+var outline         : TextureRect
 
 
-func set_current_slot(value):
-	_current_slot = value
+# ═══════════════════════════════════════════════════════════
+#  INIT
+# ═══════════════════════════════════════════════════════════
 
-func get_current_slot():
-	return _current_slot
+func set_current_slot(value): _current_slot = value
+func get_current_slot(): return _current_slot
 
 func _ready():
 	cam = get_viewport().get_camera_2d()
-
-	
-	arrow.visible=false
+	arrow.visible = false
 	if characterData:
-		name_label.text = characterData.Charaname
-		sprite.texture = characterData.portrait_texture
-		Selector.texture = characterData.portrait_texture
+		name_label.text    = characterData.Charaname
+		sprite.texture     = characterData.portrait_texture
+		Selector.texture   = characterData.portrait_texture
 		_updateSkills(characterData.skill_resources)
 	else:
 		push_warning("CharacterData non assignée pour %s" % name)
-	await  get_tree().process_frame
-	if characterData.is_player_controlled==false && combat_manager.heroes[0].characterData.corrupted==false :
-		sprite.flip_h=true
-		Selector.flip_h=true
+
+	await get_tree().process_frame
+
+	if not characterData.is_player_controlled and combat_manager.heroes[0].characterData.corrupted == false:
+		sprite.flip_h   = true
+		Selector.flip_h = true
 	else:
-		hornyParticules= hornyPart.instantiate()
-		print ( "horny particules spawn for "+ characterData.Charaname)
-		
+		hornyParticules = hornyPart.instantiate()
+		print("horny particules spawn for " + characterData.Charaname)
 		add_child(hornyParticules)
 		hornyParticules.position += characterData.headPosition
 		hornyParticules.setParticulesAlpha(0.0)
+
 	for buff in characterData.buffs:
 		add_buff(buff)
-
 	characterData.buffs.clear()
 	for buff in buffs:
 		buff.apply_to(self.characterData)
-		
-func _updateSkills(updated_skills: Array[Resource] ):
+
+
+func _updateSkills(updated_skills: Array[Resource]):
 	skills.clear()
 	for s in updated_skills:
 		if s == null:
 			push_error("Une ressource de compétence est nulle dans %s" % name)
 			continue
-		var inst= s.duplicate()
+		var inst = s.duplicate()
 		inst.owner = self
-		var base_cd = inst.cooldown
-		var reduced_cd = base_cd - get_equipement_cooldown_reduction_for(inst)
-		reduced_cd = max(0, reduced_cd)
-		inst.cooldown = reduced_cd
+		var base_cd    = inst.cooldown
+		var reduced_cd = max(0, base_cd - get_equipement_cooldown_reduction_for(inst))
+		inst.cooldown  = reduced_cd
 		skills.append(inst)
+
+
+# ═══════════════════════════════════════════════════════════
+#  STATS
+# ═══════════════════════════════════════════════════════════
 
 func update_stats():
 	if not characterData:
 		return
-	if StunParticule && !characterData.stun:
+	if StunParticule and not characterData.stun:
 		StunParticule.remove()
-		StunParticule=null
-	characterData.max_stamina = characterData.base_max_stamina
+		StunParticule = null
+
+	characterData.max_stamina   = characterData.base_max_stamina
 	characterData.max_horniness = characterData.base_max_horniness
-	characterData.max_stress = characterData.base_max_stress
-	characterData.evasion     = characterData.base_evasion
-	characterData.precision   = characterData.base_precision   # ← ajouter
-	characterData.immobilized = false    
-	characterData.attack = characterData.base_attack
-	characterData.defense = characterData.base_defense
-	characterData.initiative = characterData.base_initiative
-	characterData.willpower = characterData.base_willpower
-	characterData.evasion = characterData.base_evasion
+	characterData.max_stress    = characterData.base_max_stress
+	characterData.attack        = characterData.base_attack
+	characterData.defense       = characterData.base_defense
+	characterData.initiative    = characterData.base_initiative
+	characterData.willpower     = characterData.base_willpower
+	characterData.evasion       = characterData.base_evasion
+	characterData.precision     = characterData.base_precision
+	characterData.immobilized   = false   # remis à false — le buff IMMOBILIZE le repose si actif
 
 	for tag in characterData.tags:
 		if tag == "sadist":
@@ -145,120 +156,59 @@ func update_stats():
 		buff.apply_to(self.characterData)
 
 	for eq in characterData.equipped_items:
-		characterData.attack += eq.attack_bonus
-		characterData.defense += eq.defense_bonus
+		characterData.attack        += eq.attack_bonus
+		characterData.defense       += eq.defense_bonus
 		characterData.max_horniness += eq.Max_lust_bonus
-		characterData.max_stamina += eq.Max_stamina_bonus
-		characterData.max_stress += eq.Max_Guilt_bonus
-		characterData.willpower += eq.willpower_bonus
-		characterData.evasion += eq.evasion_bonus
-		characterData.initiative += eq.initiative_bonus
+		characterData.max_stamina   += eq.Max_stamina_bonus
+		characterData.max_stress    += eq.Max_Guilt_bonus
+		characterData.willpower     += eq.willpower_bonus
+		characterData.evasion       += eq.evasion_bonus
+		characterData.initiative    += eq.initiative_bonus
 
-func get_equipement_cooldown_reduction_for(skill: Skill) -> int: # for equipement
+
+func get_equipement_cooldown_reduction_for(skill: Skill) -> int:
 	var reduction := 0
 	if not characterData:
 		return reduction
-
 	for eq in characterData.equipped_items:
 		reduction += eq.global_cooldown_reduction
 		if skill.name in eq.skill_specific_cooldown:
 			reduction += eq.skill_specific_cooldown[skill.name]
-
 	return reduction
-func play_affinity_reaction(bark_text: String) -> void:
-	emit_signal("skill_animation_started")
-	await animate_start_Turn()
-	await show_bark(bark_text)
-	emit_signal("skill_animation_finished")
-	
-func show_bark(text:String):
-	if not characterData or characterData.bark_scene == null:
-		return
 
-	if current_bark and is_instance_valid(current_bark):
-		current_bark.queue_free()
 
-	current_bark = characterData.bark_scene.instantiate()
-	add_child(current_bark)
-	current_bark.set_text(text)
-	var bark_offset_y := -240
-	current_bark.position = Vector2(-60, bark_offset_y)
-	await get_tree().create_timer(2.0).timeout
+func refresh_stats_from_equipment():
+	characterData.attack     = characterData.base_attack
+	characterData.defense    = characterData.base_defense
+	characterData.willpower  = characterData.base_willpower
+	characterData.evasion    = characterData.base_evasion
+	characterData.initiative = characterData.base_initiative
+	for eq in characterData.equipped_items:
+		characterData.attack     += eq.attack_bonus
+		characterData.defense    += eq.defense_bonus
+		characterData.willpower  += eq.willpower_bonus
+		characterData.evasion    += eq.evasion_bonus
+		characterData.initiative += eq.initiative_bonus
 
-func slur():
-	if characterData:
-		show_bark(characterData.taunts.pick_random())
 
-func update_ui():
+# ═══════════════════════════════════════════════════════════
+#  BUFFS
+# ═══════════════════════════════════════════════════════════
 
-	if hp_Jauge == null and _current_slot != null:
-		_current_slot.Set_CharaUI()
-		hp_Jauge = _current_slot.CharaUI.getHpbar()
-		hornyJauge = _current_slot.CharaUI.get_HornyBar()
-		dotsActions = _current_slot.CharaUI.getactionpoints()
-		
-	if not characterData:
-		return
-	if LustProgressBar== null:
-		LustProgressBar =_current_slot.CharaUI.getLustbar()
-	if hp_Jauge:
-		hp_Jauge.max_value = characterData.max_stamina
-		hp_Jauge.value = characterData.current_stamina
-
-	if hornyJauge:
-		hornyJauge.self_modulate.a = (characterData.current_horniness * 2.0) / characterData.max_horniness
-		LustProgressBar.max_value = characterData.max_horniness 
-		LustProgressBar.value = characterData.current_horniness
-
-	
-	if hornyParticules&& characterData.current_horniness>=50.0:
-		hornyParticules.setParticulesAlpha(characterData.current_horniness/100.0)
-	else :
-		if hornyParticules:
-			hornyParticules.setParticulesAlpha(0.0)
-		
-	for i in range(skills.size()):
-		if i < dotsActions.size():
-			var dot = dotsActions[i]
-			var skill = skills[i]
-			if skill.current_cooldown == 0:
-				dot.modulate = Color(0.642,0.561,0.365)
-				dot.size = Vector2(0.1,0.1)
-			else:
-				dot.modulate = Color(0.1,0.1,0.1)
-				dot.size = Vector2(0.5, 0.5)
-	if characterData.stun :
-		if StunParticule == null:
-			StunParticule =stunPart.instantiate()
-			add_child(StunParticule)
-			StunParticule.position = characterData.headPosition
-	else:
-		if StunParticule != null:
-			StunParticule.remove()
-			StunParticule= null
-	
 func add_buff(buff: Buff):
 	var new_buff = buff.duplicate()
 	buffs.append(new_buff)
-	var icon =buffui.instantiate()
-	
 	if buff_bar == null:
 		buff_bar = $HBoxContainer
+	var icon = buffui.instantiate()
 	buff_bar.add_child(icon)
 	buff_icons.append(icon)
 	icon.updatebuff(new_buff)
 	update_stats()
-	print( " add buff "+buff.name+ " to "+characterData.Charaname)
-	
-	
-func process_taunt():
-	if taunt_duration > 0:
-		taunt_duration -= 1
-		if taunt_duration <= 0:
-			taunted_by = null
+	print("add buff " + buff.name + " to " + characterData.Charaname)
+
 
 func update_buffs() -> void:
-	
 	for i in range(buffs.size() - 1, -1, -1):
 		var buff = buffs[i]
 		buff.duration -= 1
@@ -266,136 +216,119 @@ func update_buffs() -> void:
 			remove_buff_at(i)
 		else:
 			buff_icons[i].refresh()
- 
-	# ── Décompte immobilisation ──────────────────────────────
-	if characterData.get("immobilized") == true:
-		characterData.immobilized_turns -= 1
-		if characterData.immobilized_turns <= 0:
-			characterData.immobilized       = false
-			characterData.immobilized_turns = 0
-			print(characterData.Charaname + " n'est plus immobilisé.")
-	# ────────────────────────────────────────────────────────
- 
+	# precision et immobilized sont recalculés par update_stats() via apply_to()
 	update_stats()
 
-func remove_buff_at(index: int):
 
+func remove_buff_at(index: int):
 	var buff = buffs[index]
 	buffs.remove_at(index)
-	
 	var icon = buff_icons[index]
 	buff_icons.remove_at(index)
 	icon.queue_free()
-	
 	print("remove buff " + buff.name)
+
 
 func get_stat(stat_enum: int) -> int:
 	var base_value = 0
 	match stat_enum:
-		Buff.Stat.ATTACK:
-			base_value = characterData.base_attack
-		Buff.Stat.DEFENSE:
-			base_value = characterData.base_defense
-		Buff.Stat.SPEED:
-			base_value = characterData.base_initiative
-		_:
-			print("Stat inconnue : ", stat_enum)
-
+		Buff.Stat.ATTACK:   base_value = characterData.base_attack
+		Buff.Stat.DEFENSE:  base_value = characterData.base_defense
+		Buff.Stat.SPEED:    base_value = characterData.base_initiative
+		_: print("Stat inconnue : ", stat_enum)
 	for buff in buffs:
 		if buff.stat == stat_enum:
 			base_value += buff.amount
-
 	return base_value
+
+
+func process_taunt():
+	if taunt_duration > 0:
+		taunt_duration -= 1
+		if taunt_duration <= 0:
+			taunted_by = null
+
+
+# ═══════════════════════════════════════════════════════════
+#  UI
+# ═══════════════════════════════════════════════════════════
+
+func update_ui():
+	if hp_Jauge == null and _current_slot != null:
+		_current_slot.Set_CharaUI()
+		hp_Jauge        = _current_slot.CharaUI.getHpbar()
+		hornyJauge      = _current_slot.CharaUI.get_HornyBar()
+		dotsActions     = _current_slot.CharaUI.getactionpoints()
+	if not characterData:
+		return
+	if LustProgressBar == null:
+		LustProgressBar = _current_slot.CharaUI.getLustbar()
+	if hp_Jauge:
+		hp_Jauge.max_value = characterData.max_stamina
+		hp_Jauge.value     = characterData.current_stamina
+	if hornyJauge:
+		hornyJauge.self_modulate.a  = (characterData.current_horniness * 2.0) / characterData.max_horniness
+		LustProgressBar.max_value   = characterData.max_horniness
+		LustProgressBar.value       = characterData.current_horniness
+	if hornyParticules and characterData.current_horniness >= 50.0:
+		hornyParticules.setParticulesAlpha(characterData.current_horniness / 100.0)
+	elif hornyParticules:
+		hornyParticules.setParticulesAlpha(0.0)
+	for i in range(skills.size()):
+		if i < dotsActions.size():
+			var dot   = dotsActions[i]
+			var skill = skills[i]
+			if skill.current_cooldown == 0:
+				dot.modulate = Color(0.642, 0.561, 0.365)
+				dot.size     = Vector2(0.1, 0.1)
+			else:
+				dot.modulate = Color(0.1, 0.1, 0.1)
+				dot.size     = Vector2(0.5, 0.5)
+	if characterData.stun:
+		if StunParticule == null:
+			StunParticule = stunPart.instantiate()
+			add_child(StunParticule)
+			StunParticule.position = characterData.headPosition
+	else:
+		if StunParticule != null:
+			StunParticule.remove()
+			StunParticule = null
+
+
+# ═══════════════════════════════════════════════════════════
+#  COMPÉTENCES / TOUR
+# ═══════════════════════════════════════════════════════════
 
 func get_skill(index: int) -> Skill:
 	if index >= 0 and index < skills.size():
 		return skills[index]
-	else:
-		push_error("Skill index %d out of bounds for character %s" % [index, name])
-		return null
+	push_error("Skill index %d out of bounds for character %s" % [index, name])
+	return null
+
 
 func is_dead() -> bool:
 	return dead
 
+
 func can_act() -> bool:
-	return not is_dead() and characterData and characterData.current_stress < 100 and characterData.current_horniness < 100
+	return not is_dead() and characterData \
+		and characterData.current_stress    < 100 \
+		and characterData.current_horniness < 100
 
-func set_targetable(state: bool):
-	is_targetable = state
-	arrow.visible = state
-	if state:
-		sprite.modulate = Color(1, 1, 1)
-		Selector.visible=true
-	else:
-		sprite.modulate = Color(0.5, 0.5, 0.5)
-		Selector.visible=false
-
-func _input_event(_viewport, event, shape_idx):
-	if is_targetable and event is InputEventMouseButton and event.pressed:
-		emit_signal("target_selected", self)
-
-func surprised():
-	if characterData:
-		characterData.stun = true
-	exclamation = TextureRect.new()
-	exclamation.texture = preload("res://UI/exclamation.png")
-	exclamation.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	exclamation.custom_minimum_size = Vector2(32, 32)
-	exclamation.position = Vector2(0, -164)
-	add_child(exclamation)
-
-func play_ai_turn(heroes : Array, enemies :Array):
-	if not characterData or characterData.ai_brain == null:
-		push_error("Aucun AiBrain assigné à %s" % name)
-		return
-
-	var decision = characterData.ai_brain.decide_action(self, heroes, enemies)
-	if decision.is_empty():
-		print("no decision")
-		resetVisuel()
-		return
-	
-	current_skill = decision["skill"]
-	combat_manager.ui.log(characterData.Charaname + " use " + current_skill.descriptionName)
-	var targetPositions: Array[PositionSlot] = []
-
-	for t in decision.get("target", []):
-		if t is PositionSlot:
-			targetPositions.append(t)
-
-	var target = targetPositions[0].occupant
-	combat_manager.pending_skill = current_skill
-	current_skill.owner = self
-	await get_tree().create_timer(0.5).timeout
-	
-
-	# Applique les effets et remplit la file des réactions
-	for thetarget in targetPositions:
-		targetPositions[0] = await current_skill.use(thetarget)
-
-	# ✅ Attendre que les barks d'affinité soient joués AVANT animate_attack
-	await combat_manager.flush_startSkills_affinity_reaction()
-	
-	if targetPositions[0].occupant:
-		await animate_attack(targetPositions[0].occupant)
-
-	if target:
-		target.update_ui()
-	update_buffs()
-	resetVisuel()
 
 func reduce_cooldowns() -> void:
 	for skill in skills:
 		if skill.current_cooldown > 0:
 			skill.current_cooldown -= 1
 
+
 func start_turn():
-	turncount +=1
+	turncount += 1
 	if not characterData:
 		return
 	print(characterData.Charaname + " start turn")
-	Selector.self_modulate.a =1.0
-	var dmg = 0
+	Selector.self_modulate.a = 1.0
+	var dmg      = 0
 	var dmgHorny = 0
 	for buff in buffs:
 		if buff.name == "poison":
@@ -408,34 +341,116 @@ func start_turn():
 		await take_damage(self, DamageEffect.Stat.HORNY, dmgHorny, false)
 	else:
 		await animate_start_Turn()
-
 	update_stats()
 	combat_manager.ui.update_ui_for_current_character(self)
 
+
 func end_turn():
-	CharaColor = Color(1.0,1.0,1.0,1.0)
+	CharaColor = Color(1.0, 1.0, 1.0, 1.0)
+	update_buffs()
+	resetVisuel()
+	reduce_cooldowns()
+	combat_manager.ui.update_ui_for_current_character(self)
+
+
+func play_ai_turn(heroes: Array, enemies: Array):
+	if not characterData or characterData.ai_brain == null:
+		push_error("Aucun AiBrain assigné à %s" % name)
+		return
+
+	var decision = characterData.ai_brain.decide_action(self, heroes, enemies)
+	if decision.is_empty():
+		print("no decision")
+		resetVisuel()
+		return
+
+	current_skill = decision["skill"]
+	combat_manager.ui.log(characterData.Charaname + " use " + current_skill.descriptionName)
+
+	var targetPositions: Array[PositionSlot] = []
+	for t in decision.get("target", []):
+		if t is PositionSlot:
+			targetPositions.append(t)
+
+	combat_manager.pending_skill = current_skill
+	current_skill.owner          = self
+	await get_tree().create_timer(0.5).timeout
+
+	# ── 1. Animation d'abord ─────────────────────────────────
+	var target_chars: Array[Character] = []
+	for slot: PositionSlot in targetPositions:
+		if slot.occupant != null:
+			target_chars.append(slot.occupant)
+
+	if not target_chars.is_empty() and current_skill.name != "move":
+		await animate_attack(target_chars, current_skill)
+
+	# ── 2. Effets après ──────────────────────────────────────
+	for thetarget in targetPositions:
+		targetPositions[0] = await current_skill.use(thetarget)
+
+	await combat_manager.flush_startSkills_affinity_reaction()
+
+	for slot in targetPositions:
+		if slot.occupant:
+			slot.occupant.update_ui()
 	update_buffs()
 	resetVisuel()
 
-	reduce_cooldowns()
-	combat_manager.ui.update_ui_for_current_character(self)
-	
 
-func isdead():
-	dead = true
-	print(characterData.Charaname + " is dead")
+# ═══════════════════════════════════════════════════════════
+#  CIBLAGE
+# ═══════════════════════════════════════════════════════════
+
+func set_targetable(state: bool):
+	is_targetable  = state
+	arrow.visible  = state
+	if state:
+		sprite.modulate  = Color(1, 1, 1)
+		Selector.visible = true
+	else:
+		sprite.modulate  = Color(0.5, 0.5, 0.5)
+		Selector.visible = false
+
+
+func _input_event(_viewport, event, _shape_idx):
+	if is_targetable and event is InputEventMouseButton and event.pressed:
+		emit_signal("target_selected", self)
+
 
 func select_as_target():
 	print("Cible sélectionnée : ", self.name)
 	combat_manager.select_target(self)
 	arrow.visible = false
 
-func take_damage(source: Character, stat: int, amount: int, typeMagic:bool, skillused: Skill= null) -> void:
+
+# ═══════════════════════════════════════════════════════════
+#  AFFECTATION / MORT
+# ═══════════════════════════════════════════════════════════
+
+func surprised():
+	if characterData:
+		characterData.stun = true
+	exclamation = TextureRect.new()
+	exclamation.texture             = preload("res://UI/exclamation.png")
+	exclamation.stretch_mode        = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	exclamation.custom_minimum_size = Vector2(32, 32)
+	exclamation.position            = Vector2(0, -164)
+	add_child(exclamation)
+
+
+func isdead():
+	dead = true
+	print(characterData.Charaname + " is dead")
+
+
+func take_damage(source: Character, stat: int, amount: int, typeMagic: bool, skillused: Skill = null) -> void:
 	var damage := 0
 	for buff in buffs:
 		if buff.name == "Target":
 			combat_manager.pending_skill.reducecost = buff.amount
 	sprite.texture = characterData.Hit_texture
+
 	match stat:
 		DamageEffect.Stat.STAMINA:
 			for tag in characterData.tags:
@@ -443,32 +458,26 @@ func take_damage(source: Character, stat: int, amount: int, typeMagic:bool, skil
 					var littlebuff := load("res://characters/kink/littleattackbuff.tres")
 					add_buff(littlebuff)
 					characterData.current_horniness = max(0, characterData.current_horniness + 2)
-
 			if source != self:
 				for tag in source.characterData.tags:
 					if tag == "sadist":
 						source.characterData.current_horniness = max(0, source.characterData.current_horniness + 2)
 					if tag == "degrader":
 						source.characterData.current_horniness = max(0, source.characterData.current_horniness + floor(characterData.current_stress / 2))
-
-				damage = max(0, ((amount + source.characterData.attack) - characterData.defense))
+				damage = max(0, (amount + source.characterData.attack) - characterData.defense)
 				print(self.name + " take " + str(damage) + " damage from " + source.name)
 			else:
 				damage = amount
-
 			for eq in characterData.equipped_items:
 				eq.on_receive_attack(self, source, damage)
-
 			if characterData.current_stamina > 0:
 				characterData.current_stamina = clamp(characterData.current_stamina - damage, 0, characterData.max_stamina)
-				if characterData.current_stamina == 0 && characterData.isOneshot:
+				if characterData.current_stamina == 0 and characterData.isOneshot:
 					isdead()
-					
 			else:
-				if characterData.IsDemon and typeMagic==true:
+				if characterData.IsDemon and typeMagic:
 					combat_manager.nb_crystaleloot += 1
 				isdead()
-
 			if dead:
 				animate_bonk()
 			else:
@@ -481,11 +490,9 @@ func take_damage(source: Character, stat: int, amount: int, typeMagic:bool, skil
 			else:
 				damage = max(0, amount - characterData.willpower)
 				characterData.current_horniness = max(0, characterData.current_horniness + damage)
-
 			for eq in characterData.equipped_items:
 				eq.on_receive_attack(self, source, damage)
-			
-			await animate_get_horny(damage,source)
+			await animate_get_horny(damage, source)
 			update_ui()
 
 		DamageEffect.Stat.STRESS:
@@ -494,67 +501,60 @@ func take_damage(source: Character, stat: int, amount: int, typeMagic:bool, skil
 					amount -= 2
 					await take_damage(self, DamageEffect.Stat.STAMINA, 2, false)
 					characterData.attack -= exibBonusAtt
-					exibBonusAtt = floor(characterData.current_stress / 10)
+					exibBonusAtt          = floor(characterData.current_stress / 10)
 					characterData.attack += exibBonusAtt
 				if tag == "degenerate":
-					var usedSkills : Array[Skill] = []
+					var usedSkills: Array[Skill] = []
 					for skill in skills:
 						if skill.current_cooldown > 0:
 							usedSkills.append(skill)
 					if not usedSkills.is_empty():
-						var reduceCooldownSkill :Skill = usedSkills.pick_random()
-						reduceCooldownSkill.current_cooldown -= 1
+						usedSkills.pick_random().current_cooldown -= 1
 					characterData.current_horniness = max(0, characterData.current_horniness + 2)
-
 			damage = max(0, amount - characterData.willpower)
 			characterData.current_stress = max(0, characterData.current_stress + damage)
 
 	shake_camera(20.0)
 	update_ui()
 
-func resetVisuel():
-	sprite.modulate = CharaColor
-	self.scale = CharaScale
-	if _current_slot&& not attacking&& not getattacked:
-		self.z_index = _current_slot.z_index
-	if characterData and characterData.current_stamina > 0 && not attacking&& not getattacked:
-		sprite.texture = characterData.portrait_texture
-		Selector.texture = characterData.portrait_texture
-	if not attacking && not getattacked:
-		self.global_position= _current_slot.global_position
-	if characterData and characterData.current_stamina == 0:
-		sprite.texture =characterData.dead_portrait_texture
-		Selector.texture =characterData.dead_portrait_texture
-	
-	if characterData.current_stamina>0:
-		modulate=Color(1.0,1.0,1.0)
-	#print ("reset " + characterData.Charaname )
-	
-	update_ui()
-	
 
-func refresh_stats_from_equipment():
-	characterData.attack = characterData.base_attack
-	characterData.defense = characterData.base_defense
-	characterData.willpower = characterData.base_willpower
-	characterData.evasion = characterData.base_evasion
-	characterData.initiative = characterData.base_initiative
+# ═══════════════════════════════════════════════════════════
+#  AFFINITÉS
+# ═══════════════════════════════════════════════════════════
 
-	for eq in characterData.equipped_items:
-		characterData.attack += eq.attack_bonus
-		characterData.defense += eq.defense_bonus
-		characterData.willpower += eq.willpower_bonus
-		characterData.evasion += eq.evasion_bonus
-		characterData.initiative += eq.initiative_bonus
+func play_affinity_reaction(bark_text: String) -> void:
+	emit_signal("skill_animation_started")
+	await animate_start_Turn()
+	await show_bark(bark_text)
+	emit_signal("skill_animation_finished")
+
+
+func show_bark(text: String):
+	if not characterData or characterData.bark_scene == null:
+		return
+	if current_bark and is_instance_valid(current_bark):
+		current_bark.queue_free()
+	current_bark = characterData.bark_scene.instantiate()
+	add_child(current_bark)
+	current_bark.set_text(text)
+	current_bark.position = Vector2(-60, -240)
+	await get_tree().create_timer(2.0).timeout
+
+
+func slur():
+	if characterData:
+		show_bark(characterData.taunts.pick_random())
+
 
 func add_affinity(target: Character, amount: int):
 	var key := target.characterData.Charaname
-	if not characterData.affinity.has(key):
-		return
-	characterData.affinity[key] = clampi(characterData.affinity[key] + amount, 0, 100)
+	if characterData.affinity.has(key):
+		characterData.affinity[key] = clampi(characterData.affinity[key] + amount, 0, 100)
+
 
 func reduce_affinity(target: Character, amount: int):
 	add_affinity(target, -amount)
+
 
 func get_affinity(target: Character) -> int:
 	var key := target.characterData.Charaname
@@ -562,96 +562,98 @@ func get_affinity(target: Character) -> int:
 		return characterData.affinity[key]
 	return 0
 
-# ------------------------------- Animation ------------------------------------------------
-#--------Animation variables-----------------------
-var start_pos
-var normal_size
-var attack_pos : Vector2
-var target_pos : Vector2
-var start_target_pos : Vector2
-var outline : TextureRect
-signal skill_animation_started
-signal skill_animation_finished
+
+# ═══════════════════════════════════════════════════════════
+#  VISUEL / RESET
+# ═══════════════════════════════════════════════════════════
+
+func resetVisuel():
+	sprite.modulate = CharaColor
+	
+	if _current_slot and not attacking and not getattacked:
+		self.z_index         = _current_slot.z_index
+		self.global_position = _current_slot.global_position
+		self.scale           = CharaScale
+	if characterData and characterData.current_stamina > 0 and not attacking and not getattacked:
+		sprite.texture   = characterData.portrait_texture
+		Selector.texture = characterData.portrait_texture
+	if characterData and characterData.current_stamina == 0:
+		sprite.texture   = characterData.dead_portrait_texture
+		Selector.texture = characterData.dead_portrait_texture
+	if characterData.current_stamina > 0:
+		modulate = Color(1.0, 1.0, 1.0)
+	update_ui()
+
+
+func shake_camera(strength := 5.0):
+	if cam and cam.has_method("shake"):
+		cam.shake(strength)
+
+
+# ═══════════════════════════════════════════════════════════
+#  ANIMATIONS
+# ═══════════════════════════════════════════════════════════
 
 func animate_start_Turn():
 	emit_signal("skill_animation_started")
-	var tween := create_tween() as Tween
-	CharaScale = _current_slot.position_data.scale if _current_slot else CharaScale
-	var normal_size = CharaScale
-	var big_size = Vector2(normal_size.x * 1.1, normal_size.y * 1.3)
-	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
-	tween.tween_property(self, "scale", normal_size, 0.2)
+	var tween      := create_tween() as Tween
+	CharaScale      = _current_slot.position_data.scale if _current_slot else CharaScale
+	var norm_size   = CharaScale
+	var big_size    = Vector2(norm_size.x * 1.1, norm_size.y * 1.3)
+	tween.tween_property(self, "scale", big_size,  0.2).set_delay(0.2)
+	tween.tween_property(self, "scale", norm_size, 0.2)
 	await tween.finished
 	emit_signal("skill_animation_finished")
 
-func animate_get_horny(damage:int, source: Character = null):
+
+func animate_get_horny(damage: int, source: Character = null):
 	emit_signal("skill_animation_started")
-	sprite.texture = characterData.Hit_texture
-	var effect_instance = HornyEffectScene.instantiate()
+	sprite.texture       = characterData.Hit_texture
+	var effect_instance  = HornyEffectScene.instantiate()
 	get_tree().current_scene.add_child(effect_instance)
 	effect_instance.global_position = global_position + Vector2(0, -30)
 	if effect_instance.has_method("setup"):
 		effect_instance.setup(damage)
-	if source== self:
-		var tween := create_tween() as Tween
-		var normal_size = CharaScale
-		var big_size= Vector2(normal_size.x*1.1,normal_size.y*1.3)
-		tween.tween_property(self, "scale", big_size, 0.2)
-		tween.tween_property(self, "scale", normal_size, 0.2)
+	if source == self:
+		var tween    := create_tween() as Tween
+		var norm_size = CharaScale
+		var big_size  = Vector2(norm_size.x * 1.1, norm_size.y * 1.3)
+		tween.tween_property(self, "scale", big_size,  0.2)
+		tween.tween_property(self, "scale", norm_size, 0.2)
 		await tween.finished
 		sprite.texture = characterData.portrait_texture
 	emit_signal("skill_animation_finished")
 
-func animate_take_damage(damage:int, source:Character, usedSkill :Skill = null):
-	
+
+func animate_take_damage(damage: int, source: Character, _usedSkill: Skill = null):
 	emit_signal("skill_animation_started")
 	await get_tree().create_timer(0.2).timeout
-
-	if characterData.current_stamina>0:
+	if characterData.current_stamina > 0:
 		sprite.texture = characterData.Hit_texture
 	var effect_instance = DamageEffectScene.instantiate()
 	get_tree().current_scene.add_child(effect_instance)
 	effect_instance.global_position = global_position + Vector2(50, -140)
-	
 	if effect_instance.has_method("setup"):
-		effect_instance.setup(damage, Color(1,0.4,0.3))
-
-	
+		effect_instance.setup(damage, Color(1, 0.4, 0.3))
 	await get_tree().create_timer(0.5).timeout
-	if source== self:
-		if characterData.current_stamina>0:
-			sprite.texture = characterData.portrait_texture
-	#if source== self:
-	#	var tween := create_tween() as Tween
-	#	var tween2 := create_tween() as Tween
-	#	tween.tween_property(self, "scale", big_size, 0.2)
-	#	tween.tween_property(self, "scale", normal_size, 0.2)
-	#	tween2.tween_property(self, "position", dam_pos, 0.02).set_delay(0.3)
-	#	tween2.tween_property(self, "position", start_pos, 0.2)
-	#	print ("self attacked------------------------------------------------------------")
-		
-	#	await tween.finished
+	if source == self and characterData.current_stamina > 0:
+		sprite.texture = characterData.portrait_texture
 	emit_signal("skill_animation_finished")
 
-func animate_heal(damage:int, _source:Character, color=null):
+
+func animate_heal(damage: int, _source: Character, color = null):
 	emit_signal("skill_animation_started")
-	var delay =0.5
+	var delay = 0.5
 	await get_tree().create_timer(0.2).timeout
 	if _source.characterData.Charaname == "Mystic":
-		delay=1.0
+		delay = 1.0
 	var effect_instance = healEffectScene.instantiate()
-	#if _source == self:
-	#	var tween := create_tween() as Tween
-	#	var normal_size = CharaScale
-	#	var big_size= Vector2(1.0,1.05)
-	#	tween.tween_property(self, "scale", big_size, 0.2).set_delay(delay)
-	#	tween.tween_property(self, "scale", normal_size, 0.2)
-	#	await tween.finished
 	get_tree().current_scene.add_child(effect_instance)
 	effect_instance.global_position = global_position + Vector2(100, -240)
 	if effect_instance.has_method("setup"):
-		effect_instance.setup(damage,color)
+		effect_instance.setup(damage, color)
 	emit_signal("skill_animation_finished")
+
 
 func DebuffAnim(text):
 	emit_signal("skill_animation_started")
@@ -662,218 +664,274 @@ func DebuffAnim(text):
 		effect_instance.setup(text)
 	emit_signal("skill_animation_finished")
 
-func animate_attack(target: Character, _duration = 1.0):
-	target.buff_bar.visible=false
-	buff_bar.visible=false
-	attacking = true
-	target.getattacked=true
-	_duration = 1.1
-	var has_changeMask := current_skill.effects.any(func(e): return e is ChangeSkill)
-	var has_heal := current_skill.effects.any(func(e): return e is HealEffect)
+
+func miss_animation(_target: Character):
 	emit_signal("skill_animation_started")
-	combat_manager.ui.log(characterData.Charaname + " use " + combat_manager._pending_skill.descriptionName)
-	if current_skill.effect != null:
-		var effect_instance = current_skill.effect.instantiate()
-		if current_skill.is_contact:
-			add_child(effect_instance)
-		else:
-			target.add_child(effect_instance)
-		if effect_instance.has_method("setup"):
-			effect_instance.setup()
-	
+	var miss_instance = MissEffectScene.instantiate()
+	get_tree().current_scene.add_child(miss_instance)
+	miss_instance.global_position = global_position + Vector2(0, -140)
+	if miss_instance.has_method("setup"):
+		miss_instance.setup()
+	var start_pose = position
+	var esquiv_pose = start_pose + Vector2(-100, 0)
 	var tween := create_tween() as Tween
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_IN_OUT)
-	self.z_index = 20
-	target.z_index = 20
-	var offset : Vector2
-	
-	target.sprite.texture=target.characterData.Hit_texture
-	
-	sprite.texture = current_skill.ImageSkill
-	target.modulate.a = 0.0
-	Selector.visible=false
-	if sprite.texture == current_skill.ImageSkill:
-		print ("change for skill texture  " + characterData.Charaname )
-	start_pos = position
-	start_target_pos =target.position
-	target_pos = start_target_pos
-	target_pos.y += 50
-
-	var cam_bigZoom = Vector2(cam.baseZoom*1.1)
-	if characterData.is_player_controlled :
-		self.global_position =Vector2(-200,728)
-	else :
-		self.global_position  =Vector2(2000,728)
-	
-		
-	if target.characterData.is_player_controlled :
-		target_pos = Vector2(643,700)
-	else :
-		target_pos = Vector2(1300,700)
-
-#--------------------contact---------------------------
-	if target.characterData.size == "Small":
-		target_pos.y -= 10
-		if characterData.size == "Big":
-			attack_pos.y +=250
-	var direction = (target.global_position - global_position).normalized()
-	if current_skill.is_contact:
-		offset = direction * -current_skill.distance_contact
-		attack_pos =  target_pos + offset
-		if target.characterData.Charaname == "Slime":
-			attack_pos.y += 70
-		if target.characterData.size == "Big":
-			target_pos.y += 70
-			
-		if !target.characterData.is_player_controlled :
-			position=Vector2(-400,728)
-		else:
-			position=Vector2(2000,728)
-			
-				
-#--------------------distance---------------------------
-	else :
-		offset = direction * 40
-		if characterData.is_player_controlled:
-			attack_pos = Vector2(643,728)
-			if target.characterData.is_player_controlled:
-				attack_pos = Vector2(443,728)
-				target_pos = Vector2(843,728)
-		else :
-			attack_pos = Vector2(1400,728)
-			if !target.characterData.is_player_controlled:
-				attack_pos = Vector2(1500,750)
-				target_pos = Vector2(1043,728)
-				if target.characterData.Charaname == "Small":
-					target_pos.y -= 00
-			if characterData.Charaname == "Slime":
-				attack_pos.y -= 70
-	if target.sprite.texture == target.characterData.dead_portrait_texture && target.characterData.IsDemon:
-		target_pos.y = 600
-		
-	sprite.texture = current_skill.ImageSkill
-
-	normal_size = self.scale
-	var big_size= normal_size*2
-	
-	self.modulate.a =0
-	var timmmmmm = 0.1
-	
-	tween.parallel().tween_property(self, "position", attack_pos, timmmmmm)
-	tween.parallel().tween_property(self, "scale", big_size, 0.0)
-	tween.parallel().tween_property(self, "modulate:a", 1.0, timmmmmm)
-	tween.parallel().tween_property(target, "scale", big_size, timmmmmm)
-	tween.parallel().tween_property(target, "position", target_pos, timmmmmm)
-	tween.parallel().tween_property(target, "modulate:a", 1.0, timmmmmm)
-	
-	tween.tween_callback(Callable(self, "_on_attack").bind(target, _duration))
-
-	tween.parallel().tween_property(ShadowBackground, "modulate:a", 1.0, 0.1)
-	tween.parallel().tween_property(cam, "zoom", cam_bigZoom , timmmmmm)
-	var camtargetpos = cam.position
-	
-	if current_skill.is_contact:
-		#offset = direction * -current_skill.distance_contact
-		#attack_pos =  target_pos + offset
-		if !target.characterData.is_player_controlled:
-			camtargetpos.x += 90
-			tween.parallel().tween_property(cam, "position", camtargetpos , timmmmmm)
-		else:
-			camtargetpos.x -= 90
-			tween.parallel().tween_property(cam, "position", camtargetpos , timmmmmm)
-	
-	
-func _on_attack(target: Character, _duration: float =1.0):
-	self.z_index = 6
-	target.z_index = 6
-	var tween = null
-	
-	var has_heal := current_skill.effects.any(func(e): return e is HealEffect)
-	tween = create_tween()
-	tween.set_ease(Tween.EASE_IN)
-	if !has_heal:
-		print("is not heal")
-		if target.characterData.current_stamina >0:
-			target.sprite.texture =target.characterData.Hit_texture
-			target.Selector.texture = target.characterData.Hit_texture
-
-	sprite.texture = current_skill.ImageSkill
- 
-	tween.parallel().tween_property(self, "position", _current_slot.global_position, 0.2).set_delay(_duration)
-	tween.parallel().tween_property(self, "scale", normal_size, 0.2).set_delay(_duration)
-	tween.parallel().tween_property(target, "scale", normal_size, 0.3).set_delay(_duration)
-		
-	tween.parallel().tween_property(target, "position", target._current_slot.global_position, 0.3).set_delay(_duration)
-	tween.parallel().tween_property(cam, "zoom", cam.baseZoom, 0.3).set_delay(_duration)
-	tween.parallel().tween_property(ShadowBackground, "modulate:a", 0.0, 0.3).set_delay(_duration)
-	tween.parallel().tween_property(cam, "position", Vector2(960,540) ,0.3).set_delay(_duration)
-	await tween.finished
-	
-	after_skilluse(target)
-	
-	
-func after_skilluse(target: Character):
-	attacking =false
-	target.getattacked=false
-	for tag in characterData.tags:
-					if tag == "degrader":
-						slur()
-	for eq in characterData.equipped_items:
-		eq.after_skill_use(self,current_skill, target)
-	sprite.texture = characterData.portrait_texture
-	
-	Selector.visible=true
-	if target.characterData.current_stamina>0:
-		target.Selector.texture=target.characterData.portrait_texture
-		target.sprite.texture = target.characterData.portrait_texture
-	
-	target.scale=target._current_slot.position_data.scale
-	if _current_slot:
-		self.z_index = _current_slot.z_index
-	if target._current_slot:
-		target.z_index = target._current_slot.z_index
-	buff_bar.visible=true
-	target.buff_bar.visible=true
-	emit_signal("skill_animation_finished")
-		
-func miss_animation(target: Character):
-	emit_signal("skill_animation_started")
-	var Misseffect_instance= MissEffectScene.instantiate()
-	get_tree().current_scene.add_child(Misseffect_instance)
-	Misseffect_instance.global_position = global_position + Vector2(0, -140)
-	if Misseffect_instance.has_method("setup"):
-		Misseffect_instance.setup()
-	var tween := create_tween() as Tween
-	var start_pose 
-	
-	start_pose = self.position
-	
-
-
-	
-	var esquiv_pose= start_pose
-	esquiv_pose.x -= 100
-	
-	if self.characterData.Charaname == "Small" :
-		esquiv_pose.y = self.position.y
-	tween.tween_property(self, "position", esquiv_pose, 0.00)
-	tween.tween_property(self, "position", start_pose, 0.2).set_delay(0.2)
+	tween.tween_property(self, "position", esquiv_pose, 0.0)
+	tween.tween_property(self, "position", start_pose,  0.2).set_delay(0.2)
 	await tween.finished
 	emit_signal("skill_animation_finished")
 
-func animate_bonk(): 
+
+func animate_bonk():
 	emit_signal("skill_animation_started")
-	if !characterData.IsDemon:
+	if not characterData.IsDemon:
 		var effect_instance = BonkEffectScene.instantiate()
 		get_tree().current_scene.add_child(effect_instance)
 		effect_instance.global_position = global_position + Vector2(0, -30)
 		if effect_instance.has_method("setup"):
 			effect_instance.setup(0)
-		
 	emit_signal("skill_animation_finished")
 
-func shake_camera(strength := 5.0):
-	
-	if cam and cam.has_method("shake"):
-		cam.shake(strength)
+
+# ═══════════════════════════════════════════════════════════
+#  ANIMATE_ATTACK  (skill + cibles multiples)
+# ═══════════════════════════════════════════════════════════
+
+## Retourne la position globale du marqueur anatomique demandé
+func _get_effect_anchor_pos(anchor: int) -> Vector2:
+	if anchor == Skill.EffectAnchor.HEAD  and is_instance_valid(head_marker):
+		return head_marker.global_position
+	if anchor == Skill.EffectAnchor.TORSO and is_instance_valid(torso_marker):
+		return torso_marker.global_position
+	return global_position
+
+
+## Spawn un VFX sur ce personnage à l'ancrage demandé
+func _spawn_vfx(scene: PackedScene, anchor: int) -> void:
+	if scene == null:
+		return
+	var vfx := scene.instantiate()
+	add_child(vfx)
+	vfx.global_position = _get_effect_anchor_pos(anchor)
+
+
+## Spawn le VFX cible sur un Character donné
+func _spawn_vfx_on_target(tgt: Character) -> void:
+	if current_skill.target_effect_scene == null:
+		return
+	var vfx := current_skill.target_effect_scene.instantiate()
+	tgt.add_child(vfx)
+	vfx.global_position = tgt._get_effect_anchor_pos(current_skill.target_effect_anchor)
+
+
+## Vrai si la skill cible des alliés
+func _skill_targets_ally() -> bool:
+	var t := current_skill.the_target_type
+	return t in [
+		Skill.target_type.ALLY,
+		Skill.target_type.FRONT_ALLY,
+		Skill.target_type.BACK_ALLY,
+		Skill.target_type.ALL_ALLY,
+	]
+
+
+# ──────────────────────────────────────────────────────────
+#  animate_attack
+#  targets : Array[Character]
+#  skill   : Skill  (gère textures, VFX, durée)
+# ──────────────────────────────────────────────────────────
+
+func animate_attack(targets: Array, skill: Skill) -> void:
+	if targets.is_empty():
+		emit_signal("skill_animation_finished")
+		return
+
+	current_skill  = skill
+	var multi      := targets.size() > 1
+	var target     : Character = targets[0]
+	var cm         := combat_manager
+
+	emit_signal("skill_animation_started")
+	attacking        = true
+	buff_bar.visible = false
+
+	# ── Positions de scène (Node2D dans la scène de combat) ──
+	var hero_P   : Vector2 = cm.hero_skillP.global_position
+	var hero_P2  : Vector2 = cm.hero_skillP2.global_position
+	var hero_P3  : Vector2 = cm.hero_skillP3.global_position
+	var enemy_P  : Vector2 = cm.enemy_skillP.global_position
+	var enemy_P2 : Vector2 = cm.enemy_skillP2.global_position
+	var enemy_P3 : Vector2 = cm.enemy_skillP3.global_position
+
+	# ── Position du caster ───────────────────────────────────
+	# Contact → P (proche de la cible) | Distance → P3 (position arrière)
+	var caster_dest : Vector2
+	if current_skill.is_contact:
+		caster_dest = hero_P if characterData.is_player_controlled else enemy_P
+	else:
+		caster_dest = hero_P3 if characterData.is_player_controlled else enemy_P3
+	normal_size = scale
+	var big_size = normal_size * 2.0
+
+	# ── Position cible (cible unique seulement) ──────────────
+	var ally_skill := _skill_targets_ally()
+	var target_dests : Dictionary = {}   # Character → Vector2
+
+	if not multi:
+		for tgt: Character in targets:
+			tgt.buff_bar.visible = false
+			tgt.getattacked      = true
+			var dest: Vector2
+			# Les cibles vont toujours en P2, qu'elles soient alliées ou ennemies
+			if tgt.characterData.is_player_controlled:
+				dest = hero_P2
+			else:
+				dest = enemy_P2
+			target_dests[tgt] = dest
+	else:
+		for tgt: Character in targets:
+			tgt.buff_bar.visible = false
+			tgt.getattacked      = true
+
+	# ── Textures ─────────────────────────────────────────────
+	sprite.texture = current_skill.ImageSkill
+	var has_heal := current_skill.effects.any(func(e): return e is HealEffect)
+	if not has_heal:
+		for tgt: Character in targets:
+			if tgt.characterData.current_stamina > 0:
+				tgt.sprite.texture = tgt.characterData.Hit_texture
+
+	# ── VFX caster ───────────────────────────────────────────
+	_spawn_vfx(current_skill.caster_effect_scene, current_skill.caster_effect_anchor)
+
+	# ── Mise en place ─────────────────────────────────────────
+	z_index         = 20
+	self.modulate.a = 0.0
+
+	# Contact  → téléport hors écran puis tween vers P
+	# Distance → téléport sur P (hors écran) puis tween vers P3
+	if current_skill.is_contact:
+		if characterData.is_player_controlled:
+			position = Vector2(-300, caster_dest.y)
+		else:
+			position = Vector2(2300, caster_dest.y)
+	else:
+		# P est hors écran, on y téléporte sans transition
+		var offscreen : Vector2 = hero_P if characterData.is_player_controlled else enemy_P
+		position = offscreen
+
+	var cam_zoom_big := Vector2(cam.baseZoom * 1.1)
+	const T_SETUP    := 0.15
+
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.parallel().tween_property(self,            "position",   caster_dest,   T_SETUP)
+	tween.parallel().tween_property(self,            "scale",      big_size,      0.0)
+	tween.parallel().tween_property(self,            "modulate:a", 1.0,           T_SETUP)
+	tween.parallel().tween_property(ShadowBackground,"modulate:a", 1.0,           T_SETUP)
+	tween.parallel().tween_property(cam,             "zoom",       cam_zoom_big,  T_SETUP)
+
+	# Déplace la caméra vers la zone de confrontation
+	var cam_target_pos = cam.position
+	if not target.characterData.is_player_controlled:
+		cam_target_pos.x += 90
+	else:
+		cam_target_pos.x -= 90
+	if current_skill.is_contact:
+		tween.parallel().tween_property(cam, "position", cam_target_pos, T_SETUP)
+
+	for tgt: Character in targets:
+		tgt.modulate.a = 0.0
+		tgt.z_index    = 20
+		if target_dests.has(tgt):
+			tween.parallel().tween_property(tgt, "position",   target_dests[tgt], T_SETUP)
+			tween.parallel().tween_property(tgt, "scale",      big_size,          T_SETUP)
+		tween.parallel().tween_property(tgt, "modulate:a", 1.0, T_SETUP)
+
+	# ── Animation d'attaque ───────────────────────────────────
+	tween.tween_interval(0.1)
+
+	if current_skill.is_contact:
+		# Avance au contact
+		var contact_dest : Vector2
+		if not multi:
+			var td  : Vector2 = target_dests.get(target, target.position)
+			var dir := (td - caster_dest).normalized()
+			contact_dest = td + dir * -current_skill.distance_contact
+		else:
+			var mid := Vector2.ZERO
+			for tgt: Character in targets:
+				mid += tgt.position
+			mid /= targets.size()
+			var dir := (mid - caster_dest).normalized()
+			contact_dest = mid + dir * -current_skill.distance_contact
+		tween.tween_property(self, "position", contact_dest, 0.18)
+	else:
+		# Aller-retour sur place
+		var nudge := caster_dest + (Vector2(60, 0) if characterData.is_player_controlled else Vector2(-60, 0))
+		tween.tween_property(self, "position", nudge,        0.12)
+		tween.tween_property(self, "position", caster_dest,  0.10)
+
+	# ── Impact ───────────────────────────────────────────────
+	tween.tween_callback(_on_attack.bind(targets))
+	await tween.finished
+
+
+func _on_attack(targets: Array) -> void:
+	# VFX sur chaque cible
+	for tgt: Character in targets:
+		_spawn_vfx_on_target(tgt)
+
+	# Pause pendant la durée définie par la skill
+	await get_tree().create_timer(current_skill.duration).timeout
+
+	# ── Retour aux positions d'origine ───────────────────────
+	const T_BACK := 0.25
+	var ret := create_tween()
+	ret.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	# Le caster revient à sa place ET retrouve sa taille normale en même temps
+	ret.parallel().tween_property(self,             "position",   _current_slot.global_position,          T_BACK)
+	ret.parallel().tween_property(self,             "scale",      _current_slot.position_data.scale,      T_BACK)
+	ret.parallel().tween_property(ShadowBackground, "modulate:a", 0.0,                                    T_BACK)
+	ret.parallel().tween_property(cam,              "zoom",       cam.baseZoom,                            T_BACK)
+	ret.parallel().tween_property(cam,              "position",   Vector2(960, 540),                       T_BACK)
+
+	for tgt: Character in targets:
+		if tgt._current_slot:
+			ret.parallel().tween_property(tgt, "position", tgt._current_slot.global_position,    T_BACK)
+			ret.parallel().tween_property(tgt, "scale",    tgt._current_slot.position_data.scale, T_BACK)
+
+	await ret.finished
+	after_skilluse(targets)
+
+
+func after_skilluse(targets: Array) -> void:
+	attacking        = false
+	buff_bar.visible = true
+	Selector.visible = true
+
+	# Reset caster
+	sprite.texture = characterData.portrait_texture
+	if _current_slot:
+		z_index = _current_slot.z_index
+		# scale déjà remis par le tween dans _on_attack
+
+	# Callbacks équipements (on passe la première cible pour compatibilité)
+	for tag in characterData.tags:
+		if tag == "degrader":
+			slur()
+	var first_target : Character = targets[0] if not targets.is_empty() else self
+	for eq in characterData.equipped_items:
+		eq.after_skill_use(self, current_skill, first_target)
+
+	# Reset cibles
+	for tgt: Character in targets:
+		tgt.getattacked      = false
+		tgt.buff_bar.visible = true
+		if tgt._current_slot:
+			tgt.z_index = tgt._current_slot.z_index
+			tgt.scale   = tgt._current_slot.position_data.scale
+		if tgt.characterData.current_stamina > 0:
+			tgt.sprite.texture   = tgt.characterData.portrait_texture
+			tgt.Selector.texture = tgt.characterData.portrait_texture
+
+	emit_signal("skill_animation_finished")

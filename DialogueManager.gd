@@ -22,9 +22,13 @@ var scene: PackedScene = preload("res://UI/dialogue_ui.tscn")
 @export var no_portrait_speakers: Array[String] = ["Narrator"]
 
 # Alias de portrait : même slot, texture différente selon le contexte
-# ex: {"InquisitorD": "Inquisitor"} → InquisitorD utilise le slot d'Inquisitor
-#     mais affiche son propre portrait si disponible, sinon celui d'Inquisitor
+# ex: {"Hooded figure": "Inquisitor", "Inquisitor.": "Inquisitor"}
 @export var portrait_aliases: Dictionary = {}
+
+# Slots qui n'apparaissent PAS dans le layout initial — ils entrent dynamiquement
+# quand leur speaker parle pour la première fois.
+# ex: ["Inquisitor"] → le slot Inquisitor est absent au début, apparaît à la 1re réplique
+@export var late_entry_slots: Array[String] = []
 
 # Détectés automatiquement à la lecture du fichier — ne pas remplir manuellement
 var participants: Array[String] = []
@@ -100,13 +104,14 @@ func load_dialogue(file_path: String):
 			if slot_name not in seen_slots:
 				seen_slots.append(slot_name)
 				# Initialise le portrait du slot avec le premier speaker qui l'utilise.
-				# ex: InquisitorD arrive en premier → slot "Inquisitor" commence avec "InquisitorD"
 				_slot_current_portrait[slot_name] = speaker
 	file.close()
 
-	# On garde au maximum 4 slots
+	# On garde au maximum 4 slots, en excluant les late_entry_slots du layout initial
 	for i in range(min(seen_slots.size(), 4)):
-		participants.append(seen_slots[i])
+		var slot := seen_slots[i]
+		if slot not in late_entry_slots:
+			participants.append(slot)
 
 	ui.setup_layout(participants.size())
 	print("Participants (slots):", participants)
@@ -152,11 +157,19 @@ func show_line():
 
 	# ── Résolution slot + portrait ────────────────────────────────────
 	var slot_name     := _resolve_slot(speaker)
+
+	# ── Entrée dynamique (late_entry_slots) ───────────────────────────
+	# Si le slot n'est pas encore dans participants, on l'ajoute et on reconfigure le layout
+	if slot_name not in participants:
+		if participants.size() < 4:
+			participants.append(slot_name)
+			ui.setup_layout(participants.size())
+
 	var speaker_index := participants.find(slot_name)
 
-	# Mise à jour du portrait du slot, sauf si déjà verrouillé sur le canonique.
-	# Un slot est verrouillé quand son portrait stocké == le nom du slot lui-même
-	# (c'est-à-dire que le personnage canonique a déjà parlé).
+	# ── Mise à jour du portrait du slot ──────────────────────────────
+	# Verrouillage : une fois que le speaker canonique (slot_name == speaker) a parlé,
+	# le portrait ne change plus.
 	var already_locked: bool = _slot_current_portrait.get(slot_name, "") == slot_name
 	if not already_locked:
 		_slot_current_portrait[slot_name] = speaker

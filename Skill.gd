@@ -67,6 +67,17 @@ var skill_effect_overridden := false
 @export var is_contact: bool = false 
 @export var distance_contact:float = 0.0
 @export var effect : PackedScene
+@export var caster_effect_scene: PackedScene
+## Scène VFX instanciée en enfant de chaque CIBLE au moment de l'impact
+@export var target_effect_scene: PackedScene
+ 
+enum EffectAnchor { HEAD, TORSO }
+## Point d'ancrage du VFX du lanceur
+@export var caster_effect_anchor: EffectAnchor = EffectAnchor.HEAD
+## Point d'ancrage du VFX de la cible
+@export var target_effect_anchor: EffectAnchor = EffectAnchor.TORSO
+
+
 
 func can_use() -> bool:
 	if owner == null:

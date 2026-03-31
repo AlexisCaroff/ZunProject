@@ -62,6 +62,13 @@ var pause: bool = false
 @onready var passButton=$"../CanvasLayer/ActionPass"
 var endTurn_affinity_reaction_queue: Array[Callable] = []
 var startSkills_affinity_reaction_queue: Array[Callable]=[]
+@onready var hero_skillP:  Node2D = $HeroSkillP
+@onready var hero_skillP2: Node2D = $HeroSkillP2
+@onready var hero_skillP3: Node2D = $HeroSkillP3
+@onready var enemy_skillP: Node2D = $EnemySkillP
+@onready var enemy_skillP2: Node2D = $EnemySkillP2
+@onready var enemy_skillP3: Node2D = $EnemySkillP3
+
 
 
 func _ready():
@@ -152,10 +159,10 @@ func _start():
 			chara.combat_manager = self
 			heroes.append(chara)
 			print("spawn " + chara.characterData.Charaname)
-			#if chara.characterData.corrupted:
-			chara.sprite.flip_h=true
-			chara.Selector.flip_h=true
-			chara.pivot.position.x += -150 
+			if gm.teamCorrupted:
+				chara.sprite.flip_h=true
+				chara.Selector.flip_h=true
+				chara.pivot.position.x += -150 
 			var slot_index = clamp(chara.characterData.Chara_position, 0, hero_positions.size() - 1)
 			var slot = hero_positions[slot_index]
 			move_character_to(chara, slot, 0)
@@ -457,62 +464,58 @@ func start_target_selection(skill: Skill):
 			
 func _on_target_selected(targets: Array[PositionSlot]):
 	stop_target_selection()
-	match combat_state: 
+ 
+	match combat_state:
+ 
+		# ── Premier groupe de cibles ──────────────────────────────────
 		CombatState.SELECTING_FIRST_TARGET:
-			if !pending_skill.two_target_Type:
-				# 1. Appliquer les effets d'abord
-				for target in targets:
-					if target.occupant != null:
-						await pending_skill.use(target)
-						target.occupant.update_ui()
-						ui.update_ui_for_current_character(current_character)
-
-				# 2. Attendre les barks d'affinité
-				await flush_startSkills_affinity_reaction()
-
-				# 3. Lancer l'animation
-				if pending_skill.name != "move":
-					var occupied_slots = targets.filter(func(s): return s.occupant != null)
-					var slot = occupied_slots[0] if occupied_slots.size() > 0 else null
-					if slot:
-						current_character.sprite.texture = current_character.current_skill.ImageSkill
-						await current_character.animate_attack(slot.occupant, current_character.current_skill.duration)
-
-				if pending_skill.attack_sound != null:
-					audio.stream = pending_skill.attack_sound
-					audio.play()
-
-				ui.log(pending_skill.name)
-				pending_skill.end_turn(self)
-				pending_skill = null
-			else:
+			if pending_skill.two_target_Type:
 				pending_skill.target1 = targets
 				combat_state = CombatState.SELECTING_SECOND_TARGET
 				start_target_selection(pending_skill)
-
-		CombatState.SELECTING_SECOND_TARGET:
-			# 1. Appliquer les effets sur la première cible
-			for target in pending_skill.target1:
-				await pending_skill.use(target)
-				target.occupant.update_ui()
-
-			# 2. Appliquer les effets sur la deuxième cible
-			for target2 in targets:
-				await pending_skill.use(target2, true)
-				target2.occupant.update_ui()
-
-			# 3. Attendre les barks d'affinité
-			await flush_startSkills_affinity_reaction()
-
-			# 4. Lancer l'animation
+				return
+ 
+			# ── 1. Animation d'abord ──────────────────────────────────
 			if pending_skill.name != "move":
-				await current_character.animate_attack(pending_skill.target1[0].occupant)
-
-			if pending_skill.attack_sound != null:
-				audio.stream = pending_skill.attack_sound
-				audio.pitch_scale = randf_range(0.9, 1.0)
-				audio.play()
-
+				var target_chars := _slots_to_characters(targets)
+				if not target_chars.is_empty():
+					await current_character.animate_attack(target_chars, pending_skill)
+ 
+			# ── 2. Effets après ───────────────────────────────────────
+			for slot in targets:
+				if slot.occupant != null:
+					await pending_skill.use(slot)
+					slot.occupant.update_ui()
+					ui.update_ui_for_current_character(current_character)
+ 
+			await flush_startSkills_affinity_reaction()
+			_play_skill_sound(pending_skill)
+			ui.log(pending_skill.name)
+			pending_skill.end_turn(self)
+			pending_skill = null
+ 
+		# ── Deuxième groupe de cibles ─────────────────────────────────
+		CombatState.SELECTING_SECOND_TARGET:
+ 
+			# ── 1. Animation d'abord ──────────────────────────────────
+			if pending_skill.name != "move":
+				var target_chars := _slots_to_characters(pending_skill.target1)
+				if not target_chars.is_empty():
+					await current_character.animate_attack(target_chars, pending_skill)
+ 
+			# ── 2. Effets après ───────────────────────────────────────
+			for slot in pending_skill.target1:
+				if slot.occupant != null:
+					await pending_skill.use(slot)
+					slot.occupant.update_ui()
+ 
+			for slot in targets:
+				if slot.occupant != null:
+					await pending_skill.use(slot, true)
+					slot.occupant.update_ui()
+ 
+			await flush_startSkills_affinity_reaction()
+			_play_skill_sound(pending_skill)
 			ui.log(pending_skill.name)
 			pending_skill.end_turn(self)
 			pending_skill = null
@@ -585,3 +588,19 @@ func flush_endTurn_affinity_reactions() -> void:
 func PassButtonDown():
 	if current_character and current_character.characterData.is_player_controlled:
 		end_currentChara_Turn()
+		
+## Retourne les Character occupant les slots (filtre les slots vides)
+func _slots_to_characters(slots: Array[PositionSlot]) -> Array[Character]:
+	var result: Array[Character] = []
+	for slot in slots:
+		if slot.occupant != null:
+			result.append(slot.occupant)
+	return result
+ 
+ 
+## Joue le son de la skill si présent
+func _play_skill_sound(skill: Skill) -> void:
+	if skill.attack_sound != null:
+		audio.stream = skill.attack_sound
+		audio.pitch_scale = randf_range(0.9, 1.0)
+		audio.play()

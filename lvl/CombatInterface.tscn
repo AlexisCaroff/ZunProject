@@ -221,6 +221,24 @@ encounter = ExtResource("11_yspa4")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CombatManager"]
 stream = ExtResource("8_p4emy")
 
+[node name="HeroSkillP" type="Node2D" parent="CombatManager"]
+position = Vector2(-390, 667)
+
+[node name="HeroSkillP3" type="Node2D" parent="CombatManager"]
+position = Vector2(342, 667)
+
+[node name="HeroSkillP2" type="Node2D" parent="CombatManager"]
+position = Vector2(676, 671)
+
+[node name="EnemySkillP" type="Node2D" parent="CombatManager"]
+position = Vector2(2167, 667)
+
+[node name="EnemySkillP2" type="Node2D" parent="CombatManager"]
+position = Vector2(1447, 667)
+
+[node name="EnemySkillP3" type="Node2D" parent="CombatManager"]
+position = Vector2(1469, 667)
+
 [node name="ResultScreen" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
