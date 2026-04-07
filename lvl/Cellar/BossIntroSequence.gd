@@ -91,8 +91,14 @@ func _resist_branch() -> Dictionary:
 
 func _give_in_branch() -> Dictionary:
 	await _play_simple(dialogue_give_in_path)
-	# L'équipe rejoint le camp ennemi — on le signale au GameManager
 	_gm.teamCorrupted = true
+
+	# Charge directement la scène give_in sans passer par la logique du RoomResource
+	if give_in_combat_scene != null:
+		_gm.load_scene_direct(give_in_combat_scene, inquisition_encounter)
+		# On retourne un signal "scène déjà chargée" pour que CombatManager s'arrête
+		return {"encounter": null, "scene": null, "handled": true}
+
 	return {"encounter": inquisition_encounter, "scene": give_in_combat_scene}
 
 

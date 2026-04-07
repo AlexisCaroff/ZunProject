@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://b18fn4cpfbvge"]
+
+[ext_resource type="Texture2D" uid="uid://cu2trwua3sb1" path="res://characters/charatexture/demo characters/HERO_mystic_cc_siphon.png" id="1_6g5ms"]
+[ext_resource type="AudioStream" uid="uid://bv7eg2rwowxuj" path="res://actions/sound/magicSlurp.mp3" id="2_pddxp"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="3_s2p81"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="4_lf7t0"]
+[ext_resource type="Texture2D" uid="uid://cq4lyjh8qvpuy" path="res://actions/actiontexture/UI icons/ICON_mystic_cc_syphon.png" id="5_7oddx"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="6_jd58n"]
+[ext_resource type="Script" uid="uid://bp8u5at2ojgse" path="res://actions/skillEffects/healEffect.gd" id="7_n7ddn"]
+
+[sub_resource type="Resource" id="Resource_ngn0m"]
+script = ExtResource("4_lf7t0")
+MagicDMG = true
+amount = 20
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[sub_resource type="Resource" id="Resource_w6ugg"]
+script = ExtResource("7_n7ddn")
+heal_target_stat = 0
+amount = 20
+metadata/_custom_type_script = "uid://bp8u5at2ojgse"
+
+[resource]
+script = ExtResource("6_jd58n")
+name = "Drain"
+descriptionName = "Drain"
+description = "Deal magic dmg and steal stamina"
+icon = ExtResource("5_7oddx")
+attack_sound = ExtResource("2_pddxp")
+barkSkill = ""
+required_position = 0
+ImageSkill = ExtResource("1_6g5ms")
+the_target_type = 0
+effects = Array[ExtResource("3_s2p81")]([SubResource("Resource_ngn0m")])
+two_target_Type = true
+the_second_target_type = 2
+second_effects = Array[ExtResource("3_s2p81")]([SubResource("Resource_w6ugg")])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 4
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 1.0
+tags = Array[String]([])
+is_contact = false
+distance_contact = 0.0
+caster_effect_anchor = 0
+target_effect_anchor = 1
+is_beneficial = false
+skip_target_return_anim = false
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

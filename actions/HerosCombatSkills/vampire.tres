@@ -1,23 +1,10 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://duo5wcnmn0qo2"]
+[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://duo5wcnmn0qo2"]
 
 [ext_resource type="Texture2D" uid="uid://cu2trwua3sb1" path="res://characters/charatexture/demo characters/HERO_mystic_cc_siphon.png" id="1_nbap8"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_jbp84"]
 [ext_resource type="AudioStream" uid="uid://bv7eg2rwowxuj" path="res://actions/sound/magicSlurp.mp3" id="2_ngn0m"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_jbp84"]
 [ext_resource type="Texture2D" uid="uid://cq4lyjh8qvpuy" path="res://actions/actiontexture/UI icons/ICON_mystic_cc_syphon.png" id="5_ngn0m"]
-[ext_resource type="Script" uid="uid://bp8u5at2ojgse" path="res://actions/skillEffects/healEffect.gd" id="5_rn6hm"]
-[ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="6_4lsex"]
-
-[sub_resource type="Resource" id="Resource_4lsex"]
-script = ExtResource("5_rn6hm")
-heal_target_stat = 0
-amount = 20
-metadata/_custom_type_script = "uid://bp8u5at2ojgse"
-
-[sub_resource type="Resource" id="Resource_jbp84"]
-script = ExtResource("6_4lsex")
-amount = 1
-metadata/_custom_type_script = "uid://2vsqpp6jqiow"
 
 [resource]
 script = ExtResource("4_jbp84")
@@ -33,7 +20,7 @@ the_target_type = 0
 effects = Array[ExtResource("2_jbp84")]([])
 two_target_Type = true
 the_second_target_type = 2
-second_effects = Array[ExtResource("2_jbp84")]([SubResource("Resource_4lsex"), SubResource("Resource_jbp84")])
+second_effects = Array[ExtResource("2_jbp84")]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

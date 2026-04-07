@@ -72,6 +72,7 @@ func _spawn_tentacle_in_slot(slot: PositionSlot, grabbed_target: Character, boss
 	grabbed_target.position = new_enemy.position
 	grabbed_target.position.y -= 70
 	grabbed_target.z_index = new_enemy.z_index - 1
+	#grabbed_target.visible=false
 
 	# ── Enregistrement ───────────────────────────────────────────────
 	combatmanager.enemies.append(new_enemy)

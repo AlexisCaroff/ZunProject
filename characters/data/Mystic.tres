@@ -15,8 +15,8 @@
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="13_h0jcq"]
 [ext_resource type="Resource" uid="uid://m6nw8l2ax4to" path="res://actions/HerosCombatSkills/ChangeMask.tres" id="14_2yhuf"]
 [ext_resource type="Resource" uid="uid://dopuwtv1moav3" path="res://actions/HerosCombatSkills/Shield.tres" id="15_lrh4f"]
+[ext_resource type="Resource" uid="uid://b18fn4cpfbvge" path="res://actions/HerosCombatSkills/drain.tres" id="16_a3yjm"]
 [ext_resource type="Resource" uid="uid://b0gt00v7dl0u7" path="res://actions/HerosCombatSkills/MysticGrab2.tres" id="17_a3yjm"]
-[ext_resource type="Resource" uid="uid://duo5wcnmn0qo2" path="res://actions/HerosCombatSkills/vampire.tres" id="17_xm5ol"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="18_uk4tb"]
 [ext_resource type="Texture2D" uid="uid://xvf1umygybrb" path="res://camp imgs/Camp_char_sit_M.png" id="19_fpwyf"]
 
@@ -61,7 +61,7 @@ current_stamina = 100
 current_stress = 0
 current_horniness = 0
 isOneshot = false
-skill_resources = Array[Resource]([ExtResource("14_2yhuf"), ExtResource("15_lrh4f"), ExtResource("17_xm5ol"), ExtResource("17_a3yjm"), ExtResource("18_uk4tb")])
+skill_resources = Array[Resource]([ExtResource("14_2yhuf"), ExtResource("15_lrh4f"), ExtResource("16_a3yjm"), ExtResource("17_a3yjm"), ExtResource("18_uk4tb")])
 tags = Array[String](["voyeur", "captive", "switch"])
 is_player_controlled = true
 can_be_moved = true

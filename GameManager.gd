@@ -200,34 +200,25 @@ func return_to_exploration():
 
 #------------------------------------------------------
 signal inventory_changed
-func enter_combat_scene(scene: PackedScene, encounter: CombatEncounter) -> void:
-	if scene == null:
-		push_error("GameManager.enter_combat_scene : scene est null")
-		return
- 
+func load_scene_direct(scene: PackedScene, encounter: CombatEncounter = null) -> void:
 	await sceneTransition.fade_out()
  
 	if current_room_node and is_instance_valid(current_room_node):
 		current_room_node.free()
 		current_room_node = null
  
-	GameState.current_phase = GameStat.GamePhase.COMBAT
+	var new_scene = scene.instantiate()
  
-	var new_scene := scene.instantiate()
- 
-	# Injecte l'encounter directement dans le CombatManager
-	var combat_manager := new_scene.find_child("CombatManager", true, false)
-	if combat_manager:
-		if encounter:
+	# Si un encounter est fourni, on le passe au CombatManager de la scène
+	if encounter != null:
+		var combat_manager = new_scene.find_child("CombatManager", true, false)
+		if combat_manager:
 			combat_manager.encounter = encounter
-		print("⚔ give_in encounter assigned to CombatManager")
-	else:
-		push_error("⚠️CombatManager introuvable dans give_in_combat_scene")
+		else:
+			push_error("load_scene_direct : CombatManager introuvable dans la scène.")
  
 	room_container.add_child(new_scene)
 	current_room_node = new_scene
-	print(" Start give_in combat scene: ", new_scene.name)
- 
 	await sceneTransition.fade_in()
 	
 func add_to_inventory(item: Equipment):

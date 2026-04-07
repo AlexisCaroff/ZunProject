@@ -210,22 +210,22 @@ encounter = ExtResource("6_0clmy")
 stream = ExtResource("7_m27o5")
 
 [node name="HeroSkillP" type="Node2D" parent="CombatManager"]
-position = Vector2(-390, 694)
+position = Vector2(2172, 694)
 
 [node name="HeroSkillP3" type="Node2D" parent="CombatManager"]
-position = Vector2(405, 694)
+position = Vector2(1415, 694)
 
 [node name="HeroSkillP2" type="Node2D" parent="CombatManager"]
-position = Vector2(708, 698)
+position = Vector2(1607, 698)
 
 [node name="EnemySkillP" type="Node2D" parent="CombatManager"]
-position = Vector2(2167, 694)
+position = Vector2(-148, 694)
 
 [node name="EnemySkillP2" type="Node2D" parent="CombatManager"]
-position = Vector2(1206, 694)
+position = Vector2(711, 694)
 
 [node name="EnemySkillP3" type="Node2D" parent="CombatManager"]
-position = Vector2(1408, 694)
+position = Vector2(480, 694)
 
 [node name="ResultScreen" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -401,16 +401,16 @@ scale = Vector2(1.8, 1.8)
 
 [node name="position4" type="Node2D" parent="HeroPosition"]
 z_index = 1
-position = Vector2(412.222, -9.00002)
+position = Vector2(341.111, -9.00002)
 script = ExtResource("12_b16wu")
 position_data = SubResource("Resource_t7hjh")
 
 [node name="TextureRect2" type="TextureRect" parent="HeroPosition/position4"]
 modulate = Color(1, 1, 1, 0.34902)
 z_index = -1
-offset_left = -182.333
+offset_left = -172.222
 offset_top = -14.3333
-offset_right = 119.667
+offset_right = 129.778
 offset_bottom = 64.6667
 scale = Vector2(1.08675, 1)
 mouse_filter = 2
@@ -428,7 +428,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_m2l43")
 flat = true
 
 [node name="charaCombatUI" parent="HeroPosition/position4" instance=ExtResource("15_lfn5j")]
-position = Vector2(-42.7778, 125.667)
+position = Vector2(16.6666, 125.667)
 scale = Vector2(1.8, 1.8)
 
 [node name="ennemiePosition" type="Node2D" parent="."]
@@ -437,7 +437,7 @@ scale = Vector2(0.9, 0.9)
 
 [node name="position1" type="Node2D" parent="ennemiePosition"]
 z_index = 1
-position = Vector2(-326.667, -9)
+position = Vector2(53.3333, -9)
 script = ExtResource("12_b16wu")
 position_data = SubResource("Resource_ehgg6")
 enemy_scene = ExtResource("16_e3jn3")
@@ -450,6 +450,7 @@ offset_bottom = 180.0
 mouse_filter = 1
 theme_override_styles/focus = SubResource("StyleBoxEmpty_xwqlg")
 flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect2" type="TextureRect" parent="ennemiePosition/position1"]
 modulate = Color(1, 1, 1, 0.34902)
@@ -463,6 +464,7 @@ mouse_filter = 2
 texture = ExtResource("14_puccw")
 expand_mode = 1
 flip_h = true
+metadata/_edit_use_anchors_ = true
 
 [node name="charaCombatUI" parent="ennemiePosition/position1" instance=ExtResource("15_lfn5j")]
 position = Vector2(0.000228882, 128.167)
@@ -470,7 +472,7 @@ scale = Vector2(1.8, 1.8)
 
 [node name="position2" type="Node2D" parent="ennemiePosition"]
 z_index = 2
-position = Vector2(-93.3335, 24)
+position = Vector2(286.667, 24)
 script = ExtResource("12_b16wu")
 position_data = SubResource("Resource_fs52m")
 enemy_scene = ExtResource("17_eui6v")
@@ -503,7 +505,7 @@ scale = Vector2(1.8, 1.8)
 
 [node name="position4" type="Node2D" parent="ennemiePosition"]
 z_index = 1
-position = Vector2(93.3334, -26.0001)
+position = Vector2(-384.444, -26.0001)
 script = ExtResource("12_b16wu")
 position_data = SubResource("Resource_euc7u")
 
@@ -534,10 +536,11 @@ size_flags_horizontal = 4
 mouse_filter = 1
 theme_override_styles/focus = SubResource("StyleBoxEmpty_iaf2c")
 flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="position5" type="Node2D" parent="ennemiePosition"]
 z_index = 1
-position = Vector2(92.2223, -65.5556)
+position = Vector2(-385.556, -65.5556)
 script = ExtResource("12_b16wu")
 position_data = SubResource("Resource_euc7u")
 
@@ -573,7 +576,7 @@ flip_h = true
 
 [node name="position3" type="Node2D" parent="ennemiePosition"]
 z_index = 2
-position = Vector2(330, 23.3333)
+position = Vector2(-147.778, 23.3333)
 script = ExtResource("12_b16wu")
 position_data = SubResource("Resource_if0a6")
 enemy_scene = SubResource("PackedScene_qbte2")

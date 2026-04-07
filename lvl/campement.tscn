@@ -6,10 +6,9 @@
 [ext_resource type="Script" uid="uid://bkiu5du6eeu5b" path="res://lvl/CampPosition.gd" id="4_adv8w"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="5_o6ov4"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="6_8yx0u"]
-[ext_resource type="Texture2D" uid="uid://dn7lvslkn2b43" path="res://UI/fightUI.png" id="6_adv8w"]
+[ext_resource type="Texture2D" uid="uid://cds1jgu4rdn1e" path="res://UI/UI boxes/UI_fgwall_inquisition.png" id="6_gofun"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="7_adv8w"]
-[ext_resource type="Texture2D" uid="uid://vxig1dgne8it" path="res://UI/box2.png" id="7_hfsnk"]
-[ext_resource type="Texture2D" uid="uid://cnxub0g557exn" path="res://UI/box.png" id="8_7788d"]
+[ext_resource type="Texture2D" uid="uid://eqli6rl4sig3" path="res://UI/UI boxes/UI_camp_points.png" id="7_fctf2"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="9_b18pc"]
 [ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="10_gwj3x"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="10_orkqx"]
@@ -24,9 +23,11 @@
 [ext_resource type="Texture2D" uid="uid://8dghn3albj01" path="res://camp imgs/PROP_tent_front.png" id="21_gofun"]
 [ext_resource type="Script" uid="uid://cklpwxrawneex" path="res://scripts/camp/tente.gd" id="22_jpnjt"]
 [ext_resource type="Texture2D" uid="uid://dek8m1gml45n4" path="res://tent scenes/TENT H001.png" id="23_2te02"]
-[ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="36_gwj3x"]
-[ext_resource type="Texture2D" uid="uid://ctkoy8ysbicta" path="res://UI/iconMap.png" id="37_yy5dy"]
+[ext_resource type="Texture2D" uid="uid://c043rkwnxe6ad" path="res://UI/UI boxes/UI_camp_leave.png" id="23_gofun"]
+[ext_resource type="Texture2D" uid="uid://bnqsm6vdxfcwy" path="res://UI/UI boxes/UI_button_map_on.png" id="25_xmkko"]
+[ext_resource type="Texture2D" uid="uid://53cn2wxevdr3" path="res://UI/menuiCON.png" id="36_3vt2c"]
 [ext_resource type="Texture2D" uid="uid://cbbc3rht6f8fd" path="res://props/sac.png" id="38_fctf2"]
+[ext_resource type="Texture2D" uid="uid://leli1dyf65l7" path="res://UI/UI boxes/UI_combat_itembox.png" id="38_qfpsl"]
 [ext_resource type="Texture2D" uid="uid://dw7qyyxtv4puc" path="res://tuto/intro4.png" id="39_gofun"]
 [ext_resource type="Script" uid="uid://b0ir2tk1oluly" path="res://lvl/Hall1/tuto.gd" id="40_xmkko"]
 [ext_resource type="Shader" uid="uid://nehgn30c71ua" path="res://characters/flame2.gdshader" id="41_1pem6"]
@@ -35,7 +36,6 @@
 [ext_resource type="Texture2D" uid="uid://6bw7q7nqrbxc" path="res://props/flame.png" id="45_7h8sq"]
 [ext_resource type="Texture2D" uid="uid://6c6j120lvsba" path="res://props/flameHalo.png" id="45_qbnx0"]
 [ext_resource type="Script" uid="uid://0yy75ocbav52" path="res://lvl/haloFeu.gd" id="46_i1nuu"]
-[ext_resource type="Texture2D" uid="uid://dh6k7cso8hksn" path="res://UI/charaIcon.png" id="47_nj740"]
 [ext_resource type="Script" uid="uid://cxgw24yv778d8" path="res://lvl/chara_portraitButton.gd" id="48_7tx7c"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="49_yy5dy"]
 [ext_resource type="Texture2D" uid="uid://hfa6tl3x7v45" path="res://camp imgs/PROP_campfire_fire.png" id="50_yy5dy"]
@@ -163,19 +163,14 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(2, 352)
 
 [node name="FightUi" type="Sprite2D" parent="."]
-position = Vector2(959.104, 539.5)
-scale = Vector2(0.787591, 0.787591)
-texture = ExtResource("6_adv8w")
+position = Vector2(958.109, 888)
+scale = Vector2(0.75, 0.78)
+texture = ExtResource("6_gofun")
 
 [node name="Box2" type="Sprite2D" parent="."]
-position = Vector2(961, 114)
-texture = ExtResource("7_hfsnk")
-
-[node name="Box" type="Sprite2D" parent="."]
-position = Vector2(962, 73)
-scale = Vector2(1, 0.667057)
-texture = ExtResource("8_7788d")
-region_rect = Rect2(9.945, 4.41, 238.562, 54.1445)
+position = Vector2(961, 101.625)
+scale = Vector2(0.552672, 0.725155)
+texture = ExtResource("7_fctf2")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 visible = false
@@ -407,12 +402,16 @@ expand_icon = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Sprite2D" parent="Button"]
-position = Vector2(132, 50)
+position = Vector2(71.2382, 54)
 rotation = 3.14159
-texture = ExtResource("36_gwj3x")
+scale = Vector2(0.841073, 0.841073)
+texture = ExtResource("23_gofun")
 
 [node name="Label2" type="Label" parent="Button"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.416995
+anchor_right = -0.416995
 offset_left = 7.0
 offset_top = 8.0
 offset_right = 212.0
@@ -426,14 +425,18 @@ metadata/_edit_use_anchors_ = true
 
 [node name="MapButton" type="Button" parent="."]
 z_index = 10
-offset_left = 1803.0
-offset_top = 805.0
-offset_right = 1867.0
-offset_bottom = 881.0
-icon = ExtResource("37_yy5dy")
+offset_left = 1764.0
+offset_top = 752.0
+offset_right = 1845.0
+offset_bottom = 828.0
 flat = true
 script = ExtResource("16_ktrs2")
 hover_color = Color(0.78125, 0.715135, 0.417796, 1)
+
+[node name="UiButtonMapOn" type="Sprite2D" parent="MapButton"]
+position = Vector2(37, 33)
+scale = Vector2(0.496094, 0.496094)
+texture = ExtResource("25_xmkko")
 
 [node name="Boles2" type="Sprite2D" parent="."]
 z_index = 5
@@ -529,14 +532,16 @@ speed = 4.0
 metadata/_edit_use_anchors_ = true
 
 [node name="charaPortrait2" type="TextureRect" parent="."]
+modulate = Color(0.803239, 0.713583, 0.658708, 1)
 z_index = 6
-offset_left = 1788.0
-offset_top = 885.0
-offset_right = 1877.0
-offset_bottom = 974.0
-texture = ExtResource("47_nj740")
+offset_left = 1629.0
+offset_top = 761.0
+offset_right = 1689.0
+offset_bottom = 821.0
+texture = ExtResource("36_3vt2c")
 expand_mode = 1
 script = ExtResource("48_7tx7c")
+normal_color = Color(0.83977, 0.808817, 0.768889, 1)
 
 [node name="charaPortraitButton" type="Button" parent="charaPortrait2"]
 layout_mode = 0
@@ -546,6 +551,12 @@ offset_bottom = 64.0
 rotation = 0.787448
 theme_override_styles/focus = SubResource("StyleBoxEmpty_xthm3")
 flat = true
+
+[node name="UiCombatItembox" type="Sprite2D" parent="charaPortrait2"]
+z_index = -1
+position = Vector2(30, 30)
+scale = Vector2(1.13095, 1.19048)
+texture = ExtResource("38_qfpsl")
 
 [node name="MenuPerso" parent="." instance=ExtResource("49_yy5dy")]
 z_index = 20

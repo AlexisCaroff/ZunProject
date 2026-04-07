@@ -93,9 +93,12 @@ func _ready():
 
 	await get_tree().process_frame
 
-	if not characterData.is_player_controlled and combat_manager.heroes[0].characterData.corrupted == false:
+	if not characterData.is_player_controlled and combat_manager.gm.teamCorrupted == false:
 		sprite.flip_h   = true
 		Selector.flip_h = true
+	if characterData.inquisition :
+		sprite.flip_h   = false
+		Selector.flip_h = false
 	else:
 		hornyParticules = hornyPart.instantiate()
 		#print("horny particules spawn for " + characterData.Charaname)
@@ -307,7 +310,7 @@ func update_ui():
 func get_skill(index: int) -> Skill:
 	if index >= 0 and index < skills.size():
 		return skills[index]
-	push_error("Skill index %d out of bounds for character %s" % [index, name])
+	push_error("Skill index %d out of bounds for character %s" % [index, characterData.Charaname])
 	return null
 
 
