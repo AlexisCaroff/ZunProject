@@ -49,7 +49,7 @@
 [ext_resource type="Texture2D" uid="uid://chgi28at85s4o" path="res://scenes/bad ends/SCENE_captured_nymphF_M.png" id="47_p4emy"]
 [ext_resource type="Texture2D" uid="uid://lhncc7d02shi" path="res://UI/BigBox.png" id="48_0p2u2"]
 [ext_resource type="Script" uid="uid://d1l1yk0j8oxes" path="res://lvl/CapturedUI.gd" id="48_hil1e"]
-[ext_resource type="Texture2D" uid="uid://d0s1odx5yqwd4" path="res://UI/PassTurn.png" id="50_hg6i8"]
+[ext_resource type="Texture2D" uid="uid://cr4fyd24h5aci" path="res://UI/UI boxes/UI_close.png" id="49_hil1e"]
 
 [sub_resource type="Resource" id="Resource_i1s1q"]
 script = ExtResource("16_113pv")
@@ -210,22 +210,22 @@ encounter = ExtResource("11_yspa4")
 stream = ExtResource("8_p4emy")
 
 [node name="HeroSkillP" type="Node2D" parent="CombatManager"]
-position = Vector2(-390, 694)
+position = Vector2(-390, 737)
 
 [node name="HeroSkillP3" type="Node2D" parent="CombatManager"]
-position = Vector2(405, 694)
+position = Vector2(405, 737)
 
 [node name="HeroSkillP2" type="Node2D" parent="CombatManager"]
-position = Vector2(708, 698)
+position = Vector2(708, 741)
 
 [node name="EnemySkillP" type="Node2D" parent="CombatManager"]
-position = Vector2(2167, 694)
+position = Vector2(2167, 737)
 
 [node name="EnemySkillP2" type="Node2D" parent="CombatManager"]
-position = Vector2(1206, 694)
+position = Vector2(1206, 737)
 
 [node name="EnemySkillP3" type="Node2D" parent="CombatManager"]
-position = Vector2(1408, 694)
+position = Vector2(1408, 737)
 
 [node name="ResultScreen" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -646,7 +646,7 @@ offset_top = 845.0
 offset_right = 1202.0
 offset_bottom = 945.0
 scale = Vector2(1.245, 1.245)
-theme_override_constants/separation = 10
+theme_override_constants/separation = -8
 alignment = 1
 
 [node name="Action1" type="Button" parent="CanvasLayer/ActionPanel"]
@@ -1040,10 +1040,10 @@ stretch_mode = 1
 
 [node name="ButtonCharainfo" type="Button" parent="CanvasLayer/ContourMap"]
 layout_mode = 0
-offset_left = 297.0
-offset_top = -46.0
-offset_right = 385.0
-offset_bottom = 47.0
+offset_left = 525.036
+offset_top = -53.5964
+offset_right = 613.036
+offset_bottom = 39.4036
 theme_override_styles/focus = SubResource("StyleBoxEmpty_rem33")
 flat = true
 script = ExtResource("38_rmchm")
@@ -1051,17 +1051,17 @@ hover_color = Color(0.643137, 0.572549, 0.435294, 1)
 centered = false
 
 [node name="CharaIcon" type="Sprite2D" parent="CanvasLayer/ContourMap/ButtonCharainfo"]
-position = Vector2(42.8079, 44.7536)
-scale = Vector2(0.387412, 0.387412)
+position = Vector2(43.9752, 44.8714)
+scale = Vector2(0.375894, 0.368012)
 texture = ExtResource("41_junmr")
 
 [node name="ButtonMap" type="Button" parent="CanvasLayer/ContourMap"]
 z_index = -1
 layout_mode = 0
-offset_left = 429.0
-offset_top = -44.0
-offset_right = 521.0
-offset_bottom = 49.0
+offset_left = 429.091
+offset_top = -54.8429
+offset_right = 521.091
+offset_bottom = 38.1571
 theme_override_styles/focus = SubResource("StyleBoxEmpty_c35ka")
 flat = true
 script = ExtResource("38_rmchm")
@@ -1392,11 +1392,16 @@ vertical_alignment = 1
 
 [node name="ActionPass" type="Button" parent="CanvasLayer"]
 z_index = 7
-offset_left = 1371.0
-offset_top = 864.0
-offset_right = 1411.0
-offset_bottom = 902.0
-icon = ExtResource("50_hg6i8")
+offset_left = 1230.0
+offset_top = 856.0
+offset_right = 1304.0
+offset_bottom = 953.0
+flat = true
+
+[node name="UiClose" type="Sprite2D" parent="CanvasLayer/ActionPass"]
+position = Vector2(44, 50)
+scale = Vector2(0.480469, 0.480469)
+texture = ExtResource("49_hil1e")
 
 [node name="Gradiant" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)

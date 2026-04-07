@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dasi42qwl63md"]
+[gd_scene load_steps=12 format=3 uid="uid://dasi42qwl63md"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_f5x8r"]
 [ext_resource type="Resource" uid="uid://cbctectxxmpkc" path="res://characters/data/CharacterEnemyAdict.tres" id="2_3kvr5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cfbwrknqf04rn" path="res://characters/charatexture/demo characters/HERO_warrior_idle.png" id="5_8x73c"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="9_qu7su"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="10_sb46e"]
+[ext_resource type="Script" uid="uid://cf5uoxm4f4cop" path="res://characters/arrow.gd" id="11_8x73c"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="11_lw1ij"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="12_flf2m"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="13_3g74j"]
@@ -70,15 +71,6 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("10_sb46e")
 script = ExtResource("11_lw1ij")
 
-[node name="Arrow" type="Sprite2D" parent="."]
-position = Vector2(1, -286.203)
-scale = Vector2(0.38, 0.38)
-texture = ExtResource("12_flf2m")
-offset = Vector2(0, 115.375)
-script = ExtResource("9_qu7su")
-min_duration = 0.5
-max_duration = 0.5
-
 [node name="contexte" type="Label" parent="."]
 visible = false
 z_index = 15
@@ -106,6 +98,14 @@ offset_top = 37.0
 offset_right = 122.0
 offset_bottom = 69.0
 alignment = 1
+
+[node name="Arrow" type="Sprite2D" parent="."]
+modulate = Color(0.77, 0.616513, 0.4158, 1)
+position = Vector2(2, -170)
+scale = Vector2(0.0897035, 0.0897035)
+texture = ExtResource("12_flf2m")
+offset = Vector2(0, 116.49)
+script = ExtResource("11_8x73c")
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

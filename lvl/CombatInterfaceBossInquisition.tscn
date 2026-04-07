@@ -54,7 +54,7 @@
 [sub_resource type="Resource" id="Resource_i1s1q"]
 script = ExtResource("13_2t6et")
 index = 0
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 2)
 is_enemy = false
 isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -64,7 +64,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="Resource" id="Resource_8flqu"]
 script = ExtResource("13_2t6et")
 index = 1
-scale = Vector2(1.8, 1.8)
+scale = Vector2(1.4, 1.4)
 is_enemy = false
 isFront = false
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -74,7 +74,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="Resource" id="Resource_x8qlv"]
 script = ExtResource("13_2t6et")
 index = 2
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 is_enemy = false
 isFront = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"
@@ -84,7 +84,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 [sub_resource type="Resource" id="Resource_t7hjh"]
 script = ExtResource("13_2t6et")
 index = 3
-scale = Vector2(1.8, 1.8)
+scale = Vector2(1.4, 1.4)
 is_enemy = false
 isFront = true
 metadata/_custom_type_script = "uid://b3l4l88c3b65c"

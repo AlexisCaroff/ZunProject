@@ -87,25 +87,29 @@ script = ExtResource("7_828wa")
 
 [node name="LastDoor" type="Button" parent="."]
 layout_mode = 0
+offset_top = 53.0
 offset_right = 242.0
-offset_bottom = 764.0
+offset_bottom = 817.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_o2neq")
 flat = true
 expand_icon = true
 script = ExtResource("8_i4gph")
 normal_color = Color(0.710938, 0.659066, 0.443412, 1)
 hover_color = Color(0.917962, 0.917029, 0.933333, 1)
+normal_scale = Vector2(0.8, 0.8)
+hover_scale = Vector2(1, 1)
 
 [node name="UiDoorArrowRight" type="Sprite2D" parent="LastDoor"]
-position = Vector2(119, 404)
-scale = Vector2(0.8, 0.8)
+position = Vector2(119, 434.25)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_jb1p8")
 
 [node name="NextDoor" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1676.0
+offset_top = 53.0
 offset_right = 1918.0
-offset_bottom = 764.0
+offset_bottom = 817.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_itvqt")
 flat = true
 icon_alignment = 1
@@ -113,10 +117,12 @@ expand_icon = true
 script = ExtResource("8_i4gph")
 normal_color = Color(0.710938, 0.659066, 0.443412, 1)
 hover_color = Color(0.917962, 0.917029, 0.933333, 1)
+normal_scale = Vector2(0.8, 0.8)
+hover_scale = Vector2(1, 1)
 
 [node name="UiDoorArrowRight" type="Sprite2D" parent="NextDoor"]
-position = Vector2(107, 404)
-scale = Vector2(0.8, 0.8)
+position = Vector2(107, 434.25)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("10_fbju3")
 
 [node name="peekButton" type="Button" parent="."]

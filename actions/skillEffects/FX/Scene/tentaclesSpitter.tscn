@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dacdwm0tqo27r" path="res://anim_fx.gd" id="1_0xhe3"]
 [ext_resource type="Texture2D" uid="uid://cb26khiomivep" path="res://demo characters/ENEMY_spitter_jump.png" id="2_0xhe3"]
-[ext_resource type="Texture2D" uid="uid://dqiwmaugg2jig" path="res://actions/skillEffects/FX/FX_stab.png" id="3_5tfxe"]
+[ext_resource type="Texture2D" uid="uid://b3stvq6r8gbr5" path="res://actions/skillEffects/FX/FX_charge.png" id="3_0xhe3"]
 
 [sub_resource type="Animation" id="Animation_7h147"]
 resource_name = "FX_anim"
@@ -52,10 +52,10 @@ texture = ExtResource("2_0xhe3")
 [node name="FxCharge" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
 z_index = -1
-position = Vector2(-127.599, -35.3921)
+position = Vector2(45, -35)
 rotation = -0.0523599
-scale = Vector2(0.355244, 0.358398)
-texture = ExtResource("3_5tfxe")
+scale = Vector2(0.215174, 0.217085)
+texture = ExtResource("3_0xhe3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

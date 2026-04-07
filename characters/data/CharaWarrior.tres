@@ -22,7 +22,7 @@
 
 [resource]
 script = ExtResource("11_vpitw")
-headPosition = Vector2(20, -110)
+headPosition = Vector2(-20, -110)
 torso_Position = Vector2(0, 0)
 portrait_texture = ExtResource("11_elmwn")
 explorationPortrait = ExtResource("9_nsh6g")

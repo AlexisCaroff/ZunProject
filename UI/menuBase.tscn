@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b56xf3f3pkdwt"]
+[gd_scene load_steps=9 format=3 uid="uid://b56xf3f3pkdwt"]
 
 [ext_resource type="Script" uid="uid://bu142a7nwheqf" path="res://UI/menu_base.gd" id="1_552u3"]
 [ext_resource type="Texture2D" uid="uid://lhncc7d02shi" path="res://UI/BigBox.png" id="2_v1j00"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="4_v1j00"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="6_11mpg"]
 [ext_resource type="PackedScene" uid="uid://bccubg8vkrr7f" path="res://UI/Menu/OptionMenu.tscn" id="6_kppfi"]
+[ext_resource type="Texture2D" uid="uid://b6ydx3ktka8fh" path="res://UI/UI boxes/UI_convo_box.png" id="7_ej7yr"]
 
 [node name="Menu" type="Control"]
 z_index = 100
@@ -127,6 +128,10 @@ horizontal_alignment = 1
 
 [node name="OptionsPanel" parent="CanvasLayer" instance=ExtResource("6_kppfi")]
 visible = false
+
+[node name="UiConvoBox" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(920, 1229)
+texture = ExtResource("7_ej7yr")
 
 [node name="Camera" type="Camera2D" parent="."]
 offset = Vector2(960, 540)
