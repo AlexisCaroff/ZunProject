@@ -52,7 +52,7 @@ var startcombat = true
 var nb_crystaleloot :int = 0
 var ennemy_are_ambushed : bool = false
 var heroes_are_ambushed : bool = false
-const SELECTOR_TEX = preload("res://UI/selectorCombatChara.png")
+const SELECTOR_TEX = preload("res://UI/UI boxes/UI_combat_selector.png")
 var selectorChara : Sprite2D
 var gm: GameManager
 var combatEnd: bool = false
@@ -372,7 +372,7 @@ func create_selector_sprite():
 
 func _on_skill_animation_started():
 	active_animations += 1
-	print("-_-_-_-_  "+ str(active_animations) )
+	#print("-_-_-_-_  "+ str(active_animations) )
 func _on_skill_animation_finished():
 	active_animations -= 1
 
@@ -485,7 +485,8 @@ func _on_target_selected(targets: Array[PositionSlot]):
 			for slot in targets:
 				if slot.occupant != null:
 					await pending_skill.use(slot)
-					slot.occupant.update_ui()
+					if slot.occupant != null:
+						slot.occupant.update_ui()
 					ui.update_ui_for_current_character(current_character)
  
 			await flush_startSkills_affinity_reaction()
@@ -549,7 +550,22 @@ func move_character_to(character: Character, slot: PositionSlot, movetime: int):
 	
 	character._current_slot = slot
 	character.update_ui()
-		
+func move_character_to_async(character: Character, slot: PositionSlot, movetime: float) -> void:
+	if slot == null or not is_instance_valid(character):
+		return
+ 
+	slot.Set_CharaUI()
+	if slot.CharaUI != null:
+		slot.CharaUI.visible = true
+ 
+	await slot.assign_character(character, movetime)
+ 
+	if not is_instance_valid(character):
+		return
+	character._current_slot = slot
+	character.update_ui()
+ 
+
 func swap_characters(slot_a: PositionSlot, slot_b: PositionSlot,movetime: float):
 	var char_a = slot_a.occupant
 	var char_b = slot_b.occupant

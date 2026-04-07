@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=14 format=3 uid="uid://behrtqotkyvnx"]
+[gd_resource type="Resource" script_class="Skill" load_steps=16 format=3 uid="uid://behrtqotkyvnx"]
 
 [ext_resource type="Texture2D" uid="uid://f8o3t710mcxl" path="res://characters/charatexture/demo characters/HERO_warrior_roar.png" id="1_3o4k5"]
+[ext_resource type="PackedScene" uid="uid://ounw7l2iaxnn" path="res://actions/skillEffects/FX/Scene/Taunt_fx.tscn" id="2_5kxhq"]
 [ext_resource type="Script" uid="uid://cjfkha61akav3" path="res://actions/skillEffects/TauntEffect.gd" id="2_wwy36"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_yu2gj"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="3_wwy36"]
@@ -9,6 +10,7 @@
 [ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="6_ukosw"]
 [ext_resource type="Texture2D" uid="uid://8idtahv35xc6" path="res://actions/actiontexture/UI icons/ICON_warrior_roar.png" id="6_v6fax"]
 [ext_resource type="Texture2D" uid="uid://blaxr6boo4hkf" path="res://UI/buffDeff.png" id="8_3o4k5"]
+[ext_resource type="PackedScene" uid="uid://dnmnprn0sygoi" path="res://actions/skillEffects/FX/Scene/Taunted_fx.tscn" id="11_6l5cr"]
 
 [sub_resource type="Resource" id="Resource_yu2gj"]
 script = ExtResource("2_wwy36")
@@ -60,8 +62,14 @@ cooldown = 5
 current_cooldown = 0
 precision = 100
 allways_hit = false
-duration = 1.0
+duration = 2.0
 tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
+caster_effect_scene = ExtResource("2_5kxhq")
+target_effect_scene = ExtResource("11_6l5cr")
+caster_effect_anchor = 0
+target_effect_anchor = 1
+is_beneficial = false
+skip_target_return_anim = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

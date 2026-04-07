@@ -71,13 +71,13 @@ var skill_effect_overridden := false
 ## Scène VFX instanciée en enfant de chaque CIBLE au moment de l'impact
 @export var target_effect_scene: PackedScene
  
-enum EffectAnchor { HEAD, TORSO }
+enum EffectAnchor { NONE, HEAD, TORSO }
 ## Point d'ancrage du VFX du lanceur
-@export var caster_effect_anchor: EffectAnchor = EffectAnchor.HEAD
+@export var caster_effect_anchor: EffectAnchor = EffectAnchor.NONE
 ## Point d'ancrage du VFX de la cible
 @export var target_effect_anchor: EffectAnchor = EffectAnchor.TORSO
-
-
+@export var is_beneficial: bool = false
+@export var skip_target_return_anim: bool = false
 
 func can_use() -> bool:
 	if owner == null:

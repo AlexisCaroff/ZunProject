@@ -25,8 +25,8 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 		if usable_skills.size() > 1 and skill.name == "move":
 			usable_skills.erase(skill)
 
-	for skill in usable_skills:
-		print(skill.name)
+	#for skill in usable_skills:
+	#	print(skill.name)
 
 	var skill: Skill = usable_skills[randi() % usable_skills.size()]
 

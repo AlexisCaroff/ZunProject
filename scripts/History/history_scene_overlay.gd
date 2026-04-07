@@ -58,5 +58,9 @@ func _on_choice_made(choice_index: int):
 func _on_no_choice():
 	close()
 func close():
+	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
+	await gm.sceneTransition.fade_out(0.5)
+	await get_tree().create_timer(0.2).timeout
+	gm.sceneTransition.fade_in(0.5)
 	emit_signal("history_finished")
 	queue_free()

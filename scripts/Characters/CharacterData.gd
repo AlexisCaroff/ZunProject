@@ -1,6 +1,7 @@
 extends Resource
 class_name CharacterData
 @export var headPosition: Vector2= Vector2(1.0,-310.0)
+@export var torso_Position  : Vector2  = Vector2(0.0,0.0)
 @export var portrait_texture: Texture2D
 @export var explorationPortrait:Texture2D
 @export var dead_portrait_texture: Texture2D

@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://dg0an5sc6a8s1"]
+[gd_scene load_steps=77 format=3 uid="uid://d3ji11ayvxnal"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_xguw5"]
 [ext_resource type="Script" uid="uid://ds3vigal0aygx" path="res://lvl/Hall1/SpriteActionCombat.gd" id="2_ykhho"]
@@ -54,7 +54,7 @@
 
 [sub_resource type="Resource" id="Resource_i1s1q"]
 script = ExtResource("14_lp3u3")
-index = 3
+index = 2
 scale = Vector2(1.8, 1.8)
 is_enemy = false
 isFront = true
@@ -64,7 +64,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="Resource" id="Resource_8flqu"]
 script = ExtResource("14_lp3u3")
-index = 2
+index = 1
 scale = Vector2(1.7, 1.7)
 is_enemy = false
 isFront = true
@@ -84,7 +84,7 @@ metadata/_custom_type_script = "uid://b3l4l88c3b65c"
 
 [sub_resource type="Resource" id="Resource_t7hjh"]
 script = ExtResource("14_lp3u3")
-index = 1
+index = 4
 scale = Vector2(1.7, 1.7)
 is_enemy = false
 isFront = false

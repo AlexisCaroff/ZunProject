@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://b4046lfpxkgqu"]
 
 [ext_resource type="Script" uid="uid://smmc6d506a52" path="res://UI/victory.gd" id="1_a5iy6"]
-[ext_resource type="Texture2D" uid="uid://de0bi1tg31an0" path="res://UI/victoryBox.png" id="1_x0fca"]
 [ext_resource type="Texture2D" uid="uid://2xyreu4glom" path="res://UI/etoile.png" id="2_1wa7u"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="2_a5iy6"]
 [ext_resource type="Script" uid="uid://xgcdntldtp3u" path="res://UI/rotateSprite.gd" id="3_rybpl"]
-[ext_resource type="Texture2D" uid="uid://cnxub0g557exn" path="res://UI/box.png" id="4_tbef5"]
 [ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="4_yancd"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="5_blfgt"]
 [ext_resource type="Script" uid="uid://do2e4rnkriin4" path="res://UI/GrowingUI.gd" id="5_w7a3p"]
+[ext_resource type="Texture2D" uid="uid://di8781jnr3hw8" path="res://UI/UI boxes/UI_combat_victory.png" id="6_yancd"]
+[ext_resource type="Texture2D" uid="uid://eqli6rl4sig3" path="res://UI/UI boxes/UI_camp_points.png" id="9_yancd"]
 
 [node name="Victory" type="Control"]
 z_index = 20
@@ -29,6 +29,7 @@ offset_bottom = 1280.0
 color = Color(0, 0, 0, 0.282)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 self_modulate = Color(0.968, 1, 0.8, 0.105)
 position = Vector2(924, 485)
 scale = Vector2(1.26367, 1.26367)
@@ -40,6 +41,7 @@ scale_speed = 0.2
 base_scale = Vector2(1.1, 1.1)
 
 [node name="Sprite2D4" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0.968, 1, 0.8, 0.2)
 position = Vector2(905, 492)
@@ -52,6 +54,7 @@ scale_speed = 0.25
 base_scale = Vector2(1.2, 1.2)
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0.968, 1, 0.8, 0.2)
 position = Vector2(964, 485)
@@ -63,6 +66,7 @@ scale_speed = 0.2
 base_scale = Vector2(1.3, 1.3)
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
+visible = false
 self_modulate = Color(0.968, 1, 0.8, 0.105)
 position = Vector2(943, 483)
 rotation = 0.785398
@@ -192,27 +196,28 @@ animation_Start_Delay = 0.4
 [node name="VictoryBox" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 408.0
-offset_top = 179.0
-offset_right = 1432.0
-offset_bottom = 879.0
+offset_left = 376.0
+offset_top = 24.0
+offset_right = 1462.0
+offset_bottom = 942.0
 pivot_offset = Vector2(512, 19.845)
-texture = ExtResource("1_x0fca")
+texture = ExtResource("6_yancd")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VictoryBox"]
 layout_mode = 0
-offset_left = 134.0
-offset_top = 249.0
-offset_right = 899.0
-offset_bottom = 453.0
+offset_left = 26.0
+offset_top = 390.0
+offset_right = 952.0
+offset_bottom = 594.0
 theme_override_constants/separation = 147
+alignment = 1
 
 [node name="Label" type="Label" parent="VictoryBox"]
 layout_mode = 0
-offset_left = 371.0
-offset_top = 14.0
-offset_right = 646.0
-offset_bottom = 75.0
+offset_left = 402.0
+offset_top = 186.0
+offset_right = 677.0
+offset_bottom = 247.0
 theme_override_fonts/font = ExtResource("2_a5iy6")
 theme_override_font_sizes/font_size = 45
 text = "Victory !"
@@ -224,16 +229,21 @@ offset_left = 785.0
 offset_top = 823.0
 offset_right = 1049.0
 offset_bottom = 895.0
-icon = ExtResource("4_tbef5")
 flat = true
 script = ExtResource("5_blfgt")
 
 [node name="Label" type="Label" parent="ContinueButton"]
+z_index = 1
 layout_mode = 0
-offset_left = 70.0
+offset_left = 72.0
 offset_top = 10.0
-offset_right = 187.0
+offset_right = 189.0
 offset_bottom = 59.0
 theme_override_fonts/font = ExtResource("2_a5iy6")
 theme_override_font_sizes/font_size = 40
 text = "Continue"
+
+[node name="UiCampPoints" type="Sprite2D" parent="ContinueButton"]
+position = Vector2(131, 38)
+scale = Vector2(0.449618, 0.531056)
+texture = ExtResource("9_yancd")

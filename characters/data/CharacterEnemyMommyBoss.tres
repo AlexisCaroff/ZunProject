@@ -22,6 +22,7 @@ metadata/_custom_type_script = "uid://b6a37g0gbkyla"
 [resource]
 script = ExtResource("7_dyn70")
 headPosition = Vector2(1, -310)
+torso_Position = Vector2(0, 0)
 portrait_texture = ExtResource("8_6dkli")
 explorationPortrait = ExtResource("5_2ne5h")
 dead_portrait_texture = ExtResource("3_6dkli")
@@ -73,5 +74,6 @@ taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide op
 reaction = ["", "", ""]
 affinityReaction = ["", "", ""]
 corrupted = false
+inquisition = false
 immobilized = false
 immobilized_turns = 0

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://dopuwtv1moav3"]
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://dopuwtv1moav3"]
 
 [ext_resource type="Texture2D" uid="uid://byggyb14q3eet" path="res://characters/charatexture/demo characters/HERO_mystic_cc_shield.png" id="1_gk65l"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_48161"]
+[ext_resource type="PackedScene" uid="uid://8g1pn7hwc331" path="res://actions/skillEffects/FX/Scene/shield_fx.tscn" id="2_mwdh1"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_r53j6"]
 [ext_resource type="Texture2D" uid="uid://blaxr6boo4hkf" path="res://UI/buffDeff.png" id="4_gk65l"]
 [ext_resource type="Texture2D" uid="uid://bwuqlyu77xyb6" path="res://actions/actiontexture/UI icons/ICON_mystic_cc_harden.png" id="5_gk65l"]
@@ -42,4 +43,9 @@ duration = 1.0
 tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
+caster_effect_scene = ExtResource("2_mwdh1")
+caster_effect_anchor = 0
+target_effect_anchor = 2
+is_beneficial = true
+skip_target_return_anim = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

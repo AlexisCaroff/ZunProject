@@ -1,20 +1,12 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://duo5wcnmn0qo2"]
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://duo5wcnmn0qo2"]
 
 [ext_resource type="Texture2D" uid="uid://cu2trwua3sb1" path="res://characters/charatexture/demo characters/HERO_mystic_cc_siphon.png" id="1_nbap8"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_jbp84"]
 [ext_resource type="AudioStream" uid="uid://bv7eg2rwowxuj" path="res://actions/sound/magicSlurp.mp3" id="2_ngn0m"]
-[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_rn6hm"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_jbp84"]
 [ext_resource type="Texture2D" uid="uid://cq4lyjh8qvpuy" path="res://actions/actiontexture/UI icons/ICON_mystic_cc_syphon.png" id="5_ngn0m"]
 [ext_resource type="Script" uid="uid://bp8u5at2ojgse" path="res://actions/skillEffects/healEffect.gd" id="5_rn6hm"]
 [ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="6_4lsex"]
-
-[sub_resource type="Resource" id="Resource_i4eos"]
-script = ExtResource("2_rn6hm")
-MagicDMG = true
-amount = 20
-damage_target_stat = 0
-metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [sub_resource type="Resource" id="Resource_4lsex"]
 script = ExtResource("5_rn6hm")
@@ -38,7 +30,7 @@ barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_nbap8")
 the_target_type = 0
-effects = Array[ExtResource("2_jbp84")]([SubResource("Resource_i4eos")])
+effects = Array[ExtResource("2_jbp84")]([])
 two_target_Type = true
 the_second_target_type = 2
 second_effects = Array[ExtResource("2_jbp84")]([SubResource("Resource_4lsex"), SubResource("Resource_jbp84")])
@@ -54,4 +46,8 @@ duration = 1.0
 tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
+caster_effect_anchor = 0
+target_effect_anchor = 1
+is_beneficial = false
+skip_target_return_anim = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://clw258vbo2rq1"]
+[gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://clw258vbo2rq1"]
 
 [ext_resource type="Texture2D" uid="uid://bo0t0247dws8k" path="res://characters/charatexture/demo characters/HERO_warrior_kick.png" id="1_gv1de"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_0evjx"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_acaj7"]
 [ext_resource type="AudioStream" uid="uid://bistgpj4eyle0" path="res://actions/sound/Impact Human Grab And Pulled By Clothes 01.wav" id="2_y1vkq"]
 [ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="3_acaj7"]
+[ext_resource type="PackedScene" uid="uid://cm1ew6n26i5ox" path="res://actions/skillEffects/FX/Scene/littlecharge_fx.tscn" id="3_yjbbm"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_bbjmb"]
 [ext_resource type="Texture2D" uid="uid://dwa3fwsoeg6bc" path="res://actions/actiontexture/UI icons/ICON_warrior_kick.png" id="6_y1vkq"]
 
@@ -17,8 +18,12 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [sub_resource type="Resource" id="Resource_0evjx"]
 script = ExtResource("3_acaj7")
-target_index = 2
-isTentacle = false
+mode = 1
+speed = 0.5
+slot_pairing = {
+3: 1,
+4: 2
+}
 metadata/_custom_type_script = "uid://cxxxcftffxxjh"
 
 [resource]
@@ -48,4 +53,9 @@ duration = 1.0
 tags = Array[String]([])
 is_contact = true
 distance_contact = 350.0
+caster_effect_scene = ExtResource("3_yjbbm")
+caster_effect_anchor = 0
+target_effect_anchor = 1
+is_beneficial = false
+skip_target_return_anim = true
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

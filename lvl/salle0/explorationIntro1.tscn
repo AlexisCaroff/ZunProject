@@ -1,10 +1,10 @@
-[gd_scene load_steps=47 format=3 uid="uid://d0tw3ef8bhc71"]
+[gd_scene load_steps=48 format=3 uid="uid://d0tw3ef8bhc71"]
 
 [ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="1_76nbu"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_32aph"]
-[ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="3_8ga50"]
 [ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="3_vn4jq"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="4_dly5n"]
+[ext_resource type="Texture2D" uid="uid://cds1jgu4rdn1e" path="res://UI/UI boxes/UI_fgwall_inquisition.png" id="4_vn4jq"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="5_7fr0g"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="6_g6vgl"]
 [ext_resource type="Script" uid="uid://tq0nr5tg2b3k" path="res://lvl/positionexplo.gd" id="7_vn4jq"]
@@ -31,12 +31,13 @@
 [ext_resource type="Texture2D" uid="uid://bl6qdsm60pd37" path="res://UI/exploCharaselector.png" id="25_8ci53"]
 [ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="26_gwyod"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="27_7ci4t"]
-[ext_resource type="Texture2D" uid="uid://dh6k7cso8hksn" path="res://UI/charaIcon.png" id="28_ompa6"]
 [ext_resource type="Script" uid="uid://cxgw24yv778d8" path="res://lvl/chara_portraitButton.gd" id="29_ai72b"]
 [ext_resource type="Texture2D" uid="uid://5trmkstb5g8x" path="res://Items/ItemIcons/testeIcon.png" id="30_jbd7a"]
 [ext_resource type="Script" uid="uid://d35u47t7s0fv4" path="res://UI/UICombatItem.gd" id="31_acvpb"]
 [ext_resource type="Texture2D" uid="uid://ch8bpedx177r3" path="res://UI/itemBack.png" id="32_oc3ys"]
 [ext_resource type="FontFile" uid="uid://dy4n8qboodyud" path="res://font/MarcellusSC-Regular.ttf" id="33_gxsp0"]
+[ext_resource type="Texture2D" uid="uid://53cn2wxevdr3" path="res://UI/menuiCON.png" id="36_bu4w2"]
+[ext_resource type="Texture2D" uid="uid://b54elep5kk5sm" path="res://UI/UI boxes/UI_combat_portrait_frame.png" id="38_7qngh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kljm5"]
 
@@ -50,14 +51,14 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w2q8r"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0lq8g"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3w44m"]
 bg_color = Color(0, 0, 0, 1)
 corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6aesp"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5xukb"]
 
 [node name="ExploInterface" type="Control"]
 layout_mode = 3
@@ -92,9 +93,9 @@ skew = 0.01116
 texture = ExtResource("3_vn4jq")
 
 [node name="exploUI" type="Sprite2D" parent="."]
-position = Vector2(959, 539.5)
-scale = Vector2(0.780945, 0.787591)
-texture = ExtResource("3_8ga50")
+position = Vector2(961, 894.102)
+scale = Vector2(0.75, 0.78)
+texture = ExtResource("4_vn4jq")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -529,58 +530,6 @@ visible = false
 z_index = 20
 layout_mode = 1
 
-[node name="charaPortrait2" type="TextureRect" parent="."]
-z_index = 6
-layout_mode = 0
-offset_left = 1770.0
-offset_top = 699.0
-offset_right = 1859.0
-offset_bottom = 788.0
-scale = Vector2(0.996858, 1.01916)
-texture = ExtResource("28_ompa6")
-expand_mode = 1
-script = ExtResource("29_ai72b")
-
-[node name="ColorRect" type="ColorRect" parent="charaPortrait2"]
-z_index = -1
-layout_mode = 0
-offset_left = 9.02837
-offset_top = 8.8308
-offset_right = 96.0284
-offset_bottom = 96.8308
-scale = Vector2(0.804318, 0.804318)
-color = Color(0.313726, 0.235294, 0.0823529, 1)
-
-[node name="ColorRect3" type="ColorRect" parent="charaPortrait2"]
-z_index = -1
-layout_mode = 0
-offset_left = 44.0
-offset_top = 3.0
-offset_right = 117.0
-offset_bottom = 75.0
-rotation = 0.787779
-scale = Vector2(0.804318, 0.804318)
-color = Color(0, 0, 0, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="charaPortrait2"]
-z_index = -1
-layout_mode = 0
-offset_left = 11.0346
-offset_top = 11.7744
-offset_right = 92.0346
-offset_bottom = 93.7744
-scale = Vector2(0.804318, 0.804318)
-color = Color(0, 0, 0, 1)
-
-[node name="charaPortraitButton" type="Button" parent="charaPortrait2"]
-layout_mode = 0
-offset_left = 43.0
-offset_right = 106.0
-offset_bottom = 64.0
-rotation = 0.787448
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0lq8g")
-flat = true
-
 [node name="Items" type="Sprite2D" parent="."]
 z_index = 8
 position = Vector2(1055, 886)
@@ -814,6 +763,42 @@ theme_override_fonts/normal_font = ExtResource("5_7fr0g")
 theme_override_font_sizes/normal_font_size = 20
 text = "Guilt:
 "
+
+[node name="charaPortrait2" type="TextureRect" parent="."]
+self_modulate = Color(0.95, 0.779792, 0.5415, 1)
+z_index = 6
+layout_mode = 0
+offset_left = 1794.0
+offset_top = 752.0
+offset_right = 1873.0
+offset_bottom = 826.0
+scale = Vector2(0.680271, 0.695491)
+texture = ExtResource("36_bu4w2")
+expand_mode = 1
+script = ExtResource("29_ai72b")
+normal_color = Color(0.392157, 0.282353, 0.12549, 1)
+hover_color = Color(0.509804, 0.372549, 0.168627, 1)
+
+[node name="charaPortraitButton" type="Button" parent="charaPortrait2"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = -28.0
+offset_right = 132.0
+offset_bottom = 68.0
+rotation = 0.787448
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5xukb")
+flat = true
+
+[node name="charaPortrait3" type="TextureRect" parent="charaPortrait2"]
+z_index = -1
+layout_mode = 0
+offset_left = -43.1356
+offset_top = -40.2292
+offset_right = 122.864
+offset_bottom = 107.771
+scale = Vector2(0.996858, 1.01916)
+texture = ExtResource("38_7qngh")
+expand_mode = 1
 
 [connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]

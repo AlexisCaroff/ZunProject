@@ -6,7 +6,7 @@ func _ready() -> void:
 	particles.emitting = true
 
 func setParticulesAlpha(alpha: float):
-	print ("set particule " + str(alpha))
+	#print ("set particule " + str(alpha))
 	if alpha>=1.0:
 		alpha=1.0
 		particlesStun. visible = true

@@ -26,8 +26,8 @@ var heroes_are_embushed : bool = false
 var characters: Array[CharacterData] = []
 @onready var portraits = $"../Portraits".get_children()
 var selected_character: CharacterData
-@onready var doorRight:=$"../DoorrDungeonHall"
-@onready var doorLeft:=$"../DoorlDungeonHall"
+@onready var doorRight:=$"../../DoorrDungeonHall"
+@onready var doorLeft:=$"../../DoorlDungeonHall"
 var locked : bool =false
 @export var Blocked : bool =false
 @export var keyName: String = "key1"
@@ -35,6 +35,21 @@ const lockedUI = preload("res://UI/scripts/LokedUI.tscn")
 const OpenUI = preload("res://UI/scripts/OpenDoorKeyUI.tscn")
 const BlockedUI= preload("res://UI/scripts/BlockedUI.tscn")
 var animation: bool=false
+
+#___________________________________________________________________________
+@onready var NameLabel= $"../Name"
+@onready var Stamina=$"../Stamina"
+@onready var Horny=$"../Horny"
+@onready var Guilt=$"../Guilt"
+@onready var Att=$"../AttLabel"
+@onready var Def =$"../DefLabel"
+@onready var WillPower= $"../WillPower"
+@onready var StaminaProgressBar = $"../StaminaProgressBar"
+@onready var LustProgressBar =$"../LustProgressBar"
+@onready var GuiltProgressBar = $"../GuiltProgressBar"
+@onready var Items =$"../Items"
+@onready var kinks =$"../Kinks"
+@onready var PeekBonus =$"../PeekBonus"
 
 func _ready():
 	GameState.current_phase = GameStat.GamePhase.DOOR
@@ -89,7 +104,7 @@ func _ready():
 	if donjon_map:
 		donjon_map.focus_door(Game_Manager.current_room_Ressource, viewport)
 		#donjon_map.move_to_position(donjon_map.curentposition)
-	
+	selectCharacter(characters[0])
 
 func load_chara():
 		for i in characters.size():
@@ -278,11 +293,40 @@ func _go_to_connected_room(index: int):
 
 	print("🚪 Door → Passage à la room suivante :", next_room.room_id)
 	Game_Manager.enter_room(next_room, true)
+	
 func selectCharacter(chara: CharacterData):
 
 		selected_character = chara
 		var i = characters.find(chara)
 		portrait_selector.position = portraits[i].position
+		NameLabel.text=chara.Charaname
+		Def.bbcode_enabled = true
+		Att.bbcode_enabled = true
+		WillPower.bbcode_enabled = true
+		Stamina.bbcode_enabled = true
+		Guilt.bbcode_enabled = true
+		Horny.bbcode_enabled = true
+		PeekBonus.bbcode_enabled = true
+		Att.text = "Attack: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
+		chara.attack, chara.base_attack, (chara.attack - chara.base_attack)]
+		Def.text = "Defense: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
+		chara.defense, chara.base_defense, (chara.defense - chara.base_defense)]
+		WillPower.text = "Willpower: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
+		chara.willpower, chara.base_willpower, (chara.willpower - chara.base_willpower)]
+		
+		Stamina.text = "%d / %d" % [chara.current_stamina, chara.max_stamina]
+		StaminaProgressBar.max_value= chara.max_stamina
+		StaminaProgressBar.value=chara.current_stamina
+		Guilt.text = "%d / %d" % [chara.current_stress, chara.max_stress]
+		GuiltProgressBar.max_value=chara.max_stress
+		GuiltProgressBar.value=chara.current_stress
+		Horny.text = "%d / %d" % [chara.current_horniness, chara.max_horniness]
+		LustProgressBar.max_value=chara.max_horniness
+		LustProgressBar.value=chara.current_horniness
+		PeekBonus.text = "Peek Bonus: %d [color=AAAAAA] " %[		chara.peek]
+		
+		
+		
 func open_door(duration:float):
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_IN)

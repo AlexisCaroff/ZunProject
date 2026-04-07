@@ -16,13 +16,14 @@
 [ext_resource type="Resource" uid="uid://behrtqotkyvnx" path="res://actions/HerosCombatSkills/Taunt.tres" id="12_70vf5"]
 [ext_resource type="Resource" uid="uid://doydfjjogegnd" path="res://actions/HerosCombatSkills/StunAttaque.tres" id="13_mupei"]
 [ext_resource type="Resource" uid="uid://clw258vbo2rq1" path="res://actions/HerosCombatSkills/Charge.tres" id="14_5iw64"]
-[ext_resource type="Resource" uid="uid://bpsapqkry8g3q" path="res://actions/HerosCombatSkills/attaque_basique.tres" id="15_aj6tx"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="16_ne2r0"]
+[ext_resource type="Resource" uid="uid://c730qx0ly721i" path="res://actions/HerosCombatSkills/largeSwing.tres" id="16_q5t8p"]
 [ext_resource type="Texture2D" uid="uid://c1vbgy6uvss1" path="res://camp imgs/Camp_char_sit_W.png" id="19_q5t8p"]
 
 [resource]
 script = ExtResource("11_vpitw")
 headPosition = Vector2(20, -110)
+torso_Position = Vector2(0, 0)
 portrait_texture = ExtResource("11_elmwn")
 explorationPortrait = ExtResource("9_nsh6g")
 dead_portrait_texture = ExtResource("9_k6dui")
@@ -44,7 +45,7 @@ base_willpower = 5
 base_initiative = 200
 base_evasion = 5
 base_precision = 100
-attack = 200000
+attack = 20
 defense = 10
 willpower = 5
 evasion = 5
@@ -60,7 +61,7 @@ current_stamina = 100
 current_stress = 0
 current_horniness = 0
 isOneshot = false
-skill_resources = Array[Resource]([ExtResource("12_70vf5"), ExtResource("13_mupei"), ExtResource("14_5iw64"), ExtResource("15_aj6tx"), ExtResource("16_ne2r0")])
+skill_resources = Array[Resource]([ExtResource("12_70vf5"), ExtResource("13_mupei"), ExtResource("16_q5t8p"), ExtResource("14_5iw64"), ExtResource("16_ne2r0")])
 tags = Array[String](["switch", "degrader", "exib"])
 is_player_controlled = true
 can_be_moved = true
@@ -75,5 +76,6 @@ taunts = ["Is that all you've got?", "Bring it on !", "You fight like a wet nood
 reaction = ["Bring it on !", "Is that all you've got?", ""]
 affinityReaction = ["", "", ""]
 corrupted = false
+inquisition = false
 immobilized = false
 immobilized_turns = 0

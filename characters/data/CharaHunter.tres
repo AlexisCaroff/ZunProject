@@ -23,7 +23,8 @@
 
 [resource]
 script = ExtResource("12_x3tfg")
-headPosition = Vector2(1, -90)
+headPosition = Vector2(-29, -91)
+torso_Position = Vector2(0, 0)
 portrait_texture = ExtResource("13_isn0k")
 explorationPortrait = ExtResource("10_j4cyw")
 dead_portrait_texture = ExtResource("9_4vg1p")
@@ -76,5 +77,6 @@ taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide op
 reaction = ["", "", ""]
 affinityReaction = ["", "", ""]
 corrupted = false
+inquisition = false
 immobilized = false
 immobilized_turns = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://uo6aacbprsjm"]
+[gd_scene load_steps=11 format=3 uid="uid://uo6aacbprsjm"]
 
 [ext_resource type="Texture2D" uid="uid://768cfl5yiljq" path="res://scenes/backgrounds dungeon demo/BG_dungeon_corridor.png" id="1_3qxc3"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_6fig8"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="7_qy23p"]
 [ext_resource type="Resource" uid="uid://ulv47dtbemlo" path="res://lvl/Cellar/encounterCellar.tres" id="8_yeibi"]
 [ext_resource type="Resource" uid="uid://y5sfj1t81c86" path="res://lvl/Cellar/encounterCellaInquisitionr.tres" id="9_o08im"]
+[ext_resource type="PackedScene" uid="uid://q6acu8lc0tp7" path="res://lvl/Boss/combatRoomCellarInquisition.tscn" id="10_tmsuc"]
 
 [node name="CombatCorridor" type="Node2D"]
 
@@ -37,6 +38,7 @@ intro_animatic = ExtResource("6_tmsuc")
 portraits_resource = ExtResource("7_qy23p")
 boss_encounter = ExtResource("8_yeibi")
 inquisition_encounter = ExtResource("9_o08im")
+give_in_combat_scene = ExtResource("10_tmsuc")
 dialogue_intro_path = "res://dialogue/Boss/intro.txt"
 dialogue_corrupt_path = "res://dialogue/Boss/corrupt.txt"
 dialogue_resist_path = "res://dialogue/Boss/resist.txt"

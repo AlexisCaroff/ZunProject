@@ -1,4 +1,5 @@
 extends Button
+class_name ButtonQuit
 
 
 @export var normal_color: Color = Color.WHITE
@@ -37,4 +38,5 @@ func _on_mouse_exited():
 	
 
 func _on_pressed():
+	
 	get_tree().quit()

@@ -1,24 +1,11 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://bcvrdy48sagwa"]
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://bcvrdy48sagwa"]
 
 [ext_resource type="Texture2D" uid="uid://b6j3rg27uuhgn" path="res://characters/charatexture/demo characters/HERO_mystic_cc_tentagrab.png" id="1_b0cgj"]
-[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_d2e5p"]
+[ext_resource type="PackedScene" uid="uid://bj8buddu2d1up" path="res://actions/skillEffects/FX/Scene/TentacleGrabM.tscn" id="2_4qf66"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_e3o77"]
-[ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="3_e3o77"]
 [ext_resource type="Texture2D" uid="uid://crwjl88ks51cr" path="res://actions/actiontexture/UI icons/ICON_mystic_cc_grab.png" id="5_b0cgj"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_c83rg"]
-
-[sub_resource type="Resource" id="Resource_i4eos"]
-script = ExtResource("2_d2e5p")
-MagicDMG = false
-amount = 40
-damage_target_stat = 0
-metadata/_custom_type_script = "uid://bjsbovfjff2wo"
-
-[sub_resource type="Resource" id="Resource_0evjx"]
-script = ExtResource("3_e3o77")
-target_index = 0
-isTentacle = false
-metadata/_custom_type_script = "uid://cxxxcftffxxjh"
+[ext_resource type="PackedScene" uid="uid://b3x5oatcp62nu" path="res://actions/skillEffects/FX/Scene/tentaclesSpitter.tscn" id="8_wble5"]
 
 [resource]
 script = ExtResource("5_c83rg")
@@ -30,14 +17,14 @@ barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_b0cgj")
 the_target_type = 0
-effects = Array[ExtResource("2_e3o77")]([SubResource("Resource_i4eos"), SubResource("Resource_0evjx")])
+effects = Array[ExtResource("2_e3o77")]([])
 two_target_Type = false
-the_second_target_type = 3
+the_second_target_type = 0
 second_effects = Array[ExtResource("2_e3o77")]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"
-cost = 10
+cost = 0
 cooldown = 4
 current_cooldown = 0
 precision = 100
@@ -46,4 +33,10 @@ duration = 0.4
 tags = Array[String]([])
 is_contact = true
 distance_contact = 700.0
+caster_effect_scene = ExtResource("2_4qf66")
+target_effect_scene = ExtResource("8_wble5")
+caster_effect_anchor = 0
+target_effect_anchor = 2
+is_beneficial = false
+skip_target_return_anim = true
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

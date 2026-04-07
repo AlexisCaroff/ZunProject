@@ -16,8 +16,12 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [sub_resource type="Resource" id="Resource_t52hr"]
 script = ExtResource("3_7m3nb")
-target_index = 3
-isTentacle = false
+mode = 0
+speed = 0.5
+slot_pairing = {
+3: 1,
+4: 2
+}
 metadata/_custom_type_script = "uid://cxxxcftffxxjh"
 
 [resource]
@@ -46,4 +50,8 @@ duration = 0.3
 tags = Array[String]([])
 is_contact = true
 distance_contact = 700.0
+caster_effect_anchor = 0
+target_effect_anchor = 1
+is_beneficial = false
+skip_target_return_anim = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

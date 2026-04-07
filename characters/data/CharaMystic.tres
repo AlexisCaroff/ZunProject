@@ -1,35 +1,36 @@
 [gd_resource type="Resource" script_class="CharacterData" load_steps=20 format=3 uid="uid://feukv2xbt3m6"]
 
-[ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_3bk0l"]
-[ext_resource type="Texture2D" uid="uid://diwmoyaawsxq6" path="res://characters/portraits/PORTRAIT_hero_mystic.png" id="1_woow1"]
-[ext_resource type="Texture2D" uid="uid://chqvuss7wfueq" path="res://characters/charatexture/demo characters/HERO_mystic_cc_hit.png" id="2_woow1"]
-[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_xua2o"]
-[ext_resource type="Resource" uid="uid://cryoy3w5uet08" path="res://actions/CampSkill/buffskillCamp.tres" id="3_woow1"]
-[ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="4_jg4jp"]
-[ext_resource type="Resource" uid="uid://b2vd1hks0mof3" path="res://actions/CampSkill/dialogueMystic.tres" id="5_n62aw"]
-[ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="6_vs65e"]
-[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="8_7ygxr"]
-[ext_resource type="Texture2D" uid="uid://dsun64yr5mg5l" path="res://characters/charatexture/demo characters/HERO_mystic_cc_down.png" id="9_jg4jp"]
-[ext_resource type="Texture2D" uid="uid://dd4k5wxaesfo4" path="res://characters/exploPortrait/MysticExploPortrait.png" id="9_tsoqm"]
-[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="11_4khx0"]
-[ext_resource type="Resource" uid="uid://m6nw8l2ax4to" path="res://actions/HerosCombatSkills/ChangeMask.tres" id="12_iqc5r"]
-[ext_resource type="Texture2D" uid="uid://he220dsml4k6" path="res://characters/charatexture/demo characters/HERO_mystic_cc_idle.png" id="12_n62aw"]
-[ext_resource type="Resource" uid="uid://dopuwtv1moav3" path="res://actions/HerosCombatSkills/Shield.tres" id="13_klcdq"]
-[ext_resource type="Resource" uid="uid://duo5wcnmn0qo2" path="res://actions/HerosCombatSkills/vampire.tres" id="14_glo23"]
-[ext_resource type="Resource" uid="uid://bcvrdy48sagwa" path="res://actions/HerosCombatSkills/hook.tres" id="15_0yih5"]
-[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="16_buv78"]
-[ext_resource type="Texture2D" uid="uid://xvf1umygybrb" path="res://camp imgs/Camp_char_sit_M.png" id="19_woow1"]
+[ext_resource type="Texture2D" uid="uid://diwmoyaawsxq6" path="res://characters/portraits/PORTRAIT_hero_mystic.png" id="1_tf8do"]
+[ext_resource type="Texture2D" uid="uid://chqvuss7wfueq" path="res://characters/charatexture/demo characters/HERO_mystic_cc_hit.png" id="2_h44xs"]
+[ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="3_rhwqo"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="4_wv7ge"]
+[ext_resource type="Resource" uid="uid://cryoy3w5uet08" path="res://actions/CampSkill/buffskillCamp.tres" id="5_c5mgy"]
+[ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="6_txn1y"]
+[ext_resource type="Resource" uid="uid://b2vd1hks0mof3" path="res://actions/CampSkill/dialogueMystic.tres" id="7_1lv18"]
+[ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="8_tpbvd"]
+[ext_resource type="Texture2D" uid="uid://dsun64yr5mg5l" path="res://characters/charatexture/demo characters/HERO_mystic_cc_down.png" id="9_jfvqo"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="10_xhny7"]
+[ext_resource type="Texture2D" uid="uid://dd4k5wxaesfo4" path="res://characters/exploPortrait/MysticExploPortrait.png" id="11_rtuv2"]
+[ext_resource type="Texture2D" uid="uid://he220dsml4k6" path="res://characters/charatexture/demo characters/HERO_mystic_cc_idle.png" id="12_cneyh"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="13_qb6cv"]
+[ext_resource type="Resource" uid="uid://m6nw8l2ax4to" path="res://actions/HerosCombatSkills/ChangeMask.tres" id="14_d2iw6"]
+[ext_resource type="Resource" uid="uid://dopuwtv1moav3" path="res://actions/HerosCombatSkills/Shield.tres" id="15_1ealu"]
+[ext_resource type="Resource" uid="uid://db1ff6iirgqeh" path="res://actions/HerosCombatSkills/TentacleGrab.tres" id="16_woow1"]
+[ext_resource type="Resource" uid="uid://duo5wcnmn0qo2" path="res://actions/HerosCombatSkills/vampire.tres" id="17_54ir1"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="18_nhfr4"]
+[ext_resource type="Texture2D" uid="uid://xvf1umygybrb" path="res://camp imgs/Camp_char_sit_M.png" id="19_0dnrj"]
 
 [resource]
-script = ExtResource("11_4khx0")
-headPosition = Vector2(20, -90)
-portrait_texture = ExtResource("12_n62aw")
-explorationPortrait = ExtResource("9_tsoqm")
-dead_portrait_texture = ExtResource("9_jg4jp")
-Hit_texture = ExtResource("2_woow1")
-initiative_icon = ExtResource("9_tsoqm")
-Dialogue_texture = ExtResource("1_woow1")
-textureCamp = ExtResource("19_woow1")
+script = ExtResource("13_qb6cv")
+headPosition = Vector2(-22, -90)
+torso_Position = Vector2(0, 0)
+portrait_texture = ExtResource("12_cneyh")
+explorationPortrait = ExtResource("11_rtuv2")
+dead_portrait_texture = ExtResource("9_jfvqo")
+Hit_texture = ExtResource("2_h44xs")
+initiative_icon = ExtResource("11_rtuv2")
+Dialogue_texture = ExtResource("1_tf8do")
+textureCamp = ExtResource("19_0dnrj")
 Name = "Sablon"
 Charaname = "Mystic"
 IsDemon = false
@@ -50,7 +51,7 @@ willpower = 5
 evasion = 5
 initiative = 20
 peek = 0
-equipped_items = Array[ExtResource("8_7ygxr")]([])
+equipped_items = Array[ExtResource("10_xhny7")]([])
 stun = false
 Chara_position = 2
 max_stamina = 100
@@ -60,7 +61,7 @@ current_stamina = 100
 current_stress = 0
 current_horniness = 0
 isOneshot = false
-skill_resources = Array[Resource]([ExtResource("12_iqc5r"), ExtResource("13_klcdq"), ExtResource("14_glo23"), ExtResource("15_0yih5"), ExtResource("16_buv78")])
+skill_resources = Array[Resource]([ExtResource("14_d2iw6"), ExtResource("15_1ealu"), ExtResource("16_woow1"), ExtResource("17_54ir1"), ExtResource("18_nhfr4")])
 tags = Array[String](["voyeur", "captive", "switch"])
 is_player_controlled = true
 can_be_moved = true
@@ -69,11 +70,12 @@ max_durationIddle = 1.0
 min_scale = 0.95
 max_scale = 1.0
 corruption = 0
-camp_skill_resources = Array[ExtResource("2_xua2o")]([ExtResource("3_woow1"), ExtResource("4_jg4jp"), ExtResource("5_n62aw"), ExtResource("6_vs65e")])
-bark_scene = ExtResource("1_3bk0l")
+camp_skill_resources = Array[ExtResource("4_wv7ge")]([ExtResource("5_c5mgy"), ExtResource("6_txn1y"), ExtResource("7_1lv18"), ExtResource("8_tpbvd")])
+bark_scene = ExtResource("3_rhwqo")
 taunts = ["Spirties grand me strenght"]
 reaction = ["", "", ""]
 affinityReaction = ["", "", ""]
 corrupted = false
+inquisition = false
 immobilized = false
 immobilized_turns = 0

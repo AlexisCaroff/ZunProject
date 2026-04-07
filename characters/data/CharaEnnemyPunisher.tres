@@ -23,6 +23,7 @@ metadata/_custom_type_script = "uid://db1m8vwgp38yx"
 [resource]
 script = ExtResource("10_oumc8")
 headPosition = Vector2(1, -110)
+torso_Position = Vector2(0, 0)
 portrait_texture = ExtResource("8_p1wfb")
 explorationPortrait = ExtResource("7_l4hkq")
 dead_portrait_texture = ExtResource("5_6liig")

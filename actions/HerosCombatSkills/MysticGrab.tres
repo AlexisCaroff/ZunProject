@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://dt03xlsrw1kdf"]
+
+[ext_resource type="Texture2D" uid="uid://c2b35no4g7tky" path="res://demo characters/HERO_mystic_cc_tentagrab.png" id="1_dj3fe"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_okeqo"]
+[ext_resource type="PackedScene" uid="uid://bj8buddu2d1up" path="res://actions/skillEffects/FX/Scene/TentacleGrabM.tscn" id="2_kk6yr"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_om7o3"]
+[ext_resource type="Texture2D" uid="uid://crwjl88ks51cr" path="res://actions/actiontexture/UI icons/ICON_mystic_cc_grab.png" id="6_sdesa"]
+[ext_resource type="PackedScene" uid="uid://vf2fr2rqom33" path="res://actions/skillEffects/FX/Scene/grabTarget.tscn" id="8_784wv"]
+
+[resource]
+script = ExtResource("2_om7o3")
+name = "Attaque"
+descriptionName = "Tentacle grabe"
+description = "Pull an enemy forward and deal damages"
+icon = ExtResource("6_sdesa")
+barkSkill = ""
+required_position = 0
+ImageSkill = ExtResource("1_dj3fe")
+the_target_type = 0
+effects = Array[ExtResource("1_okeqo")]([])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("1_okeqo")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 8
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+is_contact = false
+distance_contact = 0.0
+caster_effect_scene = ExtResource("2_kk6yr")
+target_effect_scene = ExtResource("8_784wv")
+caster_effect_anchor = 0
+target_effect_anchor = 2
+is_beneficial = false
+skip_target_return_anim = true
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

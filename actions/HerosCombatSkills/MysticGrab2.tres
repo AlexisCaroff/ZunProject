@@ -1,0 +1,61 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://b0gt00v7dl0u7"]
+
+[ext_resource type="Texture2D" uid="uid://c2b35no4g7tky" path="res://demo characters/HERO_mystic_cc_tentagrab.png" id="1_wnuqu"]
+[ext_resource type="PackedScene" uid="uid://bj8buddu2d1up" path="res://actions/skillEffects/FX/Scene/TentacleGrabM.tscn" id="2_q3n3a"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="3_jgwtt"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="4_k4h32"]
+[ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="5_sh6m8"]
+[ext_resource type="Texture2D" uid="uid://crwjl88ks51cr" path="res://actions/actiontexture/UI icons/ICON_mystic_cc_grab.png" id="6_24qvg"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="7_pigiu"]
+[ext_resource type="PackedScene" uid="uid://vf2fr2rqom33" path="res://actions/skillEffects/FX/Scene/grabTarget.tscn" id="8_7def4"]
+
+[sub_resource type="Resource" id="Resource_clqko"]
+script = ExtResource("4_k4h32")
+MagicDMG = false
+amount = 20
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[sub_resource type="Resource" id="Resource_kwmm0"]
+script = ExtResource("5_sh6m8")
+mode = 0
+speed = 0.5
+slot_pairing = {
+3: 1,
+4: 2
+}
+metadata/_custom_type_script = "uid://cxxxcftffxxjh"
+
+[resource]
+script = ExtResource("7_pigiu")
+name = "Attaque"
+descriptionName = "Tentacle grabe"
+description = "Pull an enemy forward and deal damages"
+icon = ExtResource("6_24qvg")
+barkSkill = ""
+required_position = 0
+ImageSkill = ExtResource("1_wnuqu")
+the_target_type = 0
+effects = Array[ExtResource("3_jgwtt")]([SubResource("Resource_clqko"), SubResource("Resource_kwmm0")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("3_jgwtt")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 8
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+is_contact = false
+distance_contact = 0.0
+caster_effect_scene = ExtResource("2_q3n3a")
+target_effect_scene = ExtResource("8_7def4")
+caster_effect_anchor = 0
+target_effect_anchor = 2
+is_beneficial = false
+skip_target_return_anim = true
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

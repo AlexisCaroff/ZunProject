@@ -91,6 +91,8 @@ func _resist_branch() -> Dictionary:
 
 func _give_in_branch() -> Dictionary:
 	await _play_simple(dialogue_give_in_path)
+	# L'équipe rejoint le camp ennemi — on le signale au GameManager
+	_gm.teamCorrupted = true
 	return {"encounter": inquisition_encounter, "scene": give_in_combat_scene}
 
 

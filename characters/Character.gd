@@ -7,14 +7,14 @@ class_name Character
 @onready var pivot                         = $pivot
 @onready var Selector      : TextureRect   = $pivot/Selector
 @onready var arrow                         = $Arrow
-@onready var buff_bar                      = $HBoxContainer
 ## Marqueurs anatomiques pour les VFX — nœuds Node2D enfants de HerosTexture1
-@onready var head_marker   : Node2D        = $pivot/HerosTexture1/HeadMarker
-@onready var torso_marker  : Node2D        = $pivot/HerosTexture1/TorsoMarker
+
+
 
 var hp_Jauge        : ProgressBar
 var LustProgressBar : ProgressBar
 var hornyJauge
+var buff_bar        : HBoxContainer   # référence au HBoxContainer dans CharaUi
 const MAX_EQUIPMENT = 2
 
 # ── État ──────────────────────────────────────────────────
@@ -98,9 +98,9 @@ func _ready():
 		Selector.flip_h = true
 	else:
 		hornyParticules = hornyPart.instantiate()
-		print("horny particules spawn for " + characterData.Charaname)
+		#print("horny particules spawn for " + characterData.Charaname)
 		add_child(hornyParticules)
-		hornyParticules.position += characterData.headPosition
+		hornyParticules.position.y += characterData.headPosition.y
 		hornyParticules.setParticulesAlpha(0.0)
 
 	for buff in characterData.buffs:
@@ -198,10 +198,14 @@ func refresh_stats_from_equipment():
 func add_buff(buff: Buff):
 	var new_buff = buff.duplicate()
 	buffs.append(new_buff)
-	if buff_bar == null:
-		buff_bar = $HBoxContainer
+
+	# S'assure que buff_bar est résolu avant d'instancier l'icône
+	if buff_bar == null and _current_slot != null and _current_slot.CharaUI != null:
+		buff_bar = _current_slot.CharaUI.get_buff_bar()
+
 	var icon = buffui.instantiate()
-	buff_bar.add_child(icon)
+	if buff_bar:
+		buff_bar.add_child(icon)
 	buff_icons.append(icon)
 	icon.updatebuff(new_buff)
 	update_stats()
@@ -256,9 +260,10 @@ func process_taunt():
 func update_ui():
 	if hp_Jauge == null and _current_slot != null:
 		_current_slot.Set_CharaUI()
-		hp_Jauge        = _current_slot.CharaUI.getHpbar()
-		hornyJauge      = _current_slot.CharaUI.get_HornyBar()
-		dotsActions     = _current_slot.CharaUI.getactionpoints()
+		hp_Jauge    = _current_slot.CharaUI.getHpbar()
+		hornyJauge  = _current_slot.CharaUI.get_HornyBar()
+		dotsActions = _current_slot.CharaUI.getactionpoints()
+		buff_bar    = _current_slot.CharaUI.get_buff_bar()
 	if not characterData:
 		return
 	if LustProgressBar == null:
@@ -569,7 +574,6 @@ func get_affinity(target: Character) -> int:
 
 func resetVisuel():
 	sprite.modulate = CharaColor
-	
 	if _current_slot and not attacking and not getattacked:
 		self.z_index         = _current_slot.z_index
 		self.global_position = _current_slot.global_position
@@ -698,11 +702,14 @@ func animate_bonk():
 
 ## Retourne la position globale du marqueur anatomique demandé
 func _get_effect_anchor_pos(anchor: int) -> Vector2:
-	if anchor == Skill.EffectAnchor.HEAD  and is_instance_valid(head_marker):
-		return head_marker.global_position
-	if anchor == Skill.EffectAnchor.TORSO and is_instance_valid(torso_marker):
-		return torso_marker.global_position
-	return global_position
+	var offset: Vector2
+	if anchor == Skill.EffectAnchor.HEAD:
+		offset = characterData.headPosition
+	elif anchor == Skill.EffectAnchor.TORSO:
+		offset = characterData.torso_Position
+	else:
+		return global_position
+	return global_position + offset * scale
 
 
 ## Spawn un VFX sur ce personnage à l'ancrage demandé
@@ -711,6 +718,8 @@ func _spawn_vfx(scene: PackedScene, anchor: int) -> void:
 		return
 	var vfx := scene.instantiate()
 	add_child(vfx)
+	if !characterData.is_player_controlled:
+		vfx.scale.x =-1
 	vfx.global_position = _get_effect_anchor_pos(anchor)
 
 
@@ -720,6 +729,8 @@ func _spawn_vfx_on_target(tgt: Character) -> void:
 		return
 	var vfx := current_skill.target_effect_scene.instantiate()
 	tgt.add_child(vfx)
+	if tgt.characterData.is_player_controlled:
+		vfx.scale.x =-1
 	vfx.global_position = tgt._get_effect_anchor_pos(current_skill.target_effect_anchor)
 
 
@@ -752,7 +763,7 @@ func animate_attack(targets: Array, skill: Skill) -> void:
 
 	emit_signal("skill_animation_started")
 	attacking        = true
-	buff_bar.visible = false
+	if buff_bar: buff_bar.visible = false
 
 	# ── Positions de scène (Node2D dans la scène de combat) ──
 	var hero_P   : Vector2 = cm.hero_skillP.global_position
@@ -770,7 +781,7 @@ func animate_attack(targets: Array, skill: Skill) -> void:
 	else:
 		caster_dest = hero_P3 if characterData.is_player_controlled else enemy_P3
 	normal_size = scale
-	var big_size = normal_size * 2.0
+	var big_size : Vector2 = normal_size * 2.0
 
 	# ── Position cible (cible unique seulement) ──────────────
 	var ally_skill := _skill_targets_ally()
@@ -778,7 +789,7 @@ func animate_attack(targets: Array, skill: Skill) -> void:
 
 	if not multi:
 		for tgt: Character in targets:
-			tgt.buff_bar.visible = false
+			if tgt.buff_bar: tgt.buff_bar.visible = false
 			tgt.getattacked      = true
 			var dest: Vector2
 			# Les cibles vont toujours en P2, qu'elles soient alliées ou ennemies
@@ -789,15 +800,16 @@ func animate_attack(targets: Array, skill: Skill) -> void:
 			target_dests[tgt] = dest
 	else:
 		for tgt: Character in targets:
-			tgt.buff_bar.visible = false
+			if tgt.buff_bar: tgt.buff_bar.visible = false
 			tgt.getattacked      = true
 
 	# ── Textures ─────────────────────────────────────────────
 	sprite.texture = current_skill.ImageSkill
 	var has_heal := current_skill.effects.any(func(e): return e is HealEffect)
-	if not has_heal:
+	var show_hit  := not has_heal and not current_skill.is_beneficial
+	if show_hit:
 		for tgt: Character in targets:
-			if tgt.characterData.current_stamina > 0:
+			if tgt != self and tgt.characterData.current_stamina > 0:
 				tgt.sprite.texture = tgt.characterData.Hit_texture
 
 	# ── VFX caster ───────────────────────────────────────────
@@ -885,20 +897,27 @@ func _on_attack(targets: Array) -> void:
 	await get_tree().create_timer(current_skill.duration).timeout
 
 	# ── Retour aux positions d'origine ───────────────────────
+	# Si skip_target_return_anim est activé (ex: MoveToPosition gère le déplacement),
+	# on ne tweene pas le retour des personnages — seulement caméra et shadow.
 	const T_BACK := 0.25
 	var ret := create_tween()
 	ret.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
-	# Le caster revient à sa place ET retrouve sa taille normale en même temps
-	ret.parallel().tween_property(self,             "position",   _current_slot.global_position,          T_BACK)
-	ret.parallel().tween_property(self,             "scale",      _current_slot.position_data.scale,      T_BACK)
-	ret.parallel().tween_property(ShadowBackground, "modulate:a", 0.0,                                    T_BACK)
-	ret.parallel().tween_property(cam,              "zoom",       cam.baseZoom,                            T_BACK)
-	ret.parallel().tween_property(cam,              "position",   Vector2(960, 540),                       T_BACK)
 
+	# Le caster revient toujours à son slot
+	ret.parallel().tween_property(self, "position", _current_slot.global_position,     T_BACK)
+	ret.parallel().tween_property(self, "scale",    _current_slot.position_data.scale, T_BACK)
+
+	# Les targets : scale remise mais position gérée par MoveToPosition si skip activé
 	for tgt: Character in targets:
 		if tgt._current_slot:
-			ret.parallel().tween_property(tgt, "position", tgt._current_slot.global_position,    T_BACK)
-			ret.parallel().tween_property(tgt, "scale",    tgt._current_slot.position_data.scale, T_BACK)
+			ret.parallel().tween_property(tgt, "scale", tgt._current_slot.position_data.scale, T_BACK)
+			if not current_skill.skip_target_return_anim:
+				ret.parallel().tween_property(tgt, "position", tgt._current_slot.global_position, T_BACK)
+
+	# Caméra et shadow reviennent toujours
+	ret.parallel().tween_property(ShadowBackground, "modulate:a", 0.0,             T_BACK)
+	ret.parallel().tween_property(cam,              "zoom",       cam.baseZoom,     T_BACK)
+	ret.parallel().tween_property(cam,              "position",   Vector2(960, 540), T_BACK)
 
 	await ret.finished
 	after_skilluse(targets)
@@ -906,7 +925,7 @@ func _on_attack(targets: Array) -> void:
 
 func after_skilluse(targets: Array) -> void:
 	attacking        = false
-	buff_bar.visible = true
+	if buff_bar: buff_bar.visible = true
 	Selector.visible = true
 
 	# Reset caster
@@ -926,7 +945,7 @@ func after_skilluse(targets: Array) -> void:
 	# Reset cibles
 	for tgt: Character in targets:
 		tgt.getattacked      = false
-		tgt.buff_bar.visible = true
+		if tgt.buff_bar: tgt.buff_bar.visible = true
 		if tgt._current_slot:
 			tgt.z_index = tgt._current_slot.z_index
 			tgt.scale   = tgt._current_slot.position_data.scale

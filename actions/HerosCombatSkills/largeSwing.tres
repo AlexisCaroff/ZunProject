@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://c730qx0ly721i"]
+
+[ext_resource type="Texture2D" uid="uid://divgajf7h32wb" path="res://characters/charatexture/demo characters/HERO_warrior_axe.png" id="1_meb7g"]
+[ext_resource type="AudioStream" uid="uid://daejgs7ixjjp3" path="res://actions/sound/Weapon Sword Whips 01.wav" id="2_xt3x1"]
+[ext_resource type="PackedScene" uid="uid://cnsfkllro1fsp" path="res://actions/skillEffects/FX/Scene/slashAttack.tscn" id="3_g7xhn"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="4_rljbg"]
+[ext_resource type="Texture2D" uid="uid://d24gv8aeirsdm" path="res://actions/actiontexture/UI icons/ICON_warrior_slash.png" id="5_ngsl7"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="5_xt3x1"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="6_t4oxb"]
+
+[sub_resource type="Resource" id="Resource_g7xhn"]
+script = ExtResource("5_xt3x1")
+MagicDMG = false
+amount = 20
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[resource]
+script = ExtResource("6_t4oxb")
+name = "Large swing"
+descriptionName = "Heavy swing"
+description = "attack one ennemi"
+icon = ExtResource("5_ngsl7")
+attack_sound = ExtResource("2_xt3x1")
+barkSkill = ""
+required_position = 1
+ImageSkill = ExtResource("1_meb7g")
+the_target_type = 0
+effects = Array[ExtResource("4_rljbg")]([SubResource("Resource_g7xhn")])
+two_target_Type = false
+the_second_target_type = 1
+second_effects = Array[ExtResource("4_rljbg")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 4
+cooldown = 4
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.5
+tags = Array[String]([])
+is_contact = true
+distance_contact = 600.0
+caster_effect_scene = ExtResource("3_g7xhn")
+caster_effect_anchor = 0
+target_effect_anchor = 2
+is_beneficial = false
+skip_target_return_anim = false
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
