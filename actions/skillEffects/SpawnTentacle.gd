@@ -4,6 +4,12 @@ class_name SkillEffectSpawnTentacle
 @export var enemy_scene: PackedScene
 @export var spawn_delay: float = 0.5
 
+## Textures de la tentacule selon la cible attrappée
+@export var sprite_warrior  : Texture2D
+@export var sprite_mystic   : Texture2D
+@export var sprite_priestess: Texture2D
+@export var sprite_hunter   : Texture2D
+
 var combatmanager: CombatManager
 
 
@@ -72,7 +78,6 @@ func _spawn_tentacle_in_slot(slot: PositionSlot, grabbed_target: Character, boss
 	grabbed_target.position = new_enemy.position
 	grabbed_target.position.y -= 70
 	grabbed_target.z_index = new_enemy.z_index - 1
-	#grabbed_target.visible=false
 
 	# ── Enregistrement ───────────────────────────────────────────────
 	combatmanager.enemies.append(new_enemy)
@@ -82,12 +87,28 @@ func _spawn_tentacle_in_slot(slot: PositionSlot, grabbed_target: Character, boss
 	# ── Quand la tentacule meurt, la boss re-occupe [3] ──────────────
 	new_enemy.tree_exiting.connect(_on_tentacle_died.bind(slot, boss))
 
+	# ── Sprite selon la cible attrappée ─────────────────────────────
+	var tex := _get_sprite_for_target(grabbed_target)
+	if tex != null:
+		new_enemy.characterData.portrait_texture = tex
+		new_enemy.characterData.Hit_texture      = tex   # ou un hit sprite dédié si tu en as
+		new_enemy.sprite.texture = tex
+
 	# ── File de tours ────────────────────────────────────────────────
 	combatmanager.turn_queue.append(new_enemy)
 	combatmanager.ui.update_turn_queue_ui(combatmanager.turn_queue)
 	new_enemy.update_ui()
 
 	print("✅ Tentacle spawned in [3], grabbing: ", grabbed_target.characterData.Charaname)
+
+
+func _get_sprite_for_target(target: Character) -> Texture2D:
+	match target.characterData.Charaname:
+		"Warrior":  return sprite_warrior
+		"Mystic":   return sprite_mystic
+		"Priestess":return sprite_priestess
+		"Hunter":   return sprite_hunter
+	return null
 
 
 # ─────────────────────────────────────────────

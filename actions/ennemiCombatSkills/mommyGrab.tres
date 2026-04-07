@@ -1,11 +1,15 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://deybvri8mc0gg"]
+[gd_resource type="Resource" script_class="Skill" load_steps=14 format=3 uid="uid://deybvri8mc0gg"]
 
 [ext_resource type="Texture2D" uid="uid://4v2py6qxhw2o" path="res://characters/boss assets/BOSS_broodM_grab.png" id="1_merpb"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_0gssa"]
 [ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="3_c2rjk"]
 [ext_resource type="PackedScene" uid="uid://wasovspg3yc4" path="res://characters/CharacterTestEnemyTentacle.tscn" id="4_5oaeq"]
 [ext_resource type="Script" uid="uid://cnu1tkps1688s" path="res://actions/skillEffects/SpawnTentacle.gd" id="4_merpb"]
+[ext_resource type="Texture2D" uid="uid://bnra3pcckh4xy" path="res://characters/boss assets/BOSS_broodM_tent_caught_hunter.png" id="6_c2rjk"]
+[ext_resource type="Texture2D" uid="uid://c28ege4ff5ggu" path="res://characters/boss assets/BOSS_broodM_tent_caught_mystic.png" id="7_xs41w"]
 [ext_resource type="Texture2D" uid="uid://bhhvdopw8nqlu" path="res://actions/actiontexture/vampire.png" id="8_cy45l"]
+[ext_resource type="Texture2D" uid="uid://boxo6ri5yrnly" path="res://characters/boss assets/BOSS_broodM_tent_caught_priestess.png" id="8_el8xj"]
+[ext_resource type="Texture2D" uid="uid://chl503fppdl5n" path="res://characters/boss assets/BOSS_broodM_tent_caught_warrior.png" id="9_8epi5"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="9_u2hyo"]
 
 [sub_resource type="Resource" id="Resource_coij5"]
@@ -16,6 +20,10 @@ metadata/_custom_type_script = "uid://tjywmaoy4ejj"
 script = ExtResource("4_merpb")
 enemy_scene = ExtResource("4_5oaeq")
 spawn_delay = 0.5
+sprite_warrior = ExtResource("9_8epi5")
+sprite_mystic = ExtResource("7_xs41w")
+sprite_priestess = ExtResource("8_el8xj")
+sprite_hunter = ExtResource("6_c2rjk")
 metadata/_custom_type_script = "uid://cnu1tkps1688s"
 
 [resource]
