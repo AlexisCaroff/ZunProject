@@ -532,6 +532,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_iaf2c")
 flat = true
 
 [node name="position5" type="Node2D" parent="ennemiePosition"]
+visible = false
 z_index = 1
 position = Vector2(92.2223, -65.5556)
 script = ExtResource("15_hvocy")
