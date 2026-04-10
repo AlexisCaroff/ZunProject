@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=3 uid="uid://e0tgmgc5pbw4"]
+
+[ext_resource type="Script" uid="uid://dacdwm0tqo27r" path="res://anim_fx.gd" id="1_agtvn"]
+[ext_resource type="Texture2D" uid="uid://bhrt74yv1vsxy" path="res://actions/skillEffects/FX/FX_target.png" id="2_q3nfr"]
+[ext_resource type="Texture2D" uid="uid://baxp27hdvmddn" path="res://actions/skillEffects/FX/FX_temptress_cast_over.png" id="3_gna5y"]
+
+[sub_resource type="Animation" id="Animation_7h147"]
+resource_name = "FX_anim"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FxTemptressCastOver:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.843334, 1.13333, 1.40333, 2, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.7, 0.28, 0, 0), Color(0.7, 0.28, 0, 0), Color(0.7, 0.28, 0, 1), Color(0.7, 0.28, 0, 1), Color(0.7, 0.28, 0, 0), Color(0.7, 0.28, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FxCharge:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.513334, 0.863334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.4, 0.385), Vector2(0.21763, 0.209789)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FxCharge:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.52, 0.87, 1.12),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.803846, 0.529231, 0.346154, 0), Color(0.803846, 0.529231, 0.346154, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0.803846, 0.529231, 0.346154, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fwcky"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FxTemptressCastOver:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.7, 0.28, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FxCharge:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.21763, 0.209789)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FxCharge:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.803846, 0.529231, 0.346154, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lvn5b"]
+_data = {
+&"FX_anim": SubResource("Animation_7h147"),
+&"RESET": SubResource("Animation_fwcky")
+}
+
+[node name="AnimFX" type="Node2D"]
+script = ExtResource("1_agtvn")
+
+[node name="FxCharge" type="Sprite2D" parent="."]
+modulate = Color(0.803846, 0.529231, 0.346154, 0)
+position = Vector2(-20, 1)
+scale = Vector2(0.21763, 0.209789)
+texture = ExtResource("2_q3nfr")
+
+[node name="FxTemptressCastOver" type="Sprite2D" parent="."]
+modulate = Color(0.7, 0.28, 0, 0)
+z_index = -2
+position = Vector2(-23, 13)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_gna5y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lvn5b")
+}

@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://ddsgfv1yaq58f"]
+
+[ext_resource type="Texture2D" uid="uid://73264hhutw6v" path="res://characters/boss assets/BOSS_broodM_charm.png" id="1_ebf87"]
+[ext_resource type="PackedScene" uid="uid://cpy83ejqmg2hn" path="res://actions/skillEffects/FX/Scene/charmNymphe.tscn" id="2_hjk8b"]
+[ext_resource type="PackedScene" uid="uid://8vmc6rbjidyt" path="res://actions/damageEffect/trailAttackVFX.tscn" id="3_2flid"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="4_a3mqv"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="5_thovf"]
+[ext_resource type="Texture2D" uid="uid://c6ptbylmpvkdy" path="res://actions/CampSkill/masturbIcon.png" id="6_cswgh"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="7_8ohna"]
+[ext_resource type="PackedScene" uid="uid://8j60vwihncpy" path="res://actions/skillEffects/FX/Scene/charmed.tscn" id="8_e8mt0"]
+
+[sub_resource type="Resource" id="Resource_d6f35"]
+script = ExtResource("5_thovf")
+MagicDMG = false
+amount = 25
+damage_target_stat = 1
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[resource]
+script = ExtResource("7_8ohna")
+name = "Charme"
+descriptionName = "Charme"
+description = "incrase horny"
+icon = ExtResource("6_cswgh")
+barkSkill = ""
+required_position = 0
+ImageSkill = ExtResource("1_ebf87")
+the_target_type = 0
+effects = Array[ExtResource("4_a3mqv")]([SubResource("Resource_d6f35")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("4_a3mqv")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 1.0
+tags = Array[String]([])
+is_contact = true
+distance_contact = 300.0
+effect = ExtResource("3_2flid")
+caster_effect_scene = ExtResource("2_hjk8b")
+target_effect_scene = ExtResource("8_e8mt0")
+caster_effect_anchor = 0
+target_effect_anchor = 1
+is_beneficial = false
+skip_target_return_anim = false
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

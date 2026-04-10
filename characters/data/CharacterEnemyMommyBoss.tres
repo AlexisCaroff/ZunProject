@@ -10,8 +10,8 @@
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="7_dyn70"]
 [ext_resource type="Texture2D" uid="uid://s02pnbcj1wa5" path="res://characters/boss assets/BOSS_broodM_idle.png" id="8_6dkli"]
 [ext_resource type="Resource" uid="uid://deybvri8mc0gg" path="res://actions/ennemiCombatSkills/mommyGrab.tres" id="9_6dkli"]
-[ext_resource type="Resource" uid="uid://cvpggc0yt3l4o" path="res://actions/ennemiCombatSkills/Ennemi_charme.tres" id="9_swgmx"]
 [ext_resource type="Resource" uid="uid://b4okliodacjdm" path="res://actions/ennemiCombatSkills/spawnEnnemie.tres" id="10_rphim"]
+[ext_resource type="Resource" uid="uid://ddsgfv1yaq58f" path="res://actions/ennemiCombatSkills/boss_charme.tres" id="11_kgh6k"]
 
 [sub_resource type="Resource" id="Resource_tr8hi"]
 script = ExtResource("2_6dkli")
@@ -33,17 +33,17 @@ Charaname = "Mommy"
 IsDemon = true
 size = "average"
 affinity = Dictionary[String, int]({})
-base_max_stamina = 100
+base_max_stamina = 200
 base_max_stress = 100
 base_max_horniness = 100
 base_attack = 10
-base_defense = 5
+base_defense = 10
 base_willpower = 5
 base_initiative = 2000
 base_evasion = 5
 base_precision = 100
 attack = 10
-defense = 5
+defense = 10
 willpower = 5
 evasion = 5
 initiative = 2000
@@ -51,14 +51,14 @@ peek = 0
 equipped_items = Array[ExtResource("4_tr8hi")]([])
 stun = false
 Chara_position = 1
-max_stamina = 100
+max_stamina = 200
 max_stress = 100
 max_horniness = 100
-current_stamina = 100
+current_stamina = 200
 current_stress = 0
 current_horniness = 0
 isOneshot = false
-skill_resources = Array[Resource]([ExtResource("9_6dkli"), ExtResource("9_swgmx"), ExtResource("10_rphim"), ExtResource("9_6dkli"), ExtResource("9_6dkli")])
+skill_resources = Array[Resource]([ExtResource("9_6dkli"), ExtResource("11_kgh6k"), ExtResource("10_rphim"), ExtResource("9_6dkli"), ExtResource("9_6dkli")])
 tags = Array[String]([])
 is_player_controlled = false
 ai_brain = SubResource("Resource_tr8hi")

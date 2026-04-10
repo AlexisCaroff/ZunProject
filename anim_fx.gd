@@ -7,4 +7,7 @@ func _ready() -> void:
 	anim.play("FX_anim")
 	await anim.animation_finished
 	queue_free()
- 
+	
+func remove():
+	
+	queue_free()

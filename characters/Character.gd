@@ -37,10 +37,10 @@ const MissEffectScene   := preload("res://actions/damageEffect/miss_vfx.tscn")
 const DebuffEffectScene := preload("res://actions/damageEffect/debuffVfx.tscn")
 const BonkEffectScene   := preload("res://actions/damageEffect/bonkVFX.tscn")
 const hornyPart         := preload("res://actions/damageEffect/horny_particules.tscn")
-const stunPart          := preload("res://actions/damageEffect/Stun_particules.tscn")
+const stunPart          := preload("res://actions/skillEffects/FX/Scene/stun_Fx.tscn")
 const buffui            := preload("res://UI/buffUi.tscn")
 
-var StunParticule  : StunParticules
+var StunParticule  : SkillFX
 var hornyParticules
 
 # ── Signaux ───────────────────────────────────────────────
@@ -296,7 +296,7 @@ func update_ui():
 		if StunParticule == null:
 			StunParticule = stunPart.instantiate()
 			add_child(StunParticule)
-			StunParticule.position = characterData.headPosition
+			StunParticule.position.y = characterData.headPosition.y
 	else:
 		if StunParticule != null:
 			StunParticule.remove()

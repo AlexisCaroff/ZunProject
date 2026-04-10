@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://cswp6nkwg6iwu"]
+[gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://cswp6nkwg6iwu"]
 
 [ext_resource type="Texture2D" uid="uid://7s856xrt06cp" path="res://characters/charatexture/demo characters/HERO_priestess_chant.png" id="1_rgbct"]
+[ext_resource type="PackedScene" uid="uid://e0tgmgc5pbw4" path="res://actions/skillEffects/FX/Scene/healPristres.tscn" id="2_ioqbf"]
 [ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="2_rrrrh"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_yt4kq"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="3_rrrrh"]
@@ -48,6 +49,7 @@ duration = 1.0
 tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
+caster_effect_scene = ExtResource("2_ioqbf")
 caster_effect_anchor = 0
 target_effect_anchor = 1
 is_beneficial = false
