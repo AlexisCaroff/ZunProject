@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="1_a0q4b"]
 [ext_resource type="Script" uid="uid://cm44dout6mc4v" path="res://lvl/DonjonRessource.gd" id="2_sowf2"]
 [ext_resource type="Resource" uid="uid://b5nqhfedb63on" path="res://lvl/Hall1/Hall1.tres" id="2_vhcbw"]
-[ext_resource type="Resource" uid="uid://dfukdcgmifh5j" path="res://lvl/salle2/Corridor1.tres" id="3_0haa1"]
+[ext_resource type="Resource" uid="uid://dfukdcgmifh5j" path="res://lvl/Corridor1/Corridor1.tres" id="3_0haa1"]
 [ext_resource type="Resource" uid="uid://hsq4jpscmjyc" path="res://lvl/Room3/Room3.tres" id="4_bo08l"]
 [ext_resource type="Resource" uid="uid://bcvwbh3fvvtx2" path="res://lvl/Corridor2/Corridor2.tres" id="4_gthhp"]
 [ext_resource type="Resource" uid="uid://y8m0h6ous7ho" path="res://lvl/Salon1/Salon1.tres" id="6_8cbj6"]

@@ -12,7 +12,7 @@ var initiative_icon_path: String = ""
 @onready var stress_label = $Stress
 @onready var ui :CharaUi = $charaCombatUI
 @onready var sprite = $pivot/HerosTexture1
-@onready var buff_bar = $HBuffsContainer
+@onready var buff_bar = ui.get_buff_bar()
 @onready var hp_Jauge = ui.getHpbar()
 @onready var horny_Jauge = ui.getLustbar()
 @onready var horny_Rect = ui.get_HornyBar()
@@ -22,7 +22,7 @@ var initiative_icon_path: String = ""
 # --- Infos de base
 
 
-@onready var buff_icons = $HBuffsContainer
+@onready var buff_icons = ui.get_buff_bar()
 # --- Valeurs dynamiques
 
 var campposition :CampPosition 
@@ -35,6 +35,10 @@ var camp : Campement
 var camp_skills: Array[CampSkill] = []
 
 func _ready() -> void:
+	var mat := ShaderMaterial.new()
+	mat.shader = load("res://characters/character_outline.gdshader")
+	sprite.material = mat
+	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
 	for p in actionspoints:
 		p.visible =false
 	CharaScale= self.scale
@@ -104,6 +108,7 @@ func animate_heal(damage:int, source:CharaCamp, color=null):
 
 func animate_selected():
 	emit_signal("skill_animation_started")
+	
 	var tween := create_tween() as Tween
 	var CharaScale = self.scale
 	var normal_size = CharaScale

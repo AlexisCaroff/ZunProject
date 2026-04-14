@@ -1,11 +1,40 @@
-[gd_scene load_steps=7 format=3 uid="uid://cw5s8ebimv1wh"]
+[gd_scene load_steps=11 format=3 uid="uid://cw5s8ebimv1wh"]
 
-[ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="1_oausj"]
 [ext_resource type="Script" uid="uid://cevuvmhmwe5y5" path="res://UI/item_ui.gd" id="1_q6op2"]
-[ext_resource type="Texture2D" uid="uid://2xyreu4glom" path="res://UI/etoile.png" id="2_nmcp0"]
-[ext_resource type="Texture2D" uid="uid://cwyh8uva3wdam" path="res://UI/goldIcon.png" id="2_q6op2"]
-[ext_resource type="Script" uid="uid://xgcdntldtp3u" path="res://UI/rotateSprite.gd" id="3_xmd8g"]
+[ext_resource type="Texture2D" uid="uid://dporh0fh5sn4g" path="res://UI/flare.png" id="2_cfgno"]
+[ext_resource type="Texture2D" uid="uid://b7s5yca1s1i2i" path="res://Items/ItemIcons/Loot_armor.png" id="3_qyigm"]
+[ext_resource type="Texture2D" uid="uid://leli1dyf65l7" path="res://UI/UI boxes/UI_combat_itembox.png" id="4_nmcp0"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="4_qyigm"]
+
+[sub_resource type="Gradient" id="Gradient_nmcp0"]
+offsets = PackedFloat32Array(0, 0.109005, 0.578199, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.359, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s71qm"]
+gradient = SubResource("Gradient_nmcp0")
+
+[sub_resource type="Curve" id="Curve_xmd8g"]
+_data = [Vector2(0, 0.478669), 0.0, 0.0, 0, 0, Vector2(0.202532, 0.797753), 0.0, 0.0, 0, 0, Vector2(0.409283, 0.539326), 0.0, 0.0, 0, 0, Vector2(0.607595, 0.831461), 0.0, 0.0, 0, 0, Vector2(0.810127, 0.494382), 0.0, 0.0, 0, 0, Vector2(1, 0.797753), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_hg625"]
+curve = SubResource("Curve_xmd8g")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lxu14"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(0, 1, 0)
+angle_min = 1.07288e-05
+angle_max = 360.0
+direction = Vector3(0, 0, 0)
+spread = 90.0
+angular_velocity_min = -30.0
+angular_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.25
+scale_curve = SubResource("CurveTexture_hg625")
+color = Color(0.964, 0.916, 0.825, 0.182)
+color_ramp = SubResource("GradientTexture1D_s71qm")
 
 [node name="itemUI" type="Control"]
 layout_mode = 3
@@ -16,72 +45,36 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q6op2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0.968, 1, 0.8, 0.083)
-position = Vector2(61.7577, 67.7577)
-scale = Vector2(0.220757, 0.220757)
-texture = ExtResource("2_nmcp0")
-script = ExtResource("3_xmd8g")
-vitesse = -0.5
-scale_amplitude = 0.2
-scale_speed = 0.31
-base_scale = Vector2(0.18, 0.18)
-
-[node name="Sprite2D4" type="Sprite2D" parent="."]
-self_modulate = Color(0.968, 1, 0.8, 0.083)
-position = Vector2(70, 68)
-rotation = 0.785398
-scale = Vector2(0.220757, 0.220757)
-texture = ExtResource("2_nmcp0")
-script = ExtResource("3_xmd8g")
-vitesse = -0.4
-scale_amplitude = 0.2
-scale_speed = 0.25
-base_scale = Vector2(0.18, 0.18)
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-self_modulate = Color(0.968, 1, 0.8, 0.083)
-position = Vector2(68, 69)
-scale = Vector2(0.220757, 0.220757)
-texture = ExtResource("2_nmcp0")
-script = ExtResource("3_xmd8g")
-vitesse = 0.45
-scale_amplitude = 0.2
-scale_speed = 0.2
-base_scale = Vector2(0.18, 0.18)
-
-[node name="Sprite2D3" type="Sprite2D" parent="."]
-self_modulate = Color(0.968, 1, 0.8, 0.083)
-position = Vector2(66, 70)
-rotation = 0.785398
-scale = Vector2(0.220757, 0.220757)
-texture = ExtResource("2_nmcp0")
-script = ExtResource("3_xmd8g")
-vitesse = 0.4
-scale_amplitude = 0.2
-scale_speed = 0.3
-base_scale = Vector2(0.18, 0.18)
-
 [node name="boxUI" type="TextureRect" parent="."]
 layout_mode = 0
-texture = ExtResource("1_oausj")
+offset_right = 141.0
+offset_bottom = 141.0
+texture = ExtResource("4_nmcp0")
 
 [node name="imageObj" type="TextureRect" parent="boxUI"]
 layout_mode = 0
-offset_left = 29.0
-offset_top = 33.0
-offset_right = 102.0
-offset_bottom = 103.0
-texture = ExtResource("2_q6op2")
+offset_left = -5.0
+offset_top = -6.0
+offset_right = 145.0
+offset_bottom = 138.0
+texture = ExtResource("3_qyigm")
 expand_mode = 1
 
 [node name="Labelname" type="Label" parent="boxUI"]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 127.0
-offset_right = 118.0
-offset_bottom = 184.0
+offset_left = 21.0
+offset_top = 135.0
+offset_right = 123.0
+offset_bottom = 192.0
 theme_override_fonts/font = ExtResource("4_qyigm")
 theme_override_font_sizes/font_size = 20
 text = "Name"
 horizontal_alignment = 1
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="boxUI"]
+z_index = -1
+position = Vector2(70, 69)
+amount = 10
+texture = ExtResource("2_cfgno")
+lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_lxu14")

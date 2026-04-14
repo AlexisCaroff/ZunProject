@@ -284,8 +284,8 @@ func loved_one_go_out():
 		chara.campposition.visible = true
 	for char in twoInside:
 		char.characterData.current_horniness= max(0, char.characterData.current_horniness - 20)
-	twoInside[0].characterData.affinity[twoInside[1].characterData.Charaname] += 100
-	twoInside[1].characterData.affinity[twoInside[0].characterData.Charaname] += 100
+	twoInside[0].characterData.affinity[twoInside[1].characterData.Charaname] += 20
+	twoInside[1].characterData.affinity[twoInside[0].characterData.Charaname] += 20
 	print (twoInside[0].characterData.Charaname+" and "+ twoInside[1].characterData.Charaname +" love "+str(twoInside[1].characterData.affinity[twoInside[0].characterData.Charaname]))
 	print("yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 	await get_tree().process_frame

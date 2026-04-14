@@ -11,7 +11,9 @@ class_name StartMenu
 
 
 func _ready():
+	
 	button_start.pressed.connect(_on_start_pressed)
+	button_start.animscale()
 	button_option.pressed.connect(_on_option_pressed)
 	button_gallerie.pressed.connect(_on_gallerie_pressed)
 	button_glossaire.pressed.connect(_on_glossaire_pressed)

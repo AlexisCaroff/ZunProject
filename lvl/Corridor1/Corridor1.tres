@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="RoomResource" load_steps=6 format=3 uid="uid://dfukdcgmifh5j"]
 
-[ext_resource type="PackedScene" uid="uid://uo6aacbprsjm" path="res://lvl/salle2/combat_Corridor1.tscn" id="1_raogm"]
-[ext_resource type="PackedScene" uid="uid://dhetbwfnqklgn" path="res://lvl/salle2/doorCorridor1.tscn" id="2_gh8v6"]
-[ext_resource type="Resource" uid="uid://dum04r5du6nss" path="res://lvl/salle2/encounterCorridor1.tres" id="3_3u16d"]
-[ext_resource type="PackedScene" uid="uid://onbj8isiiayd" path="res://lvl/salle2/explorationCorridor1.tscn" id="4_3frfe"]
+[ext_resource type="PackedScene" uid="uid://uo6aacbprsjm" path="res://lvl/Corridor1/combat_Corridor1.tscn" id="1_raogm"]
+[ext_resource type="PackedScene" uid="uid://dhetbwfnqklgn" path="res://lvl/Corridor1/doorCorridor1.tscn" id="2_gh8v6"]
+[ext_resource type="Resource" uid="uid://dum04r5du6nss" path="res://lvl/Corridor1/encounterCorridor1.tres" id="3_3u16d"]
+[ext_resource type="PackedScene" uid="uid://onbj8isiiayd" path="res://lvl/Corridor1/explorationCorridor1.tscn" id="4_3frfe"]
 [ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="5_3dnro"]
 
 [resource]

@@ -11,3 +11,4 @@ enum EffectType { NONE, ITEM, BUFF, TAG }
 @export var item: Resource        # Item.tres
 @export var buff: Buff       # Buff.tres
 @export var tag: String           # ex: "cursed"
+@export var opening : bool = false

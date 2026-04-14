@@ -10,13 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://ch8bpedx177r3" path="res://UI/itemBack.png" id="6_oq4fx"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="7_txi41"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="8_ls6yl"]
+[ext_resource type="Texture2D" uid="uid://utdubw2ugjtc" path="res://UI/UI boxes/UI_affinity_crystal_off.png" id="11_2m5xi"]
 [ext_resource type="Texture2D" uid="uid://d162na82h3g2m" path="res://UI/exite.png" id="11_rggra"]
 [ext_resource type="FontFile" uid="uid://dy4n8qboodyud" path="res://font/MarcellusSC-Regular.ttf" id="12_7poab"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="12_jlxux"]
+[ext_resource type="Texture2D" uid="uid://7ryxw7uwc0yd" path="res://UI/UI boxes/UI_affinity_crystal_on.png" id="12_v4oee"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="12_wlqro"]
 [ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="13_wlqro"]
-[ext_resource type="Texture2D" uid="uid://dh0jk7iwyosg6" path="res://UI/affinityCrystalBack.png" id="14_2m5xi"]
-[ext_resource type="Texture2D" uid="uid://be3qpgs2idwin" path="res://UI/affinityCrystal.png" id="15_v4oee"]
 [ext_resource type="Texture2D" uid="uid://d22q2ilbbl8dn" path="res://UI/ArrowL.png" id="20_13e1g"]
 [ext_resource type="Texture2D" uid="uid://barnu2syc2ays" path="res://UI/menuCharacterBoxChara.png" id="20_nsfhk"]
 [ext_resource type="Texture2D" uid="uid://cqp5sr6locjdw" path="res://UI/ArrowRt.png" id="21_13e1g"]
@@ -523,72 +523,66 @@ self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 129.0
-offset_top = 53.0
-offset_right = 229.0
-offset_bottom = 153.0
-scale = Vector2(0.37, 0.465)
-texture = ExtResource("14_2m5xi")
+offset_left = 114.0
+offset_top = 39.0
+offset_right = 214.0
+offset_bottom = 139.0
+scale = Vector2(0.585169, 0.735415)
+texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara1/AffinityCrystalBack1"]
-modulate = Color(0.392157, 0.364706, 0.811765, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = -65.0
-offset_top = -56.0
-offset_right = 193.0
-offset_bottom = 152.0
+offset_left = -8.10813
+offset_right = 120.892
+offset_bottom = 108.0
 scale = Vector2(0.9, 0.9)
-texture = ExtResource("15_v4oee")
+texture = ExtResource("12_v4oee")
 
 [node name="AffinityCrystalBack2" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
 self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 196.0
-offset_top = 53.0
-offset_right = 296.0
-offset_bottom = 153.0
-scale = Vector2(0.37, 0.465)
-texture = ExtResource("14_2m5xi")
+offset_left = 183.0
+offset_top = 41.0
+offset_right = 283.0
+offset_bottom = 141.0
+scale = Vector2(0.585169, 0.735415)
+texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara1/AffinityCrystalBack2"]
-modulate = Color(0.429091, 0.342463, 0.811765, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = -65.0
-offset_top = -56.0
-offset_right = 193.0
-offset_bottom = 152.0
+offset_left = -8.10813
+offset_right = 120.892
+offset_bottom = 108.0
 scale = Vector2(0.9, 0.9)
-texture = ExtResource("15_v4oee")
+texture = ExtResource("12_v4oee")
 
 [node name="AffinityCrystalBack3" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
 self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 264.0
-offset_top = 53.0
-offset_right = 364.0
-offset_bottom = 153.0
-scale = Vector2(0.37, 0.465)
-texture = ExtResource("14_2m5xi")
+offset_left = 246.0
+offset_top = 39.0
+offset_right = 346.0
+offset_bottom = 139.0
+scale = Vector2(0.585169, 0.735415)
+texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara1/AffinityCrystalBack3"]
-modulate = Color(0.473297, 0.342592, 0.811765, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = -65.0
-offset_top = -56.0
-offset_right = 193.0
-offset_bottom = 152.0
+offset_left = -8.10813
+offset_right = 120.892
+offset_bottom = 108.0
 scale = Vector2(0.9, 0.9)
-texture = ExtResource("15_v4oee")
+texture = ExtResource("12_v4oee")
 
 [node name="LustProgressBar3" type="ProgressBar" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
 modulate = Color(0.392157, 0.364706, 0.811765, 1)
@@ -600,7 +594,7 @@ offset_bottom = 88.0
 theme_override_styles/background = SubResource("StyleBoxFlat_a3lxb")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6hptt")
 step = 1.0
-value = 40.0
+value = 66.0
 show_percentage = false
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
@@ -664,72 +658,66 @@ self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 129.0
-offset_top = 53.0
-offset_right = 229.0
-offset_bottom = 153.0
-scale = Vector2(0.37, 0.465)
-texture = ExtResource("14_2m5xi")
+offset_left = 114.0
+offset_top = 39.0
+offset_right = 214.0
+offset_bottom = 139.0
+scale = Vector2(0.585169, 0.735415)
+texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara2/AffinityCrystalBack1"]
-modulate = Color(0.392157, 0.364706, 0.811765, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = -65.0
-offset_top = -56.0
-offset_right = 193.0
-offset_bottom = 152.0
+offset_left = -8.10813
+offset_right = 120.892
+offset_bottom = 108.0
 scale = Vector2(0.9, 0.9)
-texture = ExtResource("15_v4oee")
+texture = ExtResource("12_v4oee")
 
 [node name="AffinityCrystalBack2" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
 self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 196.0
-offset_top = 53.0
-offset_right = 296.0
-offset_bottom = 153.0
-scale = Vector2(0.37, 0.465)
-texture = ExtResource("14_2m5xi")
+offset_left = 183.0
+offset_top = 41.0
+offset_right = 283.0
+offset_bottom = 141.0
+scale = Vector2(0.585169, 0.735415)
+texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara2/AffinityCrystalBack2"]
-modulate = Color(0.429091, 0.342463, 0.811765, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = -65.0
-offset_top = -56.0
-offset_right = 193.0
-offset_bottom = 152.0
+offset_left = -8.10813
+offset_right = 120.892
+offset_bottom = 108.0
 scale = Vector2(0.9, 0.9)
-texture = ExtResource("15_v4oee")
+texture = ExtResource("12_v4oee")
 
 [node name="AffinityCrystalBack3" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
 self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 264.0
-offset_top = 53.0
-offset_right = 364.0
-offset_bottom = 153.0
-scale = Vector2(0.37, 0.465)
-texture = ExtResource("14_2m5xi")
+offset_left = 246.0
+offset_top = 39.0
+offset_right = 346.0
+offset_bottom = 139.0
+scale = Vector2(0.585169, 0.735415)
+texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara2/AffinityCrystalBack3"]
-modulate = Color(0.473297, 0.342592, 0.811765, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = -65.0
-offset_top = -56.0
-offset_right = 193.0
-offset_bottom = 152.0
+offset_left = -8.10813
+offset_right = 120.892
+offset_bottom = 108.0
 scale = Vector2(0.9, 0.9)
-texture = ExtResource("15_v4oee")
+texture = ExtResource("12_v4oee")
 
 [node name="LustProgressBar3" type="ProgressBar" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
 modulate = Color(0.392157, 0.364706, 0.811765, 1)
@@ -741,7 +729,7 @@ offset_bottom = 88.0
 theme_override_styles/background = SubResource("StyleBoxFlat_a3lxb")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6hptt")
 step = 1.0
-value = 40.0
+value = 66.0
 show_percentage = false
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
@@ -805,72 +793,66 @@ self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 129.0
-offset_top = 53.0
-offset_right = 229.0
-offset_bottom = 153.0
-scale = Vector2(0.37, 0.465)
-texture = ExtResource("14_2m5xi")
+offset_left = 114.0
+offset_top = 39.0
+offset_right = 214.0
+offset_bottom = 139.0
+scale = Vector2(0.585169, 0.735415)
+texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara3/AffinityCrystalBack1"]
-modulate = Color(0.392157, 0.364706, 0.811765, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = -65.0
-offset_top = -56.0
-offset_right = 193.0
-offset_bottom = 152.0
+offset_left = -8.10813
+offset_right = 120.892
+offset_bottom = 108.0
 scale = Vector2(0.9, 0.9)
-texture = ExtResource("15_v4oee")
+texture = ExtResource("12_v4oee")
 
 [node name="AffinityCrystalBack2" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara3"]
 self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 196.0
-offset_top = 53.0
-offset_right = 296.0
-offset_bottom = 153.0
-scale = Vector2(0.37, 0.465)
-texture = ExtResource("14_2m5xi")
+offset_left = 183.0
+offset_top = 41.0
+offset_right = 283.0
+offset_bottom = 141.0
+scale = Vector2(0.585169, 0.735415)
+texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara3/AffinityCrystalBack2"]
-modulate = Color(0.429091, 0.342463, 0.811765, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = -65.0
-offset_top = -56.0
-offset_right = 193.0
-offset_bottom = 152.0
+offset_left = -8.10813
+offset_right = 120.892
+offset_bottom = 108.0
 scale = Vector2(0.9, 0.9)
-texture = ExtResource("15_v4oee")
+texture = ExtResource("12_v4oee")
 
 [node name="AffinityCrystalBack3" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara3"]
 self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 264.0
-offset_top = 53.0
-offset_right = 364.0
-offset_bottom = 153.0
-scale = Vector2(0.37, 0.465)
-texture = ExtResource("14_2m5xi")
+offset_left = 246.0
+offset_top = 39.0
+offset_right = 346.0
+offset_bottom = 139.0
+scale = Vector2(0.585169, 0.735415)
+texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara3/AffinityCrystalBack3"]
-modulate = Color(0.473297, 0.342592, 0.811765, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = -65.0
-offset_top = -56.0
-offset_right = 193.0
-offset_bottom = 152.0
+offset_left = -8.10813
+offset_right = 120.892
+offset_bottom = 108.0
 scale = Vector2(0.9, 0.9)
-texture = ExtResource("15_v4oee")
+texture = ExtResource("12_v4oee")
 
 [node name="LustProgressBar3" type="ProgressBar" parent="CanvasLayer/CharactersPanelAffinity/chara3"]
 modulate = Color(0.392157, 0.364706, 0.811765, 1)
@@ -882,7 +864,7 @@ offset_bottom = 88.0
 theme_override_styles/background = SubResource("StyleBoxFlat_a3lxb")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6hptt")
 step = 1.0
-value = 40.0
+value = 66.0
 show_percentage = false
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer/CharactersPanelAffinity/chara3"]

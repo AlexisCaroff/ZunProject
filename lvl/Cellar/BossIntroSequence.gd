@@ -13,6 +13,8 @@ class_name BossIntroSequence
 
 @export var boss_encounter: CombatEncounter
 @export var inquisition_encounter: CombatEncounter
+## Scène de combat chargée si le joueur résiste (remplace entièrement la scène courante)
+@export var resist_combat_scene: PackedScene
 ## Scène de combat chargée si le joueur cède (remplace entièrement la scène courante)
 @export var give_in_combat_scene: PackedScene
 
@@ -86,6 +88,11 @@ func _corrupt_branch() -> Dictionary:
 
 func _resist_branch() -> Dictionary:
 	await _play_simple(dialogue_resist_path)
+
+	if resist_combat_scene != null:
+		_gm.load_scene_direct(resist_combat_scene, boss_encounter)
+		return {"encounter": null, "scene": null, "handled": true}
+
 	return {"encounter": boss_encounter, "scene": null}
 
 

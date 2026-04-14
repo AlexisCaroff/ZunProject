@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://ddokwgifpnrcf"]
 
-[ext_resource type="Texture2D" uid="uid://cfaduihoq380i" path="res://Items/ItemIcons/ring.png" id="1_dw1wr"]
+[ext_resource type="Texture2D" uid="uid://3y4fn44cqfxy" path="res://Items/ItemIcons/LOOT_ring.png" id="1_dw1wr"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="1_e17xq"]
 
 [resource]

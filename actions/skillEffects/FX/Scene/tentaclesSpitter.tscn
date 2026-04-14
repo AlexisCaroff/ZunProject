@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3x5oatcp62nu"]
+[gd_scene load_steps=8 format=3 uid="uid://b3x5oatcp62nu"]
 
 [ext_resource type="Script" uid="uid://dacdwm0tqo27r" path="res://anim_fx.gd" id="1_0xhe3"]
 [ext_resource type="Texture2D" uid="uid://cb26khiomivep" path="res://demo characters/ENEMY_spitter_jump.png" id="2_0xhe3"]
-[ext_resource type="Texture2D" uid="uid://b3stvq6r8gbr5" path="res://actions/skillEffects/FX/FX_charge.png" id="3_0xhe3"]
+[ext_resource type="Texture2D" uid="uid://dqiwmaugg2jig" path="res://actions/skillEffects/FX/FX_stab.png" id="3_wf8kr"]
+[ext_resource type="Texture2D" uid="uid://bqdx2bmb2i6jx" path="res://actions/skillEffects/FX/FX_chargeHit.png" id="4_wf8kr"]
 
 [sub_resource type="Animation" id="Animation_7h147"]
 resource_name = "FX_anim"
@@ -13,10 +14,34 @@ tracks/0/path = NodePath("FxCharge:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.233333, 0.5, 0.766667, 1),
+"times": PackedFloat32Array(0, 0.233333, 0.633333, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0.900284, 0.553815, 0.797287, 1), Color(0.936295, 0.516459, 0.835823, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FxChargeHit:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.333333, 0.497491, 0.790133, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FxCharge:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 0.255), Vector2(0.215174, 0.255334)]
 }
 
 [sub_resource type="Animation" id="Animation_fwcky"]
@@ -32,6 +57,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FxChargeHit:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FxCharge:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.215174, 0.255334)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lvn5b"]
@@ -52,12 +101,20 @@ texture = ExtResource("2_0xhe3")
 [node name="FxCharge" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
 z_index = -1
-position = Vector2(45, -35)
-rotation = -0.0523599
-scale = Vector2(0.215174, 0.217085)
-texture = ExtResource("3_0xhe3")
+position = Vector2(-13, -45)
+rotation = -0.23911
+scale = Vector2(0.215174, 0.255334)
+texture = ExtResource("3_wf8kr")
+offset = Vector2(-300, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_lvn5b")
 }
+
+[node name="FxChargeHit" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(92.0563, -34.4374)
+rotation = -0.0523599
+scale = Vector2(0.208263, 0.218713)
+texture = ExtResource("4_wf8kr")

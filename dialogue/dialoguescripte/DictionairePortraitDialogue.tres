@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PortraitsResource" load_steps=10 format=3 uid="uid://dpejhug6a0i4d"]
+[gd_resource type="Resource" script_class="PortraitsResource" load_steps=11 format=3 uid="uid://dpejhug6a0i4d"]
 
 [ext_resource type="Script" uid="uid://bckoqne0r03nj" path="res://dialogue/dialoguescripte/PortraitsResource.gd" id="1_q5l30"]
 [ext_resource type="Texture2D" uid="uid://diwmoyaawsxq6" path="res://characters/portraits/PORTRAIT_hero_mystic.png" id="2_n0cmy"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://qnx238xkf387" path="res://characters/portraits/PORTRAIT_boss_inquisitor_cloak.png" id="6_wl34g"]
 [ext_resource type="Texture2D" uid="uid://ch0glbvglku6v" path="res://characters/portraits/PORTRAIT_boss_inquisitor.png" id="7_wl34g"]
 [ext_resource type="Texture2D" uid="uid://cx85cu77rl5po" path="res://characters/portraits/PORTRAIT_boss_inquisitor_cloakM.png" id="8_rnvbi"]
+[ext_resource type="Texture2D" uid="uid://xbjwv5qg2xmp" path="res://characters/portraits/PORTRAIT_hero_hunter.png" id="9_usnif"]
 
 [resource]
 script = ExtResource("1_q5l30")
@@ -16,6 +17,7 @@ portraits = {
 "Broodmother": ExtResource("5_bp3gk"),
 "Hooded figure": ExtResource("8_rnvbi"),
 "Hunter": ExtResource("2_wl34g"),
+"HunterC": ExtResource("9_usnif"),
 "Inquisitor": ExtResource("7_wl34g"),
 "Inquisitor.": ExtResource("6_wl34g"),
 "Mystic": ExtResource("2_n0cmy"),

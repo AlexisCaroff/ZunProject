@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dt1g4affkspwq"]
+[gd_scene load_steps=6 format=3 uid="uid://dt1g4affkspwq"]
 
 [ext_resource type="Script" uid="uid://dacdwm0tqo27r" path="res://anim_fx.gd" id="1_t20rs"]
-[ext_resource type="Texture2D" uid="uid://4v2py6qxhw2o" path="res://characters/boss assets/BOSS_broodM_grab.png" id="2_t20rs"]
 [ext_resource type="Texture2D" uid="uid://bvqb1g8xt3aho" path="res://characters/boss assets/BOSS_broodM_grab_fx.png" id="3_xo18w"]
 
 [sub_resource type="Animation" id="Animation_7h147"]
@@ -26,10 +25,10 @@ tracks/1/path = NodePath("FxCharge:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.666667),
+"times": PackedFloat32Array(0, 0.66),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-68, 24), Vector2(115, -51)]
+"values": [Vector2(-68, 24), Vector2(83, -50.25)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -116,13 +115,8 @@ _data = {
 [node name="AnimFX" type="Node2D"]
 script = ExtResource("1_t20rs")
 
-[node name="HeroWarriorBash" type="Sprite2D" parent="."]
-position = Vector2(80, -145)
-scale = Vector2(0.210205, 0.210205)
-texture = ExtResource("2_t20rs")
-
 [node name="FxCharge" type="Sprite2D" parent="."]
-z_index = -1
+z_index = -2
 position = Vector2(273, -105)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_xo18w")

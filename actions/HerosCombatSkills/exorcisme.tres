@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://b4f6tt51qrg3o"]
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://b4f6tt51qrg3o"]
 
 [ext_resource type="Texture2D" uid="uid://ci6or334e3v7" path="res://characters/charatexture/demo characters/HERO_priestess_cast.png" id="1_i6idu"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_ar1fo"]
+[ext_resource type="PackedScene" uid="uid://cy1wq8hxnqi8u" path="res://actions/skillEffects/FX/Scene/Exorcisme_Pristress_FX.tscn" id="2_jl83b"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_wh88t"]
 [ext_resource type="Texture2D" uid="uid://ctv5fhwuig06" path="res://actions/actiontexture/exorcisme.png" id="3_dxqn5"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_mane8"]
@@ -39,6 +40,7 @@ duration = 0.3
 tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
+caster_effect_scene = ExtResource("2_jl83b")
 caster_effect_anchor = 0
 target_effect_anchor = 1
 is_beneficial = false

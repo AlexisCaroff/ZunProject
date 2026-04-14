@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dq282vipchnbq"]
+[gd_scene load_steps=6 format=3 uid="uid://dq282vipchnbq"]
 
 [ext_resource type="Script" uid="uid://c6af0cosunkf2" path="res://scripts/exploration/chara_explo.gd" id="1_rk6hn"]
+[ext_resource type="Shader" uid="uid://byep7wpo3y12v" path="res://characters/character_outline.gdshader" id="3_25du2"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="3_bd7mk"]
 [ext_resource type="Texture2D" uid="uid://cfbwrknqf04rn" path="res://characters/charatexture/demo characters/HERO_warrior_idle.png" id="5_bd7mk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bd7mk"]
+shader = ExtResource("3_25du2")
+shader_parameter/enabled = false
+shader_parameter/outline_color = Color(0.943, 0.736, 0.43, 1)
+shader_parameter/outline_width = 5.0
+shader_parameter/outline_direction = Vector2(-10, -10)
 
 [node name="chara_explo" type="Node2D"]
 script = ExtResource("1_rk6hn")
@@ -31,24 +39,12 @@ min_duration = 1.0
 max_duration = 1.5
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -160.0
-offset_top = -526.667
-offset_right = 11.0003
-offset_bottom = -295.667
-scale = Vector2(3.12266, 2.51453)
-mouse_filter = 2
-texture = ExtResource("5_bd7mk")
-expand_mode = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Selector" type="TextureRect" parent="pivot"]
-modulate = Color(2, 2, 2, 1)
-self_modulate = Color(1.3, 1.3, 1.3, 0)
-offset_left = -160.0
-offset_top = -526.667
-offset_right = 11.0003
-offset_bottom = -295.667
-scale = Vector2(3.12266, 2.51453)
+material = SubResource("ShaderMaterial_bd7mk")
+offset_left = -180.833
+offset_top = -635.0
+offset_right = -9.83301
+offset_bottom = -404.0
+scale = Vector2(3.54835, 3.066)
 mouse_filter = 2
 texture = ExtResource("5_bd7mk")
 expand_mode = 1

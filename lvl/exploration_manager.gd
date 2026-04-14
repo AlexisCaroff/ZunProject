@@ -170,10 +170,13 @@ func _swap_characters(chara1: CharaExplo, chara2: CharaExplo) -> void:
 func selectCharacter(thechara: CharaExplo):
 	
 	thechara.animate_selected()
+	
 	var chara = thechara.characterData
+	print (chara.Charaname+ " is selected")
 	if !move_mode:
 		selected_character.unselected()
 		selected_character = thechara
+		(thechara.sprite.material as ShaderMaterial).set_shader_parameter("enabled", true)
 		var i = characters.find(thechara)
 		portrait_selector.position = portraits[i].position
 		selectorChara.position= selected_character.CharaPosition.charaUI.global_position if selected_character != null else Vector2.ZERO

@@ -166,7 +166,7 @@ texture = ExtResource("3_k3xa6")
 offset = Vector2(-66.58, 128.27)
 
 [node name="FxCharge2" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0)
+modulate = Color(1, 1, 1, 0.40327)
 z_index = -1
 position = Vector2(14, -118)
 rotation = 0.496758

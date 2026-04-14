@@ -169,31 +169,31 @@ func _on_button_mouse_entered() -> void:
 				match skill.the_target_type:
 					Skill.target_type.ALLY:
 						if occupant.characterData.is_player_controlled:
-							occupant.Selector.self_modulate.a= 1.0
+							occupant.Higlight()
 					Skill.target_type.FRONT_ALLY:
 						if occupant.characterData.is_player_controlled:
-							occupant.Selector.self_modulate.a= 1.0
+							occupant.Higlight()
 					Skill.target_type.FRONT_ENNEMY:
 						if !occupant.characterData.is_player_controlled:
-							occupant.Selector.self_modulate.a= 1.0
+							occupant.Higlight()
 					Skill.target_type.BACK_ALLY:
-						occupant.Selector.self_modulate.a= 1.0
+						occupant.Higlight()
 					Skill.target_type.BACK_ENNEMY:
 						if !occupant.characterData.is_player_controlled:
-							occupant.Selector.self_modulate.a= 1.0
+							occupant.Higlight()
 					Skill.target_type.ENNEMY:
 						if !occupant.characterData.is_player_controlled:
-							occupant.Selector.self_modulate.a= 1.0
+							occupant.Higlight()
 					Skill.target_type.ALL_ALLY:
 						for chara in combat_manager.hero_positions:
-							if chara.occupant !=null:
-								chara.occupant.Selector.self_modulate.a= 1.0
+							if chara.occupant != null:
+								chara.occupant.Higlight()
 					Skill.target_type.ALL_ENNEMY:
 						for chara in combat_manager.enemy_positions:
-							if chara.occupant !=null:
-								chara.occupant.Selector.self_modulate.a=1.0
+							if chara.occupant != null:
+								chara.occupant.Higlight()
 	else :
-		occupant.Selector.self_modulate.a= 1.0
+		occupant.Higlight()
 	
 
 
@@ -202,7 +202,7 @@ func _on_button_mouse_exited() -> void:
 	if occupant == null:
 		return
 	combat_manager.ui.update_ui_for_current_character(combat_manager.current_character)
-	occupant.Selector.self_modulate.a= 0.0
+	occupant.resetHighlight()
 	if combat_manager.pending_skill:
 		var skill = combat_manager.pending_skill
 		match combat_manager.combat_state:
@@ -210,8 +210,9 @@ func _on_button_mouse_exited() -> void:
 				match skill.the_target_type:
 					Skill.target_type.ALL_ALLY:
 						for chara in combat_manager.hero_positions:
-							chara.occupant.Selector.self_modulate.a= 0.0
+							if chara.occupant != null:
+								chara.occupant.resetHighlight()
 					Skill.target_type.ALL_ENNEMY:
 						for chara in combat_manager.enemy_positions:
-							if chara.occupant !=null:
-								chara.occupant.Selector.self_modulate.a= 0.0
+							if chara.occupant != null:
+								chara.occupant.resetHighlight()

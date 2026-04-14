@@ -3,31 +3,14 @@
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_qghsa"]
 [ext_resource type="Resource" uid="uid://yecuio874dy4" path="res://characters/data/CharaEnnemyTemptress.tres" id="2_pders"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="5_gg7eq"]
+[ext_resource type="Script" uid="uid://cf5uoxm4f4cop" path="res://characters/arrow.gd" id="7_m2gl6"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="8_7pso5"]
 [ext_resource type="Texture2D" uid="uid://duqexi8su8ffh" path="res://characters/charatexture/demo characters/ENEMY_temptress_idle.png" id="9_7s1lw"]
-[ext_resource type="Texture2D" uid="uid://cfbwrknqf04rn" path="res://characters/charatexture/demo characters/HERO_warrior_idle.png" id="9_qghsa"]
 
 [node name="CharacterTestennemie2" type="Node2D"]
 script = ExtResource("1_qghsa")
 characterData = ExtResource("2_pders")
 metadata/character_data_path = "res://characters/data/CharaEnnemyTemptress.tres"
-
-[node name="name" type="Label" parent="."]
-visible = false
-offset_left = -76.0
-offset_top = -256.0
-offset_right = -32.0
-offset_bottom = -233.0
-text = "name"
-
-[node name="Arrow" type="Sprite2D" parent="."]
-position = Vector2(0, -268.05)
-scale = Vector2(0.38, 0.38)
-texture = ExtResource("8_7pso5")
-offset = Vector2(0, 107.08)
-script = ExtResource("5_gg7eq")
-min_duration = 0.5
-max_duration = 0.5
 
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2(49, 31)
@@ -48,23 +31,10 @@ expand_mode = 1
 flip_h = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Selector" type="TextureRect" parent="pivot"]
-self_modulate = Color(2.5, 2.5, 2.5, 0)
-offset_left = -289.167
-offset_top = -353.333
-offset_right = -118.166
-offset_bottom = -122.333
-scale = Vector2(2.09679, 1.68845)
-mouse_filter = 2
-texture = ExtResource("9_qghsa")
-expand_mode = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(32, 32)
-offset_left = -257.0
-offset_top = -176.0
-offset_right = 258.0
-offset_bottom = -144.0
-theme_override_constants/separation = 32
-alignment = 1
+[node name="Arrow" type="Sprite2D" parent="."]
+modulate = Color(0.77, 0.616513, 0.4158, 1)
+position = Vector2(2, -191)
+scale = Vector2(0.0897035, 0.0897035)
+texture = ExtResource("8_7pso5")
+offset = Vector2(0, 116.49)
+script = ExtResource("7_m2gl6")

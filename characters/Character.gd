@@ -2,10 +2,9 @@ extends Node2D
 class_name Character
 
 # ── Données visuelles ─────────────────────────────────────
-@onready var name_label                    = $name
+
 @onready var sprite        : TextureRect   = $pivot/HerosTexture1
 @onready var pivot                         = $pivot
-@onready var Selector      : TextureRect   = $pivot/Selector
 @onready var arrow                         = $Arrow
 ## Marqueurs anatomiques pour les VFX — nœuds Node2D enfants de HerosTexture1
 
@@ -83,10 +82,15 @@ func get_current_slot(): return _current_slot
 func _ready():
 	cam = get_viewport().get_camera_2d()
 	arrow.visible = false
+	var mat := ShaderMaterial.new()
+	mat.shader = load("res://characters/character_outline.gdshader")
+	sprite.material = mat
+	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
+	if !characterData.is_player_controlled :
+		(sprite.material as ShaderMaterial).set_shader_parameter("outline_direction",  Vector2(10.0, -10.0))
 	if characterData:
-		name_label.text    = characterData.Charaname
+		
 		sprite.texture     = characterData.portrait_texture
-		Selector.texture   = characterData.portrait_texture
 		_updateSkills(characterData.skill_resources)
 	else:
 		push_warning("CharacterData non assignée pour %s" % name)
@@ -95,10 +99,8 @@ func _ready():
 
 	if not characterData.is_player_controlled and combat_manager.gm.teamCorrupted == false:
 		sprite.flip_h   = true
-		Selector.flip_h = true
 	if characterData.inquisition :
 		sprite.flip_h   = false
-		Selector.flip_h = false
 	else:
 		hornyParticules = hornyPart.instantiate()
 		#print("horny particules spawn for " + characterData.Charaname)
@@ -334,8 +336,9 @@ func start_turn():
 	turncount += 1
 	if not characterData:
 		return
+	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", true)
 	print(characterData.Charaname + " start turn")
-	Selector.self_modulate.a = 1.0
+	sprite.self_modulate = Color(2.5, 2.5, 2.5, 1.0)
 	var dmg      = 0
 	var dmgHorny = 0
 	for buff in buffs:
@@ -355,6 +358,7 @@ func start_turn():
 
 func end_turn():
 	CharaColor = Color(1.0, 1.0, 1.0, 1.0)
+	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
 	update_buffs()
 	resetVisuel()
 	reduce_cooldowns()
@@ -414,11 +418,11 @@ func set_targetable(state: bool):
 	is_targetable  = state
 	arrow.visible  = state
 	if state:
-		sprite.modulate  = Color(1, 1, 1)
-		Selector.visible = true
+		sprite.modulate      = Color(1, 1, 1)
+		sprite.self_modulate = Color(2.5, 2.5, 2.5, 1.0)
 	else:
-		sprite.modulate  = Color(0.5, 0.5, 0.5)
-		Selector.visible = false
+		sprite.modulate      = Color(0.5, 0.5, 0.5)
+		sprite.self_modulate = Color(1.0, 1.0, 1.0, 1.0)
 
 
 func _input_event(_viewport, event, _shape_idx):
@@ -547,7 +551,11 @@ func show_bark(text: String):
 	current_bark.set_text(text)
 	current_bark.position = Vector2(-60, -240)
 	await get_tree().create_timer(2.0).timeout
+func show_outline():
+	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", true)
 
+func hide_outline():
+	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
 
 func slur():
 	if characterData:
@@ -583,10 +591,8 @@ func resetVisuel():
 		self.scale           = CharaScale
 	if characterData and characterData.current_stamina > 0 and not attacking and not getattacked:
 		sprite.texture   = characterData.portrait_texture
-		Selector.texture = characterData.portrait_texture
 	if characterData and characterData.current_stamina == 0:
 		sprite.texture   = characterData.dead_portrait_texture
-		Selector.texture = characterData.dead_portrait_texture
 	if characterData.current_stamina > 0:
 		modulate = Color(1.0, 1.0, 1.0)
 	update_ui()
@@ -755,6 +761,7 @@ func _skill_targets_ally() -> bool:
 # ──────────────────────────────────────────────────────────
 
 func animate_attack(targets: Array, skill: Skill) -> void:
+	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
 	if targets.is_empty():
 		emit_signal("skill_animation_finished")
 		return
@@ -929,7 +936,7 @@ func _on_attack(targets: Array) -> void:
 func after_skilluse(targets: Array) -> void:
 	attacking        = false
 	if buff_bar: buff_bar.visible = true
-	Selector.visible = true
+	sprite.self_modulate = Color(1.0, 1.0, 1.0, 1.0)
 
 	# Reset caster
 	sprite.texture = characterData.portrait_texture
@@ -954,6 +961,10 @@ func after_skilluse(targets: Array) -> void:
 			tgt.scale   = tgt._current_slot.position_data.scale
 		if tgt.characterData.current_stamina > 0:
 			tgt.sprite.texture   = tgt.characterData.portrait_texture
-			tgt.Selector.texture = tgt.characterData.portrait_texture
 
 	emit_signal("skill_animation_finished")
+
+func Higlight():
+	sprite.self_modulate= Color(2.5,2.5,2.5,1.0)
+func resetHighlight():
+	sprite.self_modulate= Color(1.0,1.0,1.0,1.0)

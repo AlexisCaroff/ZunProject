@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ct64b0qv3yqau" path="res://intoCinematic.gd" id="1_fng0t"]
 [ext_resource type="AudioStream" uid="uid://q3roq2qp53je" path="res://Vox/introVox.mp3" id="2_jmmwi"]
-[ext_resource type="Texture2D" uid="uid://cqnomcu1ehsmj" path="res://UI/cinematic/INTRO_dungeon_entrance.png" id="3_8s6rg"]
+[ext_resource type="Texture2D" uid="uid://b61cmtgknx2nd" path="res://INTRO_boss/INTRO_boss_002.png" id="3_2w6gd"]
 [ext_resource type="FontFile" uid="uid://dy4n8qboodyud" path="res://font/MarcellusSC-Regular.ttf" id="3_16exp"]
 [ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="4_2w6gd"]
 
@@ -14,7 +14,7 @@ stream = ExtResource("2_jmmwi")
 
 [node name="IntroDungeonEntrance" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
-texture = ExtResource("3_8s6rg")
+texture = ExtResource("3_2w6gd")
 
 [node name="Gradiant" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.918)

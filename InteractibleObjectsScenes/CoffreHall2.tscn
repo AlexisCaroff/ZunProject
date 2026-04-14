@@ -1,15 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjupsvl8kodbx"]
+[gd_scene load_steps=11 format=3 uid="uid://cjupsvl8kodbx"]
 
 [ext_resource type="Script" uid="uid://b2fldnbm4784m" path="res://InteractibleObjectsScenes/InteractableObject.gd" id="1_38tqj"]
-[ext_resource type="Texture2D" uid="uid://dw1tcf1oi3i5v" path="res://InteractibleObjectsScenes/PROP_chest.png" id="2_38tqj"]
+[ext_resource type="Texture2D" uid="uid://dysu7tdjfd3hi" path="res://props/PROP_chest_full.png" id="2_38tqj"]
+[ext_resource type="Texture2D" uid="uid://cqxak60gjmu3f" path="res://props/PROP_chest_empty.png" id="2_mwu50"]
+[ext_resource type="Resource" uid="uid://dj4jicvbqcudu" path="res://InteractibleObjectsScenes/CoffreHall2.tres" id="2_okxww"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="3_okxww"]
-[ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="4_jf0wp"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="5_1enym"]
+[ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="6_jf0wp"]
+[ext_resource type="Texture2D" uid="uid://eqli6rl4sig3" path="res://UI/UI boxes/UI_camp_points.png" id="7_1enym"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="9_1enym"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6te7v"]
 
 [node name="Object1" type="Node2D"]
 script = ExtResource("1_38tqj")
+data = ExtResource("2_okxww")
+big_size = Vector2(0.4, 0.4)
+startsize = Vector2(0.1, 0.1)
+openedSprite = ExtResource("2_mwu50")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(4, -1)
@@ -26,19 +34,29 @@ flat = true
 
 [node name="DialogueManager" type="Node2D" parent="."]
 script = ExtResource("3_okxww")
+portraits_resource = ExtResource("6_jf0wp")
 is_Choice = true
 
 [node name="etiquette" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(170, -32)
-scale = Vector2(0.626316, 0.626316)
-texture = ExtResource("4_jf0wp")
+z_index = 1
+position = Vector2(255, 50)
+scale = Vector2(0.437382, 0.437382)
+texture = ExtResource("7_1enym")
 
 [node name="Label" type="Label" parent="etiquette"]
-offset_left = -92.0
-offset_top = -23.0
-offset_right = 125.0
-offset_bottom = 30.0
+offset_left = -116.603
+offset_top = -57.1583
+offset_right = 177.397
+offset_bottom = 44.8417
 theme_override_fonts/font = ExtResource("5_1enym")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 80
 text = "Investigate"
+
+[node name="UiDoorArrow" type="Sprite2D" parent="etiquette"]
+modulate = Color(0.357627, 0.218179, 0.113515, 1)
+z_index = -1
+position = Vector2(-326.946, 2.28633)
+rotation = 1.5708
+scale = Vector2(0.375101, 0.299222)
+texture = ExtResource("9_1enym")

@@ -66,11 +66,12 @@ func _spawn_tentacle_in_slot(slot: PositionSlot, grabbed_target: Character, boss
 	new_enemy.characterData.current_stamina   = new_enemy.characterData.max_stamina
 	new_enemy.characterData.current_stress    = clamp(new_enemy.characterData.current_stress,    0, new_enemy.characterData.max_stress)
 	new_enemy.characterData.current_horniness = clamp(new_enemy.characterData.current_horniness, 0, new_enemy.characterData.max_horniness)
-
+	
+	await  grabbed_target.get_tree().create_timer(1.0).timeout
 	# ── Placement tentacule en [3] ───────────────────────────────────
 	new_enemy._current_slot = slot
 	combatmanager.move_character_to(new_enemy, slot, 0.0)
-
+	
 	# ── Grab : déplace la cible vers le slot [4] ─────────────────────
 	new_enemy.CharaGrab = grabbed_target
 	grabbed_target._current_slot.remove_character()
@@ -79,6 +80,7 @@ func _spawn_tentacle_in_slot(slot: PositionSlot, grabbed_target: Character, boss
 	grabbed_target.position.y -= 70
 	grabbed_target.z_index = new_enemy.z_index - 1
 	grabbed_target.visible = false
+	grabbed_target.characterData.stun=true
 	# ── Enregistrement ───────────────────────────────────────────────
 	combatmanager.enemies.append(new_enemy)
 	new_enemy.skill_animation_started.connect(combatmanager._on_skill_animation_started)

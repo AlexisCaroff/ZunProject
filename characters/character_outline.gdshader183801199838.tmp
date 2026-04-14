@@ -1,0 +1,35 @@
+shader_type canvas_item;
+
+uniform bool enabled = false;
+uniform vec4 outline_color : source_color = vec4(0.933, 0.706, 0.400, 1.0); // #EEB466
+uniform float outline_width : hint_range(1.0, 20.0) = 10.0;
+
+void fragment() {
+	vec4 current = texture(TEXTURE, UV);
+
+	if (!enabled) {
+		COLOR = current;
+		return;
+	}
+
+	vec2 ps = TEXTURE_PIXEL_SIZE;
+
+	// Échantillonnage en 8 directions pour un outline propre sans trous dans les diagonales
+	float n  = texture(TEXTURE, UV + vec2( 0.0,            -outline_width) * ps).a;
+	float s  = texture(TEXTURE, UV + vec2( 0.0,             outline_width) * ps).a;
+	float e  = texture(TEXTURE, UV + vec2( outline_width,   0.0          ) * ps).a;
+	float w  = texture(TEXTURE, UV + vec2(-outline_width,   0.0          ) * ps).a;
+	float ne = texture(TEXTURE, UV + vec2( outline_width,  -outline_width) * ps).a;
+	float nw = texture(TEXTURE, UV + vec2(-outline_width,  -outline_width) * ps).a;
+	float se = texture(TEXTURE, UV + vec2( outline_width,   outline_width) * ps).a;
+	float sw = texture(TEXTURE, UV + vec2(-outline_width,   outline_width) * ps).a;
+
+	float neighbour_max = max(max(max(n, s), max(e, w)), max(max(ne, nw), max(se, sw)));
+
+	// On colorie uniquement les pixels transparents voisins d'un pixel opaque
+	if (current.a < 0.01 && neighbour_max > 0.01) {
+		COLOR = vec4(outline_color.rgb, outline_color.a * neighbour_max);
+	} else {
+		COLOR = current;
+	}
+}

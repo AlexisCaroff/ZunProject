@@ -80,14 +80,18 @@ func _advance() -> void:
 	_show_frame(_current_index)
 
 # ---------- Fondu enchaîné ----------
+# L'image courante (_front) reste visible.
+# La suivante (_back) apparaît progressivement par dessus via fade in.
 
 func _cross_fade() -> void:
+	# S'assure que _back est au dessus de _front
+	_back.z_index = _front.z_index + 1
+	_back.modulate.a = 0.0
+
 	var tween := create_tween()
-	tween.set_parallel(true)
-	tween.tween_property(_front, "modulate:a", 0.0, animatic.fade_duration)\
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(_back, "modulate:a", 1.0, animatic.fade_duration)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
 	await tween.finished
 
 func _swap_images() -> void:

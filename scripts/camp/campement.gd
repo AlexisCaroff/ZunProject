@@ -39,12 +39,18 @@ var skillcampmode : bool = true
 @onready var contourMap=$ContourMap
 @onready var MenuPerso = $MenuPerso
 @onready var MenuPersoButton=$charaPortrait2/charaPortraitButton
+@onready var CharactersAffinity= [
+	$CharactersPanelAffinity/chara1,
+	$CharactersPanelAffinity/chara2,
+	$CharactersPanelAffinity/chara3
+]
 
 func _ready():
 	gm = get_tree().root.get_node("GameManager") as GameManager
 	MenuPerso.characters = gm.characters
 	load_characters_from_gamestat()
 	selected_chara = characters[0]
+	(selected_chara.sprite.material as ShaderMaterial).set_shader_parameter("enabled", true)
 # -------Heal chara----------------
 
 	for chara in characters:
@@ -58,7 +64,7 @@ func _ready():
 		#donjon_map.move_to_position(donjon_map.curentposition)
 	
 	changeSelectedCharacter(selected_chara)
-	campPointLabel = $CampPoint
+	campPointLabel = $Box2/CampPoint
 	campPointLabel.text= str(campPoints)
 	
 	mapButton.connect("button_down",toggleshowMap)
@@ -95,6 +101,7 @@ func move_character_to_slot(chara: Node, slot: Node):
 	
 
 func changeSelectedCharacter(occupant:CharaCamp):
+	(selected_chara.sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
 	show_chara_actions(occupant)
 	updateUICharacter(occupant.characterData)
 	occupant.animate_selected()
@@ -114,9 +121,41 @@ func updateUICharacter(character:CharacterData):
 	hornyBar.max_value = character.max_horniness
 	hornyBar.value =character.current_horniness
 	
+	var other_members : Array = []
+	for c in characters:
+		if c != character:
+			other_members.append(c)
+	for i in range(CharactersAffinity.size()):
+		var slot = CharactersAffinity[i]
+
+		if i < other_members.size():
+			var target = other_members[i]
+			
+			# Récupération de la RichTextLabel
+			var rtl : RichTextLabel = slot.get_node("Textaffinity")
+			rtl.bbcode_enabled = true
+			
+			
+			# Affinité (valeur)
+			var value := 0
+			if character.affinity.has(target.characterData.Charaname):
+				value = character.affinity[target.characterData.Charaname]
+			slot.set_chara(target.characterData, value)
+		
+
+			
+			rtl.text = target.characterData.Charaname
+
+			slot.visible = true
+
+		else:
+			slot.visible = false
+	
+	
+	
 	selected_chara.update_display()
 	MenuPerso.select_character(MenuPerso.selected_character)
-		
+	
 func After_camp_skill(skill: CampSkill):
 	campPoints -= skill.cost
 	
@@ -151,7 +190,7 @@ func clear_container(container: Node) -> void:
 func show_chara_actions(thechara: CharaCamp):
 	var chara = thechara.characterData 
 	selected_chara = thechara
-
+	(selected_chara.sprite.material as ShaderMaterial).set_shader_parameter("enabled", true)
 	# vide les panels
 	clear_container(action_panel)
 

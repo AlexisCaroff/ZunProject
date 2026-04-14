@@ -331,7 +331,7 @@ func next_turn():
 			end_currentChara_Turn()
 	if current_character.characterData.stun == true:
 		
-		ui.log(current_character.characterData.Charaname +" is stun")
+		ui.log(current_character.characterData.Charaname +" is stuned")
 		if current_character.exclamation != null:
 			current_character.exclamation.free()
 			ui.log(current_character.characterData.Charaname +" is surprised")
@@ -349,7 +349,7 @@ func next_turn():
 
 func end_currentChara_Turn():
 	
-	current_character.update_buffs()
+	current_character.end_turn()
 	current_character.update_ui()
 	while is_animation_playing():
 		await get_tree().process_frame

@@ -93,6 +93,7 @@ _data = {
 script = ExtResource("1_jn877")
 
 [node name="HeroWarriorBash" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(80, -145)
 scale = Vector2(0.210205, 0.210205)
 texture = ExtResource("2_8oe81")

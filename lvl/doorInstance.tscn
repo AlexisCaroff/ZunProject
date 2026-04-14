@@ -330,6 +330,7 @@ scale = Vector2(338.499, 233.869)
 flat = true
 
 [node name="ShowTuto" type="Button" parent="."]
+visible = false
 z_index = 22
 layout_mode = 0
 offset_left = 7.0

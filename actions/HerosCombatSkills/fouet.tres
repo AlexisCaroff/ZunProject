@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://sahrc1c16ogi"]
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://sahrc1c16ogi"]
 
 [ext_resource type="Texture2D" uid="uid://dobw14x62tvle" path="res://characters/charatexture/demo characters/HERO_priestess_whip.png" id="1_1rmu3"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_2julc"]
+[ext_resource type="PackedScene" uid="uid://b0ihsbf8kmpvx" path="res://actions/skillEffects/FX/Scene/whipeP.tscn" id="2_qyifb"]
 [ext_resource type="Script" uid="uid://13cgpeuxvpoa" path="res://actions/skillEffects/PainAndAbsolution.gd" id="3_2julc"]
 [ext_resource type="Texture2D" uid="uid://qhiqy0qukc0e" path="res://actions/actiontexture/fouet.png" id="4_2julc"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_7e8mt"]
@@ -41,6 +42,7 @@ duration = 1.0
 tags = Array[String]([])
 is_contact = true
 distance_contact = 400.0
+caster_effect_scene = ExtResource("2_qyifb")
 caster_effect_anchor = 0
 target_effect_anchor = 1
 is_beneficial = false

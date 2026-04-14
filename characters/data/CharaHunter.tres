@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=21 format=3 uid="uid://uf5x5dpfh5ln"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=20 format=3 uid="uid://uf5x5dpfh5ln"]
 
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_3p432"]
 [ext_resource type="Texture2D" uid="uid://17kns8mwbxnn" path="res://characters/portraits/PORTRAIT_hero_hunter_hood.png" id="1_404pk"]
@@ -10,7 +10,6 @@
 [ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="6_swvsv"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="8_4jn0w"]
 [ext_resource type="Texture2D" uid="uid://dtsue4pkmdqi4" path="res://characters/charatexture/demo characters/HERO_hunter_down.png" id="9_4vg1p"]
-[ext_resource type="Resource" uid="uid://msi3wq2l6s3t" path="res://Items/itemsRessources/SilkGloves.tres" id="9_vrfcs"]
 [ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="10_j4cyw"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="12_x3tfg"]
 [ext_resource type="Texture2D" uid="uid://ysjg7rf1ovm5" path="res://characters/charatexture/demo characters/HERO_hunter_idle.png" id="13_isn0k"]
@@ -24,7 +23,7 @@
 [resource]
 script = ExtResource("12_x3tfg")
 headPosition = Vector2(-29, -91)
-torso_Position = Vector2(0, 0)
+torso_Position = Vector2(0, -30)
 portrait_texture = ExtResource("13_isn0k")
 explorationPortrait = ExtResource("10_j4cyw")
 dead_portrait_texture = ExtResource("9_4vg1p")
@@ -52,7 +51,7 @@ willpower = 5
 evasion = 5
 initiative = 3
 peek = 0
-equipped_items = Array[ExtResource("8_4jn0w")]([ExtResource("9_vrfcs")])
+equipped_items = Array[ExtResource("8_4jn0w")]([])
 stun = false
 Chara_position = 1
 max_stamina = 100

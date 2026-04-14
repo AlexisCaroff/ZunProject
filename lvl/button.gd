@@ -15,15 +15,15 @@ func _ready():
 	# couleur de départ
 	self_modulate = normal_color
 	scale = normal_scale
-	if disabled:
-		modulate.a = 0.0
+	#if disabled:
+		#modulate.a = 0.0
 	var empty := StyleBoxEmpty.new()
 	add_theme_stylebox_override("focus", empty)
 	add_theme_stylebox_override("focus_visible", empty)
 	# connecter les signaux de souris
 	connect("mouse_entered", Callable(self, "_on_mouse_entered"))
 	connect("mouse_exited", Callable(self, "_on_mouse_exited"))
-
+	
 func _on_mouse_entered():
 	if not disabled:
 		var tween = create_tween()
@@ -37,4 +37,11 @@ func _on_mouse_exited():
 		tween.tween_property(self, "scale", normal_scale, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		if icon :
 			tween.tween_property(self, "self_modulate", normal_color, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-		
+	
+func animscale():
+	var tween = create_tween().set_loops()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	
+	tween.tween_property(self, "self_modulate", hover_color, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "self_modulate", normal_color, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)

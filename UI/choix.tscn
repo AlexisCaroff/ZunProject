@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cspa2tuof385o" path="res://lvl/ChoiceUI.gd" id="1_msup4"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="2_2sm2f"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="3_i22b5"]
-[ext_resource type="Texture2D" uid="uid://vxig1dgne8it" path="res://UI/box2.png" id="4_cuvdp"]
+[ext_resource type="Texture2D" uid="uid://eqli6rl4sig3" path="res://UI/UI boxes/UI_camp_points.png" id="4_cuvdp"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="5_cuvdp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vquci"]
@@ -43,8 +43,8 @@ script = ExtResource("3_i22b5")
 
 [node name="Box2" type="Sprite2D" parent="Choice1"]
 z_index = -1
-position = Vector2(191.266, 43.6164)
-scale = Vector2(1.61745, 1)
+position = Vector2(194.593, 51.9323)
+scale = Vector2(1.18453, 1)
 texture = ExtResource("4_cuvdp")
 
 [node name="Choice2" type="Button" parent="."]
@@ -62,8 +62,8 @@ script = ExtResource("3_i22b5")
 
 [node name="Box2" type="Sprite2D" parent="Choice2"]
 z_index = -1
-position = Vector2(191.266, 43.6164)
-scale = Vector2(1.61745, 1)
+position = Vector2(194.593, 51.9323)
+scale = Vector2(1.18453, 1)
 texture = ExtResource("4_cuvdp")
 
 [node name="Camera" type="Camera2D" parent="."]

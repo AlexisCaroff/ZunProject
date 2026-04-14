@@ -10,7 +10,7 @@ var dead_portrait_path: String = ""
 var initiative_icon_path: String = ""
 
 @onready var sprite = $pivot/HerosTexture1
-@onready var selector = $pivot/Selector
+
 @onready var buff_bar = $HBoxContainer
 @onready var hp_Jauge
 
@@ -29,8 +29,11 @@ var characterData : CharacterData
 var exploPortrait : ExploPortrait
 
 func _ready() -> void:
-	print("chara ready")
-	
+	#print("chara ready")
+	var mat := ShaderMaterial.new()
+	mat.shader = load("res://characters/character_outline.gdshader")
+	sprite.material = mat
+	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
 
 # Appelée après instanciation, pour charger les données du GameStat
 func load_chara() -> void:
@@ -44,7 +47,7 @@ func load_chara() -> void:
 func update_display() -> void:
 
 	sprite.texture =characterData.portrait_texture
-	selector.texture = characterData.portrait_texture
+	
 	hp_Jauge.max_value=characterData.max_stamina
 	hp_Jauge.value=characterData.current_stamina
 	
@@ -54,9 +57,9 @@ func update_display() -> void:
 	
 
 func want_to_move():
-	selector.self_modulate.a =1.0
+	sprite.self_modulate.a =1.0
 func move():
-	selector.self_modulate.a =0.0
+	sprite.self_modulate.a =0.0
 	
 func add_buff(buff: Buff, isload:bool =false):
 	if buff_bar ==null:
@@ -95,7 +98,8 @@ func animate_heal(damage:int, _source:CharaExplo, color=null):
 
 func animate_selected():
 	emit_signal("skill_animation_started")
-	selector.self_modulate.a =1.0
+	
+	
 	var tween := create_tween() as Tween
 	var CharaScale = self.scale
 	var normal_size = CharaScale
@@ -104,5 +108,7 @@ func animate_selected():
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	await tween.finished
 	emit_signal("skill_animation_finished")
+	
 func unselected():
-	selector.self_modulate.a =0.0
+	sprite.self_modulate.a =1.0
+	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)

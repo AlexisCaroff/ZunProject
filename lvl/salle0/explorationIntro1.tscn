@@ -202,7 +202,7 @@ scale = Vector2(1.4, 1.4)
 
 [node name="position1" type="Node2D" parent="HeroPosition"]
 z_index = 1
-position = Vector2(-284.286, -10.7143)
+position = Vector2(-284.286, -1.52588e-05)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("7_vn4jq")
 
@@ -263,7 +263,7 @@ scale = Vector2(0.936444, 0.936444)
 
 [node name="position3" type="Node2D" parent="HeroPosition"]
 z_index = 2
-position = Vector2(-22.8571, -14.2857)
+position = Vector2(-22.8571, 2.85716)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("7_vn4jq")
 

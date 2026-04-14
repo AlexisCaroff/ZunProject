@@ -95,7 +95,7 @@ func use(target: PositionSlot = null, secondtarget: bool = false) -> PositionSlo
 	owner.current_skill = self
 
 	if combatManager:
-		combatManager.ui.log(owner.characterData.Charaname + " use " + descriptionName)
+		combatManager.ui.log(owner.characterData.Charaname + " uses " + descriptionName)
 
 	for eq in owner.characterData.equipped_items:
 		eq.on_skill_use(owner, self, target.occupant)
@@ -152,8 +152,8 @@ func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = eff
 	if !combatManager:
 		combatManager = owner.combat_manager
 
-	for effect in effects_array:
-		if effect is DamageEffect:
+	for theeffect in effects_array:
+		if theeffect is DamageEffect:
 			var Hunter_value: int = owner.characterData.affinity.get("Hunter", 0)
 			var Priestess_value: int = target.occupant.characterData.affinity.get("Priestess", 0)
 			var warrior_value: int = target.occupant.characterData.affinity.get("Warrior", 0)
@@ -188,8 +188,8 @@ func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = eff
 		for tag in owner.characterData.tags:
 			if tag == "degrader" and target != owner._current_slot:
 				target.occupant.characterData.current_stress += 2
-		for effect in effects_array:
-			effect.apply(owner, target)
+		for effecttoapply in effects_array:
+			effecttoapply.apply(owner, target)
 
 	# Priestess en file après les dégâts
 	if heallovedOnesTrigger and randf() < 0.5:

@@ -8,8 +8,8 @@
 [ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="5_rbnqj"]
 [ext_resource type="Resource" uid="uid://ddokwgifpnrcf" path="res://Items/itemsRessources/ring.tres" id="5_yl2n5"]
 [ext_resource type="Script" uid="uid://b5vho57xy7r3r" path="res://scripts/InteractableChoice.gd" id="6_nrlk4"]
-[ext_resource type="PackedScene" uid="uid://6ww3jejinbp0" path="res://InteractibleObjectsScenes/object1.tscn" id="7_sndsm"]
 [ext_resource type="Script" uid="uid://n028octb10a5" path="res://scripts/InteractableObjectResource.gd" id="8_bqcqk"]
+[ext_resource type="PackedScene" uid="uid://cjupsvl8kodbx" path="res://InteractibleObjectsScenes/CoffreHall2.tscn" id="8_yl2n5"]
 
 [sub_resource type="Resource" id="Resource_gmln8"]
 script = ExtResource("6_nrlk4")
@@ -17,6 +17,7 @@ text = "get ring"
 effect_type = 1
 item = ExtResource("5_yl2n5")
 tag = ""
+opening = false
 metadata/_custom_type_script = "uid://b5vho57xy7r3r"
 
 [sub_resource type="Resource" id="Resource_2wtvs"]
@@ -24,11 +25,12 @@ script = ExtResource("6_nrlk4")
 text = "leave"
 effect_type = 0
 tag = ""
+opening = false
 metadata/_custom_type_script = "uid://b5vho57xy7r3r"
 
 [sub_resource type="Resource" id="Resource_7pxvw"]
 script = ExtResource("8_bqcqk")
-scene = ExtResource("7_sndsm")
+scene = ExtResource("8_yl2n5")
 dialogue_file = "res://dialogue/dialogueTeste.txt"
 choice_1 = SubResource("Resource_gmln8")
 choice_2 = SubResource("Resource_2wtvs")

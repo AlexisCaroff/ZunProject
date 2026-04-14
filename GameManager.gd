@@ -49,7 +49,7 @@ func start_game():
 		return
 
 	game_started = true
-
+	await sceneTransition.fade_out()
 	if start_menu and is_instance_valid(start_menu):
 		start_menu.queue_free()
 		start_menu = null
@@ -164,7 +164,7 @@ func _enter_scene_in_current_room(scene: PackedScene, ennemy_are_embushed: bool 
 			
 		room_container.add_child(new_scene)
 		current_room_node = new_scene
-		print("🌟 Start new room: ", new_scene.name)
+		print("Start new room: ", new_scene.name)
 		await sceneTransition.fade_in()
 			
 

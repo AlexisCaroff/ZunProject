@@ -1,15 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bmfv5svlavwoq"]
+[gd_scene load_steps=5 format=3 uid="uid://bmfv5svlavwoq"]
 
 [ext_resource type="Texture2D" uid="uid://768cfl5yiljq" path="res://scenes/backgrounds dungeon demo/BG_dungeon_corridor.png" id="1_ox73m"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_on3ko"]
 [ext_resource type="PackedScene" uid="uid://h8pqs7tabdxj" path="res://lvl/CombatInterface.tscn" id="3_snm2i"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="4_hbdni"]
-[ext_resource type="PackedScene" uid="uid://ri78lkeg2ktr" path="res://animatic/animatic_scene.tscn" id="5_hfvpl"]
-[ext_resource type="Script" uid="uid://6w847ltos8vm" path="res://lvl/Corridor2/boss_scene_controller.gd" id="6_ym8gb"]
-[ext_resource type="Resource" uid="uid://bmgxbqdxxsh6v" path="res://animatic/animaticTeste.tres" id="7_0ynpc"]
-[ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="8_uu2ph"]
-[ext_resource type="Resource" uid="uid://ulv47dtbemlo" path="res://lvl/Cellar/encounterCellar.tres" id="9_4ftwb"]
-[ext_resource type="Resource" uid="uid://ca8cj1nuvfp3j" path="res://lvl/Corridor2/encounterCorridor2.tres" id="10_1ouip"]
 
 [node name="CombatCorridor" type="Node2D"]
 
@@ -31,21 +25,3 @@ offset_left = -6.0
 offset_top = 18.0
 offset_right = -6.0
 offset_bottom = 18.0
-
-[node name="AnimaticPlayer" parent="." instance=ExtResource("5_hfvpl")]
-offset_left = 112.0
-offset_top = 293.0
-offset_right = 112.0
-offset_bottom = 293.0
-
-[node name="Node" type="Node" parent="."]
-script = ExtResource("6_ym8gb")
-animatic = ExtResource("7_0ynpc")
-dialogue_intro_path = "res://dialogue/Boss/intro.txt"
-dialogue_corrupt_path = "res://dialogue/Boss/corrupt.txt"
-dialogue_resist_path = "res://dialogue/Boss/resist.txt"
-dialogue_give_in_path = "res://dialogue/Boss/give_in.txt"
-portraits_resource = ExtResource("8_uu2ph")
-boss_encounter = ExtResource("9_4ftwb")
-inquisition_encounter = ExtResource("10_1ouip")
-corruption_threshold = 0

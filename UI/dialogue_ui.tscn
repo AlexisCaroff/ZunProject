@@ -139,18 +139,6 @@ text = "(left clic to continue )"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 161.008
-offset_top = -0.0551311
-offset_right = 161.008
-offset_bottom = -0.0551758
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 208.612

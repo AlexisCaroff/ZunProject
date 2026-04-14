@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://q6acu8lc0tp7"]
 
-[ext_resource type="Texture2D" uid="uid://bf44mbnwmft3s" path="res://scenes/backgrounds dungeon demo/BG_dungeon_cellar.png" id="1_ysdph"]
+[ext_resource type="Texture2D" uid="uid://uaiqhtk5leyc" path="res://scenes/BG_dungeon_boss.png" id="1_eraef"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_l3uyc"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="3_vfoag"]
 [ext_resource type="PackedScene" uid="uid://ccdnmro1xg6cg" path="res://lvl/CombatInterfaceBossInquisition.tscn" id="4_eraef"]
@@ -14,8 +14,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ZunBg" type="Sprite2D" parent="."]
+z_index = -1
 position = Vector2(960, 540)
-texture = ExtResource("1_ysdph")
+texture = ExtResource("1_eraef")
 
 [node name="atmosphere" parent="." instance=ExtResource("2_l3uyc")]
 position = Vector2(2, 352)

@@ -1,13 +1,41 @@
-[gd_scene load_steps=9 format=3 uid="uid://b56xf3f3pkdwt"]
+[gd_scene load_steps=16 format=3 uid="uid://b56xf3f3pkdwt"]
 
 [ext_resource type="Script" uid="uid://bu142a7nwheqf" path="res://UI/menu_base.gd" id="1_552u3"]
-[ext_resource type="Texture2D" uid="uid://lhncc7d02shi" path="res://UI/BigBox.png" id="2_v1j00"]
+[ext_resource type="Texture2D" uid="uid://hrylqwnnfyxd" path="res://UI/LOGO_big.png" id="2_pabs8"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="3_11mpg"]
-[ext_resource type="Texture2D" uid="uid://ccfldj30sasp8" path="res://characters/charatexture/boss.png" id="4_kppfi"]
+[ext_resource type="Texture2D" uid="uid://ciicu0hgenhgw" path="res://actions/skillEffects/FX/FX_stamina002.png" id="3_arnps"]
+[ext_resource type="Texture2D" uid="uid://d03vlqaa471uv" path="res://UI/UI boxes/UI_convo_box2.png" id="3_vq26v"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="4_v1j00"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="6_11mpg"]
 [ext_resource type="PackedScene" uid="uid://bccubg8vkrr7f" path="res://UI/Menu/OptionMenu.tscn" id="6_kppfi"]
-[ext_resource type="Texture2D" uid="uid://b6ydx3ktka8fh" path="res://UI/UI boxes/UI_convo_box.png" id="7_ej7yr"]
+[ext_resource type="Texture2D" uid="uid://cyw85rscwg0st" path="res://UI/UI boxes/UI_convo_box_decor1.png" id="7_arnps"]
+[ext_resource type="Texture2D" uid="uid://cot8fst4rxgyd" path="res://UI/UI boxes/UI_convo_box_decor2.png" id="8_g67v4"]
+
+[sub_resource type="Gradient" id="Gradient_g67v4"]
+offsets = PackedFloat32Array(0, 0.109005, 0.578199, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.962766, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vq26v"]
+gradient = SubResource("Gradient_g67v4")
+
+[sub_resource type="Curve" id="Curve_2fitg"]
+_data = [Vector2(0, 0.478669), 0.0, 0.0, 0, 0, Vector2(0.202532, 0.797753), 0.0, 0.0, 0, 0, Vector2(0.409283, 0.539326), 0.0, 0.0, 0, 0, Vector2(0.607595, 0.831461), 0.0, 0.0, 0, 0, Vector2(0.810127, 0.494382), 0.0, 0.0, 0, 0, Vector2(1, 0.797753), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_arnps"]
+curve = SubResource("Curve_2fitg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n3l1v"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 90.0
+angular_velocity_min = -30.0
+angular_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_arnps")
+color = Color(0.59425, 0.439629, 1, 1)
+color_ramp = SubResource("GradientTexture1D_vq26v")
 
 [node name="Menu" type="Control"]
 z_index = 100
@@ -23,40 +51,55 @@ script = ExtResource("1_552u3")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = -8.0
+offset_top = -13.0
+offset_right = 1921.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
 [node name="background4" type="TextureRect" parent="CanvasLayer"]
-offset_left = -42.0
-offset_top = -44.0
-offset_right = 1966.0
-offset_bottom = 1078.0
-texture = ExtResource("2_v1j00")
+visible = false
+offset_left = 16.0
+offset_top = -5.0
+offset_right = 1895.0
+offset_bottom = 1063.0
+texture = ExtResource("3_vq26v")
 expand_mode = 1
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer"]
+position = Vector2(1311, 549)
+texture = ExtResource("3_arnps")
+lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_n3l1v")
+
 [node name="background2" type="TextureRect" parent="CanvasLayer"]
-offset_left = 40.0
-offset_top = 28.0
-offset_right = 1866.0
-offset_bottom = 1022.0
-texture = ExtResource("2_v1j00")
-expand_mode = 1
+offset_left = 22.0
+offset_top = 9.0
+offset_right = 1902.0
+offset_bottom = 1056.0
+texture = ExtResource("3_vq26v")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/background2"]
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 0
 offset_left = 88.0
-offset_top = 154.0
+offset_top = 148.0
 offset_right = 488.0
-offset_bottom = 949.0
+offset_bottom = 943.0
 theme_override_constants/separation = 5
 alignment = 1
 
 [node name="ButtonStart" type="Button" parent="CanvasLayer/background2/VBoxContainer"]
-custom_minimum_size = Vector2(0, 120)
+custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_11mpg")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 100
 text = "Start"
 flat = true
 script = ExtResource("4_v1j00")
+normal_color = Color(0.754291, 0.492981, 0.61886, 1)
+hover_color = Color(0.831767, 0.170557, 0.503788, 1)
 
 [node name="Buttonoption" type="Button" parent="CanvasLayer/background2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
@@ -106,32 +149,45 @@ text = "Quit"
 flat = true
 script = ExtResource("4_v1j00")
 
-[node name="background3" type="TextureRect" parent="CanvasLayer"]
-visible = false
-offset_left = 741.0
-offset_top = 149.0
-offset_right = 1845.0
-offset_bottom = 991.0
-texture = ExtResource("4_kppfi")
+[node name="LogoBig" type="TextureRect" parent="CanvasLayer"]
+offset_left = 912.0
+offset_top = 123.0
+offset_right = 1677.0
+offset_bottom = 888.0
+texture = ExtResource("2_pabs8")
 expand_mode = 1
-flip_h = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 535.0
-offset_top = 66.0
-offset_right = 1204.0
-offset_bottom = 343.0
+offset_left = 908.0
+offset_top = 539.0
+offset_right = 1686.0
+offset_bottom = 731.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_offset_x = 5
 theme_override_fonts/normal_font = ExtResource("3_11mpg")
-theme_override_font_sizes/normal_font_size = 90
+theme_override_font_sizes/normal_font_size = 120
 text = "Dark Side Of Zun"
 horizontal_alignment = 1
 
 [node name="OptionsPanel" parent="CanvasLayer" instance=ExtResource("6_kppfi")]
 visible = false
 
-[node name="UiConvoBox" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(920, 1229)
-texture = ExtResource("7_ej7yr")
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_left = 49.0
+offset_top = 55.0
+offset_right = 158.0
+offset_bottom = 132.0
+texture = ExtResource("7_arnps")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+offset_left = 1757.0
+offset_top = 920.0
+offset_right = 1866.0
+offset_bottom = 1005.0
+texture = ExtResource("8_g67v4")
 
 [node name="Camera" type="Camera2D" parent="."]
 offset = Vector2(960, 540)

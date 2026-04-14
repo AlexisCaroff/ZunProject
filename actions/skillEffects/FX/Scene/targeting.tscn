@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://e0tgmgc5pbw4"]
 
-[ext_resource type="Script" uid="uid://dacdwm0tqo27r" path="res://anim_fx.gd" id="1_agtvn"]
-[ext_resource type="Texture2D" uid="uid://bhrt74yv1vsxy" path="res://actions/skillEffects/FX/FX_target.png" id="2_q3nfr"]
-[ext_resource type="Texture2D" uid="uid://baxp27hdvmddn" path="res://actions/skillEffects/FX/FX_temptress_cast_over.png" id="3_gna5y"]
+[ext_resource type="Script" uid="uid://dacdwm0tqo27r" path="res://anim_fx.gd" id="1_rprr5"]
+[ext_resource type="Texture2D" uid="uid://bhrt74yv1vsxy" path="res://actions/skillEffects/FX/FX_target.png" id="2_frg6e"]
+[ext_resource type="Texture2D" uid="uid://baxp27hdvmddn" path="res://actions/skillEffects/FX/FX_temptress_cast_over.png" id="3_o6b8q"]
 
 [sub_resource type="Animation" id="Animation_7h147"]
 resource_name = "FX_anim"
@@ -90,20 +90,20 @@ _data = {
 }
 
 [node name="AnimFX" type="Node2D"]
-script = ExtResource("1_agtvn")
+script = ExtResource("1_rprr5")
 
 [node name="FxCharge" type="Sprite2D" parent="."]
 modulate = Color(0.803846, 0.529231, 0.346154, 0)
 position = Vector2(-20, 1)
 scale = Vector2(0.21763, 0.209789)
-texture = ExtResource("2_q3nfr")
+texture = ExtResource("2_frg6e")
 
 [node name="FxTemptressCastOver" type="Sprite2D" parent="."]
 modulate = Color(0.7, 0.28, 0, 0)
 z_index = -2
 position = Vector2(-23, 13)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_gna5y")
+texture = ExtResource("3_o6b8q")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

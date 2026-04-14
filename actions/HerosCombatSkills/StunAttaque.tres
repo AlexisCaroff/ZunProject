@@ -9,8 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://bn67hgtv6jvaq" path="res://actions/skillEffects/FX/Scene/charge_fx.tscn" id="3_w03xy"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_abm4e"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="5_fkpvk"]
-[ext_resource type="Texture2D" uid="uid://c6qss13x88o50" path="res://actions/damageEffect/damageeffecttexture/hit.png" id="6_6dehc"]
 [ext_resource type="Texture2D" uid="uid://iweidl16yk0t" path="res://actions/actiontexture/UI icons/ICON_warrior_bash.png" id="9_qctpy"]
+[ext_resource type="Texture2D" uid="uid://qx0s5ypu8xhq" path="res://UI/star.png" id="9_w03xy"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("2_lxb6k")
@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://tjywmaoy4ejj"
 [sub_resource type="Resource" id="Resource_qctpy"]
 script = ExtResource("5_fkpvk")
 name = "Stun"
-uitexture = ExtResource("6_6dehc")
+uitexture = ExtResource("9_w03xy")
 affected_stat = 7
 amount = 0
 duration = 1

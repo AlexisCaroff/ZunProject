@@ -1,12 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2ccaxlbll6fm"]
+[gd_scene load_steps=5 format=3 uid="uid://d2ccaxlbll6fm"]
 
 [ext_resource type="Texture2D" uid="uid://bf44mbnwmft3s" path="res://scenes/backgrounds dungeon demo/BG_dungeon_cellar.png" id="2_dli37"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_io4xa"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="4_8omqh"]
-[ext_resource type="PackedScene" uid="uid://d3ji11ayvxnal" path="res://lvl/CombatInterfaceBossInquisistion.tscn" id="4_wdca1"]
-[ext_resource type="Script" uid="uid://bc58s10203bjl" path="res://lvl/Cellar/BossIntroSequence.gd" id="5_wdca1"]
-[ext_resource type="Resource" uid="uid://ulv47dtbemlo" path="res://lvl/Cellar/encounterCellar.tres" id="6_lxyd1"]
-[ext_resource type="Resource" uid="uid://fucrgg8lejvy" path="res://lvl/Hall2/encounterHall2.tres" id="7_ao5r6"]
+[ext_resource type="PackedScene" uid="uid://cnmry3pyse3v5" path="res://lvl/CombatInterfaceMommyBoss.tscn" id="4_tbmd7"]
 
 [node name="CombatInterface" type="Control"]
 layout_mode = 3
@@ -26,10 +23,5 @@ position = Vector2(2, 352)
 [node name="MenuPerso" parent="." instance=ExtResource("4_8omqh")]
 layout_mode = 1
 
-[node name="CombatInterface" parent="." instance=ExtResource("4_wdca1")]
+[node name="CombatInterface" parent="." instance=ExtResource("4_tbmd7")]
 layout_mode = 1
-
-[node name="Node" type="Node" parent="."]
-script = ExtResource("5_wdca1")
-boss_encounter = ExtResource("6_lxyd1")
-inquisition_encounter = ExtResource("7_ao5r6")

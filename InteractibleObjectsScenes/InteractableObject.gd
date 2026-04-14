@@ -11,7 +11,8 @@ class_name InteractableObject
 @export  var startsize = Vector2(0.6,0.6)
 var current_tween: Tween = null
 @export var item_ui_scene: PackedScene = preload("res://UI/item_ui.tscn")
-
+@export var openedSprite: Texture2D
+@onready var SpriteOlder: Sprite2D = $Sprite2D
 
 func _ready():
 	button.connect("button_down",start_interaction)
@@ -19,7 +20,8 @@ func _ready():
 	button.connect("mouse_exited",_on_button_mouse_exited)
 
 func start_interaction():
-	
+	if button.disabled:
+		return
 	if dialogue_manager == null:
 		push_error("DialogueManager introuvable")
 		return
@@ -62,19 +64,25 @@ func resolve_choice(choice: InteractableChoice):
 			await item_ui.animation_finished
 		
 			gm.add_to_inventory(choice.item)
-
+			
 		InteractableChoice.EffectType.BUFF:
 			for chara in characters:
 				chara.add_buff(choice.buff)
-
+			
 		InteractableChoice.EffectType.TAG:
 			for chara in characters:
 				if not chara.tags.has(choice.tag):
 					chara.tags.append(choice.tag)
-
-	queue_free() 
+	if choice.opening:
+		SpriteOlder.texture=openedSprite
+	button.disabled = true
+	etiquette.visible=false
+	SpriteOlder.modulate = Color(0.6,0.6,0.6,1.0)
+	
 	
 func _on_button_mouse_entered() -> void:
+	if button.disabled:
+		return
 	etiquette.scale = startsize 	
 	etiquette.visible=true
 	if current_tween:
@@ -84,6 +92,8 @@ func _on_button_mouse_entered() -> void:
 	
 
 func _on_button_mouse_exited() -> void:
+	if button.disabled:
+		return
 	etiquette.scale = big_size	
 	
 	if current_tween:
