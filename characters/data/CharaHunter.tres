@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=20 format=3 uid="uid://uf5x5dpfh5ln"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=21 format=3 uid="uid://uf5x5dpfh5ln"]
 
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_3p432"]
 [ext_resource type="Texture2D" uid="uid://17kns8mwbxnn" path="res://characters/portraits/PORTRAIT_hero_hunter_hood.png" id="1_404pk"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="8_4jn0w"]
 [ext_resource type="Texture2D" uid="uid://dtsue4pkmdqi4" path="res://characters/charatexture/demo characters/HERO_hunter_down.png" id="9_4vg1p"]
 [ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="10_j4cyw"]
+[ext_resource type="Texture2D" uid="uid://cx3bcb0j5pxrn" path="res://characters/characterInitiative/HunterIniPortrait.png" id="12_404pk"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="12_x3tfg"]
 [ext_resource type="Texture2D" uid="uid://ysjg7rf1ovm5" path="res://characters/charatexture/demo characters/HERO_hunter_idle.png" id="13_isn0k"]
 [ext_resource type="Resource" uid="uid://ca8rrxibg12sg" path="res://actions/HerosCombatSkills/Targetting.tres" id="13_ym5ya"]
@@ -28,7 +29,7 @@ portrait_texture = ExtResource("13_isn0k")
 explorationPortrait = ExtResource("10_j4cyw")
 dead_portrait_texture = ExtResource("9_4vg1p")
 Hit_texture = ExtResource("2_404pk")
-initiative_icon = ExtResource("10_j4cyw")
+initiative_icon = ExtResource("12_404pk")
 Dialogue_texture = ExtResource("1_404pk")
 textureCamp = ExtResource("20_404pk")
 Name = "Kalid"

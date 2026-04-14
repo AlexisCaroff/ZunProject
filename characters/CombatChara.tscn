@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i21nx"]
 [ext_resource type="Texture2D" uid="uid://diwmoyaawsxq6" path="res://characters/portraits/PORTRAIT_hero_mystic.png" id="2_3m50t"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="2_uoxmb"]
-[ext_resource type="Texture2D" uid="uid://cfbwrknqf04rn" path="res://characters/charatexture/demo characters/HERO_warrior_idle.png" id="3_i21nx"]
 [ext_resource type="Texture2D" uid="uid://chqvuss7wfueq" path="res://characters/charatexture/demo characters/HERO_mystic_cc_hit.png" id="3_lodm3"]
 [ext_resource type="Shader" uid="uid://byep7wpo3y12v" path="res://characters/character_outline.gdshader" id="4_fn4af"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="4_qgiwc"]
@@ -29,6 +28,7 @@
 [ext_resource type="Resource" uid="uid://duo5wcnmn0qo2" path="res://actions/HerosCombatSkills/vampire.tres" id="18_yqq7i"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="19_askqf"]
 [ext_resource type="Texture2D" uid="uid://xvf1umygybrb" path="res://camp imgs/Camp_char_sit_M.png" id="20_hrjkv"]
+[ext_resource type="Texture2D" uid="uid://iob20mrmybf7" path="res://characters/charatexture/demo characters/HERO_priestess_idle.png" id="23_3m50t"]
 
 [sub_resource type="Resource" id="Resource_4u7mb"]
 script = ExtResource("14_ags7y")
@@ -93,9 +93,9 @@ immobilized_turns = 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pv5ss"]
 shader = ExtResource("4_fn4af")
 shader_parameter/enabled = true
-shader_parameter/outline_color = Color(0.948311, 0.737129, 0.458433, 1)
+shader_parameter/outline_color = Color(0.80472, 0.769884, 0.726378, 1)
 shader_parameter/outline_width = 5.0
-shader_parameter/outline_direction = Vector2(-10, -10)
+shader_parameter/outline_direction = Vector2(0, -5)
 
 [node name="Warrior" type="Node2D"]
 z_as_relative = false
@@ -129,7 +129,7 @@ offset_right = 16.8333
 offset_bottom = -82.3333
 scale = Vector2(1.87875, 1.51287)
 mouse_filter = 2
-texture = ExtResource("3_i21nx")
+texture = ExtResource("23_3m50t")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 

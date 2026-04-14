@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c8vf5b7mjdmmf"]
+[gd_scene load_steps=35 format=3 uid="uid://c8vf5b7mjdmmf"]
 
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="4_p7mg6"]
 [ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="5_am67h"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dbkhml7dwqu64" path="res://UI/UI boxes/UI_door_arrow.png" id="9_jb1p8"]
 [ext_resource type="Texture2D" uid="uid://bseh53ww23rba" path="res://UI/UI boxes/UI_door_arrow_Right.png" id="10_fbju3"]
 [ext_resource type="Script" uid="uid://cxtwq4lcwvps5" path="res://scripts/door/Doorpeek.gd" id="11_8pb5t"]
+[ext_resource type="Texture2D" uid="uid://cr4fyd24h5aci" path="res://UI/UI boxes/UI_close.png" id="11_qed8k"]
 [ext_resource type="Texture2D" uid="uid://ddyvk10wkhc0r" path="res://UI/door_button_peek.png" id="12_5dmeg"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="13_jxyuu"]
 [ext_resource type="Script" uid="uid://c13pts62qilly" path="res://lvl/buttonexitepeek.gd" id="14_enmlf"]
@@ -179,14 +180,9 @@ offset_bottom = 651.0
 theme_override_fonts/font = ExtResource("13_jxyuu")
 theme_override_font_sizes/font_size = 80
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4xbl3")
-text = "exit"
+icon = ExtResource("11_qed8k")
 flat = true
 script = ExtResource("14_enmlf")
-
-[node name="UiDoorArrowRight" type="Sprite2D" parent="ExitPeek"]
-position = Vector2(191, 102)
-scale = Vector2(0.652344, 0.733933)
-texture = ExtResource("10_fbju3")
 
 [node name="Door" type="Button" parent="."]
 z_index = 7

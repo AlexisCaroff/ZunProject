@@ -79,16 +79,21 @@ func update_turn_queue_ui(queue: Array[Character]):
 	
 	for child in turnOrderPanel.get_children():
 		child.queue_free()
-
+	var first =true
 	for c in queue:
 		var portraitChara = TextureRect.new()
-		portraitChara.texture = c.characterData.explorationPortrait  # CHANGED
-		portraitChara.custom_minimum_size = Vector2(64, 64)
+		portraitChara.texture = c.characterData.initiative_icon  # CHANGED
+		portraitChara.custom_minimum_size = Vector2(120, 120)
+		portraitChara.modulate = Color(0.7,0.7,0.7,1.0)
 		portraitChara.expand_mode= TextureRect.EXPAND_IGNORE_SIZE
 		portraitChara.stretch_mode= TextureRect.STRETCH_SCALE
 		portraitChara.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		if !first:
+			portraitChara.custom_minimum_size = Vector2(90, 90)
+			portraitChara.modulate = Color(0.7,0.7,0.7,1.0)
 		turnOrderPanel.add_child(portraitChara)
-
+		
+		first=false
 
 
 # -------------------------------------------------------------------------

@@ -81,18 +81,18 @@ libraries = {
 }
 
 [node name="FxNetPink003" type="Sprite2D" parent="."]
-position = Vector2(40, 77)
+position = Vector2(39.8625, 37)
 scale = Vector2(0.181372, 0.181372)
 texture = ExtResource("3_0g2uo")
 
 [node name="FxNetPink002" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(-29, 51)
+position = Vector2(-7.13754, 66)
 scale = Vector2(0.181372, 0.181372)
 texture = ExtResource("4_v1c3q")
 
 [node name="FxNetPink001" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(28, -14)
+position = Vector2(81.8624, 24)
 scale = Vector2(0.181372, 0.181372)
 texture = ExtResource("3_vobmv")

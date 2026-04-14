@@ -515,7 +515,7 @@ offset_right = 240.0
 offset_bottom = 88.0
 theme_override_fonts/normal_font = ExtResource("5_7fr0g")
 theme_override_font_sizes/normal_font_size = 30
-text = "enter in the dungeon"
+text = "Enter the dungeon"
 horizontal_alignment = 1
 vertical_alignment = 1
 

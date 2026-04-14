@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=20 format=3 uid="uid://cw65x7yfthrul"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=21 format=3 uid="uid://cw65x7yfthrul"]
 
 [ext_resource type="Texture2D" uid="uid://dx8h5r3u15vy5" path="res://characters/portraits/PORTRAIT_hero_priestess.png" id="1_32fiq"]
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_k2y3o"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="8_3iphg"]
 [ext_resource type="Texture2D" uid="uid://bnx56w5vhsm2n" path="res://characters/charatexture/demo characters/HERO_priestess_down.png" id="9_h4nms"]
 [ext_resource type="Texture2D" uid="uid://dwu2rkneujev8" path="res://characters/exploPortrait/pristressExploPortrait.png" id="10_pcj8w"]
+[ext_resource type="Texture2D" uid="uid://dcni6t4nbvnh" path="res://characters/characterInitiative/prestressIniPortrait.png" id="12_4vmab"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="12_74clh"]
 [ext_resource type="Resource" uid="uid://cswp6nkwg6iwu" path="res://actions/HerosCombatSkills/priere.tres" id="13_3brwx"]
 [ext_resource type="Texture2D" uid="uid://iob20mrmybf7" path="res://characters/charatexture/demo characters/HERO_priestess_idle.png" id="13_k2dab"]
@@ -28,7 +29,7 @@ portrait_texture = ExtResource("13_k2dab")
 explorationPortrait = ExtResource("10_pcj8w")
 dead_portrait_texture = ExtResource("9_h4nms")
 Hit_texture = ExtResource("2_4vmab")
-initiative_icon = ExtResource("10_pcj8w")
+initiative_icon = ExtResource("12_4vmab")
 Dialogue_texture = ExtResource("1_32fiq")
 textureCamp = ExtResource("20_4vmab")
 Name = "Nyx"

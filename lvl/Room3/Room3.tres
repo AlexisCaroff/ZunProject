@@ -27,6 +27,7 @@ text = "take"
 effect_type = 0
 buff = SubResource("Resource_osxcn")
 tag = ""
+opening = false
 metadata/_custom_type_script = "uid://b5vho57xy7r3r"
 
 [sub_resource type="Resource" id="Resource_u06hx"]
@@ -34,6 +35,7 @@ script = ExtResource("7_nvcrf")
 text = "leave"
 effect_type = 0
 tag = ""
+opening = false
 metadata/_custom_type_script = "uid://b5vho57xy7r3r"
 
 [sub_resource type="Resource" id="Resource_wf3oc"]

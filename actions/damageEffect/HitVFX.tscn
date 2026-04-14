@@ -153,6 +153,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Hit" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-14, -47)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_ktxfw")

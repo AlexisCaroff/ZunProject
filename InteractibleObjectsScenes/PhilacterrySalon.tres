@@ -11,6 +11,7 @@ text = ""
 effect_type = 1
 item = ExtResource("1_c6sic")
 tag = ""
+opening = false
 metadata/_custom_type_script = "uid://b5vho57xy7r3r"
 
 [sub_resource type="Resource" id="Resource_c6sic"]
@@ -18,6 +19,7 @@ script = ExtResource("2_c48p6")
 text = "Leave"
 effect_type = 0
 tag = ""
+opening = false
 metadata/_custom_type_script = "uid://b5vho57xy7r3r"
 
 [resource]

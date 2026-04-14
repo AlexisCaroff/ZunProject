@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=20 format=3 uid="uid://b5k1alktrg3t4"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=21 format=3 uid="uid://b5k1alktrg3t4"]
 
 [ext_resource type="Texture2D" uid="uid://c32ucvj4qas4v" path="res://characters/portraits/PORTRAIT_hero_warrior.png" id="1_q5t8p"]
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_qo24v"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cfbwrknqf04rn" path="res://characters/charatexture/demo characters/HERO_warrior_idle.png" id="11_elmwn"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="11_vpitw"]
 [ext_resource type="Resource" uid="uid://behrtqotkyvnx" path="res://actions/HerosCombatSkills/Taunt.tres" id="12_70vf5"]
+[ext_resource type="Texture2D" uid="uid://rcuujvtnjcgk" path="res://characters/characterInitiative/warriorIniPortrait.png" id="12_k6dui"]
 [ext_resource type="Resource" uid="uid://doydfjjogegnd" path="res://actions/HerosCombatSkills/StunAttaque.tres" id="13_mupei"]
 [ext_resource type="Resource" uid="uid://clw258vbo2rq1" path="res://actions/HerosCombatSkills/Charge.tres" id="14_5iw64"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="16_ne2r0"]
@@ -28,7 +29,7 @@ portrait_texture = ExtResource("11_elmwn")
 explorationPortrait = ExtResource("9_nsh6g")
 dead_portrait_texture = ExtResource("9_k6dui")
 Hit_texture = ExtResource("2_q5t8p")
-initiative_icon = ExtResource("9_nsh6g")
+initiative_icon = ExtResource("12_k6dui")
 Dialogue_texture = ExtResource("1_q5t8p")
 textureCamp = ExtResource("19_q5t8p")
 Name = "Elisabeth"

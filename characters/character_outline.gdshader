@@ -1,11 +1,11 @@
 shader_type canvas_item;
 
 uniform bool enabled = false;
-uniform vec4 outline_color : source_color = vec4(0.943, 0.736, 0.430, 1.0); // #EEB466
+uniform vec4 outline_color : source_color = vec4(0.805, 0.77, 0.720, 1.0); // #EEB466
 // Épaisseur du contour en pixels (sample dans les 8 directions)
 uniform float outline_width : hint_range(1.0, 200.0) = 4.0;
 // Décalage de l'outline en pixels : vec2(0,-10)=haut  vec2(0,10)=bas  vec2(10,0)=droite
-uniform vec2 outline_direction = vec2(-8.0, -8.0);
+uniform vec2 outline_direction = vec2(0.0, -5.0);
 
 void fragment() {
 	vec4 current = texture(TEXTURE, UV);

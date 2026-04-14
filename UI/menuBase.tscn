@@ -68,7 +68,7 @@ texture = ExtResource("3_vq26v")
 expand_mode = 1
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer"]
-position = Vector2(1311, 549)
+position = Vector2(1311, 436)
 texture = ExtResource("3_arnps")
 lifetime = 4.0
 process_material = SubResource("ParticleProcessMaterial_n3l1v")
@@ -151,17 +151,18 @@ script = ExtResource("4_v1j00")
 
 [node name="LogoBig" type="TextureRect" parent="CanvasLayer"]
 offset_left = 912.0
-offset_top = 123.0
+offset_top = 10.0
 offset_right = 1677.0
-offset_bottom = 888.0
+offset_bottom = 775.0
 texture = ExtResource("2_pabs8")
 expand_mode = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+modulate = Color(0.820907, 0.511184, 0.857549, 1)
 offset_left = 908.0
-offset_top = 539.0
+offset_top = 445.0
 offset_right = 1686.0
-offset_bottom = 731.0
+offset_bottom = 637.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
@@ -169,7 +170,40 @@ theme_override_constants/shadow_offset_y = 4
 theme_override_constants/shadow_offset_x = 5
 theme_override_fonts/normal_font = ExtResource("3_11mpg")
 theme_override_font_sizes/normal_font_size = 120
-text = "Dark Side Of Zun"
+text = "Dark Side "
+horizontal_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer"]
+modulate = Color(0.820907, 0.511184, 0.857549, 1)
+offset_left = 902.0
+offset_top = 595.0
+offset_right = 1680.0
+offset_bottom = 669.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_offset_x = 5
+theme_override_fonts/normal_font = ExtResource("3_11mpg")
+theme_override_font_sizes/normal_font_size = 50
+text = "Of "
+horizontal_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer"]
+modulate = Color(0.820907, 0.511184, 0.857549, 1)
+offset_left = 895.0
+offset_top = 666.0
+offset_right = 1673.0
+offset_bottom = 939.0
+scale = Vector2(1.00409, 0.752579)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_offset_x = 5
+theme_override_fonts/normal_font = ExtResource("3_11mpg")
+theme_override_font_sizes/normal_font_size = 200
+text = "ZUN"
 horizontal_alignment = 1
 
 [node name="OptionsPanel" parent="CanvasLayer" instance=ExtResource("6_kppfi")]

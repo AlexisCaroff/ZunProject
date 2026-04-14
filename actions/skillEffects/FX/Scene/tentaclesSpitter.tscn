@@ -26,7 +26,7 @@ tracks/1/path = NodePath("FxChargeHit:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.333333, 0.497491, 0.790133, 1),
+"times": PackedFloat32Array(0.3, 0.6, 0.633333, 0.733333),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]

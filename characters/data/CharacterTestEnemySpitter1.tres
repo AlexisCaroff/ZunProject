@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_kpmge"]
 [ext_resource type="Texture2D" uid="uid://dfbm6mf8pdux7" path="res://characters/charatexture/demo characters/ENEMY_slime_down.png" id="5_bxekq"]
 [ext_resource type="Texture2D" uid="uid://dbq25fw4dr1n0" path="res://characters/exploPortrait/SpitterExploPortrait.png" id="5_s2gjy"]
-[ext_resource type="Texture2D" uid="uid://cgnrms5owdhet" path="res://characters/characterInitiative/slimportini.png" id="6_tnthr"]
+[ext_resource type="Texture2D" uid="uid://ctwjj2s4rqugl" path="res://characters/characterInitiative/SlimIniPortrait.png" id="8_bxekq"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="8_i4ffr"]
 [ext_resource type="Texture2D" uid="uid://chhccyohveiec" path="res://characters/charatexture/demo characters/ENEMY_spitter_idle.png" id="9_kpmge"]
 [ext_resource type="Resource" uid="uid://dwdi447w8ocvi" path="res://actions/ennemiCombatSkills/poisonHorny.tres" id="9_odt67"]
@@ -28,7 +28,7 @@ portrait_texture = ExtResource("9_kpmge")
 explorationPortrait = ExtResource("5_s2gjy")
 dead_portrait_texture = ExtResource("5_bxekq")
 Hit_texture = ExtResource("1_bxekq")
-initiative_icon = ExtResource("6_tnthr")
+initiative_icon = ExtResource("8_bxekq")
 Name = "Spitter"
 Charaname = "Spitter"
 IsDemon = true

@@ -11,6 +11,7 @@ text = "take the gloves"
 effect_type = 1
 item = ExtResource("1_nvxa8")
 tag = ""
+opening = false
 metadata/_custom_type_script = "uid://b5vho57xy7r3r"
 
 [sub_resource type="Resource" id="Resource_nvxa8"]
@@ -18,6 +19,7 @@ script = ExtResource("2_w0ymi")
 text = "Leave"
 effect_type = 0
 tag = ""
+opening = false
 metadata/_custom_type_script = "uid://b5vho57xy7r3r"
 
 [resource]

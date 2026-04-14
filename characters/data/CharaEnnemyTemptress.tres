@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=16 format=3 uid="uid://yecuio874dy4"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=17 format=3 uid="uid://yecuio874dy4"]
 
 [ext_resource type="Texture2D" uid="uid://dw6mlmcxoge8o" path="res://characters/charatexture/demo characters/ENEMY_temptress_hit.png" id="1_183tr"]
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_mcmpk"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://djdgehyta1mx" path="res://characters/charatexture/demo characters/ENEMY_temptress_down.png" id="5_ocqyt"]
 [ext_resource type="Texture2D" uid="uid://bodt30r3mnj1m" path="res://characters/exploPortrait/temptressPortrait.png" id="7_airwf"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="8_lnpek"]
+[ext_resource type="Texture2D" uid="uid://bj42280vlqril" path="res://characters/characterInitiative/TemptressIniPortrait.png" id="8_ocqyt"]
 [ext_resource type="Texture2D" uid="uid://duqexi8su8ffh" path="res://characters/charatexture/demo characters/ENEMY_temptress_idle.png" id="8_ruvyt"]
 [ext_resource type="Resource" uid="uid://c6phd3e1sln7n" path="res://actions/ennemiCombatSkills/healMonster.tres" id="10_w6qd6"]
 [ext_resource type="Resource" uid="uid://rxp2q7eq2hr5" path="res://actions/ennemiCombatSkills/charme.tres" id="11_lnpek"]
@@ -29,7 +30,7 @@ portrait_texture = ExtResource("8_ruvyt")
 explorationPortrait = ExtResource("7_airwf")
 dead_portrait_texture = ExtResource("5_ocqyt")
 Hit_texture = ExtResource("1_183tr")
-initiative_icon = ExtResource("7_airwf")
+initiative_icon = ExtResource("8_ocqyt")
 Name = "Temptress"
 Charaname = "Temptress"
 IsDemon = false

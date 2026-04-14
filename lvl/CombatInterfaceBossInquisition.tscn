@@ -189,10 +189,11 @@ custom_minimum_size = Vector2(80, 80)
 layout_mode = 0
 offset_left = 5.0
 offset_top = 28.0
-offset_right = 1921.0
-offset_bottom = 93.0
+offset_right = 1906.0
+offset_bottom = 108.0
 mouse_filter = 2
-alignment = 1
+theme_override_constants/separation = -40
+alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="TurnOrderPanel"]
 custom_minimum_size = Vector2(80, 80)
@@ -228,6 +229,7 @@ position = Vector2(711, 694)
 position = Vector2(480, 694)
 
 [node name="ResultScreen" type="Label" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_top = 1.0

@@ -87,7 +87,7 @@ func _ready():
 	sprite.material = mat
 	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
 	if !characterData.is_player_controlled :
-		(sprite.material as ShaderMaterial).set_shader_parameter("outline_direction",  Vector2(10.0, -10.0))
+		(sprite.material as ShaderMaterial).set_shader_parameter("outline_direction",  Vector2(0.0, -5.0))
 	if characterData:
 		
 		sprite.texture     = characterData.portrait_texture
@@ -781,7 +781,7 @@ func animate_attack(targets: Array, skill: Skill) -> void:
 	var hero_P3  : Vector2 = cm.hero_skillP3.global_position
 	var enemy_P  : Vector2 = cm.enemy_skillP.global_position
 	var enemy_P2 : Vector2 = cm.enemy_skillP2.global_position
-	var enemy_P3 : Vector2 = cm.enemy_skillP3.global_position
+	var enemy_P3 : Vector2 = cm.enemy_skillP3.global_position #position help allie
 
 	# ── Position du caster ───────────────────────────────────
 	# Contact → P (proche de la cible) | Distance → P3 (position arrière)
@@ -812,6 +812,7 @@ func animate_attack(targets: Array, skill: Skill) -> void:
 		for tgt: Character in targets:
 			if tgt.buff_bar: tgt.buff_bar.visible = false
 			tgt.getattacked      = true
+			
 
 	# ── Textures ─────────────────────────────────────────────
 	sprite.texture = current_skill.ImageSkill
@@ -864,7 +865,10 @@ func animate_attack(targets: Array, skill: Skill) -> void:
 	for tgt: Character in targets:
 		tgt.modulate.a = 0.0
 		tgt.z_index    = 20
+		
 		if target_dests.has(tgt):
+			if tgt.characterData.Charaname=="Spitter":
+				target_dests[tgt].y-=60
 			tween.parallel().tween_property(tgt, "position",   target_dests[tgt], T_SETUP)
 			tween.parallel().tween_property(tgt, "scale",      big_size,          T_SETUP)
 		tween.parallel().tween_property(tgt, "modulate:a", 1.0, T_SETUP)
@@ -883,9 +887,12 @@ func animate_attack(targets: Array, skill: Skill) -> void:
 			var mid := Vector2.ZERO
 			for tgt: Character in targets:
 				mid += tgt.position
+				if tgt.characterData.Charaname=="Spitter":
+					mid.y+=60
 			mid /= targets.size()
 			var dir := (mid - caster_dest).normalized()
 			contact_dest = mid + dir * -current_skill.distance_contact
+			
 		tween.tween_property(self, "position", contact_dest, 0.18)
 	else:
 		# Aller-retour sur place

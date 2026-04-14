@@ -302,7 +302,7 @@ func next_turn():
 		
 	if current_character.characterData.current_stamina <= 0:
 		ui.log(current_character.characterData.Charaname +" is tired")
-		end_currentChara_Turn()
+		await end_currentChara_Turn()
 		return
 		
 	if current_character.characterData.current_horniness >= 100: 
@@ -313,7 +313,7 @@ func next_turn():
 			button.disabled = true
 		
 		await get_tree().create_timer(1.5).timeout
-		end_currentChara_Turn()
+		await end_currentChara_Turn()
 		return
 
 	
@@ -328,7 +328,7 @@ func next_turn():
 			ui.update_ui_for_current_character(current_character)
 			await get_tree().create_timer(1.5).timeout
 			current_character.play_ai_turn(heroes,enemies)
-			end_currentChara_Turn()
+			await end_currentChara_Turn()
 	if current_character.characterData.stun == true:
 		
 		ui.log(current_character.characterData.Charaname +" is stuned")
@@ -343,7 +343,7 @@ func next_turn():
 		
 		current_character.characterData.stun = false
 		
-		end_currentChara_Turn()
+		await end_currentChara_Turn()
 		
 		return
 
@@ -604,7 +604,7 @@ func flush_endTurn_affinity_reactions() -> void:
 	
 func PassButtonDown():
 	if current_character and current_character.characterData.is_player_controlled:
-		end_currentChara_Turn()
+		await end_currentChara_Turn()
 		
 ## Retourne les Character occupant les slots (filtre les slots vides)
 func _slots_to_characters(slots: Array[PositionSlot]) -> Array[Character]:
