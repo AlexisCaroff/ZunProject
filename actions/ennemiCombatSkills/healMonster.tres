@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://c6phd3e1sln7n"]
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://c6phd3e1sln7n"]
 
 [ext_resource type="Texture2D" uid="uid://ddcx2dm6to566" path="res://characters/charatexture/demo characters/ENEMY_temptress_cast.png" id="1_80rpu"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_nhirv"]
 [ext_resource type="Script" uid="uid://bp8u5at2ojgse" path="res://actions/skillEffects/healEffect.gd" id="3_lh1si"]
 [ext_resource type="Texture2D" uid="uid://ccyi8n3i3daxa" path="res://actions/actiontexture/heal.png" id="4_htmn0"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_i2770"]
+[ext_resource type="PackedScene" uid="uid://xaab2xdp41sl" path="res://actions/skillEffects/FX/Scene/healed.tscn" id="6_8dswr"]
 
 [sub_resource type="Resource" id="Resource_svn31"]
 script = ExtResource("3_lh1si")
@@ -38,6 +39,7 @@ duration = 1.0
 tags = Array[String](["heal"])
 is_contact = false
 distance_contact = 0.0
+target_effect_scene = ExtResource("6_8dswr")
 caster_effect_anchor = 0
 target_effect_anchor = 2
 is_beneficial = false

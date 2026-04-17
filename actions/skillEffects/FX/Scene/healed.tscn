@@ -105,7 +105,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -202,6 +202,7 @@ scale = Vector2(0.210205, 0.210205)
 texture = ExtResource("2_in2q3")
 
 [node name="FxCharge" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
 z_index = 1
 position = Vector2(35, 8)
 rotation = -0.0272677

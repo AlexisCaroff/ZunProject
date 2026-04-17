@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dg3aat08m30vy"]
+[gd_scene load_steps=14 format=3 uid="uid://dg3aat08m30vy"]
 
 [ext_resource type="Script" uid="uid://blgghrqrf6qji" path="res://peek.gd" id="1_2c73c"]
 [ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://lvl/Hall1/encounter1.tres" id="2_amsrx"]
@@ -7,7 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://dmywh27l7sqm1" path="res://UI/mask.png" id="5_4c7x2"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="5_knem7"]
 [ext_resource type="Script" uid="uid://wv6mo6dmik54" path="res://UI/doorshadows.gd" id="6_knem7"]
+[ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="8_ay1rd"]
 [ext_resource type="Texture2D" uid="uid://b06vh0at651m6" path="res://UI/eye.png" id="8_sdumx"]
+[ext_resource type="Texture2D" uid="uid://d03vlqaa471uv" path="res://UI/UI boxes/UI_convo_box2.png" id="9_3rmv8"]
+[ext_resource type="Texture2D" uid="uid://cpiyjpaydx3i5" path="res://UI/UI boxes/UI_affinity_meter.png" id="10_clgmf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7bfl"]
 bg_color = Color(0.116614, 0.109248, 0.109598, 1)
@@ -58,13 +61,13 @@ scale = Vector2(0.420956, 1.615)
 texture = ExtResource("5_4c7x2")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Crosshair"]
-position = Vector2(-1644.03, 0)
-scale = Vector2(1.31812, 1.48134)
+position = Vector2(-1925.84, 0)
+scale = Vector2(1.61168, 1.48134)
 texture = ExtResource("5_4c7x2")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Crosshair"]
-position = Vector2(1607.29, 0)
-scale = Vector2(1.31812, 1.48134)
+position = Vector2(2169.45, 0)
+scale = Vector2(1.90371, 1.48134)
 texture = ExtResource("5_4c7x2")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
@@ -80,6 +83,12 @@ value = 0.5
 fill_mode = 2
 show_percentage = false
 
+[node name="Gradiant" type="Sprite2D" parent="."]
+position = Vector2(954.329, 1227)
+rotation = -1.5708
+scale = Vector2(1.14323, 3.69707)
+texture = ExtResource("8_ay1rd")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
 
@@ -87,7 +96,22 @@ position = Vector2(960, 540)
 size = Vector2i(1920, 1080)
 
 [node name="Eye" type="Sprite2D" parent="."]
+modulate = Color(0.47, 0.2068, 0.303307, 1)
 z_index = 20
 position = Vector2(269, 838)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("8_sdumx")
+
+[node name="UiConvoBox2" type="Sprite2D" parent="."]
+z_index = 20
+position = Vector2(950, 544)
+scale = Vector2(0.992192, 0.994444)
+texture = ExtResource("9_3rmv8")
+
+[node name="UiAffinityMeter" type="Sprite2D" parent="."]
+modulate = Color(0.488893, 0.490484, 0.973617, 1)
+z_index = 9
+position = Vector2(266.779, 462.827)
+rotation = 1.5708
+scale = Vector2(2.73755, 2.771)
+texture = ExtResource("10_clgmf")

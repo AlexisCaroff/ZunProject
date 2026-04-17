@@ -346,6 +346,7 @@ offset_top = -32.0
 offset_right = 26.0
 offset_bottom = 36.0
 flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Door7" type="Sprite2D" parent="DonjonDoor"]
 self_modulate = Color(0, 0, 0, 1)

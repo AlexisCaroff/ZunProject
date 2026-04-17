@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=13 format=3 uid="uid://bmkp0brav8l87"]
+[gd_resource type="Resource" script_class="Skill" load_steps=14 format=3 uid="uid://bmkp0brav8l87"]
 
 [ext_resource type="Texture2D" uid="uid://fe1y4mug6b75" path="res://characters/charatexture/demo characters/HERO_hunter_throw.png" id="1_n3hnu"]
 [ext_resource type="AudioStream" uid="uid://cyqpgjkdqkdr3" path="res://actions/sound/Weapon Whips 02.wav" id="2_iabra"]
@@ -8,7 +8,8 @@
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_bx3cj"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="5_r265m"]
 [ext_resource type="Texture2D" uid="uid://c6qss13x88o50" path="res://actions/damageEffect/damageeffecttexture/hit.png" id="6_iabra"]
-[ext_resource type="Texture2D" uid="uid://7qfwhdd5o7m6" path="res://actions/actiontexture/actionbollas.png" id="6_n3hnu"]
+[ext_resource type="Texture2D" uid="uid://b4oubet2ttcx0" path="res://actions/actiontexture/UI icons/ICON_hunter_bolas.png" id="8_iabra"]
+[ext_resource type="PackedScene" uid="uid://cqea4mekfk8gb" path="res://actions/skillEffects/FX/Scene/hit_standar.tscn" id="10_jigks"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("3_vlstb")
@@ -35,7 +36,7 @@ script = ExtResource("5_bx3cj")
 name = "bollas"
 descriptionName = "bollas"
 description = "Stuns a backline enemy and deals minor damage."
-icon = ExtResource("6_n3hnu")
+icon = ExtResource("8_iabra")
 attack_sound = ExtResource("2_iabra")
 barkSkill = ""
 required_position = 0
@@ -57,7 +58,8 @@ duration = 1.0
 tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
-caster_effect_anchor = 0
+target_effect_scene = ExtResource("10_jigks")
+caster_effect_anchor = 2
 target_effect_anchor = 1
 is_beneficial = false
 skip_target_return_anim = false

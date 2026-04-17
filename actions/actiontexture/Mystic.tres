@@ -1,0 +1,82 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=21 format=3 uid="uid://c1xql2qyr4th5"]
+
+[ext_resource type="Texture2D" uid="uid://diwmoyaawsxq6" path="res://characters/portraits/PORTRAIT_hero_mystic.png" id="1_m5m7p"]
+[ext_resource type="Texture2D" uid="uid://chqvuss7wfueq" path="res://characters/charatexture/demo characters/HERO_mystic_cc_hit.png" id="2_ovh7i"]
+[ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="3_ff4cp"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="4_85n1u"]
+[ext_resource type="Resource" uid="uid://cryoy3w5uet08" path="res://actions/CampSkill/buffskillCamp.tres" id="5_07ulr"]
+[ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="6_koia7"]
+[ext_resource type="Resource" uid="uid://b2vd1hks0mof3" path="res://actions/CampSkill/dialogueMystic.tres" id="7_tcb1i"]
+[ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="8_enbju"]
+[ext_resource type="Texture2D" uid="uid://dsun64yr5mg5l" path="res://characters/charatexture/demo characters/HERO_mystic_cc_down.png" id="9_kyavf"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="10_kcgfw"]
+[ext_resource type="Texture2D" uid="uid://dd4k5wxaesfo4" path="res://characters/exploPortrait/MysticExploPortrait.png" id="11_g0sk4"]
+[ext_resource type="Texture2D" uid="uid://cfbpe4u16v3hx" path="res://characters/characterInitiative/MysticIniPortrait.png" id="12_or2ga"]
+[ext_resource type="Texture2D" uid="uid://he220dsml4k6" path="res://characters/charatexture/demo characters/HERO_mystic_cc_idle.png" id="13_1l0ed"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="14_a4wx8"]
+[ext_resource type="Resource" uid="uid://m6nw8l2ax4to" path="res://actions/HerosCombatSkills/ChangeMask.tres" id="15_faxul"]
+[ext_resource type="Resource" uid="uid://dopuwtv1moav3" path="res://actions/HerosCombatSkills/Shield.tres" id="16_4awn5"]
+[ext_resource type="Resource" uid="uid://b18fn4cpfbvge" path="res://actions/HerosCombatSkills/drain.tres" id="17_cfmag"]
+[ext_resource type="Resource" uid="uid://b0gt00v7dl0u7" path="res://actions/HerosCombatSkills/MysticGrab2.tres" id="18_pqop0"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="19_vhhps"]
+[ext_resource type="Texture2D" uid="uid://xvf1umygybrb" path="res://camp imgs/Camp_char_sit_M.png" id="20_ouxh7"]
+
+[resource]
+script = ExtResource("14_a4wx8")
+headPosition = Vector2(-22, -90)
+torso_Position = Vector2(0, 0)
+portrait_texture = ExtResource("13_1l0ed")
+explorationPortrait = ExtResource("11_g0sk4")
+dead_portrait_texture = ExtResource("9_kyavf")
+Hit_texture = ExtResource("2_ovh7i")
+initiative_icon = ExtResource("12_or2ga")
+Dialogue_texture = ExtResource("1_m5m7p")
+textureCamp = ExtResource("20_ouxh7")
+Name = "Sablon"
+Charaname = "Mystic"
+IsDemon = false
+size = "Small"
+affinity = Dictionary[String, int]({})
+base_max_stamina = 100
+base_max_stress = 100
+base_max_horniness = 100
+base_attack = 10
+base_defense = 5
+base_willpower = 5
+base_initiative = 20
+base_evasion = 5
+base_precision = 100
+attack = 12
+defense = 5
+willpower = 5
+evasion = 5
+initiative = 20
+peek = 0
+equipped_items = Array[ExtResource("10_kcgfw")]([])
+stun = false
+Chara_position = 2
+max_stamina = 100
+max_stress = 100
+max_horniness = 100
+current_stamina = 100
+current_stress = 0
+current_horniness = 0
+isOneshot = false
+skill_resources = Array[Resource]([ExtResource("15_faxul"), ExtResource("16_4awn5"), ExtResource("17_cfmag"), ExtResource("18_pqop0"), ExtResource("19_vhhps")])
+tags = Array[String](["voyeur", "captive", "switch"])
+is_player_controlled = true
+can_be_moved = true
+min_durationIddle = 0.6
+max_durationIddle = 1.0
+min_scale = 0.95
+max_scale = 1.0
+corruption = 0
+camp_skill_resources = Array[ExtResource("4_85n1u")]([ExtResource("5_07ulr"), ExtResource("6_koia7"), ExtResource("7_tcb1i"), ExtResource("8_enbju")])
+bark_scene = ExtResource("3_ff4cp")
+taunts = ["Spirties grand me strenght"]
+reaction = ["", "", ""]
+affinityReaction = ["", "", ""]
+corrupted = false
+inquisition = false
+immobilized = false
+immobilized_turns = 0

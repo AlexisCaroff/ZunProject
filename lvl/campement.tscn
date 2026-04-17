@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://c63m6eq381xm1"]
+[gd_scene load_steps=63 format=3 uid="uid://c63m6eq381xm1"]
 
 [ext_resource type="Script" uid="uid://w6xjpbgh5xei" path="res://scripts/camp/campement.gd" id="1_7mjgo"]
 [ext_resource type="PackedScene" uid="uid://c2rn6c4jc5dlf" path="res://UI/chara_camp.tscn" id="2_ofeuf"]
@@ -36,10 +36,12 @@
 [ext_resource type="FontFile" uid="uid://dy4n8qboodyud" path="res://font/MarcellusSC-Regular.ttf" id="41_7h8sq"]
 [ext_resource type="Shader" uid="uid://ci6t01o8wrsor" path="res://characters/flame.gdshader" id="41_qfpsl"]
 [ext_resource type="Texture2D" uid="uid://okan3l38r1ob" path="res://characters/charatexture/noise4.png" id="42_1pem6"]
-[ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="42_qbnx0"]
+[ext_resource type="Texture2D" uid="uid://cpiyjpaydx3i5" path="res://UI/UI boxes/UI_affinity_meter.png" id="42_i1nuu"]
 [ext_resource type="Texture2D" uid="uid://utdubw2ugjtc" path="res://UI/UI boxes/UI_affinity_crystal_off.png" id="43_i1nuu"]
 [ext_resource type="Texture2D" uid="uid://7ryxw7uwc0yd" path="res://UI/UI boxes/UI_affinity_crystal_on.png" id="44_l0oyj"]
+[ext_resource type="Texture2D" uid="uid://xwq7f8l713uc" path="res://UI/UI boxes/UI_affinity_portait_frame.png" id="44_nj740"]
 [ext_resource type="Texture2D" uid="uid://6bw7q7nqrbxc" path="res://props/flame.png" id="45_7h8sq"]
+[ext_resource type="Texture2D" uid="uid://dd4k5wxaesfo4" path="res://characters/exploPortrait/MysticExploPortrait.png" id="45_i1nuu"]
 [ext_resource type="Texture2D" uid="uid://6c6j120lvsba" path="res://props/flameHalo.png" id="45_qbnx0"]
 [ext_resource type="Script" uid="uid://0yy75ocbav52" path="res://lvl/haloFeu.gd" id="46_i1nuu"]
 [ext_resource type="Script" uid="uid://cxgw24yv778d8" path="res://lvl/chara_portraitButton.gd" id="48_7tx7c"]
@@ -176,8 +178,8 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(2, 352)
 
 [node name="FightUi" type="Sprite2D" parent="."]
-position = Vector2(969, 890)
-scale = Vector2(0.75, 0.78)
+position = Vector2(963.5, 890)
+scale = Vector2(0.754297, 0.78)
 texture = ExtResource("6_gofun")
 
 [node name="Box2" type="Sprite2D" parent="."]
@@ -270,11 +272,11 @@ expand_mode = 1
 
 [node name="ActionPanel" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(90, 90)
-offset_left = 579.0
-offset_top = 845.0
-offset_right = 1202.0
-offset_bottom = 945.0
-scale = Vector2(1.245, 1.245)
+offset_left = 616.0
+offset_top = 830.0
+offset_right = 1239.0
+offset_bottom = 930.0
+scale = Vector2(1.13927, 1.13927)
 theme_override_constants/separation = 10
 alignment = 1
 
@@ -326,8 +328,6 @@ offset_right = 1260.0
 offset_bottom = 1066.0
 theme_override_fonts/font = ExtResource("17_luaer")
 theme_override_font_sizes/font_size = 25
-text = "Attaque1 
-et truc et bidule"
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -463,8 +463,8 @@ script = ExtResource("16_ktrs2")
 hover_color = Color(0.78125, 0.715135, 0.417796, 1)
 
 [node name="UiButtonMapOn" type="Sprite2D" parent="MapButton"]
-position = Vector2(19.027, 33.6012)
-scale = Vector2(0.462275, 0.478862)
+position = Vector2(33.5029, 48.6551)
+scale = Vector2(0.349182, 0.361711)
 texture = ExtResource("25_xmkko")
 
 [node name="Boles2" type="Sprite2D" parent="."]
@@ -525,6 +525,7 @@ scale = Vector2(338.499, 233.869)
 flat = true
 
 [node name="ShowTuto" type="Button" parent="."]
+visible = false
 z_index = 22
 offset_top = 161.0
 offset_right = 81.0
@@ -563,10 +564,10 @@ metadata/_edit_use_anchors_ = true
 [node name="charaPortrait2" type="TextureRect" parent="."]
 modulate = Color(0.803239, 0.713583, 0.658708, 1)
 z_index = 6
-offset_left = 1704.0
-offset_top = 761.0
-offset_right = 1764.0
-offset_bottom = 821.0
+offset_left = 1762.0
+offset_top = 778.0
+offset_right = 1806.0
+offset_bottom = 822.0
 scale = Vector2(0.79653, 0.79653)
 texture = ExtResource("36_3vt2c")
 expand_mode = 1
@@ -585,8 +586,8 @@ flat = true
 
 [node name="UiCombatItembox" type="Sprite2D" parent="charaPortrait2"]
 z_index = -1
-position = Vector2(30, 30)
-scale = Vector2(1.13095, 1.19048)
+position = Vector2(21.3426, 23.8535)
+scale = Vector2(0.937375, 0.986716)
 texture = ExtResource("38_qfpsl")
 
 [node name="MenuPerso" parent="." instance=ExtResource("49_yy5dy")]
@@ -764,7 +765,7 @@ offset_left = 789.0
 offset_top = 85.0
 offset_right = 1543.0
 offset_bottom = 216.0
-theme_override_constants/separation = 198
+theme_override_constants/separation = 210
 
 [node name="chara1" type="TextureRect" parent="CharactersPanelAffinity"]
 z_index = 6
@@ -773,13 +774,15 @@ layout_mode = 2
 expand_mode = 1
 script = ExtResource("40_1pem6")
 
-[node name="ColorRect" type="ColorRect" parent="CharactersPanelAffinity/chara1"]
-modulate = Color(0.184314, 0.172549, 0.14902, 1)
+[node name="chara2" type="TextureRect" parent="CharactersPanelAffinity/chara1"]
+z_index = 6
 layout_mode = 0
-offset_left = 77.0
-offset_top = 62.0
-offset_right = 283.0
-offset_bottom = 90.0
+offset_left = 52.0
+offset_top = 42.0
+offset_right = 299.0
+offset_bottom = 113.0
+texture = ExtResource("42_i1nuu")
+expand_mode = 1
 
 [node name="Textaffinity" type="RichTextLabel" parent="CharactersPanelAffinity/chara1"]
 layout_mode = 0
@@ -793,19 +796,30 @@ theme_override_font_sizes/normal_font_size = 25
 text = "name  value"
 horizontal_alignment = 1
 
+[node name="chara3" type="TextureRect" parent="CharactersPanelAffinity/chara1"]
+z_index = 6
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_left = -14.0
+offset_top = 6.0
+offset_right = 105.0
+offset_bottom = 125.0
+texture = ExtResource("44_nj740")
+expand_mode = 1
+
 [node name="chara" type="TextureRect" parent="CharactersPanelAffinity/chara1"]
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 14.0
-offset_top = 4.0
-offset_right = 114.0
-offset_bottom = 104.0
-texture = ExtResource("42_qbnx0")
+offset_left = -11.0
+offset_top = 26.0
+offset_right = 89.0
+offset_bottom = 126.0
+rotation = -0.191986
+texture = ExtResource("45_i1nuu")
 expand_mode = 1
 
 [node name="AffinityCrystalBack1" type="TextureRect" parent="CharactersPanelAffinity/chara1"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
@@ -827,7 +841,6 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("44_l0oyj")
 
 [node name="AffinityCrystalBack2" type="TextureRect" parent="CharactersPanelAffinity/chara1"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
@@ -849,7 +862,6 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("44_l0oyj")
 
 [node name="AffinityCrystalBack3" type="TextureRect" parent="CharactersPanelAffinity/chara1"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
@@ -871,32 +883,23 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("44_l0oyj")
 
 [node name="LustProgressBar3" type="ProgressBar" parent="CharactersPanelAffinity/chara1"]
-modulate = Color(0.392157, 0.364706, 0.811765, 1)
+modulate = Color(0.959566, 0.836991, 0.50111, 1)
 layout_mode = 2
 offset_left = 80.0
-offset_top = 64.0
+offset_top = 69.0
 offset_right = 280.0
-offset_bottom = 88.0
+offset_bottom = 85.0
 theme_override_styles/background = SubResource("StyleBoxFlat_nj740")
 theme_override_styles/fill = SubResource("StyleBoxFlat_7tx7c")
 step = 1.0
 value = 66.0
 show_percentage = false
 
-[node name="ColorRect2" type="ColorRect" parent="CharactersPanelAffinity/chara1"]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 5.0
-offset_right = 134.0
-offset_bottom = 74.0
-rotation = 0.785398
-color = Color(0, 0, 0, 1)
-
 [node name="Button" type="Button" parent="CharactersPanelAffinity/chara1"]
 layout_mode = 0
-offset_left = 65.0
+offset_left = 46.0
 offset_top = 1.0
-offset_right = 154.0
+offset_right = 135.0
 offset_bottom = 91.0
 rotation = 0.793458
 flat = true
@@ -908,13 +911,15 @@ layout_mode = 2
 expand_mode = 1
 script = ExtResource("40_1pem6")
 
-[node name="ColorRect" type="ColorRect" parent="CharactersPanelAffinity/chara2"]
-modulate = Color(0.184314, 0.172549, 0.14902, 1)
+[node name="chara2" type="TextureRect" parent="CharactersPanelAffinity/chara2"]
+z_index = 6
 layout_mode = 0
-offset_left = 77.0
-offset_top = 62.0
-offset_right = 283.0
-offset_bottom = 90.0
+offset_left = 52.0
+offset_top = 42.0
+offset_right = 299.0
+offset_bottom = 113.0
+texture = ExtResource("42_i1nuu")
+expand_mode = 1
 
 [node name="Textaffinity" type="RichTextLabel" parent="CharactersPanelAffinity/chara2"]
 layout_mode = 0
@@ -928,19 +933,30 @@ theme_override_font_sizes/normal_font_size = 25
 text = "name  value"
 horizontal_alignment = 1
 
+[node name="chara3" type="TextureRect" parent="CharactersPanelAffinity/chara2"]
+z_index = 6
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_left = -14.0
+offset_top = 6.0
+offset_right = 105.0
+offset_bottom = 125.0
+texture = ExtResource("44_nj740")
+expand_mode = 1
+
 [node name="chara" type="TextureRect" parent="CharactersPanelAffinity/chara2"]
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 14.0
-offset_top = 4.0
-offset_right = 114.0
-offset_bottom = 104.0
-texture = ExtResource("42_qbnx0")
+offset_left = -11.0
+offset_top = 26.0
+offset_right = 89.0
+offset_bottom = 126.0
+rotation = -0.191986
+texture = ExtResource("45_i1nuu")
 expand_mode = 1
 
 [node name="AffinityCrystalBack1" type="TextureRect" parent="CharactersPanelAffinity/chara2"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
@@ -962,7 +978,6 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("44_l0oyj")
 
 [node name="AffinityCrystalBack2" type="TextureRect" parent="CharactersPanelAffinity/chara2"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
@@ -984,7 +999,6 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("44_l0oyj")
 
 [node name="AffinityCrystalBack3" type="TextureRect" parent="CharactersPanelAffinity/chara2"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
@@ -1006,33 +1020,24 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("44_l0oyj")
 
 [node name="LustProgressBar3" type="ProgressBar" parent="CharactersPanelAffinity/chara2"]
-modulate = Color(0.392157, 0.364706, 0.811765, 1)
+modulate = Color(0.959566, 0.836991, 0.50111, 1)
 layout_mode = 2
 offset_left = 80.0
-offset_top = 64.0
+offset_top = 69.0
 offset_right = 280.0
-offset_bottom = 88.0
+offset_bottom = 85.0
 theme_override_styles/background = SubResource("StyleBoxFlat_nj740")
 theme_override_styles/fill = SubResource("StyleBoxFlat_7tx7c")
 step = 1.0
 value = 66.0
 show_percentage = false
 
-[node name="ColorRect2" type="ColorRect" parent="CharactersPanelAffinity/chara2"]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 5.0
-offset_right = 134.0
-offset_bottom = 74.0
-rotation = 0.785398
-color = Color(0, 0, 0, 1)
-
 [node name="Button" type="Button" parent="CharactersPanelAffinity/chara2"]
 layout_mode = 0
-offset_left = 65.0
-offset_top = 1.0
-offset_right = 154.0
-offset_bottom = 91.0
+offset_left = 46.0
+offset_top = 5.0
+offset_right = 135.0
+offset_bottom = 95.0
 rotation = 0.793458
 flat = true
 
@@ -1043,13 +1048,15 @@ layout_mode = 2
 expand_mode = 1
 script = ExtResource("40_1pem6")
 
-[node name="ColorRect" type="ColorRect" parent="CharactersPanelAffinity/chara3"]
-modulate = Color(0.184314, 0.172549, 0.14902, 1)
+[node name="chara2" type="TextureRect" parent="CharactersPanelAffinity/chara3"]
+z_index = 6
 layout_mode = 0
-offset_left = 77.0
-offset_top = 62.0
-offset_right = 283.0
-offset_bottom = 90.0
+offset_left = 52.0
+offset_top = 42.0
+offset_right = 299.0
+offset_bottom = 113.0
+texture = ExtResource("42_i1nuu")
+expand_mode = 1
 
 [node name="Textaffinity" type="RichTextLabel" parent="CharactersPanelAffinity/chara3"]
 layout_mode = 0
@@ -1063,19 +1070,30 @@ theme_override_font_sizes/normal_font_size = 25
 text = "name  value"
 horizontal_alignment = 1
 
+[node name="chara3" type="TextureRect" parent="CharactersPanelAffinity/chara3"]
+z_index = 6
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_left = -14.0
+offset_top = 6.0
+offset_right = 105.0
+offset_bottom = 125.0
+texture = ExtResource("44_nj740")
+expand_mode = 1
+
 [node name="chara" type="TextureRect" parent="CharactersPanelAffinity/chara3"]
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 14.0
-offset_top = 4.0
-offset_right = 114.0
-offset_bottom = 104.0
-texture = ExtResource("42_qbnx0")
+offset_left = -11.0
+offset_top = 26.0
+offset_right = 89.0
+offset_bottom = 126.0
+rotation = -0.191986
+texture = ExtResource("45_i1nuu")
 expand_mode = 1
 
 [node name="AffinityCrystalBack1" type="TextureRect" parent="CharactersPanelAffinity/chara3"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
@@ -1097,7 +1115,6 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("44_l0oyj")
 
 [node name="AffinityCrystalBack2" type="TextureRect" parent="CharactersPanelAffinity/chara3"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
@@ -1119,7 +1136,6 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("44_l0oyj")
 
 [node name="AffinityCrystalBack3" type="TextureRect" parent="CharactersPanelAffinity/chara3"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
@@ -1141,32 +1157,23 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("44_l0oyj")
 
 [node name="LustProgressBar3" type="ProgressBar" parent="CharactersPanelAffinity/chara3"]
-modulate = Color(0.392157, 0.364706, 0.811765, 1)
+modulate = Color(0.959566, 0.836991, 0.50111, 1)
 layout_mode = 2
 offset_left = 80.0
-offset_top = 64.0
+offset_top = 69.0
 offset_right = 280.0
-offset_bottom = 88.0
+offset_bottom = 85.0
 theme_override_styles/background = SubResource("StyleBoxFlat_nj740")
 theme_override_styles/fill = SubResource("StyleBoxFlat_7tx7c")
 step = 1.0
 value = 66.0
 show_percentage = false
 
-[node name="ColorRect2" type="ColorRect" parent="CharactersPanelAffinity/chara3"]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 5.0
-offset_right = 134.0
-offset_bottom = 74.0
-rotation = 0.785398
-color = Color(0, 0, 0, 1)
-
 [node name="Button" type="Button" parent="CharactersPanelAffinity/chara3"]
 layout_mode = 0
-offset_left = 65.0
+offset_left = 46.0
 offset_top = 1.0
-offset_right = 154.0
+offset_right = 135.0
 offset_bottom = 91.0
 rotation = 0.793458
 flat = true

@@ -161,11 +161,11 @@ texture = ExtResource("2_n50uc")
 texture = ExtResource("3_50q8f")
 
 [node name="BuffBar" type="HBoxContainer" parent="."]
-z_index = 8
+z_index = 6
 custom_minimum_size = Vector2(32, 32)
-offset_left = -260.0
-offset_top = -31.0
-offset_right = 255.0
-offset_bottom = 1.0
+offset_left = -267.0
+offset_top = -21.0
+offset_right = 248.0
+offset_bottom = 11.0
 theme_override_constants/separation = 32
 alignment = 1

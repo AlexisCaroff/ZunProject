@@ -19,11 +19,11 @@ position = Vector2(-82, 40)
 script = ExtResource("3_sqe47")
 
 [node name="HerosTexture2" type="TextureRect" parent="pivotcorps"]
-offset_left = -57.0
-offset_top = -390.0
-offset_right = 114.0
-offset_bottom = -159.0
-scale = Vector2(2.79216, 1.8362)
+offset_left = -6.0
+offset_top = -413.0
+offset_right = 165.0
+offset_bottom = -182.0
+scale = Vector2(3.07911, 2.02491)
 mouse_filter = 2
 texture = ExtResource("11_4imvw")
 expand_mode = 1
@@ -35,11 +35,11 @@ position = Vector2(-74, 41)
 script = ExtResource("3_sqe47")
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -145.0
-offset_top = -345.0
-offset_right = 26.0
-offset_bottom = -114.0
-scale = Vector2(2.17679, 1.61301)
+offset_left = -117.0
+offset_top = -368.0
+offset_right = 54.0
+offset_bottom = -137.0
+scale = Vector2(2.40353, 1.78102)
 mouse_filter = 2
 texture = ExtResource("4_sqe47")
 expand_mode = 1

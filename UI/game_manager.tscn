@@ -11,7 +11,7 @@
 [ext_resource type="Resource" uid="uid://uf5x5dpfh5ln" path="res://characters/data/CharaHunter.tres" id="7_vbvj5"]
 [ext_resource type="Texture2D" uid="uid://u4r16y7nxe6o" path="res://logo.png" id="8_soe0u"]
 [ext_resource type="Resource" uid="uid://cw65x7yfthrul" path="res://characters/data/CharaPriest.tres" id="9_43qkp"]
-[ext_resource type="Resource" uid="uid://c1xql2qyr4th5" path="res://characters/data/Mystic.tres" id="9_nm67f"]
+[ext_resource type="Resource" uid="uid://c1xql2qyr4th5" path="res://actions/actiontexture/Mystic.tres" id="9_nm67f"]
 [ext_resource type="Resource" uid="uid://b5k1alktrg3t4" path="res://characters/data/CharaWarrior.tres" id="10_nm67f"]
 [ext_resource type="Script" uid="uid://hqfnhl3n6kn" path="res://UI/button_journal.gd" id="12_n5q86"]
 [ext_resource type="Texture2D" uid="uid://eqli6rl4sig3" path="res://UI/UI boxes/UI_camp_points.png" id="12_nm67f"]

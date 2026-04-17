@@ -18,9 +18,6 @@ var dialogue_started: bool = false
 var ui: Node = null
 var scene: PackedScene = preload("res://UI/dialogue_ui.tscn")
 
-# Résolution pour laquelle le dialogue_ui.tscn a été designé
-const DESIGN_SIZE := Vector2(1920.0, 1080.0)
-
 # Speakers sans portrait — n'occupent pas de slot visuel (ex: "Narrator")
 @export var no_portrait_speakers: Array[String] = ["Narrator"]
 
@@ -45,7 +42,6 @@ func _ready():
 	if ui == null:
 		ui = scene.instantiate()
 		add_child(ui)
-		_fit_ui_to_viewport()
 	else:
 		ui = $DialogueUI
 	ui.visible = false
@@ -69,18 +65,20 @@ func _ready():
 				choix.Choice2.pressed.connect(external_choice_receiver._on_Choice2_button_down)
 
 
-func _fit_ui_to_viewport() -> void:
-	var viewport_size := get_viewport().get_visible_rect().size
-	var scale_factor  := minf(viewport_size.x / DESIGN_SIZE.x, viewport_size.y / DESIGN_SIZE.y)
-	ui.scale    = Vector2(scale_factor, scale_factor)
-	# Centre le ui scalé dans le viewport
-	ui.position = (viewport_size - DESIGN_SIZE * scale_factor) / 2.0
-
-
 func _input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT \
-			and event.pressed and dialogue_started:
-		next_line()
+	if not event.is_pressed():
+		return
+
+	# Clic gauche ou Espace → ligne suivante
+	if dialogue_started:
+		if (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT) \
+				or (event is InputEventKey and event.keycode == KEY_SPACE):
+			next_line()
+
+	# X → sauter tout le dialogue immédiatement
+	if dialogue_started and event is InputEventKey and event.keycode == KEY_X:
+		current_index = dialogue_lines.size()
+		show_line()
 
 
 func load_dialogue(file_path: String):

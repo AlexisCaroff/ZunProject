@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=15 format=3 uid="uid://b12yj86cv1lo7"]
+[gd_resource type="Resource" script_class="Skill" load_steps=16 format=3 uid="uid://b12yj86cv1lo7"]
 
 [ext_resource type="Texture2D" uid="uid://dflxvs46sww1w" path="res://characters/charatexture/demo characters/ENEMY_nymph_F_shoot.png" id="1_4y5k8"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_nya7c"]
 [ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="2_g222q"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_kcvw8"]
+[ext_resource type="PackedScene" uid="uid://b0xlvqrqes381" path="res://actions/skillEffects/FX/Scene/spitEnnemy_FX.tscn" id="2_vgxbl"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="3_4y5k8"]
 [ext_resource type="Texture2D" uid="uid://bhhvdopw8nqlu" path="res://actions/actiontexture/vampire.png" id="4_j4j7o"]
 [ext_resource type="Texture2D" uid="uid://btvnbxbbjq1w4" path="res://UI/debuffDeff.png" id="5_coij5"]
@@ -68,9 +69,10 @@ duration = 0.3
 tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
+caster_effect_scene = ExtResource("2_vgxbl")
 target_effect_scene = ExtResource("10_df3d6")
 caster_effect_anchor = 0
-target_effect_anchor = 1
+target_effect_anchor = 2
 is_beneficial = false
 skip_target_return_anim = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

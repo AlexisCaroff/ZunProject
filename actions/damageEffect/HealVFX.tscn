@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://n3dvhwwiawh4" path="res://HitVFX.gd" id="1_fgbhh"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="2_g4jbf"]
-[ext_resource type="Texture2D" uid="uid://cg6u8o4rwhjio" path="res://actions/damageEffect/damageeffecttexture/heal.png" id="3_rvtrb"]
+[ext_resource type="Texture2D" uid="uid://cs8rb5j8e32f" path="res://actions/skillEffects/FX/FX_stamina001.png" id="3_rvtrb"]
 
 [sub_resource type="Animation" id="Animation_dam0d"]
 length = 0.001

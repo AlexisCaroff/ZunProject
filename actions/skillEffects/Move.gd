@@ -29,10 +29,10 @@ func apply(user: Character, target: PositionSlot) -> void:
 		return
  
 	if Chartarget._current_slot.is_occupied():
-		cm.swap_characters(Chartarget._current_slot, user_slot, 1.7)
+		cm.swap_characters(Chartarget._current_slot, user_slot, 0.5)
 		user.update_ui()
 		Chartarget.update_ui()
 	else:
-		cm.move_character_to(Chartarget, user_slot, 0.7)
+		cm.move_character_to(Chartarget, user_slot, 0.5)
 		Chartarget.update_ui()
 	

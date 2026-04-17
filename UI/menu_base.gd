@@ -11,6 +11,7 @@ class_name StartMenu
 
 
 func _ready():
+	options_panel.hide()
 	
 	button_start.pressed.connect(_on_start_pressed)
 	button_start.animscale()
@@ -19,7 +20,7 @@ func _ready():
 	button_glossaire.pressed.connect(_on_glossaire_pressed)
 	button_didacticiel.pressed.connect(_on_didacticiel_pressed)
 	button_quit.pressed.connect(_on_quit_pressed)
-	options_panel.hide()
+	
 	AudioManager.register_tracks(
 		[preload("res://Audio/Music/track_01.ogg"),
 		 preload("res://Audio/Music/track_02.ogg"), 

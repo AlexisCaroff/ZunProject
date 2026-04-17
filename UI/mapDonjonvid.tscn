@@ -1,0 +1,404 @@
+[gd_scene load_steps=28 format=3 uid="uid://v4vr7no2fm85"]
+
+[ext_resource type="Script" uid="uid://3tapvib7sxkd" path="res://UI/donjon_roomsTrailercode.gd" id="2_qwja6"]
+[ext_resource type="Texture2D" uid="uid://c1ce3m6pqbp3y" path="res://lvl/donjon2/dungeon_map2.png" id="2_tyn3m"]
+[ext_resource type="Texture2D" uid="uid://dnbfhwynqsv76" path="res://lvl/donjon2/hall.png" id="4_ok8ga"]
+[ext_resource type="Texture2D" uid="uid://b4q0etu7h1jad" path="res://lvl/donjon2/corridor.png" id="5_cm8ct"]
+[ext_resource type="Texture2D" uid="uid://dgrsjw18hcfu7" path="res://lvl/donjon2/room3.png" id="6_3gyw5"]
+[ext_resource type="Texture2D" uid="uid://2ee8vp2sxvgu" path="res://lvl/donjon2/cellar.png" id="7_fykp4"]
+[ext_resource type="Texture2D" uid="uid://fpa40krxtjol" path="res://lvl/donjon2/corridor2.png" id="8_1xfem"]
+[ext_resource type="Texture2D" uid="uid://bukhn3m4hqpx4" path="res://lvl/donjon2/hall2.png" id="9_esq0y"]
+[ext_resource type="Texture2D" uid="uid://8i03b1vq1ivk" path="res://lvl/donjon2/room1.png" id="10_7g4le"]
+[ext_resource type="Texture2D" uid="uid://ipgb2jvkfk8a" path="res://lvl/donjon2/room2.png" id="11_efq8o"]
+[ext_resource type="Texture2D" uid="uid://ceaq1hrl47lmk" path="res://lvl/donjon2/salon1.png" id="12_f51a6"]
+[ext_resource type="Texture2D" uid="uid://rprejanye477" path="res://lvl/donjon2/salon2.png" id="13_ccxg1"]
+[ext_resource type="Texture2D" uid="uid://b4tsh3gx5rbxg" path="res://lvl/donjon2/bossRoom.png" id="14_vxhjk"]
+[ext_resource type="Texture2D" uid="uid://dphxs3npuk1lg" path="res://lvl/donjon2/salle0.png" id="15_ocncm"]
+[ext_resource type="Texture2D" uid="uid://dpb4et0d3bipa" path="res://UI/position.png" id="16_pnd37"]
+[ext_resource type="Script" uid="uid://xgcdntldtp3u" path="res://UI/rotateSprite.gd" id="17_bnfhj"]
+[ext_resource type="Texture2D" uid="uid://cggthsriibvyo" path="res://UI/logo dark.png" id="17_x7w4e"]
+[ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="18_4yok0"]
+[ext_resource type="Texture2D" uid="uid://ciicu0hgenhgw" path="res://actions/skillEffects/FX/FX_stamina002.png" id="18_j1fly"]
+[ext_resource type="Texture2D" uid="uid://hmsurmgk8g4s" path="res://lvl/donjon2/door.png" id="20_gscve"]
+[ext_resource type="Texture2D" uid="uid://bnqsm6vdxfcwy" path="res://UI/UI boxes/UI_button_map_on.png" id="20_tyn3m"]
+[ext_resource type="Texture2D" uid="uid://d03vlqaa471uv" path="res://UI/UI boxes/UI_convo_box2.png" id="21_j1fly"]
+
+[sub_resource type="Gradient" id="Gradient_ok8ga"]
+offsets = PackedFloat32Array(0, 0.109005, 0.578199, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.962766, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vq26v"]
+gradient = SubResource("Gradient_ok8ga")
+
+[sub_resource type="Curve" id="Curve_cm8ct"]
+_data = [Vector2(0, 0.478669), 0.0, 0.0, 0, 0, Vector2(0.202532, 0.797753), 0.0, 0.0, 0, 0, Vector2(0.409283, 0.539326), 0.0, 0.0, 0, 0, Vector2(0.607595, 0.831461), 0.0, 0.0, 0, 0, Vector2(0.810127, 0.494382), 0.0, 0.0, 0, 0, Vector2(1, 0.797753), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_arnps"]
+curve = SubResource("Curve_cm8ct")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3gyw5"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 90.0
+angular_velocity_min = -30.0
+angular_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.6
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_arnps")
+color = Color(0.598667, 0.44, 1, 1)
+color_ramp = SubResource("GradientTexture1D_vq26v")
+
+[node name="map1" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -4385.0
+offset_top = -2255.0
+offset_right = 4311.0
+offset_bottom = 3038.0
+color = Color(0, 0, 0, 1)
+
+[node name="DonjonRooms" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+texture = ExtResource("2_tyn3m")
+script = ExtResource("2_qwja6")
+fade_duration = 1.0
+scale_duration = 0.5
+child_delay = 0.5
+cam_zoom_duration = 1.5
+
+[node name="Salle0" type="Sprite2D" parent="DonjonRooms"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.67, 0.624775, 0.5695, 1)
+position = Vector2(-1092, -34)
+texture = ExtResource("15_ocncm")
+
+[node name="Door1" type="Sprite2D" parent="DonjonRooms/Salle0"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+z_index = 2
+position = Vector2(282, -14)
+scale = Vector2(0.233398, 0.233398)
+texture = ExtResource("18_4yok0")
+
+[node name="Button" type="Button" parent="DonjonRooms/Salle0/Door1"]
+anchors_preset = -1
+anchor_left = -0.6
+anchor_top = -0.506849
+anchor_right = -0.6
+anchor_bottom = -0.506849
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Hall1" type="Sprite2D" parent="DonjonRooms"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.67, 0.624775, 0.5695, 1)
+position = Vector2(-421, -51)
+texture = ExtResource("4_ok8ga")
+
+[node name="Door2" type="Sprite2D" parent="DonjonRooms/Hall1"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+z_index = 2
+position = Vector2(-41, 171)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("20_gscve")
+
+[node name="Button" type="Button" parent="DonjonRooms/Hall1/Door2"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+anchors_preset = -1
+anchor_left = -0.64
+anchor_top = -0.506849
+anchor_right = -0.64
+anchor_bottom = -0.506849
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Door8" type="Sprite2D" parent="DonjonRooms/Hall1"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+z_index = 2
+position = Vector2(-55, -172)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("20_gscve")
+
+[node name="Button" type="Button" parent="DonjonRooms/Hall1/Door8"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+anchors_preset = -1
+anchor_left = -0.64
+anchor_top = -0.506849
+anchor_right = -0.64
+anchor_bottom = -0.506849
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Corridor1" type="Sprite2D" parent="DonjonRooms"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.67, 0.624775, 0.5695, 1)
+position = Vector2(-260, 310)
+texture = ExtResource("5_cm8ct")
+
+[node name="Door3" type="Sprite2D" parent="DonjonRooms/Corridor1"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+z_index = 2
+position = Vector2(-321, -51)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("20_gscve")
+
+[node name="Button" type="Button" parent="DonjonRooms/Corridor1/Door3"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+anchors_preset = -1
+anchor_left = -0.64
+anchor_top = -0.534247
+anchor_right = -0.64
+anchor_bottom = -0.534247
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Door4" type="Sprite2D" parent="DonjonRooms/Corridor1"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+z_index = 2
+position = Vector2(-95, -95)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("20_gscve")
+
+[node name="Door5" type="Sprite2D" parent="DonjonRooms/Corridor1"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+z_index = 2
+position = Vector2(272, 46)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("20_gscve")
+
+[node name="Salon1" type="Sprite2D" parent="DonjonRooms"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.67, 0.624775, 0.5695, 1)
+position = Vector2(-94, 126)
+texture = ExtResource("12_f51a6")
+
+[node name="Door10" type="Sprite2D" parent="DonjonRooms/Salon1"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+z_index = 2
+position = Vector2(151, -180)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("20_gscve")
+
+[node name="Button" type="Button" parent="DonjonRooms/Salon1/Door10"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+anchors_preset = -1
+anchor_left = -0.64
+anchor_top = -0.506849
+anchor_right = -0.64
+anchor_bottom = -0.506849
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Door7" type="Sprite2D" parent="DonjonRooms/Salon1"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+z_index = 2
+position = Vector2(240, -43)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("20_gscve")
+
+[node name="Button" type="Button" parent="DonjonRooms/Salon1/Door7"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Hall2" type="Sprite2D" parent="DonjonRooms"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.67, 0.624775, 0.5695, 1)
+position = Vector2(269, 73)
+texture = ExtResource("9_esq0y")
+
+[node name="Salon2" type="Sprite2D" parent="DonjonRooms"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.67, 0.624775, 0.5695, 1)
+position = Vector2(-94, -225)
+texture = ExtResource("13_ccxg1")
+
+[node name="Door11" type="Sprite2D" parent="DonjonRooms/Salon2"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+z_index = 2
+position = Vector2(218, -6)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("20_gscve")
+
+[node name="Button" type="Button" parent="DonjonRooms/Salon2/Door11"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+anchors_preset = -1
+anchor_left = -0.64
+anchor_top = -0.506849
+anchor_right = -0.64
+anchor_bottom = -0.506849
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Room2" type="Sprite2D" parent="DonjonRooms"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.67, 0.624775, 0.5695, 1)
+position = Vector2(230, -302)
+texture = ExtResource("11_efq8o")
+
+[node name="Door9" type="Sprite2D" parent="DonjonRooms/Room2"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+z_index = 2
+position = Vector2(-110, -83)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("20_gscve")
+
+[node name="Button" type="Button" parent="DonjonRooms/Room2/Door9"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+anchors_preset = -1
+anchor_left = -0.64
+anchor_top = -0.506849
+anchor_right = -0.64
+anchor_bottom = -0.506849
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+scale = Vector2(2, 2)
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Corridor2" type="Sprite2D" parent="DonjonRooms"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.67, 0.624775, 0.5695, 1)
+position = Vector2(-189, -413)
+texture = ExtResource("8_1xfem")
+
+[node name="Room3" type="Sprite2D" parent="DonjonRooms"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.67, 0.624775, 0.5695, 1)
+position = Vector2(-645, 272)
+texture = ExtResource("6_3gyw5")
+
+[node name="Room1" type="Sprite2D" parent="DonjonRooms"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.67, 0.624775, 0.5695, 1)
+position = Vector2(113, 303)
+texture = ExtResource("10_7g4le")
+
+[node name="Door6" type="Sprite2D" parent="DonjonRooms/Room1"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+z_index = 2
+position = Vector2(64, 95)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("20_gscve")
+
+[node name="Button" type="Button" parent="DonjonRooms/Room1/Door6"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+offset_left = -27.0
+offset_top = -32.0
+offset_right = 26.0
+offset_bottom = 36.0
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Cellar" type="Sprite2D" parent="DonjonRooms"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.67, 0.624775, 0.5695, 1)
+position = Vector2(573, 490)
+texture = ExtResource("7_fykp4")
+
+[node name="Door12" type="Sprite2D" parent="DonjonRooms/Cellar"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
+z_index = 2
+position = Vector2(200, -144)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("20_gscve")
+
+[node name="Button" type="Button" parent="DonjonRooms/Cellar/Door12"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="BossRoom" type="Sprite2D" parent="DonjonRooms"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.67, 0.624775, 0.5695, 1)
+position = Vector2(782, -5)
+texture = ExtResource("14_vxhjk")
+
+[node name="LogoDark" type="Sprite2D" parent="DonjonRooms"]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+position = Vector2(779, -48)
+texture = ExtResource("17_x7w4e")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="DonjonRooms/LogoDark"]
+z_index = -1
+position = Vector2(6, 21)
+texture = ExtResource("18_j1fly")
+lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_3gyw5")
+
+[node name="Position" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-9, 229)
+texture = ExtResource("16_pnd37")
+script = ExtResource("17_bnfhj")
+vitesse = 0.5
+scale_amplitude = 0.1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.6, 0.6)
+
+[node name="DonjonDoor" type="Node2D" parent="."]
+
+[node name="UiConvoBox2" type="Sprite2D" parent="."]
+position = Vector2(-4.50002, -10.5)
+scale = Vector2(1.64966, 1.63241)
+texture = ExtResource("21_j1fly")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 20
+offset_left = -4385.0
+offset_top = -2255.0
+offset_right = 4311.0
+offset_bottom = 3038.0
+color = Color(0, 0, 0, 1)
+
+[node name="UiButtonMapOn" type="Sprite2D" parent="."]
+position = Vector2(-1441, -739)
+texture = ExtResource("20_tyn3m")

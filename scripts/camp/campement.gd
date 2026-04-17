@@ -107,7 +107,7 @@ func changeSelectedCharacter(occupant:CharaCamp):
 	occupant.animate_selected()
 	
 func updateUICharacter(character:CharacterData):
-	portraitCharaselect.texture = character.initiative_icon
+	portraitCharaselect.texture = character.explorationPortrait
 	CharacterName.text = character.Charaname
 	AttLabel.text = "Attaque: %d" % [character.attack]
 	DefLabel.text = "Defence: %d" % [character.defense]
@@ -123,7 +123,7 @@ func updateUICharacter(character:CharacterData):
 	
 	var other_members : Array = []
 	for c in characters:
-		if c != character:
+		if c.characterData != character:
 			other_members.append(c)
 	for i in range(CharactersAffinity.size()):
 		var slot = CharactersAffinity[i]

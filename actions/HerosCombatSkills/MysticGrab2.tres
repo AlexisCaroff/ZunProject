@@ -7,11 +7,11 @@
 [ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="5_sh6m8"]
 [ext_resource type="Texture2D" uid="uid://crwjl88ks51cr" path="res://actions/actiontexture/UI icons/ICON_mystic_cc_grab.png" id="6_24qvg"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="7_pigiu"]
-[ext_resource type="PackedScene" uid="uid://vf2fr2rqom33" path="res://actions/skillEffects/FX/Scene/grabTarget.tscn" id="8_7def4"]
+[ext_resource type="PackedScene" uid="uid://d1snbm7gq1lk2" path="res://actions/skillEffects/FX/Scene/hit_magic.tscn" id="8_wnuqu"]
 
 [sub_resource type="Resource" id="Resource_clqko"]
 script = ExtResource("4_k4h32")
-MagicDMG = false
+MagicDMG = true
 amount = 20
 damage_target_stat = 0
 metadata/_custom_type_script = "uid://bjsbovfjff2wo"
@@ -53,7 +53,7 @@ tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
 caster_effect_scene = ExtResource("2_q3n3a")
-target_effect_scene = ExtResource("8_7def4")
+target_effect_scene = ExtResource("8_wnuqu")
 caster_effect_anchor = 0
 target_effect_anchor = 2
 is_beneficial = false

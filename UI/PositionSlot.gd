@@ -201,7 +201,7 @@ func _on_button_mouse_exited() -> void:
 	
 	if occupant == null:
 		return
-	combat_manager.ui.update_ui_for_current_character(combat_manager.current_character)
+	
 	occupant.resetHighlight()
 	if combat_manager.pending_skill:
 		var skill = combat_manager.pending_skill

@@ -11,7 +11,10 @@ var ui: Control = null
 @export var ENEMY_START_POS = Vector2(1200, 600)
 @export var SPACING_Y = 250
 @export var _pending_skill: Skill = null  
-@export var turnNumber : int =0
+@export var turnNumber : int = 0
+var round_number : int = 0
+## Effets appliqués à tous les héros au début de chaque round (buff passif, allié invisible…)
+@export var round_effects : Array[SkillEffect] = []
 @export_file("*.tscn") var target_scene : String
 @onready var ShadowBackground: Sprite2D = $"../Gradiant"
 #save
@@ -99,7 +102,7 @@ func show_ambush_message(text: String, _color: Color):
 	label.visible=true
 
 
-	add_child(label)
+	
 	label.pivot_offset = label.size / 2
 
 	var tween = create_tween()
@@ -263,8 +266,14 @@ func next_turn():
 		return
 	
 	turnNumber += 1
-	
-	
+
+	# ── Compteur de round ─────────────────────────────────────────────────
+	if not turn_queue.is_empty() and turnNumber > turn_queue.size():
+		round_number += 1
+		turnNumber = 1
+		print("⚔️ Round ", round_number, " !")
+		await _trigger_round_effects()
+
 	if turn_queue.is_empty():
 		turn_queue = build_turn_queue(heroes + enemies)
 		ui.update_turn_queue_ui(turn_queue)
@@ -290,6 +299,7 @@ func next_turn():
 	ui.hide_Panel_action()
 	
 	selectorChara.position= current_character._current_slot.CharaUI.global_position if current_character._current_slot else Vector2.ZERO
+	selectorChara.position.y += 45 
 	if current_character.characterData.is_player_controlled:
 		selectorChara.modulate = Color(0.9,0.95,0.7)
 	else:
@@ -320,40 +330,64 @@ func next_turn():
 	if current_character.characterData.is_player_controlled:
 		ui.MenuPerso.select_character(current_character.characterData)
 		await get_tree().process_frame
-		ui.update_ui_for_current_character(current_character)
-		current_character.CharaColor =Color(1.8,1.8,1.8,1)
 		current_character.sprite.modulate =current_character.CharaColor
 	else:
 		if current_character.characterData.stun == false:
-			ui.update_ui_for_current_character(current_character)
+		
 			await get_tree().create_timer(1.5).timeout
 			current_character.play_ai_turn(heroes,enemies)
 			await end_currentChara_Turn()
 	if current_character.characterData.stun == true:
-		
 		ui.log(current_character.characterData.Charaname +" is stuned")
 		if current_character.exclamation != null:
 			current_character.exclamation.free()
 			ui.log(current_character.characterData.Charaname +" is surprised")
 		for button:Button in ui.skill_buttons :
 			button.disabled = true
-		
-		
-		
-		
 		current_character.characterData.stun = false
 		
 		await end_currentChara_Turn()
 		
 		return
 
+# ─────────────────────────────────────────────────────────────────────
+#  Effets de début de round (allié passif non ciblable)
+#  Applique chaque SkillEffect de round_effects sur tous les héros vivants.
+#  Pour ajouter un effet : créer une ressource SkillEffect dans l'inspecteur
+#  et l'ajouter au tableau round_effects du CombatManager.
+# ─────────────────────────────────────────────────────────────────────
+func _trigger_round_effects() -> void:
+	if round_effects.is_empty():
+		return
+
+	# On utilise le premier héros vivant comme "caster" factice pour les effets
+	# qui ont besoin d'un owner (ex: BuffEffect). Les effets purement passifs
+	# peuvent ignorer le user.
+	var caster: Character = null
+	for hero in heroes:
+		if is_instance_valid(hero) and not hero.is_dead():
+			caster = hero
+			break
+
+	if caster == null:
+		return
+
+	for hero in heroes:
+		if not is_instance_valid(hero) or hero.is_dead():
+			continue
+		if hero._current_slot == null:
+			continue
+		for effect: SkillEffect in round_effects:
+			effect.apply(caster, hero._current_slot)
+		hero.update_ui()
+
+
 func end_currentChara_Turn():
-	
+	await get_tree().create_timer(1.5).timeout
 	current_character.end_turn()
-	current_character.update_ui()
 	while is_animation_playing():
 		await get_tree().process_frame
-	await get_tree().create_timer(1.5).timeout
+	
 	turn_queue.append(current_character)
 	await flush_endTurn_affinity_reactions()
 	next_turn()

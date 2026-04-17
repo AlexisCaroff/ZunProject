@@ -22,6 +22,7 @@ text = "name"
 horizontal_alignment = 1
 
 [node name="charaCombatUI" parent="." instance=ExtResource("3_xv3i0")]
+z_index = 6
 position = Vector2(-19, 18)
 scale = Vector2(1.2, 1.2)
 

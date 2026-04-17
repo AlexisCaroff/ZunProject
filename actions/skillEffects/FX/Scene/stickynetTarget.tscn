@@ -71,7 +71,7 @@ script = ExtResource("1_dlxvs")
 
 [node name="HeroWarriorBash" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(99, -46)
+position = Vector2(95, -116)
 scale = Vector2(0.210205, 0.210205)
 texture = ExtResource("2_0g2uo")
 
@@ -81,18 +81,18 @@ libraries = {
 }
 
 [node name="FxNetPink003" type="Sprite2D" parent="."]
-position = Vector2(39.8625, 37)
+position = Vector2(17.8625, -29.1375)
 scale = Vector2(0.181372, 0.181372)
 texture = ExtResource("3_0g2uo")
 
 [node name="FxNetPink002" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(-7.13754, 66)
+position = Vector2(-29.1375, -0.137529)
 scale = Vector2(0.181372, 0.181372)
 texture = ExtResource("4_v1c3q")
 
 [node name="FxNetPink001" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(81.8624, 24)
+position = Vector2(59.8624, -42.1375)
 scale = Vector2(0.181372, 0.181372)
 texture = ExtResource("3_vobmv")

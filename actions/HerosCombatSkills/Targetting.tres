@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://ca8rrxibg12sg"]
+[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://ca8rrxibg12sg"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_3rhwt"]
 [ext_resource type="Texture2D" uid="uid://fe1y4mug6b75" path="res://characters/charatexture/demo characters/HERO_hunter_throw.png" id="1_47d3i"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_1rja0"]
 [ext_resource type="Texture2D" uid="uid://diax5md43vxxd" path="res://UI/target.png" id="3_1rja0"]
-[ext_resource type="Texture2D" uid="uid://cfgd3lfve00ud" path="res://actions/actiontexture/track.png" id="3_47d3i"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_p8nbi"]
 [ext_resource type="Texture2D" uid="uid://btvnbxbbjq1w4" path="res://UI/debuffDeff.png" id="5_p8nbi"]
+[ext_resource type="Texture2D" uid="uid://ctsbyb8u7ctto" path="res://actions/actiontexture/UI icons/ICON_hunter_meditate.png" id="6_26ge4"]
+[ext_resource type="PackedScene" uid="uid://dnmnprn0sygoi" path="res://actions/skillEffects/FX/Scene/Taunted_fx.tscn" id="8_2rb02"]
 
 [sub_resource type="Resource" id="Resource_26ge4"]
 script = ExtResource("2_1rja0")
@@ -39,7 +40,7 @@ script = ExtResource("4_p8nbi")
 name = "targeting"
 descriptionName = "Weak Point"
 description = "Marks an enemy for 2 turns: skills used against them have reduced cooldowns"
-icon = ExtResource("3_47d3i")
+icon = ExtResource("6_26ge4")
 barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_47d3i")
@@ -56,10 +57,11 @@ cooldown = 2
 current_cooldown = 0
 precision = 100
 allways_hit = false
-duration = 1.0
+duration = 1.5
 tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
+target_effect_scene = ExtResource("8_2rb02")
 caster_effect_anchor = 0
 target_effect_anchor = 1
 is_beneficial = false

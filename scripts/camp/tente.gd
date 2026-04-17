@@ -338,7 +338,7 @@ func show_love_image(user: CharaCamp, target: CharaCamp):
 
 func _on_mouse_entered():
 	if !is_anim_zoom_playing:
-		self.modulate.a = 0.2  # 50% d’opacité
+		self.modulate.a = 0.0  # 50% d’opacité
 		bounce_enabled=false
 func _on_mouse_exited():
 	if !is_anim_zoom_playing:

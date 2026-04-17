@@ -159,36 +159,42 @@ horizontal_alignment = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 visible = false
+z_index = 10
 layout_mode = 0
-offset_left = 170.0
-offset_top = 27.0
-offset_right = 1761.0
-offset_bottom = 782.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 1910.0
+offset_bottom = 1053.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(1585, 755)
+size = Vector2i(1900, 1045)
 render_target_update_mode = 0
 
 [node name="ExitPeek" type="Button" parent="."]
 visible = false
+z_index = 11
 layout_mode = 2
-offset_left = 1528.0
-offset_top = 167.0
-offset_right = 1894.0
-offset_bottom = 651.0
+offset_left = 1539.0
+offset_top = -13.0
+offset_right = 1934.0
+offset_bottom = 317.0
 theme_override_fonts/font = ExtResource("13_jxyuu")
 theme_override_font_sizes/font_size = 80
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4xbl3")
-icon = ExtResource("11_qed8k")
 flat = true
 script = ExtResource("14_enmlf")
 
+[node name="UiClose" type="Sprite2D" parent="ExitPeek"]
+position = Vector2(304.5, 67.3242)
+scale = Vector2(0.648438, 0.648438)
+texture = ExtResource("11_qed8k")
+
 [node name="Door" type="Button" parent="."]
-z_index = 7
+z_index = 12
 layout_mode = 0
 offset_left = 799.0
-offset_top = 151.0
+offset_top = 368.0
 offset_right = 1084.0
 offset_bottom = 657.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_5ypre")
@@ -198,16 +204,16 @@ script = ExtResource("15_g7kgf")
 [node name="DoorText" type="TextureRect" parent="Door"]
 layout_mode = 0
 offset_left = -3.0
-offset_top = 338.0
+offset_top = 155.0
 offset_right = 311.0
-offset_bottom = 460.0
+offset_bottom = 277.0
 texture = ExtResource("16_5tf2j")
 
 [node name="pose1" type="Node2D" parent="."]
 position = Vector2(791, 286)
 
 [node name="pose2" type="Node2D" parent="."]
-position = Vector2(791, 374)
+position = Vector2(791, 727)
 
 [node name="EmbuscadeUI" type="TextureRect" parent="."]
 visible = false

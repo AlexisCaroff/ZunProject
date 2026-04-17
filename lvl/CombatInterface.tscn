@@ -40,13 +40,13 @@
 [ext_resource type="Texture2D" uid="uid://d03vlqaa471uv" path="res://UI/UI boxes/UI_convo_box2.png" id="37_hg6i8"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="38_rmchm"]
 [ext_resource type="Texture2D" uid="uid://cfoht4c53xv8e" path="res://UI/ennemiturn.png" id="40_qn3ef"]
-[ext_resource type="Texture2D" uid="uid://b1thgnhggbr0w" path="res://tuto/intro3.png" id="41_1a7uw"]
 [ext_resource type="Texture2D" uid="uid://efhkjwi3j3sb" path="res://UI/UI boxes/UI_button_target_on.png" id="41_junmr"]
 [ext_resource type="Texture2D" uid="uid://leli1dyf65l7" path="res://UI/UI boxes/UI_combat_itembox.png" id="42_8up0w"]
 [ext_resource type="Script" uid="uid://b0ir2tk1oluly" path="res://lvl/Hall1/tuto.gd" id="42_dxxe6"]
 [ext_resource type="Texture2D" uid="uid://bnqsm6vdxfcwy" path="res://UI/UI boxes/UI_button_map_on.png" id="42_yspa4"]
 [ext_resource type="Script" uid="uid://d35u47t7s0fv4" path="res://UI/UICombatItem.gd" id="44_8yaj0"]
 [ext_resource type="FontFile" uid="uid://dy4n8qboodyud" path="res://font/MarcellusSC-Regular.ttf" id="45_um08x"]
+[ext_resource type="Texture2D" uid="uid://deqgk0wx0m6wl" path="res://UI/voide.png" id="46_junmr"]
 [ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="47_mhvks"]
 [ext_resource type="Texture2D" uid="uid://chgi28at85s4o" path="res://scenes/bad ends/SCENE_captured_nymphF_M.png" id="47_p4emy"]
 [ext_resource type="Texture2D" uid="uid://lhncc7d02shi" path="res://UI/BigBox.png" id="48_0p2u2"]
@@ -186,16 +186,18 @@ outsidePos = Vector2(-300, 0)
 esquivPos = Vector2(250, 0)
 attack_scale = Vector2(1, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="RoundsLabel" type="RichTextLabel" parent="."]
 modulate = Color(0.597176, 0.597176, 0.597176, 1)
 layout_mode = 2
 offset_left = 1109.0
 offset_top = 44.0
-offset_right = 1318.0
+offset_right = 1300.0
 offset_bottom = 124.0
+pivot_offset = Vector2(91.085, 41.61)
 theme_override_fonts/normal_font = ExtResource("8_qx47d")
 theme_override_font_sizes/normal_font_size = 60
 text = "Round 1"
+fit_content = true
 scroll_active = false
 
 [node name="TurnOrderPanel" type="HBoxContainer" parent="."]
@@ -1190,7 +1192,7 @@ visible = false
 z_index = 20
 position = Vector2(963, 538)
 scale = Vector2(0.72634, 0.72634)
-texture = ExtResource("41_1a7uw")
+texture = ExtResource("46_junmr")
 script = ExtResource("42_dxxe6")
 
 [node name="HideTuto" type="Button" parent="CanvasLayer/Intro2"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://cnmry3pyse3v5"]
+[gd_scene load_steps=80 format=3 uid="uid://cnmry3pyse3v5"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_74uic"]
 [ext_resource type="Script" uid="uid://ds3vigal0aygx" path="res://lvl/Hall1/SpriteActionCombat.gd" id="2_th258"]
@@ -49,8 +49,10 @@
 [ext_resource type="Texture2D" uid="uid://chgi28at85s4o" path="res://scenes/bad ends/SCENE_captured_nymphF_M.png" id="47_6l8a4"]
 [ext_resource type="Script" uid="uid://d1l1yk0j8oxes" path="res://lvl/CapturedUI.gd" id="48_117px"]
 [ext_resource type="Texture2D" uid="uid://lhncc7d02shi" path="res://UI/BigBox.png" id="49_jwk1x"]
-[ext_resource type="Texture2D" uid="uid://cr4fyd24h5aci" path="res://UI/UI boxes/UI_close.png" id="50_hqh3m"]
+[ext_resource type="Script" uid="uid://bb01afuki8pgo" path="res://UI/buttonBasic.gd" id="49_qg5op"]
+[ext_resource type="Texture2D" uid="uid://bbx8fyrak3d05" path="res://actions/actiontexture/UI icons/UI_time.png" id="50_7v6gp"]
 [ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="51_7bjlm"]
+[ext_resource type="Texture2D" uid="uid://dmtf3xuwjker5" path="res://UI/UI boxes/UI_initiative_chain_link.png" id="52_th258"]
 
 [sub_resource type="Resource" id="Resource_i1s1q"]
 script = ExtResource("12_08or7")
@@ -164,6 +166,8 @@ corner_detail = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p4emy"]
 bg_color = Color(1, 1, 1, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rar8p"]
+
 [node name="CombatInterfaceMommyBoss" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -183,23 +187,6 @@ MidPos = Vector2(400, 0)
 outsidePos = Vector2(-300, 0)
 esquivPos = Vector2(250, 0)
 attack_scale = Vector2(1, 1)
-
-[node name="TurnOrderPanel" type="HBoxContainer" parent="."]
-modulate = Color(1.5, 1.5, 1.5, 1)
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 0
-offset_left = 5.0
-offset_top = 28.0
-offset_right = 1921.0
-offset_bottom = 93.0
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="TurnOrderPanel"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-texture = ExtResource("3_qg5op")
-expand_mode = 1
 
 [node name="CombatManager" parent="." instance=ExtResource("4_7v6gp")]
 HERO_START_POS = Vector2(100, 500)
@@ -229,6 +216,7 @@ position = Vector2(1206, 737)
 position = Vector2(1408, 737)
 
 [node name="ResultScreen" type="Label" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_top = 1.0
@@ -1167,6 +1155,7 @@ texture = ExtResource("44_hptl0")
 
 [node name="Intro2" type="Sprite2D" parent="CanvasLayer"]
 visible = false
+modulate = Color(1, 1, 1, 0)
 z_index = 20
 position = Vector2(963, 538)
 scale = Vector2(0.72634, 0.72634)
@@ -1382,14 +1371,16 @@ vertical_alignment = 1
 z_index = 7
 offset_left = 1230.0
 offset_top = 856.0
-offset_right = 1304.0
+offset_right = 1324.0
 offset_bottom = 953.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rar8p")
 flat = true
+script = ExtResource("49_qg5op")
 
 [node name="UiClose" type="Sprite2D" parent="CanvasLayer/ActionPass"]
 position = Vector2(44, 50)
 scale = Vector2(0.480469, 0.480469)
-texture = ExtResource("50_hqh3m")
+texture = ExtResource("50_7v6gp")
 
 [node name="Gradiant" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -1433,6 +1424,47 @@ offset_right = 1485.95
 offset_bottom = 727.0
 rotation = 0.785398
 color = Color(0.643137, 0.560784, 0.364706, 1)
+
+[node name="RoundsLabel" type="RichTextLabel" parent="."]
+modulate = Color(0.597176, 0.597176, 0.597176, 1)
+layout_mode = 0
+offset_left = 1109.0
+offset_top = 44.0
+offset_right = 1300.0
+offset_bottom = 124.0
+pivot_offset = Vector2(91.085, 41.61)
+theme_override_fonts/normal_font = ExtResource("8_76r4q")
+theme_override_font_sizes/normal_font_size = 60
+text = "Round 1"
+fit_content = true
+scroll_active = false
+
+[node name="TurnOrderPanel" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 0
+offset_left = 26.0
+offset_top = 28.0
+offset_right = 1903.0
+offset_bottom = 108.0
+mouse_filter = 2
+theme_override_constants/separation = -20
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="TurnOrderPanel"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("3_qg5op")
+expand_mode = 1
+
+[node name="UiInitiativeChainLink" type="TextureRect" parent="."]
+modulate = Color(0.51, 0.51, 0.51, 1)
+layout_mode = 0
+offset_left = 1886.0
+offset_top = 49.0
+offset_right = 1966.0
+offset_bottom = 129.0
+texture = ExtResource("52_th258")
+expand_mode = 1
 
 [connection signal="button_down" from="Button" to="Button" method="_on_button_down"]
 [connection signal="mouse_entered" from="CanvasLayer/ActionPanel/Action1" to="CanvasLayer/ActionPanel/Action1" method="_on_mouse_entered"]

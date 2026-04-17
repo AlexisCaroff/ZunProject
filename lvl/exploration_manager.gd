@@ -34,7 +34,7 @@ var gm : GameManager
 @onready var LustProgressBar =$"../LustProgressBar"
 @onready var GuiltProgressBar = $"../GuiltProgressBar"
 @onready var Items =$"../Items"
-const SELECTOR_TEX = preload("res://UI/selectorCombatChara.png")
+const SELECTOR_TEX = preload("res://UI/UI boxes/UI_combat_selector.png")
 var selectorChara : Sprite2D
 @onready var campTexture=$Campement/CampFire2
 @onready var GoToCampement=$GoToCampement
@@ -94,6 +94,8 @@ func _init_selection():
 	var i = characters.find(characters[0])
 	portrait_selector.position = portraits[i].position
 	selectorChara.position = selected_character.CharaPosition.charaUI.global_position if selected_character.CharaPosition else Vector2.ZERO
+	selectorChara.position.y +=45
+
 func load_characters_from_gamestat():
 	characters.clear()
 	
@@ -166,7 +168,7 @@ func _swap_characters(chara1: CharaExplo, chara2: CharaExplo) -> void:
 	portrait1.set_occupant(chara2)
 	move_mode = false
 	selectorChara.position= selected_character.CharaPosition.charaUI.global_position if selected_character.CharaPosition else Vector2.ZERO
-	#selectorChara.position.y -=46
+	selectorChara.position.y +=45
 func selectCharacter(thechara: CharaExplo):
 	
 	thechara.animate_selected()
@@ -180,6 +182,7 @@ func selectCharacter(thechara: CharaExplo):
 		var i = characters.find(thechara)
 		portrait_selector.position = portraits[i].position
 		selectorChara.position= selected_character.CharaPosition.charaUI.global_position if selected_character != null else Vector2.ZERO
+		selectorChara.position.y +=45
 		#selectorChara.position.y -=46
 		NameLabel.text=chara.Charaname
 		Def.bbcode_enabled = true

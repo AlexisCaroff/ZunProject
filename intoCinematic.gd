@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var text = $RichTextLabel
 @onready var voice = $AudioStreamPlayer2D
+@onready var gm :GameManager = $"../.."
 @onready var transi: SceneTransition =$".."
 @export var scroll_speed = 20
 var started:bool=false
@@ -22,4 +23,5 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and self.visible and started:
 		transi.fade_in()
+		gm.spawn_start_menu()
 		queue_free()

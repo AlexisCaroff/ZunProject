@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bkvdwvrmdt5aw" path="res://actions/skillEffects/Buff.gd" id="3_kngi2"]
 [ext_resource type="Texture2D" uid="uid://dbuugeey6c5y4" path="res://UI/buffAtt.png" id="4_7nidr"]
 [ext_resource type="Texture2D" uid="uid://2u65ql48338r" path="res://actions/bufftexture/buffDeff.png" id="5_6nl4t"]
-[ext_resource type="Texture2D" uid="uid://w7tcv0qth2a" path="res://actions/CampSkill/maintainingequipement.png" id="6_kngi2"]
+[ext_resource type="Texture2D" uid="uid://fv4bkev72oqw" path="res://actions/actiontexture/UI icons/ICON_camp_warrior_gear.png" id="6_6nl4t"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="6_w3tfs"]
 
 [sub_resource type="Resource" id="Resource_dicsy"]
@@ -35,9 +35,9 @@ metadata/_custom_type_script = "uid://gi5vwildn2qs"
 
 [resource]
 script = ExtResource("6_w3tfs")
-name = "maintaining equipements"
+name = "sharpening"
 description = "buff atttack and defence"
-icon = ExtResource("6_kngi2")
+icon = ExtResource("6_6nl4t")
 cost = 2
 standarEnd = true
 target_type = 2

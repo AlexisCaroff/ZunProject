@@ -27,7 +27,8 @@ var buff_icons     : Array        = []
 var skills         : Array[Skill] = []
 var combat_manager : CombatManager = null
 var dotsActions    : Array[TextureRect]
-
+var stunned : bool = false
+var surprise : bool = false
 # ── VFX constants ─────────────────────────────────────────
 const HornyEffectScene  := preload("res://actions/damageEffect/charmed-particules.tscn")
 const DamageEffectScene := preload("res://actions/damageEffect/HitVFX.tscn")
@@ -294,7 +295,7 @@ func update_ui():
 			else:
 				dot.modulate = Color(0.1, 0.1, 0.1)
 				dot.size     = Vector2(0.5, 0.5)
-	if characterData.stun:
+	if characterData.stun && !surprise:
 		if StunParticule == null:
 			StunParticule = stunPart.instantiate()
 			add_child(StunParticule)
@@ -336,6 +337,10 @@ func start_turn():
 	turncount += 1
 	if not characterData:
 		return
+	if characterData.stun or characterData.current_horniness >= 100 :
+		stunned=true
+		print( characterData.Charaname + " is stunned now !")
+	
 	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", true)
 	print(characterData.Charaname + " start turn")
 	sprite.self_modulate = Color(2.5, 2.5, 2.5, 1.0)
@@ -363,7 +368,8 @@ func end_turn():
 	resetVisuel()
 	reduce_cooldowns()
 	combat_manager.ui.update_ui_for_current_character(self)
-
+	stunned = false
+	surprise = false
 
 func play_ai_turn(heroes: Array, enemies: Array):
 	if not characterData or characterData.ai_brain == null:
@@ -443,6 +449,7 @@ func select_as_target():
 func surprised():
 	if characterData:
 		characterData.stun = true
+		surprise = true
 	exclamation = TextureRect.new()
 	exclamation.texture             = preload("res://UI/exclamation.png")
 	exclamation.stretch_mode        = TextureRect.STRETCH_KEEP_ASPECT_CENTERED

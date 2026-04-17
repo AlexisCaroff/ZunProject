@@ -123,7 +123,7 @@ func _on_click() -> void:
 	# Coupe l'audio si on saute
 	if audio_player.playing:
 		audio_player.stop()
-		subtitle_label.text = ""
+		#subtitle_label.text = ""
 
 	_advance()
 

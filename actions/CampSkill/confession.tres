@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bkvdwvrmdt5aw" path="res://actions/skillEffects/Buff.gd" id="3_aj55t"]
 [ext_resource type="Texture2D" uid="uid://dbuugeey6c5y4" path="res://UI/buffAtt.png" id="4_5dfsc"]
 [ext_resource type="Script" uid="uid://cwdlfpy6jfr4w" path="res://actions/skillEffects/campSkilleffect/CampHealEffet.gd" id="5_aykp4"]
-[ext_resource type="Texture2D" uid="uid://hiujggsk4t1h" path="res://actions/CampSkill/confession.png" id="6_4dxr3"]
+[ext_resource type="Texture2D" uid="uid://7t7u7bv1dsdg" path="res://actions/actiontexture/UI icons/ICON_camp_priestess_confession.png" id="6_yuiic"]
 
 [sub_resource type="Resource" id="Resource_vmukh"]
 script = ExtResource("3_aj55t")
@@ -33,7 +33,7 @@ metadata/_custom_type_script = "uid://cwdlfpy6jfr4w"
 script = ExtResource("2_fyxek")
 name = "Confession"
 description = ""
-icon = ExtResource("6_4dxr3")
+icon = ExtResource("6_yuiic")
 cost = 2
 standarEnd = true
 target_type = 1

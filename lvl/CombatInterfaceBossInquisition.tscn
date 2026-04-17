@@ -1449,6 +1449,19 @@ offset_bottom = 727.0
 rotation = 0.785398
 color = Color(0.643137, 0.560784, 0.364706, 1)
 
+[node name="RoundsLabel" type="RichTextLabel" parent="."]
+modulate = Color(0.597176, 0.597176, 0.597176, 1)
+offset_left = 1109.0
+offset_top = 44.0
+offset_right = 1300.0
+offset_bottom = 124.0
+pivot_offset = Vector2(91.085, 41.61)
+theme_override_fonts/normal_font = ExtResource("9_47p3j")
+theme_override_font_sizes/normal_font_size = 60
+text = "Round 1"
+fit_content = true
+scroll_active = false
+
 [connection signal="button_down" from="Button" to="Button" method="_on_button_down"]
 [connection signal="mouse_entered" from="CanvasLayer/ActionPanel/Action1" to="CanvasLayer/ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/ActionPanel/Action1" to="CanvasLayer/ActionPanel/Action1" method="_on_mouse_exited"]

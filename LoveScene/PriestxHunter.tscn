@@ -8,9 +8,17 @@
 script = ExtResource("1_dbirp")
 dialogue_path = "res://dialogue/love/PriestessHunter.txt"
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -364.0
+offset_top = -245.0
+offset_right = 1603.0
+offset_bottom = 890.0
+scale = Vector2(1.23435, 1.307)
+color = Color(0, 0, 0, 1)
+
 [node name="HunterxWarrior" type="Sprite2D" parent="."]
-position = Vector2(948, 457.5)
-scale = Vector2(0.421759, 0.421759)
+position = Vector2(960, 542.5)
+scale = Vector2(0.491204, 0.491204)
 texture = ExtResource("2_dbirp")
 
 [node name="Button" type="Button" parent="."]

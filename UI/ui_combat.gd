@@ -8,7 +8,7 @@ class_name UI_combat
 	$CanvasLayer/ActionPanel/Action4,
 	$CanvasLayer/ActionPanel/Action5
 ]
-
+@onready var RoundNumbersHolder : RichTextLabel = $RoundsLabel
 @onready var Charaname_panel = $CanvasLayer/Charaname
 @onready var charaPortrait = $CanvasLayer/charaPortrait
 @onready var log_panel = $contexte
@@ -126,9 +126,8 @@ func update_ui_for_current_character(character: Character):
 			button.icon = skill.icon
 			if character.characterData.current_horniness>=100 :
 				button.disabled = true
-			if character.characterData.stun ==true:
+			if character.stunned ==true:
 				button.disabled = true
-				print("Chara is stun !!!")
 			var index = i
 			button.pressed.connect(func(): combat_manager.use_skill(index))
 
@@ -237,14 +236,19 @@ func update_ui_for_overed_character(character: Character):
 		character.characterData.current_stamina,
 		character.characterData.max_stamina
 	]
-	guilt2.text = "Guilt: %d / %d" % [
-		character.characterData.current_stress,
-		character.characterData.max_stress
-	]
-	horny2.text = "Horny: %d / %d" % [
-		character.characterData.current_horniness,
-		character.characterData.max_horniness
-	]
+	if character.characterData.is_player_controlled:
+		guilt2.text = "Guilt: %d / %d" % [
+			character.characterData.current_stress,
+			character.characterData.max_stress
+		]
+		horny2.text = "Horny: %d / %d" % [
+			character.characterData.current_horniness,
+			character.characterData.max_horniness
+		]
+	else :
+		guilt2.text =""
+		horny2.text =""
+		
 
 
 # -------------------------------------------------------------------------
@@ -276,3 +280,12 @@ func set_MenuPerso(heroes:Array[CharacterData]):
 
 func showMenuPerso():
 	MenuPerso.showMenu() 
+
+func updateRound(roundnumber:int):
+	RoundNumbersHolder.text = "Round "+ str(roundnumber)
+	var tween      := create_tween() as Tween
+	var theScale      = RoundNumbersHolder.size
+
+	var big_size    = Vector2(theScale .x * 1.1, theScale .y * 1.3)
+	tween.tween_property(self, "scale", big_size,  0.2)
+	tween.tween_property(self, "scale", theScale  , 0.2)

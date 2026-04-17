@@ -28,7 +28,7 @@
 [ext_resource type="Resource" uid="uid://duo5wcnmn0qo2" path="res://actions/HerosCombatSkills/vampire.tres" id="18_yqq7i"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="19_askqf"]
 [ext_resource type="Texture2D" uid="uid://xvf1umygybrb" path="res://camp imgs/Camp_char_sit_M.png" id="20_hrjkv"]
-[ext_resource type="Texture2D" uid="uid://iob20mrmybf7" path="res://characters/charatexture/demo characters/HERO_priestess_idle.png" id="23_3m50t"]
+[ext_resource type="Texture2D" uid="uid://bo1ywd64wsyi4" path="res://demo characters/HERO_priestess_hit.png" id="23_3m50t"]
 
 [sub_resource type="Resource" id="Resource_4u7mb"]
 script = ExtResource("14_ags7y")
@@ -172,4 +172,4 @@ scale = Vector2(2.34924, 0.637405)
 texture = ExtResource("8_osbnm")
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2(2, -36)
+position = Vector2(-37, -103)

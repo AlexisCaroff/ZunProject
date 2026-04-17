@@ -8,6 +8,14 @@
 script = ExtResource("1_ikva5")
 dialogue_path = "res://dialogue/love/MysticHunter.txt"
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -228.0
+offset_top = -145.0
+offset_right = 1739.0
+offset_bottom = 990.0
+scale = Vector2(1.23435, 1.307)
+color = Color(0, 0, 0, 1)
+
 [node name="HunterxWarrior" type="Sprite2D" parent="."]
 position = Vector2(953.444, 541.5)
 scale = Vector2(0.485648, 0.485648)

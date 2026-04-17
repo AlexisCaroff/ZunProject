@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_2julc"]
 [ext_resource type="PackedScene" uid="uid://b0ihsbf8kmpvx" path="res://actions/skillEffects/FX/Scene/whipeP.tscn" id="2_qyifb"]
 [ext_resource type="Script" uid="uid://13cgpeuxvpoa" path="res://actions/skillEffects/PainAndAbsolution.gd" id="3_2julc"]
-[ext_resource type="Texture2D" uid="uid://qhiqy0qukc0e" path="res://actions/actiontexture/fouet.png" id="4_2julc"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_7e8mt"]
+[ext_resource type="Texture2D" uid="uid://bufr3w56ilg6r" path="res://actions/actiontexture/UI icons/ICON_priestess_whip.png" id="5_qyifb"]
 
 [sub_resource type="Resource" id="Resource_28per"]
 script = ExtResource("3_2julc")
@@ -21,7 +21,7 @@ script = ExtResource("4_7e8mt")
 name = "Whip"
 descriptionName = "Whip"
 description = "remove horny on Ally and deal dmg to ennemy"
-icon = ExtResource("4_2julc")
+icon = ExtResource("5_qyifb")
 barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_1rmu3")

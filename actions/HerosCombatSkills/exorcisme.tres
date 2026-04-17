@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://b4f6tt51qrg3o"]
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://b4f6tt51qrg3o"]
 
 [ext_resource type="Texture2D" uid="uid://ci6or334e3v7" path="res://characters/charatexture/demo characters/HERO_priestess_cast.png" id="1_i6idu"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_ar1fo"]
 [ext_resource type="PackedScene" uid="uid://cy1wq8hxnqi8u" path="res://actions/skillEffects/FX/Scene/Exorcisme_Pristress_FX.tscn" id="2_jl83b"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_wh88t"]
-[ext_resource type="Texture2D" uid="uid://ctv5fhwuig06" path="res://actions/actiontexture/exorcisme.png" id="3_dxqn5"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_mane8"]
+[ext_resource type="Texture2D" uid="uid://vog3i82xcmga" path="res://actions/actiontexture/UI icons/ICON_priestess_prayer.png" id="5_7i8lj"]
+[ext_resource type="PackedScene" uid="uid://d1snbm7gq1lk2" path="res://actions/skillEffects/FX/Scene/hit_magic.tscn" id="7_u2hku"]
 
 [sub_resource type="Resource" id="Resource_i4eos"]
 script = ExtResource("2_wh88t")
@@ -19,7 +20,7 @@ script = ExtResource("4_mane8")
 name = "exorcisme"
 descriptionName = "exorcisme"
 description = "deal magic dmg "
-icon = ExtResource("3_dxqn5")
+icon = ExtResource("5_7i8lj")
 barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_i6idu")
@@ -41,8 +42,9 @@ tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
 caster_effect_scene = ExtResource("2_jl83b")
+target_effect_scene = ExtResource("7_u2hku")
 caster_effect_anchor = 0
-target_effect_anchor = 1
+target_effect_anchor = 0
 is_beneficial = false
 skip_target_return_anim = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

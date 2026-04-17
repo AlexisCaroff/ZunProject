@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://dwdi447w8ocvi"]
+[gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://dwdi447w8ocvi"]
 
 [ext_resource type="Texture2D" uid="uid://dmluhaejj5vxf" path="res://characters/charatexture/demo characters/ENEMY_spitter_spit.png" id="1_f2alv"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_tnww7"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_f2alv"]
+[ext_resource type="PackedScene" uid="uid://b0xlvqrqes381" path="res://actions/skillEffects/FX/Scene/spitEnnemy_FX.tscn" id="2_nncjn"]
 [ext_resource type="Texture2D" uid="uid://yyl7yyr5j4rv" path="res://UI/poisonHorny.png" id="3_tnww7"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="4_dt8ru"]
 [ext_resource type="Texture2D" uid="uid://bw10cun1t2x4g" path="res://actions/actiontexture/poison.png" id="5_fmjc0"]
@@ -50,6 +51,7 @@ duration = 0.3
 tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
+caster_effect_scene = ExtResource("2_nncjn")
 caster_effect_anchor = 0
 target_effect_anchor = 1
 is_beneficial = false

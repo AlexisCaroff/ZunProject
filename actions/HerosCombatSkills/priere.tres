@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://cswp6nkwg6iwu"]
+[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://cswp6nkwg6iwu"]
 
 [ext_resource type="Texture2D" uid="uid://7s856xrt06cp" path="res://characters/charatexture/demo characters/HERO_priestess_chant.png" id="1_rgbct"]
 [ext_resource type="PackedScene" uid="uid://e0tgmgc5pbw4" path="res://actions/skillEffects/FX/Scene/targeting.tscn" id="2_ioqbf"]
 [ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="2_rrrrh"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_yt4kq"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="3_rrrrh"]
-[ext_resource type="Texture2D" uid="uid://sb35k7bfa5ry" path="res://actions/actiontexture/priere.png" id="4_hd7w4"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_yqqrb"]
 [ext_resource type="Texture2D" uid="uid://dbuugeey6c5y4" path="res://UI/buffAtt.png" id="5_rgbct"]
+[ext_resource type="Texture2D" uid="uid://dlrp4rbvk565w" path="res://actions/actiontexture/UI icons/ICON_priestess_hymn.png" id="7_ioqbf"]
+[ext_resource type="PackedScene" uid="uid://bcvy3uxu0ox5h" path="res://actions/skillEffects/FX/Scene/boosted.tscn" id="9_wllrc"]
 
 [sub_resource type="Resource" id="Resource_k0qpg"]
 script = ExtResource("2_rrrrh")
@@ -25,10 +26,10 @@ metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [resource]
 script = ExtResource("4_yqqrb")
-name = "priere"
-descriptionName = "priere"
+name = "Hymn"
+descriptionName = "Hymn"
 description = "buff and resset cooldown of all allies"
-icon = ExtResource("4_hd7w4")
+icon = ExtResource("7_ioqbf")
 barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_rgbct")
@@ -50,8 +51,9 @@ tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
 caster_effect_scene = ExtResource("2_ioqbf")
+target_effect_scene = ExtResource("9_wllrc")
 caster_effect_anchor = 0
-target_effect_anchor = 1
-is_beneficial = false
+target_effect_anchor = 2
+is_beneficial = true
 skip_target_return_anim = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

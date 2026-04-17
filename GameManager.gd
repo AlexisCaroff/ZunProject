@@ -28,7 +28,7 @@ func _ready():
 	if not room_container:
 		room_container = Node2D.new()
 		add_child(room_container)
-	spawn_start_menu()
+	
 	
 	initialize_affinities(characters)
 	await sceneTransition.fade_in()

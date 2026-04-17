@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://b18fn4cpfbvge"]
+[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://b18fn4cpfbvge"]
 
 [ext_resource type="Texture2D" uid="uid://cu2trwua3sb1" path="res://characters/charatexture/demo characters/HERO_mystic_cc_siphon.png" id="1_6g5ms"]
 [ext_resource type="AudioStream" uid="uid://bv7eg2rwowxuj" path="res://actions/sound/magicSlurp.mp3" id="2_pddxp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cq4lyjh8qvpuy" path="res://actions/actiontexture/UI icons/ICON_mystic_cc_syphon.png" id="5_7oddx"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="6_jd58n"]
 [ext_resource type="Script" uid="uid://bp8u5at2ojgse" path="res://actions/skillEffects/healEffect.gd" id="7_n7ddn"]
+[ext_resource type="PackedScene" uid="uid://d1snbm7gq1lk2" path="res://actions/skillEffects/FX/Scene/hit_magic.tscn" id="9_s2p81"]
 
 [sub_resource type="Resource" id="Resource_ngn0m"]
 script = ExtResource("4_lf7t0")
@@ -50,6 +51,7 @@ tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
 caster_effect_scene = ExtResource("3_pddxp")
+target_effect_scene = ExtResource("9_s2p81")
 caster_effect_anchor = 0
 target_effect_anchor = 1
 is_beneficial = false
