@@ -68,6 +68,7 @@ grow_vertical = 0
 color = Color(0, 0, 0, 0.7)
 
 [node name="UiConvoBox2" type="TextureRect" parent="AnonDialogue"]
+layout_mode = 0
 offset_left = 493.0
 offset_top = 42.0
 offset_right = 2414.0

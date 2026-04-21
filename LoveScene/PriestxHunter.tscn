@@ -84,6 +84,7 @@ bbcode_enabled = true
 scroll_active = false
 
 [node name="UiConvoBox2" type="TextureRect" parent="AnonDialogue"]
+layout_mode = 0
 offset_left = 580.984
 offset_top = 42.0
 offset_right = 2501.98
