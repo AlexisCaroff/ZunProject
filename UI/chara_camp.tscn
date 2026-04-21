@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2rn6c4jc5dlf"]
+[gd_scene load_steps=7 format=3 uid="uid://c2rn6c4jc5dlf"]
 
 [ext_resource type="Script" uid="uid://jtrtg026w4al" path="res://UI/chara_camp.gd" id="1_n0x3i"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="1_tajnv"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="2_n0x3i"]
-[ext_resource type="PackedScene" uid="uid://cifpdtrct42ek" path="res://UI/chara_combat_ui.tscn" id="3_xv3i0"]
 [ext_resource type="Texture2D" uid="uid://dqk35k04yhaeb" path="res://camp imgs/Camp_char_sit_H.png" id="4_xv3i0"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="5_8qacs"]
 [ext_resource type="Script" uid="uid://cf5uoxm4f4cop" path="res://characters/arrow.gd" id="7_vsk4x"]
@@ -12,6 +11,7 @@
 script = ExtResource("1_n0x3i")
 
 [node name="name" type="Label" parent="."]
+visible = false
 z_index = 4
 offset_left = -34.0
 offset_top = -1.0
@@ -20,11 +20,6 @@ offset_bottom = 22.0
 theme_override_fonts/font = ExtResource("1_tajnv")
 text = "name"
 horizontal_alignment = 1
-
-[node name="charaCombatUI" parent="." instance=ExtResource("3_xv3i0")]
-z_index = 6
-position = Vector2(-19, 18)
-scale = Vector2(1.2, 1.2)
 
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2(35, 6)

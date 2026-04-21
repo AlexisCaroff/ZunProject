@@ -1451,6 +1451,7 @@ color = Color(0.643137, 0.560784, 0.364706, 1)
 
 [node name="RoundsLabel" type="RichTextLabel" parent="."]
 modulate = Color(0.597176, 0.597176, 0.597176, 1)
+layout_mode = 0
 offset_left = 1109.0
 offset_top = 44.0
 offset_right = 1300.0

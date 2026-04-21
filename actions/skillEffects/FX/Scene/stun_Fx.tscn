@@ -132,17 +132,17 @@ libraries = {
 }
 
 [node name="FxStun001" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.226857, 0.226857)
 texture = ExtResource("3_p4pbo")
 
 [node name="FxStun002" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.226857, 0.226857)
 texture = ExtResource("4_frkxc")
 
 [node name="FxStun003" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.226857, 0.226857)
 texture = ExtResource("5_f1ktu")
 
 [node name="FxStun004" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.226857, 0.226857)
 texture = ExtResource("6_helyn")

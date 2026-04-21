@@ -299,7 +299,7 @@ func selectCharacter(chara: CharacterData):
 		selected_character = chara
 		var i = characters.find(chara)
 		portrait_selector.position = portraits[i].position
-		NameLabel.text=chara.Charaname
+		NameLabel.text=chara.Name
 		Def.bbcode_enabled = true
 		Att.bbcode_enabled = true
 		WillPower.bbcode_enabled = true

@@ -10,19 +10,19 @@ var initiative_icon_path: String = ""
 @onready var name_label = $name
 @onready var Selector =$pivot/Selector
 @onready var stress_label = $Stress
-@onready var ui :CharaUi = $charaCombatUI
+@onready var ui :CharaUi
 @onready var sprite = $pivot/HerosTexture1
-@onready var buff_bar = ui.get_buff_bar()
-@onready var hp_Jauge = ui.getHpbar()
-@onready var horny_Jauge = ui.getLustbar()
-@onready var horny_Rect = ui.get_HornyBar()
-@onready var actionspoints : Array[TextureRect] =ui.getactionpoints()
+@onready var buff_bar
+@onready var hp_Jauge 
+@onready var horny_Jauge 
+@onready var horny_Rect 
+@onready var actionspoints : Array[TextureRect] 
 
 @onready var Arrow = $Arrow
 # --- Infos de base
 
 
-@onready var buff_icons = ui.get_buff_bar()
+@onready var buff_icons 
 # --- Valeurs dynamiques
 
 var campposition :CampPosition 
@@ -34,6 +34,7 @@ var CharaCampPoints : int = 2
 var camp : Campement
 var camp_skills: Array[CampSkill] = []
 
+
 func _ready() -> void:
 	var mat := ShaderMaterial.new()
 	mat.shader = load("res://characters/character_outline.gdshader")
@@ -43,7 +44,16 @@ func _ready() -> void:
 		p.visible =false
 	CharaScale= self.scale
 	print("chara ready")
-	
+
+func set_UI(theUI):
+	print("set UI for "+characterData.Charaname)
+	ui = theUI
+	buff_bar    = ui.get_buff_bar()
+	hp_Jauge    = ui.getHpbar()
+	horny_Jauge = ui.getLustbar()
+	horny_Rect  = ui.get_HornyBar()
+	actionspoints = ui.getactionpoints()
+	buff_icons  = ui.get_buff_bar()
 	update_display()
 
 # Appelée après instanciation, pour charger les données du GameStat
@@ -70,11 +80,9 @@ func add_buff(buff: Buff):
 	print("add buff")
 	
 func update_display() -> void:
-	if not hp_Jauge or not horny_Jauge :
-		hp_Jauge=$HPProgressBar
-		horny_Jauge= ui.getHpbar()
-		horny_Rect = ui.get_HornyBar()
-		# return
+	if not hp_Jauge or not horny_Jauge:
+		push_warning("CharaCamp: UI non initialisée pour " + characterData.Charaname)
+		return
 	hp_Jauge.value=characterData.current_stamina
 	horny_Jauge.value=characterData.current_horniness
 	horny_Rect.modulate.a =characterData.current_horniness

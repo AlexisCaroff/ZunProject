@@ -78,15 +78,17 @@ func load_characters_from_gamestat():
 	characters.clear()
 	for i in gm.characters.size():
 		var hero_data = gm.characters[i]
-		var chara = chara_Camp_scene.instantiate()
+		var chara : CharaCamp = chara_Camp_scene.instantiate()
 		chara.load_camp_chara(hero_data)
 		add_child(chara)
-		characters.append(chara)
+		
 		chara.camp= self
 
 		# Placement dans le slot correspondant
 		var slot_index = hero_data.Chara_position
-	
+		chara.campposition=slots[slot_index]
+		chara.set_UI(slots[slot_index].get_ui())
+		characters.append(chara)
 		move_character_to_slot(chara, slots[slot_index])
 		
 		
@@ -108,7 +110,7 @@ func changeSelectedCharacter(occupant:CharaCamp):
 	
 func updateUICharacter(character:CharacterData):
 	portraitCharaselect.texture = character.explorationPortrait
-	CharacterName.text = character.Charaname
+	CharacterName.text = character.Name
 	AttLabel.text = "Attaque: %d" % [character.attack]
 	DefLabel.text = "Defence: %d" % [character.defense]
 	Stamina.text = " %d / %d" % [character.current_stamina, character.max_stamina]
@@ -144,7 +146,7 @@ func updateUICharacter(character:CharacterData):
 		
 
 			
-			rtl.text = target.characterData.Charaname
+			rtl.text = target.characterData.Name
 
 			slot.visible = true
 
@@ -237,6 +239,7 @@ func show_chara_actions(thechara: CharaCamp):
 		
 func _on_camp_skill_pressed(skill: CampSkill, user: CharaCamp) -> void:
 	# Exemple d'utilisation simple selon le target_type
+	
 	if !skillcampmode:
 		return
 	if skill.cost>campPoints:

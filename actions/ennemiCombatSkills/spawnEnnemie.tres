@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://b4okliodacjdm"]
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://b4okliodacjdm"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_e7b2u"]
 [ext_resource type="Texture2D" uid="uid://bj666rkm2544o" path="res://characters/boss assets/BOSS_broodM_spawn.png" id="1_oeisb"]
+[ext_resource type="PackedScene" uid="uid://cj6jxdl7uv8ea" path="res://actions/skillEffects/FX/Scene/SpawnSpitter.tscn" id="2_48h3l"]
 [ext_resource type="PackedScene" uid="uid://doitrlqhfja4t" path="res://characters/CharacterTestEnemySpitter1.tscn" id="2_lt7gc"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_tmr80"]
 [ext_resource type="Script" uid="uid://dh0x1pgx4tqgk" path="res://actions/skillEffects/Spawn.gd" id="3_oeisb"]
@@ -40,8 +41,9 @@ duration = 0.3
 tags = Array[String](["spawn"])
 is_contact = false
 distance_contact = 0.0
+caster_effect_scene = ExtResource("2_48h3l")
 caster_effect_anchor = 0
 target_effect_anchor = 1
-is_beneficial = false
+is_beneficial = true
 skip_target_return_anim = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

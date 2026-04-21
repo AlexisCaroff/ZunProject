@@ -184,7 +184,7 @@ func selectCharacter(thechara: CharaExplo):
 		selectorChara.position= selected_character.CharaPosition.charaUI.global_position if selected_character != null else Vector2.ZERO
 		selectorChara.position.y +=45
 		#selectorChara.position.y -=46
-		NameLabel.text=chara.Charaname
+		NameLabel.text=chara.Name
 		Def.bbcode_enabled = true
 		Att.bbcode_enabled = true
 		WillPower.bbcode_enabled = true

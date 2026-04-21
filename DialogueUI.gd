@@ -3,8 +3,8 @@ extends Control
 @onready var portrait_nodes: Array[TextureRect] = [
 	$Portrait,   # gauche        (index 0)
 	$Portrait3,  # centre-gauche (index 1)
-	$Portrait2,  # centre-droite (index 2)
-	$Portrait4,  # droite        (index 3)
+	$Portrait4,  # centre-droite (index 2)
+	$Portrait2,  # droite        (index 3)
 ]
 @onready var dialogue_text: RichTextLabel = $RichTextLabel
 @onready var name_label: Label = $Speaker
@@ -27,7 +27,7 @@ func setup_layout(count: int) -> void:
 			portrait_nodes[0].visible = true
 		2:
 			portrait_nodes[0].visible = true
-			portrait_nodes[2].visible = true
+			portrait_nodes[3].visible = true
 		3:
 			portrait_nodes[0].visible = true
 			portrait_nodes[1].visible = true

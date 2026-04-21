@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://db37joy3a54np"
-path="res://.godot/imported/BOSS_broodM_spawn_fx.png-1c81ef6068600b98a7e539fef7e8206f.ctex"
+path="res://.godot/imported/BOSS_broodM_spawn_fx.png-b239b8f99b0b703753260580a73838a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/boss assets/BOSS_broodM_spawn_fx.png"
-dest_files=["res://.godot/imported/BOSS_broodM_spawn_fx.png-1c81ef6068600b98a7e539fef7e8206f.ctex"]
+source_file="res://vfx/shader/BOSS_broodM_spawn_fx.png"
+dest_files=["res://.godot/imported/BOSS_broodM_spawn_fx.png-b239b8f99b0b703753260580a73838a7.ctex"]
 
 [params]
 

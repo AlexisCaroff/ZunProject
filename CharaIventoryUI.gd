@@ -21,19 +21,20 @@ func _ready():
 	button.connect("mouse_entered", over)
 	button.connect("mouse_exited",exit)
 	normal_scale = thetexture.scale
-	thetexture.pivot_offset = thetexture.size / 2
+#	thetexture.pivot_offset = thetexture.size / 2
 func  select_Chara():
 	inventory.select_character(chara)
 func set_chara(character:CharacterData, affinity: int):
 	chara=character
 	thetexture.texture=character.explorationPortrait
+	#thetexture.position = Vector2(-12.0,29.0)
 	#print(character.Charaname+ " is updated")
 	progressBar.value=affinity
 	update_affinity_crystals(affinity,AffinityCrystals)
 	
 func update_affinity_crystals(affinity: int, crystals: Array):
 	var count := 0
-	
+
 	if affinity >= 90:
 		count = 3
 	elif affinity >= 60:

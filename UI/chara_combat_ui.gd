@@ -19,6 +19,7 @@ class_name CharaUi
 
 func getHpbar():
 	HPProgressBar = $HPProgressBar
+	print("send Hp Bar")
 	return HPProgressBar
 
 func getLustbar():

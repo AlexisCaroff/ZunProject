@@ -5,7 +5,7 @@ var occupant : CharaCamp
 var skill : CampSkill
 var selfoccupant :  Array[CharaCamp]
 @onready var button =$Button
-
+@onready var ui=$charaCombatUI
 func _ready() -> void:
 	button.connect("mouse_entered",over)
 	button.connect("mouse_exited",out)
@@ -21,11 +21,16 @@ func _on_button_button_down() -> void:
 			CampSkill.TargetType.ALLY:
 				skill.use(campement.selected_chara,selfoccupant)
 		campement.noCharacterSelected()
+		campement.exitButton.visible=false
 	else :
 		campement.changeSelectedCharacter(occupant)
+func get_ui()-> CharaUi:
+	print("send " + ui.name)
+	ui=$charaCombatUI
+	return ui
 
 func over():
-	occupant.animate_selected()
+	
 	occupant.Selector.visible = true
 func out():
 	occupant.Selector.visible = false

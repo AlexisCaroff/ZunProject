@@ -1,13 +1,3 @@
-Mystic: Azun’bir. You look haggard. Perhaps you should get some rest in the tent.
-Pristess: I’m perfectly fine. We need to keep going soon.
-Mystic: Your channeling is essential to our success, Azun’bir. You must not overburden yourself.
-Pristess: The priestess sets her jaw and grumbles. I am not sleepy.
-Mystic: The mystic sighs, but doesn’t relent. Then would you at least allow me to help you with a ritual? I have some ointments that help relieve fatigue.
-Pristess: I have little trust in your pagan nonsense, demon wielder. I will be fine.
-Mystic: You must restore your energies, Azun’bir. Please, allow me to help.
-Warrior: He’s not wrong, Chief. If you fall, the rest of us won’t last long in this place.
-Pristess: … Very well, if I must. But this doesn’t mean I trust you yet, barbarian.
-
 
 Narrator: Inside the tent, the mystic sets his bag down, pulling out small earthen jars, seashell containers, and dried herbs. He starts mixing ingredients together in a wooden bowl.
 Narrator: The priestess watches him with a suspicious eye, asking about every ingredient and its purpose. 

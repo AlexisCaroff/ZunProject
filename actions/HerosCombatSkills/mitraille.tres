@@ -1,20 +1,12 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://dhh17qt8y66hk"]
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://dhh17qt8y66hk"]
 
 [ext_resource type="Texture2D" uid="uid://bjl3tx6extox8" path="res://characters/charatexture/demo characters/HERO_mystic_ranged_shootbig.png" id="1_3yijc"]
 [ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="1_54gp4"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_54gp4"]
 [ext_resource type="PackedScene" uid="uid://cctqpui77aw5" path="res://actions/skillEffects/FX/Scene/spitMystic_FX.tscn" id="3_8wa8f"]
-[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_62wbe"]
 [ext_resource type="Texture2D" uid="uid://df4q4tno1vx4c" path="res://actions/actiontexture/UI icons/ICON_mystic_rang_spray.png" id="4_dtk8s"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_bfp37"]
 [ext_resource type="PackedScene" uid="uid://d1snbm7gq1lk2" path="res://actions/skillEffects/FX/Scene/hit_magic.tscn" id="8_3vfqi"]
-
-[sub_resource type="Resource" id="Resource_ey7qo"]
-script = ExtResource("3_62wbe")
-MagicDMG = true
-amount = 15
-damage_target_stat = 0
-metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [resource]
 script = ExtResource("5_bfp37")
@@ -27,7 +19,7 @@ barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_3yijc")
 the_target_type = 4
-effects = Array[ExtResource("2_54gp4")]([SubResource("Resource_ey7qo")])
+effects = Array[ExtResource("2_54gp4")]([])
 two_target_Type = false
 the_second_target_type = 1
 second_effects = Array[ExtResource("2_54gp4")]([])

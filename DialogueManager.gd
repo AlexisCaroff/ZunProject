@@ -33,12 +33,24 @@ var scene: PackedScene = preload("res://UI/dialogue_ui.tscn")
 # Détectés automatiquement à la lecture du fichier — ne pas remplir manuellement
 var participants: Array[String] = []
 
+# Mapping nœuds portrait selon le nombre de participants (gauche → droite)
+const _LAYOUT_PORTRAIT_NAMES := {
+	1: ["Portrait"],
+	2: ["Portrait", "Portrait2"],
+	3: ["Portrait", "Portrait3", "Portrait2"],
+	4: ["Portrait", "Portrait3", "Portrait4", "Portrait2"]
+}
+
 # Portrait actuellement verrouillé par slot : { "Inquisitor": "Inquisitor" }
 # Une fois le portrait canonique affiché, il ne repasse plus sur un alias.
 var _slot_current_portrait: Dictionary = {}
 
+# Référence au GameManager pour récupérer les noms personnalisés des héros
+var _gm: GameManager = null
+
 
 func _ready():
+	_gm = get_tree().root.get_node_or_null("GameManager") as GameManager
 	if ui == null:
 		ui = scene.instantiate()
 		add_child(ui)
@@ -162,7 +174,7 @@ func show_line():
 	if speaker in no_portrait_speakers:
 		# Tous les portraits en inactif, nom du speaker quand même affiché
 		_dim_all_portraits()
-		ui.set_text(speaker, text)
+		ui.set_text(_resolve_display_name(speaker), text)
 		return
 
 	# ── Résolution slot + portrait ────────────────────────────────────
@@ -197,7 +209,8 @@ func show_line():
 		textures.append(tex)
 
 	ui.set_portraits_multi(textures, speaker_index)
-	ui.set_text(speaker, text)
+	ui.set_text(_resolve_display_name(speaker), text)
+	_reposition_speaker(speaker_index)
 
 
 func next_line():
@@ -223,10 +236,46 @@ func _on_Choice2_button_down() -> void:
 #  Helpers
 # ─────────────────────────────────────────────
 
+## Déplace le label Speaker pour le centrer sous le portrait actif.
+## Utilise un mapping fixe par nombre de participants pour être fiable
+## quel que soit l'état des textures dans la scène.
+func _reposition_speaker(speaker_index: int) -> void:
+	var speaker_label := ui.get_node_or_null("Speaker") as Label
+	if speaker_label == null:
+		return
+
+	var count := participants.size()
+	if not _LAYOUT_PORTRAIT_NAMES.has(count):
+		return
+	var names: Array = _LAYOUT_PORTRAIT_NAMES[count]
+	if speaker_index < 0 or speaker_index >= names.size():
+		return
+
+	var portrait := ui.get_node_or_null(names[speaker_index]) as TextureRect
+	if portrait == null:
+		return
+
+	var center_x := portrait.position.x + portrait.size.x * portrait.scale.x * 0.5
+	var half_w := speaker_label.size.x * 0.5
+	speaker_label.position.x = center_x - half_w
+
+
 ## Retourne le nom de slot d'un speaker (résout les alias)
 func _resolve_slot(speaker: String) -> String:
 	if portrait_aliases.has(speaker):
 		return portrait_aliases[speaker]
+	return speaker
+
+
+## Retourne le nom affiché du speaker.
+## Cherche dans gm.characters un CharacterData dont Charaname == slot_name
+## et retourne son Name personnalisé. Fallback sur le speaker brut si introuvable.
+func _resolve_display_name(speaker: String) -> String:
+	var slot_name := _resolve_slot(speaker)
+	if _gm != null:
+		for chara: CharacterData in _gm.characters:
+			if chara.Charaname == slot_name:
+				return chara.Name if chara.Name != "" else slot_name
 	return speaker
 
 
