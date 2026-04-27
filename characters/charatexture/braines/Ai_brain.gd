@@ -31,10 +31,16 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 	var skill: Skill = usable_skills[randi() % usable_skills.size()]
 
 	# ── Helpers : slots vivants uniquement ───────────────────────────
+	# IMPORTANT : on exclut systématiquement les héros grab (.grab == true).
+	# Un héros grab n'occupe plus son hero_slot — son _current_slot pointe
+	# vers enemy_positions[4] (le "slot tentacule") qui n'a jamais d'occupant
+	# assigné. Le cibler renvoie un slot avec occupant == null et fait
+	# planter play_ai_turn / les effets de skill.
 	var alive_hero_slots: Array = herosPositions.filter(
 		func(p: PositionSlot) -> bool:
 			return p.is_occupied() \
 				and not p.occupant.is_dead() \
+				and not p.occupant.characterData.grab \
 				and p.occupant.characterData.current_horniness < 100
 	)
 	var alive_enemy_slots: Array = ennemisPositions.filter(
@@ -101,14 +107,27 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 
 	possible_targets = possible_targets.filter(func(c): return not c.is_dead())
 	possible_targets = possible_targets.filter(func(c): return c.characterData.current_horniness < 100)
+	# ── Filtre les héros grab : ils ne sont plus dans leur slot d'origine
+	#    et ne peuvent plus être attaqués normalement. ──
+	if skill.the_target_type == skill.target_type.ENNEMY:
+		possible_targets = possible_targets.filter(func(c): return not c.characterData.grab)
+
+	# Sécurité : taunted_by ne doit pas pointer vers une cible invalide
+	var taunt_valid := owner.taunted_by != null \
+		and is_instance_valid(owner.taunted_by) \
+		and not owner.taunted_by.is_dead() \
+		and not owner.taunted_by.characterData.grab
 
 	var target: Character = null
-	if owner.taunted_by != null and skill.the_target_type == skill.target_type.ENNEMY:
+	if taunt_valid and skill.the_target_type == skill.target_type.ENNEMY:
 		target = owner.taunted_by
 	elif possible_targets.size() > 0:
 		target = possible_targets[randi() % possible_targets.size()]
 	else:
-		target = owner  # fallback
+		# Aucune cible valide → on annule l'action plutôt que de cibler soi-même
+		# (cibler owner avec une skill ENNEMY produit des comportements bizarres).
+		print("%s n'a aucune cible valide pour %s." % [owner.characterData.Charaname, skill.name])
+		return {}
 
 	var targetPos: Array[PositionSlot] = []
 	targetPos.append(target._current_slot)

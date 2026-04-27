@@ -51,6 +51,7 @@ initiative = 0
 peek = 0
 equipped_items = Array[ExtResource("6_m26kp")]([])
 stun = false
+grab = false
 Chara_position = 0
 max_stamina = 100
 max_stress = 100

@@ -16,8 +16,8 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [resource]
 script = ExtResource("2_vyqw8")
-name = "Charme"
-descriptionName = "Charme"
+name = "Charm"
+descriptionName = "Charm"
 description = "get an ennemi Horny"
 icon = ExtResource("1_lqogb")
 barkSkill = ""

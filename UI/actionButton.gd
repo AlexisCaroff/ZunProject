@@ -10,12 +10,13 @@ var current_tween_button: Tween = null
 
 
 func _on_mouse_entered() -> void:
-	startposition = label.position
-	label.scale = startsize 
-	label.visible = true
-	label.text = Actiontext
-	self.set_pivot_offset(size / 2)
-	label.set_pivot_offset(label.size / 2)
+	if label:
+		startposition = label.position
+		label.scale = startsize 
+		label.visible = true
+		label.text = Actiontext
+		self.set_pivot_offset(size / 2)
+		label.set_pivot_offset(label.size / 2)
 
 	if current_tween:
 		current_tween.kill()

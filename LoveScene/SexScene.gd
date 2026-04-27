@@ -4,7 +4,7 @@ class_name SexScene
 @onready var sprite = $HunterxWarrior
 @onready var dialogue_manager: DialogueManager = $DialogueManager
 @onready var anon_dialogue = $AnonDialogue
-@onready var background = $background
+
 var base_scale: Vector2
 
 ## Dialogue avec noms et portraits (DialogueManager standard)
@@ -14,38 +14,30 @@ var base_scale: Vector2
 
 
 func _ready() -> void:
-	base_scale = scale
-	scale = scale * 0.8
-	modulate.a = 0.0
-	sprite.visible=false
+	
+	
+	
 	for child in get_children():
 		if child is Button:
 			var empty := StyleBoxEmpty.new()
 			child.add_theme_stylebox_override("focus", empty)
 			child.add_theme_stylebox_override("focus_visible", empty)
 
-	# Phase 1 terminée → lancer phase 2
-	dialogue_manager.dialogue_finished.connect(_on_phase1_finished)
+	
 	# Phase 2 terminée → fermer la scène
 	anon_dialogue.dialogue_finished.connect(_on_dialogue_finished)
 
 	# Animation d'intro
-	var tween := create_tween()
-	tween.parallel().tween_property(self, "scale", base_scale, 0.5) \
-		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(self, "modulate:a", 1.0, 0.5)
+	
 
-	await tween.finished
-
-	# Lance la phase 1
-	dialogue_manager.load_dialogue(dialogue_path)
-	dialogue_manager.start_dialogue()
+	
+	_on_phase1_finished()
 
 
 func _on_phase1_finished() -> void:
 	# Enchaîne immédiatement sur la phase 2
 	anon_dialogue.load_dialogue(anon_dialogue_path)
-	background.visible =false
+
 	anon_dialogue.start_dialogue()
 	sprite.visible=true
 

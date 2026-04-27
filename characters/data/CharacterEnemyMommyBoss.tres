@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_od2up"]
 [ext_resource type="Script" uid="uid://b6a37g0gbkyla" path="res://characters/charatexture/braines/Ai_brain_MommyBoss.gd" id="2_6dkli"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="2_kgh6k"]
-[ext_resource type="Texture2D" uid="uid://cexw1ji72sn8b" path="res://characters/charatexture/enemy nymphDead.png" id="3_6dkli"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_tr8hi"]
 [ext_resource type="Texture2D" uid="uid://0x6um7xfv678" path="res://characters/exploPortrait/BossExploPortrait.png" id="5_2ne5h"]
+[ext_resource type="Texture2D" uid="uid://dfbm6mf8pdux7" path="res://characters/charatexture/demo characters/ENEMY_slime_down.png" id="5_6dkli"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="7_dyn70"]
 [ext_resource type="Texture2D" uid="uid://s02pnbcj1wa5" path="res://characters/boss assets/BOSS_broodM_idle.png" id="8_6dkli"]
 [ext_resource type="Texture2D" uid="uid://bxd3n5abhx0l5" path="res://characters/characterInitiative/BossIniPortrait.png" id="8_tr8hi"]
@@ -26,7 +26,7 @@ headPosition = Vector2(1, -310)
 torso_Position = Vector2(0, 0)
 portrait_texture = ExtResource("8_6dkli")
 explorationPortrait = ExtResource("5_2ne5h")
-dead_portrait_texture = ExtResource("3_6dkli")
+dead_portrait_texture = ExtResource("5_6dkli")
 Hit_texture = ExtResource("1_kgh6k")
 initiative_icon = ExtResource("8_tr8hi")
 Name = "Mommy"
@@ -51,6 +51,7 @@ initiative = 2000
 peek = 0
 equipped_items = Array[ExtResource("4_tr8hi")]([])
 stun = false
+grab = false
 Chara_position = 1
 max_stamina = 200
 max_stress = 100

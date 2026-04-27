@@ -6,8 +6,9 @@ class_name UI_combat
 	$CanvasLayer/ActionPanel/Action2,
 	$CanvasLayer/ActionPanel/Action3,
 	$CanvasLayer/ActionPanel/Action4,
-	$CanvasLayer/ActionPanel/Action5
+	$CanvasLayer/ActionPanel/Action5,
 ]
+@onready var passButton : Button = $CanvasLayer/ActionPass
 @onready var RoundNumbersHolder : RichTextLabel = $RoundsLabel
 @onready var Charaname_panel = $CanvasLayer/Charaname
 @onready var charaPortrait = $CanvasLayer/charaPortrait
@@ -100,6 +101,14 @@ func update_turn_queue_ui(queue: Array[Character]):
 # ➤ MET À JOUR L’UI DU PERSONNAGE ACTIF
 # -------------------------------------------------------------------------
 func update_ui_for_current_character(character: Character):
+	if !character.characterData.is_player_controlled:
+		update_ui_for_overed_character(character)
+		for i in range(skill_buttons.size()):
+			var button : Button = skill_buttons[i]
+			button.disabled = true
+			passButton.disabled=true
+		return
+	passButton.disabled=false
 	if !MenuPerso:
 		MenuPerso = $"../MenuPerso"
 	MenuPerso.select_character(character.characterData)
@@ -284,8 +293,8 @@ func showMenuPerso():
 func updateRound(roundnumber:int):
 	RoundNumbersHolder.text = "Round "+ str(roundnumber)
 	var tween      := create_tween() as Tween
-	var theScale      = RoundNumbersHolder.size
+	var theScale      = Vector2(1,1)
 
 	var big_size    = Vector2(theScale .x * 1.1, theScale .y * 1.3)
-	tween.tween_property(self, "scale", big_size,  0.2)
-	tween.tween_property(self, "scale", theScale  , 0.2)
+	tween.tween_property(RoundNumbersHolder, "scale", big_size,  0.2)
+	tween.tween_property(RoundNumbersHolder, "scale", theScale  , 0.2)

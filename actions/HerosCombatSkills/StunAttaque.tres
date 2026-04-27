@@ -1,36 +1,12 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=15 format=3 uid="uid://doydfjjogegnd"]
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://doydfjjogegnd"]
 
 [ext_resource type="Texture2D" uid="uid://ltw8c8afgkv8" path="res://characters/charatexture/demo characters/HERO_warrior_bash.png" id="1_k3ail"]
 [ext_resource type="AudioStream" uid="uid://daejgs7ixjjp3" path="res://actions/sound/Weapon Sword Whips 01.wav" id="2_6dehc"]
-[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_lxb6k"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_slxy4"]
-[ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="3_lxb6k"]
 [ext_resource type="PackedScene" uid="uid://bn67hgtv6jvaq" path="res://actions/skillEffects/FX/Scene/charge_fx.tscn" id="3_w03xy"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_abm4e"]
-[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="5_fkpvk"]
 [ext_resource type="Texture2D" uid="uid://iweidl16yk0t" path="res://actions/actiontexture/UI icons/ICON_warrior_bash.png" id="9_qctpy"]
-[ext_resource type="Texture2D" uid="uid://qx0s5ypu8xhq" path="res://UI/star.png" id="9_w03xy"]
 [ext_resource type="PackedScene" uid="uid://cqea4mekfk8gb" path="res://actions/skillEffects/FX/Scene/hit_standar.tscn" id="11_w03xy"]
-
-[sub_resource type="Resource" id="Resource_i4eos"]
-script = ExtResource("2_lxb6k")
-MagicDMG = false
-amount = 7
-damage_target_stat = 0
-metadata/_custom_type_script = "uid://bjsbovfjff2wo"
-
-[sub_resource type="Resource" id="Resource_slxy4"]
-script = ExtResource("3_lxb6k")
-metadata/_custom_type_script = "uid://tjywmaoy4ejj"
-
-[sub_resource type="Resource" id="Resource_qctpy"]
-script = ExtResource("5_fkpvk")
-name = "Stun"
-uitexture = ExtResource("9_w03xy")
-affected_stat = 7
-amount = 0
-duration = 1
-metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [resource]
 script = ExtResource("4_abm4e")
@@ -43,7 +19,7 @@ barkSkill = ""
 required_position = 1
 ImageSkill = ExtResource("1_k3ail")
 the_target_type = 5
-effects = Array[ExtResource("2_slxy4")]([SubResource("Resource_i4eos"), SubResource("Resource_slxy4"), SubResource("Resource_qctpy")])
+effects = Array[ExtResource("2_slxy4")]([])
 two_target_Type = false
 the_second_target_type = 0
 second_effects = Array[ExtResource("2_slxy4")]([])

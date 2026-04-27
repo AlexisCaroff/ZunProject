@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=10 format=3 uid="uid://d3i2h10vsjlsj"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=11 format=3 uid="uid://d3i2h10vsjlsj"]
 
 [ext_resource type="Texture2D" uid="uid://kysl4qntumom" path="res://characters/charatexture/demo characters/tentacle.png" id="1_jdbjj"]
 [ext_resource type="Script" uid="uid://cf2k68rgsdle0" path="res://characters/charatexture/braines/Ai_brain.gd" id="2_y0omi"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="4_xpfno"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_jf3mf"]
 [ext_resource type="Texture2D" uid="uid://b25krvl6etj57" path="res://characters/exploPortrait/BossTentacleExploPortrait.png" id="6_kl24q"]
+[ext_resource type="Texture2D" uid="uid://0p8u0kokfjf8" path="res://characters/characterInitiative/BossTentacleIniPortrait.png" id="7_srcuk"]
 [ext_resource type="Resource" uid="uid://byc26r5u5smx0" path="res://actions/ennemiCombatSkills/TentacleSquishes.tres" id="8_3a7ml"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="10_uqb7o"]
 
@@ -17,13 +18,13 @@ metadata/_custom_type_script = "uid://cf2k68rgsdle0"
 
 [resource]
 script = ExtResource("10_uqb7o")
-headPosition = Vector2(1, -310)
+headPosition = Vector2(1, -151)
 torso_Position = Vector2(0, 0)
 portrait_texture = ExtResource("1_jdbjj")
 explorationPortrait = ExtResource("6_kl24q")
 dead_portrait_texture = ExtResource("1_jdbjj")
 Hit_texture = ExtResource("1_jdbjj")
-initiative_icon = ExtResource("6_kl24q")
+initiative_icon = ExtResource("7_srcuk")
 Name = "Tentacle"
 Charaname = "Tentacle"
 IsDemon = true
@@ -46,11 +47,12 @@ initiative = 3
 peek = 0
 equipped_items = Array[ExtResource("6_jf3mf")]([])
 stun = false
+grab = false
 Chara_position = 3
 max_stamina = 15
 max_stress = 100
 max_horniness = 100
-current_stamina = 15
+current_stamina = 1
 current_stress = 0
 current_horniness = 0
 isOneshot = true

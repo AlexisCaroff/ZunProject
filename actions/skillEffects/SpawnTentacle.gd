@@ -76,11 +76,12 @@ func _spawn_tentacle_in_slot(slot: PositionSlot, grabbed_target: Character, boss
 	new_enemy.CharaGrab = grabbed_target
 	grabbed_target._current_slot.remove_character()
 	grabbed_target._current_slot = combatmanager.enemy_positions[4]
+	grabbed_target._current_slot.assign_character(grabbed_target,0.7)
 	grabbed_target.position = new_enemy.position
 	grabbed_target.position.y -= 70
 	grabbed_target.z_index = new_enemy.z_index - 1
 	grabbed_target.visible = false
-	grabbed_target.characterData.stun=true
+	grabbed_target.characterData.grab=true
 	# ── Enregistrement ───────────────────────────────────────────────
 	combatmanager.enemies.append(new_enemy)
 	new_enemy.skill_animation_started.connect(combatmanager._on_skill_animation_started)

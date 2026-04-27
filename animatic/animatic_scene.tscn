@@ -31,15 +31,6 @@ offset_right = 2160.0
 offset_bottom = 1117.0
 color = Color(0, 0, 0, 1)
 
-[node name="DialogueBox2" type="TextureRect" parent="CanvasLayer"]
-offset_left = 105.0
-offset_top = 6.0
-offset_right = 1496.0
-offset_bottom = 838.0
-scale = Vector2(1.2, 1.15385)
-texture = ExtResource("3_8733h")
-expand_mode = 1
-
 [node name="Images" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
@@ -69,6 +60,16 @@ offset_left = 111.0
 offset_right = 1993.0
 offset_bottom = 1044.52
 scale = Vector2(0.860984, 0.860984)
+expand_mode = 1
+
+[node name="DialogueBox2" type="TextureRect" parent="CanvasLayer"]
+z_index = 4
+offset_left = 105.0
+offset_top = 6.0
+offset_right = 1496.0
+offset_bottom = 838.0
+scale = Vector2(1.2, 1.15385)
+texture = ExtResource("3_8733h")
 expand_mode = 1
 
 [node name="Camera" type="Camera2D" parent="CanvasLayer"]

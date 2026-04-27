@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://2avrmp1dyhw5"]
+[gd_scene load_steps=9 format=3 uid="uid://2avrmp1dyhw5"]
 
 [ext_resource type="Script" uid="uid://cdva0owcmjo24" path="res://LoveScene/SexScene.gd" id="1_ikva5"]
 [ext_resource type="Texture2D" uid="uid://cyy6b634yl0ja" path="res://LoveScene/SCENE_CAMP_MxH.png" id="2_ikva5"]
-[ext_resource type="Texture2D" uid="uid://87y4s7750hu4" path="res://scenes/backgrounds dungeon demo/BG_dungeon_storeroom.png" id="3_edb4r"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="3_gucjp"]
 [ext_resource type="Script" uid="uid://da5ntrd7ag2qq" path="res://LoveScene/AnonDialogue.gd" id="4_32p31"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="5_tfso7"]
@@ -26,11 +25,6 @@ color = Color(0, 0, 0, 1)
 position = Vector2(953.444, 541.5)
 scale = Vector2(0.485648, 0.485648)
 texture = ExtResource("2_ikva5")
-
-[node name="background" type="Sprite2D" parent="."]
-position = Vector2(1221, 819)
-scale = Vector2(1.37694, 1.47079)
-texture = ExtResource("3_edb4r")
 
 [node name="Button" type="Button" parent="."]
 offset_right = 1909.0

@@ -46,8 +46,12 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 		var tentacle_active := _has_living_tentacle_in_combat(cm)
 
 		if not tentacle_active:
+			# Exclut les héros déjà grabbés (par sécurité, en plus de la
+			# vérification tentacle_active ci-dessus).
 			var valid_targets := heroes.filter(func(c: Character) -> bool:
-				return not c.is_dead() and c.characterData.current_horniness < 100
+				return not c.is_dead() \
+					and not c.characterData.grab \
+					and c.characterData.current_horniness < 100
 			)
 
 			if not valid_targets.is_empty():
@@ -126,9 +130,12 @@ func _fallback_attack(owner: Character, heroes: Array, enemies: Array) -> Dictio
 
 	var skill: Skill = attack_skills[randi() % attack_skills.size()]
 
+	# IMPORTANT : on exclut les héros grab (.grab == true). Voir Ai_brain.gd
+	# pour l'explication détaillée.
 	var alive_hero_slots: Array = cm.hero_positions.filter(func(p: PositionSlot) -> bool:
 		return p.is_occupied() \
 			and not p.occupant.is_dead() \
+			and not p.occupant.characterData.grab \
 			and p.occupant.characterData.current_horniness < 100
 	)
 	var alive_enemy_slots: Array = cm.enemy_positions.filter(func(p: PositionSlot) -> bool:
@@ -149,14 +156,23 @@ func _fallback_attack(owner: Character, heroes: Array, enemies: Array) -> Dictio
 		skill.target_type.ALLY:
 			possible_targets = enemies.filter(func(c): return not c.is_dead())
 		skill.target_type.ENNEMY:
+			# Exclut les héros grab : leur slot n'est plus dans hero_positions
+			# et leur _current_slot pointe vers enemy_positions[4] (occupant null).
 			possible_targets = heroes.filter(func(c): return not c.is_dead() \
+				and not c.characterData.grab \
 				and c.characterData.current_horniness < 100)
 
 	if possible_targets.is_empty():
 		return {}
 
+	# Sécurité : taunted_by ne doit pas pointer vers une cible invalide
+	var taunt_valid := owner.taunted_by != null \
+		and is_instance_valid(owner.taunted_by) \
+		and not owner.taunted_by.is_dead() \
+		and not owner.taunted_by.characterData.grab
+
 	var target: Character
-	if owner.taunted_by != null and skill.the_target_type == skill.target_type.ENNEMY:
+	if taunt_valid and skill.the_target_type == skill.target_type.ENNEMY:
 		target = owner.taunted_by
 	else:
 		target = possible_targets[randi() % possible_targets.size()]

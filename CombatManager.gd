@@ -12,7 +12,7 @@ var ui: Control = null
 @export var SPACING_Y = 250
 @export var _pending_skill: Skill = null  
 @export var turnNumber : int = 0
-var round_number : int = 0
+var round_number : int = 1
 ## Effets appliqués à tous les héros au début de chaque round (buff passif, allié invisible…)
 @export var round_effects : Array[SkillEffect] = []
 @export_file("*.tscn") var target_scene : String
@@ -250,106 +250,126 @@ func is_pause() -> bool:
 	
 	
 func next_turn():
-	
 	while is_animation_playing():
-			await get_tree().process_frame
-
+		await get_tree().process_frame
+ 
 	_check_victory()
 	_check_defeat()
-	
+ 
 	while is_pause():
 		await get_tree().process_frame
 	while GameState.Pause:
 		await get_tree().process_frame
-		
+ 
 	if combatEnd:
 		return
-	
+ 
 	turnNumber += 1
-
-	# ── Compteur de round ─────────────────────────────────────────────────
+ 
+	# ── Compteur de round ─────────────────────────────────────────────
 	if not turn_queue.is_empty() and turnNumber > turn_queue.size():
 		round_number += 1
 		turnNumber = 1
 		print("⚔️ Round ", round_number, " !")
 		await _trigger_round_effects()
-
+ 
 	if turn_queue.is_empty():
 		turn_queue = build_turn_queue(heroes + enemies)
 		ui.update_turn_queue_ui(turn_queue)
 	ui.update_turn_queue_ui(turn_queue)
 	current_character = turn_queue.pop_front()
-	
-	
+ 
 	for char in turn_queue:
 		char.resetVisuel()
-		
-		
+ 
 	if current_character.characterData.acte_twice:
-		current_character.characterData.acte_twice=false
+		current_character.characterData.acte_twice = false
 		turn_queue.push_front(current_character)
-		print ("Hunter Acte_twice")
+		print("Hunter Acte_twice")
 	await get_tree().process_frame
-	
-	
+ 
 	for position in enemy_positions:
-		if position.occupant==null :
-			position.CharaUI.visible=false
-
+		if position.occupant == null:
+			position.CharaUI.visible = false
+ 
 	ui.hide_Panel_action()
-	
-	selectorChara.position= current_character._current_slot.CharaUI.global_position if current_character._current_slot else Vector2.ZERO
-	selectorChara.position.y += 45 
+ 
+	selectorChara.position = current_character._current_slot.CharaUI.global_position if current_character._current_slot else Vector2.ZERO
+	selectorChara.position.y += 45
 	if current_character.characterData.is_player_controlled:
-		selectorChara.modulate = Color(0.9,0.95,0.7)
+		selectorChara.modulate = Color(0.9, 0.95, 0.7)
 	else:
-		selectorChara.modulate = Color(0.1,0.1,0.1)
-		
+		selectorChara.modulate = Color(0.1, 0.1, 0.1)
+ 
 	current_character.start_turn()
-	
+ 
 	for chara in turn_queue:
 		chara.update_ui()
-		
+ 
+	# ══════════════════════════════════════════════════════════════════
+	#  CHECKS D'INCAPACITÉ — TOUT EN HAUT, avant tout affichage UI
+	# ══════════════════════════════════════════════════════════════════
+ 
+	# ── Stamina épuisée ──
 	if current_character.characterData.current_stamina <= 0:
-		ui.log(current_character.characterData.Charaname +" is tired")
+		print("🚫 SKIP (tired): ", current_character.characterData.Charaname)
+		ui.log(current_character.characterData.Charaname + " is tired")
 		await end_currentChara_Turn()
 		return
-		
-	if current_character.characterData.current_horniness >= 100: 
-		current_character.characterData.current_horniness =100
-		print (current_character.characterData.Charaname + "is too horny to fight")
-		ui.log(current_character.characterData.Charaname +" is too horny to fight")
-		for button:Button in ui.skill_buttons :
-			button.disabled = true
-		
+ 
+	# ── Horniness max ──
+	if current_character.characterData.current_horniness >= 100:
+		print("🚫 SKIP (horny): ", current_character.characterData.Charaname)
+		current_character.characterData.current_horniness = 100
+		ui.log(current_character.characterData.Charaname + " is too horny to fight")
+		# Disable les boutons même pour un héros (cohérence visuelle)
+		if current_character.characterData.is_player_controlled:
+			for button: Button in ui.skill_buttons:
+				button.disabled = true
 		await get_tree().create_timer(1.5).timeout
 		await end_currentChara_Turn()
 		return
-
-	
+ 
+	# ── Grab (boss capture) ──
+	if current_character.characterData.grab == true:
+		print("🚫 SKIP (grabbed): ", current_character.characterData.Charaname)
+		ui.log(current_character.characterData.Charaname + " is grabbed")
+		if current_character.characterData.is_player_controlled:
+			for button: Button in ui.skill_buttons:
+				button.disabled = true
+		await end_currentChara_Turn()
+		return
+ 
+	# ── Stun / Surprise ──
+	# IMPORTANT : on traite le stun AVANT d'afficher le menu joueur,
+	# sinon l'UI flash brièvement pour rien.
+	if current_character.characterData.stun == true:
+		print("🚫 SKIP (stun): ", current_character.characterData.Charaname)
+		ui.log(current_character.characterData.Charaname + " is stuned")
+		if current_character.exclamation != null:
+			current_character.exclamation.free()
+			ui.log(current_character.characterData.Charaname + " is surprised")
+		if current_character.characterData.is_player_controlled:
+			for button: Button in ui.skill_buttons:
+				button.disabled = true
+		current_character.characterData.stun = false
+		await end_currentChara_Turn()
+		return
+ 
+	# ══════════════════════════════════════════════════════════════════
+	#  Le perso peut jouer : décision joueur vs IA
+	# ══════════════════════════════════════════════════════════════════
+ 
 	if current_character.characterData.is_player_controlled:
 		ui.MenuPerso.select_character(current_character.characterData)
 		await get_tree().process_frame
-		current_character.sprite.modulate =current_character.CharaColor
+		current_character.sprite.modulate = current_character.CharaColor
 	else:
-		if current_character.characterData.stun == false:
-		
-			await get_tree().create_timer(1.5).timeout
-			current_character.play_ai_turn(heroes,enemies)
-			await end_currentChara_Turn()
-	if current_character.characterData.stun == true:
-		ui.log(current_character.characterData.Charaname +" is stuned")
-		if current_character.exclamation != null:
-			current_character.exclamation.free()
-			ui.log(current_character.characterData.Charaname +" is surprised")
-		for button:Button in ui.skill_buttons :
-			button.disabled = true
-		current_character.characterData.stun = false
-		
+		await get_tree().create_timer(1.5).timeout
+		current_character.play_ai_turn(heroes, enemies)
 		await end_currentChara_Turn()
 		
-		return
-
+		
 # ─────────────────────────────────────────────────────────────────────
 #  Effets de début de round (allié passif non ciblable)
 #  Applique chaque SkillEffect de round_effects sur tous les héros vivants.
@@ -360,9 +380,7 @@ func _trigger_round_effects() -> void:
 	if round_effects.is_empty():
 		return
 
-	# On utilise le premier héros vivant comme "caster" factice pour les effets
-	# qui ont besoin d'un owner (ex: BuffEffect). Les effets purement passifs
-	# peuvent ignorer le user.
+	
 	var caster: Character = null
 	for hero in heroes:
 		if is_instance_valid(hero) and not hero.is_dead():
@@ -383,6 +401,12 @@ func _trigger_round_effects() -> void:
 
 
 func end_currentChara_Turn():
+	if current_character.characterData.current_stamina >= 0:
+		print("🚫 SKIP TURN: ", current_character.characterData.Charaname,
+		" stamina=", current_character.characterData.current_stamina,
+		" stun=", current_character.characterData.stun,
+		" grab=", current_character.characterData.grab,
+		" horny=", current_character.characterData.current_horniness)
 	await get_tree().create_timer(1.5).timeout
 	current_character.end_turn()
 	while is_animation_playing():
@@ -412,40 +436,81 @@ func _on_skill_animation_finished():
 
 func is_animation_playing() -> bool:
 	return active_animations > 0
+	
+func _is_incapacitated(c: Character) -> bool:
+	if not is_instance_valid(c) or c.characterData == null:
+		return true
+	if c.is_dead():
+		return true
+	if c.characterData.current_stamina <= 0:
+		return true
+	if c.characterData.current_horniness >= c.characterData.max_horniness:
+		return true
+	if c.characterData.grab:
+		return true
+	return false
+	
 
 func _check_victory():
-	for enemy:Character in enemies.duplicate():
+	# ── 1. Nettoyage des ennemis MORTS (libère grabs, slots, queue_free) ──
+	for enemy: Character in enemies.duplicate():
 		if enemy.dead:
 			turn_queue.erase(enemy)
 			if enemy.CharaGrab != null:
-				enemy.CharaGrab.characterData.stun=false
-				enemy.CharaGrab.visible=true
-				for pos :PositionSlot in hero_positions:
-					if !pos.is_occupied():
-						pos.assign_character(enemy.CharaGrab,0.3)
+				enemy.CharaGrab.characterData.grab = false
+				enemy.CharaGrab.visible = true
+				for pos: PositionSlot in hero_positions:
+					if not pos.is_occupied():
+						pos.assign_character(enemy.CharaGrab, 0.3)
 			if enemy._current_slot:
 				enemy._current_slot.remove_character()
 			enemies.erase(enemy)
 			enemy.queue_free()
-	if enemies.is_empty():
+ 
+	# ── 2. Victoire : aucun ennemi en état de combattre ──
+	var any_active_enemy := false
+	for enemy: Character in enemies:
+		if not _is_incapacitated(enemy):
+			any_active_enemy = true
+			break
+ 
+	if not any_active_enemy:
+		# Bonus cristaux : chaque démon encore présent (vivant mais incapacité)
+		# en donne 1. Les démons morts par magie ont déjà été comptés dans
+		# Character.take_damage().
+		for enemy: Character in enemies:
+			if is_instance_valid(enemy) \
+					and enemy.characterData \
+					and enemy.characterData.IsDemon \
+					and not enemy.is_dead():
+				nb_crystaleloot += 1
+				print("💎 +1 cristal (démon incapacité : ", enemy.characterData.Charaname, ")")
 		_show_victory()
-	
+ 
+ 
 func _check_defeat():
-	var alive:bool= false 
-	for ally in heroes.duplicate():
-		if !ally.dead && ally.characterData.current_horniness<100:
-			alive =true
+	# ── 1. Nettoyage des héros morts ──
+	for ally: Character in heroes.duplicate():
 		if ally.dead:
 			turn_queue.erase(ally)
 			if ally._current_slot:
 				ally._current_slot.remove_character()
-			ScreenLooseChara.visible =true
-			pause = true 
+			ScreenLooseChara.visible = true
+			pause = true
 			heroes.erase(ally)
 			ally.queue_free()
-	if !alive :
-		combatEnd=true
+ 
+	# ── 2. Défaite : aucun héros en état de combattre ──
+	var any_active_hero := false
+	for ally: Character in heroes:
+		if not _is_incapacitated(ally):
+			any_active_hero = true
+			break
+ 
+	if not any_active_hero:
+		combatEnd = true
 		_show_defeat()
+ 
 	
 func _show_defeat():
 	ResultScreen_label.text = "Defeat !"

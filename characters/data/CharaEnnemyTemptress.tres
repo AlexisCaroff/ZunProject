@@ -10,8 +10,8 @@
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="8_lnpek"]
 [ext_resource type="Texture2D" uid="uid://bj42280vlqril" path="res://characters/characterInitiative/TemptressIniPortrait.png" id="8_ocqyt"]
 [ext_resource type="Texture2D" uid="uid://duqexi8su8ffh" path="res://characters/charatexture/demo characters/ENEMY_temptress_idle.png" id="8_ruvyt"]
-[ext_resource type="Resource" uid="uid://c6phd3e1sln7n" path="res://actions/ennemiCombatSkills/healMonster.tres" id="10_w6qd6"]
 [ext_resource type="Resource" uid="uid://rxp2q7eq2hr5" path="res://actions/ennemiCombatSkills/charme.tres" id="11_lnpek"]
+[ext_resource type="Resource" uid="uid://bffg11yiyqayl" path="res://actions/ennemiCombatSkills/healMonster2.tres" id="11_ocqyt"]
 [ext_resource type="Resource" uid="uid://xgqxannip7id" path="res://actions/ennemiCombatSkills/Encouragement.tres" id="12_rfywr"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="13_airwf"]
 [ext_resource type="Resource" uid="uid://daik6fj7sis15" path="res://actions/ennemiCombatSkills/vampire.tres" id="13_brc4x"]
@@ -53,6 +53,7 @@ initiative = 0
 peek = 0
 equipped_items = Array[ExtResource("4_ocqyt")]([])
 stun = false
+grab = false
 Chara_position = 0
 max_stamina = 100
 max_stress = 100
@@ -61,7 +62,7 @@ current_stamina = 100
 current_stress = 0
 current_horniness = 0
 isOneshot = false
-skill_resources = Array[Resource]([ExtResource("10_w6qd6"), ExtResource("11_lnpek"), ExtResource("12_rfywr"), ExtResource("13_brc4x"), ExtResource("13_airwf")])
+skill_resources = Array[Resource]([ExtResource("11_ocqyt"), ExtResource("11_lnpek"), ExtResource("12_rfywr"), ExtResource("13_brc4x"), ExtResource("13_airwf")])
 tags = Array[String]([])
 is_player_controlled = false
 ai_brain = SubResource("Resource_ocqyt")

@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://cryoy3w5uet08" path="res://actions/CampSkill/buffskillCamp.tres" id="5_07ulr"]
 [ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="6_koia7"]
 [ext_resource type="Resource" uid="uid://b2vd1hks0mof3" path="res://actions/CampSkill/dialogueMystic.tres" id="7_tcb1i"]
-[ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="8_enbju"]
+[ext_resource type="Resource" uid="uid://bbr0a854j5ncx" path="res://actions/CampSkill/LoveEffectM.tres" id="8_m5m7p"]
 [ext_resource type="Texture2D" uid="uid://dsun64yr5mg5l" path="res://characters/charatexture/demo characters/HERO_mystic_cc_down.png" id="9_kyavf"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="10_kcgfw"]
 [ext_resource type="Texture2D" uid="uid://dd4k5wxaesfo4" path="res://characters/exploPortrait/MysticExploPortrait.png" id="11_g0sk4"]
@@ -51,16 +51,17 @@ defense = 5
 willpower = 5
 evasion = 5
 initiative = 20
-peek = 0
+peek = 10
 equipped_items = Array[ExtResource("10_kcgfw")]([])
 stun = false
+grab = false
 Chara_position = 2
 max_stamina = 100
 max_stress = 100
 max_horniness = 100
-current_stamina = 100
+current_stamina = 90
 current_stress = 0
-current_horniness = 0
+current_horniness = 20
 isOneshot = false
 skill_resources = Array[Resource]([ExtResource("15_faxul"), ExtResource("16_4awn5"), ExtResource("17_cfmag"), ExtResource("18_pqop0"), ExtResource("19_vhhps")])
 tags = Array[String](["voyeur", "captive", "switch"])
@@ -71,7 +72,7 @@ max_durationIddle = 1.0
 min_scale = 0.95
 max_scale = 1.0
 corruption = 0
-camp_skill_resources = Array[ExtResource("4_85n1u")]([ExtResource("5_07ulr"), ExtResource("6_koia7"), ExtResource("7_tcb1i"), ExtResource("8_enbju")])
+camp_skill_resources = Array[ExtResource("4_85n1u")]([ExtResource("5_07ulr"), ExtResource("6_koia7"), ExtResource("7_tcb1i"), ExtResource("8_m5m7p")])
 bark_scene = ExtResource("3_ff4cp")
 taunts = ["Spirties grand me strenght"]
 reaction = ["", "", ""]

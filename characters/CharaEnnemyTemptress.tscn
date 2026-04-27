@@ -20,11 +20,11 @@ min_duration = 1.0
 max_duration = 1.5
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -289.167
-offset_top = -353.333
-offset_right = -118.166
-offset_bottom = -122.333
-scale = Vector2(2.09679, 1.68845)
+offset_left = -300.833
+offset_top = -368.333
+offset_right = -129.832
+offset_bottom = -137.333
+scale = Vector2(2.183, 1.75787)
 mouse_filter = 2
 texture = ExtResource("9_7s1lw")
 expand_mode = 1

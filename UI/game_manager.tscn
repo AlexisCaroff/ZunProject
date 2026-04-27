@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://u4r16y7nxe6o" path="res://logo.png" id="8_soe0u"]
 [ext_resource type="Resource" uid="uid://cw65x7yfthrul" path="res://characters/data/CharaPriest.tres" id="9_43qkp"]
 [ext_resource type="Resource" uid="uid://c1xql2qyr4th5" path="res://actions/actiontexture/Mystic.tres" id="9_nm67f"]
-[ext_resource type="Resource" uid="uid://b5k1alktrg3t4" path="res://characters/data/CharaWarrior.tres" id="10_nm67f"]
+[ext_resource type="Resource" uid="uid://b42qgncyvuw0n" path="res://characters/data/CharaWarrior2.tres" id="10_n5q86"]
 [ext_resource type="Script" uid="uid://hqfnhl3n6kn" path="res://UI/button_journal.gd" id="12_n5q86"]
 [ext_resource type="Texture2D" uid="uid://eqli6rl4sig3" path="res://UI/UI boxes/UI_camp_points.png" id="12_nm67f"]
 [ext_resource type="Texture2D" uid="uid://db0f042psyftl" path="res://UI/UI boxes/UI_journal.png" id="13_n5q86"]
@@ -30,7 +30,7 @@ TheRoom_we_are_in = ExtResource("3_0q5so")
 LastRoom_we_were_in = ExtResource("3_0q5so")
 last_room_Ressource = ExtResource("3_0q5so")
 inventory = Array[ExtResource("4_0q5so")]([ExtResource("5_dhxbs")])
-characters = Array[ExtResource("6_1xubm")]([ExtResource("9_43qkp"), ExtResource("7_vbvj5"), ExtResource("9_nm67f"), ExtResource("10_nm67f")])
+characters = Array[ExtResource("6_1xubm")]([ExtResource("9_43qkp"), ExtResource("7_vbvj5"), ExtResource("9_nm67f"), ExtResource("10_n5q86")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -200

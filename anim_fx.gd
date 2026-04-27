@@ -5,6 +5,7 @@ class_name SkillFX
  
 func _ready() -> void:
 	anim.play("FX_anim")
+	print("spawn anim")
 	await anim.animation_finished
 	queue_free()
 	

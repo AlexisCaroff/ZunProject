@@ -104,8 +104,8 @@ texture = ExtResource("8_sdumx")
 
 [node name="UiConvoBox2" type="Sprite2D" parent="."]
 z_index = 20
-position = Vector2(950, 544)
-scale = Vector2(0.992192, 0.994444)
+position = Vector2(959, 541.5)
+scale = Vector2(0.982822, 0.975)
 texture = ExtResource("9_3rmv8")
 
 [node name="UiAffinityMeter" type="Sprite2D" parent="."]

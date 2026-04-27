@@ -65,8 +65,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="exploUI" type="Sprite2D" parent="."]
-position = Vector2(960, 898)
-scale = Vector2(0.75, 0.75)
+position = Vector2(960, 893.063)
+scale = Vector2(0.76, 0.78)
 texture = ExtResource("1_d8pyn")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]

@@ -1,0 +1,61 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=13 format=3 uid="uid://fxica5dgq572"]
+
+[ext_resource type="Texture2D" uid="uid://bjl3tx6extox8" path="res://characters/charatexture/demo characters/HERO_mystic_ranged_shootbig.png" id="1_6tc8b"]
+[ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="2_u4587"]
+[ext_resource type="PackedScene" uid="uid://cctqpui77aw5" path="res://actions/skillEffects/FX/Scene/spitMystic_FX.tscn" id="3_a8cui"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="4_3tfge"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="5_bu4o1"]
+[ext_resource type="Texture2D" uid="uid://btvnbxbbjq1w4" path="res://UI/debuffDeff.png" id="6_0vupr"]
+[ext_resource type="Script" uid="uid://h6pwe3ibr1w5" path="res://actions/skillEffects/ImmobilizeEffect.gd" id="7_i53d2"]
+[ext_resource type="Texture2D" uid="uid://b5wn2rdt50t4q" path="res://actions/actiontexture/UI icons/ICON_mystic_rang_net.png" id="8_kecnh"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="9_8lnek"]
+[ext_resource type="PackedScene" uid="uid://d1snbm7gq1lk2" path="res://actions/skillEffects/FX/Scene/hit_magic.tscn" id="10_xv2w8"]
+
+[sub_resource type="Resource" id="Resource_nueg3"]
+script = ExtResource("5_bu4o1")
+name = "name"
+uitexture = ExtResource("6_0vupr")
+affected_stat = 1
+amount = -10
+duration = 2
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[sub_resource type="Resource" id="Resource_181ke"]
+script = ExtResource("7_i53d2")
+duration = 2
+metadata/_custom_type_script = "uid://h6pwe3ibr1w5"
+
+[resource]
+script = ExtResource("9_8lnek")
+name = "sticky net"
+descriptionName = "sticky net"
+description = "debuff deff, remove ability to move "
+icon = ExtResource("8_kecnh")
+attack_sound = ExtResource("2_u4587")
+barkSkill = ""
+required_position = 0
+ImageSkill = ExtResource("1_6tc8b")
+the_target_type = 4
+effects = Array[ExtResource("4_3tfge")]([SubResource("Resource_nueg3"), SubResource("Resource_181ke")])
+two_target_Type = false
+the_second_target_type = 1
+second_effects = Array[ExtResource("4_3tfge")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 4
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 1.0
+tags = Array[String]([])
+is_contact = false
+distance_contact = 0.0
+caster_effect_scene = ExtResource("3_a8cui")
+target_effect_scene = ExtResource("10_xv2w8")
+caster_effect_anchor = 0
+target_effect_anchor = 2
+is_beneficial = false
+skip_target_return_anim = false
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

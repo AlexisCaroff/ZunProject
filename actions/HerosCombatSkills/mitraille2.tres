@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://celpxos31e3k2"]
+
+[ext_resource type="Texture2D" uid="uid://bjl3tx6extox8" path="res://characters/charatexture/demo characters/HERO_mystic_ranged_shootbig.png" id="1_44xuo"]
+[ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="2_qrpiw"]
+[ext_resource type="PackedScene" uid="uid://cctqpui77aw5" path="res://actions/skillEffects/FX/Scene/spitMystic_FX.tscn" id="3_u5tsq"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="4_rjgt8"]
+[ext_resource type="Texture2D" uid="uid://df4q4tno1vx4c" path="res://actions/actiontexture/UI icons/ICON_mystic_rang_spray.png" id="5_e0qpi"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="5_qrpiw"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="6_fq4on"]
+[ext_resource type="PackedScene" uid="uid://d1snbm7gq1lk2" path="res://actions/skillEffects/FX/Scene/hit_magic.tscn" id="7_i4qvi"]
+
+[sub_resource type="Resource" id="Resource_u5tsq"]
+script = ExtResource("5_qrpiw")
+MagicDMG = true
+amount = 5
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[resource]
+script = ExtResource("6_fq4on")
+name = "mitaille"
+descriptionName = "mitaille"
+description = "attack all ennemies"
+icon = ExtResource("5_e0qpi")
+attack_sound = ExtResource("2_qrpiw")
+barkSkill = ""
+required_position = 0
+ImageSkill = ExtResource("1_44xuo")
+the_target_type = 4
+effects = Array[ExtResource("4_rjgt8")]([SubResource("Resource_u5tsq")])
+two_target_Type = false
+the_second_target_type = 1
+second_effects = Array[ExtResource("4_rjgt8")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 4
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 1.0
+tags = Array[String]([])
+is_contact = false
+distance_contact = 0.0
+caster_effect_scene = ExtResource("3_u5tsq")
+target_effect_scene = ExtResource("7_i4qvi")
+caster_effect_anchor = 0
+target_effect_anchor = 2
+is_beneficial = false
+skip_target_return_anim = false
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

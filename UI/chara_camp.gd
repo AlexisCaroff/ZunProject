@@ -9,7 +9,7 @@ var dead_portrait_path: String = ""
 var initiative_icon_path: String = ""
 @onready var name_label = $name
 @onready var Selector =$pivot/Selector
-@onready var stress_label = $Stress
+#@onready var stress_label = $Stress
 @onready var ui :CharaUi
 @onready var sprite = $pivot/HerosTexture1
 @onready var buff_bar

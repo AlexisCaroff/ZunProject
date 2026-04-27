@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="CampSkill" load_steps=6 format=3 uid="uid://duwv5ufsa7tht"]
+
+[ext_resource type="Script" uid="uid://brw6jmbngkbbu" path="res://scripts/camp/CampEffect.gd" id="1_alhbr"]
+[ext_resource type="Script" uid="uid://bjysq2c5802md" path="res://actions/skillEffects/campSkilleffect/loveEffect.gd" id="2_bq5ul"]
+[ext_resource type="Texture2D" uid="uid://u5q3v34isoh1" path="res://actions/actiontexture/UI icons/ICON_camp_flirt.png" id="3_srn2e"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="4_d3rhg"]
+
+[sub_resource type="Resource" id="Resource_71lud"]
+script = ExtResource("2_bq5ul")
+name = ""
+love_scenes = {
+"Hunter+Warrior": "res://LoveScene/HunterxWarrior.tscn",
+"Mystic+Hunter": "res://LoveScene/MysticxHunter.tscn",
+"Mystic+Warrior": "res://LoveScene/WarriorxMystic.tscn",
+"Priest+Hunter": "res://LoveScene/PriestxHunter.tscn",
+"Priest+Mystic": "res://LoveScene/PriestxMystic.tscn",
+"Priest+Warrior": "res://LoveScene/PriestxWarrior.tscn"
+}
+dialoguePriest = "res://dialogue/love/PriestessHunterD.txt"
+dialogueMystic = "res://dialogue/love/MysticHunterD.txt"
+dialogueHunter = ""
+dialogueWarrior = "res://dialogue/love/HunterWarriorD.txt"
+metadata/_custom_type_script = "uid://bjysq2c5802md"
+
+[resource]
+script = ExtResource("4_d3rhg")
+name = "Flirt"
+description = "Invite charater to tent"
+icon = ExtResource("3_srn2e")
+cost = 2
+standarEnd = false
+target_type = 1
+effects = Array[ExtResource("1_alhbr")]([SubResource("Resource_71lud")])
+metadata/_custom_type_script = "uid://dmwb4vh0ycukv"

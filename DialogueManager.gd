@@ -107,13 +107,16 @@ func load_dialogue(file_path: String):
 	var seen_slots: Array[String] = []   # noms de slots (après résolution des alias)
 
 	while not file.eof_reached():
-		var line := file.get_line().strip_edges()
-		if line == "":
+		var raw := file.get_line()
+		# Ligne vide → séparateur de réplique, on ne concatène pas
+		if raw.strip_edges() == "":
 			continue
-		var parts = line.split(":", false, 2)
-		if parts.size() == 2:
-			var speaker = parts[0].strip_edges()
-			var text    = parts[1].strip_edges()
+
+		var parts = raw.split(":", false, 2)
+		if parts.size() >= 2:
+			# Ligne avec speaker → nouvelle réplique
+			var speaker := parts[0].strip_edges()
+			var text    := parts[1].strip_edges()
 			dialogue_lines.append({"speaker": speaker, "text": text})
 
 			# Ignore les speakers sans portrait
@@ -122,11 +125,15 @@ func load_dialogue(file_path: String):
 
 			# Résout l'alias → nom de slot
 			var slot_name := _resolve_slot(speaker)
-
 			if slot_name not in seen_slots:
 				seen_slots.append(slot_name)
-				# Initialise le portrait du slot avec le premier speaker qui l'utilise.
 				_slot_current_portrait[slot_name] = speaker
+
+		else:
+			# Ligne sans ":" → continuation de la réplique précédente
+			if not dialogue_lines.is_empty():
+				dialogue_lines[-1]["text"] += "\n" + raw.strip_edges()
+
 	file.close()
 
 	# On garde au maximum 4 slots, en excluant les late_entry_slots du layout initial

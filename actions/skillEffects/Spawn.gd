@@ -16,6 +16,19 @@ func apply(_user: Character, target: PositionSlot) -> void:
 		push_error("Impossible de trouver le combat_manager depuis le target slot")
 		return
 
+	# Joue le caster_effect_scene de la skill si présent
+	var skill := _user.current_skill
+	if skill and skill.caster_effect_scene:
+		var vfx := skill.caster_effect_scene.instantiate()
+		combatmanager.add_child(vfx)
+		match skill.caster_effect_anchor:
+			skill.EffectAnchor.HEAD:
+				vfx.global_position = _user.global_position + Vector2(0, -100)
+			skill.EffectAnchor.TORSO:
+				vfx.global_position = _user.global_position + Vector2(0, -50)
+			_:
+				vfx.global_position = _user.global_position
+
 	_spawn_enemy_in_slot(target)
 
 

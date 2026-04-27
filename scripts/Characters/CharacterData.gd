@@ -41,7 +41,7 @@ var precision: int = 100        # recalculé chaque update_stats
 
 #etat
 @export var stun : bool = false
-
+@export var grab : bool  = false
 @export var Chara_position:int = 0 
 
 

@@ -18,8 +18,8 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [resource]
 script = ExtResource("7_8ohna")
-name = "Charme"
-descriptionName = "Charme"
+name = "Charm"
+descriptionName = "Charm"
 description = "incrase horny"
 icon = ExtResource("6_cswgh")
 barkSkill = ""
@@ -41,7 +41,7 @@ allways_hit = false
 duration = 1.0
 tags = Array[String]([])
 is_contact = true
-distance_contact = 300.0
+distance_contact = 800.0
 effect = ExtResource("3_2flid")
 caster_effect_scene = ExtResource("2_hjk8b")
 target_effect_scene = ExtResource("8_e8mt0")

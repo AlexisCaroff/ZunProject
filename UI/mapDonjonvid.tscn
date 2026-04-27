@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://v4vr7no2fm85"]
+[gd_scene load_steps=27 format=3 uid="uid://v4vr7no2fm85"]
 
 [ext_resource type="Script" uid="uid://3tapvib7sxkd" path="res://UI/donjon_roomsTrailercode.gd" id="2_qwja6"]
 [ext_resource type="Texture2D" uid="uid://c1ce3m6pqbp3y" path="res://lvl/donjon2/dungeon_map2.png" id="2_tyn3m"]
@@ -17,7 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://dpb4et0d3bipa" path="res://UI/position.png" id="16_pnd37"]
 [ext_resource type="Script" uid="uid://xgcdntldtp3u" path="res://UI/rotateSprite.gd" id="17_bnfhj"]
 [ext_resource type="Texture2D" uid="uid://cggthsriibvyo" path="res://UI/logo dark.png" id="17_x7w4e"]
-[ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="18_4yok0"]
 [ext_resource type="Texture2D" uid="uid://ciicu0hgenhgw" path="res://actions/skillEffects/FX/FX_stamina002.png" id="18_j1fly"]
 [ext_resource type="Texture2D" uid="uid://hmsurmgk8g4s" path="res://lvl/donjon2/door.png" id="20_gscve"]
 [ext_resource type="Texture2D" uid="uid://bnqsm6vdxfcwy" path="res://UI/UI boxes/UI_button_map_on.png" id="20_tyn3m"]
@@ -61,6 +60,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="DonjonRooms" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0)
+position = Vector2(144, 0)
 texture = ExtResource("2_tyn3m")
 script = ExtResource("2_qwja6")
 fade_duration = 1.0
@@ -74,18 +74,19 @@ self_modulate = Color(0.67, 0.624775, 0.5695, 1)
 position = Vector2(-1092, -34)
 texture = ExtResource("15_ocncm")
 
-[node name="Door1" type="Sprite2D" parent="DonjonRooms/Salle0"]
+[node name="Door2" type="Sprite2D" parent="DonjonRooms/Salle0"]
 self_modulate = Color(0.7, 0.55195, 0.371, 1)
 z_index = 2
-position = Vector2(282, -14)
-scale = Vector2(0.233398, 0.233398)
-texture = ExtResource("18_4yok0")
+position = Vector2(287, -4)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("20_gscve")
 
-[node name="Button" type="Button" parent="DonjonRooms/Salle0/Door1"]
+[node name="Button" type="Button" parent="DonjonRooms/Salle0/Door2"]
+self_modulate = Color(0.7, 0.55195, 0.371, 1)
 anchors_preset = -1
-anchor_left = -0.6
+anchor_left = -0.64
 anchor_top = -0.506849
-anchor_right = -0.6
+anchor_right = -0.64
 anchor_bottom = -0.506849
 offset_left = -30.0
 offset_top = -39.0
@@ -105,7 +106,7 @@ texture = ExtResource("4_ok8ga")
 self_modulate = Color(0.7, 0.55195, 0.371, 1)
 z_index = 2
 position = Vector2(-41, 171)
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("20_gscve")
 
 [node name="Button" type="Button" parent="DonjonRooms/Hall1/Door2"]
@@ -127,7 +128,7 @@ metadata/_edit_use_anchors_ = true
 self_modulate = Color(0.7, 0.55195, 0.371, 1)
 z_index = 2
 position = Vector2(-55, -172)
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("20_gscve")
 
 [node name="Button" type="Button" parent="DonjonRooms/Hall1/Door8"]
@@ -155,7 +156,7 @@ texture = ExtResource("5_cm8ct")
 self_modulate = Color(0.7, 0.55195, 0.371, 1)
 z_index = 2
 position = Vector2(-321, -51)
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("20_gscve")
 
 [node name="Button" type="Button" parent="DonjonRooms/Corridor1/Door3"]
@@ -177,14 +178,14 @@ metadata/_edit_use_anchors_ = true
 self_modulate = Color(0.7, 0.55195, 0.371, 1)
 z_index = 2
 position = Vector2(-95, -95)
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("20_gscve")
 
 [node name="Door5" type="Sprite2D" parent="DonjonRooms/Corridor1"]
 self_modulate = Color(0.7, 0.55195, 0.371, 1)
 z_index = 2
 position = Vector2(272, 46)
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("20_gscve")
 
 [node name="Salon1" type="Sprite2D" parent="DonjonRooms"]
@@ -197,7 +198,7 @@ texture = ExtResource("12_f51a6")
 self_modulate = Color(0.7, 0.55195, 0.371, 1)
 z_index = 2
 position = Vector2(151, -180)
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("20_gscve")
 
 [node name="Button" type="Button" parent="DonjonRooms/Salon1/Door10"]
@@ -219,7 +220,7 @@ metadata/_edit_use_anchors_ = true
 self_modulate = Color(0.7, 0.55195, 0.371, 1)
 z_index = 2
 position = Vector2(240, -43)
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("20_gscve")
 
 [node name="Button" type="Button" parent="DonjonRooms/Salon1/Door7"]
@@ -247,7 +248,7 @@ texture = ExtResource("13_ccxg1")
 self_modulate = Color(0.7, 0.55195, 0.371, 1)
 z_index = 2
 position = Vector2(218, -6)
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("20_gscve")
 
 [node name="Button" type="Button" parent="DonjonRooms/Salon2/Door11"]
@@ -277,7 +278,7 @@ modulate = Color(1, 1, 1, 0)
 self_modulate = Color(0.7, 0.55195, 0.371, 1)
 z_index = 2
 position = Vector2(-110, -83)
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("20_gscve")
 
 [node name="Button" type="Button" parent="DonjonRooms/Room2/Door9"]
@@ -318,7 +319,7 @@ texture = ExtResource("10_7g4le")
 self_modulate = Color(0.7, 0.55195, 0.371, 1)
 z_index = 2
 position = Vector2(64, 95)
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("20_gscve")
 
 [node name="Button" type="Button" parent="DonjonRooms/Room1/Door6"]
@@ -341,7 +342,7 @@ texture = ExtResource("7_fykp4")
 self_modulate = Color(0.7, 0.55195, 0.371, 1)
 z_index = 2
 position = Vector2(200, -144)
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("20_gscve")
 
 [node name="Button" type="Button" parent="DonjonRooms/Cellar/Door12"]

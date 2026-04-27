@@ -56,7 +56,9 @@ func set_portraits_multi(textures: Array[Texture2D], active_index: int) -> void:
 
 func set_text(speaker: String, text: String) -> void:
 	name_label.text = speaker
-	dialogue_text.text = text
+	dialogue_text.bbcode_enabled=true
+	dialogue_text.clear()
+	dialogue_text.append_text(text)
 
 
 func set_portraits(left: Texture2D, right: Texture2D, active_side: String = "left") -> void:

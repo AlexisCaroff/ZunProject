@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://nqy5y0yj20tq"]
+[gd_scene load_steps=9 format=3 uid="uid://nqy5y0yj20tq"]
 
 [ext_resource type="Script" uid="uid://cdva0owcmjo24" path="res://LoveScene/SexScene.gd" id="1_evfe3"]
 [ext_resource type="Texture2D" uid="uid://4esjxhirq1wp" path="res://LoveScene/SCENE_CAMP_WxP.png" id="2_evfe3"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="3_t3j8c"]
-[ext_resource type="Texture2D" uid="uid://87y4s7750hu4" path="res://scenes/backgrounds dungeon demo/BG_dungeon_storeroom.png" id="3_vir6h"]
 [ext_resource type="Script" uid="uid://da5ntrd7ag2qq" path="res://LoveScene/AnonDialogue.gd" id="4_aw24d"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="5_6g5sb"]
 [ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="5_413p2"]
@@ -24,11 +23,6 @@ color = Color(0, 0, 0, 0.8)
 position = Vector2(965, 541.5)
 scale = Vector2(0.485648, 0.485648)
 texture = ExtResource("2_evfe3")
-
-[node name="background" type="Sprite2D" parent="."]
-position = Vector2(1221, 819)
-scale = Vector2(1.37694, 1.47079)
-texture = ExtResource("3_vir6h")
 
 [node name="DialogueManager" type="Node2D" parent="."]
 script = ExtResource("3_t3j8c")

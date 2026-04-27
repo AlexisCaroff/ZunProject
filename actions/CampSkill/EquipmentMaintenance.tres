@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://gi5vwildn2qs" path="res://actions/skillEffects/campSkilleffect/CampBuffEffet.gd" id="2_6nl4t"]
 [ext_resource type="Script" uid="uid://bkvdwvrmdt5aw" path="res://actions/skillEffects/Buff.gd" id="3_kngi2"]
 [ext_resource type="Texture2D" uid="uid://dbuugeey6c5y4" path="res://UI/buffAtt.png" id="4_7nidr"]
-[ext_resource type="Texture2D" uid="uid://2u65ql48338r" path="res://actions/bufftexture/buffDeff.png" id="5_6nl4t"]
+[ext_resource type="Texture2D" uid="uid://blaxr6boo4hkf" path="res://UI/buffDeff.png" id="5_6nl4t"]
 [ext_resource type="Texture2D" uid="uid://fv4bkev72oqw" path="res://actions/actiontexture/UI icons/ICON_camp_warrior_gear.png" id="6_6nl4t"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="6_w3tfs"]
 

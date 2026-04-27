@@ -7,8 +7,8 @@
 [ext_resource type="Resource" uid="uid://poprema6x515" path="res://actions/CampSkill/confession.tres" id="3_4vmab"]
 [ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="4_h4nms"]
 [ext_resource type="Resource" uid="uid://cd4m2bk1ikodm" path="res://actions/CampSkill/dialoguePristress.tres" id="5_k2dab"]
-[ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="6_dtkfh"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="8_3iphg"]
+[ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffectP.tres" id="8_4vmab"]
 [ext_resource type="Texture2D" uid="uid://bnx56w5vhsm2n" path="res://characters/charatexture/demo characters/HERO_priestess_down.png" id="9_h4nms"]
 [ext_resource type="Texture2D" uid="uid://dwu2rkneujev8" path="res://characters/exploPortrait/pristressExploPortrait.png" id="10_pcj8w"]
 [ext_resource type="Texture2D" uid="uid://dcni6t4nbvnh" path="res://characters/characterInitiative/prestressIniPortrait.png" id="12_4vmab"]
@@ -54,13 +54,14 @@ initiative = 1
 peek = 0
 equipped_items = Array[ExtResource("8_3iphg")]([])
 stun = false
+grab = false
 Chara_position = 0
 max_stamina = 100
 max_stress = 100
 max_horniness = 100
 current_stamina = 100
 current_stress = 0
-current_horniness = 0
+current_horniness = 60
 isOneshot = false
 skill_resources = Array[Resource]([ExtResource("13_3brwx"), ExtResource("14_se5jd"), ExtResource("15_y6w34"), ExtResource("16_67nw5"), ExtResource("17_b3euk")])
 tags = Array[String](["dom", "sadist", "jailor"])
@@ -71,7 +72,7 @@ max_durationIddle = 1.0
 min_scale = 0.95
 max_scale = 1.0
 corruption = 0
-camp_skill_resources = Array[ExtResource("2_32fiq")]([ExtResource("3_4vmab"), ExtResource("4_h4nms"), ExtResource("5_k2dab"), ExtResource("6_dtkfh")])
+camp_skill_resources = Array[ExtResource("2_32fiq")]([ExtResource("3_4vmab"), ExtResource("4_h4nms"), ExtResource("5_k2dab"), ExtResource("8_4vmab")])
 bark_scene = ExtResource("1_k2y3o")
 taunts = ["For the glory of ZUN !", "On your knees, wretches !"]
 reaction = ["", "", ""]

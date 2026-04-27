@@ -1039,6 +1039,7 @@ hover_color = Color(0.643137, 0.572549, 0.435294, 1)
 centered = false
 
 [node name="CharaIcon" type="Sprite2D" parent="CanvasLayer/ContourMap/ButtonCharainfo"]
+z_index = 2
 position = Vector2(43.9752, 44.8714)
 scale = Vector2(0.375894, 0.368012)
 texture = ExtResource("39_ylfq7")
@@ -1056,7 +1057,7 @@ script = ExtResource("38_ikmja")
 centered = false
 
 [node name="IconMap" type="Sprite2D" parent="CanvasLayer/ContourMap/ButtonMap"]
-z_index = 1
+z_index = 2
 position = Vector2(45.3985, 46.1179)
 scale = Vector2(0.381367, 0.369314)
 texture = ExtResource("40_yplac")
@@ -1394,35 +1395,35 @@ metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 440.0
-offset_top = 712.0
-offset_right = 442.0
-offset_bottom = 739.0
+offset_left = 410.95
+offset_top = 704.0
+offset_right = 412.95
+offset_bottom = 731.0
 color = Color(0.643137, 0.560784, 0.364706, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 441.0
-offset_top = 720.0
-offset_right = 448.0
-offset_bottom = 727.0
+offset_left = 411.95
+offset_top = 712.0
+offset_right = 418.95
+offset_bottom = 719.0
 rotation = 0.785398
 color = Color(0.643137, 0.560784, 0.364706, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 1477.95
-offset_top = 712.0
-offset_right = 1479.95
-offset_bottom = 739.0
+offset_left = 1428.95
+offset_top = 704.0
+offset_right = 1430.95
+offset_bottom = 731.0
 color = Color(0.643137, 0.560784, 0.364706, 1)
 
 [node name="ColorRect4" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 1478.95
-offset_top = 720.0
-offset_right = 1485.95
-offset_bottom = 727.0
+offset_left = 1429.95
+offset_top = 712.0
+offset_right = 1436.95
+offset_bottom = 719.0
 rotation = 0.785398
 color = Color(0.643137, 0.560784, 0.364706, 1)
 

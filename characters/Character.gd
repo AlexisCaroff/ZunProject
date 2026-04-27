@@ -337,7 +337,7 @@ func start_turn():
 	turncount += 1
 	if not characterData:
 		return
-	if characterData.stun or characterData.current_horniness >= 100 :
+	if characterData.stun or characterData.current_horniness >= 100 or characterData.grab:
 		stunned=true
 		print( characterData.Charaname + " is stunned now !")
 	
@@ -383,7 +383,8 @@ func play_ai_turn(heroes: Array, enemies: Array):
 		return
 
 	current_skill = decision["skill"]
-	combat_manager.ui.log(characterData.Charaname + " use " + current_skill.descriptionName)
+	
+	combat_manager.ui.log(characterData.Charaname + " uses " + current_skill.descriptionName)
 
 	var targetPositions: Array[PositionSlot] = []
 	for t in decision.get("target", []):

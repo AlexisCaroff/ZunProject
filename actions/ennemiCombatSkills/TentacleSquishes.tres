@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://byc26r5u5smx0"]
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://byc26r5u5smx0"]
 
-[ext_resource type="Texture2D" uid="uid://kysl4qntumom" path="res://characters/charatexture/demo characters/tentacle.png" id="1_wrj23"]
+[ext_resource type="Texture2D" uid="uid://boxo6ri5yrnly" path="res://characters/boss assets/BOSS_broodM_tent_caught_priestess.png" id="1_dmdws"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_2ne05"]
+[ext_resource type="PackedScene" uid="uid://cqea4mekfk8gb" path="res://actions/skillEffects/FX/Scene/hit_standar.tscn" id="2_dmdws"]
 [ext_resource type="Script" uid="uid://devwsgwqxadac" path="res://actions/skillEffects/DamageEffectToGrabChara.gd" id="3_dmdws"]
-[ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="4_2ne05"]
 [ext_resource type="Texture2D" uid="uid://ccnq4lbltabiy" path="res://actions/actiontexture/tentacles.png" id="4_786br"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_53mw8"]
 
@@ -14,10 +14,6 @@ amount = 20
 damage_target_stat = 0
 metadata/_custom_type_script = "uid://devwsgwqxadac"
 
-[sub_resource type="Resource" id="Resource_dmdws"]
-script = ExtResource("4_2ne05")
-metadata/_custom_type_script = "uid://tjywmaoy4ejj"
-
 [resource]
 script = ExtResource("5_53mw8")
 name = "Tentacle squishes"
@@ -26,9 +22,9 @@ description = "dmg an ennemi grab"
 icon = ExtResource("4_786br")
 barkSkill = ""
 required_position = 0
-ImageSkill = ExtResource("1_wrj23")
+ImageSkill = ExtResource("1_dmdws")
 the_target_type = 2
-effects = Array[ExtResource("2_2ne05")]([SubResource("Resource_8mjdd"), SubResource("Resource_dmdws")])
+effects = Array[ExtResource("2_2ne05")]([SubResource("Resource_8mjdd")])
 two_target_Type = false
 the_second_target_type = 0
 second_effects = Array[ExtResource("2_2ne05")]([])
@@ -44,8 +40,9 @@ duration = 0.3
 tags = Array[String]([])
 is_contact = true
 distance_contact = 300.0
-caster_effect_anchor = 0
-target_effect_anchor = 1
+caster_effect_scene = ExtResource("2_dmdws")
+caster_effect_anchor = 1
+target_effect_anchor = 2
 is_beneficial = false
 skip_target_return_anim = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

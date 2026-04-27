@@ -12,10 +12,10 @@ var initiative_icon_path: String = ""
 @onready var sprite = $pivot/HerosTexture1
 
 @onready var buff_bar = $HBoxContainer
-@onready var hp_Jauge
+var hp_Jauge
 
-@onready var hornyJauge
-
+var hornyJauge
+var LustProgressBar
 
 const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
 # --- Infos de base
@@ -45,13 +45,25 @@ func load_chara() -> void:
 	
 
 func update_display() -> void:
+	sprite.texture = characterData.portrait_texture
 
-	sprite.texture =characterData.portrait_texture
-	
-	hp_Jauge.max_value=characterData.max_stamina
-	hp_Jauge.value=characterData.current_stamina
-	
-	hornyJauge.self_modulate.a = (characterData.current_horniness*2.0)/characterData.max_horniness
+	hp_Jauge.max_value = characterData.max_stamina
+	hp_Jauge.value = characterData.current_stamina
+	LustProgressBar.max_value = characterData.max_horniness
+	LustProgressBar.value = characterData.current_horniness
+	hornyJauge.self_modulate.a = (characterData.current_horniness * 2.0) / characterData.max_horniness
+
+	# Synchronise la buff_bar avec characterData.buffs
+	for child in buff_bar.get_children():
+		child.queue_free()
+	for buff in characterData.buffs:
+		var icon := TextureRect.new()
+		icon.texture = buff.icon
+		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		icon.custom_minimum_size = Vector2(32, 32)
+		icon.size = Vector2(32, 32)
+		buff_bar.add_child(icon)
 
 
 	
@@ -62,8 +74,7 @@ func move():
 	sprite.self_modulate.a =0.0
 	
 func add_buff(buff: Buff, isload:bool =false):
-	if buff_bar ==null:
-		buff_bar = $HBoxContainer
+	
 	var new_buff = buff.duplicate()
 	var icon = TextureRect.new()
 	icon.texture = new_buff.icon

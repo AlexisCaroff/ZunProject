@@ -1,0 +1,83 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=21 format=3 uid="uid://b42qgncyvuw0n"]
+
+[ext_resource type="Texture2D" uid="uid://c32ucvj4qas4v" path="res://characters/portraits/PORTRAIT_hero_warrior.png" id="1_l3gwv"]
+[ext_resource type="Texture2D" uid="uid://c18klaue4evao" path="res://characters/charatexture/demo characters/HERO_warrior_hit.png" id="2_0vjkw"]
+[ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="3_p32jx"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="4_7r1bm"]
+[ext_resource type="Resource" uid="uid://do024kep0pxki" path="res://actions/CampSkill/EquipmentMaintenance.tres" id="5_pg16s"]
+[ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="6_6vwhk"]
+[ext_resource type="Resource" uid="uid://c00hfk3k1wy86" path="res://actions/CampSkill/dialogueWarrior.tres" id="7_s7alk"]
+[ext_resource type="Resource" uid="uid://bi4132h3ku3pk" path="res://actions/CampSkill/LoveEffectW.tres" id="8_l4ocr"]
+[ext_resource type="Texture2D" uid="uid://bxkt7r7ry34ci" path="res://characters/charatexture/demo characters/HERO_warrior_down.png" id="9_2p3f2"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="10_w4srh"]
+[ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="11_ftigy"]
+[ext_resource type="Texture2D" uid="uid://rcuujvtnjcgk" path="res://characters/characterInitiative/warriorIniPortrait.png" id="12_d4hdv"]
+[ext_resource type="Texture2D" uid="uid://cfbwrknqf04rn" path="res://characters/charatexture/demo characters/HERO_warrior_idle.png" id="13_hkvtb"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="14_dopfq"]
+[ext_resource type="Resource" uid="uid://behrtqotkyvnx" path="res://actions/HerosCombatSkills/Taunt.tres" id="15_lhhey"]
+[ext_resource type="Resource" uid="uid://cvpnvu50a3dp2" path="res://actions/HerosCombatSkills/StunAttaque2.tres" id="16_l3gwv"]
+[ext_resource type="Resource" uid="uid://5fcbub8rim5w" path="res://actions/HerosCombatSkills/largeSwing2.tres" id="17_l3gwv"]
+[ext_resource type="Resource" uid="uid://df6t6enfsamfo" path="res://actions/HerosCombatSkills/Charge2.tres" id="18_0vjkw"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="19_ppcgc"]
+[ext_resource type="Texture2D" uid="uid://c1vbgy6uvss1" path="res://camp imgs/Camp_char_sit_W.png" id="20_idin8"]
+
+[resource]
+script = ExtResource("14_dopfq")
+headPosition = Vector2(-20, -110)
+torso_Position = Vector2(-5, -36)
+portrait_texture = ExtResource("13_hkvtb")
+explorationPortrait = ExtResource("11_ftigy")
+dead_portrait_texture = ExtResource("9_2p3f2")
+Hit_texture = ExtResource("2_0vjkw")
+initiative_icon = ExtResource("12_d4hdv")
+Dialogue_texture = ExtResource("1_l3gwv")
+textureCamp = ExtResource("20_idin8")
+Name = "Warrior"
+Charaname = "Warrior"
+IsDemon = false
+size = "average"
+affinity = Dictionary[String, int]({})
+base_max_stamina = 100
+base_max_stress = 100
+base_max_horniness = 100
+base_attack = 20
+base_defense = 12
+base_willpower = 5
+base_initiative = 200
+base_evasion = 5
+base_precision = 100
+attack = 2000
+defense = 10
+willpower = 5
+evasion = 5
+initiative = 200
+peek = 0
+equipped_items = Array[ExtResource("10_w4srh")]([])
+stun = false
+grab = false
+Chara_position = 3
+max_stamina = 120
+max_stress = 100
+max_horniness = 100
+current_stamina = 100
+current_stress = 0
+current_horniness = 0
+isOneshot = false
+skill_resources = Array[Resource]([ExtResource("15_lhhey"), ExtResource("16_l3gwv"), ExtResource("17_l3gwv"), ExtResource("18_0vjkw"), ExtResource("19_ppcgc")])
+tags = Array[String](["switch", "degrader", "exib"])
+is_player_controlled = true
+can_be_moved = true
+min_durationIddle = 0.6
+max_durationIddle = 1.0
+min_scale = 0.95
+max_scale = 1.0
+corruption = 0
+camp_skill_resources = Array[ExtResource("4_7r1bm")]([ExtResource("5_pg16s"), ExtResource("6_6vwhk"), ExtResource("7_s7alk"), ExtResource("8_l4ocr")])
+bark_scene = ExtResource("3_p32jx")
+taunts = ["Is that all you've got?", "Bring it on !", "You fight like a wet noodle!"]
+reaction = ["Bring it on !", "Is that all you've got?", ""]
+affinityReaction = ["", "", ""]
+corrupted = false
+inquisition = false
+immobilized = false
+immobilized_turns = 0

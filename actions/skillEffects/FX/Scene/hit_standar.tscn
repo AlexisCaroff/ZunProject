@@ -69,7 +69,7 @@ script = ExtResource("1_cod7w")
 
 [node name="HeroWarriorBash" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(80, -145)
+position = Vector2(80, -106)
 scale = Vector2(0.210205, 0.210205)
 texture = ExtResource("2_cod7w")
 

@@ -22,9 +22,12 @@ func showMove():
 func hideMove():
 	movebutton.visible=false
 func set_occupant(chara : CharaExplo):
+	charaUI = $charaUI
 	occupant = chara
 	occupant.hornyJauge=charaUI.HornyBar
 	occupant.hp_Jauge = charaUI.HPProgressBar
+	occupant.LustProgressBar= charaUI.LustProgressBar  
+	occupant.buff_bar=charaUI.buff_bar
 	chara.global_position = self.global_position
 	occupant.CharaPosition=self
 	occupant.z_index=self.z_index

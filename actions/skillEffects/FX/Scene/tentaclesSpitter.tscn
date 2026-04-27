@@ -114,7 +114,7 @@ libraries = {
 
 [node name="FxChargeHit" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(92.0563, -34.4374)
+position = Vector2(92.0563, -46)
 rotation = -0.0523599
 scale = Vector2(0.208263, 0.218713)
 texture = ExtResource("4_wf8kr")

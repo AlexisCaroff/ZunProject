@@ -7,8 +7,8 @@
 [ext_resource type="Resource" uid="uid://mkaq7ws2yox8" path="res://actions/CampSkill/ActeTwiceSkill.tres" id="3_404pk"]
 [ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="4_4vg1p"]
 [ext_resource type="Resource" uid="uid://y8ibrfop35on" path="res://actions/CampSkill/dialogueHunter.tres" id="5_isn0k"]
-[ext_resource type="Resource" uid="uid://bw3xbx65ggbtl" path="res://actions/CampSkill/LoveEffect.tres" id="6_swvsv"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="8_4jn0w"]
+[ext_resource type="Resource" uid="uid://duwv5ufsa7tht" path="res://actions/CampSkill/LoveEffectH.tres" id="8_404pk"]
 [ext_resource type="Texture2D" uid="uid://dtsue4pkmdqi4" path="res://characters/charatexture/demo characters/HERO_hunter_down.png" id="9_4vg1p"]
 [ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="10_j4cyw"]
 [ext_resource type="Texture2D" uid="uid://cx3bcb0j5pxrn" path="res://characters/characterInitiative/HunterIniPortrait.png" id="12_404pk"]
@@ -54,13 +54,14 @@ initiative = 3
 peek = 0
 equipped_items = Array[ExtResource("8_4jn0w")]([])
 stun = false
+grab = false
 Chara_position = 1
 max_stamina = 100
 max_stress = 100
 max_horniness = 100
-current_stamina = 100
+current_stamina = 80
 current_stress = 0
-current_horniness = 0
+current_horniness = 42
 isOneshot = false
 skill_resources = Array[Resource]([ExtResource("13_ym5ya"), ExtResource("14_6clvv"), ExtResource("15_yughv"), ExtResource("16_itjcr"), ExtResource("17_oyaaw")])
 tags = Array[String](["sub", "degenerate", "jailor"])
@@ -71,7 +72,7 @@ max_durationIddle = 1.0
 min_scale = 0.95
 max_scale = 1.0
 corruption = 0
-camp_skill_resources = Array[ExtResource("2_y4sil")]([ExtResource("3_404pk"), ExtResource("4_4vg1p"), ExtResource("5_isn0k"), ExtResource("6_swvsv")])
+camp_skill_resources = Array[ExtResource("2_y4sil")]([ExtResource("3_404pk"), ExtResource("4_4vg1p"), ExtResource("5_isn0k"), ExtResource("8_404pk")])
 bark_scene = ExtResource("1_3p432")
 taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide open!", "You fight like a wet noodle!", "Oops! Did that hurt?"]
 reaction = ["", "", ""]

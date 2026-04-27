@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://cdwv568jxr37u"]
+
+[ext_resource type="Texture2D" uid="uid://bcxmyora8jiw7" path="res://characters/charatexture/demo characters/HERO_mystic_ranged_shoot.png" id="1_0p6x4"]
+[ext_resource type="AudioStream" uid="uid://cxxmgoai7q8bb" path="res://actions/sound/Weapon Arrow Shot 01.wav" id="2_neujj"]
+[ext_resource type="PackedScene" uid="uid://cctqpui77aw5" path="res://actions/skillEffects/FX/Scene/spitMystic_FX.tscn" id="3_1m55v"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="4_fdnc1"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="5_neujj"]
+[ext_resource type="Texture2D" uid="uid://b8prngd3bcbo3" path="res://actions/actiontexture/UI icons/ICON_mystic_rang_shoot.png" id="5_w7e57"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="6_3undn"]
+[ext_resource type="PackedScene" uid="uid://d1snbm7gq1lk2" path="res://actions/skillEffects/FX/Scene/hit_magic.tscn" id="7_lx02g"]
+
+[sub_resource type="Resource" id="Resource_1m55v"]
+script = ExtResource("5_neujj")
+MagicDMG = true
+amount = 20
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[resource]
+script = ExtResource("6_3undn")
+name = "Acid Arrow"
+descriptionName = "Acid Arrow"
+description = "Deal damages to one ennemi"
+icon = ExtResource("5_w7e57")
+attack_sound = ExtResource("2_neujj")
+barkSkill = ""
+required_position = 0
+ImageSkill = ExtResource("1_0p6x4")
+the_target_type = 0
+effects = Array[ExtResource("4_fdnc1")]([SubResource("Resource_1m55v")])
+two_target_Type = false
+the_second_target_type = 1
+second_effects = Array[ExtResource("4_fdnc1")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 4
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 1.0
+tags = Array[String]([])
+is_contact = false
+distance_contact = 0.0
+caster_effect_scene = ExtResource("3_1m55v")
+target_effect_scene = ExtResource("7_lx02g")
+caster_effect_anchor = 0
+target_effect_anchor = 2
+is_beneficial = false
+skip_target_return_anim = false
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
