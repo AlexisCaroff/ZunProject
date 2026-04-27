@@ -19,7 +19,6 @@ shader_parameter/deform_strength_y = 0.02
 shader_parameter/scroll_speed = 0.2
 
 [node name="Mystic" type="Node2D"]
-position = Vector2(187, 264)
 metadata/character_data_path = "res://characters/data/CharaMystic.tres"
 
 [node name="name" type="Label" parent="."]

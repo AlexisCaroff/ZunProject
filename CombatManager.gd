@@ -457,6 +457,7 @@ func _check_victory():
 		if enemy.dead:
 			turn_queue.erase(enemy)
 			if enemy.CharaGrab != null:
+				enemy.CharaGrab._current_slot.remove_character()
 				enemy.CharaGrab.characterData.grab = false
 				enemy.CharaGrab.visible = true
 				for pos: PositionSlot in hero_positions:
