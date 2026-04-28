@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=15 format=3 uid="uid://ddr2vixcg7bcr"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=16 format=3 uid="uid://ddr2vixcg7bcr"]
 
 [ext_resource type="Texture2D" uid="uid://cnp4jdodbb6ss" path="res://characters/charatexture/demo characters/INQUISITION_chainmaiden_hit.png" id="1_fp0mp"]
 [ext_resource type="Script" uid="uid://db1m8vwgp38yx" path="res://characters/charatexture/braines/Ai_brain_Support.gd" id="2_pucnk"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_m26kp"]
 [ext_resource type="Texture2D" uid="uid://c5mbm8111iqb8" path="res://characters/exploPortrait/ChainMaidenExploPortrait.png" id="7_sm27d"]
 [ext_resource type="Texture2D" uid="uid://bnpg5r735arqt" path="res://characters/charatexture/demo characters/INQUISITION_chainmaiden_idle.png" id="8_x7hy0"]
+[ext_resource type="Texture2D" uid="uid://dhelkdmdp0rim" path="res://characters/characterInitiative/chainMaidenIniPortrait.png" id="8_ylhrk"]
 [ext_resource type="Resource" uid="uid://cwxukwuwcmaka" path="res://actions/ennemiCombatSkills/energySyphon.tres" id="10_fp0mp"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="10_qh3k8"]
 [ext_resource type="Resource" uid="uid://bnke3i3ay1pvb" path="res://actions/ennemiCombatSkills/ChainGrab.tres" id="11_ylhrk"]
@@ -28,7 +29,7 @@ portrait_texture = ExtResource("8_x7hy0")
 explorationPortrait = ExtResource("7_sm27d")
 dead_portrait_texture = ExtResource("5_ylhrk")
 Hit_texture = ExtResource("1_fp0mp")
-initiative_icon = ExtResource("7_sm27d")
+initiative_icon = ExtResource("8_ylhrk")
 Name = "Chain Maiden"
 Charaname = "Chain Maiden"
 IsDemon = false

@@ -1,19 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://uo6aacbprsjm"]
+[gd_scene load_steps=5 format=3 uid="uid://uo6aacbprsjm"]
 
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="1_h08u6"]
-[ext_resource type="Texture2D" uid="uid://b61cmtgknx2nd" path="res://INTRO_boss/INTRO_boss_002.png" id="2_om15a"]
+[ext_resource type="Texture2D" uid="uid://768cfl5yiljq" path="res://scenes/backgrounds dungeon demo/BG_dungeon_corridor.png" id="1_ua6ae"]
 [ext_resource type="PackedScene" uid="uid://h8pqs7tabdxj" path="res://lvl/CombatInterface.tscn" id="2_onypn"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="3_ghgm4"]
-[ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="4_h08u6"]
-[ext_resource type="Script" uid="uid://bc58s10203bjl" path="res://lvl/Cellar/BossIntroSequence.gd" id="5_vha4o"]
-[ext_resource type="Resource" uid="uid://bmgxbqdxxsh6v" path="res://animatic/animaticTeste.tres" id="6_1m5v8"]
-[ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="7_c7oub"]
-[ext_resource type="Resource" uid="uid://ulv47dtbemlo" path="res://lvl/Cellar/encounterCellar.tres" id="8_unr1q"]
-[ext_resource type="Resource" uid="uid://y5sfj1t81c86" path="res://lvl/Cellar/encounterCellaInquisitionr.tres" id="9_lefjd"]
-[ext_resource type="PackedScene" uid="uid://d2ccaxlbll6fm" path="res://lvl/Boss/combatRoomCellar.tscn" id="10_wgano"]
-[ext_resource type="PackedScene" uid="uid://q6acu8lc0tp7" path="res://lvl/Boss/combatRoomCellarInquisition.tscn" id="11_566pb"]
 
 [node name="CombatCorridor" type="Node2D"]
+
+[node name="BgDungeonCorridor" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_ua6ae")
 
 [node name="atmosphere" parent="." instance=ExtResource("1_h08u6")]
 position = Vector2(2, 352)
@@ -21,42 +17,3 @@ position = Vector2(2, 352)
 [node name="CombatInterface" parent="." instance=ExtResource("2_onypn")]
 
 [node name="MenuPerso" parent="." instance=ExtResource("3_ghgm4")]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
-
-[node name="ZunBg" type="Sprite2D" parent="CanvasLayer"]
-z_index = 2
-position = Vector2(960, 398)
-scale = Vector2(1, 1.17963)
-texture = ExtResource("2_om15a")
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-offset_left = -56.0
-offset_top = -253.0
-offset_right = -16.0
-offset_bottom = -184.0
-scale = Vector2(50.9137, 20.7665)
-color = Color(0, 0, 0, 1)
-
-[node name="Gradiant" type="Sprite2D" parent="CanvasLayer"]
-z_index = 4
-position = Vector2(943, 925)
-rotation = 1.5708
-scale = Vector2(1.09378, 4)
-texture = ExtResource("4_h08u6")
-
-[node name="BossIntroSequence" type="Node" parent="."]
-script = ExtResource("5_vha4o")
-intro_animatic = ExtResource("6_1m5v8")
-portraits_resource = ExtResource("7_c7oub")
-choice_resist_label = "Fight !"
-choice_give_in_label = "Give in"
-boss_encounter = ExtResource("8_unr1q")
-inquisition_encounter = ExtResource("9_lefjd")
-resist_combat_scene = ExtResource("10_wgano")
-give_in_combat_scene = ExtResource("11_566pb")
-dialogue_intro_path = "res://dialogue/Boss/intro.txt"
-dialogue_corrupt_path = "res://dialogue/Boss/corrupt.txt"
-dialogue_resist_path = "res://dialogue/Boss/resist.txt"
-dialogue_give_in_path = "res://dialogue/Boss/give_in.txt"

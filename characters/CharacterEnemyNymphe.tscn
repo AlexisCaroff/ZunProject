@@ -50,11 +50,11 @@ min_duration = 1.0
 max_duration = 1.5
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -180.833
-offset_top = -333.333
-offset_right = -9.83223
-offset_bottom = -102.333
-scale = Vector2(2.15339, 1.6298)
+offset_left = -196.667
+offset_top = -347.5
+offset_right = -25.6656
+offset_bottom = -116.5
+scale = Vector2(2.23197, 1.68927)
 mouse_filter = 2
 texture = ExtResource("4_ukx70")
 expand_mode = 1
@@ -63,7 +63,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Arrow" type="Sprite2D" parent="."]
 modulate = Color(0.77, 0.616513, 0.4158, 1)
-position = Vector2(1, -196)
+position = Vector2(1, -201)
 scale = Vector2(0.0897035, 0.0897035)
 texture = ExtResource("8_0ot4w")
 offset = Vector2(0, 116.49)

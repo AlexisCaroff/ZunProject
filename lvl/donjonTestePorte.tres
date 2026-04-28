@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DonjonResource" load_steps=14 format=3 uid="uid://7dlbup10473y"]
+[gd_resource type="Resource" script_class="DonjonResource" load_steps=15 format=3 uid="uid://7dlbup10473y"]
 
 [ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="1_a0q4b"]
 [ext_resource type="Script" uid="uid://cm44dout6mc4v" path="res://lvl/DonjonRessource.gd" id="2_sowf2"]
@@ -13,11 +13,12 @@
 [ext_resource type="Resource" uid="uid://67gv81rl7ohs" path="res://lvl/Cellar/Cellar.tres" id="9_rgrye"]
 [ext_resource type="Resource" uid="uid://boae5v2muy3s5" path="res://lvl/Room2/Room2.tres" id="11_prth1"]
 [ext_resource type="Resource" uid="uid://cnhkp6oueda3f" path="res://lvl/Salon2/Salon2.tres" id="12_rgrye"]
+[ext_resource type="Resource" uid="uid://b80hxlex06n1s" path="res://lvl/Boss/BossRoom.tres" id="13_prth1"]
 
 [resource]
 script = ExtResource("2_sowf2")
 name = "teste Porte"
-rooms = Array[ExtResource("1_a0q4b")]([ExtResource("7_bo08l"), ExtResource("2_vhcbw"), ExtResource("3_0haa1"), ExtResource("4_gthhp"), ExtResource("4_bo08l"), ExtResource("12_rgrye"), ExtResource("6_8cbj6"), ExtResource("6_i0bu5"), ExtResource("9_rgrye"), ExtResource("9_2od33"), ExtResource("11_prth1")])
+rooms = Array[ExtResource("1_a0q4b")]([ExtResource("7_bo08l"), ExtResource("2_vhcbw"), ExtResource("3_0haa1"), ExtResource("4_gthhp"), ExtResource("4_bo08l"), ExtResource("12_rgrye"), ExtResource("6_8cbj6"), ExtResource("6_i0bu5"), ExtResource("9_rgrye"), ExtResource("9_2od33"), ExtResource("11_prth1"), ExtResource("13_prth1")])
 start_room_id = "Salle0"
 outsideroom_id = "Salle0"
 metadata/_custom_type_script = "uid://cm44dout6mc4v"

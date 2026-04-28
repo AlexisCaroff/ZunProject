@@ -1,26 +1,56 @@
-[gd_scene load_steps=7 format=3 uid="uid://c66s1enb5m070"]
+[gd_scene load_steps=14 format=3 uid="uid://c66s1enb5m070"]
 
 [ext_resource type="Script" uid="uid://b2fldnbm4784m" path="res://InteractibleObjectsScenes/InteractableObject.gd" id="1_82peo"]
-[ext_resource type="Texture2D" uid="uid://dw1tcf1oi3i5v" path="res://InteractibleObjectsScenes/PROP_chest.png" id="2_armhm"]
+[ext_resource type="Resource" uid="uid://ciw7rc628eq41" path="res://Items/itemsRessources/keyRoom3.tres" id="2_08jjl"]
+[ext_resource type="Script" uid="uid://n028octb10a5" path="res://scripts/InteractableObjectResource.gd" id="2_ib46f"]
+[ext_resource type="Script" uid="uid://b5vho57xy7r3r" path="res://scripts/InteractableChoice.gd" id="3_1uasi"]
+[ext_resource type="Texture2D" uid="uid://cqxak60gjmu3f" path="res://props/PROP_chest_empty.png" id="3_5n3dl"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="3_ib46f"]
 [ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="4_5n3dl"]
+[ext_resource type="Texture2D" uid="uid://dysu7tdjfd3hi" path="res://props/PROP_chest_full.png" id="4_08jjl"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="5_08jjl"]
+
+[sub_resource type="Resource" id="Resource_l7lad"]
+script = ExtResource("3_1uasi")
+text = "open chest"
+effect_type = 1
+item = ExtResource("2_08jjl")
+tag = ""
+opening = false
+metadata/_custom_type_script = "uid://b5vho57xy7r3r"
+
+[sub_resource type="Resource" id="Resource_drpdm"]
+script = ExtResource("3_1uasi")
+text = ""
+effect_type = 0
+tag = ""
+opening = false
+metadata/_custom_type_script = "uid://b5vho57xy7r3r"
+
+[sub_resource type="Resource" id="Resource_1uasi"]
+script = ExtResource("2_ib46f")
+dialogue_file = "res://dialogue/dialogueTeste.txt"
+choice_1 = SubResource("Resource_l7lad")
+choice_2 = SubResource("Resource_drpdm")
+metadata/_custom_type_script = "uid://n028octb10a5"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6te7v"]
 
 [node name="Object1" type="Node2D"]
 script = ExtResource("1_82peo")
+data = SubResource("Resource_1uasi")
+openedSprite = ExtResource("3_5n3dl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(4, -1)
+position = Vector2(-29.0631, -141)
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_armhm")
+texture = ExtResource("4_08jjl")
 
 [node name="Button" type="Button" parent="."]
-offset_left = -107.0
-offset_top = -171.0
-offset_right = 94.0
-offset_bottom = 134.0
+offset_left = -133.063
+offset_top = -310.0
+offset_right = 67.9369
+offset_bottom = -5.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6te7v")
 flat = true
 
@@ -29,10 +59,10 @@ script = ExtResource("3_ib46f")
 is_Choice = true
 
 [node name="etiquette" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(170, -32)
+position = Vector2(-249.063, -120)
 scale = Vector2(0.626316, 0.626316)
 texture = ExtResource("4_5n3dl")
+flip_h = true
 
 [node name="Label" type="Label" parent="etiquette"]
 offset_left = -92.0

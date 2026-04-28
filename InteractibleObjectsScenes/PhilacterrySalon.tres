@@ -25,7 +25,7 @@ metadata/_custom_type_script = "uid://b5vho57xy7r3r"
 [resource]
 script = ExtResource("4_ygp1k")
 scene = ExtResource("3_80usg")
-dialogue_file = "res://scripts/InteractableObjectResource.gd"
+dialogue_file = "res://dialogue/dialogueTeste.txt"
 choice_1 = SubResource("Resource_dmmkg")
 choice_2 = SubResource("Resource_c6sic")
 metadata/_custom_type_script = "uid://n028octb10a5"

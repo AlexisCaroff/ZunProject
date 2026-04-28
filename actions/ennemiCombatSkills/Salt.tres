@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://o3alq0k34b2r"]
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://o3alq0k34b2r"]
 
 [ext_resource type="Texture2D" uid="uid://5sxx1j4x2jr3" path="res://characters/charatexture/demo characters/INQUISITION_incapacitor_pin.png" id="1_nn0gt"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_1gmq2"]
+[ext_resource type="PackedScene" uid="uid://d74pdae8pwuk" path="res://actions/skillEffects/FX/Scene/saltHunter.tscn" id="2_nn0gt"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_gog1q"]
 [ext_resource type="Texture2D" uid="uid://b4oubet2ttcx0" path="res://actions/actiontexture/UI icons/ICON_hunter_bolas.png" id="6_psnns"]
+[ext_resource type="PackedScene" uid="uid://bbt436f0mwo1e" path="res://actions/skillEffects/FX/Scene/hit_magicSalt.tscn" id="7_1gmq2"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="7_chsun"]
 
 [sub_resource type="Resource" id="Resource_3q5jt"]
@@ -39,6 +41,8 @@ duration = 0.3
 tags = Array[String]([])
 is_contact = true
 distance_contact = 300.0
+caster_effect_scene = ExtResource("2_nn0gt")
+target_effect_scene = ExtResource("7_1gmq2")
 caster_effect_anchor = 0
 target_effect_anchor = 1
 is_beneficial = false

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="RoomResource" load_steps=6 format=3 uid="uid://b80hxlex06n1s"]
+
+[ext_resource type="PackedScene" uid="uid://b4r5k5p1es3f" path="res://lvl/Boss/combatRoomBoss.tscn" id="1_dtpir"]
+[ext_resource type="PackedScene" uid="uid://v5sa3ky4nk8q" path="res://lvl/Cellar/doorRoomCellar.tscn" id="2_xn85b"]
+[ext_resource type="Resource" uid="uid://ulv47dtbemlo" path="res://lvl/Cellar/encounterCellar.tres" id="3_grbfd"]
+[ext_resource type="PackedScene" uid="uid://cxdgvo3c4jddc" path="res://lvl/Boss/explorationBoss.tscn" id="4_dtpir"]
+[ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="5_72rbf"]
+
+[resource]
+script = ExtResource("5_72rbf")
+room_id = "BossRoom"
+position_on_map = 4
+door_scene = ExtResource("2_xn85b")
+combat_scene = ExtResource("1_dtpir")
+exploration_scene = ExtResource("4_dtpir")
+encounter = ExtResource("3_grbfd")
+CanCamp = false
+connected_room_ids = Array[String](["Cellar"])
+blocked_room_ids = Array[String]([])
+explored = false
+ennemikilled = false
+CampDone = false
+keyName = ""
+locked = false
+metadata/_custom_type_script = "uid://oj44pgv34ji0"

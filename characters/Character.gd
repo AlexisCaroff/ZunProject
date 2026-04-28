@@ -597,12 +597,28 @@ func resetVisuel():
 		self.z_index         = _current_slot.z_index
 		self.global_position = _current_slot.global_position
 		self.scale           = CharaScale
+ 
 	if characterData and characterData.current_stamina > 0 and not attacking and not getattacked:
-		sprite.texture   = characterData.portrait_texture
+		sprite.texture = characterData.portrait_texture
+ 
 	if characterData and characterData.current_stamina == 0:
-		sprite.texture   = characterData.dead_portrait_texture
+		sprite.texture = characterData.dead_portrait_texture
+		# ── Cas spécial : persos à 2 sprites (ex. MommyBoss) ──
+		# pivotcorps n'a pas de texture "morte" → on le masque pour
+		# ne pas avoir le corps vivant sous une tête morte.
+		var corpse_pivot := get_node_or_null("pivotcorps") as Node2D
+		if corpse_pivot:
+			corpse_pivot.visible = false
+ 
 	if characterData.current_stamina > 0:
 		modulate = Color(1.0, 1.0, 1.0)
+		# Si le perso revient à la vie (heal, nouveau combat…), on
+		# remontre pivotcorps. Sans ça il resterait masqué pour
+		# toujours.
+		var corpse_pivot := get_node_or_null("pivotcorps") as Node2D
+		if corpse_pivot and not corpse_pivot.visible:
+			corpse_pivot.visible = true
+ 
 	update_ui()
 
 
@@ -842,9 +858,9 @@ func animate_attack(targets: Array, skill: Skill) -> void:
 	# Distance → téléport sur P (hors écran) puis tween vers P3
 	if current_skill.is_contact:
 		if characterData.is_player_controlled:
-			position = Vector2(-300, caster_dest.y)
+			position = Vector2(hero_P.x, caster_dest.y)
 		else:
-			position = Vector2(2300, caster_dest.y)
+			position = Vector2(enemy_P.x, caster_dest.y)
 	else:
 		# P est hors écran, on y téléporte sans transition
 		var offscreen : Vector2 = hero_P if characterData.is_player_controlled else enemy_P

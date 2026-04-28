@@ -173,6 +173,9 @@ func update_ui_for_current_character(character: Character):
 	]
 	hornyBar.value=character.characterData.current_horniness
 
+func disableActionButton():
+	for button : Button in skill_buttons:
+		button.disabled=true
 # -------------------------------------------------------------------------
 # ➤ ÉQUIPEMENT (basé sur characterData)
 # -------------------------------------------------------------------------

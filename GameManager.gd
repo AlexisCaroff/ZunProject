@@ -47,62 +47,83 @@ func spawn_start_menu():
 func start_game():
 	if game_started:
 		return
-
+ 
 	game_started = true
+ 
+	# Reset de l'état runtime de toutes les salles avant de démarrer.
+	if donjon != null:
+		for room: RoomResource in donjon.rooms:
+			room.reset_runtime_state()
+ 
 	await sceneTransition.fade_out()
 	if start_menu and is_instance_valid(start_menu):
 		start_menu.queue_free()
 		start_menu = null
-
+ 
 	if donjon and donjon.start_room_id != "":
 		var start_room = get_room_by_id(donjon.start_room_id)
-		
+ 
 		if start_room:
-			current_room_Ressource=start_room
-			
+			current_room_Ressource = start_room
 			call_deferred("_enter_scene_in_current_room", start_room.exploration_scene)
 		else:
 			push_error("❌ Start room introuvable pour ID : " + donjon.start_room_id)
+ 
 			
 		
 func enter_room(room: RoomResource, changedoor: bool = false):
 	if not changedoor:
 		last_room_Ressource = current_room_Ressource
 	current_room_Ressource = room
-	
-	
+ 
 	print("🏰 Current room is ", current_room_Ressource.room_id)
 	await sceneTransition.fade_out()
 	if current_room_node:
 		current_room_node.queue_free()
 		current_room_node = null
-
+ 
 	var scene_to_load: PackedScene = null
 	if room.door_scene:
 		scene_to_load = room.door_scene
 		print("🔓 Load door scene : " + scene_to_load.resource_name)
-
+ 
 	if scene_to_load:
 		var new_scene = scene_to_load.instantiate()
 		room_container.add_child(new_scene)
 		current_room_node = new_scene
 	await sceneTransition.fade_in()
+ 
 
-func go_back():
+
+func go_back() -> void:
+	if last_room_Ressource == null:
+		push_warning("go_back : aucune salle précédente enregistrée.")
+		return
+ 
+	if last_room_Ressource.exploration_scene == null:
+		push_error("go_back : %s n'a pas d'exploration_scene." % last_room_Ressource.room_id)
+		return
+ 
 	await sceneTransition.fade_out()
+ 
+	# Restaure l'état de salle complet — sans ça, les autres systèmes
+	# (connected_room_ids, camp, fin de combat…) pensent qu'on est encore
+	# dans la salle qu'on n'a jamais réellement visitée.
+	current_room_Ressource = last_room_Ressource
+	TheRoom_we_are_in      = last_room_Ressource
+ 
 	if current_room_node and is_instance_valid(current_room_node):
 		current_room_node.queue_free()
 		current_room_node = null
-	
-	var scene_to_load: PackedScene = null
-	if last_room_Ressource and last_room_Ressource.exploration_scene:
-		scene_to_load = last_room_Ressource.exploration_scene
-	
-	if scene_to_load:
-		var new_scene = scene_to_load.instantiate()
-		room_container.add_child(new_scene)
-		current_room_node = new_scene
+ 
+	var new_scene = current_room_Ressource.exploration_scene.instantiate()
+	room_container.add_child(new_scene)
+	current_room_node = new_scene
+ 
+	print("↩️ Retour à l'exploration de ", current_room_Ressource.room_id)
 	await sceneTransition.fade_in()
+	
+	
 # 🔍 Retourne une RoomResource depuis son ID
 func get_room_by_id(room_id: String) -> RoomResource:
 	for r in donjon.rooms:

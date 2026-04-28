@@ -38,6 +38,8 @@ func apply(user: Character, target: PositionSlot) -> void:
 
 func _do_grab(cm: CombatManager, slots: Array[PositionSlot], back_slot: PositionSlot, back_idx: int) -> void:
 	if not slot_pairing.has(back_idx):
+		var grabbed : Character = back_slot.occupant
+		await cm.move_character_to_async(grabbed, back_slot, speed)
 		push_warning("GRAB : la cible n'est pas en position arrière connue (index %d)." % back_idx)
 		return
 
@@ -75,7 +77,10 @@ func _do_push(cm: CombatManager, slots: Array[PositionSlot], front_slot: Positio
 			break
 
 	if back_idx == -1:
+		var pushed  : Character = front_slot.occupant
+		await cm.move_character_to_async(pushed, front_slot, speed)
 		push_warning("PUSH : la cible n'est pas en position avant connue (index %d)." % front_idx)
+		
 		return
 
 	var back_slot : PositionSlot = _get_slot_by_index(slots, back_idx)

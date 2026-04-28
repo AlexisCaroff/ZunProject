@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://d3ji11ayvxnal"]
+[gd_scene load_steps=77 format=3 uid="uid://bdwhwkh8qvkne"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_xguw5"]
 [ext_resource type="Script" uid="uid://ds3vigal0aygx" path="res://lvl/Hall1/SpriteActionCombat.gd" id="2_ykhho"]

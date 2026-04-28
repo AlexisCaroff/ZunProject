@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxdgvo3c4jddc"]
+
+[ext_resource type="Texture2D" uid="uid://bktjtu30qytux" path="res://scenes/backgrounds dungeon demo/BG_dungeon_salon.png" id="1_rb7r1"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_5gi1d"]
+[ext_resource type="PackedScene" uid="uid://badg2cpqmlnim" path="res://lvl/explorationInterface.tscn" id="3_upi37"]
+[ext_resource type="Texture2D" uid="uid://b61cmtgknx2nd" path="res://INTRO_boss/INTRO_boss_002.png" id="4_pxdkt"]
+[ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="5_2bhwa"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="6_unj4m"]
+
+[node name="ExploInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ZunBg" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_rb7r1")
+
+[node name="atmosphere" parent="." instance=ExtResource("2_5gi1d")]
+position = Vector2(2, 352)
+
+[node name="ExploInterface" parent="." instance=ExtResource("3_upi37")]
+layout_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ZunBg" type="Sprite2D" parent="CanvasLayer"]
+z_index = 2
+position = Vector2(960, 398)
+scale = Vector2(1, 1.17963)
+texture = ExtResource("4_pxdkt")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = -56.0
+offset_top = -253.0
+offset_right = -16.0
+offset_bottom = -184.0
+scale = Vector2(50.9137, 20.7665)
+color = Color(0, 0, 0, 1)
+
+[node name="Gradiant" type="Sprite2D" parent="CanvasLayer"]
+z_index = 4
+position = Vector2(943, 925)
+rotation = 1.5708
+scale = Vector2(1.09378, 4)
+texture = ExtResource("5_2bhwa")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+z_index = 40
+offset_left = 271.0
+offset_top = 97.0
+offset_right = 1722.0
+offset_bottom = 944.0
+theme_override_fonts/normal_font = ExtResource("6_unj4m")
+theme_override_font_sizes/normal_font_size = 100
+text = "Congratulations! You've defeated the boss and completed this dungeon. 
+
+Thank you for playing this first prototype of Dark Side of Zun.
+
+We hope you enjoyed the experience."
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1

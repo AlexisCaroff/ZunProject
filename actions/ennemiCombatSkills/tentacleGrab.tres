@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://dxj1ksi0rq6i6"]
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://dxj1ksi0rq6i6"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_2gtcg"]
 [ext_resource type="Texture2D" uid="uid://bu3l6pyorqnws" path="res://characters/charatexture/demo characters/ENEMY_addict_tentagrab.png" id="1_7m3nb"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_jtfnp"]
 [ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="3_7m3nb"]
 [ext_resource type="Texture2D" uid="uid://ccnq4lbltabiy" path="res://actions/actiontexture/tentacles.png" id="4_2x4hl"]
+[ext_resource type="PackedScene" uid="uid://7n55anqhulp1" path="res://actions/skillEffects/FX/Scene/grabTargetAdict.tscn" id="7_2x4hl"]
 
 [sub_resource type="Resource" id="Resource_t3sey"]
 script = ExtResource("2_jtfnp")
@@ -50,8 +51,9 @@ duration = 0.3
 tags = Array[String]([])
 is_contact = true
 distance_contact = 700.0
+target_effect_scene = ExtResource("7_2x4hl")
 caster_effect_anchor = 0
-target_effect_anchor = 1
+target_effect_anchor = 2
 is_beneficial = false
-skip_target_return_anim = false
+skip_target_return_anim = true
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

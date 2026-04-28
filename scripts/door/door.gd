@@ -50,13 +50,14 @@ var animation: bool=false
 @onready var Items =$"../Items"
 @onready var kinks =$"../Kinks"
 @onready var PeekBonus =$"../PeekBonus"
-
+@onready var return_button : Button=$"../Return"
 func _ready():
 	GameState.current_phase = GameStat.GamePhase.DOOR
 	Game_Manager = get_tree().root.get_node("GameManager") 
-	if Game_Manager.current_room_Ressource.door_scene_History != null:
+	if Game_Manager.current_room_Ressource.door_scene_History != null and not Game_Manager.current_room_Ressource.door_history_played:
 		print("find history Scene")
 		Game_Manager.show_history_scene(Game_Manager.current_room_Ressource.door_scene_History)
+		Game_Manager.current_room_Ressource.door_history_played =true
 	characters=Game_Manager.characters
 	peek_scene = load("res://UI/peekScene.tscn").instantiate()
 	sub_viewport.add_child(peek_scene)
@@ -97,6 +98,22 @@ func _ready():
 		left_button.modulate.a = 0.2
 		right_button.disabled=true
 		right_button.modulate.a = 0.2
+		
+	 
+	# Fallback : cherche le bouton par nom si pas assigné dans l'inspecteur.
+	if return_button == null:
+		return_button = find_child("ReturnButton", true, false) as Button
+	if return_button == null:
+		return_button = find_child("Return", true, false) as Button
+ 
+	if return_button == null:
+		push_warning("door.gd : bouton 'Return' introuvable — assigne-le dans l'inspecteur.")
+	else:
+		if not return_button.pressed.is_connected(_on_return_pressed):
+			return_button.pressed.connect(_on_return_pressed)
+ 
+ 
+	
 	
 	await get_tree().process_frame  # attendre que la frame d'instanciation soit finie
 	load_chara()
@@ -339,4 +356,7 @@ func open_door(duration:float):
 	tween.parallel().tween_property(doorRight, "skew",0.2 , duration)
 	tween.parallel().tween_property(doorLeft, "skew",-0.2 , duration)
 	
-	
+func _on_return_pressed() -> void:
+	if Game_Manager == null:
+		return
+	Game_Manager.go_back()

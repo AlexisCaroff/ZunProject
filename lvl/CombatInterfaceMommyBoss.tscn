@@ -462,7 +462,7 @@ enemy_scene = ExtResource("16_x2vxt")
 
 [node name="Button" type="Button" parent="ennemiePosition/position2"]
 offset_left = -107.0
-offset_top = -333.0
+offset_top = -477.0
 offset_right = 83.0
 offset_bottom = 142.0
 mouse_filter = 1
@@ -507,12 +507,13 @@ flip_h = true
 metadata/_edit_use_anchors_ = true
 
 [node name="charaCombatUI" parent="ennemiePosition/position4" instance=ExtResource("14_5i3jh")]
+visible = false
 position = Vector2(21.222, 144.056)
 scale = Vector2(1.8, 1.8)
 
 [node name="Button" type="Button" parent="ennemiePosition/position4"]
 offset_left = -90.0
-offset_top = -285.0
+offset_top = -412.0
 offset_right = 124.0
 offset_bottom = 185.0
 size_flags_horizontal = 4
@@ -521,15 +522,13 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_iaf2c")
 flat = true
 
 [node name="position5" type="Node2D" parent="ennemiePosition"]
-visible = false
 z_index = 1
 position = Vector2(92.2223, -65.5556)
 script = ExtResource("11_hl4ge")
 position_data = SubResource("Resource_euc7u")
 
 [node name="charaCombatUI" parent="ennemiePosition/position5" instance=ExtResource("14_5i3jh")]
-visible = false
-position = Vector2(21.222, 117)
+position = Vector2(524.081, 700.057)
 scale = Vector2(1.8, 1.8)
 
 [node name="Button" type="Button" parent="ennemiePosition/position5"]
@@ -538,6 +537,7 @@ offset_left = -72.2223
 offset_top = -310.667
 offset_right = 97.7777
 offset_bottom = 159.333
+scale = Vector2(0.343033, 0.00532432)
 mouse_filter = 1
 theme_override_styles/focus = SubResource("StyleBoxEmpty_iaf2c")
 flat = true

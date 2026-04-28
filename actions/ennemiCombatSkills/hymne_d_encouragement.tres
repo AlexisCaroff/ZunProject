@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://dibkowmk40eu3"]
+[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://dibkowmk40eu3"]
 
 [ext_resource type="Texture2D" uid="uid://cwag18576qdi3" path="res://characters/charatexture/demo characters/INQUISITION_inquisitor_heal.png" id="1_eh7me"]
+[ext_resource type="PackedScene" uid="uid://benwaylhwqxxj" path="res://actions/skillEffects/FX/Scene/Priere_FX.tscn" id="2_4w7hc"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_uwvpd"]
 [ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="3_4w7hc"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="4_hyp3f"]
 [ext_resource type="Texture2D" uid="uid://dbuugeey6c5y4" path="res://UI/buffAtt.png" id="5_lfdvk"]
 [ext_resource type="Texture2D" uid="uid://sb35k7bfa5ry" path="res://actions/actiontexture/priere.png" id="6_8vcuv"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="7_yd43b"]
+[ext_resource type="PackedScene" uid="uid://bcvy3uxu0ox5h" path="res://actions/skillEffects/FX/Scene/boosted.tscn" id="9_hyp3f"]
 
 [sub_resource type="Resource" id="Resource_k0qpg"]
 script = ExtResource("3_4w7hc")
@@ -48,6 +50,8 @@ duration = 1.0
 tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
+caster_effect_scene = ExtResource("2_4w7hc")
+target_effect_scene = ExtResource("9_hyp3f")
 caster_effect_anchor = 0
 target_effect_anchor = 1
 is_beneficial = false

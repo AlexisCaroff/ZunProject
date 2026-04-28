@@ -30,6 +30,26 @@ var scene: PackedScene = preload("res://UI/dialogue_ui.tscn")
 # ex: ["Inquisitor"] → le slot Inquisitor est absent au début, apparaît à la 1re réplique
 @export var late_entry_slots: Array[String] = []
 
+# ─────────────────────────────────────────────
+#  Layout custom (optionnel)
+# ─────────────────────────────────────────────
+## Liste des slots du DialogueUI à afficher, dans l'ordre logique
+## d'affectation. Vide → utilise le layout par défaut basé sur le nombre
+## de participants (1→[0], 2→[0,3], 3→[0,1,2], 4→[0,1,2,3]).
+##
+## Exemple give_in : [0, 1, 3] = Portrait | Portrait3 | (vide) | Portrait2
+@export var slot_layout: Array[int] = []
+
+## Mapping speaker (slot name) → index logique dans participants/slot_layout.
+## Vide → ordre d'apparition dans le fichier de dialogue.
+## Quand renseigné, désactive late_entry_slots (le layout est fixé d'avance).
+##
+## Exemple give_in :
+##   {"Inquisitor": 0, "Priestess": 1, "Broodmother": 2}
+##   combiné à slot_layout = [0, 1, 3] →
+##   Inquisitor en gauche, Priestess en centre-gauche, Broodmother en droite.
+@export var slot_overrides: Dictionary = {}
+
 # Détectés automatiquement à la lecture du fichier — ne pas remplir manuellement
 var participants: Array[String] = []
 
@@ -40,6 +60,10 @@ const _LAYOUT_PORTRAIT_NAMES := {
 	3: ["Portrait", "Portrait3", "Portrait2"],
 	4: ["Portrait", "Portrait3", "Portrait4", "Portrait2"]
 }
+
+# Slot index (0-3) → nom du nœud TextureRect dans DialogueUI.
+# Utilisé pour _reposition_speaker quand slot_layout est défini.
+const _SLOT_INDEX_TO_NODE_NAME := ["Portrait", "Portrait3", "Portrait4", "Portrait2"]
 
 # Portrait actuellement verrouillé par slot : { "Inquisitor": "Inquisitor" }
 # Une fois le portrait canonique affiché, il ne repasse plus sur un alias.
@@ -136,13 +160,41 @@ func load_dialogue(file_path: String):
 
 	file.close()
 
-	# On garde au maximum 4 slots, en excluant les late_entry_slots du layout initial
-	for i in range(min(seen_slots.size(), 4)):
-		var slot := seen_slots[i]
-		if slot not in late_entry_slots:
-			participants.append(slot)
+	# ── Construction de participants ──
+	if not slot_overrides.is_empty():
+		# MODE OVERRIDE : ordre fixé par slot_overrides (speaker → index logique).
+		# Late_entry_slots est ignoré ici (le layout est figé d'avance).
+		var max_idx := -1
+		for s in slot_overrides.keys():
+			max_idx = max(max_idx, int(slot_overrides[s]))
 
-	ui.setup_layout(participants.size())
+		var ordered: Array[String] = []
+		ordered.resize(max_idx + 1)
+		for s: String in slot_overrides.keys():
+			var idx := int(slot_overrides[s])
+			if idx >= 0 and idx <= max_idx:
+				ordered[idx] = s
+
+		# Ne garde dans participants que les speakers qui apparaissent réellement
+		# dans le fichier (sinon on aurait des slots vides au mauvais endroit).
+		for s in ordered:
+			if s != "" and s in seen_slots:
+				participants.append(s)
+				if not _slot_current_portrait.has(s):
+					_slot_current_portrait[s] = s
+	else:
+		# MODE CLASSIQUE : ordre d'apparition, hors late_entry_slots.
+		for i in range(min(seen_slots.size(), 4)):
+			var slot := seen_slots[i]
+			if slot not in late_entry_slots:
+				participants.append(slot)
+
+	# ── Layout ──
+	if not slot_layout.is_empty():
+		ui.setup_layout_explicit(slot_layout)
+	else:
+		ui.setup_layout(participants.size())
+
 	print("Participants (slots):", participants)
 
 
@@ -188,11 +240,17 @@ func show_line():
 	var slot_name     := _resolve_slot(speaker)
 
 	# ── Entrée dynamique (late_entry_slots) ───────────────────────────
-	# Si le slot n'est pas encore dans participants, on l'ajoute et on reconfigure le layout
+	# Désactivée en mode override : le layout est fixé d'avance.
 	if slot_name not in participants:
-		if participants.size() < 4:
+		if slot_overrides.is_empty() and participants.size() < 4:
 			participants.append(slot_name)
 			ui.setup_layout(participants.size())
+		else:
+			# Mode override : speaker absent de slot_overrides → fallback narrator
+			push_warning("DialogueManager : speaker '%s' absent de slot_overrides → affiché en mode narrator." % speaker)
+			_dim_all_portraits()
+			ui.set_text(_resolve_display_name(speaker), text)
+			return
 
 	var speaker_index := participants.find(slot_name)
 
@@ -244,21 +302,32 @@ func _on_Choice2_button_down() -> void:
 # ─────────────────────────────────────────────
 
 ## Déplace le label Speaker pour le centrer sous le portrait actif.
-## Utilise un mapping fixe par nombre de participants pour être fiable
-## quel que soit l'état des textures dans la scène.
+## En mode slot_layout, on utilise directement l'index de slot ; sinon
+## on utilise le mapping par count des _LAYOUT_PORTRAIT_NAMES.
 func _reposition_speaker(speaker_index: int) -> void:
 	var speaker_label := ui.get_node_or_null("Speaker") as Label
 	if speaker_label == null:
 		return
 
-	var count := participants.size()
-	if not _LAYOUT_PORTRAIT_NAMES.has(count):
-		return
-	var names: Array = _LAYOUT_PORTRAIT_NAMES[count]
-	if speaker_index < 0 or speaker_index >= names.size():
-		return
+	var node_name: String = ""
 
-	var portrait := ui.get_node_or_null(names[speaker_index]) as TextureRect
+	if not slot_layout.is_empty():
+		if speaker_index < 0 or speaker_index >= slot_layout.size():
+			return
+		var slot_idx: int = slot_layout[speaker_index]
+		if slot_idx < 0 or slot_idx >= _SLOT_INDEX_TO_NODE_NAME.size():
+			return
+		node_name = _SLOT_INDEX_TO_NODE_NAME[slot_idx]
+	else:
+		var count := participants.size()
+		if not _LAYOUT_PORTRAIT_NAMES.has(count):
+			return
+		var names: Array = _LAYOUT_PORTRAIT_NAMES[count]
+		if speaker_index < 0 or speaker_index >= names.size():
+			return
+		node_name = names[speaker_index]
+
+	var portrait := ui.get_node_or_null(node_name) as TextureRect
 	if portrait == null:
 		return
 

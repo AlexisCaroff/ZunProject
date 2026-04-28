@@ -27,6 +27,24 @@ class_name BossIntroSequence
 ## Slots absents du layout initial — entrent dynamiquement quand leur speaker parle.
 @export var late_entry_slots: Array[String] = ["Inquisitor"]
 
+## ── Layout custom pour la scène GIVE-IN ──
+## Liste des slots du DialogueUI à utiliser (dans l'ordre d'affectation).
+## Layout par défaut souhaité : Inquisitor en gauche (slot 0),
+## Priestess centre-gauche (slot 1), Broodmother à droite (slot 3).
+## Le slot 2 (centre-droite) reste vide.
+@export var give_in_slot_layout: Array[int] = [0, 1, 3]
+
+## Mapping speaker → index logique dans give_in_slot_layout.
+## Exemple par défaut :
+##   "Inquisitor" → 0 (donc slot 0 = gauche)
+##   "Priestess"  → 1 (donc slot 1 = centre-gauche)
+##   "Broodmother"→ 2 (donc slot 3 = droite, car layout[2] = 3)
+@export var give_in_slot_overrides: Dictionary = {
+	"Inquisitor": 0,
+	"Priestess":  1,
+	"Broodmother": 2,
+}
+
 @export var debug_force_corrupt: bool = false
 
 # ─────────────────────────────────────────────
@@ -45,13 +63,9 @@ func _ready() -> void:
 
 
 # ─────────────────────────────────────────────
-#  Point d'entrée — appelé en tout début de _start() dans CombatManager,
-#  AVANT le spawn des ennemis.
-#  Retourne l'encounter à utiliser.
+#  Point d'entrée
 # ─────────────────────────────────────────────
 
-## Retourne {encounter: CombatEncounter|null, scene: PackedScene|null}
-## Si scene != null, CombatManager doit charger cette scène au lieu de spawner.
 func run_sequence(cam: Camera2D) -> Dictionary:
 
 	# 1 ── Animatique d'intro
@@ -79,7 +93,7 @@ func _corrupt_branch() -> Dictionary:
 	_dm_choice.start_dialogue()
 	await get_tree().create_timer(.2).timeout
 	await _gm.sceneTransition.fade_in()
-	var choice: int = await _dm_choice.choice_made  # 0 résister / 1 céder
+	var choice: int = await _dm_choice.choice_made
 	if choice == 0:
 		return await _resist_branch()
 	else:
@@ -97,13 +111,16 @@ func _resist_branch() -> Dictionary:
 
 
 func _give_in_branch() -> Dictionary:
+	# Layout custom : Inquisitor à gauche, Priestess centre-gauche,
+	# Broodmother à droite (slot 3, on saute le centre-droite).
+	_apply_give_in_layout(_dm_simple)
+
 	await _play_simple(dialogue_give_in_path)
 	_gm.teamCorrupted = true
 
-	# Charge directement la scène give_in sans passer par la logique du RoomResource
+	# Charge directement la scène give_in sans passer par RoomResource
 	if give_in_combat_scene != null:
 		_gm.load_scene_direct(give_in_combat_scene, inquisition_encounter)
-		# On retourne un signal "scène déjà chargée" pour que CombatManager s'arrête
 		return {"encounter": null, "scene": null, "handled": true}
 
 	return {"encounter": inquisition_encounter, "scene": give_in_combat_scene}
@@ -112,6 +129,25 @@ func _give_in_branch() -> Dictionary:
 # ─────────────────────────────────────────────
 #  Helpers
 # ─────────────────────────────────────────────
+
+## Configure le DialogueManager pour le layout give-in :
+##   - liste de slots visibles
+##   - mapping speaker → index logique
+##
+## ⚠ Requiert que DialogueManager.gd ait deux propriétés :
+##   var slot_layout: Array[int]      # passe à DialogueUI.setup_layout_explicit()
+##   var slot_overrides: Dictionary   # speaker name → index dans slot_layout
+##
+## Si tes propriétés s'appellent différemment, adapte les deux lignes
+## d'assignation ci-dessous.
+func _apply_give_in_layout(dm: DialogueManager) -> void:
+	if dm == null:
+		return
+	if "slot_layout" in dm:
+		dm.slot_layout = give_in_slot_layout.duplicate()
+	if "slot_overrides" in dm:
+		dm.slot_overrides = give_in_slot_overrides.duplicate()
+
 
 func _play_simple(file_path: String) -> void:
 	_dm_simple.load_dialogue(file_path)
@@ -136,11 +172,11 @@ func _build_dialogue_managers() -> void:
 	# DialogueManager simple (intro, résistance, reddition)
 	_dm_simple = DialogueManager.new()
 	_dm_simple.portraits_resource = portraits_resource
-	
 	_dm_simple.no_portrait_speakers = no_portrait_speakers
 	_dm_simple.portrait_aliases     = portrait_aliases
 	_dm_simple.late_entry_slots     = late_entry_slots
 	_canvas.add_child(_dm_simple)
+
 	# DialogueManager avec choix (corruption)
 	_dm_choice = DialogueManager.new()
 	_dm_choice.portraits_resource = portraits_resource

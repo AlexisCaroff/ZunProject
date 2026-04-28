@@ -54,9 +54,8 @@ offset_right = 152.0
 offset_bottom = 124.797
 
 [node name="Arrow" type="Sprite2D" parent="."]
-visible = false
 modulate = Color(0.77, 0.616513, 0.4158, 1)
-position = Vector2(-56, -166)
+position = Vector2(-36, -160)
 scale = Vector2(0.0897035, 0.0897035)
 texture = ExtResource("7_6olh6")
 offset = Vector2(0, 116.49)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://h8pqs7tabdxj"]
+[gd_scene load_steps=80 format=3 uid="uid://h8pqs7tabdxj"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_3b7mk"]
 [ext_resource type="Script" uid="uid://ds3vigal0aygx" path="res://lvl/Hall1/SpriteActionCombat.gd" id="3_mhvks"]
@@ -165,6 +165,8 @@ corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p4emy"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_junmr"]
 
 [node name="CombatInterface" type="Control"]
 layout_mode = 3
@@ -1404,9 +1406,10 @@ vertical_alignment = 1
 [node name="ActionPass" type="Button" parent="CanvasLayer"]
 z_index = 7
 offset_left = 1230.0
-offset_top = 856.0
-offset_right = 1304.0
-offset_bottom = 953.0
+offset_top = 855.0
+offset_right = 1321.0
+offset_bottom = 949.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_junmr")
 flat = true
 
 [node name="UiClose" type="Sprite2D" parent="CanvasLayer/ActionPass"]

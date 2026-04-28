@@ -364,3 +364,20 @@ offset_top = -39.0
 offset_right = 30.0
 offset_bottom = 36.0
 flat = true
+
+[node name="Door12" type="Sprite2D" parent="DonjonDoor"]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 2
+position = Vector2(800, 353)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_oc32i")
+script = ExtResource("18_b056a")
+connectedRooms = Array[String](["BossRoom", "Cellar"])
+normal_scale = Vector2(1.5, 1.5)
+
+[node name="Button" type="Button" parent="DonjonDoor/Door12"]
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 30.0
+offset_bottom = 36.0
+flat = true

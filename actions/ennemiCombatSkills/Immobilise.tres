@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=13 format=3 uid="uid://bp426legb2qkr"]
+[gd_resource type="Resource" script_class="Skill" load_steps=15 format=3 uid="uid://bp426legb2qkr"]
 
 [ext_resource type="Texture2D" uid="uid://5sxx1j4x2jr3" path="res://characters/charatexture/demo characters/INQUISITION_incapacitor_pin.png" id="1_36e8l"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_36e8l"]
+[ext_resource type="PackedScene" uid="uid://bn67hgtv6jvaq" path="res://actions/skillEffects/FX/Scene/charge_fx.tscn" id="2_mfcwu"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_g0hup"]
 [ext_resource type="Script" uid="uid://dvysavdlqaph" path="res://actions/skillEffects/addcooldownEffect.gd" id="4_g0hup"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_ixvgo"]
 [ext_resource type="Texture2D" uid="uid://b4oubet2ttcx0" path="res://actions/actiontexture/UI icons/ICON_hunter_bolas.png" id="5_mfcwu"]
 [ext_resource type="Script" uid="uid://bp8u5at2ojgse" path="res://actions/skillEffects/healEffect.gd" id="6_4ktlx"]
 [ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="7_ljpvx"]
+[ext_resource type="PackedScene" uid="uid://cqea4mekfk8gb" path="res://actions/skillEffects/FX/Scene/hit_standar.tscn" id="10_ixvgo"]
 
 [sub_resource type="Resource" id="Resource_3q5jt"]
 script = ExtResource("3_g0hup")
@@ -33,8 +35,8 @@ metadata/_custom_type_script = "uid://2vsqpp6jqiow"
 
 [resource]
 script = ExtResource("5_ixvgo")
-name = "Ennergie syphon"
-descriptionName = "Ennergie syphon"
+name = "Immobilise"
+descriptionName = "Immobilise"
 description = "deal dmg , heal and reduce cooldown"
 icon = ExtResource("5_mfcwu")
 barkSkill = ""
@@ -57,8 +59,10 @@ duration = 0.3
 tags = Array[String]([])
 is_contact = true
 distance_contact = 300.0
+caster_effect_scene = ExtResource("2_mfcwu")
+target_effect_scene = ExtResource("10_ixvgo")
 caster_effect_anchor = 0
-target_effect_anchor = 1
+target_effect_anchor = 2
 is_beneficial = false
 skip_target_return_anim = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

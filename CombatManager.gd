@@ -164,7 +164,7 @@ func _start():
 			print("spawn " + chara.characterData.Charaname)
 			if gm.teamCorrupted:
 				chara.sprite.flip_h=true
-				chara.Selector.flip_h=true
+				
 				chara.pivot.position.x += -150 
 			var slot_index = clamp(chara.characterData.Chara_position, 0, hero_positions.size() - 1)
 			var slot = hero_positions[slot_index]
@@ -704,7 +704,11 @@ func flush_endTurn_affinity_reactions() -> void:
 	
 func PassButtonDown():
 	if current_character and current_character.characterData.is_player_controlled:
+		ui.disableActionButton()
+			
+		current_character.animate_start_Turn()
 		await end_currentChara_Turn()
+		ui.disableActionButton()
 		
 ## Retourne les Character occupant les slots (filtre les slots vides)
 func _slots_to_characters(slots: Array[PositionSlot]) -> Array[Character]:

@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://daxgjjbu82mgo"]
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://daxgjjbu82mgo"]
 
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_11uf3"]
 [ext_resource type="Texture2D" uid="uid://dk7w4qddh43na" path="res://characters/charatexture/demo characters/ENEMY_addict_euphoria.png" id="1_383f7"]
+[ext_resource type="PackedScene" uid="uid://b0odwqc7e8b6o" path="res://actions/skillEffects/FX/Scene/Euphoria.tscn" id="2_6saam"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_devca"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_jtbft"]
 [ext_resource type="Texture2D" uid="uid://bt3c7xnciduqy" path="res://actions/actiontexture/raving.png" id="3_hmtly"]
 [ext_resource type="Texture2D" uid="uid://dbuugeey6c5y4" path="res://UI/buffAtt.png" id="4_383f7"]
+[ext_resource type="PackedScene" uid="uid://bcvy3uxu0ox5h" path="res://actions/skillEffects/FX/Scene/boosted.tscn" id="8_rrluw"]
 
 [sub_resource type="Resource" id="Resource_383f7"]
 script = ExtResource("2_jtbft")
@@ -42,8 +44,10 @@ duration = 0.3
 tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
+caster_effect_scene = ExtResource("2_6saam")
+target_effect_scene = ExtResource("8_rrluw")
 caster_effect_anchor = 0
-target_effect_anchor = 1
+target_effect_anchor = 2
 is_beneficial = false
 skip_target_return_anim = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

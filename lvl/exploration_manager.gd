@@ -70,11 +70,18 @@ func _ready():
 	menuPerso.change_in_equipment.connect(_on_character_equipment_changed)
 	
 	load_characters_from_gamestat()
+	for chara in characters:
+		chara.characterData.current_stamina = min(chara.characterData.max_stamina, chara.characterData.current_stamina + 10)
+		chara.characterData.current_horniness = max(0, chara.characterData.current_horniness - 5)
+		chara.animate_heal(10, chara)
+		chara.update_display()
 	selected_character =characters[0]
 	selected_character.animate_selected()
-	if gm.current_room_Ressource.exploration_scene_history != null:
+	if gm.current_room_Ressource.exploration_scene_history != null \
+			and not gm.current_room_Ressource.exploration_history_played:
 		print("find history Scene")
 		gm.show_history_scene(gm.current_room_Ressource.exploration_scene_history)
+		gm.current_room_Ressource.exploration_history_played = true
 	
 	portrait_selector.position = portraits[0].position
 	
@@ -169,6 +176,8 @@ func _swap_characters(chara1: CharaExplo, chara2: CharaExplo) -> void:
 	move_mode = false
 	selectorChara.position= selected_character.CharaPosition.charaUI.global_position if selected_character.CharaPosition else Vector2.ZERO
 	selectorChara.position.y +=45
+	
+	
 func selectCharacter(thechara: CharaExplo):
 	
 	thechara.animate_selected()
@@ -303,10 +312,14 @@ func Door_notover():
 func load_interactable():
 	var room := gm.current_room_Ressource
 	if room.interactable == null:
-		return
 		print("no interactable in this room")
-
+		return
+ 
 	var obj := room.interactable.scene.instantiate()
 	obj.data = room.interactable
+	# Donne au coffre la référence vers SA salle, pour qu'il puisse
+	# persister son état (ouvert/utilisé) après son queue_free().
+	obj.room = room
 	interactable.add_child(obj)
+ 
 	
