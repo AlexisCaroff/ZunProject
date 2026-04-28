@@ -21,12 +21,10 @@ offset_bottom = -233.0
 text = "name"
 
 [node name="pivot" type="Node2D" parent="."]
-position = Vector2(49, 31)
-scale = Vector2(1.2, 1.2)
+position = Vector2(40, 21)
 script = ExtResource("4_yhjim")
-min_scale = 1.15
-max_scale = 1.15
-scalemini = 1.1
+min_scale = 1.02
+max_scale = 1.05
 min_duration = 1.0
 max_duration = 1.5
 

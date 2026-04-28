@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://ciw7rc628eq41"]
 
-[ext_resource type="Texture2D" uid="uid://byq6y7gf8k5i3" path="res://Items/ItemIcons/keys.png" id="1_ij5s5"]
+[ext_resource type="Texture2D" uid="uid://cxy4vmreeb06a" path="res://Items/ItemIcons/LOOT_key_storage.png" id="1_ij5s5"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="2_uogi8"]
 
 [resource]
 script = ExtResource("2_uogi8")
 icon = ExtResource("1_ij5s5")
-name = "keyRoom3"
+name = "key Storage Room"
 description = ""
 isCursed = false
 number = 1

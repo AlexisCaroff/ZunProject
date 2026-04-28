@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dg0coy6r6f1ww"]
+[gd_scene load_steps=23 format=3 uid="uid://dg0coy6r6f1ww"]
 
 [ext_resource type="Script" uid="uid://d12jn42j03tgg" path="res://GameManager.gd" id="1_838hb"]
 [ext_resource type="Resource" uid="uid://7dlbup10473y" path="res://lvl/donjonTestePorte.tres" id="2_soe0u"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://b1luajn2l3jft" path="res://UI/IntroWarnning.gd" id="17_6kqjp"]
 [ext_resource type="Texture2D" uid="uid://b5cqyywvqxjb8" path="res://tuto/intro1.png" id="17_43qkp"]
 [ext_resource type="PackedScene" uid="uid://bvgh80ryq8f31" path="res://UI/cinematic/introCinematc.tscn" id="19_nm67f"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="21_oavjs"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n5q86"]
 
@@ -154,7 +155,7 @@ script = ExtResource("16_vbvj5")
 [node name="TextureRect" type="TextureRect" parent="SceneTransition"]
 offset_right = 40.0
 offset_bottom = 40.0
-scale = Vector2(0.739588, 0.739588)
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("17_43qkp")
 script = ExtResource("17_6kqjp")
 
@@ -164,3 +165,8 @@ offset_right = 4296.0
 offset_bottom = 2902.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+script = ExtResource("21_oavjs")
+metadata/_custom_type_script = "uid://devdej4xpva2i"

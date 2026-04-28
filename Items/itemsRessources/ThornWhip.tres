@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://ueptel68dk1y" path="res://characters/kink/littleattackbuff.tres" id="1_a3pwn"]
 [ext_resource type="Script" uid="uid://cvtwl7tphucho" path="res://Items/ItemScripts/ThornWhipCursed.gd" id="1_mci6p"]
-[ext_resource type="Texture2D" uid="uid://dv754aqww4n5q" path="res://Items/ItemIcons/cursed Thorn whip.png" id="2_hbnfo"]
+[ext_resource type="Texture2D" uid="uid://brjyxb0jat7ng" path="res://Items/ItemIcons/LOOT_whip_thorn.png" id="2_hbnfo"]
 
 [resource]
 script = ExtResource("1_mci6p")

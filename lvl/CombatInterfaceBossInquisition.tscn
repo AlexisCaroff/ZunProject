@@ -177,6 +177,182 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ctcel")
 
+[node name="pivotcorps" type="Node2D" parent="."]
+position = Vector2(1542, 523)
+scale = Vector2(1.011, 1)
+script = ExtResource("24_twxny")
+min_scale = 1.01
+max_scale = 1.01
+
+[node name="HerosTexture2" type="TextureRect" parent="pivotcorps"]
+modulate = Color(0.720467, 0.720468, 0.720467, 1)
+z_index = -1
+offset_left = 3.95649
+offset_top = -603.0
+offset_right = 174.957
+offset_bottom = -372.0
+scale = Vector2(4.99083, 3.28212)
+mouse_filter = 2
+texture = ExtResource("12_fxnon")
+expand_mode = 1
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(1550, 570)
+scale = Vector2(1, 0.989)
+script = ExtResource("24_twxny")
+min_scale = 1.01
+max_scale = 1.01
+
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+modulate = Color(0.720467, 0.720468, 0.720467, 1)
+z_index = -1
+offset_left = -214.0
+offset_top = -640.04
+offset_right = -43.0005
+offset_bottom = -409.04
+scale = Vector2(4.42711, 3.2805)
+mouse_filter = 2
+texture = ExtResource("13_h1mji")
+expand_mode = 1
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="HeroPosition" type="Node2D" parent="."]
+z_index = -1
+position = Vector2(967, 623)
+scale = Vector2(0.9, 0.9)
+
+[node name="position1" type="Node2D" parent="HeroPosition"]
+z_index = 2
+position = Vector2(606.667, 32)
+script = ExtResource("12_b16wu")
+position_data = SubResource("Resource_i1s1q")
+
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position1"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -182.333
+offset_top = -0.888895
+offset_right = 132.667
+offset_bottom = 78.1111
+scale = Vector2(1.01712, 1)
+mouse_filter = 2
+texture = ExtResource("14_puccw")
+expand_mode = 1
+flip_h = true
+
+[node name="Button" type="Button" parent="HeroPosition/position1"]
+offset_left = -101.0
+offset_top = -304.0
+offset_right = 78.0
+offset_bottom = 82.0
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s6b88")
+flat = true
+
+[node name="charaCombatUI" parent="HeroPosition/position1" instance=ExtResource("15_lfn5j")]
+position = Vector2(-25.6667, 68.0559)
+scale = Vector2(1.8, 1.8)
+
+[node name="position2" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(790, -4.99998)
+script = ExtResource("12_b16wu")
+position_data = SubResource("Resource_8flqu")
+
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position2"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -182.0
+offset_top = -9.0
+offset_right = 120.0
+offset_bottom = 61.0
+scale = Vector2(1.02448, 1)
+mouse_filter = 2
+texture = ExtResource("14_puccw")
+expand_mode = 1
+flip_h = true
+
+[node name="Button" type="Button" parent="HeroPosition/position2"]
+offset_left = -104.0
+offset_top = -304.0
+offset_right = 92.0
+offset_bottom = 154.0
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hxbks")
+flat = true
+
+[node name="charaCombatUI" parent="HeroPosition/position2" instance=ExtResource("15_lfn5j")]
+position = Vector2(-22.2222, 103.889)
+scale = Vector2(1.8, 1.8)
+
+[node name="position3" type="Node2D" parent="HeroPosition"]
+z_index = 2
+z_as_relative = false
+position = Vector2(178.889, 30.833)
+script = ExtResource("12_b16wu")
+position_data = SubResource("Resource_x8qlv")
+
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position3"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -182.333
+offset_top = -0.888977
+offset_right = 132.667
+offset_bottom = 78.111
+scale = Vector2(1.01712, 1)
+mouse_filter = 2
+texture = ExtResource("14_puccw")
+expand_mode = 1
+flip_h = true
+
+[node name="Button" type="Button" parent="HeroPosition/position3"]
+offset_left = -89.0
+offset_top = -304.0
+offset_right = 105.0
+offset_bottom = 130.0
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vtu61")
+flat = true
+
+[node name="charaCombatUI" parent="HeroPosition/position3" instance=ExtResource("15_lfn5j")]
+position = Vector2(-7.7778, 68.0559)
+scale = Vector2(1.8, 1.8)
+
+[node name="position4" type="Node2D" parent="HeroPosition"]
+z_index = 1
+position = Vector2(341.111, -9.00002)
+script = ExtResource("12_b16wu")
+position_data = SubResource("Resource_t7hjh")
+
+[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position4"]
+modulate = Color(1, 1, 1, 0.34902)
+z_index = -1
+offset_left = -172.222
+offset_top = -14.3333
+offset_right = 129.778
+offset_bottom = 64.6667
+scale = Vector2(1.08675, 1)
+mouse_filter = 2
+texture = ExtResource("14_puccw")
+expand_mode = 1
+flip_h = true
+
+[node name="Button" type="Button" parent="HeroPosition/position4"]
+offset_left = -111.0
+offset_top = -304.0
+offset_right = 86.0
+offset_bottom = 164.0
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m2l43")
+flat = true
+
+[node name="charaCombatUI" parent="HeroPosition/position4" instance=ExtResource("15_lfn5j")]
+position = Vector2(16.6666, 107.889)
+scale = Vector2(1.8, 1.8)
+
 [node name="SpriteHeros" type="Sprite2D" parent="."]
 z_index = 6
 position = Vector2(1460, 728)
@@ -197,7 +373,7 @@ offset_top = 28.0
 offset_right = 1906.0
 offset_bottom = 108.0
 mouse_filter = 2
-theme_override_constants/separation = -40
+theme_override_constants/separation = -20
 alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="TurnOrderPanel"]
@@ -305,177 +481,8 @@ position = Vector2(960, 540)
 ignore_rotation = false
 script = ExtResource("11_2c5qs")
 
-[node name="pivotcorps" type="Node2D" parent="."]
-z_index = 1
-position = Vector2(1736, 681)
-scale = Vector2(1.33484, 1.32009)
-script = ExtResource("24_twxny")
-
-[node name="HerosTexture2" type="TextureRect" parent="pivotcorps"]
-offset_left = -39.7052
-offset_top = -670.411
-offset_right = 131.295
-offset_bottom = -439.411
-scale = Vector2(5.14022, 3.38036)
-mouse_filter = 2
-texture = ExtResource("12_fxnon")
-expand_mode = 1
-flip_h = true
-metadata/_edit_use_anchors_ = true
-
-[node name="pivot" type="Node2D" parent="."]
-z_index = 1
-position = Vector2(1744, 682)
-scale = Vector2(1.33484, 1.32009)
-script = ExtResource("24_twxny")
-
-[node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -191.783
-offset_top = -588.293
-offset_right = -20.7835
-offset_bottom = -357.293
-scale = Vector2(4.02833, 2.985)
-mouse_filter = 2
-texture = ExtResource("13_h1mji")
-expand_mode = 1
-flip_h = true
-metadata/_edit_use_anchors_ = true
-
-[node name="HeroPosition" type="Node2D" parent="."]
-position = Vector2(967, 600)
-scale = Vector2(0.9, 0.9)
-
-[node name="position1" type="Node2D" parent="HeroPosition"]
-z_index = 2
-position = Vector2(606.667, 32)
-script = ExtResource("12_b16wu")
-position_data = SubResource("Resource_i1s1q")
-
-[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position1"]
-modulate = Color(1, 1, 1, 0.34902)
-z_index = -1
-offset_left = -182.333
-offset_top = -0.888895
-offset_right = 132.667
-offset_bottom = 78.1111
-scale = Vector2(1.01712, 1)
-mouse_filter = 2
-texture = ExtResource("14_puccw")
-expand_mode = 1
-flip_h = true
-
-[node name="Button" type="Button" parent="HeroPosition/position1"]
-offset_left = -101.0
-offset_top = -304.0
-offset_right = 78.0
-offset_bottom = 82.0
-mouse_filter = 1
-theme_override_styles/focus = SubResource("StyleBoxEmpty_s6b88")
-flat = true
-
-[node name="charaCombatUI" parent="HeroPosition/position1" instance=ExtResource("15_lfn5j")]
-position = Vector2(-25.6667, 85.8337)
-scale = Vector2(1.8, 1.8)
-
-[node name="position2" type="Node2D" parent="HeroPosition"]
-z_index = 1
-position = Vector2(790, -4.99998)
-script = ExtResource("12_b16wu")
-position_data = SubResource("Resource_8flqu")
-
-[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position2"]
-modulate = Color(1, 1, 1, 0.34902)
-z_index = -1
-offset_left = -182.0
-offset_top = -9.0
-offset_right = 120.0
-offset_bottom = 61.0
-scale = Vector2(1.02448, 1)
-mouse_filter = 2
-texture = ExtResource("14_puccw")
-expand_mode = 1
-flip_h = true
-
-[node name="Button" type="Button" parent="HeroPosition/position2"]
-offset_left = -104.0
-offset_top = -304.0
-offset_right = 92.0
-offset_bottom = 154.0
-mouse_filter = 1
-theme_override_styles/focus = SubResource("StyleBoxEmpty_hxbks")
-flat = true
-
-[node name="charaCombatUI" parent="HeroPosition/position2" instance=ExtResource("15_lfn5j")]
-position = Vector2(-22.2222, 121.667)
-scale = Vector2(1.8, 1.8)
-
-[node name="position3" type="Node2D" parent="HeroPosition"]
-z_index = 2
-z_as_relative = false
-position = Vector2(178.889, 30.833)
-script = ExtResource("12_b16wu")
-position_data = SubResource("Resource_x8qlv")
-
-[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position3"]
-modulate = Color(1, 1, 1, 0.34902)
-z_index = -1
-offset_left = -182.333
-offset_top = -0.888977
-offset_right = 132.667
-offset_bottom = 78.111
-scale = Vector2(1.01712, 1)
-mouse_filter = 2
-texture = ExtResource("14_puccw")
-expand_mode = 1
-flip_h = true
-
-[node name="Button" type="Button" parent="HeroPosition/position3"]
-offset_left = -89.0
-offset_top = -304.0
-offset_right = 105.0
-offset_bottom = 130.0
-mouse_filter = 1
-theme_override_styles/focus = SubResource("StyleBoxEmpty_vtu61")
-flat = true
-
-[node name="charaCombatUI" parent="HeroPosition/position3" instance=ExtResource("15_lfn5j")]
-position = Vector2(-7.7778, 85.8337)
-scale = Vector2(1.8, 1.8)
-
-[node name="position4" type="Node2D" parent="HeroPosition"]
-z_index = 1
-position = Vector2(341.111, -9.00002)
-script = ExtResource("12_b16wu")
-position_data = SubResource("Resource_t7hjh")
-
-[node name="TextureRect2" type="TextureRect" parent="HeroPosition/position4"]
-modulate = Color(1, 1, 1, 0.34902)
-z_index = -1
-offset_left = -172.222
-offset_top = -14.3333
-offset_right = 129.778
-offset_bottom = 64.6667
-scale = Vector2(1.08675, 1)
-mouse_filter = 2
-texture = ExtResource("14_puccw")
-expand_mode = 1
-flip_h = true
-
-[node name="Button" type="Button" parent="HeroPosition/position4"]
-offset_left = -111.0
-offset_top = -304.0
-offset_right = 86.0
-offset_bottom = 164.0
-mouse_filter = 1
-theme_override_styles/focus = SubResource("StyleBoxEmpty_m2l43")
-flat = true
-
-[node name="charaCombatUI" parent="HeroPosition/position4" instance=ExtResource("15_lfn5j")]
-position = Vector2(16.6666, 125.667)
-scale = Vector2(1.8, 1.8)
-
 [node name="ennemiePosition" type="Node2D" parent="."]
-position = Vector2(486, 600)
+position = Vector2(486, 623)
 scale = Vector2(0.9, 0.9)
 
 [node name="position1" type="Node2D" parent="ennemiePosition"]
@@ -510,7 +517,7 @@ flip_h = true
 metadata/_edit_use_anchors_ = true
 
 [node name="charaCombatUI" parent="ennemiePosition/position1" instance=ExtResource("15_lfn5j")]
-position = Vector2(0.000228882, 128.167)
+position = Vector2(0.000228882, 110.389)
 scale = Vector2(1.8, 1.8)
 
 [node name="position2" type="Node2D" parent="ennemiePosition"]
@@ -543,7 +550,7 @@ expand_mode = 1
 flip_h = true
 
 [node name="charaCombatUI" parent="ennemiePosition/position2" instance=ExtResource("15_lfn5j")]
-position = Vector2(-9.99984, 96.2782)
+position = Vector2(-9.99984, 78.5004)
 scale = Vector2(1.8, 1.8)
 
 [node name="position4" type="Node2D" parent="ennemiePosition"]
@@ -564,10 +571,9 @@ mouse_filter = 2
 texture = ExtResource("14_puccw")
 expand_mode = 1
 flip_h = true
-metadata/_edit_use_anchors_ = true
 
 [node name="charaCombatUI" parent="ennemiePosition/position4" instance=ExtResource("15_lfn5j")]
-position = Vector2(21.222, 144.056)
+position = Vector2(21.222, 126.278)
 scale = Vector2(1.8, 1.8)
 
 [node name="Button" type="Button" parent="ennemiePosition/position4"]
@@ -638,7 +644,7 @@ expand_mode = 1
 flip_h = true
 
 [node name="charaCombatUI" parent="ennemiePosition/position3" instance=ExtResource("15_lfn5j")]
-position = Vector2(-8.00005, 93.6115)
+position = Vector2(-8.00005, 75.8337)
 scale = Vector2(1.8, 1.8)
 
 [node name="Button" type="Button" parent="ennemiePosition/position3"]
@@ -1244,12 +1250,11 @@ scale = Vector2(338.499, 233.869)
 flat = true
 
 [node name="ShowTuto" type="Button" parent="CanvasLayer"]
-offset_left = 1818.0
-offset_top = 151.0
-offset_right = 1932.0
-offset_bottom = 248.0
+offset_left = 2154.0
+offset_top = 666.0
+offset_right = 2268.0
+offset_bottom = 763.0
 text = "Tutorial"
-flat = true
 
 [node name="AttLabel2" type="RichTextLabel" parent="CanvasLayer"]
 z_index = 7
@@ -1468,17 +1473,17 @@ color = Color(0.643137, 0.560784, 0.364706, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 1477.95
+offset_left = 1397.95
 offset_top = 712.0
-offset_right = 1479.95
+offset_right = 1399.95
 offset_bottom = 739.0
 color = Color(0.643137, 0.560784, 0.364706, 1)
 
 [node name="ColorRect4" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 1478.95
+offset_left = 1398.95
 offset_top = 720.0
-offset_right = 1485.95
+offset_right = 1405.95
 offset_bottom = 727.0
 rotation = 0.785398
 color = Color(0.643137, 0.560784, 0.364706, 1)

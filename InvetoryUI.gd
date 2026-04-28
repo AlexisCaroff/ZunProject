@@ -410,12 +410,12 @@ func unequip(slot_index: int):
 		if inventory_items[i] == null:
 			inventory_items[i] = item
 			selected_character.equipped_items.remove_at(slot_index)
-		
+			
 			update_inventory_ui()
 			update_equipment_slots()
 			#print('unequip '+ item.name)
 			return
-	
+	gm.add_to_inventory(item)
 	select_character(selected_character)
 
 # --------------------------------------------------------------------
@@ -447,6 +447,8 @@ func try_equip_on_character() -> bool:
 		return false
 
 	selected_character.equipped_items.append(dragged_item)
+	var removedItem = gm.inventory.find(dragged_item)
+	gm.inventory.remove_at(removedItem)
 	update_equipment_slots()
 	update_inventory_ui()
 	select_character(selected_character)
@@ -545,7 +547,7 @@ func _reposition_tooltip(near: Vector2):
 	# Déborde à droite → passer à gauche du slot
 	if pos.x + tp_size.x+500 > viewport_size.x:
 		pos.x = near.x - tp_size.x - 136  # 136 = largeur slot (120) + marge (16)
-		print("repo")
+		
 	
 	# Déborde en bas → remonter
 	if pos.y + tp_size.y > viewport_size.y:

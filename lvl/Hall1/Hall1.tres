@@ -13,7 +13,7 @@
 
 [sub_resource type="Resource" id="Resource_gmln8"]
 script = ExtResource("6_nrlk4")
-text = "get ring"
+text = "Get relic"
 effect_type = 1
 item = ExtResource("5_yl2n5")
 tag = ""
@@ -45,7 +45,7 @@ door_scene_History = ExtResource("3_yl2n5")
 combat_scene = ExtResource("1_yl2n5")
 exploration_scene = ExtResource("4_kuqls")
 encounter = ExtResource("4_yl2n5")
-CanCamp = false
+CanCamp = true
 connected_room_ids = Array[String](["Corridor1", "Corridor2"])
 blocked_room_ids = Array[String]([])
 explored = false

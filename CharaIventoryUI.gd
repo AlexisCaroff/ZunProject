@@ -39,7 +39,7 @@ func update_affinity_crystals(affinity: int, crystals: Array):
 		count = 3
 	elif affinity >= 60:
 		count = 2
-	elif affinity >= 30:
+	elif affinity >=25:
 		count = 1
 	else:
 		count = 0

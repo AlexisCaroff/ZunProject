@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://dd3x1krj5j35e"]
 
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="1_drw5b"]
-[ext_resource type="Texture2D" uid="uid://b8iwrks00vrj3" path="res://Items/ItemIcons/Lurid codpiece.png" id="1_s1wml"]
+[ext_resource type="Texture2D" uid="uid://dabklpyhg5mus" path="res://Items/ItemIcons/LOOT_codpiece.png" id="1_s1wml"]
 
 [resource]
 script = ExtResource("1_drw5b")
@@ -9,6 +9,7 @@ icon = ExtResource("1_s1wml")
 name = "Lurid Codpiece"
 description = ""
 isCursed = true
+number = 1
 Max_stamina_bonus = 5
 Max_lust_bonus = 10
 Max_Guilt_bonus = 0

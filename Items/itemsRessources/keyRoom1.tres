@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://bovg8sutwbfkk"]
 
-[ext_resource type="Texture2D" uid="uid://byq6y7gf8k5i3" path="res://Items/ItemIcons/keys.png" id="1_hop5s"]
+[ext_resource type="Texture2D" uid="uid://dn8mbhk5cbv1t" path="res://Items/ItemIcons/LOOT_key_cellar.png" id="1_40ycr"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="2_6cy5q"]
 
 [resource]
 script = ExtResource("2_6cy5q")
-icon = ExtResource("1_hop5s")
+icon = ExtResource("1_40ycr")
 name = "CellarKey"
 description = ""
 isCursed = false

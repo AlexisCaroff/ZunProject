@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SilkGloves" load_steps=3 format=3 uid="uid://msi3wq2l6s3t"]
 
 [ext_resource type="Script" uid="uid://d2mi50dgks1at" path="res://Items/ItemScripts/SilkGloves.gd" id="1_4chqx"]
-[ext_resource type="Texture2D" uid="uid://dfrt5qu50emjc" path="res://Items/ItemIcons/gloves.png" id="1_aubnq"]
+[ext_resource type="Texture2D" uid="uid://54w5gojjnvj2" path="res://Items/ItemIcons/LOOT_glove.png" id="1_aubnq"]
 
 [resource]
 script = ExtResource("1_4chqx")

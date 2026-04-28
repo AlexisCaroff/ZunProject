@@ -7,11 +7,11 @@
 
 [sub_resource type="Resource" id="Resource_dmmkg"]
 script = ExtResource("2_c48p6")
-text = ""
+text = "take Relic"
 effect_type = 1
 item = ExtResource("1_c6sic")
 tag = ""
-opening = false
+opening = true
 metadata/_custom_type_script = "uid://b5vho57xy7r3r"
 
 [sub_resource type="Resource" id="Resource_c6sic"]
@@ -25,7 +25,7 @@ metadata/_custom_type_script = "uid://b5vho57xy7r3r"
 [resource]
 script = ExtResource("4_ygp1k")
 scene = ExtResource("3_80usg")
-dialogue_file = "res://dialogue/dialogueTeste.txt"
+dialogue_file = "res://dialogue/dialogueEmpty.txt"
 choice_1 = SubResource("Resource_dmmkg")
 choice_2 = SubResource("Resource_c6sic")
 metadata/_custom_type_script = "uid://n028octb10a5"

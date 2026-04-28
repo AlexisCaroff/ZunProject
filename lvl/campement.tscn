@@ -293,17 +293,16 @@ texture = ExtResource("10_7h8sq")
 expand_mode = 1
 
 [node name="ActionPanel" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(90, 90)
-offset_left = 616.0
-offset_top = 830.0
-offset_right = 1239.0
-offset_bottom = 930.0
-scale = Vector2(1.13927, 1.13927)
+custom_minimum_size = Vector2(45, 45)
+offset_left = 681.0
+offset_top = 837.0
+offset_right = 781.0
+offset_bottom = 937.0
 theme_override_constants/separation = 10
 alignment = 1
 
 [node name="Action1" type="Button" parent="ActionPanel"]
-custom_minimum_size = Vector2(90, 90)
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("7_adv8w")
@@ -318,7 +317,7 @@ custom_minimum_size = Vector2(90, 90)
 layout_mode = 0
 offset_left = 579.0
 offset_top = 845.0
-offset_right = 1202.0
+offset_right = 679.0
 offset_bottom = 945.0
 scale = Vector2(1.245, 1.245)
 theme_override_constants/separation = 10
@@ -331,12 +330,15 @@ script = ExtResource("10_orkqx")
 portraits_resource = ExtResource("13_ktrs2")
 
 [node name="ExitButton" type="Button" parent="."]
+visible = false
 z_index = 10
 y_sort_enabled = true
-offset_left = 1353.0
-offset_top = 857.0
-offset_right = 1489.0
-offset_bottom = 994.0
+custom_minimum_size = Vector2(40, 40)
+offset_left = 1292.0
+offset_top = 856.0
+offset_right = 1428.0
+offset_bottom = 993.0
+scale = Vector2(0.692733, 0.692733)
 icon = ExtResource("16_nj740")
 flat = true
 script = ExtResource("16_ktrs2")
@@ -797,11 +799,11 @@ script = ExtResource("40_1pem6")
 hover_scale = Vector2(0.51, 0.51)
 
 [node name="chara2" type="TextureRect" parent="CharactersPanelAffinity/chara1"]
-z_index = 6
+z_index = 3
 layout_mode = 0
-offset_left = 52.0
+offset_left = 69.0
 offset_top = 42.0
-offset_right = 299.0
+offset_right = 316.0
 offset_bottom = 113.0
 texture = ExtResource("42_i1nuu")
 expand_mode = 1
@@ -840,11 +842,11 @@ texture = ExtResource("45_i1nuu")
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 114.0
-offset_top = 39.0
-offset_right = 214.0
-offset_bottom = 139.0
-scale = Vector2(0.585169, 0.735415)
+offset_left = 113.0
+offset_top = 45.0
+offset_right = 213.0
+offset_bottom = 145.0
+scale = Vector2(0.484047, 0.52833)
 texture = ExtResource("43_i1nuu")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CharactersPanelAffinity/chara1/AffinityCrystalBack1"]
@@ -860,11 +862,11 @@ texture = ExtResource("44_l0oyj")
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 183.0
-offset_top = 41.0
-offset_right = 283.0
-offset_bottom = 141.0
-scale = Vector2(0.585169, 0.735415)
+offset_left = 195.0
+offset_top = 44.0
+offset_right = 295.0
+offset_bottom = 144.0
+scale = Vector2(0.484047, 0.52833)
 texture = ExtResource("43_i1nuu")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CharactersPanelAffinity/chara1/AffinityCrystalBack2"]
@@ -880,11 +882,11 @@ texture = ExtResource("44_l0oyj")
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 246.0
-offset_top = 39.0
-offset_right = 346.0
-offset_bottom = 139.0
-scale = Vector2(0.585169, 0.735415)
+offset_left = 270.0
+offset_top = 46.0
+offset_right = 370.0
+offset_bottom = 146.0
+scale = Vector2(0.484047, 0.52833)
 texture = ExtResource("43_i1nuu")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CharactersPanelAffinity/chara1/AffinityCrystalBack3"]
@@ -898,282 +900,23 @@ texture = ExtResource("44_l0oyj")
 
 [node name="LustProgressBar3" type="ProgressBar" parent="CharactersPanelAffinity/chara1"]
 modulate = Color(0.959566, 0.836991, 0.50111, 1)
+z_index = 5
 layout_mode = 2
-offset_left = 80.0
-offset_top = 69.0
-offset_right = 280.0
-offset_bottom = 85.0
+offset_left = 85.0
+offset_top = 72.0
+offset_right = 297.0
+offset_bottom = 82.0
 theme_override_styles/background = SubResource("StyleBoxFlat_nj740")
 theme_override_styles/fill = SubResource("StyleBoxFlat_7tx7c")
 step = 1.0
-value = 66.0
+value = 25.0
 show_percentage = false
 
 [node name="Button" type="Button" parent="CharactersPanelAffinity/chara1"]
 layout_mode = 0
-offset_left = 46.0
+offset_left = 49.0
 offset_top = 1.0
-offset_right = 135.0
-offset_bottom = 91.0
-rotation = 0.793458
-flat = true
-
-[node name="chara2" type="TextureRect" parent="CharactersPanelAffinity"]
-z_index = 6
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-expand_mode = 1
-script = ExtResource("40_1pem6")
-hover_scale = Vector2(0.51, 0.51)
-
-[node name="chara2" type="TextureRect" parent="CharactersPanelAffinity/chara2"]
-z_index = 6
-layout_mode = 0
-offset_left = 52.0
-offset_top = 42.0
-offset_right = 299.0
-offset_bottom = 113.0
-texture = ExtResource("42_i1nuu")
-expand_mode = 1
-
-[node name="Textaffinity" type="RichTextLabel" parent="CharactersPanelAffinity/chara2"]
-layout_mode = 0
-offset_left = 127.0
-offset_top = 12.0
-offset_right = 305.0
-offset_bottom = 103.0
-theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
-theme_override_fonts/normal_font = ExtResource("41_7h8sq")
-theme_override_font_sizes/normal_font_size = 25
-text = "name  value"
-horizontal_alignment = 1
-
-[node name="chara3" type="TextureRect" parent="CharactersPanelAffinity/chara2"]
-z_index = 6
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = -14.0
-offset_top = 6.0
-offset_right = 105.0
-offset_bottom = 125.0
-texture = ExtResource("44_nj740")
-expand_mode = 1
-
-[node name="chara" type="Sprite2D" parent="CharactersPanelAffinity/chara2"]
-z_index = 6
-position = Vector2(46.5226, 68)
-rotation = -0.191986
-scale = Vector2(0.491435, 0.491435)
-texture = ExtResource("45_i1nuu")
-
-[node name="AffinityCrystalBack1" type="TextureRect" parent="CharactersPanelAffinity/chara2"]
-z_index = 6
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = 114.0
-offset_top = 39.0
-offset_right = 214.0
-offset_bottom = 139.0
-scale = Vector2(0.585169, 0.735415)
-texture = ExtResource("43_i1nuu")
-
-[node name="AffinityCrystal" type="TextureRect" parent="CharactersPanelAffinity/chara2/AffinityCrystalBack1"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = -8.10813
-offset_right = 120.892
-offset_bottom = 108.0
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("44_l0oyj")
-
-[node name="AffinityCrystalBack2" type="TextureRect" parent="CharactersPanelAffinity/chara2"]
-z_index = 6
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = 183.0
-offset_top = 41.0
-offset_right = 283.0
-offset_bottom = 141.0
-scale = Vector2(0.585169, 0.735415)
-texture = ExtResource("43_i1nuu")
-
-[node name="AffinityCrystal" type="TextureRect" parent="CharactersPanelAffinity/chara2/AffinityCrystalBack2"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = -8.10813
-offset_right = 120.892
-offset_bottom = 108.0
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("44_l0oyj")
-
-[node name="AffinityCrystalBack3" type="TextureRect" parent="CharactersPanelAffinity/chara2"]
-z_index = 6
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = 246.0
-offset_top = 39.0
-offset_right = 346.0
-offset_bottom = 139.0
-scale = Vector2(0.585169, 0.735415)
-texture = ExtResource("43_i1nuu")
-
-[node name="AffinityCrystal" type="TextureRect" parent="CharactersPanelAffinity/chara2/AffinityCrystalBack3"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = -8.10813
-offset_right = 120.892
-offset_bottom = 108.0
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("44_l0oyj")
-
-[node name="LustProgressBar3" type="ProgressBar" parent="CharactersPanelAffinity/chara2"]
-modulate = Color(0.959566, 0.836991, 0.50111, 1)
-layout_mode = 2
-offset_left = 80.0
-offset_top = 69.0
-offset_right = 280.0
-offset_bottom = 85.0
-theme_override_styles/background = SubResource("StyleBoxFlat_nj740")
-theme_override_styles/fill = SubResource("StyleBoxFlat_7tx7c")
-step = 1.0
-value = 66.0
-show_percentage = false
-
-[node name="Button" type="Button" parent="CharactersPanelAffinity/chara2"]
-layout_mode = 0
-offset_left = 46.0
-offset_top = 1.0
-offset_right = 135.0
-offset_bottom = 91.0
-rotation = 0.793458
-flat = true
-
-[node name="chara3" type="TextureRect" parent="CharactersPanelAffinity"]
-z_index = 6
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-expand_mode = 1
-script = ExtResource("40_1pem6")
-hover_scale = Vector2(0.51, 0.51)
-
-[node name="chara2" type="TextureRect" parent="CharactersPanelAffinity/chara3"]
-z_index = 6
-layout_mode = 0
-offset_left = 52.0
-offset_top = 42.0
-offset_right = 299.0
-offset_bottom = 113.0
-texture = ExtResource("42_i1nuu")
-expand_mode = 1
-
-[node name="Textaffinity" type="RichTextLabel" parent="CharactersPanelAffinity/chara3"]
-layout_mode = 0
-offset_left = 127.0
-offset_top = 12.0
-offset_right = 305.0
-offset_bottom = 103.0
-theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
-theme_override_fonts/normal_font = ExtResource("41_7h8sq")
-theme_override_font_sizes/normal_font_size = 25
-text = "name  value"
-horizontal_alignment = 1
-
-[node name="chara3" type="TextureRect" parent="CharactersPanelAffinity/chara3"]
-z_index = 6
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = -14.0
-offset_top = 6.0
-offset_right = 105.0
-offset_bottom = 125.0
-texture = ExtResource("44_nj740")
-expand_mode = 1
-
-[node name="chara" type="Sprite2D" parent="CharactersPanelAffinity/chara3"]
-z_index = 6
-position = Vector2(46.5226, 68)
-rotation = -0.191986
-scale = Vector2(0.491435, 0.491435)
-texture = ExtResource("45_i1nuu")
-
-[node name="AffinityCrystalBack1" type="TextureRect" parent="CharactersPanelAffinity/chara3"]
-z_index = 6
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = 114.0
-offset_top = 39.0
-offset_right = 214.0
-offset_bottom = 139.0
-scale = Vector2(0.585169, 0.735415)
-texture = ExtResource("43_i1nuu")
-
-[node name="AffinityCrystal" type="TextureRect" parent="CharactersPanelAffinity/chara3/AffinityCrystalBack1"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = -8.10813
-offset_right = 120.892
-offset_bottom = 108.0
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("44_l0oyj")
-
-[node name="AffinityCrystalBack2" type="TextureRect" parent="CharactersPanelAffinity/chara3"]
-z_index = 6
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = 183.0
-offset_top = 41.0
-offset_right = 283.0
-offset_bottom = 141.0
-scale = Vector2(0.585169, 0.735415)
-texture = ExtResource("43_i1nuu")
-
-[node name="AffinityCrystal" type="TextureRect" parent="CharactersPanelAffinity/chara3/AffinityCrystalBack2"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = -8.10813
-offset_right = 120.892
-offset_bottom = 108.0
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("44_l0oyj")
-
-[node name="AffinityCrystalBack3" type="TextureRect" parent="CharactersPanelAffinity/chara3"]
-z_index = 6
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = 246.0
-offset_top = 39.0
-offset_right = 346.0
-offset_bottom = 139.0
-scale = Vector2(0.585169, 0.735415)
-texture = ExtResource("43_i1nuu")
-
-[node name="AffinityCrystal" type="TextureRect" parent="CharactersPanelAffinity/chara3/AffinityCrystalBack3"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = -8.10813
-offset_right = 120.892
-offset_bottom = 108.0
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("44_l0oyj")
-
-[node name="LustProgressBar3" type="ProgressBar" parent="CharactersPanelAffinity/chara3"]
-modulate = Color(0.959566, 0.836991, 0.50111, 1)
-layout_mode = 2
-offset_left = 80.0
-offset_top = 69.0
-offset_right = 280.0
-offset_bottom = 85.0
-theme_override_styles/background = SubResource("StyleBoxFlat_nj740")
-theme_override_styles/fill = SubResource("StyleBoxFlat_7tx7c")
-step = 1.0
-value = 66.0
-show_percentage = false
-
-[node name="Button" type="Button" parent="CharactersPanelAffinity/chara3"]
-layout_mode = 0
-offset_left = 46.0
-offset_top = 1.0
-offset_right = 135.0
+offset_right = 138.0
 offset_bottom = 91.0
 rotation = 0.793458
 flat = true

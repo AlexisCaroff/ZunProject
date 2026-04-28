@@ -21,6 +21,9 @@ texture = ExtResource("1_eraef")
 [node name="atmosphere" parent="." instance=ExtResource("2_l3uyc")]
 position = Vector2(2, 352)
 
+[node name="atmosphere2" parent="." instance=ExtResource("2_l3uyc")]
+position = Vector2(2, 352)
+
 [node name="MenuPerso" parent="." instance=ExtResource("3_vfoag")]
 layout_mode = 1
 

@@ -218,6 +218,8 @@ func show_chara_actions(thechara: CharaCamp):
 			btn.icon = skill.icon
 		var empty_style := StyleBoxEmpty.new()
 		btn.add_theme_stylebox_override("focus", empty_style)
+		btn.custom_minimum_size= Vector2(70,70)
+		btn.size=Vector2(70,70)
 		btn.Actiontext = skill.name
 		if skill.cost>campPoints:
 			btn.disabled=true

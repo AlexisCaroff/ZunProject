@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=15 format=3 uid="uid://nl7l7dwgagxi"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=16 format=3 uid="uid://nl7l7dwgagxi"]
 
 [ext_resource type="Texture2D" uid="uid://c6wwcw5lllh44" path="res://characters/charatexture/demo characters/INQUISITION_punisher_hit.png" id="1_u85jh"]
 [ext_resource type="Script" uid="uid://db1m8vwgp38yx" path="res://characters/charatexture/braines/Ai_brain_Support.gd" id="2_l4hkq"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://blka6u0nynm1c" path="res://characters/charatexture/demo characters/INQUISITION_punisher_down.png" id="5_6liig"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_y6lxd"]
 [ext_resource type="Texture2D" uid="uid://dlcjkvugg0br8" path="res://characters/exploPortrait/PunisherExploPortrait.png" id="7_l4hkq"]
+[ext_resource type="Texture2D" uid="uid://d3knbe31r0cgx" path="res://characters/characterInitiative/PunishersIniPortrait.png" id="8_6liig"]
 [ext_resource type="Texture2D" uid="uid://deg5h8trputmj" path="res://characters/charatexture/demo characters/INQUISITION_punisher_idle.png" id="8_p1wfb"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="10_oumc8"]
 [ext_resource type="Resource" uid="uid://c4nfaoik03hsb" path="res://actions/ennemiCombatSkills/Shield.tres" id="10_u85jh"]
@@ -28,7 +29,7 @@ portrait_texture = ExtResource("8_p1wfb")
 explorationPortrait = ExtResource("7_l4hkq")
 dead_portrait_texture = ExtResource("5_6liig")
 Hit_texture = ExtResource("1_u85jh")
-initiative_icon = ExtResource("7_l4hkq")
+initiative_icon = ExtResource("8_6liig")
 Name = "Punisher"
 Charaname = "Punisher"
 IsDemon = false

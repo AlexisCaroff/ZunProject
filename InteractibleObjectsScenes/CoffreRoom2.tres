@@ -25,7 +25,7 @@ metadata/_custom_type_script = "uid://b5vho57xy7r3r"
 [resource]
 script = ExtResource("1_d4fg4")
 scene = ExtResource("3_p2w61")
-dialogue_file = "res://dialogue/dialogueTeste.txt"
+dialogue_file = "res://dialogue/dialogueEmpty.txt"
 choice_1 = SubResource("Resource_dmmkg")
 choice_2 = SubResource("Resource_nvxa8")
 metadata/_custom_type_script = "uid://n028octb10a5"

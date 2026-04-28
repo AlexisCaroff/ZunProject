@@ -22,27 +22,13 @@ text = "name"
 
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2(49, 31)
-scale = Vector2(1.2, 1.2)
 script = ExtResource("4_1ysjx")
-min_scale = 1.15
-max_scale = 1.15
-scalemini = 1.1
+min_scale = 1.01
+max_scale = 1.05
 min_duration = 1.0
 max_duration = 1.5
 
 [node name="HerosTexture1" type="TextureRect" parent="pivot"]
-offset_left = -152.5
-offset_top = -353.333
-offset_right = 18.501
-offset_bottom = -122.333
-scale = Vector2(2.09679, 1.68845)
-mouse_filter = 2
-texture = ExtResource("4_plkkk")
-expand_mode = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Selector" type="TextureRect" parent="pivot"]
-self_modulate = Color(2.5, 2.5, 2.5, 0)
 offset_left = -152.5
 offset_top = -353.333
 offset_right = 18.501

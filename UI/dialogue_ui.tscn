@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bg44l1eibyvid"]
+[gd_scene load_steps=12 format=3 uid="uid://bg44l1eibyvid"]
 
 [ext_resource type="Script" uid="uid://2yw45k1rwvdf" path="res://DialogueUI.gd" id="1_6e3n1"]
 [ext_resource type="Texture2D" uid="uid://xbjwv5qg2xmp" path="res://characters/portraits/PORTRAIT_hero_hunter.png" id="2_om3t3"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://daesb11yj6hl2" path="res://UI/UI boxes/UI_convo_name.png" id="7_y5125"]
 [ext_resource type="Texture2D" uid="uid://cwkldn58q4lyh" path="res://UI/UI boxes/UI_convo_name_Bkg.png" id="8_qn32y"]
 [ext_resource type="Texture2D" uid="uid://djk5rtb1m8cpd" path="res://UI/UI boxes/UI_click_left.png" id="10_5qnbt"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="11_y5125"]
 
 [node name="DialogueUI" type="Control"]
 z_index = 20
@@ -165,3 +166,8 @@ expand_mode = 1
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 8
 follow_viewport_enabled = true
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(1920, 1080)
+script = ExtResource("11_y5125")
+metadata/_custom_type_script = "uid://devdej4xpva2i"

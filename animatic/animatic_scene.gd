@@ -76,7 +76,7 @@ func _advance() -> void:
 	_swap_images()
 
 	_current_index = next_index
-	_is_transitioning = false
+	#_is_transitioning = false
 	_show_frame(_current_index)
 
 # ---------- Fondu enchaîné ----------
@@ -126,8 +126,16 @@ func _on_click() -> void:
 		#subtitle_label.text = ""
 
 	_advance()
+	
+func _input(event):
+	if not event.is_pressed():
+		return
 
-# ---------- Fin ----------
+
+	# X → sauter tout l'animatic immédiatement
+	if event is InputEventKey and event.keycode == KEY_X:
+		_end_animatic()
+
 
 func _end_animatic() -> void:
 	GameState.Pause=false

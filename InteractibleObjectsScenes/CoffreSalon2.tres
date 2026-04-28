@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_dmmkg"]
 script = ExtResource("2_6av3b")
-text = "Take"
+text = "Open the chest"
 effect_type = 1
 item = ExtResource("1_pkqor")
 tag = ""
@@ -25,7 +25,7 @@ metadata/_custom_type_script = "uid://b5vho57xy7r3r"
 [resource]
 script = ExtResource("4_3kaf6")
 scene = ExtResource("3_pkqor")
-dialogue_file = "res://scripts/InteractableObjectResource.gd"
+dialogue_file = "res://dialogue/dialogueEmpty.txt"
 choice_1 = SubResource("Resource_dmmkg")
 choice_2 = SubResource("Resource_pkqor")
 metadata/_custom_type_script = "uid://n028octb10a5"
