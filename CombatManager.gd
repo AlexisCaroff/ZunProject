@@ -345,7 +345,7 @@ func next_turn():
 	# sinon l'UI flash brièvement pour rien.
 	if current_character.characterData.stun == true:
 		print("🚫 SKIP (stun): ", current_character.characterData.Charaname)
-		ui.log(current_character.characterData.Charaname + " is stuned")
+		ui.log(current_character.characterData.Charaname + " is stunned")
 		if current_character.exclamation != null:
 			current_character.exclamation.free()
 			ui.log(current_character.characterData.Charaname + " is surprised")
@@ -536,7 +536,7 @@ func _show_victory():
 	victory_ui.showLoot(encounter.loots, gm)
 	
 	gm.current_room_Ressource.ennemikilled=true
-	
+	gm.combat_just_ended = true
 	canvas.add_child(victory_ui)
 
 

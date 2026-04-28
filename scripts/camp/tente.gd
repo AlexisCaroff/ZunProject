@@ -109,7 +109,7 @@ func startlove(user:CharaCamp, target: CharaCamp):
 	var key1 = "%s+%s" % [user.characterData.Charaname, target.characterData.Charaname]
 	var key2 = "%s+%s" % [target.characterData.Charaname, user.characterData.Charaname]
 	var littlebuff := load("res://characters/kink/bigAttackBuff.tres")
-	
+	print ("show "+ key1+ " " + key2)
 	user.campposition.visible=false
 	target.campposition.visible=false
 	twoInside.append(user)
@@ -294,10 +294,10 @@ func loved_one_go_out():
 	
 	
 func show_love_image(user: CharaCamp, target: CharaCamp):
-
+	
 	var key1 = "%s+%s" % [user.characterData.Charaname, target.characterData.Charaname]
 	var key2 = "%s+%s" % [target.characterData.Charaname, user.characterData.Charaname]
-
+	print("show love image " + key1 +" " + key2 )
 	var folder_path := ""
 
 	if duo_folders.has(key1):

@@ -1,14 +1,14 @@
 extends Node2D
 class_name Map
-var Rooms: Array[Node2D] = [] 
- 
-var Doors: Array[Node2D] = [] 
 
-@onready var oldposition :Node2D
+var Rooms: Array[Node2D] = []
+var Doors: Array[Node2D] = []
+
+@onready var oldposition: Node2D
 @onready var TeamPositisonIndicator = $Position
-@export var move_time: float = 1.0   
+@export var move_time: float = 1.0
 var tween: Tween
-@onready var camera: Camera2D= $Camera2D
+@onready var camera: Camera2D = $Camera2D
 var is_dragging := false
 var last_mouse_pos := Vector2.ZERO
 
@@ -16,40 +16,37 @@ var zoom_step := 0.1
 var min_zoom := 0.4
 var max_zoom := 2.5
 
-var gm : GameManager
-@export var colorDoorFocus : Color
-@export var colorDoorExplored : Color
-@export var colorDoorToExplor : Color
-@export var colorRoomFocus : Color
-@export var colorRoomExplored : Color
+var gm: GameManager
+@export var colorDoorFocus: Color
+@export var colorDoorExplored: Color
+@export var colorDoorToExplor: Color
+@export var colorRoomFocus: Color
+@export var colorRoomExplored: Color
+
 
 func _ready() -> void:
 	gm = get_tree().root.get_node("GameManager") as GameManager
-	
+
 	if oldposition != null:
-		TeamPositisonIndicator.position=oldposition.position
-	
+		TeamPositisonIndicator.position = oldposition.position
+
 	for child in $DonjonRooms.get_children():
 		Rooms.append(child)
 	for child in $DonjonDoor.get_children():
 		Doors.append(child)
-	# Exemple : aller à la première position si elle existe
-	
+
+
 func _input(event: InputEvent) -> void:
 	if camera == null:
 		return
 
 	var mouse_pos := camera.get_global_mouse_position()
 
-	# -------- Hover --------
-
-
 	if is_dragging:
 		var delta = last_mouse_pos - mouse_pos
 		camera.position += delta
 		last_mouse_pos = mouse_pos
 
-	# -------- Clic gauche --------
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
@@ -58,16 +55,13 @@ func _input(event: InputEvent) -> void:
 			else:
 				is_dragging = false
 
-				# clic simple → sélection room
-
-
-		# -------- Zoom molette --------
 		if event.pressed:
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				_zoom_at(mouse_pos, 1.0 - zoom_step)
-
 			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				_zoom_at(mouse_pos, 1.0 + zoom_step)
+
+
 func _zoom_at(mouse_pos: Vector2, factor: float) -> void:
 	var old_zoom = camera.zoom
 	var new_zoom = (old_zoom * factor).clamp(Vector2(min_zoom, min_zoom), Vector2(max_zoom, max_zoom))
@@ -75,120 +69,120 @@ func _zoom_at(mouse_pos: Vector2, factor: float) -> void:
 	if new_zoom == old_zoom:
 		return
 
-	# Compense le déplacement pour zoomer sous la souris
 	var before = mouse_pos
 	camera.zoom = new_zoom
 	var after = camera.get_global_mouse_position()
-
 	camera.position += before - after
 
-func focus_on_room(room: RoomResource, _viewport=null ):
-	var focusedRoom
+
+# ════════════════════════════════════════════════════════════════════
+#  Helpers de coloration
+# ════════════════════════════════════════════════════════════════════
+
+## Repeint TOUTES les salles : visible si explorée, noire sinon.
+## Renvoie la salle dont le nom matche room.room_id (la "focus").
+func _paint_rooms(room: RoomResource) -> Node2D:
+	var focused: Node2D = null
 	for salle in Rooms:
 		var room_res = gm.get_room_by_id(salle.name)
 		if room_res and room_res.explored:
 			salle.self_modulate = colorRoomExplored
-			for thedoor in Doors:
-				for roomname in thedoor.connectedRooms:
-					if roomname == room_res.room_id:
-				
-						thedoor.self_modulate=colorDoorToExplor
-			
 		else:
 			salle.self_modulate = Color.BLACK
-		if salle.name==room.room_id:
-			focusedRoom=salle
-			salle.self_modulate=colorRoomFocus
-	var RoomExploreds: Array[RoomResource]
-	for roomRes in gm.donjon.rooms:
-		
-		if roomRes.explored:
-			RoomExploreds.append(roomRes)
-			
+		if salle.name == room.room_id:
+			focused = salle
+	return focused
 
-	
-		
 
+## Repeint TOUTES les portes : visible (gris) si elle relie au moins
+## une salle explorée, noire sinon. C'est la base avant de surligner
+## la porte focus.
+func _paint_doors_default() -> void:
+	for thedoor: MapDoor in Doors:
+		var visible_door := false
+		for roomname in thedoor.connectedRooms:
+			var room_res = gm.get_room_by_id(roomname)
+			if room_res and room_res.explored:
+				visible_door = true
+				break
+		thedoor.self_modulate = colorDoorToExplor if visible_door else Color.BLACK
+
+
+# ════════════════════════════════════════════════════════════════════
+#  Focus modes
+# ════════════════════════════════════════════════════════════════════
+
+## Phase EXPLORATION : on est dans une salle, on la met en focus.
+func focus_on_room(room: RoomResource, _viewport = null):
+	var focusedRoom := _paint_rooms(room)
+	_paint_doors_default()
+	if focusedRoom:
+		focusedRoom.self_modulate = colorRoomFocus
+
+	if focusedRoom == null:
+		return
 	var target_pos = focusedRoom.position
-	var tween = create_tween()
-	tween.tween_property( camera, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	var thetween = create_tween()
+	thetween.tween_property(camera, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 
-func peek_next_Room(room : RoomResource, _viewport=null):
+## Hover sur une salle dans le menu de sélection : on prévisualise la porte.
+func peek_next_Room(room: RoomResource, _viewport = null):
 	if gm == null:
 		gm = get_tree().root.get_node("GameManager") as GameManager
-		print ("go find Gm")
-	var lastRoom
 
+	var lastRoom: String = ""
 	if gm.last_room_Ressource != null:
 		lastRoom = gm.TheRoom_we_are_in.room_id
-	
-	var focusedRoom
+
+	var focusedRoom: Node2D = null
 	for salle in Rooms:
-		if salle.name==room.room_id:
-			focusedRoom=salle
-			focusedRoom.self_modulate=colorRoomFocus
-			
-	for thedoor in Doors:	
+		if salle.name == room.room_id:
+			focusedRoom = salle
+			focusedRoom.self_modulate = colorRoomFocus
+
+	for thedoor: MapDoor in Doors:
 		for roomname in thedoor.connectedRooms:
 			if roomname == room.room_id:
-				thedoor.self_modulate=colorDoorToExplor
+				thedoor.self_modulate = colorDoorToExplor
 			if roomname == lastRoom:
-				thedoor.self_modulate=colorDoorToExplor
-			if lastRoom != null:
-				if focusedRoom.name in thedoor.connectedRooms and lastRoom in thedoor.connectedRooms:
-					thedoor.self_modulate=colorDoorFocus
-					
-				
-				
+				thedoor.self_modulate = colorDoorToExplor
+		if lastRoom != "" and focusedRoom != null:
+			if focusedRoom.name in thedoor.connectedRooms and lastRoom in thedoor.connectedRooms:
+				thedoor.self_modulate = colorDoorFocus
 
 
-		
-func focus_door(room : RoomResource, _viewport=null):
-	
+## Phase DOOR : on regarde une porte qu'on est sur le point de franchir.
+## Reset complet salles + portes, puis surligne la porte qu'on traverse.
+func focus_door(room: RoomResource, _viewport = null):
 	if gm == null:
 		gm = get_tree().root.get_node("GameManager") as GameManager
-		print ("go find Gm")
-	for salle in Rooms:
-		var room_res = gm.get_room_by_id(salle.name)
-		if room_res and room_res.explored:
-			salle.self_modulate = colorRoomExplored
-		else:
-			salle.self_modulate = Color.BLACK
 
-	var focusedRoom
-	var lastRoom
+	# 1. Repaint salles + portes par défaut (état explored)
+	var focusedRoom := _paint_rooms(room)
+	_paint_doors_default()
+
+	# 2. Détermine la salle de provenance
+	var lastRoom: String = ""
 	if gm.LastRoom_we_were_in != null:
 		lastRoom = gm.TheRoom_we_are_in.room_id
-	for salle in Rooms:
-		if salle.name==room.room_id:
-			focusedRoom=salle
-			
 
-	var target_pos 
-	
-	for thedoor :MapDoor in Doors:
-		
-		for roomname in thedoor.connectedRooms:
-			if roomname == lastRoom:
-				thedoor.self_modulate=colorDoorToExplor
-		
-		if lastRoom != null:
-			if focusedRoom.name in thedoor.connectedRooms and lastRoom in thedoor.connectedRooms:
-				thedoor.self_modulate=colorDoorFocus
-				target_pos=thedoor.position
-				#print ("find door")
-		else:
-			for roomname in thedoor.connectedRooms:
-				if roomname == "Salle0":
-					thedoor.self_modulate=colorDoorFocus
-					target_pos=thedoor.position
-		
-	if target_pos ==null:
-		target_pos=focusedRoom.position
-	var thetween = create_tween()
-	thetween.tween_property( camera, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	
-		
-		
-	
+	# 3. Cherche la porte qui relie focusedRoom et lastRoom → focus
+	var target_pos = null
+	for thedoor: MapDoor in Doors:
+		var connects_focus := focusedRoom != null and (focusedRoom.name in thedoor.connectedRooms)
+		var connects_last  := lastRoom != "" and (lastRoom in thedoor.connectedRooms)
+		var connects_start := lastRoom == "" and ("Salle0" in thedoor.connectedRooms)
+
+		if (connects_focus and connects_last) or connects_start:
+			thedoor.self_modulate = colorDoorFocus
+			target_pos = thedoor.position
+			break
+
+	# 4. Tween caméra vers la porte focus, ou la salle si on n'a rien trouvé
+	if target_pos == null and focusedRoom != null:
+		target_pos = focusedRoom.position
+
+	if target_pos != null:
+		var thetween = create_tween()
+		thetween.tween_property(camera, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)

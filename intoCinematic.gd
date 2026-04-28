@@ -17,6 +17,7 @@ func _process(delta):
 		started=true
 	else:
 		if started:
+			gm.spawn_start_menu()
 			transi.fade_in()
 			queue_free()
 		

@@ -18,6 +18,7 @@ var campement_node: Node = null
 @export var teamCorrupted = false
 var start_menu: StartMenu = null
 var game_started: bool = false
+var combat_just_ended: bool = false
 
 func _ready():
 	var screen_index := 0
@@ -76,6 +77,9 @@ func enter_room(room: RoomResource, changedoor: bool = false):
 		last_room_Ressource = current_room_Ressource
 	current_room_Ressource = room
  
+	# Une porte n'est pas du combat — on remet la phase à EXPLORATION.
+	GameState.current_phase = GameStat.GamePhase.EXPLORATION
+ 
 	print("🏰 Current room is ", current_room_Ressource.room_id)
 	await sceneTransition.fade_out()
 	if current_room_node:
@@ -93,24 +97,28 @@ func enter_room(room: RoomResource, changedoor: bool = false):
 		current_room_node = new_scene
 	await sceneTransition.fade_in()
  
+	if room.door_scene_History != null and not room.door_history_played:
+		print("📖 Door history pour ", room.room_id)
+		show_history_scene(room.door_scene_History)
+		room.door_history_played = true
+ 
 
 
 func go_back() -> void:
 	if last_room_Ressource == null:
 		push_warning("go_back : aucune salle précédente enregistrée.")
 		return
- 
 	if last_room_Ressource.exploration_scene == null:
 		push_error("go_back : %s n'a pas d'exploration_scene." % last_room_Ressource.room_id)
 		return
  
 	await sceneTransition.fade_out()
  
-	# Restaure l'état de salle complet — sans ça, les autres systèmes
-	# (connected_room_ids, camp, fin de combat…) pensent qu'on est encore
-	# dans la salle qu'on n'a jamais réellement visitée.
 	current_room_Ressource = last_room_Ressource
 	TheRoom_we_are_in      = last_room_Ressource
+ 
+	# On revient à de l'exploration → reset de phase.
+	GameState.current_phase = GameStat.GamePhase.EXPLORATION
  
 	if current_room_node and is_instance_valid(current_room_node):
 		current_room_node.queue_free()
@@ -156,23 +164,26 @@ func _enter_scene_in_current_room(scene: PackedScene, ennemy_are_embushed: bool 
 		TheRoom_we_are_in = current_room_Ressource
 	current_room_Ressource.explored = true
 	if get_room_by_id("Cellar").ennemikilled == true:
-		end.visible=true
+		end.visible = true
+ 
+	# Détermine la phase en fonction de la scène chargée.
+	var loading_combat := current_room_Ressource.combat_scene \
+			and scene == current_room_Ressource.combat_scene \
+			and current_room_Ressource.ennemikilled == false
+	GameState.current_phase = GameStat.GamePhase.COMBAT if loading_combat else GameStat.GamePhase.EXPLORATION
+ 
 	await sceneTransition.fade_out()
 	if scene:
-		
 		if current_room_node:
 			print("old scene is ", current_room_node.name)
-			print ("free old room")
+			print("free old room")
 			current_room_node.free()
-			
 			current_room_node = null
-
-		
+ 
 		var new_scene
-		if current_room_Ressource.combat_scene and scene == current_room_Ressource.combat_scene and current_room_Ressource.ennemikilled == false:
+		if loading_combat:
 			new_scene = scene.instantiate()
 			var combat_manager = new_scene.find_child("CombatManager", true, false)
-
 			if combat_manager:
 				combat_manager.encounter = current_room_Ressource.encounter
 				combat_manager.ennemy_are_ambushed = ennemy_are_embushed
@@ -180,14 +191,13 @@ func _enter_scene_in_current_room(scene: PackedScene, ennemy_are_embushed: bool 
 				print("⚔️ Encounter assigned to CombatManager")
 			else:
 				push_error("⚠️ CombatManager introuvable dans la scène de combat")
-		else : 
+		else:
 			new_scene = current_room_Ressource.exploration_scene.instantiate()
-			
+ 
 		room_container.add_child(new_scene)
 		current_room_node = new_scene
 		print("Start new room: ", new_scene.name)
 		await sceneTransition.fade_in()
-			
 
 func go_to_campement():
 	await sceneTransition.fade_out()
@@ -202,22 +212,25 @@ func go_to_campement():
 
 func return_to_exploration():
 	await sceneTransition.fade_out()
+ 
+	# Sortie du camp = retour en exploration.
+	GameState.current_phase = GameStat.GamePhase.EXPLORATION
+ 
 	if campement_node and is_instance_valid(campement_node):
 		campement_node.queue_free()
 		campement_node = null
-
+ 
 	var scene_to_load: PackedScene = null
 	if current_room_Ressource and current_room_Ressource.exploration_scene:
 		scene_to_load = current_room_Ressource.exploration_scene
-
+ 
 	if scene_to_load:
 		var new_scene = scene_to_load.instantiate()
 		room_container.add_child(new_scene)
 		current_room_node = new_scene
-		var exploManager =new_scene.get_node("ExplorationManager") as ExplorationManager
-		
+		var exploManager = new_scene.get_node("ExplorationManager") as ExplorationManager
+ 
 	await sceneTransition.fade_in()
-
 
 #------------------------------------------------------
 signal inventory_changed

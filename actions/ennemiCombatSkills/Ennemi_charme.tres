@@ -18,8 +18,8 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [resource]
 script = ExtResource("5_nar82")
-name = "Charme"
-descriptionName = "Charme"
+name = "Charm"
+descriptionName = "Charm"
 description = "incrase horny"
 icon = ExtResource("4_ngyod")
 barkSkill = ""

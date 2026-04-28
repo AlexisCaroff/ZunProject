@@ -76,7 +76,7 @@ func _advance() -> void:
 	_swap_images()
 
 	_current_index = next_index
-	#_is_transitioning = false
+	_is_transitioning = false
 	_show_frame(_current_index)
 
 # ---------- Fondu enchaîné ----------

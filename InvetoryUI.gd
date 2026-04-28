@@ -303,9 +303,7 @@ func _on_slot_hovered(index: int):
 	show_tooltip(item, cell.global_position + Vector2(120, 0))
 
 func on_inventory_slot_pressed(index: int):
-	#if index < 0 or index >= inventory_items.size():
-	#	print("Index hors limite :", index)
-	#	return
+	print("Inventory click | phase=", GameState.current_phase) 
 	var item = inventory_items[index]
 
 	if dragged_item == null:
@@ -401,21 +399,29 @@ func update_equipment_slots():
 func unequip(slot_index: int):
 	if GameState.current_phase == GameStat.GamePhase.COMBAT:
 		return
-	#print ('try unequip item')
-	var item = selected_character.equipped_items[slot_index]
-	
-	# Trouver une place dans l’inventaire
-	for i in range(inventory_items.size()+1):
-		
+ 
+	var item: Equipment = selected_character.equipped_items[slot_index]
+ 
+	# ── Sync avec gm.inventory (le master persistant) ──
+	# On ajoute directement (pas via gm.add_to_inventory) pour éviter
+	# que le signal inventory_changed ne déclenche un addItemToInventory()
+	# qui ajouterait une 2e fois dans inventory_items.
+	if not gm.inventory.has(item):
+		gm.inventory.append(item)
+ 
+	# ── Place dans le grid local ──
+	for i in range(inventory_items.size()):
 		if inventory_items[i] == null:
 			inventory_items[i] = item
 			selected_character.equipped_items.remove_at(slot_index)
-			
 			update_inventory_ui()
 			update_equipment_slots()
-			#print('unequip '+ item.name)
 			return
-	gm.add_to_inventory(item)
+ 
+	# ── Fallback : aucune place dans le grid (improbable mais safe) ──
+	# L'item reste dans gm.inventory. On retire quand même de equipped.
+	selected_character.equipped_items.remove_at(slot_index)
+	update_equipment_slots()
 	select_character(selected_character)
 
 # --------------------------------------------------------------------
@@ -442,19 +448,22 @@ func _input(event):
 func try_equip_on_character() -> bool:
 	if selected_character == null:
 		return false
-
+ 
 	if selected_character.equipped_items.size() >= 2:
 		return false
-
+ 
 	selected_character.equipped_items.append(dragged_item)
-	var removedItem = gm.inventory.find(dragged_item)
-	gm.inventory.remove_at(removedItem)
+ 
+	# Sécurité : ne pas faire remove_at(-1) si l'item n'est pas dans
+	# gm.inventory (peut arriver si la sync était cassée à un moment).
+	var idx := gm.inventory.find(dragged_item)
+	if idx >= 0:
+		gm.inventory.remove_at(idx)
+ 
 	update_equipment_slots()
 	update_inventory_ui()
 	select_character(selected_character)
 	return true
-
-
 
 func update_inventory_ui():
 

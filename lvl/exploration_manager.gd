@@ -49,6 +49,7 @@ func _ready():
 	DoorButton.connect("mouse_exited",Door_notover)
 	DoorTuto.visible=false
 	gm = get_tree().root.get_node("GameManager") as GameManager
+	GameState.current_phase = GameStat.GamePhase.EXPLORATION
 	GoToCampement.visible=false
 	GoToCampement.scale=Vector2(0.0,0.0)
 	if gm.current_room_Ressource.CanCamp:
@@ -70,11 +71,25 @@ func _ready():
 	menuPerso.change_in_equipment.connect(_on_character_equipment_changed)
 	
 	load_characters_from_gamestat()
-	for chara in characters:
-		chara.characterData.current_stamina = min(chara.characterData.max_stamina, chara.characterData.current_stamina + 10)
-		chara.characterData.current_horniness = max(0, chara.characterData.current_horniness - 5)
-		chara.animate_heal(10, chara)
-		chara.update_display()
+	if gm.combat_just_ended:
+		print("💚 Post-combat heal sur l'équipe.")
+		for chara in characters:
+			chara.characterData.current_stamina = min(
+				chara.characterData.max_stamina,
+				chara.characterData.current_stamina + 10
+			)
+			chara.characterData.current_horniness = max(
+				0,
+				chara.characterData.current_horniness - 5
+			)
+			chara.animate_heal(10, chara)
+			chara.update_display()
+		
+		gm.combat_just_ended = false
+	else:
+	
+		for chara in characters:
+			chara.update_display()
 	selected_character =characters[0]
 	selected_character.animate_selected()
 	if gm.current_room_Ressource.exploration_scene_history != null \
@@ -292,12 +307,13 @@ func create_selector_sprite():
 	if !showselector:
 		selectorChara.modulate.a=0.0
 func campement_over():
-	GoToCampement.scale= Vector2(0.0,0.0)
-	GoToCampement.visible=true
-	var tween : Tween = create_tween()
+	if !gm.current_room_Ressource.CampDone:
+		GoToCampement.scale= Vector2(0.0,0.0)
+		GoToCampement.visible=true
+		var tween : Tween = create_tween()
 	
-	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(GoToCampement,"scale",Vector2(1.0,1.0),0.3).set_delay(0.3)
+		tween.set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(GoToCampement,"scale",Vector2(1.0,1.0),0.3).set_delay(0.3)
 func campement_notover():
 	GoToCampement.visible=false
 func Door_over():
