@@ -61,7 +61,7 @@ func _ready():
 		campButton.connect("mouse_exited",campement_notover)
 		if gm.current_room_Ressource.CampDone:
 			campButton.disabled=true
-			campTexture.texture=preload("res://camp imgs/PROP_campfire_closed.png")
+			campTexture.texture=preload("res://camp_imgs/PROP_campfire_closed.png")
 			campTexture.modulate= Color.DARK_GRAY
 	else :
 		campButton.visible=false

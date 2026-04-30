@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterData" load_steps=16 format=3 uid="uid://ce5erf8nv7cca"]
 
 [ext_resource type="Texture2D" uid="uid://cmbc5iua15q72" path="res://characters/charatexture/demo characters/INQUISITION_inquisitor_hit.png" id="1_c5xmt"]
-[ext_resource type="Script" uid="uid://db1m8vwgp38yx" path="res://characters/charatexture/braines/Ai_brain_Support.gd" id="2_lbmoj"]
+[ext_resource type="Script" uid="uid://cf2k68rgsdle0" path="res://characters/charatexture/braines/Ai_brain.gd" id="2_in4ng"]
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="3_qidbc"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="4_gio1x"]
 [ext_resource type="Texture2D" uid="uid://lll7favsplso" path="res://characters/charatexture/demo characters/INQUISITION_inquisitor_down.png" id="5_in4ng"]
@@ -15,11 +15,11 @@
 [ext_resource type="Resource" uid="uid://cmpo3p42diyix" path="res://actions/ennemiCombatSkills/Sermon.tres" id="12_in4ng"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="13_c5xmt"]
 
-[sub_resource type="Resource" id="Resource_ocqyt"]
-script = ExtResource("2_lbmoj")
+[sub_resource type="Resource" id="Resource_in4ng"]
+script = ExtResource("2_in4ng")
 name = "Default AI"
 description = "IA basique qui choisit une compétence aléatoire utilisable et une cible valide."
-metadata/_custom_type_script = "uid://db1m8vwgp38yx"
+metadata/_custom_type_script = "uid://cf2k68rgsdle0"
 
 [resource]
 script = ExtResource("10_h7mmf")
@@ -38,13 +38,13 @@ affinity = Dictionary[String, int]({})
 base_max_stamina = 100
 base_max_stress = 100
 base_max_horniness = 100
-base_attack = 10
+base_attack = 15
 base_defense = 5
 base_willpower = 5
 base_initiative = 1
 base_evasion = 5
 base_precision = 100
-attack = 10
+attack = 15
 defense = 5
 willpower = 5
 evasion = 5
@@ -61,10 +61,10 @@ current_stamina = 100
 current_stress = 0
 current_horniness = 0
 isOneshot = false
-skill_resources = Array[Resource]([ExtResource("10_i7j3r"), ExtResource("11_c5xmt"), ExtResource("12_in4ng"), ExtResource("13_c5xmt"), ExtResource("13_c5xmt")])
+skill_resources = Array[Resource]([ExtResource("10_i7j3r"), ExtResource("11_c5xmt"), ExtResource("12_in4ng"), ExtResource("12_in4ng"), ExtResource("13_c5xmt")])
 tags = Array[String]([])
 is_player_controlled = false
-ai_brain = SubResource("Resource_ocqyt")
+ai_brain = SubResource("Resource_in4ng")
 can_be_moved = true
 min_durationIddle = 0.6
 max_durationIddle = 1.0

@@ -433,7 +433,7 @@ func _input(event):
 		if dragged_item == null:
 			return
 
-		var equipped := try_equip_on_character()
+		var equipped := await  try_equip_on_character()
 
 		if not equipped:
 			# remettre l’objet là où il était
@@ -457,9 +457,12 @@ func try_equip_on_character() -> bool:
 	# Sécurité : ne pas faire remove_at(-1) si l'item n'est pas dans
 	# gm.inventory (peut arriver si la sync était cassée à un moment).
 	var idx := gm.inventory.find(dragged_item)
+	
 	if idx >= 0:
 		gm.inventory.remove_at(idx)
- 
+ 	
+	
+	await get_tree().create_timer(0.01).timeout
 	update_equipment_slots()
 	update_inventory_ui()
 	select_character(selected_character)

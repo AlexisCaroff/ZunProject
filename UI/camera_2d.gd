@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 		offset = original_offset
 func zoom_to_position(	target_pos: Vector2,target_zoom: float, duration := 0.5):
 	#update_camera_limits(Vector2(target_zoom, target_zoom))
-	
+	print ("zoom Camera "+ str(target_zoom)+ " for "+ str(duration))
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_OUT)

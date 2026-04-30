@@ -19,7 +19,7 @@
 [ext_resource type="Resource" uid="uid://clw258vbo2rq1" path="res://actions/HerosCombatSkills/Charge.tres" id="14_5iw64"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="16_ne2r0"]
 [ext_resource type="Resource" uid="uid://c730qx0ly721i" path="res://actions/HerosCombatSkills/largeSwing.tres" id="16_q5t8p"]
-[ext_resource type="Texture2D" uid="uid://c1vbgy6uvss1" path="res://camp imgs/Camp_char_sit_W.png" id="19_q5t8p"]
+[ext_resource type="Texture2D" uid="uid://c1vbgy6uvss1" path="res://camp_imgs/Camp_char_sit_W.png" id="19_q5t8p"]
 
 [resource]
 script = ExtResource("11_vpitw")

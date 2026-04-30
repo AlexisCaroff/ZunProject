@@ -173,14 +173,7 @@ func After_camp_skill(skill: CampSkill):
 	
 	
 func noCharacterSelected():
-	clear_container(action_panel)
-	portraitCharaselect.texture = null
-	CharacterName.text = ""
-	AttLabel.text = ""
-	DefLabel.text = ""
-	Stamina.text = ""
-	guilt.text =  ""
-	horny.text = ""
+	return
 		
 		
 func clear_container(container: Node) -> void:

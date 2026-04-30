@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://ypnfqe2auka1"]
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://ypnfqe2auka1"]
 
 [ext_resource type="Texture2D" uid="uid://dogj147dqfwqb" path="res://characters/charatexture/demo characters/INQUISITION_punisher_spank.png" id="1_7xlqq"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_18tr0"]
+[ext_resource type="PackedScene" uid="uid://dacqrw5c17fup" path="res://actions/skillEffects/FX/Scene/dashAttack.tscn" id="2_six7k"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="4_68f7u"]
 [ext_resource type="Texture2D" uid="uid://b4oubet2ttcx0" path="res://actions/actiontexture/UI icons/ICON_hunter_bolas.png" id="5_3cms5"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="6_ytx18"]
+[ext_resource type="PackedScene" uid="uid://cqea4mekfk8gb" path="res://actions/skillEffects/FX/Scene/hit_standar.tscn" id="7_68f7u"]
 
 [sub_resource type="Resource" id="Resource_ar5br"]
 script = ExtResource("4_68f7u")
@@ -22,8 +24,8 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [resource]
 script = ExtResource("6_ytx18")
-name = "Salt"
-descriptionName = "Salt"
+name = "Paddle Spank"
+descriptionName = "Paddle Spank"
 description = "debuff att and add miss chance"
 icon = ExtResource("5_3cms5")
 barkSkill = ""
@@ -42,10 +44,12 @@ cooldown = 2
 current_cooldown = 0
 precision = 100
 allways_hit = false
-duration = 0.3
+duration = 1.0
 tags = Array[String]([])
 is_contact = true
-distance_contact = 300.0
+distance_contact = 700.0
+caster_effect_scene = ExtResource("2_six7k")
+target_effect_scene = ExtResource("7_68f7u")
 caster_effect_anchor = 0
 target_effect_anchor = 1
 is_beneficial = false

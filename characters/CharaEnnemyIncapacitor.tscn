@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://1n2wip3x21ri"]
 
 [ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_fmmg3"]
-[ext_resource type="Resource" uid="uid://dqtcfynrhhbmj" path="res://characters/charatexture/demo characters/CharaEnnemyIncapacitor.tres" id="2_fmmg3"]
+[ext_resource type="Resource" uid="uid://dqtcfynrhhbmj" path="res://actions/HerosCombatSkills/CharaEnnemyIncapacitor.tres" id="2_fmmg3"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="3_15pi7"]
 [ext_resource type="Texture2D" uid="uid://bre80a2pkbpsw" path="res://characters/charatexture/demo characters/INQUISITION_incapacitor_idle.png" id="4_fmmg3"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="4_yhjim"]

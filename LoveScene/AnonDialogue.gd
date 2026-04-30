@@ -9,7 +9,7 @@ signal dialogue_finished
 @onready var bg: ColorRect             = $Background
 @onready var click_hint: Label         = $ClickHint
 @onready var arrow =$Arrow
-@onready var skip_button: Button = $Arrow/SkipButton
+@onready var skip_button: Button =$SkipButton
 
 var _lines: Array[String] = []
 var _index: int = 0
@@ -23,8 +23,12 @@ func _ready() -> void:
 	if skip_button:
 		skip_button.connect("button_down",_on_skip_pressed)
 		skip_button.visible = false
-		skip_button.connect("mouse_entered",over_skip)
-		skip_button.connect("mouse_exited",out_over_skip)
+
+		
+func _is_mouse_over_skip() -> bool:
+	var mouse := get_global_mouse_position()
+	var rect := skip_button.get_global_rect()
+	return rect.has_point(mouse)
 func over_skip():
 	
 	var tween = create_tween()
@@ -109,8 +113,9 @@ func _input(event: InputEvent) -> void:
 	var advance := false
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		# Ne pas consommer le clic si la souris est sur le bouton skip
-		if skip_button and skip_button.get_global_rect().has_point(get_global_mouse_position()):
+		# ✅ Vérifie si la souris survole le bouton via le signal déjà connecté
+		# au lieu de get_global_rect() qui peut être décalé par Arrow
+		if skip_button and skip_button.visible and _is_mouse_over_skip():
 			return
 		advance = true
 	elif event is InputEventKey and event.keycode == KEY_SPACE:

@@ -16,7 +16,7 @@ love_scenes = {
 "Priest+Mystic": "res://LoveScene/PriestxMystic.tscn",
 "Priest+Warrior": "res://LoveScene/PriestxWarrior.tscn"
 }
-dialoguePriest = "res://dialogue/love/PritessWarriorD.txt"
+dialoguePriest = "res://dialogue/love/PriestessWarriorD.txt"
 dialogueMystic = "res://dialogue/love/MysticWarriorD.txt"
 dialogueHunter = "res://dialogue/love/HunterWarriorD.txt"
 dialogueWarrior = ""

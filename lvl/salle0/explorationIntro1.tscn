@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cnxub0g557exn" path="res://UI/box.png" id="13_ssiy4"]
 [ext_resource type="Texture2D" uid="uid://cqp5sr6locjdw" path="res://UI/ArrowRt.png" id="14_yxmv2"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="15_4vf0k"]
-[ext_resource type="Texture2D" uid="uid://baw3dj7ucjqsp" path="res://camp imgs/PROP_campfire_open.png" id="16_tl4st"]
+[ext_resource type="Texture2D" uid="uid://baw3dj7ucjqsp" path="res://camp_imgs/PROP_campfire_open.png" id="16_tl4st"]
 [ext_resource type="Texture2D" uid="uid://vxig1dgne8it" path="res://UI/box2.png" id="17_jt67d"]
 [ext_resource type="Texture2D" uid="uid://cfwlbo0pguis6" path="res://UI/DOORR_dungeon_hall.png" id="18_g6vgl"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="18_mnxrh"]

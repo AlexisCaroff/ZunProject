@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bk4cgsd7snei7"]
+
+[ext_resource type="Texture2D" uid="uid://drk3glch3ovdn" path="res://scenes/BG doors demo/DOOR_dungeon_boss.png" id="1_efjw8"]
+[ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_1tqvd"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_y76hp"]
+[ext_resource type="PackedScene" uid="uid://c8vf5b7mjdmmf" path="res://lvl/doorInstance.tscn" id="4_ct52t"]
+
+[node name="Door" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DoorBg" type="Sprite2D" parent="."]
+position = Vector2(960.5, 542)
+scale = Vector2(0.781352, 0.79562)
+texture = ExtResource("1_efjw8")
+
+[node name="exploUI" type="Sprite2D" parent="."]
+position = Vector2(961, 541)
+scale = Vector2(0.782573, 0.789781)
+texture = ExtResource("2_1tqvd")
+
+[node name="atmosphere" parent="." instance=ExtResource("3_y76hp")]
+position = Vector2(19, 447)
+
+[node name="Door" parent="." instance=ExtResource("4_ct52t")]
+layout_mode = 1

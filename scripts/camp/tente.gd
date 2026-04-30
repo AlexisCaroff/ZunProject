@@ -1,10 +1,10 @@
 extends Node
 class_name  tente
 @export var solo_folders := {
-	"Hunter": "res://camp imgs/solo/Hunter/",
-	"Mystic": "res://camp imgs/solo/Mystic/",
-	"Priestess": "res://camp imgs/solo/Pristress/",
-	"Warrior": "res://camp imgs/solo/Warrior/"
+	"Hunter": "res://camp_imgs/solo/Hunter/",
+	"Mystic": "res://camp_imgs/solo/Mystic/",
+	"Priestess": "res://camp_imgs/solo/Pristress/",
+	"Warrior": "res://camp_imgs/solo/Warrior/"
 }
 @export var switch_time =0.5
 @onready var thetexture:Sprite2D =$"../animMasturbate"
@@ -25,12 +25,12 @@ var twoInside : Array[CharaCamp]
 var Tentescale : Vector2 
 @onready var love_sprite: Sprite2D = $"../LoveImage"
 @export var duo_folders := {
-	"Hunter+Warrior": "res://camp imgs/duo/HunterWarrior/",
-	"Mystic+Hunter": "res://camp imgs/duo/MysticHunter/",
-	"Mystic+Warrior": "res://camp imgs/duo/MysticWarrior/",
-	"Priestess+Mystic": "res://camp imgs/duo/PriestessMystic/",
-	"Priestess+Hunter": "res://camp imgs/duo/PristressHunter/",
-	"Priestess+Warrior": "res://camp imgs/duo/PristressWarrior/"
+	"Hunter+Warrior": "res://camp_imgs/duo/HunterWarrior/",
+	"Mystic+Hunter": "res://camp_imgs/duo/MysticHunter/",
+	"Mystic+Warrior": "res://camp_imgs/duo/MysticWarrior/",
+	"Priestess+Mystic": "res://camp_imgs/duo/PriestessMystic/",
+	"Priestess+Hunter": "res://camp_imgs/duo/PriestessHunter/",
+	"Priestess+Warrior": "res://camp_imgs/duo/PriestessWarrior/"
 }
 
 
@@ -56,7 +56,7 @@ func _ready() -> void:
 	Tentescale=self.scale
 	button.connect("mouse_entered", Callable(self, "_on_mouse_entered"))
 	button.connect("mouse_exited", Callable(self, "_on_mouse_exited"))
-	
+	cam.make_current()
 	gm = get_tree().root.get_node("GameManager") as GameManager
 func startMasturbation(user:CharaCamp): 
 	
@@ -76,12 +76,12 @@ func startMasturbation(user:CharaCamp):
 	var folder_path = solo_folders[char_name]
 	var all_frames := load_textures_from_folder(folder_path)
 
-	if all_frames.size() < 3:
+	if all_frames.size() < 4:
 		print("❌ Pas assez d'images dans ", folder_path)
 		return
 
 	# 🔥 On retire les 2 dernières images
-	var frames := all_frames.slice(0, all_frames.size() - 2)
+	var frames := all_frames.slice(0, all_frames.size() - 4)
 
 	love_sprite.visible = true
 	love_sprite.texture = null
@@ -181,12 +181,12 @@ func _on_tente_button_button_down() -> void:
 		var folder_path = solo_folders[char_name]
 		var all_frames := load_textures_from_folder(folder_path)
 
-		if all_frames.size() < 2:
+		if all_frames.size() < 3:
 			print("❌ Pas assez d'images pour final anim")
 			return
 
 # 🔥 On prend uniquement les 2 dernières
-		var frames := all_frames.slice(all_frames.size() - 2, all_frames.size())
+		var frames := all_frames.slice(all_frames.size() - 3, all_frames.size())
 		is_anim_zoom_playing =true
 		var campPosition = somoneInside.campposition
 	
@@ -200,7 +200,7 @@ func _on_tente_button_button_down() -> void:
 			anim.add_frame("default", tex)
 		
 		
-		cam.zoom_to_position(cam_pos, cam.baseZoom.x*1.5 ,0.6)
+		cam.zoom_to_position(cam_pos, cam.baseZoom.x*1.5 ,1.0)
 		var animated_sprite := AnimatedSprite2D.new()
 		animated_sprite.frames = anim
 		animated_sprite.scale = Vector2(0.6, 0.6)
@@ -215,6 +215,8 @@ func _on_tente_button_button_down() -> void:
 		tween.tween_property(love_sprite,"modulate:r",1,0.2)
 		tween.tween_property(love_sprite,"modulate:r",2,0.2)
 		tween.tween_property(love_sprite,"modulate:r",1,0.2)
+		tween.tween_property(love_sprite,"modulate:r",2,0.2)
+		tween.tween_property(love_sprite,"modulate:r",1,0.2)
 		await tween.finished
 		campPosition.visible=true
 		somoneInside.animate_heal(20,somoneInside,Color.HOT_PINK)
@@ -222,10 +224,15 @@ func _on_tente_button_button_down() -> void:
 		love_sprite.visible = false
 		somoneInside=null
 		is_anim_zoom_playing =false
+		await get_tree().create_timer(0.1).timeout
 		cam.reset()
 	
 	if not twoInside.is_empty() && cliclove == false:
 		cliclove = true
+		if anim == null:
+			push_error("anim est null : les images duo n'ont pas été chargées.")
+			cliclove = false
+			return
 		print ( "clic on tente with peoples inside")
 		is_anim_zoom_playing =true
 		var tween := create_tween()
@@ -287,7 +294,7 @@ func loved_one_go_out():
 	twoInside[0].characterData.affinity[twoInside[1].characterData.Charaname] += 20
 	twoInside[1].characterData.affinity[twoInside[0].characterData.Charaname] += 20
 	print (twoInside[0].characterData.Charaname+" and "+ twoInside[1].characterData.Charaname +" love "+str(twoInside[1].characterData.affinity[twoInside[0].characterData.Charaname]))
-	print("yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+	
 	await get_tree().process_frame
 	twoInside.clear()
 	bounce_enabled = false
@@ -350,24 +357,30 @@ func load_textures_from_folder(path: String) -> Array[Texture2D]:
 
 	var dir := DirAccess.open(path)
 	if dir == null:
-		push_error("Impossible d’ouvrir : " + path)
+		push_error("Dossier introuvable : " + path)
 		return textures
 
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
-
 	while file_name != "":
-		if !dir.current_is_dir():
-			if file_name.get_extension().to_lower() in ["png","jpg","webp"]:
-				var tex: Texture2D = load(path + file_name)
+		if not dir.current_is_dir():
+			# En build, Godot expose les .png.import — on retire le .import
+			var real_name := file_name
+			if file_name.ends_with(".import"):
+				real_name = file_name.trim_suffix(".import")
+			
+			var ext := real_name.get_extension().to_lower()
+			if ext in ["png", "jpg", "webp", "jpeg"]:
+				var tex := load(path + real_name) as Texture2D
 				if tex:
 					textures.append(tex)
+				else:
+					push_error("Texture non chargée : " + path + real_name)
 		file_name = dir.get_next()
-
 	dir.list_dir_end()
 
-	textures.sort_custom(func(a,b): return a.resource_path < b.resource_path)
-
+	textures.sort_custom(func(a, b): return a.resource_path < b.resource_path)
+	print("📁 ", path, " → ", textures.size(), " textures")
 	return textures
 	
 func get_solo_frames(character_name: String) -> Array[Texture2D]:

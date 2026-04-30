@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://bjupnilvigvhl" path="res://lvl/salle0/Salle0.tres" id="3_0q5so"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_0q5so"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="4_dhxbs"]
-[ext_resource type="Resource" uid="uid://b7ana3ldrsk7j" path="res://Items/itemsRessources/golds.tres" id="5_dhxbs"]
+[ext_resource type="Resource" uid="uid://bovg8sutwbfkk" path="res://Items/itemsRessources/keyRoom1.tres" id="5_oavjs"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="6_1xubm"]
 [ext_resource type="Script" uid="uid://bhsro7sspbgqw" path="res://UI/buttonQuit.gd" id="7_k66he"]
 [ext_resource type="Resource" uid="uid://uf5x5dpfh5ln" path="res://characters/data/CharaHunter.tres" id="7_vbvj5"]
@@ -30,7 +30,7 @@ donjon = ExtResource("2_soe0u")
 TheRoom_we_are_in = ExtResource("3_0q5so")
 LastRoom_we_were_in = ExtResource("3_0q5so")
 last_room_Ressource = ExtResource("3_0q5so")
-inventory = Array[ExtResource("4_0q5so")]([ExtResource("5_dhxbs")])
+inventory = Array[ExtResource("4_0q5so")]([ExtResource("5_oavjs")])
 characters = Array[ExtResource("6_1xubm")]([ExtResource("9_43qkp"), ExtResource("7_vbvj5"), ExtResource("9_nm67f"), ExtResource("10_n5q86")])
 
 [node name="ColorRect" type="ColorRect" parent="."]

@@ -39,17 +39,6 @@ texture = ExtResource("4_j54v1")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Selector" type="TextureRect" parent="pivot"]
-offset_left = -158.333
-offset_top = -353.333
-offset_right = 12.6677
-offset_bottom = -122.333
-scale = Vector2(2.09679, 1.68845)
-mouse_filter = 2
-texture = ExtResource("4_j54v1")
-expand_mode = 1
-metadata/_edit_use_anchors_ = true
-
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(32, 32)
 offset_left = -257.0

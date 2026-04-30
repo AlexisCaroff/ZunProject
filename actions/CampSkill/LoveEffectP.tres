@@ -19,7 +19,7 @@ love_scenes = {
 dialoguePriest = ""
 dialogueMystic = "res://dialogue/love/PristessMysticD.txt"
 dialogueHunter = "res://dialogue/love/PriestessHunterD.txt"
-dialogueWarrior = "res://dialogue/love/PritessWarriorD.txt"
+dialogueWarrior = "res://dialogue/love/PriestessWarriorD.txt"
 metadata/_custom_type_script = "uid://bjysq2c5802md"
 
 [resource]

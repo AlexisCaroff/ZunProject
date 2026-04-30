@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://o3alq0k34b2r"]
+[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://o3alq0k34b2r"]
 
 [ext_resource type="Texture2D" uid="uid://5sxx1j4x2jr3" path="res://characters/charatexture/demo characters/INQUISITION_incapacitor_pin.png" id="1_nn0gt"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_1gmq2"]
 [ext_resource type="PackedScene" uid="uid://d74pdae8pwuk" path="res://actions/skillEffects/FX/Scene/saltHunter.tscn" id="2_nn0gt"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_gog1q"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="5_gog1q"]
+[ext_resource type="Texture2D" uid="uid://drpnss51hobsj" path="res://UI/debuffAtt.png" id="6_fl13x"]
 [ext_resource type="Texture2D" uid="uid://b4oubet2ttcx0" path="res://actions/actiontexture/UI icons/ICON_hunter_bolas.png" id="6_psnns"]
 [ext_resource type="PackedScene" uid="uid://bbt436f0mwo1e" path="res://actions/skillEffects/FX/Scene/hit_magicSalt.tscn" id="7_1gmq2"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="7_chsun"]
@@ -15,6 +17,15 @@ amount = 5
 damage_target_stat = 0
 metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
+[sub_resource type="Resource" id="Resource_j1cnl"]
+script = ExtResource("5_gog1q")
+name = "Salt"
+uitexture = ExtResource("6_fl13x")
+affected_stat = 0
+amount = -10
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
 [resource]
 script = ExtResource("7_chsun")
 name = "Salt"
@@ -24,8 +35,8 @@ icon = ExtResource("6_psnns")
 barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_nn0gt")
-the_target_type = 0
-effects = Array[ExtResource("2_1gmq2")]([SubResource("Resource_3q5jt"), null])
+the_target_type = 4
+effects = Array[ExtResource("2_1gmq2")]([SubResource("Resource_3q5jt"), SubResource("Resource_j1cnl")])
 two_target_Type = false
 the_second_target_type = 2
 second_effects = Array[ExtResource("2_1gmq2")]([])
@@ -37,14 +48,14 @@ cooldown = 2
 current_cooldown = 0
 precision = 100
 allways_hit = false
-duration = 0.3
+duration = 1.0
 tags = Array[String]([])
-is_contact = true
+is_contact = false
 distance_contact = 300.0
 caster_effect_scene = ExtResource("2_nn0gt")
 target_effect_scene = ExtResource("7_1gmq2")
 caster_effect_anchor = 0
-target_effect_anchor = 1
+target_effect_anchor = 2
 is_beneficial = false
 skip_target_return_anim = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

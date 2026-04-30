@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="11_ijfhg"]
 [ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="11_tthlc"]
 [ext_resource type="Texture2D" uid="uid://cqp5sr6locjdw" path="res://UI/ArrowRt.png" id="12_d8pyn"]
-[ext_resource type="Texture2D" uid="uid://baw3dj7ucjqsp" path="res://camp imgs/PROP_campfire_open.png" id="12_ijfhg"]
+[ext_resource type="Texture2D" uid="uid://baw3dj7ucjqsp" path="res://camp_imgs/PROP_campfire_open.png" id="12_ijfhg"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="12_o4x5b"]
 [ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="13_llg3m"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="14_afmd4"]

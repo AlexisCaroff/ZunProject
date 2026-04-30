@@ -123,6 +123,10 @@ func use(target: PositionSlot = null, secondtarget: bool = false) -> PositionSlo
 
 			if rand >= chance:
 				target.occupant.miss_animation(owner)
+					# ✅ Enregistre la cible comme ratée
+				if owner and owner.has_method("_missed_targets"):
+					pass
+				owner._missed_targets.append(target.occupant)
 				return target
 
 		if secondtarget:

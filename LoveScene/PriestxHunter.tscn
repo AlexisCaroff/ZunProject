@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://flk0ijhjw2g6"]
+[gd_scene load_steps=11 format=3 uid="uid://flk0ijhjw2g6"]
 
 [ext_resource type="Script" uid="uid://cdva0owcmjo24" path="res://LoveScene/SexScene.gd" id="1_dbirp"]
 [ext_resource type="Texture2D" uid="uid://coxf8kf83pbt6" path="res://LoveScene/SCENE_CAMP_PxH.png" id="2_dbirp"]
@@ -8,6 +8,8 @@
 [ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="5_x3n8d"]
 [ext_resource type="Texture2D" uid="uid://d03vlqaa471uv" path="res://UI/UI boxes/UI_convo_box2.png" id="6_sk1m6"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="7_1t4vq"]
+[ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="9_1524k"]
+[ext_resource type="Texture2D" uid="uid://cr4fyd24h5aci" path="res://UI/UI boxes/UI_close.png" id="10_8vwbk"]
 
 [node name="HunterxWarrior" type="Node2D"]
 script = ExtResource("1_dbirp")
@@ -118,3 +120,17 @@ offset_top = -190.0
 offset_right = 153.0
 offset_bottom = 250.0
 flat = true
+
+[node name="SkipButton" type="Button" parent="AnonDialogue"]
+layout_mode = 0
+offset_left = 1680.0
+offset_top = -159.0
+offset_right = 2005.0
+offset_bottom = 281.0
+flat = true
+script = ExtResource("9_1524k")
+
+[node name="UiClose" type="Sprite2D" parent="AnonDialogue/SkipButton"]
+position = Vector2(179, 213)
+scale = Vector2(0.703125, 0.74031)
+texture = ExtResource("10_8vwbk")

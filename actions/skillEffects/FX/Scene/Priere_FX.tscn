@@ -41,7 +41,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0.166666, 0.433333, 1.2, 1.43334),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.586), Color(1, 1, 1, 0.32), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.757), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -159,16 +159,17 @@ scale = Vector2(0.210205, 0.210205)
 texture = ExtResource("2_ypnor")
 
 [node name="FxCharge" type="Sprite2D" parent="."]
+visible = false
 z_index = -1
-position = Vector2(11, -117)
+position = Vector2(-14.0808, -117)
 scale = Vector2(0.255716, 0.306952)
 texture = ExtResource("3_k3xa6")
 offset = Vector2(-66.58, 128.27)
 
 [node name="FxCharge2" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.40327)
+modulate = Color(1, 1, 1, 0)
 z_index = -1
-position = Vector2(14, -118)
+position = Vector2(-11.0808, -124)
 rotation = 0.496758
 scale = Vector2(0.186239, 0.207083)
 texture = ExtResource("3_k3xa6")

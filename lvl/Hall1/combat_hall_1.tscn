@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_gd6am"]
 [ext_resource type="PackedScene" uid="uid://h8pqs7tabdxj" path="res://lvl/CombatInterface.tscn" id="3_e5in0"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="4_gd6am"]
-[ext_resource type="Texture2D" uid="uid://deqgk0wx0m6wl" path="res://UI/voide.png" id="5_lrolr"]
+[ext_resource type="Texture2D" uid="uid://b1thgnhggbr0w" path="res://tuto/intro3.png" id="5_lrolr"]
 [ext_resource type="Script" uid="uid://b0ir2tk1oluly" path="res://lvl/Hall1/tuto.gd" id="6_psgqu"]
 
 [node name="CombatHall1" type="Node2D"]
@@ -29,6 +29,7 @@ offset_right = -6.0
 offset_bottom = 18.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 follow_viewport_enabled = true
 
 [node name="Intro2" type="Sprite2D" parent="CanvasLayer"]

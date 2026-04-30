@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://cfjjaolic6nab"]
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://cfjjaolic6nab"]
 
 [ext_resource type="Texture2D" uid="uid://n1517gj8qvni" path="res://characters/charatexture/demo characters/INQUISITION_inquisitor_hymn.png" id="1_fsluq"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_fxdud"]
+[ext_resource type="PackedScene" uid="uid://cwsj8uqak0drf" path="res://actions/skillEffects/FX/Scene/Healing_fx.tscn" id="2_hfgbl"]
 [ext_resource type="Script" uid="uid://bp8u5at2ojgse" path="res://actions/skillEffects/healEffect.gd" id="3_br75f"]
 [ext_resource type="Texture2D" uid="uid://ccyi8n3i3daxa" path="res://actions/actiontexture/heal.png" id="4_kre7d"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_bbd80"]
+[ext_resource type="PackedScene" uid="uid://xaab2xdp41sl" path="res://actions/skillEffects/FX/Scene/healed.tscn" id="7_4tkee"]
 
 [sub_resource type="Resource" id="Resource_svn31"]
 script = ExtResource("3_br75f")
@@ -14,8 +16,8 @@ metadata/_custom_type_script = "uid://bp8u5at2ojgse"
 
 [resource]
 script = ExtResource("5_bbd80")
-name = "Heal"
-descriptionName = "Heal"
+name = "Holy ray"
+descriptionName = "Holy ray"
 description = "heal for some amount"
 icon = ExtResource("4_kre7d")
 barkSkill = ""
@@ -38,8 +40,10 @@ duration = 1.0
 tags = Array[String](["heal"])
 is_contact = false
 distance_contact = 0.0
+caster_effect_scene = ExtResource("2_hfgbl")
+target_effect_scene = ExtResource("7_4tkee")
 caster_effect_anchor = 0
 target_effect_anchor = 1
-is_beneficial = false
+is_beneficial = true
 skip_target_return_anim = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

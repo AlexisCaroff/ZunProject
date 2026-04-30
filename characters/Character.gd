@@ -72,7 +72,7 @@ var target_pos      : Vector2
 var start_target_pos: Vector2
 var outline         : TextureRect
 
-
+var _missed_targets: Array[Character] = []
 # ═══════════════════════════════════════════════════════════
 #  INIT
 # ═══════════════════════════════════════════════════════════
@@ -751,8 +751,12 @@ func _spawn_vfx(scene: PackedScene, anchor: int) -> void:
 		return
 	var vfx := scene.instantiate()
 	add_child(vfx)
-	if !characterData.is_player_controlled:
+	if !characterData.is_player_controlled :
 		vfx.scale.x =-1
+	if combat_manager.gm.teamCorrupted:
+		vfx.scale.x =-1
+	if characterData.inquisition == true:
+		vfx.scale.x=1
 	vfx.global_position = _get_effect_anchor_pos(anchor)
 
 
@@ -760,9 +764,14 @@ func _spawn_vfx(scene: PackedScene, anchor: int) -> void:
 func _spawn_vfx_on_target(tgt: Character) -> void:
 	if current_skill.target_effect_scene == null:
 		return
+	if tgt in _missed_targets:
+		print("tgt in _missed_targets ; don't spawn VFX target")
+		return
 	var vfx := current_skill.target_effect_scene.instantiate()
 	tgt.add_child(vfx)
-	if tgt.characterData.is_player_controlled:
+	if tgt.characterData.is_player_controlled and !combat_manager.gm.teamCorrupted:
+		vfx.scale.x =-1
+	if tgt.characterData.inquisition:
 		vfx.scale.x =-1
 	vfx.global_position = tgt._get_effect_anchor_pos(current_skill.target_effect_anchor)
 
@@ -785,6 +794,7 @@ func _skill_targets_ally() -> bool:
 # ──────────────────────────────────────────────────────────
 
 func animate_attack(targets: Array, skill: Skill) -> void:
+	
 	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
 	if targets.is_empty():
 		emit_signal("skill_animation_finished")
@@ -888,7 +898,9 @@ func animate_attack(targets: Array, skill: Skill) -> void:
 
 	for tgt: Character in targets:
 		tgt.modulate.a = 0.0
-		tgt.z_index    = 20
+		if not multi:
+			tgt.z_index = 20
+		
 		
 		if target_dests.has(tgt):
 			if tgt.characterData.Charaname=="Spitter":
@@ -933,10 +945,10 @@ func _on_attack(targets: Array) -> void:
 	# VFX sur chaque cible
 	for tgt: Character in targets:
 		_spawn_vfx_on_target(tgt)
-
+	
 	# Pause pendant la durée définie par la skill
 	await get_tree().create_timer(current_skill.duration).timeout
-
+	
 	# ── Retour aux positions d'origine ───────────────────────
 	# Si skip_target_return_anim est activé (ex: MoveToPosition gère le déplacement),
 	# on ne tweene pas le retour des personnages — seulement caméra et shadow.

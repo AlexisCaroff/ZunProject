@@ -32,7 +32,7 @@ func setup_layout(count: int) -> void:
 		2:
 			_active_slots = [0, 3]
 		3:
-			_active_slots = [0, 1, 2]
+			_active_slots = [0, 1, 3]
 		4:
 			_active_slots = [0, 1, 2, 3]
 

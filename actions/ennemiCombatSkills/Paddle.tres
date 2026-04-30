@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://dt63y18mbf7c0"]
+[gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://dt63y18mbf7c0"]
 
 [ext_resource type="Texture2D" uid="uid://dogj147dqfwqb" path="res://characters/charatexture/demo characters/INQUISITION_punisher_spank.png" id="1_dx7s7"]
+[ext_resource type="PackedScene" uid="uid://dacqrw5c17fup" path="res://actions/skillEffects/FX/Scene/dashAttack.tscn" id="2_1t1mg"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_sdcig"]
 [ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="3_ucnpk"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="4_sdcig"]
 [ext_resource type="Texture2D" uid="uid://b4oubet2ttcx0" path="res://actions/actiontexture/UI icons/ICON_hunter_bolas.png" id="6_snq88"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="7_exwrj"]
+[ext_resource type="PackedScene" uid="uid://cqea4mekfk8gb" path="res://actions/skillEffects/FX/Scene/hit_standar.tscn" id="8_4nknl"]
 
 [sub_resource type="Resource" id="Resource_20ewg"]
 script = ExtResource("3_ucnpk")
-mode = 0
+mode = 1
 speed = 0.5
 slot_pairing = {
 3: 1,
@@ -26,8 +28,8 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [resource]
 script = ExtResource("7_exwrj")
-name = "Salt"
-descriptionName = "Salt"
+name = "Paddle Push"
+descriptionName = "Paddle Push"
 description = "debuff att and add miss chance"
 icon = ExtResource("6_snq88")
 barkSkill = ""
@@ -46,10 +48,12 @@ cooldown = 2
 current_cooldown = 0
 precision = 100
 allways_hit = false
-duration = 0.3
+duration = 1.0
 tags = Array[String]([])
 is_contact = true
-distance_contact = 300.0
+distance_contact = 700.0
+caster_effect_scene = ExtResource("2_1t1mg")
+target_effect_scene = ExtResource("8_4nknl")
 caster_effect_anchor = 0
 target_effect_anchor = 1
 is_beneficial = false

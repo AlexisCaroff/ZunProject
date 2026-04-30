@@ -54,11 +54,51 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 			selfpositions.append(owner._current_slot)
 			return {"skill": skill, "target": selfpositions}
 
+		# ✅ ALL_ALLY : tous les alliés de l'IA = alive_enemy_slots
 		skill.target_type.ALL_ALLY:
+			print("ALL_ALLY → ", alive_enemy_slots.map(func(s): return s.occupant.characterData.Charaname if s.occupant else "vide"))
 			return {"skill": skill, "target": alive_enemy_slots}
 
+		# ✅ ALL_ENNEMY : tous les ennemis de l'IA = alive_hero_slots  
 		skill.target_type.ALL_ENNEMY:
+			print("ALL_ENNEMY → ", alive_hero_slots.map(func(s): return s.occupant.characterData.Charaname if s.occupant else "vide"))
 			return {"skill": skill, "target": alive_hero_slots}
+
+		# ✅ FRONT_ALLY : alliés IA en première ligne
+		skill.target_type.FRONT_ALLY:
+			var front_allies := alive_enemy_slots.filter(
+				func(p: PositionSlot) -> bool: return p.position_data.isFront
+			)
+			if front_allies.is_empty():
+				front_allies = alive_enemy_slots  # fallback si pas de front
+			return {"skill": skill, "target": front_allies}
+
+		# ✅ BACK_ALLY : alliés IA en deuxième ligne
+		skill.target_type.BACK_ALLY:
+			var back_allies := alive_enemy_slots.filter(
+				func(p: PositionSlot) -> bool: return not p.position_data.isFront
+			)
+			if back_allies.is_empty():
+				back_allies = alive_enemy_slots  # fallback
+			return {"skill": skill, "target": back_allies}
+
+		# ✅ FRONT_ENNEMY : héros joueur en première ligne
+		skill.target_type.FRONT_ENNEMY:
+			var front_enemies := alive_hero_slots.filter(
+				func(p: PositionSlot) -> bool: return p.position_data.isFront
+			)
+			if front_enemies.is_empty():
+				front_enemies = alive_hero_slots  # fallback
+			return {"skill": skill, "target": front_enemies}
+
+		# ✅ BACK_ENNEMY : héros joueur en deuxième ligne
+		skill.target_type.BACK_ENNEMY:
+			var back_enemies := alive_hero_slots.filter(
+				func(p: PositionSlot) -> bool: return not p.position_data.isFront
+			)
+			if back_enemies.is_empty():
+				back_enemies = alive_hero_slots  # fallback
+			return {"skill": skill, "target": back_enemies}
 
 	# ── Move : cible un slot ennemi selon la position requise par sa skill principale ──
 	if skill.name == "move":

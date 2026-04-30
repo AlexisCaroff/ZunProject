@@ -23,7 +23,7 @@ func _ready():
 	# connecter les signaux de souris
 	connect("mouse_entered", Callable(self, "_on_mouse_entered"))
 	connect("mouse_exited", Callable(self, "_on_mouse_exited"))
-	
+	connect("button_down",Callable(self, "down"))
 func _on_mouse_entered():
 	if not disabled:
 		var tween = create_tween()
@@ -45,3 +45,5 @@ func animscale():
 	
 	tween.tween_property(self, "self_modulate", hover_color, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "self_modulate", normal_color, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+func down():
+	print( "clic button")

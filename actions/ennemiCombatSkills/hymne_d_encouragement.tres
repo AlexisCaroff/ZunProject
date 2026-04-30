@@ -20,7 +20,7 @@ script = ExtResource("4_hyp3f")
 name = "name"
 uitexture = ExtResource("5_lfdvk")
 affected_stat = 0
-amount = 5
+amount = 14
 duration = 3
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
@@ -54,6 +54,6 @@ caster_effect_scene = ExtResource("2_4w7hc")
 target_effect_scene = ExtResource("9_hyp3f")
 caster_effect_anchor = 0
 target_effect_anchor = 1
-is_beneficial = false
+is_beneficial = true
 skip_target_return_anim = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

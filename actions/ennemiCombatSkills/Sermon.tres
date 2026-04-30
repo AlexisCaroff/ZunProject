@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://cmpo3p42diyix"]
+[gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://cmpo3p42diyix"]
 
 [ext_resource type="Texture2D" uid="uid://b2prk8wkajghq" path="res://characters/charatexture/demo characters/INQUISITION_inquisitor_whip.png" id="1_71118"]
+[ext_resource type="PackedScene" uid="uid://b6dlg108vd1bt" path="res://actions/skillEffects/FX/Scene/Sermon_FX.tscn" id="2_dho85"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_fkuie"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_fkuie"]
 [ext_resource type="Texture2D" uid="uid://ccyi8n3i3daxa" path="res://actions/actiontexture/heal.png" id="4_3bird"]
@@ -30,13 +31,13 @@ metadata/_custom_type_script = "uid://d34budn3ew6qb"
 [resource]
 script = ExtResource("5_hlfvf")
 name = "Sermon"
-descriptionName = "hymne d’encouragement"
+descriptionName = "Sermon"
 description = "add guilt  and 30 stamina if 70% guilt or more"
 icon = ExtResource("4_3bird")
 barkSkill = ""
 required_position = 0
 ImageSkill = ExtResource("1_71118")
-the_target_type = 3
+the_target_type = 4
 effects = Array[ExtResource("2_fkuie")]([SubResource("Resource_3bird"), SubResource("Resource_vs6o4")])
 two_target_Type = false
 the_second_target_type = 0
@@ -53,6 +54,7 @@ duration = 1.0
 tags = Array[String](["heal"])
 is_contact = false
 distance_contact = 0.0
+caster_effect_scene = ExtResource("2_dho85")
 caster_effect_anchor = 0
 target_effect_anchor = 1
 is_beneficial = false

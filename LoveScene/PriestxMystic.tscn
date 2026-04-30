@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkqcghxo5xns2"]
+[gd_scene load_steps=11 format=3 uid="uid://dkqcghxo5xns2"]
 
 [ext_resource type="Script" uid="uid://cdva0owcmjo24" path="res://LoveScene/SexScene.gd" id="1_a4eqb"]
 [ext_resource type="Texture2D" uid="uid://b6p083ebvag7i" path="res://LoveScene/SCENE_CAMP_MxP.png" id="2_a4eqb"]
@@ -8,6 +8,8 @@
 [ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="5_r0o26"]
 [ext_resource type="Texture2D" uid="uid://d03vlqaa471uv" path="res://UI/UI boxes/UI_convo_box2.png" id="6_wad7t"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="7_4xlxo"]
+[ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="9_qji1t"]
+[ext_resource type="Texture2D" uid="uid://cr4fyd24h5aci" path="res://UI/UI boxes/UI_close.png" id="10_svub0"]
 
 [node name="HunterxWarrior" type="Node2D"]
 script = ExtResource("1_a4eqb")
@@ -23,11 +25,6 @@ color = Color(0, 0, 0, 0.8)
 position = Vector2(953.444, 541.5)
 scale = Vector2(0.485648, 0.485648)
 texture = ExtResource("2_a4eqb")
-
-[node name="Button" type="Button" parent="."]
-offset_right = 1909.0
-offset_bottom = 1079.0
-flat = true
 
 [node name="DialogueManager" type="Node2D" parent="."]
 script = ExtResource("3_6fgpt")
@@ -90,9 +87,9 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 67.0
-offset_top = 71.0
-offset_right = 543.0
+offset_left = 77.0
+offset_top = 81.0
+offset_right = 527.0
 offset_bottom = 961.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -114,3 +111,17 @@ offset_top = -190.0
 offset_right = 153.0
 offset_bottom = 250.0
 flat = true
+
+[node name="SkipButton" type="Button" parent="AnonDialogue"]
+layout_mode = 0
+offset_left = 1680.0
+offset_top = -159.0
+offset_right = 2005.0
+offset_bottom = 281.0
+flat = true
+script = ExtResource("9_qji1t")
+
+[node name="UiClose" type="Sprite2D" parent="AnonDialogue/SkipButton"]
+position = Vector2(179, 213)
+scale = Vector2(0.703125, 0.74031)
+texture = ExtResource("10_svub0")

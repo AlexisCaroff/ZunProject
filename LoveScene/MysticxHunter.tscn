@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://2avrmp1dyhw5"]
+[gd_scene load_steps=11 format=3 uid="uid://2avrmp1dyhw5"]
 
 [ext_resource type="Script" uid="uid://cdva0owcmjo24" path="res://LoveScene/SexScene.gd" id="1_ikva5"]
 [ext_resource type="Texture2D" uid="uid://cyy6b634yl0ja" path="res://LoveScene/SCENE_CAMP_MxH.png" id="2_ikva5"]
@@ -8,10 +8,13 @@
 [ext_resource type="Resource" uid="uid://dpejhug6a0i4d" path="res://dialogue/dialoguescripte/DictionairePortraitDialogue.tres" id="5_ul4vw"]
 [ext_resource type="Texture2D" uid="uid://d03vlqaa471uv" path="res://UI/UI boxes/UI_convo_box2.png" id="6_edb4r"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="7_tfso7"]
+[ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="9_ltix2"]
+[ext_resource type="Texture2D" uid="uid://cr4fyd24h5aci" path="res://UI/UI boxes/UI_close.png" id="10_mi4x7"]
 
 [node name="HunterxWarrior" type="Node2D"]
 script = ExtResource("1_ikva5")
-dialogue_path = "res://dialogue/love/MysticHunter.txt"
+dialogue_path = "res://dialogue/love/MysticHunterD.txt"
+anon_dialogue_path = "res://dialogue/love/MysticHunter.txt"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -228.0
@@ -92,13 +95,6 @@ rotation = -1.5708
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("7_tfso7")
 
-[node name="SkipButton" type="Button" parent="AnonDialogue/Arrow"]
-offset_left = -172.0
-offset_top = -190.0
-offset_right = 153.0
-offset_bottom = 250.0
-flat = true
-
 [node name="RichTextLabel" type="RichTextLabel" parent="AnonDialogue"]
 layout_mode = 1
 anchors_preset = 12
@@ -115,3 +111,17 @@ theme_override_fonts/normal_font = ExtResource("5_tfso7")
 theme_override_font_sizes/normal_font_size = 35
 bbcode_enabled = true
 scroll_active = false
+
+[node name="SkipButton" type="Button" parent="AnonDialogue"]
+layout_mode = 0
+offset_left = 1680.0
+offset_top = -159.0
+offset_right = 2005.0
+offset_bottom = 281.0
+flat = true
+script = ExtResource("9_ltix2")
+
+[node name="UiClose" type="Sprite2D" parent="AnonDialogue/SkipButton"]
+position = Vector2(179, 213)
+scale = Vector2(0.703125, 0.74031)
+texture = ExtResource("10_mi4x7")

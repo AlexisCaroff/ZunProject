@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxdgvo3c4jddc"]
+[gd_scene load_steps=9 format=3 uid="uid://cxdgvo3c4jddc"]
 
 [ext_resource type="Texture2D" uid="uid://bktjtu30qytux" path="res://scenes/backgrounds dungeon demo/BG_dungeon_salon.png" id="1_rb7r1"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_5gi1d"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://b61cmtgknx2nd" path="res://INTRO_boss/INTRO_boss_002.png" id="4_pxdkt"]
 [ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="5_2bhwa"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="6_unj4m"]
+[ext_resource type="Script" uid="uid://bhsro7sspbgqw" path="res://UI/buttonQuit.gd" id="7_unj4m"]
+[ext_resource type="Texture2D" uid="uid://eqli6rl4sig3" path="res://UI/UI boxes/UI_camp_points.png" id="8_xfwii"]
 
 [node name="ExploInterface" type="Control"]
 layout_mode = 3
@@ -71,3 +73,21 @@ We hope you enjoyed the experience."
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
+
+[node name="ButtonQuit" type="Button" parent="CanvasLayer"]
+z_index = 12
+offset_left = 927.0
+offset_top = 984.0
+offset_right = 1056.0
+offset_bottom = 1042.0
+theme_override_fonts/font = ExtResource("6_unj4m")
+theme_override_font_sizes/font_size = 40
+text = "Quit"
+flat = true
+script = ExtResource("7_unj4m")
+
+[node name="DialogueBox" type="Sprite2D" parent="CanvasLayer/ButtonQuit"]
+z_index = -1
+position = Vector2(68, 31.5)
+scale = Vector2(0.19542, 0.391304)
+texture = ExtResource("8_xfwii")

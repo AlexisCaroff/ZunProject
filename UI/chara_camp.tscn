@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://jtrtg026w4al" path="res://UI/chara_camp.gd" id="1_n0x3i"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="1_tajnv"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="2_n0x3i"]
-[ext_resource type="Texture2D" uid="uid://dqk35k04yhaeb" path="res://camp imgs/Camp_char_sit_H.png" id="4_xv3i0"]
+[ext_resource type="Texture2D" uid="uid://dqk35k04yhaeb" path="res://camp_imgs/Camp_char_sit_H.png" id="4_xv3i0"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="5_8qacs"]
 [ext_resource type="Script" uid="uid://cf5uoxm4f4cop" path="res://characters/arrow.gd" id="7_vsk4x"]
 

@@ -22,8 +22,8 @@
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="17_luaer"]
 [ext_resource type="Texture2D" uid="uid://cc5eq6g7p535a" path="res://props/boles.png" id="18_03c8w"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="20_7788d"]
-[ext_resource type="Texture2D" uid="uid://b6mfq3s6sv7s7" path="res://camp imgs/PROP_tent_back.png" id="20_fctf2"]
-[ext_resource type="Texture2D" uid="uid://8dghn3albj01" path="res://camp imgs/PROP_tent_front.png" id="21_gofun"]
+[ext_resource type="Texture2D" uid="uid://b6mfq3s6sv7s7" path="res://camp_imgs/PROP_tent_back.png" id="20_fctf2"]
+[ext_resource type="Texture2D" uid="uid://8dghn3albj01" path="res://camp_imgs/PROP_tent_front.png" id="21_gofun"]
 [ext_resource type="Script" uid="uid://cklpwxrawneex" path="res://scripts/camp/tente.gd" id="22_jpnjt"]
 [ext_resource type="Texture2D" uid="uid://dek8m1gml45n4" path="res://tent scenes/TENT H001.png" id="23_2te02"]
 [ext_resource type="Texture2D" uid="uid://c043rkwnxe6ad" path="res://UI/UI boxes/UI_camp_leave.png" id="23_gofun"]
@@ -48,7 +48,7 @@
 [ext_resource type="Script" uid="uid://0yy75ocbav52" path="res://lvl/haloFeu.gd" id="46_i1nuu"]
 [ext_resource type="Script" uid="uid://cxgw24yv778d8" path="res://lvl/chara_portraitButton.gd" id="48_7tx7c"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="49_yy5dy"]
-[ext_resource type="Texture2D" uid="uid://hfa6tl3x7v45" path="res://camp imgs/PROP_campfire_fire.png" id="50_yy5dy"]
+[ext_resource type="Texture2D" uid="uid://hfa6tl3x7v45" path="res://camp_imgs/PROP_campfire_fire.png" id="50_yy5dy"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_luaer"]
 

@@ -629,10 +629,10 @@ flat = true
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1560.0
-offset_top = -18.0
+offset_top = 2.0
 offset_right = 1944.0
-offset_bottom = 61.0
-flat = true
+offset_bottom = 36.0
+text = "Skip combat"
 script = ExtResource("32_a5bh2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
