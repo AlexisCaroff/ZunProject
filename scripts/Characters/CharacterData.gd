@@ -59,6 +59,7 @@ var precision: int = 100        # recalculé chaque update_stats
 @export var skill_resources: Array[Resource] = []
 # --- Tags (type, classe, etc.)
 @export var tags: Array[String] = []
+@export var assist: String = ""
 #combat
 
 # --- Contrôle

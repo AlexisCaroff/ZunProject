@@ -1,29 +1,38 @@
-[gd_scene load_steps=30 format=3 uid="uid://bvr5vf8uyqxhp"]
+[gd_scene load_steps=42 format=3 uid="uid://bvr5vf8uyqxhp"]
 
 [ext_resource type="Script" uid="uid://btg7pq0vcw8uk" path="res://InvetoryUI.gd" id="1_22r63"]
-[ext_resource type="Texture2D" uid="uid://lhncc7d02shi" path="res://UI/BigBox.png" id="2_tlc6u"]
-[ext_resource type="Texture2D" uid="uid://dsi4pii678hew" path="res://UI/longBox.png" id="3_gcq4s"]
-[ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="4_qryfk"]
+[ext_resource type="Texture2D" uid="uid://246mvgagx4lt" path="res://UI/UI inventory/UI_inventory_box_char.png" id="2_6hptt"]
+[ext_resource type="Texture2D" uid="uid://cd52c3qv1laol" path="res://UI/UI inventory/UI_inventory_box_pack.png" id="3_8ilm7"]
+[ext_resource type="Texture2D" uid="uid://cogratascjrrt" path="res://UI/UI inventory/UI_inventory_nameplate.png" id="4_gd2vl"]
 [ext_resource type="Script" uid="uid://23jk35s0bxvn" path="res://CharaIventoryUI.gd" id="5_1dccd"]
-[ext_resource type="Texture2D" uid="uid://d0cdwsrnib8ju" path="res://UI/Character_screen_test.jpg" id="5_uba40"]
+[ext_resource type="Texture2D" uid="uid://boxqmqojqn0m" path="res://UI/UI inventory/UI_button_gear_frame.png" id="5_nsfhk"]
 [ext_resource type="Texture2D" uid="uid://5trmkstb5g8x" path="res://Items/ItemIcons/testeIcon.png" id="6_n2jd0"]
 [ext_resource type="Texture2D" uid="uid://ch8bpedx177r3" path="res://UI/itemBack.png" id="6_oq4fx"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="7_txi41"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="8_ls6yl"]
 [ext_resource type="Texture2D" uid="uid://utdubw2ugjtc" path="res://UI/UI boxes/UI_affinity_crystal_off.png" id="11_2m5xi"]
-[ext_resource type="Texture2D" uid="uid://d162na82h3g2m" path="res://UI/exite.png" id="11_rggra"]
 [ext_resource type="FontFile" uid="uid://dy4n8qboodyud" path="res://font/MarcellusSC-Regular.ttf" id="12_7poab"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="12_jlxux"]
 [ext_resource type="Texture2D" uid="uid://7ryxw7uwc0yd" path="res://UI/UI boxes/UI_affinity_crystal_on.png" id="12_v4oee"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="12_wlqro"]
 [ext_resource type="Script" uid="uid://bbfc4ul2bo0en" path="res://UI/actionButton.gd" id="13_wlqro"]
-[ext_resource type="Texture2D" uid="uid://d22q2ilbbl8dn" path="res://UI/ArrowL.png" id="20_13e1g"]
-[ext_resource type="Texture2D" uid="uid://barnu2syc2ays" path="res://UI/menuCharacterBoxChara.png" id="20_nsfhk"]
-[ext_resource type="Texture2D" uid="uid://cqp5sr6locjdw" path="res://UI/ArrowRt.png" id="21_13e1g"]
-[ext_resource type="Texture2D" uid="uid://ctkoy8ysbicta" path="res://UI/iconMap.png" id="21_v4oee"]
-[ext_resource type="Texture2D" uid="uid://bswj3ifksudqi" path="res://UI/journalIcon.png" id="22_nsfhk"]
-[ext_resource type="Texture2D" uid="uid://53cn2wxevdr3" path="res://UI/menuiCON.png" id="23_a3lxb"]
+[ext_resource type="Texture2D" uid="uid://cpiyjpaydx3i5" path="res://UI/UI boxes/UI_affinity_meter.png" id="14_gd2vl"]
+[ext_resource type="Texture2D" uid="uid://xwq7f8l713uc" path="res://UI/UI boxes/UI_affinity_portait_frame.png" id="16_j0oqy"]
+[ext_resource type="Texture2D" uid="uid://dd4k5wxaesfo4" path="res://characters/exploPortrait/MysticExploPortrait.png" id="17_da0jd"]
+[ext_resource type="Texture2D" uid="uid://klrxowkw56rk" path="res://UI/UI inventory/UI_inventory_arch_over.png" id="18_6hptt"]
+[ext_resource type="Texture2D" uid="uid://6yhi43fxw300" path="res://UI/UI inventory/UI_inventory_arch_under.png" id="19_8ilm7"]
+[ext_resource type="Texture2D" uid="uid://cr4fyd24h5aci" path="res://UI/UI boxes/UI_close.png" id="20_vxwdg"]
+[ext_resource type="Texture2D" uid="uid://d1x0t0774gvww" path="res://UI/UI inventory/UI_inventory_nameplate_right.png" id="21_j0oqy"]
+[ext_resource type="Texture2D" uid="uid://cen6p7rqoyp13" path="res://UI/UI inventory/UI_inventory_nameplate_left.png" id="22_da0jd"]
+[ext_resource type="Texture2D" uid="uid://5u3lacixetkm" path="res://UI/UI inventory/UI_inventory_button_map.png" id="23_vxwdg"]
 [ext_resource type="Texture2D" uid="uid://xbjwv5qg2xmp" path="res://characters/portraits/PORTRAIT_hero_hunter.png" id="24_2m5xi"]
+[ext_resource type="Texture2D" uid="uid://b6ydx3ktka8fh" path="res://UI/UI boxes/UI_convo_box.png" id="24_j0oqy"]
+[ext_resource type="Texture2D" uid="uid://baq5h4e1x0b27" path="res://UI/UI inventory/UI_inventory_button_journal.png" id="24_ttj2k"]
+[ext_resource type="Texture2D" uid="uid://spwciuq6x1l2" path="res://UI/UI inventory/UI_inventory_button_menu.png" id="25_o5gf2"]
+[ext_resource type="Texture2D" uid="uid://b5pfnsjtakfga" path="res://UI/UI inventory/UI_button_frame_tilted.png" id="26_vxwdg"]
+[ext_resource type="Texture2D" uid="uid://mwsjcj1ro84d" path="res://UI/UI boxes/UI_convo_box3.png" id="27_gd2vl"]
+[ext_resource type="Texture2D" uid="uid://dio74h46tmg6s" path="res://UI/UI inventory/UI_inventory_gender_F.png" id="32_vxwdg"]
+[ext_resource type="Texture2D" uid="uid://dvmfh1wg85vvj" path="res://UI/UI inventory/UI_inventory_gender_M.png" id="33_ttj2k"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22r63"]
 
@@ -34,9 +43,18 @@ corner_detail = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6hptt"]
 bg_color = Color(1, 1, 1, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttj2k"]
+bg_color = Color(0, 0, 0, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5gf2"]
+bg_color = Color(1, 1, 1, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p2sg8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2m5xi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j0oqy"]
 
 [node name="MenuPerso" type="Control"]
 z_index = 40
@@ -55,57 +73,76 @@ metadata/_edit_vertical_guides_ = [-690.0, -635.0]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 128
-visible = false
 follow_viewport_enabled = true
 
-[node name="background2" type="TextureRect" parent="CanvasLayer"]
-offset_left = 40.0
-offset_top = 28.0
-offset_right = 1395.0
-offset_bottom = 1070.0
-texture = ExtResource("2_tlc6u")
-expand_mode = 1
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 2334.0
+offset_bottom = 1107.0
+color = Color(0, 0, 0, 0.89)
 
 [node name="background4" type="TextureRect" parent="CanvasLayer"]
 offset_left = 40.0
 offset_top = 28.0
 offset_right = 1395.0
 offset_bottom = 1070.0
-texture = ExtResource("2_tlc6u")
-expand_mode = 1
-
-[node name="background3" type="TextureRect" parent="CanvasLayer"]
-offset_left = 1404.0
-offset_top = 29.0
-offset_right = 1884.0
-offset_bottom = 1066.0
-texture = ExtResource("3_gcq4s")
+texture = ExtResource("2_6hptt")
 expand_mode = 1
 
 [node name="background5" type="TextureRect" parent="CanvasLayer"]
 offset_left = 1404.0
 offset_top = 29.0
-offset_right = 1884.0
+offset_right = 1895.0
 offset_bottom = 1066.0
-texture = ExtResource("3_gcq4s")
+texture = ExtResource("3_8ilm7")
 expand_mode = 4
 
-[node name="CharacterScreenTest" type="Sprite2D" parent="CanvasLayer"]
-visible = false
-position = Vector2(950, 557)
-scale = Vector2(1.20928, 1.20928)
-texture = ExtResource("5_uba40")
+[node name="MenuCharacterBoxChara2" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(718.5, 687.309)
+scale = Vector2(1.07337, 1.09112)
+texture = ExtResource("19_8ilm7")
+
+[node name="pivot" type="Node2D" parent="CanvasLayer"]
+position = Vector2(527, 871)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("8_ls6yl")
+min_scale = 1.1
+max_scale = 1.2
+scalemini = 1.1
+min_duration = 1.0
+max_duration = 1.5
+
+[node name="HerosTexture1" type="TextureRect" parent="CanvasLayer/pivot"]
+anchors_preset = -1
+anchor_right = 0.0880208
+offset_left = -167.5
+offset_top = -663.333
+offset_right = 660.0
+offset_bottom = 164.167
+scale = Vector2(0.8, 0.8)
+mouse_filter = 2
+texture = ExtResource("24_2m5xi")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MenuCharacterBoxChara" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(718.5, 337)
+scale = Vector2(1.07337, 1.09112)
+texture = ExtResource("18_6hptt")
+
+[node name="UiInventoryNameplate" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(713, 85)
+texture = ExtResource("4_gd2vl")
 
 [node name="InventoryGrid" type="GridContainer" parent="CanvasLayer"]
 clip_contents = true
 custom_minimum_size = Vector2(120, 120)
-offset_left = 1454.0
-offset_top = 117.0
-offset_right = 1836.0
-offset_bottom = 1043.0
+offset_left = 1447.0
+offset_top = 253.0
+offset_right = 1856.0
+offset_bottom = 1000.0
 theme_override_constants/h_separation = 60
 theme_override_constants/v_separation = 60
-columns = 8
+columns = 5
 
 [node name="EquipmentSlots" type="HBoxContainer" parent="CanvasLayer"]
 offset_left = 1003.0
@@ -129,10 +166,11 @@ expand_mode = 1
 [node name="Icon" type="TextureRect" parent="CanvasLayer/EquipmentSlots/EquipSlot1"]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
-offset_left = 2.0
-offset_right = 108.0
-offset_bottom = 106.0
-texture = ExtResource("6_n2jd0")
+offset_left = -8.0
+offset_top = -10.0
+offset_right = 154.0
+offset_bottom = 152.0
+texture = ExtResource("5_nsfhk")
 
 [node name="Btn" type="Button" parent="CanvasLayer/EquipmentSlots/EquipSlot1"]
 layout_mode = 0
@@ -159,10 +197,11 @@ expand_mode = 1
 [node name="Icon" type="TextureRect" parent="CanvasLayer/EquipmentSlots/EquipSlot2"]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
-offset_left = 2.0
-offset_right = 108.0
-offset_bottom = 106.0
-texture = ExtResource("6_n2jd0")
+offset_left = -8.0
+offset_top = -10.0
+offset_right = 154.0
+offset_bottom = 152.0
+texture = ExtResource("5_nsfhk")
 
 [node name="Btn" type="Button" parent="CanvasLayer/EquipmentSlots/EquipSlot2"]
 layout_mode = 0
@@ -175,17 +214,18 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_22r63")
 flat = true
 
 [node name="DragIcon" type="TextureRect" parent="CanvasLayer"]
-offset_left = 2.0
-offset_right = 108.0
-offset_bottom = 106.0
+offset_left = 141.0
+offset_top = -186.0
+offset_right = 247.0
+offset_bottom = -80.0
 texture = ExtResource("6_n2jd0")
 
 [node name="Charaname" type="Label" parent="CanvasLayer"]
 z_index = 6
 offset_left = 606.0
-offset_top = 75.0
+offset_top = 46.0
 offset_right = 829.0
-offset_bottom = 148.0
+offset_bottom = 119.0
 theme_override_colors/font_color = Color(0.721569, 0.647059, 0.45098, 1)
 theme_override_fonts/font = ExtResource("7_txi41")
 theme_override_font_sizes/font_size = 60
@@ -199,18 +239,17 @@ offset_left = 994.0
 offset_top = 620.0
 offset_right = 1194.0
 offset_bottom = 669.0
-theme_override_colors/font_color = Color(0.721569, 0.647059, 0.45098, 1)
+theme_override_colors/font_color = Color(0.568627, 0.52549, 0.439216, 1)
 theme_override_fonts/font = ExtResource("7_txi41")
 theme_override_font_sizes/font_size = 40
 text = "Gears"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Equipement"]
-layout_mode = 0
 offset_left = 26.0
 offset_top = 42.0
 offset_right = 324.0
 offset_bottom = 44.0
-color = Color(0.721569, 0.647059, 0.45098, 1)
+color = Color(0.568627, 0.52549, 0.439216, 1)
 
 [node name="Kinks" type="Label" parent="CanvasLayer"]
 z_index = 6
@@ -218,18 +257,36 @@ offset_left = 994.0
 offset_top = 270.0
 offset_right = 1194.0
 offset_bottom = 319.0
-theme_override_colors/font_color = Color(0.721569, 0.647059, 0.45098, 1)
+theme_override_colors/font_color = Color(0.568627, 0.52549, 0.439216, 1)
 theme_override_fonts/font = ExtResource("7_txi41")
 theme_override_font_sizes/font_size = 40
 text = "Kinks"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Kinks"]
-layout_mode = 0
 offset_left = 26.0
 offset_top = 42.0
 offset_right = 324.0
 offset_bottom = 44.0
-color = Color(0.721569, 0.647059, 0.45098, 1)
+color = Color(0.568627, 0.52549, 0.439216, 1)
+
+[node name="Kinks2" type="Label" parent="CanvasLayer"]
+z_index = 6
+offset_left = 1445.0
+offset_top = 120.0
+offset_right = 1645.0
+offset_bottom = 169.0
+theme_override_colors/font_color = Color(0.32549, 0.278431, 0.215686, 1)
+theme_override_fonts/font = ExtResource("7_txi41")
+theme_override_font_sizes/font_size = 40
+text = "Kinks"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Kinks2"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 102.0
+offset_right = 324.0
+offset_bottom = 104.0
+color = Color(0.180392, 0.14902, 0.12549, 1)
 
 [node name="Equipement5" type="Label" parent="CanvasLayer"]
 z_index = 6
@@ -237,7 +294,7 @@ offset_left = 67.0
 offset_top = 633.0
 offset_right = 267.0
 offset_bottom = 682.0
-theme_override_colors/font_color = Color(0.721569, 0.647059, 0.45098, 1)
+theme_override_colors/font_color = Color(0.568627, 0.52549, 0.439216, 1)
 theme_override_fonts/font = ExtResource("7_txi41")
 theme_override_font_sizes/font_size = 40
 text = "Affinity"
@@ -248,26 +305,36 @@ offset_left = 26.0
 offset_top = 42.0
 offset_right = 324.0
 offset_bottom = 44.0
-color = Color(0.721569, 0.647059, 0.45098, 1)
+color = Color(0.568627, 0.52549, 0.439216, 1)
 
 [node name="Equipement4" type="Label" parent="CanvasLayer"]
 z_index = 6
 offset_left = 84.0
-offset_top = 193.0
+offset_top = 137.0
 offset_right = 313.0
-offset_bottom = 242.0
-theme_override_colors/font_color = Color(0.721569, 0.647059, 0.45098, 1)
+offset_bottom = 186.0
+theme_override_colors/font_color = Color(0.568627, 0.52549, 0.439216, 1)
 theme_override_fonts/font = ExtResource("7_txi41")
 theme_override_font_sizes/font_size = 40
 text = "Combat Skills"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Equipement4"]
-layout_mode = 0
 offset_left = 26.0
 offset_top = 42.0
 offset_right = 324.0
 offset_bottom = 44.0
-color = Color(0.721569, 0.647059, 0.45098, 1)
+color = Color(0.568627, 0.52549, 0.439216, 1)
+
+[node name="Camp skill" type="Label" parent="CanvasLayer"]
+z_index = 6
+offset_left = 84.0
+offset_top = 529.0
+offset_right = 313.0
+offset_bottom = 578.0
+theme_override_colors/font_color = Color(0.403922, 0.345098, 0.278431, 1)
+theme_override_fonts/font = ExtResource("7_txi41")
+theme_override_font_sizes/font_size = 40
+text = "Camp skill"
 
 [node name="AttLabel" type="RichTextLabel" parent="CanvasLayer"]
 z_index = 6
@@ -288,39 +355,13 @@ offset_left = 1019.0
 offset_top = 355.0
 offset_right = 1274.0
 offset_bottom = 592.0
-theme_override_colors/default_color = Color(0.613281, 0.549953, 0.3833, 1)
+theme_override_colors/default_color = Color(0.65098, 0.34902, 0.45098, 1)
 theme_override_fonts/normal_font = ExtResource("7_txi41")
 theme_override_fonts/italics_font = ExtResource("7_txi41")
 theme_override_font_sizes/bold_italics_font_size = 20
 theme_override_font_sizes/normal_font_size = 30
 text = "kinks
 "
-
-[node name="KinksList2" type="RichTextLabel" parent="CanvasLayer"]
-z_index = 6
-offset_left = 214.0
-offset_top = 125.0
-offset_right = 346.0
-offset_bottom = 185.0
-theme_override_colors/default_color = Color(0.613281, 0.549953, 0.3833, 1)
-theme_override_fonts/normal_font = ExtResource("7_txi41")
-theme_override_fonts/italics_font = ExtResource("7_txi41")
-theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/normal_font_size = 30
-text = "Map"
-
-[node name="KinksList3" type="RichTextLabel" parent="CanvasLayer"]
-z_index = 6
-offset_left = 112.0
-offset_top = 125.0
-offset_right = 173.0
-offset_bottom = 185.0
-theme_override_colors/default_color = Color(0.613281, 0.549953, 0.3833, 1)
-theme_override_fonts/normal_font = ExtResource("7_txi41")
-theme_override_fonts/italics_font = ExtResource("7_txi41")
-theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/normal_font_size = 30
-text = "Menu"
 
 [node name="DefLabel" type="RichTextLabel" parent="CanvasLayer"]
 z_index = 6
@@ -348,16 +389,38 @@ theme_override_font_sizes/bold_italics_font_size = 20
 theme_override_font_sizes/normal_font_size = 30
 text = "Willpower:"
 
+[node name="Assist" type="RichTextLabel" parent="CanvasLayer"]
+z_index = 6
+offset_left = 92.0
+offset_top = 689.0
+offset_right = 162.0
+offset_bottom = 744.0
+theme_override_colors/default_color = Color(0.32549, 0.278431, 0.215686, 1)
+theme_override_fonts/normal_font = ExtResource("7_txi41")
+theme_override_font_sizes/normal_font_size = 30
+text = "Assist:"
+
+[node name="AssistEffect" type="RichTextLabel" parent="CanvasLayer"]
+z_index = 6
+offset_left = 172.0
+offset_top = 689.0
+offset_right = 374.0
+offset_bottom = 744.0
+theme_override_colors/default_color = Color(0.470588, 0.435294, 0.364706, 1)
+theme_override_fonts/normal_font = ExtResource("7_txi41")
+theme_override_font_sizes/normal_font_size = 30
+text = "Protection"
+
 [node name="Orientation" type="RichTextLabel" parent="CanvasLayer"]
 z_index = 6
 offset_left = 1000.0
-offset_top = 146.0
+offset_top = 158.0
 offset_right = 1312.0
-offset_bottom = 201.0
-theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
+offset_bottom = 213.0
+theme_override_colors/default_color = Color(0.32549, 0.278431, 0.215686, 1)
 theme_override_fonts/normal_font = ExtResource("7_txi41")
 theme_override_font_sizes/normal_font_size = 40
-text = "Orientation:"
+text = "Like:"
 
 [node name="Type" type="RichTextLabel" parent="CanvasLayer"]
 z_index = 6
@@ -365,10 +428,10 @@ offset_left = 1000.0
 offset_top = 97.0
 offset_right = 1312.0
 offset_bottom = 152.0
-theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
+theme_override_colors/default_color = Color(0.32549, 0.278431, 0.215686, 1)
 theme_override_fonts/normal_font = ExtResource("7_txi41")
 theme_override_font_sizes/normal_font_size = 40
-text = "Type:"
+text = "Personality :"
 
 [node name="StaminaProgressBar" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(0.878431, 0.584314, 0.341176, 1)
@@ -389,7 +452,7 @@ offset_right = 866.0
 offset_bottom = 971.0
 theme_override_styles/background = SubResource("StyleBoxFlat_a3lxb")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6hptt")
-value = 72.93
+value = 100.0
 show_percentage = false
 
 [node name="GuiltProgressBar" type="ProgressBar" parent="CanvasLayer"]
@@ -474,10 +537,11 @@ text = "Guilt:
 
 [node name="CharactersPanelAffinity" type="VBoxContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(60, 60)
-offset_left = 69.0
-offset_top = 710.0
-offset_right = 269.0
-offset_bottom = 1098.0
+offset_left = 86.0
+offset_top = 738.0
+offset_right = 286.0
+offset_bottom = 1126.0
+scale = Vector2(0.856322, 0.856322)
 theme_override_constants/separation = 2
 
 [node name="chara1" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity"]
@@ -486,14 +550,17 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 expand_mode = 1
 script = ExtResource("5_1dccd")
+hover_scale = Vector2(0.51, 0.51)
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
-modulate = Color(0.184314, 0.172549, 0.14902, 1)
+[node name="chara2" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
+z_index = 3
 layout_mode = 0
-offset_left = 77.0
-offset_top = 62.0
-offset_right = 283.0
-offset_bottom = 90.0
+offset_left = 69.0
+offset_top = 42.0
+offset_right = 316.0
+offset_bottom = 113.0
+texture = ExtResource("14_gd2vl")
+expand_mode = 1
 
 [node name="Textaffinity" type="RichTextLabel" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
 layout_mode = 0
@@ -507,31 +574,36 @@ theme_override_font_sizes/normal_font_size = 25
 text = "name  value"
 horizontal_alignment = 1
 
-[node name="chara" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
+[node name="chara3" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 14.0
-offset_top = 4.0
-offset_right = 114.0
-offset_bottom = 104.0
-texture = ExtResource("4_qryfk")
+offset_left = -14.0
+offset_top = 6.0
+offset_right = 105.0
+offset_bottom = 125.0
+texture = ExtResource("16_j0oqy")
 expand_mode = 1
 
+[node name="chara" type="Sprite2D" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
+z_index = 6
+position = Vector2(46.5226, 68)
+rotation = -0.191986
+scale = Vector2(0.491435, 0.491435)
+texture = ExtResource("17_da0jd")
+
 [node name="AffinityCrystalBack1" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 114.0
-offset_top = 39.0
-offset_right = 214.0
-offset_bottom = 139.0
-scale = Vector2(0.585169, 0.735415)
+offset_left = 113.0
+offset_top = 45.0
+offset_right = 213.0
+offset_bottom = 145.0
+scale = Vector2(0.484047, 0.52833)
 texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara1/AffinityCrystalBack1"]
-z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
 offset_left = -8.10813
@@ -541,19 +613,17 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("12_v4oee")
 
 [node name="AffinityCrystalBack2" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 183.0
-offset_top = 41.0
-offset_right = 283.0
-offset_bottom = 141.0
-scale = Vector2(0.585169, 0.735415)
+offset_left = 195.0
+offset_top = 44.0
+offset_right = 295.0
+offset_bottom = 144.0
+scale = Vector2(0.484047, 0.52833)
 texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara1/AffinityCrystalBack2"]
-z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
 offset_left = -8.10813
@@ -563,19 +633,17 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("12_v4oee")
 
 [node name="AffinityCrystalBack3" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 246.0
-offset_top = 39.0
-offset_right = 346.0
-offset_bottom = 139.0
-scale = Vector2(0.585169, 0.735415)
+offset_left = 270.0
+offset_top = 46.0
+offset_right = 370.0
+offset_bottom = 146.0
+scale = Vector2(0.484047, 0.52833)
 texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara1/AffinityCrystalBack3"]
-z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
 offset_left = -8.10813
@@ -585,32 +653,24 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("12_v4oee")
 
 [node name="LustProgressBar3" type="ProgressBar" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
-modulate = Color(0.392157, 0.364706, 0.811765, 1)
+modulate = Color(0.959566, 0.836991, 0.50111, 1)
+z_index = 5
 layout_mode = 2
-offset_left = 80.0
-offset_top = 64.0
-offset_right = 280.0
-offset_bottom = 88.0
-theme_override_styles/background = SubResource("StyleBoxFlat_a3lxb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_6hptt")
+offset_left = 85.0
+offset_top = 72.0
+offset_right = 297.0
+offset_bottom = 82.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ttj2k")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o5gf2")
 step = 1.0
-value = 66.0
+value = 25.0
 show_percentage = false
-
-[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 5.0
-offset_right = 134.0
-offset_bottom = 74.0
-rotation = 0.785398
-color = Color(0, 0, 0, 1)
 
 [node name="Button" type="Button" parent="CanvasLayer/CharactersPanelAffinity/chara1"]
 layout_mode = 0
-offset_left = 65.0
+offset_left = 49.0
 offset_top = 1.0
-offset_right = 154.0
+offset_right = 138.0
 offset_bottom = 91.0
 rotation = 0.793458
 flat = true
@@ -621,14 +681,17 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 expand_mode = 1
 script = ExtResource("5_1dccd")
+hover_scale = Vector2(0.51, 0.51)
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
-modulate = Color(0.184314, 0.172549, 0.14902, 1)
+[node name="chara2" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
+z_index = 3
 layout_mode = 0
-offset_left = 77.0
-offset_top = 62.0
-offset_right = 283.0
-offset_bottom = 90.0
+offset_left = 69.0
+offset_top = 42.0
+offset_right = 316.0
+offset_bottom = 113.0
+texture = ExtResource("14_gd2vl")
+expand_mode = 1
 
 [node name="Textaffinity" type="RichTextLabel" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
 layout_mode = 0
@@ -642,31 +705,36 @@ theme_override_font_sizes/normal_font_size = 25
 text = "name  value"
 horizontal_alignment = 1
 
-[node name="chara" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
+[node name="chara3" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 14.0
-offset_top = 4.0
-offset_right = 114.0
-offset_bottom = 104.0
-texture = ExtResource("4_qryfk")
+offset_left = -14.0
+offset_top = 6.0
+offset_right = 105.0
+offset_bottom = 125.0
+texture = ExtResource("16_j0oqy")
 expand_mode = 1
 
+[node name="chara" type="Sprite2D" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
+z_index = 6
+position = Vector2(46.5226, 68)
+rotation = -0.191986
+scale = Vector2(0.491435, 0.491435)
+texture = ExtResource("17_da0jd")
+
 [node name="AffinityCrystalBack1" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 114.0
-offset_top = 39.0
-offset_right = 214.0
-offset_bottom = 139.0
-scale = Vector2(0.585169, 0.735415)
+offset_left = 113.0
+offset_top = 45.0
+offset_right = 213.0
+offset_bottom = 145.0
+scale = Vector2(0.484047, 0.52833)
 texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara2/AffinityCrystalBack1"]
-z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
 offset_left = -8.10813
@@ -676,19 +744,17 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("12_v4oee")
 
 [node name="AffinityCrystalBack2" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 183.0
-offset_top = 41.0
-offset_right = 283.0
-offset_bottom = 141.0
-scale = Vector2(0.585169, 0.735415)
+offset_left = 195.0
+offset_top = 44.0
+offset_right = 295.0
+offset_bottom = 144.0
+scale = Vector2(0.484047, 0.52833)
 texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara2/AffinityCrystalBack2"]
-z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
 offset_left = -8.10813
@@ -698,19 +764,17 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("12_v4oee")
 
 [node name="AffinityCrystalBack3" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 246.0
-offset_top = 39.0
-offset_right = 346.0
-offset_bottom = 139.0
-scale = Vector2(0.585169, 0.735415)
+offset_left = 270.0
+offset_top = 46.0
+offset_right = 370.0
+offset_bottom = 146.0
+scale = Vector2(0.484047, 0.52833)
 texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara2/AffinityCrystalBack3"]
-z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
 offset_left = -8.10813
@@ -720,32 +784,24 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("12_v4oee")
 
 [node name="LustProgressBar3" type="ProgressBar" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
-modulate = Color(0.392157, 0.364706, 0.811765, 1)
+modulate = Color(0.959566, 0.836991, 0.50111, 1)
+z_index = 5
 layout_mode = 2
-offset_left = 80.0
-offset_top = 64.0
-offset_right = 280.0
-offset_bottom = 88.0
-theme_override_styles/background = SubResource("StyleBoxFlat_a3lxb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_6hptt")
+offset_left = 85.0
+offset_top = 72.0
+offset_right = 297.0
+offset_bottom = 82.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ttj2k")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o5gf2")
 step = 1.0
-value = 66.0
+value = 25.0
 show_percentage = false
-
-[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 5.0
-offset_right = 134.0
-offset_bottom = 74.0
-rotation = 0.785398
-color = Color(0, 0, 0, 1)
 
 [node name="Button" type="Button" parent="CanvasLayer/CharactersPanelAffinity/chara2"]
 layout_mode = 0
-offset_left = 65.0
+offset_left = 49.0
 offset_top = 1.0
-offset_right = 154.0
+offset_right = 138.0
 offset_bottom = 91.0
 rotation = 0.793458
 flat = true
@@ -756,14 +812,17 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 expand_mode = 1
 script = ExtResource("5_1dccd")
+hover_scale = Vector2(0.51, 0.51)
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/CharactersPanelAffinity/chara3"]
-modulate = Color(0.184314, 0.172549, 0.14902, 1)
+[node name="chara2" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara3"]
+z_index = 3
 layout_mode = 0
-offset_left = 77.0
-offset_top = 62.0
-offset_right = 283.0
-offset_bottom = 90.0
+offset_left = 69.0
+offset_top = 42.0
+offset_right = 316.0
+offset_bottom = 113.0
+texture = ExtResource("14_gd2vl")
+expand_mode = 1
 
 [node name="Textaffinity" type="RichTextLabel" parent="CanvasLayer/CharactersPanelAffinity/chara3"]
 layout_mode = 0
@@ -777,31 +836,36 @@ theme_override_font_sizes/normal_font_size = 25
 text = "name  value"
 horizontal_alignment = 1
 
-[node name="chara" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara3"]
+[node name="chara3" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara3"]
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 14.0
-offset_top = 4.0
-offset_right = 114.0
-offset_bottom = 104.0
-texture = ExtResource("4_qryfk")
+offset_left = -14.0
+offset_top = 6.0
+offset_right = 105.0
+offset_bottom = 125.0
+texture = ExtResource("16_j0oqy")
 expand_mode = 1
 
+[node name="chara" type="Sprite2D" parent="CanvasLayer/CharactersPanelAffinity/chara3"]
+z_index = 6
+position = Vector2(46.5226, 68)
+rotation = -0.191986
+scale = Vector2(0.491435, 0.491435)
+texture = ExtResource("17_da0jd")
+
 [node name="AffinityCrystalBack1" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara3"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 114.0
-offset_top = 39.0
-offset_right = 214.0
-offset_bottom = 139.0
-scale = Vector2(0.585169, 0.735415)
+offset_left = 113.0
+offset_top = 45.0
+offset_right = 213.0
+offset_bottom = 145.0
+scale = Vector2(0.484047, 0.52833)
 texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara3/AffinityCrystalBack1"]
-z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
 offset_left = -8.10813
@@ -811,19 +875,17 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("12_v4oee")
 
 [node name="AffinityCrystalBack2" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara3"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 183.0
-offset_top = 41.0
-offset_right = 283.0
-offset_bottom = 141.0
-scale = Vector2(0.585169, 0.735415)
+offset_left = 195.0
+offset_top = 44.0
+offset_right = 295.0
+offset_bottom = 144.0
+scale = Vector2(0.484047, 0.52833)
 texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara3/AffinityCrystalBack2"]
-z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
 offset_left = -8.10813
@@ -833,19 +895,17 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("12_v4oee")
 
 [node name="AffinityCrystalBack3" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara3"]
-self_modulate = Color(0.184314, 0.172549, 0.152941, 1)
 z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 246.0
-offset_top = 39.0
-offset_right = 346.0
-offset_bottom = 139.0
-scale = Vector2(0.585169, 0.735415)
+offset_left = 270.0
+offset_top = 46.0
+offset_right = 370.0
+offset_bottom = 146.0
+scale = Vector2(0.484047, 0.52833)
 texture = ExtResource("11_2m5xi")
 
 [node name="AffinityCrystal" type="TextureRect" parent="CanvasLayer/CharactersPanelAffinity/chara3/AffinityCrystalBack3"]
-z_index = 6
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
 offset_left = -8.10813
@@ -855,42 +915,34 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("12_v4oee")
 
 [node name="LustProgressBar3" type="ProgressBar" parent="CanvasLayer/CharactersPanelAffinity/chara3"]
-modulate = Color(0.392157, 0.364706, 0.811765, 1)
+modulate = Color(0.959566, 0.836991, 0.50111, 1)
+z_index = 5
 layout_mode = 2
-offset_left = 80.0
-offset_top = 64.0
-offset_right = 280.0
-offset_bottom = 88.0
-theme_override_styles/background = SubResource("StyleBoxFlat_a3lxb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_6hptt")
+offset_left = 85.0
+offset_top = 72.0
+offset_right = 297.0
+offset_bottom = 82.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ttj2k")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o5gf2")
 step = 1.0
-value = 66.0
+value = 25.0
 show_percentage = false
-
-[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/CharactersPanelAffinity/chara3"]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 5.0
-offset_right = 134.0
-offset_bottom = 74.0
-rotation = 0.785398
-color = Color(0, 0, 0, 1)
 
 [node name="Button" type="Button" parent="CanvasLayer/CharactersPanelAffinity/chara3"]
 layout_mode = 0
-offset_left = 65.0
+offset_left = 49.0
 offset_top = 1.0
-offset_right = 154.0
+offset_right = 138.0
 offset_bottom = 91.0
 rotation = 0.793458
 flat = true
 
 [node name="ExitButton" type="Button" parent="CanvasLayer"]
-offset_left = 1849.0
-offset_top = 17.0
-offset_right = 1904.0
-offset_bottom = 75.0
-icon = ExtResource("11_rggra")
+offset_left = 1859.0
+offset_top = 12.0
+offset_right = 1914.0
+offset_bottom = 70.0
+icon = ExtResource("20_vxwdg")
 flat = true
 expand_icon = true
 script = ExtResource("12_wlqro")
@@ -899,9 +951,9 @@ script = ExtResource("12_wlqro")
 z_index = 6
 custom_minimum_size = Vector2(90, 90)
 offset_left = 111.0
-offset_top = 262.0
+offset_top = 206.0
 offset_right = 328.0
-offset_bottom = 462.0
+offset_bottom = 406.0
 scale = Vector2(1.245, 1.245)
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
@@ -987,113 +1039,216 @@ offset_right = 81.0
 offset_bottom = 1.78713
 alignment = 1
 
-[node name="LabelAction" type="RichTextLabel" parent="CanvasLayer"]
-z_index = 6
-offset_left = 42.0
-offset_top = 545.0
-offset_right = 456.0
-offset_bottom = 629.0
-theme_override_fonts/normal_font = ExtResource("7_txi41")
-theme_override_font_sizes/normal_font_size = 20
-horizontal_alignment = 1
+[node name="CampsSkill" type="Button" parent="CanvasLayer"]
+custom_minimum_size = Vector2(90, 90)
+offset_left = 294.0
+offset_top = 511.0
+offset_right = 384.0
+offset_bottom = 601.0
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("12_jlxux")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p2sg8")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("13_wlqro")
 
-[node name="MenuCharacterBoxChara" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(718.5, 534.326)
-scale = Vector2(0.733133, 0.745253)
-texture = ExtResource("20_nsfhk")
+[node name="CooldownBar" type="HBoxContainer" parent="CanvasLayer/CampsSkill"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -3.21287
+offset_right = 81.0
+offset_bottom = 1.78713
+alignment = 1
+
+[node name="LabelAction" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+z_index = 9
+offset_left = 34.0
+offset_top = 545.0
+offset_right = 442.0
+offset_bottom = 624.0
+theme_override_colors/default_color = Color(0.852547, 0.823695, 0.766131, 1)
+theme_override_fonts/normal_font = ExtResource("7_txi41")
+theme_override_font_sizes/normal_font_size = 15
+text = "blablabaal"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/LabelAction"]
+z_index = -1
+offset_left = 33.0
+offset_right = 385.0
+offset_bottom = 79.0
+color = Color(0, 0, 0, 1)
+
+[node name="UiConvoBox3" type="Sprite2D" parent="CanvasLayer/LabelAction"]
+position = Vector2(208, 39.5)
+scale = Vector2(0.210464, 0.38756)
+texture = ExtResource("24_j0oqy")
 
 [node name="ButtonCharacter1" type="Button" parent="CanvasLayer"]
-modulate = Color(0.317647, 0.262745, 0.188235, 1)
-offset_left = 890.0
-offset_top = 84.0
-offset_right = 963.0
-offset_bottom = 157.0
+offset_left = 909.0
+offset_top = 74.0
+offset_right = 982.0
+offset_bottom = 147.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2m5xi")
-icon = ExtResource("21_13e1g")
+icon = ExtResource("21_j0oqy")
 flat = true
 script = ExtResource("12_wlqro")
 
 [node name="ButtonCharacter2" type="Button" parent="CanvasLayer"]
-modulate = Color(0.317647, 0.262745, 0.188235, 1)
-offset_left = 440.0
-offset_top = 84.0
-offset_right = 513.0
-offset_bottom = 157.0
+offset_left = 471.0
+offset_top = 74.0
+offset_right = 544.0
+offset_bottom = 147.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2m5xi")
-icon = ExtResource("20_13e1g")
+icon = ExtResource("22_da0jd")
 flat = true
 script = ExtResource("12_wlqro")
 
 [node name="ButtonMap" type="Button" parent="CanvasLayer"]
-offset_left = 187.0
-offset_top = 67.0
-offset_right = 260.0
-offset_bottom = 140.0
+offset_left = 130.0
+offset_top = 29.0
+offset_right = 214.0
+offset_bottom = 113.0
+scale = Vector2(0.710574, 0.710574)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2m5xi")
-icon = ExtResource("21_v4oee")
 flat = true
 script = ExtResource("12_wlqro")
+normal_scale = Vector2(0.8, 0.8)
+hover_scale = Vector2(1, 1)
 
-[node name="KinksList4" type="RichTextLabel" parent="CanvasLayer"]
-z_index = 6
-offset_left = 317.0
-offset_top = 125.0
-offset_right = 449.0
-offset_bottom = 185.0
-theme_override_colors/default_color = Color(0.613281, 0.549953, 0.3833, 1)
-theme_override_fonts/normal_font = ExtResource("7_txi41")
-theme_override_fonts/italics_font = ExtResource("7_txi41")
-theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/normal_font_size = 30
-text = "Journal"
+[node name="UiButtonFrameTilted" type="Sprite2D" parent="CanvasLayer/ButtonMap"]
+position = Vector2(37.3988, 44.4184)
+scale = Vector2(0.511719, 0.511719)
+texture = ExtResource("26_vxwdg")
+
+[node name="UiInventoryButtonMap" type="Sprite2D" parent="CanvasLayer/ButtonMap"]
+position = Vector2(35.3988, 41.9184)
+scale = Vector2(0.525391, 0.525391)
+texture = ExtResource("23_vxwdg")
 
 [node name="ButtonMap3" type="Button" parent="CanvasLayer"]
-offset_left = 290.0
-offset_top = 67.0
-offset_right = 363.0
-offset_bottom = 140.0
+offset_left = 226.0
+offset_top = 24.0
+offset_right = 310.0
+offset_bottom = 107.0
+scale = Vector2(0.710574, 0.710574)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2m5xi")
-icon = ExtResource("22_nsfhk")
 flat = true
 script = ExtResource("12_wlqro")
+normal_scale = Vector2(0.8, 0.8)
+hover_scale = Vector2(1, 1)
+
+[node name="UiButtonFrameTilted" type="Sprite2D" parent="CanvasLayer/ButtonMap3"]
+position = Vector2(34.8172, 48.72)
+scale = Vector2(0.511719, 0.511719)
+texture = ExtResource("26_vxwdg")
+
+[node name="UiInventoryButtonJournal" type="Sprite2D" parent="CanvasLayer/ButtonMap3"]
+position = Vector2(35.8172, 48.72)
+scale = Vector2(0.554688, 0.545544)
+texture = ExtResource("24_ttj2k")
 
 [node name="ButtonMenu" type="Button" parent="CanvasLayer"]
-offset_left = 73.0
-offset_top = 58.0
-offset_right = 157.0
-offset_bottom = 148.0
+offset_left = 36.0
+offset_top = 28.0
+offset_right = 120.0
+offset_bottom = 118.0
+scale = Vector2(0.710574, 0.710574)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2m5xi")
-icon = ExtResource("23_a3lxb")
 flat = true
 script = ExtResource("12_wlqro")
+normal_scale = Vector2(0.8, 0.8)
+hover_scale = Vector2(1, 1)
 
-[node name="pivot" type="Node2D" parent="CanvasLayer"]
-position = Vector2(527, 871)
-scale = Vector2(1.2, 1.2)
-script = ExtResource("8_ls6yl")
-min_duration = 1.0
-max_duration = 1.5
+[node name="UiButtonFrameTilted" type="Sprite2D" parent="CanvasLayer/ButtonMenu"]
+position = Vector2(40.3114, 40.9489)
+scale = Vector2(0.511719, 0.511719)
+texture = ExtResource("26_vxwdg")
 
-[node name="HerosTexture1" type="TextureRect" parent="CanvasLayer/pivot"]
-anchors_preset = -1
-anchor_right = 0.0880208
-offset_left = -166.667
-offset_top = -660.833
-offset_right = 660.833
-offset_bottom = 166.667
-scale = Vector2(0.8, 0.8)
+[node name="UiInventoryButtonMenu" type="Sprite2D" parent="CanvasLayer/ButtonMenu"]
+position = Vector2(41.3114, 42.4489)
+scale = Vector2(0.544922, 0.544922)
+texture = ExtResource("25_o5gf2")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer"]
+modulate = Color(0, 0, 0, 1)
+clip_contents = true
+custom_minimum_size = Vector2(20, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -348.0
+offset_top = 408.0
+offset_right = 354.0
+offset_bottom = 459.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.361299, 0.471874)
+size_flags_vertical = 0
 mouse_filter = 2
-texture = ExtResource("24_2m5xi")
-expand_mode = 1
-metadata/_edit_use_anchors_ = true
+theme_override_constants/separation = 64
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer/HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="CanvasLayer/HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect6" type="ColorRect" parent="CanvasLayer/HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect7" type="ColorRect" parent="CanvasLayer/HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect8" type="ColorRect" parent="CanvasLayer/HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect9" type="ColorRect" parent="CanvasLayer/HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect10" type="ColorRect" parent="CanvasLayer/HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
 
 [node name="ToolTipPanel" type="PanelContainer" parent="CanvasLayer"]
+z_index = 11
 offset_left = -304.0
 offset_right = -33.0
 offset_bottom = 176.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_j0oqy")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ToolTipPanel"]
 layout_mode = 2
+
+[node name="ToolTipName2" type="RichTextLabel" parent="CanvasLayer/ToolTipPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("12_7poab")
+horizontal_alignment = 1
 
 [node name="ToolTipName" type="RichTextLabel" parent="CanvasLayer/ToolTipPanel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 25)
@@ -1108,6 +1263,36 @@ layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("12_7poab")
 text = "Description"
 
+[node name="UiConvoBox3" type="Sprite2D" parent="CanvasLayer/ToolTipPanel"]
+position = Vector2(132.684, 88)
+scale = Vector2(0.336843, 0.337165)
+texture = ExtResource("27_gd2vl")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ToolTipPanel/UiConvoBox3"]
+z_index = -1
+offset_left = -421.0
+offset_top = -261.0
+offset_right = -148.0
+offset_bottom = -92.0
+scale = Vector2(3.06129, 3.07368)
+color = Color(0, 0, 0, 1)
+
+[node name="UiInventoryGenderF" type="TextureRect" parent="CanvasLayer"]
+offset_left = 1097.0
+offset_top = 165.0
+offset_right = 1189.0
+offset_bottom = 256.0
+scale = Vector2(0.61896, 0.61896)
+texture = ExtResource("32_vxwdg")
+
+[node name="UiInventoryGenderM" type="TextureRect" parent="CanvasLayer"]
+offset_left = 1186.0
+offset_top = 164.0
+offset_right = 1278.0
+offset_bottom = 255.0
+scale = Vector2(0.618961, 0.618961)
+texture = ExtResource("33_ttj2k")
+
 [connection signal="mouse_entered" from="CanvasLayer/ActionPanel/Action1" to="CanvasLayer/ActionPanel/Action1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/ActionPanel/Action1" to="CanvasLayer/ActionPanel/Action1" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer/ActionPanel/Action2" to="CanvasLayer/ActionPanel/Action2" method="_on_mouse_entered"]
@@ -1116,3 +1301,5 @@ text = "Description"
 [connection signal="mouse_exited" from="CanvasLayer/ActionPanel/Action3" to="CanvasLayer/ActionPanel/Action3" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer/ActionPanel/Action4" to="CanvasLayer/ActionPanel/Action4" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/ActionPanel/Action4" to="CanvasLayer/ActionPanel/Action4" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/CampsSkill" to="CanvasLayer/CampsSkill" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/CampsSkill" to="CanvasLayer/CampsSkill" method="_on_mouse_exited"]

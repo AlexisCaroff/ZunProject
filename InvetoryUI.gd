@@ -4,7 +4,7 @@ class_name InventoryUI
 
 @export var inventory_size_x := 5
 @export var inventory_size_y := 5
-@export var emptySlotTexture : Texture2D = preload("res://UI/emptyItemSlot.png")
+@export var emptySlotTexture : Texture2D = preload("res://UI/UI inventory/UI_inventory_pack_frame.png")
 # --- Références
 @onready var startMenuButton = $CanvasLayer/ButtonMenu
 @onready var canvasLayer = $CanvasLayer
@@ -45,9 +45,13 @@ class_name InventoryUI
 @onready var LustProgressBar=$CanvasLayer/LustProgressBar
 @onready var GuiltProgressBar=$CanvasLayer/GuiltProgressBar
 @onready var KinksList=$CanvasLayer/KinksList
+# --- Camp skill / Assist
+@onready var CampsSkill = $CanvasLayer/CampsSkill
+@onready var CampsSkillCooldown = $CanvasLayer/CampsSkill/CooldownBar
+@onready var AssistEffect = $CanvasLayer/AssistEffect
 # Instances des personnages
 var characters : Array[CharacterData]= [
-	
+
 ]
 var current_character_index : int = 0
 var selected_character : CharacterData = null
@@ -70,37 +74,43 @@ signal change_in_equipment(character: CharacterData)
 
 
 
-
 func _ready():
-	
+
 	gm = get_tree().root.get_node("GameManager") as GameManager
 	hideMenu()
 	gm.inventory_changed.connect(_on_inventory_changed)
 	startMenuButton.connect("button_down", startmenu)
 	create_inventory_grid()
-	
+
 	ExitButton.connect("button_down", hideMenu)
 	drag_icon.visible = false
 	var theinventory = inventory_items.duplicate()
-	
+
 	inventory_items.resize(inventory_size_x * inventory_size_y)
-	
+
 	for i in range(inventory_items.size()):
 		inventory_items[i] = null
-		
+
 	for i in gm.inventory:
 		if i != null:
 			print (i.name + " is in Game manager inventory")
 			addItemToInventory(i)
-	
 
-		
+
+
 	if characters.is_empty():
 		characters=gm.characters
 	select_character(characters[0])
 	ButtonCharacter1.connect("button_down",nextChara)
 	ButtonCharacter2.connect("button_down",lastChara)
 	update_inventory_ui()
+
+	# --- Repositionner LabelAction sous le bouton survolé
+	for btn in skill_buttons:
+		if btn != null:
+			btn.mouse_entered.connect(position_label_under.bind(btn))
+	if CampsSkill != null:
+		CampsSkill.mouse_entered.connect(position_label_under.bind(CampsSkill))
 
 
 # --------------------------------------------------------------------
@@ -109,10 +119,10 @@ func _ready():
 func nextChara():
 	if characters.is_empty():
 		return
-	
+
 	current_character_index = (current_character_index + 1) % characters.size()
 	select_character(characters[current_character_index])
-	
+
 func lastChara():
 	if characters.is_empty():
 		return
@@ -145,21 +155,21 @@ func select_character(chara:CharacterData):
 	chara.initiative = chara.base_initiative
 	chara.willpower = chara.base_willpower
 	chara.evasion = chara.base_evasion
-	
+
 	for eq in chara.equipped_items:
-		
+
 		chara.attack += eq.attack_bonus
 		chara.defense += eq.defense_bonus
 		chara.max_horniness += eq.Max_lust_bonus
 		chara.max_stamina += eq.Max_stamina_bonus
-		chara.max_stress += eq.Max_Guilt_bonus 
+		chara.max_stress += eq.Max_Guilt_bonus
 		chara.willpower += eq.willpower_bonus
 		chara.evasion += eq.evasion_bonus
-		chara.initiative += eq.initiative_bonus 
-	
+		chara.initiative += eq.initiative_bonus
+
 	for buff in chara.buffs:
 		buff.apply_to(chara)
-	
+
 	for tag in chara.tags:
 		KinksList.text += tag + "\n"
 	Charaname.text=chara.Charaname
@@ -175,7 +185,7 @@ func select_character(chara:CharacterData):
 	chara.defense, chara.base_defense, (chara.defense - chara.base_defense)]
 	WillPower.text = "Willpower: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
 	chara.willpower, chara.base_willpower, (chara.willpower - chara.base_willpower)]
-	
+
 	Stamina.text = "%d / %d" % [chara.current_stamina, chara.max_stamina]
 	StaminaProgressBar.max_value= chara.max_stamina
 	StaminaProgressBar.value=chara.current_stamina
@@ -185,7 +195,7 @@ func select_character(chara:CharacterData):
 	Horny.text = "%d / %d" % [chara.current_horniness, chara.max_horniness]
 	LustProgressBar.max_value=chara.max_horniness
 	LustProgressBar.value=chara.current_horniness
-	
+
 	if skill_buttons == null:
 		#push_error("skill_buttons est null pour %s" % character.Charaname)
 		skill_buttons = [
@@ -193,40 +203,60 @@ func select_character(chara:CharacterData):
 		$ActionPanel/Action2,
 		$ActionPanel/Action3,
 		$ActionPanel/Action4,
-		
+
 		]
 		cooldown_bars = [
 		$ActionPanel/Action1/CooldownBar,
 		$ActionPanel/Action2/CooldownBar,
 		$ActionPanel/Action3/CooldownBar,
 		$ActionPanel/Action4/CooldownBar,
-		
+
 		]
 		CharactersAffinity= [
 		$CharactersPanelAffinity/chara1,
 		$CharactersPanelAffinity/chara2,
 		$CharactersPanelAffinity/chara3
 		]
-	
+
 	for i in range(skill_buttons.size()):
 		var button = skill_buttons[i]
-		
+
 		var skill = chara.skill_resources[i]
-		
-		
+
+
 		if skill != null:
 			skill_buttons[i].Actiontext = skill.descriptionName + "\n" + skill.description
 			button.disabled = skill.can_use()
 			button.icon = skill.icon
 			skill_buttons[i].label = LabelAction
-			
 
 
-			
+
 			update_cooldown_bar(cooldown_bars[i],skill)
 		else:
 			button.text = "—"
 			button.disabled = true
+
+	# --- Camp Skill : affichage comme une action de combat ---
+	if CampsSkill != null:
+		if chara.camp_skill_resources.size() > 0 and chara.camp_skill_resources[0] != null:
+			var camp_skill = chara.camp_skill_resources[0]
+			CampsSkill.Actiontext = camp_skill.name 
+			
+			CampsSkill.icon = camp_skill.icon
+			CampsSkill.label = LabelAction
+			
+		else:
+			CampsSkill.Actiontext = ""
+			CampsSkill.icon = null
+			CampsSkill.disabled = true
+			CampsSkill.label = LabelAction
+			update_cooldown_bar(CampsSkillCooldown, null)
+
+	# --- Assist : affiche la variable assist du personnage sélectionné ---
+	if AssistEffect != null:
+		AssistEffect.text = chara.assist
+
 	var other_members : Array = []
 	for c in characters:
 		if c != chara:
@@ -240,23 +270,49 @@ func select_character(chara:CharacterData):
 			# Récupération de la RichTextLabel
 			var rtl : RichTextLabel = slot.get_node("Textaffinity")
 			rtl.bbcode_enabled = true
-			
-			
+
+
 			# Affinité (valeur)
 			var value := 0
 			if chara.affinity.has(target.Charaname):
 				value = chara.affinity[target.Charaname]
 			slot.set_chara(target, value)
-		
 
-			
+
+
 			rtl.text = target.Charaname
 
 			slot.visible = true
 
 		else:
 			slot.visible = false
-			 
+
+
+
+# --------------------------------------------------------------------
+# POSITIONNEMENT DU LABEL D'ACTION SOUS LE BOUTON SURVOLÉ
+# --------------------------------------------------------------------
+func position_label_under(button: Control):
+	if LabelAction == null or button == null:
+		return
+	# Forcer le recalcul de la taille au cas où le texte vient d'être changé
+	await get_tree().process_frame
+
+	var btn_rect : Rect2 = button.get_global_rect()
+	var label_size : Vector2 = LabelAction.size
+
+	# Centrer horizontalement sous le bouton, et le placer juste en dessous
+	var target_pos : Vector2 = Vector2(
+		btn_rect.position.x + btn_rect.size.x * 0.5 - label_size.x * 0.5,
+		btn_rect.position.y + btn_rect.size.y + 8
+	)
+
+	# Empêcher le label de sortir de l'écran
+	var viewport_size : Vector2 = get_viewport().get_visible_rect().size
+	target_pos.x = clamp(target_pos.x, 0, viewport_size.x - label_size.x)
+	target_pos.y = clamp(target_pos.y, 0, viewport_size.y - label_size.y)
+
+	LabelAction.global_position = target_pos
 
 
 func create_inventory_grid():
@@ -284,16 +340,16 @@ func create_inventory_cell(index: int) -> Control:
 	btn.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	btn.size = Vector2(120, 120)
 	btn.flat = true
-	
+
 	var emptyStyle = StyleBoxEmpty.new()
 	btn.add_theme_stylebox_override("focus", emptyStyle)
-	
+
 	btn.connect("pressed", func(): on_inventory_slot_pressed(index))
-	
+
 
 	btn.mouse_entered.connect(func(): _on_slot_hovered(index))
 	btn.mouse_exited.connect(func(): hide_tooltip())
-	
+
 	container.add_child(btn)
 	return container
 
@@ -303,7 +359,7 @@ func _on_slot_hovered(index: int):
 	show_tooltip(item, cell.global_position + Vector2(120, 0))
 
 func on_inventory_slot_pressed(index: int):
-	print("Inventory click | phase=", GameState.current_phase) 
+	print("Inventory click | phase=", GameState.current_phase)
 	var item = inventory_items[index]
 
 	if dragged_item == null:
@@ -313,7 +369,7 @@ func on_inventory_slot_pressed(index: int):
 				#print( "can't in Combat")
 				return
 			start_drag(item, index)
-			
+
 	else:
 		# Déposer l’item ici
 		place_item_in_inventory(index)
@@ -361,7 +417,7 @@ func place_item_in_inventory(index: int):
 	inventory_items[index] = dragged_item
 	dragged_item = temp
 	update_inventory_ui()
-	
+
 
 func addItemToInventory(item: Equipment):
 	for idx in range(inventory_items.size()):
@@ -369,7 +425,7 @@ func addItemToInventory(item: Equipment):
 			inventory_items[idx] = item
 			print("add item ", item.name)
 			break
-	
+
 	update_inventory_ui()
 # --------------------------------------------------------------------
 # EQUIPMENT SLOTS UI
@@ -389,26 +445,26 @@ func update_equipment_slots():
 			icon.texture = item.icon
 			btn.disabled = false
 			btn.connect("pressed", func(): unequip(i))
-			
+
 		else:
 			icon.texture = null
 			btn.disabled = true
-	
+
 
 
 func unequip(slot_index: int):
 	if GameState.current_phase == GameStat.GamePhase.COMBAT:
 		return
- 
+
 	var item: Equipment = selected_character.equipped_items[slot_index]
- 
+
 	# ── Sync avec gm.inventory (le master persistant) ──
 	# On ajoute directement (pas via gm.add_to_inventory) pour éviter
 	# que le signal inventory_changed ne déclenche un addItemToInventory()
 	# qui ajouterait une 2e fois dans inventory_items.
 	if not gm.inventory.has(item):
 		gm.inventory.append(item)
- 
+
 	# ── Place dans le grid local ──
 	for i in range(inventory_items.size()):
 		if inventory_items[i] == null:
@@ -417,7 +473,7 @@ func unequip(slot_index: int):
 			update_inventory_ui()
 			update_equipment_slots()
 			return
- 
+
 	# ── Fallback : aucune place dans le grid (improbable mais safe) ──
 	# L'item reste dans gm.inventory. On retire quand même de equipped.
 	selected_character.equipped_items.remove_at(slot_index)
@@ -448,20 +504,20 @@ func _input(event):
 func try_equip_on_character() -> bool:
 	if selected_character == null:
 		return false
- 
+
 	if selected_character.equipped_items.size() >= 2:
 		return false
- 
+
 	selected_character.equipped_items.append(dragged_item)
- 
+
 	# Sécurité : ne pas faire remove_at(-1) si l'item n'est pas dans
 	# gm.inventory (peut arriver si la sync était cassée à un moment).
 	var idx := gm.inventory.find(dragged_item)
-	
+
 	if idx >= 0:
 		gm.inventory.remove_at(idx)
- 	
-	
+
+
 	await get_tree().create_timer(0.01).timeout
 	update_equipment_slots()
 	update_inventory_ui()
@@ -477,16 +533,16 @@ func update_inventory_ui():
 
 		icon.texture = item.icon if item != null else emptySlotTexture
 	emit_signal("change_in_equipment", selected_character)
-	
+
 func hideMenu():
 	canvasLayer.visible=false
 func showMenu():
 	canvasLayer.visible=true
 func update_cooldown_bar(container: HBoxContainer, skill):
-	
+
 	for child in container.get_children():
 		child.queue_free()
-	
+
 	if skill == null:
 		return
 
@@ -512,11 +568,11 @@ func show_tooltip(item: Equipment, cell_position: Vector2):
 	if item == null:
 		hide_tooltip()
 		return
-	
+
 	tooltip_name.text = item.name
-	
-	
-	
+
+
+
 	# Construit les stats dynamiquement
 	var stats := ""
 	if item.attack_bonus != 0:
@@ -538,7 +594,7 @@ func show_tooltip(item: Equipment, cell_position: Vector2):
 
 	tooltip_desc.bbcode_enabled = true
 	tooltip_desc.text = "  " + item.description if item.get("description") else "" + stats
-	
+
 	tooltip_panel.visible = true
 	_reposition_tooltip(cell_position)
 
@@ -550,23 +606,23 @@ func hide_tooltip():
 	tooltip_panel.visible = false
 
 func _reposition_tooltip(near: Vector2):
-	
-	
+
+
 	var viewport_size = get_viewport().get_visible_rect().size
 	var tp_size = tooltip_panel.size
 	var pos = near + Vector2(-16, 0)
-	
+
 	# Déborde à droite → passer à gauche du slot
 	if pos.x + tp_size.x+500 > viewport_size.x:
 		pos.x = near.x - tp_size.x - 136  # 136 = largeur slot (120) + marge (16)
-		
-	
+
+
 	# Déborde en bas → remonter
 	if pos.y + tp_size.y > viewport_size.y:
 		pos.y = viewport_size.y - tp_size.y - 8
-	
+
 	# Déborde en haut (si tooltip très grand)
 	if pos.y < 0:
 		pos.y = 8
-	
+
 	tooltip_panel.global_position = pos
