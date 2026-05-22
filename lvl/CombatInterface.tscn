@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://h8pqs7tabdxj"]
+[gd_scene load_steps=82 format=3 uid="uid://h8pqs7tabdxj"]
 
 [ext_resource type="Script" uid="uid://c2wkbu6y4kcu2" path="res://UI/ui_combat.gd" id="1_3b7mk"]
 [ext_resource type="Script" uid="uid://ds3vigal0aygx" path="res://lvl/Hall1/SpriteActionCombat.gd" id="3_mhvks"]
@@ -34,6 +34,7 @@
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="30_awrpq"]
 [ext_resource type="Texture2D" uid="uid://b54elep5kk5sm" path="res://UI/UI boxes/UI_combat_portrait_frame.png" id="30_junmr"]
 [ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="31_fmgae"]
+[ext_resource type="Shader" uid="uid://byep7wpo3y12v" path="res://characters/character_outline.gdshader" id="32_8up0w"]
 [ext_resource type="Script" uid="uid://bqnn7n8kuofir" path="res://UI/buttonSkipCombat.gd" id="32_a5bh2"]
 [ext_resource type="Script" uid="uid://dpfgacyh24syl" path="res://lvl/Hall1/overmenu.gd" id="34_ty8ym"]
 [ext_resource type="Texture2D" uid="uid://dh6k7cso8hksn" path="res://UI/charaIcon.png" id="35_5xk2w"]
@@ -142,6 +143,13 @@ _bundled = {
 "variants": [ExtResource("22_f8625"), ExtResource("23_tqpdb"), ExtResource("24_7x5ke"), ExtResource("25_agocc"), "Bulub", true, 2, Array[Resource]([ExtResource("26_twjx6"), ExtResource("26_twjx6"), ExtResource("26_twjx6"), ExtResource("26_twjx6"), ExtResource("27_ibx7i")]), false, Vector2(0, -21), ExtResource("28_tgyd1"), -133.0, -229.0, 38.0, 2.0, 2, ExtResource("23_tqpdb"), 1, true, Color(2, 2, 2, 0), -133.0, -229.0, 38.0, 2.0, 2, ExtResource("23_tqpdb"), 1, true, false, -82.0, -265.0, -38.0, -242.0, "name", Color(1, 1, 1, 0), -123.0, -325.0, 110.0, 57.0, 22.0, -252.0, 62.0, -233.0, false, -176.0, -305.0, 400.0, 271.0, Vector2(0.5, 0.5), ExtResource("29_vn84m"), ExtResource("30_awrpq"), Vector2(-52, -351), Vector2(0.38, 0.38), ExtResource("31_fmgae"), Vector2(0, 117.335), ExtResource("28_tgyd1"), 0.38, 0.38, 0.3, 0.5, 0.5, -108.0, -33.0, -65.0, -14.0, ExtResource("8_qx47d"), 15, "Stamina:", Color(0.690751, 1, 0, 1), 0, 50.0, 7.0, 146.0, 17.0, 100.0, false, -91.0, -15.0, -66.0, 4.0, ExtResource("8_qx47d"), 15, "Guilt:", Color(1, 0.257036, 0, 1), 0, 32.0, 7.0, 128.0, 17.0, false, -99.0, 2.0, -67.0, 21.0, ExtResource("8_qx47d"), 15, "Horny:", Color(0.905484, 0, 1, 1), 0, 39.0, 7.0, 135.0, 17.0, false],
 "version": 3
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yspa4"]
+shader = ExtResource("32_8up0w")
+shader_parameter/enabled = true
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 8.0
+shader_parameter/outline_direction = Vector2(0, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kiw3p"]
 
@@ -632,7 +640,7 @@ offset_left = 1560.0
 offset_top = 2.0
 offset_right = 1944.0
 offset_bottom = 36.0
-text = "Skip combat"
+flat = true
 script = ExtResource("32_a5bh2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -675,6 +683,7 @@ theme_override_constants/separation = -8
 alignment = 1
 
 [node name="Action1" type="Button" parent="CanvasLayer/ActionPanel"]
+material = SubResource("ShaderMaterial_yspa4")
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
@@ -695,6 +704,7 @@ offset_bottom = 1.78713
 alignment = 1
 
 [node name="Action2" type="Button" parent="CanvasLayer/ActionPanel"]
+material = SubResource("ShaderMaterial_yspa4")
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
@@ -715,6 +725,7 @@ offset_bottom = 1.78713
 alignment = 1
 
 [node name="Action3" type="Button" parent="CanvasLayer/ActionPanel"]
+material = SubResource("ShaderMaterial_yspa4")
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
@@ -735,6 +746,7 @@ offset_bottom = 1.78713
 alignment = 1
 
 [node name="Action4" type="Button" parent="CanvasLayer/ActionPanel"]
+material = SubResource("ShaderMaterial_yspa4")
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
@@ -755,6 +767,7 @@ offset_bottom = 1.78713
 alignment = 1
 
 [node name="Action5" type="Button" parent="CanvasLayer/ActionPanel"]
+material = SubResource("ShaderMaterial_yspa4")
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0

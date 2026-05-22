@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=17 format=3 uid="uid://yecuio874dy4"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=18 format=3 uid="uid://yecuio874dy4"]
 
 [ext_resource type="Texture2D" uid="uid://dw6mlmcxoge8o" path="res://characters/charatexture/demo characters/ENEMY_temptress_hit.png" id="1_183tr"]
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_mcmpk"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_ocqyt"]
 [ext_resource type="Texture2D" uid="uid://djdgehyta1mx" path="res://characters/charatexture/demo characters/ENEMY_temptress_down.png" id="5_ocqyt"]
 [ext_resource type="Texture2D" uid="uid://bodt30r3mnj1m" path="res://characters/exploPortrait/temptressPortrait.png" id="7_airwf"]
+[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="8_airwf"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="8_lnpek"]
 [ext_resource type="Texture2D" uid="uid://bj42280vlqril" path="res://characters/characterInitiative/TemptressIniPortrait.png" id="8_ocqyt"]
 [ext_resource type="Texture2D" uid="uid://duqexi8su8ffh" path="res://characters/charatexture/demo characters/ENEMY_temptress_idle.png" id="8_ruvyt"]
@@ -63,7 +64,9 @@ current_stress = 0
 current_horniness = 0
 isOneshot = false
 skill_resources = Array[Resource]([ExtResource("11_ocqyt"), ExtResource("11_lnpek"), ExtResource("12_rfywr"), ExtResource("13_brc4x"), ExtResource("13_airwf")])
+exploration_skill_resources = Array[ExtResource("8_airwf")]([])
 tags = Array[String]([])
+assist = ""
 is_player_controlled = false
 ai_brain = SubResource("Resource_ocqyt")
 can_be_moved = true

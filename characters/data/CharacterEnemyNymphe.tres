@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=16 format=3 uid="uid://qau4rsq3wbf8"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=17 format=3 uid="uid://qau4rsq3wbf8"]
 
 [ext_resource type="Texture2D" uid="uid://c8oumnotxps83" path="res://characters/charatexture/demo characters/ENEMY_nymph_F_hit.png" id="1_j2yie"]
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_yr1yc"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cp18c4j8lgs6a" path="res://characters/charatexture/demo characters/ENEMY_nymph_F_idle.png" id="7_uby0a"]
 [ext_resource type="Resource" uid="uid://b12yj86cv1lo7" path="res://actions/ennemiCombatSkills/stickynet.tres" id="8_37cj1"]
 [ext_resource type="Texture2D" uid="uid://cgimx52mmw3ve" path="res://characters/characterInitiative/NympheIniPortrait.png" id="8_bq8kj"]
+[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="8_csovy"]
 [ext_resource type="Resource" uid="uid://cvpggc0yt3l4o" path="res://actions/ennemiCombatSkills/Ennemi_charme.tres" id="9_q077x"]
 [ext_resource type="Resource" uid="uid://nri716ki3ipb" path="res://actions/ennemiCombatSkills/BigpoisonHorny.tres" id="10_fn3av"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="11_66i88"]
@@ -62,7 +63,9 @@ current_stress = 0
 current_horniness = 0
 isOneshot = false
 skill_resources = Array[Resource]([ExtResource("8_37cj1"), ExtResource("9_q077x"), ExtResource("10_fn3av"), ExtResource("9_q077x"), ExtResource("11_66i88")])
+exploration_skill_resources = Array[ExtResource("8_csovy")]([])
 tags = Array[String]([])
+assist = ""
 is_player_controlled = false
 ai_brain = SubResource("Resource_bq8kj")
 can_be_moved = true

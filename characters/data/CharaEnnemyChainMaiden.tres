@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=16 format=3 uid="uid://ddr2vixcg7bcr"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=17 format=3 uid="uid://ddr2vixcg7bcr"]
 
 [ext_resource type="Texture2D" uid="uid://cnp4jdodbb6ss" path="res://characters/charatexture/demo characters/INQUISITION_chainmaiden_hit.png" id="1_fp0mp"]
 [ext_resource type="Script" uid="uid://db1m8vwgp38yx" path="res://characters/charatexture/braines/Ai_brain_Support.gd" id="2_pucnk"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bw62jfvjc7876" path="res://characters/charatexture/demo characters/INQUISITION_chainmaiden_down.png" id="5_ylhrk"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_m26kp"]
 [ext_resource type="Texture2D" uid="uid://c5mbm8111iqb8" path="res://characters/exploPortrait/ChainMaidenExploPortrait.png" id="7_sm27d"]
+[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="8_sm27d"]
 [ext_resource type="Texture2D" uid="uid://bnpg5r735arqt" path="res://characters/charatexture/demo characters/INQUISITION_chainmaiden_idle.png" id="8_x7hy0"]
 [ext_resource type="Texture2D" uid="uid://dhelkdmdp0rim" path="res://characters/characterInitiative/chainMaidenIniPortrait.png" id="8_ylhrk"]
 [ext_resource type="Resource" uid="uid://cwxukwuwcmaka" path="res://actions/ennemiCombatSkills/energySyphon.tres" id="10_fp0mp"]
@@ -62,7 +63,9 @@ current_stress = 0
 current_horniness = 0
 isOneshot = false
 skill_resources = Array[Resource]([ExtResource("10_fp0mp"), ExtResource("11_ylhrk"), ExtResource("12_sm27d"), ExtResource("13_x7hy0"), ExtResource("12_sm27d")])
+exploration_skill_resources = Array[ExtResource("8_sm27d")]([])
 tags = Array[String]([])
+assist = ""
 is_player_controlled = false
 ai_brain = SubResource("Resource_ocqyt")
 can_be_moved = true

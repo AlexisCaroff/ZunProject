@@ -5,18 +5,18 @@ class_name Skill
 @export var descriptionName: String = "Attaque"
 @export var description: String = "Inflige des dégâts à un ennemi"
 @export var icon: Texture2D
-@export var attack_sound: AudioStream 
+@export var attack_sound: AudioStream
 @export var barkSkill:= ""
 enum position_requirement {
-	ANY,      
-	FRONT,    
-	BACK     
+	ANY,
+	FRONT,
+	BACK
 }
 @export var required_position: position_requirement = position_requirement.ANY
 
 enum target_type {
-	ENNEMY, 
-	ALLY, 
+	ENNEMY,
+	ALLY,
 	SELF,
 	ALL_ALLY,
 	ALL_ENNEMY,
@@ -24,17 +24,20 @@ enum target_type {
 	BACK_ENNEMY,
 	FRONT_ALLY,
 	BACK_ALLY,
-	EVERYONE
+	EVERYONE,
+	EVERY_OTHER,
+	EVERYONE_ALL,
+	ALL_ALLY_AND_ENNEMY_FRONT
 }
-@export var ImageSkill : Texture2D 
-@export_enum("enemy", "ally", "self", "all ally", "all ennemy", "front ennemy","back ennemy","front ally","back ally","everyone")
+@export var ImageSkill : Texture2D
+@export_enum("enemy", "ally", "self", "all ally", "all ennemy", "front ennemy","back ennemy","front ally","back ally","everyone","every other","everyone all","all ally and ennemy front")
 var the_target_type: int = target_type.ENNEMY
 @export var effects: Array[SkillEffect] = []
-@export var two_target_Type: bool = false 
+@export var two_target_Type: bool = false
 
 enum second_target_type {
-	ENNEMY, 
-	ALLY, 
+	ENNEMY,
+	ALLY,
 	SELF,
 	ALL_ALLY,
 	ALL_ENNEMY,
@@ -42,10 +45,13 @@ enum second_target_type {
 	BACK_ENNEMY,
 	FRONT_ALLY,
 	BACK_ALLY,
-	EVERYONE
+	EVERYONE,
+	EVERY_OTHER,
+	EVERYONE_ALL,
+	ALL_ALLY_AND_ENNEMY_FRONT
 }
 
-@export_enum("enemy", "ally", "self", "all ally", "all ennemy", "front ennemy","back ennemy","front ally","back ally","everyone")
+@export_enum("enemy", "ally", "self", "all ally", "all ennemy", "front ennemy","back ennemy","front ally","back ally","everyone","every other","everyone all","all ally and ennemy front")
 var the_second_target_type: int = second_target_type.ENNEMY
 @export var second_effects: Array[SkillEffect] = []
 @export var usable_when_horny: bool = false
@@ -64,13 +70,13 @@ var target2 : Array[PositionSlot]
 var combatManager : CombatManager
 var reducecost : int=0
 var skill_effect_overridden := false
-@export var is_contact: bool = false 
+@export var is_contact: bool = false
 @export var distance_contact:float = 0.0
 @export var effect : PackedScene
 @export var caster_effect_scene: PackedScene
 ## Scène VFX instanciée en enfant de chaque CIBLE au moment de l'impact
 @export var target_effect_scene: PackedScene
- 
+
 enum EffectAnchor { NONE, HEAD, TORSO }
 ## Point d'ancrage du VFX du lanceur
 @export var caster_effect_anchor: EffectAnchor = EffectAnchor.NONE
@@ -88,7 +94,7 @@ func can_use() -> bool:
 		return false
 	if required_position == position_requirement.BACK and owner._current_slot.position_data.isFront:
 		return false
-	
+
 	return true
 
 func use(target: PositionSlot = null, secondtarget: bool = false) -> PositionSlot:
@@ -105,7 +111,7 @@ func use(target: PositionSlot = null, secondtarget: bool = false) -> PositionSlo
 
 	if target.occupant != null:
 
-		
+
 
 		target.combat_manager.stop_target_selection()
 
@@ -269,14 +275,14 @@ func select_targets(combat_manager:CombatManager):
 			for ally in combat_manager.heroes:
 				if !ally._current_slot.position_data.isFront:
 					ally.set_targetable(true)
-				else: 
+				else:
 					ally.set_targetable(false)
 
 		target_type.FRONT_ALLY:
 			for ally in combat_manager.heroes:
 				if ally._current_slot.position_data.isFront:
 					ally.set_targetable(true)
-				else: 
+				else:
 					ally.set_targetable(false)
 			for enemy in combat_manager.enemies:
 				enemy.set_targetable(false)
@@ -297,15 +303,54 @@ func select_targets(combat_manager:CombatManager):
 					enemy.set_targetable(false)
 			for ally in combat_manager.heroes:
 				ally.set_targetable(false)
-			
+
 		target_type.EVERYONE:
 			for enemy in combat_manager.enemies:
 				enemy.set_targetable(true)
 			for ally in combat_manager.heroes:
 				ally.set_targetable(true)
 
+		# --- NOUVEAU : un parmi tous les autres (≠ self) ---
+		target_type.EVERY_OTHER:
+			for enemy in combat_manager.enemies:
+				enemy.set_targetable(true)
+				if enemy.target_selected.is_connected(combat_manager._on_target_selected):
+					enemy.target_selected.disconnect(combat_manager._on_target_selected)
+				enemy.target_selected.connect(combat_manager._on_target_selected)
+			for ally in combat_manager.heroes:
+				if ally == owner:
+					ally.set_targetable(false)
+				else:
+					ally.set_targetable(true)
+					if ally.target_selected.is_connected(combat_manager._on_target_selected):
+						ally.target_selected.disconnect(combat_manager._on_target_selected)
+					ally.target_selected.connect(combat_manager._on_target_selected)
+
+		# --- NOUVEAU : tous les alliés + tous les ennemis (effet de groupe) ---
+		target_type.EVERYONE_ALL:
+			for enemy in combat_manager.enemies:
+				enemy.set_targetable(true)
+			for ally in combat_manager.heroes:
+				ally.set_targetable(true)
+
+		# --- NOUVEAU : 1 cible parmi TOUS les alliés OU les ennemis FRONT ---
+		target_type.ALL_ALLY_AND_ENNEMY_FRONT:
+			for ally in combat_manager.heroes:
+				ally.set_targetable(true)
+				if ally.target_selected.is_connected(combat_manager._on_target_selected):
+					ally.target_selected.disconnect(combat_manager._on_target_selected)
+				ally.target_selected.connect(combat_manager._on_target_selected)
+			for enemy in combat_manager.enemies:
+				if enemy._current_slot.position_data.isFront:
+					enemy.set_targetable(true)
+					if enemy.target_selected.is_connected(combat_manager._on_target_selected):
+						enemy.target_selected.disconnect(combat_manager._on_target_selected)
+					enemy.target_selected.connect(combat_manager._on_target_selected)
+				else:
+					enemy.set_targetable(false)
+
 func select_second_target(combat_manager:CombatManager):
-	
+
 	match the_second_target_type:
 		second_target_type.SELF:
 			var selfposition: Array[PositionSlot]
@@ -340,7 +385,7 @@ func select_second_target(combat_manager:CombatManager):
 		second_target_type.ALL_ENNEMY:
 			for enemy in combat_manager.enemies:
 				enemy.set_targetable(true)
-				
+
 		second_target_type.BACK_ALLY:
 			combat_manager.ui.log("Now select an ally")
 			for ally in combat_manager.heroes:
@@ -363,6 +408,43 @@ func select_second_target(combat_manager:CombatManager):
 			for enemy in combat_manager.enemies:
 				if enemy._current_slot.position_data.isFront:
 					enemy.set_targetable(true)
+
+		# --- NOUVEAUX (second target) ---
+		second_target_type.EVERY_OTHER:
+			for enemy in combat_manager.enemies:
+				enemy.set_targetable(true)
+				if enemy.target_selected.is_connected(combat_manager._on_target_selected):
+					enemy.target_selected.disconnect(combat_manager._on_target_selected)
+				enemy.target_selected.connect(combat_manager._on_target_selected)
+			for ally in combat_manager.heroes:
+				if ally == owner:
+					ally.set_targetable(false)
+				else:
+					ally.set_targetable(true)
+					if ally.target_selected.is_connected(combat_manager._on_target_selected):
+						ally.target_selected.disconnect(combat_manager._on_target_selected)
+					ally.target_selected.connect(combat_manager._on_target_selected)
+
+		second_target_type.EVERYONE_ALL:
+			for enemy in combat_manager.enemies:
+				enemy.set_targetable(true)
+			for ally in combat_manager.heroes:
+				ally.set_targetable(true)
+
+		second_target_type.ALL_ALLY_AND_ENNEMY_FRONT:
+			for ally in combat_manager.heroes:
+				ally.set_targetable(true)
+				if ally.target_selected.is_connected(combat_manager._on_target_selected):
+					ally.target_selected.disconnect(combat_manager._on_target_selected)
+				ally.target_selected.connect(combat_manager._on_target_selected)
+			for enemy in combat_manager.enemies:
+				if enemy._current_slot.position_data.isFront:
+					enemy.set_targetable(true)
+					if enemy.target_selected.is_connected(combat_manager._on_target_selected):
+						enemy.target_selected.disconnect(combat_manager._on_target_selected)
+					enemy.target_selected.connect(combat_manager._on_target_selected)
+				else:
+					enemy.set_targetable(false)
 
 func end_turn(combat_manager):
 	pay_cost()

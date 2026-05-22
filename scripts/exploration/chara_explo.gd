@@ -42,7 +42,7 @@ func load_chara() -> void:
 
 	for buff in characterData.buffs:
 		add_buff(buff, true)
-	
+
 
 func update_display() -> void:
 	sprite.texture = characterData.portrait_texture
@@ -66,15 +66,15 @@ func update_display() -> void:
 		buff_bar.add_child(icon)
 
 
-	
+
 
 func want_to_move():
 	sprite.self_modulate.a =1.0
 func move():
 	sprite.self_modulate.a =0.0
-	
+
 func add_buff(buff: Buff, isload:bool =false):
-	
+
 	var new_buff = buff.duplicate()
 	var icon = TextureRect.new()
 	icon.texture = new_buff.icon
@@ -87,7 +87,7 @@ func add_buff(buff: Buff, isload:bool =false):
 		characterData.buffs.append(buff)
 	#buff_icons.add_child(icon)
 	print("add buff")
-	
+
 signal skill_animation_started
 signal skill_animation_finished
 func animate_heal(damage:int, _source:CharaExplo, color=null):
@@ -97,11 +97,11 @@ func animate_heal(damage:int, _source:CharaExplo, color=null):
 	effect_instance.global_position = global_position + Vector2(0, -140)
 	if effect_instance.has_method("setup"):
 		effect_instance.setup(damage,color)
-		
+
 	var tween := create_tween() as Tween
-	
+
 	var normal_size = self.scale
-	var big_size= Vector2(1.0,1.05) 
+	var big_size= Vector2(1.0,1.05)
 	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	await tween.finished
@@ -109,17 +109,71 @@ func animate_heal(damage:int, _source:CharaExplo, color=null):
 
 func animate_selected():
 	emit_signal("skill_animation_started")
-	
-	
+
+
 	var tween := create_tween() as Tween
 	var CharaScale = self.scale
 	var normal_size = CharaScale
-	var big_size= Vector2(1.0,1.1) 
+	var big_size= Vector2(1.0,1.1)
 	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	await tween.finished
 	emit_signal("skill_animation_finished")
-	
+
 func unselected():
 	sprite.self_modulate.a =1.0
 	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
+
+
+# --------------------------------------------------------------------
+# ANIMATIONS DE SKILL D'EXPLORATION
+# --------------------------------------------------------------------
+
+## Animation du LANCEUR : petit "casting" + VFX optionnel sur lui-même.
+func animate_explo_skill_cast(skill: ExplorationSkill, target :CharaExplo) -> void:
+	emit_signal("skill_animation_started")
+	var restpos= self.position
+	var tween1 := create_tween() as Tween
+	z_index=target.z_index
+	tween1.tween_property(self, "position",Vector2(target.position.x-200, target.position.y),0.1)
+	await tween1.finished
+	# VFX sur le lanceur
+	if skill != null and skill.caster_effect_scene != null:
+		var vfx = skill.caster_effect_scene.instantiate()
+		get_tree().current_scene.add_child(vfx)
+		vfx.global_position = global_position + Vector2(0, -140)
+		vfx.z_index=self.z_index+1
+	if skill.animTexture != null:
+		sprite.texture=skill.animTexture
+	var tween := create_tween() as Tween
+	var normal_size : Vector2 = self.scale
+	var cast_size : Vector2 = Vector2(normal_size.x * 0.93, normal_size.y * 1.07)
+	# léger "préparation" avant d'agir
+	tween.tween_property(self, "scale", cast_size, 0.25)
+	tween.tween_property(self, "scale", normal_size, 0.2)
+	emit_signal("skill_animation_finished")
+	tween.tween_property(self, "position",restpos,0.2).set_delay(0.5)
+	await tween.finished
+	
+	sprite.texture= characterData.portrait_texture
+	
+
+
+## Animation de la CIBLE : "impact" + VFX optionnel.
+## Si la cible == le lanceur, c'est OK (auto-cast), on joue les deux séquentiellement.
+func animate_explo_skill_target(skill: ExplorationSkill, _source: CharaExplo) -> void:
+	emit_signal("skill_animation_started")
+
+	# VFX sur la cible
+	if skill != null and skill.target_effect_scene != null:
+		var vfx = skill.target_effect_scene.instantiate()
+		get_tree().current_scene.add_child(vfx)
+		vfx.global_position = global_position + Vector2(0, -140)
+		vfx.z_index=self.z_index+1
+	var tween := create_tween() as Tween
+	var normal_size : Vector2 = self.scale
+	var impact_size : Vector2 = Vector2(normal_size.x * 1.08, normal_size.y * 1.08)
+	tween.tween_property(self, "scale", impact_size, 0.15)
+	tween.tween_property(self, "scale", normal_size, 0.25)
+	await tween.finished
+	emit_signal("skill_animation_finished")

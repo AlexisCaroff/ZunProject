@@ -43,7 +43,7 @@ var selectorChara : Sprite2D
 
 # --- Bouton skill exploration (à AJOUTER dans la scène, voir notes en bas)
 # Mets le node Button dans ta scène à : ../ExploSkillButton  (ou adapte le chemin)
-@onready var explo_skill_button: Button = $"../ExploSkillButton"
+@onready var explo_skill_button: Button = get_node_or_null("../ExploSkillButton")
 
 # --- État de sélection de cible pour un skill d'exploration
 var pending_explo_skill: ExplorationSkill = null
@@ -78,7 +78,7 @@ func _ready():
 	menuPerso.characters=gm.characters
 	print ("characters atribués ")
 	menuPerso.change_in_equipment.connect(_on_character_equipment_changed)
-	#explo_skill_button.connect("button_down",_on_explo_skill_button_pressed)
+
 	load_characters_from_gamestat()
 	if gm.combat_just_ended:
 		print("💚 Post-combat heal sur l'équipe.")

@@ -73,6 +73,7 @@ metadata/_edit_vertical_guides_ = [-690.0, -635.0]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 128
+visible = false
 follow_viewport_enabled = true
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
@@ -245,6 +246,7 @@ theme_override_font_sizes/font_size = 40
 text = "Gears"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Equipement"]
+layout_mode = 0
 offset_left = 26.0
 offset_top = 42.0
 offset_right = 324.0
@@ -263,6 +265,7 @@ theme_override_font_sizes/font_size = 40
 text = "Kinks"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Kinks"]
+layout_mode = 0
 offset_left = 26.0
 offset_top = 42.0
 offset_right = 324.0
@@ -319,6 +322,7 @@ theme_override_font_sizes/font_size = 40
 text = "Combat Skills"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Equipement4"]
+layout_mode = 0
 offset_left = 26.0
 offset_top = 42.0
 offset_right = 324.0
@@ -1078,6 +1082,7 @@ vertical_alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/LabelAction"]
 z_index = -1
+layout_mode = 0
 offset_left = 33.0
 offset_right = 385.0
 offset_bottom = 79.0

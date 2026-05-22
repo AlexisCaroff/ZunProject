@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://d0tw3ef8bhc71"]
+[gd_scene load_steps=50 format=3 uid="uid://d0tw3ef8bhc71"]
 
 [ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="1_76nbu"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_32aph"]
@@ -32,12 +32,13 @@
 [ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="26_gwyod"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="27_7ci4t"]
 [ext_resource type="Script" uid="uid://cxgw24yv778d8" path="res://lvl/chara_portraitButton.gd" id="29_ai72b"]
-[ext_resource type="Texture2D" uid="uid://5trmkstb5g8x" path="res://Items/ItemIcons/testeIcon.png" id="30_jbd7a"]
 [ext_resource type="Script" uid="uid://d35u47t7s0fv4" path="res://UI/UICombatItem.gd" id="31_acvpb"]
-[ext_resource type="Texture2D" uid="uid://ch8bpedx177r3" path="res://UI/itemBack.png" id="32_oc3ys"]
+[ext_resource type="Texture2D" uid="uid://leli1dyf65l7" path="res://UI/UI boxes/UI_combat_itembox.png" id="33_7qngh"]
 [ext_resource type="FontFile" uid="uid://dy4n8qboodyud" path="res://font/MarcellusSC-Regular.ttf" id="33_gxsp0"]
 [ext_resource type="Texture2D" uid="uid://53cn2wxevdr3" path="res://UI/menuiCON.png" id="36_bu4w2"]
 [ext_resource type="Texture2D" uid="uid://b54elep5kk5sm" path="res://UI/UI boxes/UI_combat_portrait_frame.png" id="38_7qngh"]
+[ext_resource type="Script" uid="uid://bb01afuki8pgo" path="res://UI/buttonBasic.gd" id="39_5xukb"]
+[ext_resource type="Texture2D" uid="uid://bufr3w56ilg6r" path="res://actions/actiontexture/UI icons/ICON_priestess_whip.png" id="39_7qngh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kljm5"]
 
@@ -59,6 +60,8 @@ corner_detail = 1
 bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5xukb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rwqyy"]
 
 [node name="ExploInterface" type="Control"]
 layout_mode = 3
@@ -537,8 +540,7 @@ scale = Vector2(0.90566, 0.90566)
 
 [node name="Item1" type="Sprite2D" parent="Items"]
 z_index = 8
-position = Vector2(-1.10394, 0)
-texture = ExtResource("30_jbd7a")
+position = Vector2(229.667, 0)
 script = ExtResource("31_acvpb")
 
 [node name="TextureRect" type="TextureRect" parent="Items/Item1"]
@@ -547,7 +549,7 @@ offset_left = -56.0
 offset_top = -55.0
 offset_right = 56.0
 offset_bottom = 55.0
-texture = ExtResource("32_oc3ys")
+texture = ExtResource("33_7qngh")
 expand_mode = 1
 
 [node name="Button" type="Button" parent="Items/Item1"]
@@ -574,30 +576,8 @@ horizontal_alignment = 1
 
 [node name="Item2" type="Sprite2D" parent="Items"]
 z_index = 8
-position = Vector2(-1.10417, 131.396)
-texture = ExtResource("30_jbd7a")
+position = Vector2(229.667, 117.042)
 script = ExtResource("31_acvpb")
-
-[node name="Button" type="Button" parent="Items/Item2"]
-offset_left = -1.0
-offset_top = -57.0
-offset_right = 82.0
-offset_bottom = 22.0
-rotation = 0.790096
-flat = true
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Items/Item2"]
-visible = false
-offset_left = -61.0
-offset_top = 17.0
-offset_right = 64.0
-offset_bottom = 84.0
-theme_override_fonts/normal_font = ExtResource("20_ql5t1")
-theme_override_fonts/bold_italics_font = ExtResource("20_ql5t1")
-theme_override_fonts/bold_font = ExtResource("20_ql5t1")
-theme_override_font_sizes/normal_font_size = 25
-theme_override_font_sizes/bold_font_size = 30
-horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Items/Item2"]
 z_as_relative = false
@@ -605,8 +585,30 @@ offset_left = -56.0
 offset_top = -55.0
 offset_right = 56.0
 offset_bottom = 55.0
-texture = ExtResource("32_oc3ys")
+texture = ExtResource("33_7qngh")
 expand_mode = 1
+
+[node name="Button" type="Button" parent="Items/Item2"]
+offset_left = -1.0
+offset_top = -57.0
+offset_right = 81.0
+offset_bottom = 21.0
+rotation = 0.790096
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Items/Item2"]
+visible = false
+offset_left = -61.0
+offset_top = 17.0
+offset_right = 64.0
+offset_bottom = 84.0
+theme_override_fonts/normal_font = ExtResource("33_gxsp0")
+theme_override_fonts/bold_italics_font = ExtResource("5_7fr0g")
+theme_override_fonts/bold_font = ExtResource("5_7fr0g")
+theme_override_font_sizes/normal_font_size = 15
+theme_override_font_sizes/bold_font_size = 20
+horizontal_alignment = 1
 
 [node name="AttLabel" type="RichTextLabel" parent="."]
 z_index = 6
@@ -799,6 +801,22 @@ offset_bottom = 107.771
 scale = Vector2(0.996858, 1.01916)
 texture = ExtResource("38_7qngh")
 expand_mode = 1
+
+[node name="ExploSkillButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1028.0
+offset_top = 947.0
+offset_right = 1129.0
+offset_bottom = 1047.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rwqyy")
+flat = true
+script = ExtResource("39_5xukb")
+
+[node name="IconPriestessWhip" type="Sprite2D" parent="ExploSkillButton"]
+visible = false
+position = Vector2(50, 52.98)
+scale = Vector2(0.831065, 0.866774)
+texture = ExtResource("39_7qngh")
 
 [connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]

@@ -133,6 +133,12 @@ func update_ui_for_current_character(character: Character):
 			button.Actiontext = skill.descriptionName + "\n" + skill.description
 			button.disabled = !skill.can_use()
 			button.icon = skill.icon
+			var mat := ShaderMaterial.new()
+			mat.shader = load("res://characters/character_outline.gdshader")
+			button.material = mat
+			(button.material as ShaderMaterial).set_shader_parameter("enabled", false)
+			mat.set_shader_parameter("outline_direction", Vector2.ZERO)
+			#print("set skill buttons")
 			if character.characterData.current_horniness>=100 :
 				button.disabled = true
 			if character.stunned ==true:

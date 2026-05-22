@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=15 format=3 uid="uid://dm75andeiexh0"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=16 format=3 uid="uid://dm75andeiexh0"]
 
 [ext_resource type="Texture2D" uid="uid://dsndrfk4royid" path="res://characters/boss assets/BOSS_broodM_hit.png" id="1_kgh6k"]
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_od2up"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://0x6um7xfv678" path="res://characters/exploPortrait/BossExploPortrait.png" id="5_2ne5h"]
 [ext_resource type="Texture2D" uid="uid://c2n4nh46f5vwu" path="res://characters/boss assets/BOSS_broodM_Dead.png" id="5_6dkli"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="7_dyn70"]
+[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="8_2ne5h"]
 [ext_resource type="Texture2D" uid="uid://s02pnbcj1wa5" path="res://characters/boss assets/BOSS_broodM_idle.png" id="8_6dkli"]
 [ext_resource type="Texture2D" uid="uid://bxd3n5abhx0l5" path="res://characters/characterInitiative/BossIniPortrait.png" id="8_tr8hi"]
 [ext_resource type="Resource" uid="uid://deybvri8mc0gg" path="res://actions/ennemiCombatSkills/mommyGrab.tres" id="9_6dkli"]
@@ -61,7 +62,9 @@ current_stress = 0
 current_horniness = 0
 isOneshot = false
 skill_resources = Array[Resource]([ExtResource("9_6dkli"), ExtResource("11_kgh6k"), ExtResource("10_rphim"), ExtResource("9_6dkli"), ExtResource("9_6dkli")])
+exploration_skill_resources = Array[ExtResource("8_2ne5h")]([])
 tags = Array[String]([])
+assist = ""
 is_player_controlled = false
 ai_brain = SubResource("Resource_tr8hi")
 can_be_moved = false

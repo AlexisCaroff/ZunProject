@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=16 format=3 uid="uid://nl7l7dwgagxi"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=17 format=3 uid="uid://nl7l7dwgagxi"]
 
 [ext_resource type="Texture2D" uid="uid://c6wwcw5lllh44" path="res://characters/charatexture/demo characters/INQUISITION_punisher_hit.png" id="1_u85jh"]
 [ext_resource type="Script" uid="uid://db1m8vwgp38yx" path="res://characters/charatexture/braines/Ai_brain_Support.gd" id="2_l4hkq"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_y6lxd"]
 [ext_resource type="Texture2D" uid="uid://dlcjkvugg0br8" path="res://characters/exploPortrait/PunisherExploPortrait.png" id="7_l4hkq"]
 [ext_resource type="Texture2D" uid="uid://d3knbe31r0cgx" path="res://characters/characterInitiative/PunishersIniPortrait.png" id="8_6liig"]
+[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="8_l4hkq"]
 [ext_resource type="Texture2D" uid="uid://deg5h8trputmj" path="res://characters/charatexture/demo characters/INQUISITION_punisher_idle.png" id="8_p1wfb"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="10_oumc8"]
 [ext_resource type="Resource" uid="uid://c4nfaoik03hsb" path="res://actions/ennemiCombatSkills/Shield.tres" id="10_u85jh"]
@@ -62,7 +63,9 @@ current_stress = 0
 current_horniness = 0
 isOneshot = false
 skill_resources = Array[Resource]([ExtResource("10_u85jh"), ExtResource("11_6liig"), ExtResource("12_l4hkq"), ExtResource("13_p1wfb"), ExtResource("12_l4hkq")])
+exploration_skill_resources = Array[ExtResource("8_l4hkq")]([])
 tags = Array[String]([])
+assist = ""
 is_player_controlled = false
 ai_brain = SubResource("Resource_ocqyt")
 can_be_moved = true

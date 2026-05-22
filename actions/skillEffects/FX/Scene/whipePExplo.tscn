@@ -1,12 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0ihsbf8kmpvx"]
+[gd_scene load_steps=8 format=3 uid="uid://cv37cxhtky17t"]
 
-[ext_resource type="Script" uid="uid://dacdwm0tqo27r" path="res://anim_fx.gd" id="1_mgx8c"]
-[ext_resource type="Texture2D" uid="uid://i4c7mn71iv6q" path="res://demo characters/HERO_warrior_bash.png" id="2_5ao2n"]
-[ext_resource type="Shader" uid="uid://doi2g7uvanh7p" path="res://vfx/shader/revealShader.gdshader" id="3_5ao2n"]
-[ext_resource type="Texture2D" uid="uid://dlqsewubtd0t6" path="res://actions/skillEffects/FX/FX_slash_side.png" id="4_mdegx"]
+[ext_resource type="Script" uid="uid://dacdwm0tqo27r" path="res://anim_fx.gd" id="1_o03uc"]
+[ext_resource type="Shader" uid="uid://doi2g7uvanh7p" path="res://vfx/shader/revealShader.gdshader" id="3_ibodp"]
+[ext_resource type="Texture2D" uid="uid://dlqsewubtd0t6" path="res://actions/skillEffects/FX/FX_slash_side.png" id="4_31j6g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n5yef"]
-shader = ExtResource("3_5ao2n")
+shader = ExtResource("3_ibodp")
 shader_parameter/progress_x = 1.0
 shader_parameter/left_to_right = false
 shader_parameter/progress_y = 1.0
@@ -122,19 +121,13 @@ _data = {
 }
 
 [node name="AnimFX" type="Node2D"]
-script = ExtResource("1_mgx8c")
-
-[node name="HeroWarriorBash" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(80, -145)
-scale = Vector2(0.210205, 0.210205)
-texture = ExtResource("2_5ao2n")
+script = ExtResource("1_o03uc")
 
 [node name="FxCharge" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_n5yef")
 position = Vector2(100, -51)
 scale = Vector2(0.245807, 0.236951)
-texture = ExtResource("4_mdegx")
+texture = ExtResource("4_31j6g")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

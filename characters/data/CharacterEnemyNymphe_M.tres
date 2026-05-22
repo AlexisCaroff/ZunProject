@@ -1,0 +1,260 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=44 format=3 uid="uid://co5mh354m7vcm"]
+
+[ext_resource type="Texture2D" uid="uid://sdb07y8ys371" path="res://characters/charatexture/demo characters/ENEMY_nymph_M_hit.png" id="1_sko64"]
+[ext_resource type="Script" uid="uid://cf2k68rgsdle0" path="res://characters/charatexture/braines/Ai_brain.gd" id="2_ejruj"]
+[ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="3_3gy6o"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="4_efseb"]
+[ext_resource type="Texture2D" uid="uid://dfbm6mf8pdux7" path="res://characters/charatexture/demo characters/ENEMY_slime_down.png" id="5_11pj5"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_mmw4g"]
+[ext_resource type="Texture2D" uid="uid://j7bv1but26wp" path="res://characters/exploPortrait/NymphMExploPortrait.png" id="7_chjig"]
+[ext_resource type="Texture2D" uid="uid://4peeh1wj8xmw" path="res://characters/characterInitiative/NympheIMniPortrait.png" id="8_1t3xt"]
+[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="8_7suoy"]
+[ext_resource type="Texture2D" uid="uid://dux62nhq0l8r4" path="res://characters/charatexture/demo characters/ENEMY_nymph_M_idle.png" id="9_ejruj"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="10_jr0gc"]
+[ext_resource type="Texture2D" uid="uid://dilhgwuvvqcbb" path="res://characters/charatexture/demo characters/ENEMY_nymph_M_shoot.png" id="11_7suoy"]
+[ext_resource type="PackedScene" uid="uid://b0xlvqrqes381" path="res://actions/skillEffects/FX/Scene/spitEnnemy_FX.tscn" id="12_wahje"]
+[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="13_6iske"]
+[ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="14_a2r24"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="14_jw3aa"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="15_8gy0o"]
+[ext_resource type="Texture2D" uid="uid://btvnbxbbjq1w4" path="res://UI/debuffDeff.png" id="16_xdq6k"]
+[ext_resource type="Texture2D" uid="uid://drpnss51hobsj" path="res://UI/debuffAtt.png" id="17_162dt"]
+[ext_resource type="Texture2D" uid="uid://c6qss13x88o50" path="res://actions/damageEffect/damageeffecttexture/hit.png" id="18_wbcj0"]
+[ext_resource type="Texture2D" uid="uid://bhhvdopw8nqlu" path="res://actions/actiontexture/vampire.png" id="19_alt42"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="20_nhnm1"]
+[ext_resource type="PackedScene" uid="uid://dbup2xsc10i5v" path="res://actions/skillEffects/FX/Scene/stickynetTarget.tscn" id="21_avjs5"]
+[ext_resource type="Texture2D" uid="uid://ou5y44sq84ul" path="res://characters/charatexture/demo characters/ENEMY_nymph_M_charm.png" id="22_dry7m"]
+[ext_resource type="PackedScene" uid="uid://cpy83ejqmg2hn" path="res://actions/skillEffects/FX/Scene/charmNymphe.tscn" id="23_5x5xr"]
+[ext_resource type="PackedScene" uid="uid://8vmc6rbjidyt" path="res://actions/damageEffect/trailAttackVFX.tscn" id="24_pqnst"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="25_68ywm"]
+[ext_resource type="Texture2D" uid="uid://c6ptbylmpvkdy" path="res://actions/CampSkill/masturbIcon.png" id="26_45l2a"]
+[ext_resource type="PackedScene" uid="uid://8j60vwihncpy" path="res://actions/skillEffects/FX/Scene/charmed.tscn" id="27_o4hbb"]
+[ext_resource type="PackedScene" uid="uid://d0tjxl5jqwvvn" path="res://actions/damageEffect/smockAttackVFX.tscn" id="28_47lfu"]
+[ext_resource type="Texture2D" uid="uid://yyl7yyr5j4rv" path="res://UI/poisonHorny.png" id="29_scbj6"]
+[ext_resource type="Texture2D" uid="uid://bw10cun1t2x4g" path="res://actions/actiontexture/poison.png" id="30_0sbx8"]
+
+[sub_resource type="Resource" id="Resource_bq8kj"]
+script = ExtResource("2_ejruj")
+name = "Default AI"
+description = "IA basique qui choisit une compétence aléatoire utilisable et une cible valide."
+metadata/_custom_type_script = "uid://cf2k68rgsdle0"
+
+[sub_resource type="Resource" id="Resource_coij5"]
+script = ExtResource("14_a2r24")
+metadata/_custom_type_script = "uid://tjywmaoy4ejj"
+
+[sub_resource type="Resource" id="Resource_g6l6p"]
+script = ExtResource("15_8gy0o")
+name = "lowerDef"
+uitexture = ExtResource("16_xdq6k")
+affected_stat = 1
+amount = -10
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[sub_resource type="Resource" id="Resource_df3d6"]
+script = ExtResource("15_8gy0o")
+name = "lowerattack"
+uitexture = ExtResource("17_162dt")
+affected_stat = 0
+amount = -5
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[sub_resource type="Resource" id="Resource_vgxbl"]
+script = ExtResource("15_8gy0o")
+name = "Stunn"
+uitexture = ExtResource("18_wbcj0")
+affected_stat = 7
+amount = 0
+duration = 1
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[sub_resource type="Resource" id="Resource_mbe1k"]
+script = ExtResource("20_nhnm1")
+name = "Stickynet"
+descriptionName = "Stickynet"
+description = "Stickynet"
+icon = ExtResource("19_alt42")
+barkSkill = ""
+required_position = 2
+ImageSkill = ExtResource("11_7suoy")
+the_target_type = 0
+effects = Array[ExtResource("13_6iske")]([SubResource("Resource_coij5"), SubResource("Resource_g6l6p"), SubResource("Resource_df3d6"), SubResource("Resource_vgxbl")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("13_6iske")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+is_contact = false
+distance_contact = 0.0
+caster_effect_scene = ExtResource("12_wahje")
+target_effect_scene = ExtResource("21_avjs5")
+caster_effect_anchor = 0
+target_effect_anchor = 2
+is_beneficial = false
+skip_target_return_anim = false
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
+
+[sub_resource type="Resource" id="Resource_d6f35"]
+script = ExtResource("25_68ywm")
+MagicDMG = false
+amount = 25
+damage_target_stat = 1
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[sub_resource type="Resource" id="Resource_t0uqr"]
+script = ExtResource("20_nhnm1")
+name = "Charm"
+descriptionName = "Charm"
+description = "incrase horny"
+icon = ExtResource("26_45l2a")
+barkSkill = ""
+required_position = 0
+ImageSkill = ExtResource("22_dry7m")
+the_target_type = 0
+effects = Array[ExtResource("13_6iske")]([SubResource("Resource_d6f35")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("13_6iske")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 1.0
+tags = Array[String]([])
+is_contact = true
+distance_contact = 400.0
+effect = ExtResource("24_pqnst")
+caster_effect_scene = ExtResource("23_5x5xr")
+target_effect_scene = ExtResource("27_o4hbb")
+caster_effect_anchor = 0
+target_effect_anchor = 1
+is_beneficial = false
+skip_target_return_anim = false
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
+
+[sub_resource type="Resource" id="Resource_jrqoj"]
+script = ExtResource("15_8gy0o")
+name = "poisonHorny"
+uitexture = ExtResource("29_scbj6")
+affected_stat = 6
+amount = 12
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[sub_resource type="Resource" id="Resource_3h4no"]
+script = ExtResource("25_68ywm")
+MagicDMG = false
+amount = 10
+damage_target_stat = 1
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[sub_resource type="Resource" id="Resource_yilwg"]
+script = ExtResource("20_nhnm1")
+name = "Poison"
+descriptionName = "Horny Poison"
+description = "Aphrodisiac on an enemy"
+icon = ExtResource("30_0sbx8")
+barkSkill = ""
+required_position = 0
+ImageSkill = ExtResource("11_7suoy")
+the_target_type = 0
+effects = Array[ExtResource("13_6iske")]([SubResource("Resource_jrqoj"), SubResource("Resource_3h4no")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[ExtResource("13_6iske")]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+is_contact = false
+distance_contact = 0.0
+effect = ExtResource("28_47lfu")
+caster_effect_scene = ExtResource("12_wahje")
+target_effect_scene = ExtResource("27_o4hbb")
+caster_effect_anchor = 0
+target_effect_anchor = 1
+is_beneficial = false
+skip_target_return_anim = false
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
+
+[resource]
+script = ExtResource("10_jr0gc")
+headPosition = Vector2(1, -125)
+torso_Position = Vector2(0, 0)
+portrait_texture = ExtResource("9_ejruj")
+explorationPortrait = ExtResource("7_chjig")
+dead_portrait_texture = ExtResource("5_11pj5")
+Hit_texture = ExtResource("1_sko64")
+initiative_icon = ExtResource("8_1t3xt")
+Name = "Nymph"
+Charaname = "Nymph"
+IsDemon = true
+size = "Big"
+affinity = Dictionary[String, int]({})
+base_max_stamina = 100
+base_max_stress = 100
+base_max_horniness = 100
+base_attack = 10
+base_defense = 5
+base_willpower = 5
+base_initiative = 200
+base_evasion = 5
+base_precision = 100
+attack = 10
+defense = 5
+willpower = 5
+evasion = 5
+initiative = 200
+peek = 0
+equipped_items = Array[ExtResource("6_mmw4g")]([])
+stun = false
+grab = false
+Chara_position = 1
+max_stamina = 100
+max_stress = 100
+max_horniness = 100
+current_stamina = 100
+current_stress = 0
+current_horniness = 0
+isOneshot = false
+skill_resources = Array[Resource]([SubResource("Resource_mbe1k"), SubResource("Resource_t0uqr"), SubResource("Resource_yilwg"), SubResource("Resource_t0uqr"), ExtResource("14_jw3aa")])
+exploration_skill_resources = Array[ExtResource("8_7suoy")]([])
+tags = Array[String]([])
+assist = ""
+is_player_controlled = false
+ai_brain = SubResource("Resource_bq8kj")
+can_be_moved = true
+min_durationIddle = 0.6
+max_durationIddle = 1.0
+min_scale = 0.95
+max_scale = 1.0
+corruption = 0
+camp_skill_resources = Array[ExtResource("4_efseb")]([])
+bark_scene = ExtResource("3_3gy6o")
+taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide open!", "You fight like a wet noodle!", "Oops! Did that hurt?"]
+reaction = ["", "", ""]
+affinityReaction = ["", "", ""]
+corrupted = false
+inquisition = false
+immobilized = false
+immobilized_turns = 0

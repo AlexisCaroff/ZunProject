@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=21 format=3 uid="uid://b42qgncyvuw0n"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=22 format=3 uid="uid://b42qgncyvuw0n"]
 
 [ext_resource type="Texture2D" uid="uid://c32ucvj4qas4v" path="res://characters/portraits/PORTRAIT_hero_warrior.png" id="1_l3gwv"]
 [ext_resource type="Texture2D" uid="uid://c18klaue4evao" path="res://characters/charatexture/demo characters/HERO_warrior_hit.png" id="2_0vjkw"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bxkt7r7ry34ci" path="res://characters/charatexture/demo characters/HERO_warrior_down.png" id="9_2p3f2"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="10_w4srh"]
 [ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="11_ftigy"]
+[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="12_0vjkw"]
 [ext_resource type="Texture2D" uid="uid://rcuujvtnjcgk" path="res://characters/characterInitiative/warriorIniPortrait.png" id="12_d4hdv"]
 [ext_resource type="Texture2D" uid="uid://cfbwrknqf04rn" path="res://characters/charatexture/demo characters/HERO_warrior_idle.png" id="13_hkvtb"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="14_dopfq"]
@@ -64,7 +65,9 @@ current_stress = 0
 current_horniness = 0
 isOneshot = false
 skill_resources = Array[Resource]([ExtResource("15_lhhey"), ExtResource("16_l3gwv"), ExtResource("17_l3gwv"), ExtResource("18_0vjkw"), ExtResource("19_ppcgc")])
+exploration_skill_resources = Array[ExtResource("12_0vjkw")]([])
 tags = Array[String](["switch", "degrader", "exib"])
+assist = ""
 is_player_controlled = true
 can_be_moved = true
 min_durationIddle = 0.6

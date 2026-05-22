@@ -59,46 +59,58 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 			print("ALL_ALLY → ", alive_enemy_slots.map(func(s): return s.occupant.characterData.Charaname if s.occupant else "vide"))
 			return {"skill": skill, "target": alive_enemy_slots}
 
-		# ✅ ALL_ENNEMY : tous les ennemis de l'IA = alive_hero_slots  
+		# ✅ ALL_ENNEMY : tous les ennemis de l'IA = alive_hero_slots
 		skill.target_type.ALL_ENNEMY:
 			print("ALL_ENNEMY → ", alive_hero_slots.map(func(s): return s.occupant.characterData.Charaname if s.occupant else "vide"))
 			return {"skill": skill, "target": alive_hero_slots}
 
-		# ✅ FRONT_ALLY : alliés IA en première ligne
+		# ✅ FRONT_ALLY : UN allié IA en première ligne (cible unique)
 		skill.target_type.FRONT_ALLY:
 			var front_allies := alive_enemy_slots.filter(
 				func(p: PositionSlot) -> bool: return p.position_data.isFront
 			)
 			if front_allies.is_empty():
-				front_allies = alive_enemy_slots  # fallback si pas de front
-			return {"skill": skill, "target": front_allies}
+				front_allies = alive_enemy_slots  # fallback
+			if front_allies.is_empty():
+				return {}
+			var chosen: Array[PositionSlot] = [front_allies[randi() % front_allies.size()]]
+			return {"skill": skill, "target": chosen}
 
-		# ✅ BACK_ALLY : alliés IA en deuxième ligne
+		# ✅ BACK_ALLY : UN allié IA en deuxième ligne (cible unique)
 		skill.target_type.BACK_ALLY:
 			var back_allies := alive_enemy_slots.filter(
 				func(p: PositionSlot) -> bool: return not p.position_data.isFront
 			)
 			if back_allies.is_empty():
 				back_allies = alive_enemy_slots  # fallback
-			return {"skill": skill, "target": back_allies}
+			if back_allies.is_empty():
+				return {}
+			var chosen: Array[PositionSlot] = [back_allies[randi() % back_allies.size()]]
+			return {"skill": skill, "target": chosen}
 
-		# ✅ FRONT_ENNEMY : héros joueur en première ligne
+		# ✅ FRONT_ENNEMY : UN héros joueur en première ligne (cible unique)
 		skill.target_type.FRONT_ENNEMY:
 			var front_enemies := alive_hero_slots.filter(
 				func(p: PositionSlot) -> bool: return p.position_data.isFront
 			)
 			if front_enemies.is_empty():
 				front_enemies = alive_hero_slots  # fallback
-			return {"skill": skill, "target": front_enemies}
+			if front_enemies.is_empty():
+				return {}
+			var chosen: Array[PositionSlot] = [front_enemies[randi() % front_enemies.size()]]
+			return {"skill": skill, "target": chosen}
 
-		# ✅ BACK_ENNEMY : héros joueur en deuxième ligne
+		# ✅ BACK_ENNEMY : UN héros joueur en deuxième ligne (cible unique)
 		skill.target_type.BACK_ENNEMY:
 			var back_enemies := alive_hero_slots.filter(
 				func(p: PositionSlot) -> bool: return not p.position_data.isFront
 			)
 			if back_enemies.is_empty():
 				back_enemies = alive_hero_slots  # fallback
-			return {"skill": skill, "target": back_enemies}
+			if back_enemies.is_empty():
+				return {}
+			var chosen: Array[PositionSlot] = [back_enemies[randi() % back_enemies.size()]]
+			return {"skill": skill, "target": chosen}
 
 	# ── Move : cible un slot ennemi selon la position requise par sa skill principale ──
 	if skill.name == "move":

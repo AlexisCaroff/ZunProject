@@ -10,7 +10,7 @@ var ui: Control = null
 @export var HERO_START_POS = Vector2(100, 600)
 @export var ENEMY_START_POS = Vector2(1200, 600)
 @export var SPACING_Y = 250
-@export var _pending_skill: Skill = null  
+@export var _pending_skill: Skill = null
 @export var turnNumber : int = 0
 var round_number : int = 1
 ## Effets appliqués à tous les héros au début de chaque round (buff passif, allié invisible…)
@@ -72,6 +72,12 @@ var startSkills_affinity_reaction_queue: Array[Callable]=[]
 @onready var enemy_skillP2: Node2D = $EnemySkillP2
 @onready var enemy_skillP3: Node2D = $EnemySkillP3
 
+# --- Outline du bouton de skill sélectionné ---------------------------
+## Largeur de l'outline au repos (valeur du shader des boutons) — typiquement 0
+const OUTLINE_WIDTH_NORMAL := 0.0
+## Largeur de l'outline quand un skill est en cours de sélection de cible
+const OUTLINE_WIDTH_SELECTED := 4.0
+var _outlined_skill_button: Button = null
 
 
 func _ready():
@@ -80,11 +86,11 @@ func _ready():
 	for child in $"../HeroPosition".get_children():
 		if child is PositionSlot:
 			hero_positions.append(child)
-	
+
 	for child in $"../ennemiePosition".get_children():
 		if child is PositionSlot:
 			enemy_positions.append(child)
-			
+
 	if heroes_are_ambushed:
 		show_ambush_message("heroes surprised!", Color(1, 0.2, 0.2))
 	elif ennemy_are_ambushed:
@@ -102,7 +108,7 @@ func show_ambush_message(text: String, _color: Color):
 	label.visible=true
 
 
-	
+
 	label.pivot_offset = label.size / 2
 
 	var tween = create_tween()
@@ -127,13 +133,13 @@ func _start():
 			$"../ennemiePosition/position4",
 			$"../ennemiePosition/position5",
 		]
- 
+
 		# ── Séquence d'intro boss AVANT le spawn ─────────────────────────
 		var boss_intro := get_parent().get_parent().get_node_or_null("BossIntroSequence") as BossIntroSequence
 		if boss_intro:
 			await get_tree().process_frame
 			var result: Dictionary = await boss_intro.run_sequence(cam)
- 
+
 			var chosen_scene: PackedScene = result.get("scene", null)
 			if chosen_scene != null:
 				# Le joueur a cédé → on quitte cette scène et on en charge une autre.
@@ -144,13 +150,13 @@ func _start():
 					gm.current_room_Ressource.encounter = chosen_encounter
 				gm._enter_scene_in_current_room(chosen_scene)
 				return   # ← stoppe _start(), rien ne se spawne ici
- 
+
 			# Branche normale (résistance) : on change juste l'encounter
 			var chosen_encounter: CombatEncounter = result.get("encounter", null)
 			if chosen_encounter != null:
 				encounter = chosen_encounter
 		# ─────────────────────────────────────────────────────────────────
- 
+
 		# Spawn héros
 		print("Aucune sauvegarde -> Spawn des héros par défaut")
 		for i in gm.characters.size():
@@ -164,22 +170,22 @@ func _start():
 			print("spawn " + chara.characterData.Charaname)
 			if gm.teamCorrupted:
 				chara.sprite.flip_h=true
-				
-				chara.pivot.position.x += -150 
+
+				chara.pivot.position.x += -150
 			var slot_index = clamp(chara.characterData.Chara_position, 0, hero_positions.size() - 1)
 			var slot = hero_positions[slot_index]
 			move_character_to(chara, slot, 0)
- 
+
 			chara.update_stats()
 			chara.characterData.current_stamina = chara.characterData.max_stamina
 			chara.characterData.current_stress = clamp(chara.characterData.current_stress, 0, chara.characterData.max_stress)
 			chara.characterData.current_horniness = clamp(chara.characterData.current_horniness, 0, chara.characterData.max_horniness)
 			chara.ShadowBackground = ShadowBackground
- 
+
 			if heroes_are_ambushed:
 				chara.surprised()
 			chara.update_ui()
- 
+
 		# Spawn ennemis (encounter est maintenant le bon)
 		for i in encounter.enemy_scenes.size():
 			var chara: Character = encounter.enemy_scenes[i].instantiate()
@@ -198,22 +204,27 @@ func _start():
 				chara.characterData.current_stamina = chara.characterData.max_stamina
 				chara.characterData.current_stress = clamp(chara.characterData.current_stress, 0, chara.characterData.max_stress)
 				chara.characterData.current_horniness = clamp(chara.characterData.current_horniness, 0, chara.characterData.max_horniness)
- 
+
 			if ennemy_are_ambushed:
 				chara.surprised()
 			chara.update_ui()
- 
+
 		ui.set_MenuPerso(gm.characters)
 		_start_combat_flow()
- 
+
 	for chara in heroes + enemies:
 		chara.skill_animation_started.connect(_on_skill_animation_started)
 		chara.skill_animation_finished.connect(_on_skill_animation_finished)
 
+	# --- Assure que chaque bouton de skill a sa propre instance de
+	# ShaderMaterial (sinon ils partageraient l'outline_width).
+	_ensure_unique_skill_button_materials()
+
+
 func _start_combat_flow() -> void:
 	if ui:
 		ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
- 
+
 	# Animatique et histoire pré-combat (système existant)
 	if gm.current_room_Ressource.before_combat_scene_History:
 		var overlay = gm.show_history_scene(gm.current_room_Ressource.before_combat_scene_History)
@@ -222,12 +233,12 @@ func _start_combat_flow() -> void:
 		var overlay = gm.show_Animatic_scene(gm.current_room_Ressource.before_combat_Animatic_scene, cam)
 		await overlay.Animatic_finished
 
- 
+
 	if ui:
 		ui.mouse_filter = Control.MOUSE_FILTER_STOP
- 
+
 	start_combat()
-	
+
 func start_combat():
 	combat_state = CombatState.IDLE
 	var all_characters: Array[Character] = []
@@ -239,7 +250,7 @@ func start_combat():
 	next_turn()
 
 func build_turn_queue(characters: Array[Character]) -> Array[Character]:
-	var queue: Array[Character] = characters.duplicate()  
+	var queue: Array[Character] = characters.duplicate()
 	queue.sort_custom(func(a: Character, b: Character) -> bool:
 		# compare via characterData.initiative
 		return a.characterData.initiative > b.characterData.initiative
@@ -247,76 +258,76 @@ func build_turn_queue(characters: Array[Character]) -> Array[Character]:
 	return queue
 func is_pause() -> bool:
 	return pause
-	
-	
+
+
 func next_turn():
 	while is_animation_playing():
 		await get_tree().process_frame
- 
+
 	_check_victory()
 	_check_defeat()
- 
+
 	while is_pause():
 		await get_tree().process_frame
 	while GameState.Pause:
 		await get_tree().process_frame
- 
+
 	if combatEnd:
 		return
- 
+
 	turnNumber += 1
- 
+
 	# ── Compteur de round ─────────────────────────────────────────────
 	if not turn_queue.is_empty() and turnNumber > turn_queue.size():
 		round_number += 1
 		turnNumber = 1
 		print("⚔️ Round ", round_number, " !")
 		await _trigger_round_effects()
- 
+
 	if turn_queue.is_empty():
 		turn_queue = build_turn_queue(heroes + enemies)
 		ui.update_turn_queue_ui(turn_queue)
 	ui.update_turn_queue_ui(turn_queue)
 	current_character = turn_queue.pop_front()
- 
+
 	for char in turn_queue:
 		char.resetVisuel()
- 
+
 	if current_character.characterData.acte_twice:
 		current_character.characterData.acte_twice = false
 		turn_queue.push_front(current_character)
 		print("Hunter Acte_twice")
 	await get_tree().process_frame
- 
+
 	for position in enemy_positions:
 		if position.occupant == null:
 			position.CharaUI.visible = false
- 
+
 	ui.hide_Panel_action()
- 
+
 	selectorChara.position = current_character._current_slot.CharaUI.global_position if current_character._current_slot else Vector2.ZERO
 	selectorChara.position.y += 45
 	if current_character.characterData.is_player_controlled:
 		selectorChara.modulate = Color(0.9, 0.95, 0.7)
 	else:
 		selectorChara.modulate = Color(0.1, 0.1, 0.1)
- 
+
 	current_character.start_turn()
- 
+
 	for chara in turn_queue:
 		chara.update_ui()
- 
+
 	# ══════════════════════════════════════════════════════════════════
 	#  CHECKS D'INCAPACITÉ — TOUT EN HAUT, avant tout affichage UI
 	# ══════════════════════════════════════════════════════════════════
- 
+
 	# ── Stamina épuisée ──
 	if current_character.characterData.current_stamina <= 0:
 		print("🚫 SKIP (tired): ", current_character.characterData.Charaname)
 		ui.log(current_character.characterData.Charaname + " is tired")
 		await end_currentChara_Turn()
 		return
- 
+
 	# ── Horniness max ──
 	if current_character.characterData.current_horniness >= 100:
 		print("🚫 SKIP (horny): ", current_character.characterData.Charaname)
@@ -329,7 +340,7 @@ func next_turn():
 		await get_tree().create_timer(1.5).timeout
 		await end_currentChara_Turn()
 		return
- 
+
 	# ── Grab (boss capture) ──
 	if current_character.characterData.grab == true:
 		print("🚫 SKIP (grabbed): ", current_character.characterData.Charaname)
@@ -339,7 +350,7 @@ func next_turn():
 				button.disabled = true
 		await end_currentChara_Turn()
 		return
- 
+
 	# ── Stun / Surprise ──
 	# IMPORTANT : on traite le stun AVANT d'afficher le menu joueur,
 	# sinon l'UI flash brièvement pour rien.
@@ -355,11 +366,11 @@ func next_turn():
 		current_character.characterData.stun = false
 		await end_currentChara_Turn()
 		return
- 
+
 	# ══════════════════════════════════════════════════════════════════
 	#  Le perso peut jouer : décision joueur vs IA
 	# ══════════════════════════════════════════════════════════════════
- 
+
 	if current_character.characterData.is_player_controlled:
 		ui.MenuPerso.select_character(current_character.characterData)
 		await get_tree().process_frame
@@ -368,8 +379,8 @@ func next_turn():
 		await get_tree().create_timer(1.5).timeout
 		current_character.play_ai_turn(heroes, enemies)
 		await end_currentChara_Turn()
-		
-		
+
+
 # ─────────────────────────────────────────────────────────────────────
 #  Effets de début de round (allié passif non ciblable)
 #  Applique chaque SkillEffect de round_effects sur tous les héros vivants.
@@ -380,7 +391,7 @@ func _trigger_round_effects() -> void:
 	if round_effects.is_empty():
 		return
 
-	
+
 	var caster: Character = null
 	for hero in heroes:
 		if is_instance_valid(hero) and not hero.is_dead():
@@ -411,7 +422,7 @@ func end_currentChara_Turn():
 	current_character.end_turn()
 	while is_animation_playing():
 		await get_tree().process_frame
-	
+
 	turn_queue.append(current_character)
 	await flush_endTurn_affinity_reactions()
 	next_turn()
@@ -436,7 +447,7 @@ func _on_skill_animation_finished():
 
 func is_animation_playing() -> bool:
 	return active_animations > 0
-	
+
 func _is_incapacitated(c: Character) -> bool:
 	if not is_instance_valid(c) or c.characterData == null:
 		return true
@@ -449,7 +460,7 @@ func _is_incapacitated(c: Character) -> bool:
 	if c.characterData.grab:
 		return true
 	return false
-	
+
 
 func _check_victory():
 	# ── 1. Nettoyage des ennemis MORTS (libère grabs, slots, queue_free) ──
@@ -467,14 +478,14 @@ func _check_victory():
 				enemy._current_slot.remove_character()
 			enemies.erase(enemy)
 			enemy.queue_free()
- 
+
 	# ── 2. Victoire : aucun ennemi en état de combattre ──
 	var any_active_enemy := false
 	for enemy: Character in enemies:
 		if not _is_incapacitated(enemy):
 			any_active_enemy = true
 			break
- 
+
 	if not any_active_enemy:
 		# Bonus cristaux : chaque démon encore présent (vivant mais incapacité)
 		# en donne 1. Les démons morts par magie ont déjà été comptés dans
@@ -487,8 +498,8 @@ func _check_victory():
 				nb_crystaleloot += 1
 				print("💎 +1 cristal (démon incapacité : ", enemy.characterData.Charaname, ")")
 		_show_victory()
- 
- 
+
+
 func _check_defeat():
 	# ── 1. Nettoyage des héros morts ──
 	for ally: Character in heroes.duplicate():
@@ -500,32 +511,32 @@ func _check_defeat():
 			pause = true
 			heroes.erase(ally)
 			ally.queue_free()
- 
+
 	# ── 2. Défaite : aucun héros en état de combattre ──
 	var any_active_hero := false
 	for ally: Character in heroes:
 		if not _is_incapacitated(ally):
 			any_active_hero = true
 			break
- 
+
 	if not any_active_hero:
 		combatEnd = true
 		_show_defeat()
- 
-	
+
+
 func _show_defeat():
 	ResultScreen_label.text = "Defeat !"
 	ResultScreen_label.visible=true
 	ResultScreen_label.modulate = Color(1, 1, 1, 1)
-	
-	
-	
+
+
+
 func _show_victory():
 
 	var victory_ui_scene = preload("res://UI/victory.tscn")
 	var victory_ui = victory_ui_scene.instantiate()
 	var cristal_item := Equipment.new()
-	
+
 	cristal_item.name = (str(nb_crystaleloot)+" Cristal")
 	cristal_item.icon = cristal_texture
 	cristal_item.number = nb_crystaleloot
@@ -534,13 +545,13 @@ func _show_victory():
 		encounter.loots.append(cristal_item)
 	gm = get_tree().root.get_node("GameManager") as GameManager
 	victory_ui.showLoot(encounter.loots, gm)
-	
+
 	gm.current_room_Ressource.ennemikilled=true
 	gm.combat_just_ended = true
 	canvas.add_child(victory_ui)
 
 
-	
+
 func use_skill(index: int):
 	if is_animation_playing():
 		return
@@ -550,24 +561,27 @@ func use_skill(index: int):
 	if skill.can_use():
 		pending_skill = skill
 		start_target_selection(skill)
-		
+		# --- Outline : grossit l'outline_width du shader du bouton ---
+		if index >= 0 and index < ui.skill_buttons.size():
+			_set_skill_button_outline(ui.skill_buttons[index])
+
 func get_current_character() -> Character:
 	return current_character
-	
+
 func start_target_selection(skill: Skill):
-	match combat_state: 
+	match combat_state:
 		CombatState.SELECTING_FIRST_TARGET :
 			print("selecting first target")
 			skill.select_targets(self)
 		CombatState.SELECTING_SECOND_TARGET :
 			print("selecting second target")
 			skill.select_second_target(self)
-			
+
 func _on_target_selected(targets: Array[PositionSlot]):
 	stop_target_selection()
- 
+
 	match combat_state:
- 
+
 		# ── Premier groupe de cibles ──────────────────────────────────
 		CombatState.SELECTING_FIRST_TARGET:
 			if pending_skill.two_target_Type:
@@ -575,13 +589,13 @@ func _on_target_selected(targets: Array[PositionSlot]):
 				combat_state = CombatState.SELECTING_SECOND_TARGET
 				start_target_selection(pending_skill)
 				return
- 
+
 			# ── 1. Animation d'abord ──────────────────────────────────
 			if pending_skill.name != "move":
 				var target_chars := _slots_to_characters(targets)
 				if not target_chars.is_empty():
 					await current_character.animate_attack(target_chars, pending_skill)
- 
+
 			# ── 2. Effets après ───────────────────────────────────────
 			for slot in targets:
 				if slot.occupant != null:
@@ -589,38 +603,40 @@ func _on_target_selected(targets: Array[PositionSlot]):
 					if slot.occupant != null:
 						slot.occupant.update_ui()
 					ui.update_ui_for_current_character(current_character)
- 
+
 			await flush_startSkills_affinity_reaction()
 			_play_skill_sound(pending_skill)
 			ui.log(pending_skill.name)
 			pending_skill.end_turn(self)
 			pending_skill = null
- 
+			_clear_skill_button_outline()  # --- restore outline_width
+
 		# ── Deuxième groupe de cibles ─────────────────────────────────
 		CombatState.SELECTING_SECOND_TARGET:
- 
+
 			# ── 1. Animation d'abord ──────────────────────────────────
 			if pending_skill.name != "move":
 				var target_chars := _slots_to_characters(pending_skill.target1)
 				if not target_chars.is_empty():
 					await current_character.animate_attack(target_chars, pending_skill)
- 
+
 			# ── 2. Effets après ───────────────────────────────────────
 			for slot in pending_skill.target1:
 				if slot.occupant != null:
 					await pending_skill.use(slot)
 					slot.occupant.update_ui()
- 
+
 			for slot in targets:
 				if slot.occupant != null:
 					await pending_skill.use(slot, true)
 					slot.occupant.update_ui()
- 
+
 			await flush_startSkills_affinity_reaction()
 			_play_skill_sound(pending_skill)
 			ui.log(pending_skill.name)
 			pending_skill.end_turn(self)
 			pending_skill = null
+			_clear_skill_button_outline()  # --- restore outline_width
 
 func stop_target_selection():
 	for enemy in enemies:
@@ -628,14 +644,14 @@ func stop_target_selection():
 		enemy.resetVisuel()
 		if enemy.target_selected.is_connected(_on_target_selected):
 			enemy.target_selected.disconnect(_on_target_selected)
-		
+
 	for ally in heroes:
 		ally.set_targetable(false)
 		if ally != current_character:
 			ally.resetVisuel()
 		if ally.target_selected.is_connected(_on_target_selected):
 			ally.target_selected.disconnect(_on_target_selected)
-			
+
 func get_positions(is_playercontroled: bool) -> Array[PositionSlot]:
 	return hero_positions if is_playercontroled else enemy_positions
 
@@ -648,24 +664,24 @@ func move_character_to(character: Character, slot: PositionSlot, movetime: int):
 	slot.CharaUI.visible=true
 
 	slot.assign_character(character,movetime)
-	
+
 	character._current_slot = slot
 	character.update_ui()
 func move_character_to_async(character: Character, slot: PositionSlot, movetime: float) -> void:
 	if slot == null or not is_instance_valid(character):
 		return
- 
+
 	slot.Set_CharaUI()
 	if slot.CharaUI != null:
 		slot.CharaUI.visible = true
- 
+
 	await slot.assign_character(character, movetime)
- 
+
 	if not is_instance_valid(character):
 		return
 	character._current_slot = slot
 	character.update_ui()
- 
+
 
 func swap_characters(slot_a: PositionSlot, slot_b: PositionSlot,movetime: float):
 	var char_a = slot_a.occupant
@@ -690,26 +706,27 @@ func queue_endTurn_affinity_reaction(reaction: Callable) -> void:
 
 func queue_startSkills_affinity_reaction (reaction: Callable) -> void:
 	startSkills_affinity_reaction_queue.append(reaction)
-	
+
 func flush_startSkills_affinity_reaction()->void:
 	for reaction in startSkills_affinity_reaction_queue:
 		await reaction.call()
-		
+
 	startSkills_affinity_reaction_queue.clear()
-	
+
 func flush_endTurn_affinity_reactions() -> void:
 	for reaction in endTurn_affinity_reaction_queue:
 		await reaction.call()
 	endTurn_affinity_reaction_queue.clear()
-	
+
 func PassButtonDown():
 	if current_character and current_character.characterData.is_player_controlled:
+		_clear_skill_button_outline()  # --- restore outline_width
 		ui.disableActionButton()
-			
+
 		current_character.animate_start_Turn()
 		await end_currentChara_Turn()
 		ui.disableActionButton()
-		
+
 ## Retourne les Character occupant les slots (filtre les slots vides)
 func _slots_to_characters(slots: Array[PositionSlot]) -> Array[Character]:
 	var result: Array[Character] = []
@@ -717,11 +734,56 @@ func _slots_to_characters(slots: Array[PositionSlot]) -> Array[Character]:
 		if slot.occupant != null:
 			result.append(slot.occupant)
 	return result
- 
- 
+
+
 ## Joue le son de la skill si présent
 func _play_skill_sound(skill: Skill) -> void:
 	if skill.attack_sound != null:
 		audio.stream = skill.attack_sound
 		audio.pitch_scale = randf_range(0.9, 1.0)
 		audio.play()
+
+
+# ─────────────────────────────────────────────────────────────────────
+#  OUTLINE DU BOUTON DE SKILL SÉLECTIONNÉ
+#  On NE crée PAS de nouveau matériel : on modifie le paramètre
+#  outline_width du ShaderMaterial déjà assigné aux boutons dans l'éditeur.
+# ─────────────────────────────────────────────────────────────────────
+
+## Duplique le ShaderMaterial de chaque bouton pour qu'il soit unique.
+## Sinon, modifier outline_width sur un bouton affecterait tous les
+## boutons qui partagent la même ressource .tres.
+func _ensure_unique_skill_button_materials() -> void:
+	if ui == null or ui.skill_buttons == null:
+		return
+	for button: Button in ui.skill_buttons:
+		if button == null:
+			continue
+		if button.material is ShaderMaterial:
+			# duplicate(true) → copie profonde, indépendante du .tres
+			button.material = button.material.duplicate(true)
+
+
+## Active l'outline du bouton donné en augmentant outline_width.
+func _set_skill_button_outline(button: Button) -> void:
+	_clear_skill_button_outline()
+	if button == null:
+		return
+	var mat := button.material as ShaderMaterial
+	if mat == null:
+		push_warning("Skill button n'a pas de ShaderMaterial — outline ignoré.")
+		return
+	mat.set_shader_parameter("enabled",true)
+	mat.set_shader_parameter("outline_width", OUTLINE_WIDTH_SELECTED)
+	#print ("add the outline to the skill button ")
+	_outlined_skill_button = button
+
+
+## Remet l'outline du dernier bouton outliné à sa largeur normale.
+func _clear_skill_button_outline() -> void:
+	if _outlined_skill_button != null and is_instance_valid(_outlined_skill_button):
+		#print ("clear outline skill button ")
+		var mat := _outlined_skill_button.material as ShaderMaterial
+		if mat != null:
+			mat.set_shader_parameter("outline_width", OUTLINE_WIDTH_NORMAL)
+	_outlined_skill_button = null

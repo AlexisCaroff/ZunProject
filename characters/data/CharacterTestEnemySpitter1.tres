@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=15 format=3 uid="uid://c3vy2fgg7t28x"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=16 format=3 uid="uid://c3vy2fgg7t28x"]
 
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_716pa"]
 [ext_resource type="Texture2D" uid="uid://4xabmn08n7nt" path="res://characters/charatexture/demo characters/ENEMY_spitter_hit.png" id="1_bxekq"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dbq25fw4dr1n0" path="res://characters/exploPortrait/SpitterExploPortrait.png" id="5_s2gjy"]
 [ext_resource type="Texture2D" uid="uid://ctwjj2s4rqugl" path="res://characters/characterInitiative/SlimIniPortrait.png" id="8_bxekq"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="8_i4ffr"]
+[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="8_kpmge"]
 [ext_resource type="Texture2D" uid="uid://chhccyohveiec" path="res://characters/charatexture/demo characters/ENEMY_spitter_idle.png" id="9_kpmge"]
 [ext_resource type="Resource" uid="uid://dwdi447w8ocvi" path="res://actions/ennemiCombatSkills/poisonHorny.tres" id="9_odt67"]
 [ext_resource type="Resource" uid="uid://6oj65xacpxi" path="res://actions/ennemiCombatSkills/tentacleAttack.tres" id="10_qbpw2"]
@@ -61,7 +62,9 @@ current_stress = 0
 current_horniness = 0
 isOneshot = false
 skill_resources = Array[Resource]([ExtResource("9_odt67"), ExtResource("9_odt67"), ExtResource("10_qbpw2"), ExtResource("10_qbpw2"), ExtResource("11_ev3yx")])
+exploration_skill_resources = Array[ExtResource("8_kpmge")]([])
 tags = Array[String]([])
+assist = ""
 is_player_controlled = false
 ai_brain = SubResource("Resource_bxekq")
 can_be_moved = true

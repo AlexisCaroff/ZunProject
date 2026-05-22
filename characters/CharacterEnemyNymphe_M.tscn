@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://csuy5ek1fs6yd"]
+
+[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_glfxh"]
+[ext_resource type="Resource" uid="uid://co5mh354m7vcm" path="res://characters/data/CharacterEnemyNymphe_M.tres" id="2_glfxh"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="3_p78to"]
+[ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="4_kdhom"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="5_50tc8"]
+[ext_resource type="Texture2D" uid="uid://dux62nhq0l8r4" path="res://characters/charatexture/demo characters/ENEMY_nymph_M_idle.png" id="6_rgbjq"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="7_71n1r"]
+[ext_resource type="Script" uid="uid://cf5uoxm4f4cop" path="res://characters/arrow.gd" id="8_3awkj"]
+
+[node name="NympheM" type="Node2D"]
+script = ExtResource("1_glfxh")
+characterData = ExtResource("2_glfxh")
+metadata/character_data_path = "res://characters/data/CharacterEnemyNymphe.tres"
+
+[node name="name" type="Label" parent="."]
+visible = false
+offset_left = -46.0
+offset_top = -267.0
+offset_right = -2.0
+offset_bottom = -244.0
+text = "name"
+
+[node name="contexte" type="Label" parent="."]
+visible = false
+z_index = 15
+offset_left = -131.0
+offset_top = -225.0
+offset_right = 179.0
+offset_bottom = -63.0
+scale = Vector2(0.825763, 0.821068)
+theme_override_fonts/font = ExtResource("3_p78to")
+theme_override_font_sizes/font_size = 40
+text = "Skill name"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="LootItem" type="Sprite2D" parent="contexte"]
+z_index = -1
+position = Vector2(161, 28)
+scale = Vector2(2.34924, 0.637405)
+texture = ExtResource("4_kdhom")
+
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(-77, 23)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("5_50tc8")
+min_duration = 1.0
+max_duration = 1.5
+
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+offset_left = -196.667
+offset_top = -347.5
+offset_right = -25.6656
+offset_bottom = -116.5
+scale = Vector2(2.23197, 1.68927)
+mouse_filter = 2
+texture = ExtResource("6_rgbjq")
+expand_mode = 1
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Arrow" type="Sprite2D" parent="."]
+modulate = Color(0.77, 0.616513, 0.4158, 1)
+position = Vector2(1, -201)
+scale = Vector2(0.0897035, 0.0897035)
+texture = ExtResource("7_71n1r")
+offset = Vector2(0, 116.49)
+script = ExtResource("8_3awkj")

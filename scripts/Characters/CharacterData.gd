@@ -57,6 +57,8 @@ var precision: int = 100        # recalculé chaque update_stats
 @export var isOneshot : bool= false
 
 @export var skill_resources: Array[Resource] = []
+
+@export var exploration_skill_resources: Array[ExplorationSkill] = []
 # --- Tags (type, classe, etc.)
 @export var tags: Array[String] = []
 @export var assist: String = ""

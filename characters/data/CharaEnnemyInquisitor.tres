@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=16 format=3 uid="uid://ce5erf8nv7cca"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=17 format=3 uid="uid://ce5erf8nv7cca"]
 
 [ext_resource type="Texture2D" uid="uid://cmbc5iua15q72" path="res://characters/charatexture/demo characters/INQUISITION_inquisitor_hit.png" id="1_c5xmt"]
 [ext_resource type="Script" uid="uid://cf2k68rgsdle0" path="res://characters/charatexture/braines/Ai_brain.gd" id="2_in4ng"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_fgfnc"]
 [ext_resource type="Texture2D" uid="uid://cr7dbkl3oeulx" path="res://characters/exploPortrait/InquisitorExploPortrait.png" id="7_lbmoj"]
 [ext_resource type="Texture2D" uid="uid://cjrr8vf03dgx7" path="res://characters/characterInitiative/InquisitricePortrait.png" id="8_in4ng"]
+[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="8_lbmoj"]
 [ext_resource type="Texture2D" uid="uid://bj56jynpgi8ca" path="res://characters/charatexture/demo characters/INQUISITION_inquisitor_idle.png" id="8_qidbc"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="10_h7mmf"]
 [ext_resource type="Resource" uid="uid://dibkowmk40eu3" path="res://actions/ennemiCombatSkills/hymne_d_encouragement.tres" id="10_i7j3r"]
@@ -62,7 +63,9 @@ current_stress = 0
 current_horniness = 0
 isOneshot = false
 skill_resources = Array[Resource]([ExtResource("10_i7j3r"), ExtResource("11_c5xmt"), ExtResource("12_in4ng"), ExtResource("12_in4ng"), ExtResource("13_c5xmt")])
+exploration_skill_resources = Array[ExtResource("8_lbmoj")]([])
 tags = Array[String]([])
+assist = ""
 is_player_controlled = false
 ai_brain = SubResource("Resource_in4ng")
 can_be_moved = true

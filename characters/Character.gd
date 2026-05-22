@@ -87,6 +87,7 @@ func _ready():
 	mat.shader = load("res://characters/character_outline.gdshader")
 	sprite.material = mat
 	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
+	
 	if !characterData.is_player_controlled :
 		(sprite.material as ShaderMaterial).set_shader_parameter("outline_direction",  Vector2(0.0, -5.0))
 	if characterData:
