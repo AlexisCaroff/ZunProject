@@ -9,6 +9,8 @@ uniform vec2 outline_direction = vec2(0.0, -5.0);
 
 void fragment() {
 	vec4 current = texture(TEXTURE, UV);
+	vec4 tint = COLOR / max(texture(TEXTURE, UV), vec4(0.001));
+    tint = clamp(tint, vec4(0.0), vec4(1.0));
 
 	if (enabled) {
 		vec2 ps = TEXTURE_PIXEL_SIZE;
@@ -31,9 +33,9 @@ void fragment() {
 		if (current.a < 0.01 && alpha_max > 0.01) {
 			COLOR = vec4(outline_color.rgb, outline_color.a * alpha_max);
 		} else {
-			COLOR = current;
+			COLOR = current* tint;
 		}
 	} else {
-		COLOR = current;
+		COLOR = current* tint;
 	}
 }
