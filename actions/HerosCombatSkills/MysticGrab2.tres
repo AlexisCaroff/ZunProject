@@ -34,6 +34,7 @@ description = "Pull an enemy forward and deal damages"
 icon = ExtResource("6_24qvg")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_wnuqu")
 the_target_type = 0
 effects = Array[ExtResource("3_jgwtt")]([SubResource("Resource_clqko"), SubResource("Resource_kwmm0")])

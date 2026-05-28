@@ -51,6 +51,7 @@ description = "Stickynet"
 icon = ExtResource("4_j4j7o")
 barkSkill = ""
 required_position = 2
+range = 3
 ImageSkill = ExtResource("1_4y5k8")
 the_target_type = 0
 effects = Array[ExtResource("1_nya7c")]([SubResource("Resource_coij5"), SubResource("Resource_g6l6p"), SubResource("Resource_df3d6"), SubResource("Resource_vgxbl")])

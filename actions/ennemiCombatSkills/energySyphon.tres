@@ -28,6 +28,7 @@ description = "30 dmg"
 icon = ExtResource("4_xi680")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_vf8rk")
 the_target_type = 0
 effects = Array[ExtResource("2_2rco6")]([SubResource("Resource_3q5jt")])

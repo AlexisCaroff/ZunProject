@@ -13,7 +13,7 @@ enum position_requirement {
 	BACK
 }
 @export var required_position: position_requirement = position_requirement.ANY
-
+@export var range: int = 3  # 1 = courte, 2 = moyenne, 3 = longue
 enum target_type {
 	ENNEMY,
 	ALLY,
@@ -93,6 +93,14 @@ func can_use() -> bool:
 	if required_position == position_requirement.FRONT and not owner._current_slot.position_data.isFront:
 		return false
 	if required_position == position_requirement.BACK and owner._current_slot.position_data.isFront:
+		return false
+
+	# Portée : un skill ennemi de portée 1 est inutilisable depuis le back
+	var targets_enemy := the_target_type in [
+		target_type.ENNEMY, target_type.ALL_ENNEMY,
+		target_type.FRONT_ENNEMY, target_type.BACK_ENNEMY
+	]
+	if targets_enemy and range == 1 and not owner._current_slot.position_data.isFront:
 		return false
 
 	return true
@@ -252,11 +260,17 @@ func select_targets(combat_manager:CombatManager):
 				enemy.set_targetable(false)
 
 		target_type.ENNEMY:
+			var caster_is_front: bool = owner._current_slot.position_data.isFront
 			for enemy in combat_manager.enemies:
-				enemy.set_targetable(true)
-				if enemy.target_selected.is_connected(combat_manager._on_target_selected):
-					enemy.target_selected.disconnect(combat_manager._on_target_selected)
-				enemy.target_selected.connect(combat_manager._on_target_selected)
+				var enemy_is_front: bool = enemy._current_slot.position_data.isFront
+				var reachable: bool = _can_reach_enemy(caster_is_front, enemy_is_front)
+				if reachable:
+					enemy.set_targetable(true)
+					if enemy.target_selected.is_connected(combat_manager._on_target_selected):
+						enemy.target_selected.disconnect(combat_manager._on_target_selected)
+					enemy.target_selected.connect(combat_manager._on_target_selected)
+				else:
+					enemy.set_targetable(false)
 			for ally in combat_manager.heroes:
 				ally.set_targetable(false)
 
@@ -267,8 +281,10 @@ func select_targets(combat_manager:CombatManager):
 				enemy.set_targetable(false)
 
 		target_type.ALL_ENNEMY:
+			var caster_is_front: bool = owner._current_slot.position_data.isFront
 			for enemy in combat_manager.enemies:
-				enemy.set_targetable(true)
+				var enemy_is_front: bool = enemy._current_slot.position_data.isFront
+				enemy.set_targetable(_can_reach_enemy(caster_is_front, enemy_is_front))
 			for ally in combat_manager.heroes:
 				ally.set_targetable(false)
 		target_type.BACK_ALLY:
@@ -305,8 +321,17 @@ func select_targets(combat_manager:CombatManager):
 				ally.set_targetable(false)
 
 		target_type.EVERYONE:
+			var caster_is_front: bool = owner._current_slot.position_data.isFront
 			for enemy in combat_manager.enemies:
-				enemy.set_targetable(true)
+				var enemy_is_front: bool = enemy._current_slot.position_data.isFront
+				var reachable: bool = _can_reach_enemy(caster_is_front, enemy_is_front)
+				if reachable:
+					enemy.set_targetable(true)
+					if enemy.target_selected.is_connected(combat_manager._on_target_selected):
+						enemy.target_selected.disconnect(combat_manager._on_target_selected)
+					enemy.target_selected.connect(combat_manager._on_target_selected)
+				else:
+					enemy.set_targetable(false)
 			for ally in combat_manager.heroes:
 				ally.set_targetable(true)
 
@@ -455,3 +480,17 @@ func end_turn(combat_manager):
 
 func has_tag(tag: String) -> bool:
 	return tag in tags
+func _can_reach_enemy(caster_is_front: bool, target_is_front: bool) -> bool:
+	match range:
+		1:
+			# Portée 1 : seulement depuis front, seulement front ennemis
+			return caster_is_front and target_is_front
+		2:
+			if caster_is_front:
+				return true           # Front atteint tout
+			else:
+				return target_is_front  # Back atteint seulement les fronts ennemis
+		3:
+			return true               # Portée maximale, toujours accessible
+		_:
+			return true

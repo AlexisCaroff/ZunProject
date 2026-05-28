@@ -36,6 +36,7 @@ description = "add guilt  and 30 stamina if 70% guilt or more"
 icon = ExtResource("4_3bird")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_71118")
 the_target_type = 4
 effects = Array[ExtResource("2_fkuie")]([SubResource("Resource_3bird"), SubResource("Resource_vs6o4")])

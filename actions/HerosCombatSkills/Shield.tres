@@ -25,6 +25,7 @@ description = "Buff defence"
 icon = ExtResource("5_gk65l")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_gk65l")
 the_target_type = 2
 effects = Array[ExtResource("2_48161")]([SubResource("Resource_mdx25")])

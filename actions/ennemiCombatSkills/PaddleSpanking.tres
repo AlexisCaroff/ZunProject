@@ -30,6 +30,7 @@ description = "debuff att and add miss chance"
 icon = ExtResource("5_3cms5")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_7xlqq")
 the_target_type = 5
 effects = Array[ExtResource("2_18tr0")]([SubResource("Resource_ar5br"), SubResource("Resource_wsfjn")])

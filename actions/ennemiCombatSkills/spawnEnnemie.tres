@@ -23,6 +23,7 @@ description = "Spawn a new Slim"
 icon = ExtResource("4_48h3l")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_oeisb")
 the_target_type = 1
 effects = Array[ExtResource("1_e7b2u")]([SubResource("Resource_cne8y")])

@@ -1,20 +1,12 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://cbakapyjnht36"]
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://cbakapyjnht36"]
 
 [ext_resource type="Texture2D" uid="uid://cdhidvnxb6h10" path="res://characters/charatexture/demo characters/HERO_hunter_thrust.png" id="1_na1tf"]
 [ext_resource type="AudioStream" uid="uid://dovp7wcqjx7ux" path="res://actions/sound/Weapon Sword Whips 02.wav" id="2_na1tf"]
-[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_58yna"]
 [ext_resource type="PackedScene" uid="uid://dacqrw5c17fup" path="res://actions/skillEffects/FX/Scene/dashAttack.tscn" id="3_fusxw"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="3_uogve"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_1dvb3"]
 [ext_resource type="Texture2D" uid="uid://bywr6bvpagx5v" path="res://actions/actiontexture/UI icons/ICON_hunter_stab.png" id="7_fusxw"]
 [ext_resource type="PackedScene" uid="uid://cqea4mekfk8gb" path="res://actions/skillEffects/FX/Scene/hit_standar.tscn" id="8_fusxw"]
-
-[sub_resource type="Resource" id="Resource_i4eos"]
-script = ExtResource("3_58yna")
-MagicDMG = false
-amount = 20
-damage_target_stat = 0
-metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [resource]
 script = ExtResource("5_1dvb3")
@@ -25,9 +17,10 @@ icon = ExtResource("7_fusxw")
 attack_sound = ExtResource("2_na1tf")
 barkSkill = ""
 required_position = 0
+range = 2
 ImageSkill = ExtResource("1_na1tf")
 the_target_type = 0
-effects = Array[ExtResource("3_uogve")]([SubResource("Resource_i4eos")])
+effects = Array[ExtResource("3_uogve")]([])
 two_target_Type = false
 the_second_target_type = 1
 second_effects = Array[ExtResource("3_uogve")]([])

@@ -43,6 +43,7 @@ description = "Marks an enemy for 2 turns: skills used against them have reduced
 icon = ExtResource("6_26ge4")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_47d3i")
 the_target_type = 0
 effects = Array[ExtResource("1_3rhwt")]([SubResource("Resource_26ge4"), SubResource("Resource_2rb02")])

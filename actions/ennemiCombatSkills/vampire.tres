@@ -26,6 +26,7 @@ description = "hurt and delay ennemie"
 icon = ExtResource("4_w0udk")
 barkSkill = ""
 required_position = 1
+range = 3
 ImageSkill = ExtResource("1_cvhwe")
 the_target_type = 0
 effects = Array[ExtResource("1_lxrva")]([SubResource("Resource_2t4vb"), SubResource("Resource_jrlbw")])

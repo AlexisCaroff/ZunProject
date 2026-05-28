@@ -34,6 +34,7 @@ description = "dmg an ennemi"
 icon = ExtResource("4_6g65u")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_6g65u")
 the_target_type = 0
 effects = Array[ExtResource("2_pqnxp")]([SubResource("Resource_3q5jt"), SubResource("Resource_1bt6q")])

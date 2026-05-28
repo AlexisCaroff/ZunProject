@@ -22,6 +22,7 @@ description = "get an ennemi Horny"
 icon = ExtResource("1_lqogb")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_0w17e")
 the_target_type = 0
 effects = Array[ExtResource("1_0d46u")]([SubResource("Resource_lqogb")])

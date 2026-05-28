@@ -48,6 +48,7 @@ description = "Taunt one ennemi and reset 2 cooldowns on skills"
 icon = ExtResource("6_v6fax")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_3o4k5")
 the_target_type = 0
 effects = Array[ExtResource("2_yu2gj")]([SubResource("Resource_yu2gj"), SubResource("Resource_5kxhq")])

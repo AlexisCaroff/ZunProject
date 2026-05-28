@@ -23,6 +23,7 @@ description = "deal magic dmg "
 icon = ExtResource("5_7i8lj")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_i6idu")
 the_target_type = 0
 effects = Array[ExtResource("2_ar1fo")]([SubResource("Resource_i4eos")])

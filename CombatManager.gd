@@ -476,9 +476,11 @@ func _check_victory():
 						pos.assign_character(enemy.CharaGrab, 0.3)
 			if enemy._current_slot:
 				enemy._current_slot.remove_character()
+			for child in enemy.buff_bar.get_children():
+				child.queue_free()
 			enemies.erase(enemy)
 			enemy.queue_free()
-
+	await _check_frontline_advance() 
 	# ── 2. Victoire : aucun ennemi en état de combattre ──
 	var any_active_enemy := false
 	for enemy: Character in enemies:
@@ -509,9 +511,11 @@ func _check_defeat():
 				ally._current_slot.remove_character()
 			ScreenLooseChara.visible = true
 			pause = true
+			for child in ally.buff_bar.get_children():
+				child.queue_free()
 			heroes.erase(ally)
 			ally.queue_free()
-
+	await _check_frontline_advance() 
 	# ── 2. Défaite : aucun héros en état de combattre ──
 	var any_active_hero := false
 	for ally: Character in heroes:
@@ -787,3 +791,37 @@ func _clear_skill_button_outline() -> void:
 		if mat != null:
 			mat.set_shader_parameter("outline_width", OUTLINE_WIDTH_NORMAL)
 	_outlined_skill_button = null
+func _check_frontline_advance() -> void:
+	_advance_group_if_front_empty(hero_positions, heroes)
+	_advance_group_if_front_empty(enemy_positions, enemies)
+
+func _advance_group_if_front_empty(positions: Array[PositionSlot], group: Array[Character]) -> void:
+	# Vérifie si au moins une position front existe et est vide
+	var front_slots: Array[PositionSlot] = []
+	var back_slots_occupied: Array[PositionSlot] = []
+
+	for slot in positions:
+		if slot.position_data.isFront:
+			front_slots.append(slot)
+		elif slot.occupant != null:
+			back_slots_occupied.append(slot)
+
+	# Y a-t-il encore quelqu'un en front ?
+	var front_is_empty := true
+	for slot in front_slots:
+		if slot.occupant != null:
+			front_is_empty = false
+			break
+
+	# Si le front est vide ET qu'il reste des gens en back → on avance
+	if front_is_empty and not back_slots_occupied.is_empty():
+		# Trouve les slots front libres et les slots back occupés
+		var free_front_slots: Array[PositionSlot] = []
+		for slot in front_slots:
+			if slot.occupant == null:
+				free_front_slots.append(slot)
+
+		for i in min(free_front_slots.size(), back_slots_occupied.size()):
+			var character := back_slots_occupied[i].occupant
+			await move_character_to_async(character, free_front_slots[i], 0.4)
+			ui.log(character.characterData.Charaname + " moves to the front !")

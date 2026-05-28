@@ -32,6 +32,7 @@ description = "buff and resset cooldown of all allies"
 icon = ExtResource("6_8vcuv")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_eh7me")
 the_target_type = 3
 effects = Array[ExtResource("2_uwvpd")]([SubResource("Resource_k0qpg"), SubResource("Resource_yt4kq")])

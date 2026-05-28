@@ -25,6 +25,7 @@ icon = ExtResource("5_e0qpi")
 attack_sound = ExtResource("2_qrpiw")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_44xuo")
 the_target_type = 4
 effects = Array[ExtResource("4_rjgt8")]([SubResource("Resource_u5tsq")])

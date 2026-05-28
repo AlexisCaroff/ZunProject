@@ -1,31 +1,12 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=13 format=3 uid="uid://dn00l75vs5ctm"]
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://dn00l75vs5ctm"]
 
 [ext_resource type="Texture2D" uid="uid://fe1y4mug6b75" path="res://characters/charatexture/demo characters/HERO_hunter_throw.png" id="1_vtysm"]
 [ext_resource type="AudioStream" uid="uid://cxxmgoai7q8bb" path="res://actions/sound/Weapon Arrow Shot 01.wav" id="2_vtysm"]
 [ext_resource type="PackedScene" uid="uid://d74pdae8pwuk" path="res://actions/skillEffects/FX/Scene/saltHunter.tscn" id="3_12xun"]
-[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_nv4t7"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="3_wlhg8"]
-[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="4_iy76m"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_7c32x"]
-[ext_resource type="Texture2D" uid="uid://drpnss51hobsj" path="res://UI/debuffAtt.png" id="6_vtysm"]
 [ext_resource type="Texture2D" uid="uid://dd54fh0lmlt5f" path="res://actions/actiontexture/UI icons/ICON_hunter_purify.png" id="8_qu854"]
 [ext_resource type="PackedScene" uid="uid://bbt436f0mwo1e" path="res://actions/skillEffects/FX/Scene/hit_magicSalt.tscn" id="10_12xun"]
-
-[sub_resource type="Resource" id="Resource_i4eos"]
-script = ExtResource("3_nv4t7")
-MagicDMG = true
-amount = 1
-damage_target_stat = 0
-metadata/_custom_type_script = "uid://bjsbovfjff2wo"
-
-[sub_resource type="Resource" id="Resource_nv4t7"]
-script = ExtResource("4_iy76m")
-name = "name"
-uitexture = ExtResource("6_vtysm")
-affected_stat = 0
-amount = -5
-duration = 3
-metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [resource]
 script = ExtResource("5_7c32x")
@@ -36,9 +17,10 @@ icon = ExtResource("8_qu854")
 attack_sound = ExtResource("2_vtysm")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_vtysm")
 the_target_type = 4
-effects = Array[ExtResource("3_wlhg8")]([SubResource("Resource_i4eos"), SubResource("Resource_nv4t7")])
+effects = Array[ExtResource("3_wlhg8")]([])
 two_target_Type = false
 the_second_target_type = 1
 second_effects = Array[ExtResource("3_wlhg8")]([])

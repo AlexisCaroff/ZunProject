@@ -21,6 +21,7 @@ description = "heal for some amount"
 icon = ExtResource("4_wfvog")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_gsyl5")
 the_target_type = 1
 effects = Array[ExtResource("2_560gq")]([SubResource("Resource_svn31")])

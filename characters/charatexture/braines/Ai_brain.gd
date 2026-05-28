@@ -150,37 +150,43 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 		return {"skill": skill, "target": targetPos}
 
 	# ── Cible unique ─────────────────────────────────────────────────
-	var possible_targets: Array[Character] = []
+	# ── Cible unique ─────────────────────────────────────────────────
+	var candidate_slots: Array = []
 	match skill.the_target_type:
 		skill.target_type.ALLY:
-			possible_targets = enemies
+			candidate_slots = alive_enemy_slots
 		skill.target_type.ENNEMY:
-			possible_targets = heroes
+			candidate_slots = alive_hero_slots
 
-	possible_targets = possible_targets.filter(func(c): return not c.is_dead())
-	possible_targets = possible_targets.filter(func(c): return c.characterData.current_horniness < 100)
-	# ── Filtre les héros grab : ils ne sont plus dans leur slot d'origine
-	#    et ne peuvent plus être attaqués normalement. ──
-	if skill.the_target_type == skill.target_type.ENNEMY:
-		possible_targets = possible_targets.filter(func(c): return not c.characterData.grab)
+	# Applique le filtre de portée
+	candidate_slots = _filter_by_range(skill, candidate_slots, owner)
 
-	# Sécurité : taunted_by ne doit pas pointer vers une cible invalide
-	var taunt_valid := owner.taunted_by != null \
-		and is_instance_valid(owner.taunted_by) \
-		and not owner.taunted_by.is_dead() \
-		and not owner.taunted_by.characterData.grab
+	# Taunt (uniquement si la cible taunted_by est dans les slots filtrés)
+	if owner.taunted_by != null \
+			and is_instance_valid(owner.taunted_by) \
+			and not owner.taunted_by.is_dead() \
+			and not owner.taunted_by.characterData.grab \
+			and skill.the_target_type == skill.target_type.ENNEMY:
+		var taunt_slot := owner.taunted_by._current_slot
+		if taunt_slot in candidate_slots:
+			var result: Array[PositionSlot] = [taunt_slot]
+			return {"skill": skill, "target": result}
 
-	var target: Character = null
-	if taunt_valid and skill.the_target_type == skill.target_type.ENNEMY:
-		target = owner.taunted_by
-	elif possible_targets.size() > 0:
-		target = possible_targets[randi() % possible_targets.size()]
-	else:
-		# Aucune cible valide → on annule l'action plutôt que de cibler soi-même
-		# (cibler owner avec une skill ENNEMY produit des comportements bizarres).
-		print("%s n'a aucune cible valide pour %s." % [owner.characterData.Charaname, skill.name])
+	if candidate_slots.is_empty():
+		print("%s n'a aucune cible à portée pour %s." % [owner.characterData.Charaname, skill.name])
 		return {}
 
-	var targetPos: Array[PositionSlot] = []
-	targetPos.append(target._current_slot)
+	var targetPos: Array[PositionSlot] = [candidate_slots[randi() % candidate_slots.size()]]
 	return {"skill": skill, "target": targetPos}
+	
+func _filter_by_range(skill: Skill, slots: Array, owner: Character) -> Array:
+	if skill.range == 3:
+		return slots  # portée max, pas de filtre
+	var caster_is_front: bool = owner._current_slot.position_data.isFront
+	return slots.filter(func(p: PositionSlot) -> bool:
+		var target_is_front: bool = p.position_data.isFront
+		match skill.range:
+			1: return caster_is_front and target_is_front
+			2: return caster_is_front or target_is_front
+		return true
+	)

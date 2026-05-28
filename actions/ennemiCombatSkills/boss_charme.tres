@@ -24,6 +24,7 @@ description = "incrase horny"
 icon = ExtResource("6_cswgh")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_ebf87")
 the_target_type = 0
 effects = Array[ExtResource("4_a3mqv")]([SubResource("Resource_d6f35")])

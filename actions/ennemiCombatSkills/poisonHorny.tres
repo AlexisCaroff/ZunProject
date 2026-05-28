@@ -33,6 +33,7 @@ description = "Aphrodisiac on an enemy"
 icon = ExtResource("5_fmjc0")
 barkSkill = ""
 required_position = 2
+range = 3
 ImageSkill = ExtResource("1_f2alv")
 the_target_type = 0
 effects = Array[ExtResource("1_tnww7")]([SubResource("Resource_jrqoj"), SubResource("Resource_3h4no")])

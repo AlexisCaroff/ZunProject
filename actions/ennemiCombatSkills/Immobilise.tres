@@ -47,6 +47,7 @@ description = "deal dmg , heal and reduce cooldown"
 icon = ExtResource("5_mfcwu")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_36e8l")
 the_target_type = 0
 effects = Array[ExtResource("2_36e8l")]([SubResource("Resource_3q5jt"), SubResource("Resource_ixvgo"), SubResource("Resource_4ktlx")])
