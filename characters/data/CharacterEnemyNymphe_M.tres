@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_mmw4g"]
 [ext_resource type="Texture2D" uid="uid://j7bv1but26wp" path="res://characters/exploPortrait/NymphMExploPortrait.png" id="7_chjig"]
 [ext_resource type="Texture2D" uid="uid://4peeh1wj8xmw" path="res://characters/characterInitiative/NympheIMniPortrait.png" id="8_1t3xt"]
-[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="8_7suoy"]
+[ext_resource type="Script" path="res://scripts/exploration/ExplorationSkill.gd" id="8_7suoy"]
 [ext_resource type="Texture2D" uid="uid://dux62nhq0l8r4" path="res://characters/charatexture/demo characters/ENEMY_nymph_M_idle.png" id="9_ejruj"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="10_jr0gc"]
 [ext_resource type="Texture2D" uid="uid://dilhgwuvvqcbb" path="res://characters/charatexture/demo characters/ENEMY_nymph_M_shoot.png" id="11_7suoy"]

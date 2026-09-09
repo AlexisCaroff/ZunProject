@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://d0tw3ef8bhc71"]
+[gd_scene load_steps=51 format=3 uid="uid://d0tw3ef8bhc71"]
 
 [ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="1_76nbu"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_32aph"]
@@ -39,6 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://b54elep5kk5sm" path="res://UI/UI boxes/UI_combat_portrait_frame.png" id="38_7qngh"]
 [ext_resource type="Script" uid="uid://bb01afuki8pgo" path="res://UI/buttonBasic.gd" id="39_5xukb"]
 [ext_resource type="Texture2D" uid="uid://bufr3w56ilg6r" path="res://actions/actiontexture/UI icons/ICON_priestess_whip.png" id="39_7qngh"]
+[ext_resource type="Texture2D" uid="uid://ckki2ygke5r3x" path="res://actions/actiontexture/UI icons/ICON_move.png" id="40_iconmv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kljm5"]
 
@@ -63,7 +64,7 @@ bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rwqyy"]
 
-[node name="ExploInterface" type="Control"]
+[node name="ExploInterface2" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -805,9 +806,9 @@ expand_mode = 1
 [node name="ExploSkillButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1028.0
-offset_top = 947.0
+offset_top = 841.0
 offset_right = 1129.0
-offset_bottom = 1047.0
+offset_bottom = 941.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_rwqyy")
 flat = true
 script = ExtResource("39_5xukb")
@@ -817,6 +818,21 @@ visible = false
 position = Vector2(50, 52.98)
 scale = Vector2(0.831065, 0.866774)
 texture = ExtResource("39_7qngh")
+
+[node name="ExploSkillButtonMove" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1028.0
+offset_top = 947.0
+offset_right = 1129.0
+offset_bottom = 1047.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rwqyy")
+flat = true
+script = ExtResource("39_5xukb")
+
+[node name="IconMove" type="Sprite2D" parent="ExploSkillButtonMove"]
+position = Vector2(50, 52.98)
+scale = Vector2(0.831065, 0.866774)
+texture = ExtResource("40_iconmv")
 
 [connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]

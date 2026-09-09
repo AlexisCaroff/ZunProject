@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=22 format=3 uid="uid://b42qgncyvuw0n"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=23 format=3 uid="uid://b42qgncyvuw0n"]
 
 [ext_resource type="Texture2D" uid="uid://c32ucvj4qas4v" path="res://characters/portraits/PORTRAIT_hero_warrior.png" id="1_l3gwv"]
 [ext_resource type="Texture2D" uid="uid://c18klaue4evao" path="res://characters/charatexture/demo characters/HERO_warrior_hit.png" id="2_0vjkw"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bxkt7r7ry34ci" path="res://characters/charatexture/demo characters/HERO_warrior_down.png" id="9_2p3f2"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="10_w4srh"]
 [ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="11_ftigy"]
-[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="12_0vjkw"]
+[ext_resource type="Script" path="res://scripts/exploration/ExplorationSkill.gd" id="12_0vjkw"]
 [ext_resource type="Texture2D" uid="uid://rcuujvtnjcgk" path="res://characters/characterInitiative/warriorIniPortrait.png" id="12_d4hdv"]
 [ext_resource type="Texture2D" uid="uid://cfbwrknqf04rn" path="res://characters/charatexture/demo characters/HERO_warrior_idle.png" id="13_hkvtb"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="14_dopfq"]
@@ -21,6 +21,7 @@
 [ext_resource type="Resource" uid="uid://df6t6enfsamfo" path="res://actions/HerosCombatSkills/Charge2.tres" id="18_0vjkw"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="19_ppcgc"]
 [ext_resource type="Texture2D" uid="uid://c1vbgy6uvss1" path="res://camp_imgs/Camp_char_sit_W.png" id="20_idin8"]
+[ext_resource type="Texture2D" uid="uid://dlt7q57qwfk2" path="res://characters/demo characters peek/HERO_warrior_peek.png" id="99_peektex"]
 
 [resource]
 script = ExtResource("14_dopfq")
@@ -33,6 +34,7 @@ Hit_texture = ExtResource("2_0vjkw")
 initiative_icon = ExtResource("12_d4hdv")
 Dialogue_texture = ExtResource("1_l3gwv")
 textureCamp = ExtResource("20_idin8")
+peek_texture = ExtResource("99_peektex")
 Name = "Warrior"
 Charaname = "Warrior"
 IsDemon = false

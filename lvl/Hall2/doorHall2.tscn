@@ -13,27 +13,41 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.417147
+anchor_top = -0.000459911
+anchor_right = 0.527645
+anchor_bottom = 0.767133
+offset_left = 1019.92
+offset_top = -129.503
+offset_right = 1394.92
+offset_bottom = 408.497
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
 [node name="DoorBg" type="Sprite2D" parent="."]
-position = Vector2(960.5, 542)
+position = Vector2(1316.5, 542)
 scale = Vector2(0.781352, 0.79562)
 texture = ExtResource("1_agxcq")
 
 [node name="DoorrDungeonHall" type="Sprite2D" parent="."]
-position = Vector2(1103, 420.59)
+position = Vector2(1459, 420.59)
 rotation = 1.5708
 scale = Vector2(0.794935, 0.747183)
 texture = ExtResource("2_aagpo")
 offset = Vector2(0, 101.44)
 
 [node name="DoorlDungeonHall" type="Sprite2D" parent="."]
-position = Vector2(795, 419.615)
+position = Vector2(1151, 419.615)
 rotation = 1.5708
 scale = Vector2(0.787713, 0.759046)
 texture = ExtResource("3_bxj7q")
 offset = Vector2(0, -104.11)
 
 [node name="DoorBg2" type="Sprite2D" parent="."]
-position = Vector2(960.5, 98)
+position = Vector2(1316.5, 98)
 scale = Vector2(0.781352, 0.79562)
 texture = ExtResource("1_agxcq")
 region_enabled = true

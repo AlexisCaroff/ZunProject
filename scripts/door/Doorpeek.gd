@@ -35,9 +35,18 @@ func _on_mouse_exited() -> void:
 	current_tween.tween_property(peektext, "scale", startsize, 0.2)
 
 
+var _opening: bool = false
+
+
 func _on_button_down() -> void:
-	if doorbutton.locked:
+	if doorbutton.locked or _opening:
 		return
+	_opening = true
+	disabled = true
+
+	# Le personnage s'avance d'abord vers la porte ; la vue de peek, qui
+	# recouvre tout l'ecran, n'apparait qu'une fois le glissement termine.
+	await doorbutton.on_peek_enter()
 
 	# Réactive le process avant d'afficher
 	sub_viewport.process_mode = Node.PROCESS_MODE_INHERIT
@@ -47,3 +56,6 @@ func _on_button_down() -> void:
 	doorbutton.peeking  = true
 	doorbutton.startpeeking()
 	ExitPeekButton.visible = true
+
+	_opening = false
+	disabled = false

@@ -101,6 +101,15 @@ script = ExtResource("4_v1j00")
 normal_color = Color(0.754291, 0.492981, 0.61886, 1)
 hover_color = Color(0.831767, 0.170557, 0.503788, 1)
 
+[node name="ButtonLoad" type="Button" parent="CanvasLayer/background2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_11mpg")
+theme_override_font_sizes/font_size = 35
+text = "Load"
+flat = true
+script = ExtResource("4_v1j00")
+
 [node name="Buttonoption" type="Button" parent="CanvasLayer/background2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2

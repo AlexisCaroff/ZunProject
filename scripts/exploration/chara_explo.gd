@@ -10,6 +10,9 @@ var dead_portrait_path: String = ""
 var initiative_icon_path: String = ""
 
 @onready var sprite = $pivot/HerosTexture1
+## Flèche affichée au-dessus de la tête quand ce personnage est une cible
+## d'échange valide (mode déplacement).
+@onready var arrow: Sprite2D = $Arrow
 
 @onready var buff_bar = $HBoxContainer
 var hp_Jauge
@@ -34,6 +37,7 @@ func _ready() -> void:
 	mat.shader = load("res://characters/character_outline.gdshader")
 	sprite.material = mat
 	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
+	arrow.visible = false
 
 # Appelée après instanciation, pour charger les données du GameStat
 func load_chara() -> void:
@@ -68,10 +72,9 @@ func update_display() -> void:
 
 
 
-func want_to_move():
-	sprite.self_modulate.a =1.0
-func move():
-	sprite.self_modulate.a =0.0
+## Affiche ou masque la flèche de sélection au-dessus de la tête.
+func set_move_target(state: bool) -> void:
+	arrow.visible = state
 
 func add_buff(buff: Buff, isload:bool =false):
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://v4vr7no2fm85"]
+[gd_scene load_steps=27 format=3 uid="uid://djgxpv6exubsw"]
 
 [ext_resource type="Script" uid="uid://3tapvib7sxkd" path="res://UI/donjon_roomsTrailercode.gd" id="2_qwja6"]
 [ext_resource type="Texture2D" uid="uid://c1ce3m6pqbp3y" path="res://lvl/donjon2/dungeon_map2.png" id="2_tyn3m"]

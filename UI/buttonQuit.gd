@@ -13,6 +13,9 @@ class_name ButtonQuit
 func _ready():
 	pressed.connect(_on_pressed)
 	if centered:
+		# La taille peut être fixée par un conteneur après _ready : on recentre
+		# le pivot à chaque redimensionnement.
+		resized.connect(func(): pivot_offset = size / 2)
 		pivot_offset = size / 2
 	# couleur de départ
 	self_modulate = normal_color

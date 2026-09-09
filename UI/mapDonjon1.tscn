@@ -102,7 +102,7 @@ position = Vector2(-1092, -34)
 texture = ExtResource("17_pnf5p")
 
 [node name="Position" type="Sprite2D" parent="."]
-visible = false
+z_index = 5
 position = Vector2(-9, 229)
 texture = ExtResource("3_poicj")
 script = ExtResource("4_gmmoh")

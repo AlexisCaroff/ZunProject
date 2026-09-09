@@ -264,24 +264,26 @@ func endcamp():
 	
 	
 	
-	if GameState.saveRunning:
+	# Ces lignes appelaient GameState.save_party_from_camp() / save_finished,
+	# qui n'ont jamais existé sur GameStat : la sortie du camp plantait.
+	# L'état du party vit dans les CharacterData, déjà à jour ici ; la
+	# sauvegarde est prise en charge par l'autosave de return_to_exploration().
+	if SaveManager.is_busy():
 		push_warning("Sauvegarde déjà en cours…")
 		return
-
-	GameState.save_party_from_camp(characters)
-	await GameState.save_finished
 
 	GameState.current_phase = GameStat.GamePhase.EXPLORATION
 	await get_tree().process_frame
 
 	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
-	if gm and gm.current_room_Ressource:
-		if gm.current_room_Ressource.exploration_scene:
-			gm._enter_scene_in_current_room(gm.current_room_Ressource.exploration_scene)
-		else:
-			push_error("Pas de scene exploration définie pour cette salle")
-	else:
+	if gm == null or gm.current_room_Ressource == null:
 		push_error("GameManager introuvable ou current_room vide")
+		return
+	if gm.current_room_Ressource.exploration_scene == null:
+		push_error("Pas de scene exploration définie pour cette salle")
+		return
+	# Un seul chargement : l'ancien code appelait _enter_scene_in_current_room()
+	# ET return_to_exploration(), ce qui instanciait la salle deux fois.
 	gm.return_to_exploration()
 func focus_on_room(room: Node2D):
 	

@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dq282vipchnbq"]
+[gd_scene load_steps=8 format=3 uid="uid://dq282vipchnbq"]
 
 [ext_resource type="Script" uid="uid://c6af0cosunkf2" path="res://scripts/exploration/chara_explo.gd" id="1_rk6hn"]
 [ext_resource type="Shader" uid="uid://byep7wpo3y12v" path="res://characters/character_outline.gdshader" id="3_25du2"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="3_bd7mk"]
 [ext_resource type="Texture2D" uid="uid://cfbwrknqf04rn" path="res://characters/charatexture/demo characters/HERO_warrior_idle.png" id="5_bd7mk"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="6_arrow"]
+[ext_resource type="Script" uid="uid://cf5uoxm4f4cop" path="res://characters/arrow.gd" id="7_arrow"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bd7mk"]
 shader = ExtResource("3_25du2")
@@ -49,3 +51,12 @@ mouse_filter = 2
 texture = ExtResource("5_bd7mk")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Arrow" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.77, 0.616513, 0.4158, 1)
+position = Vector2(0, -370)
+scale = Vector2(0.179407, 0.179407)
+texture = ExtResource("6_arrow")
+offset = Vector2(0, 116.49)
+script = ExtResource("7_arrow")

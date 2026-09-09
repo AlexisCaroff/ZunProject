@@ -9,6 +9,9 @@ class_name CharacterData
 @export var initiative_icon: Texture2D
 @export var Dialogue_texture: Texture2D
 @export var textureCamp: Texture2D
+## Sprite affiché pendant que le personnage est posté devant la porte en
+## mode peek. Null = on garde le sprite courant.
+@export var peek_texture: Texture2D
 
 @export var Name : String = "name"
 @export var Charaname: String = "Classe"

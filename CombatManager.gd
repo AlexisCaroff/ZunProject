@@ -159,11 +159,14 @@ func _start():
 
 		# Spawn héros
 		print("Aucune sauvegarde -> Spawn des héros par défaut")
+		# Les héros reprennent la formation choisie en exploration. Chara_position
+		# était auparavant réécrit avec l'ordre de spawn, ce qui annulait tout
+		# réarrangement fait par le joueur avant d'entrer en combat.
+		var taken_slots: Array[int] = []
 		for i in gm.characters.size():
 			var charaData = gm.characters[i]
 			var chara: Character = combatChara.instantiate()
 			chara.characterData = charaData
-			chara.characterData.Chara_position = i
 			add_child(chara)
 			chara.combat_manager = self
 			heroes.append(chara)
@@ -172,7 +175,9 @@ func _start():
 				chara.sprite.flip_h=true
 
 				chara.pivot.position.x += -150
-			var slot_index = clamp(chara.characterData.Chara_position, 0, hero_positions.size() - 1)
+			var slot_index := _resolve_hero_slot(chara, taken_slots)
+			taken_slots.append(slot_index)
+			chara.characterData.Chara_position = slot_index
 			var slot = hero_positions[slot_index]
 			move_character_to(chara, slot, 0)
 
@@ -655,6 +660,20 @@ func stop_target_selection():
 			ally.resetVisuel()
 		if ally.target_selected.is_connected(_on_target_selected):
 			ally.target_selected.disconnect(_on_target_selected)
+
+## Slot de combat correspondant à la position choisie en exploration.
+## Une valeur hors bornes ou déjà prise retombe sur le premier slot libre :
+## deux héros sur le même slot casseraient _current_slot et la file de tour.
+func _resolve_hero_slot(chara: Character, taken: Array[int]) -> int:
+	var wanted: int = clamp(chara.characterData.Chara_position, 0, hero_positions.size() - 1)
+	if not taken.has(wanted):
+		return wanted
+	for i in hero_positions.size():
+		if not taken.has(i):
+			push_warning("Slot %d déjà occupé — %s placé en %d." % [wanted, chara.characterData.Charaname, i])
+			return i
+	return wanted
+
 
 func get_positions(is_playercontroled: bool) -> Array[PositionSlot]:
 	return hero_positions if is_playercontroled else enemy_positions

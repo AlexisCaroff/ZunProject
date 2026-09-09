@@ -13,6 +13,11 @@ var current_tween: Tween = null
 var selected_character: CharaExplo = null
 var over_chara: CharaExplo
 var move_mode: bool = false
+## Duree du glissement lors d'un echange de position, alignee sur le 0.5 s
+## de Move.gd en combat.
+@export var swap_move_time: float = 0.5
+## Vrai pendant l'animation d'echange : bloque les clics et le bouton move.
+var _swapping: bool = false
 @onready var viewport: Viewport = $"../SubViewportContainer/SubViewport"
 @onready var donjon_map: Map = $"../SubViewportContainer/SubViewport/map"
 @onready var portraits = $"../Portraits".get_children()
@@ -44,6 +49,7 @@ var selectorChara : Sprite2D
 # --- Bouton skill exploration (à AJOUTER dans la scène, voir notes en bas)
 # Mets le node Button dans ta scène à : ../ExploSkillButton  (ou adapte le chemin)
 @onready var explo_skill_button: Button = $"../ExploSkillButton"
+@onready var explo_move_button: Button = $"../ExploSkillButtonMove"
 
 # --- État de sélection de cible pour un skill d'exploration
 var pending_explo_skill: ExplorationSkill = null
@@ -125,12 +131,14 @@ func _ready():
 		explo_skill_button.connect("button_down", _on_explo_skill_button_pressed)
 		_refresh_explo_skill_button()
 
+	# --- Bouton de deplacement (echange de position entre deux heros)
+	if explo_move_button != null:
+		explo_move_button.connect("button_down", _on_move_skill_button_pressed)
+		_refresh_move_button()
+
 func _init_selection():
 	selectCharacter(characters[0])
-	var i = characters.find(characters[0])
-	portrait_selector.position = portraits[i].position
-	selectorChara.position = selected_character.CharaPosition.charaUI.global_position if selected_character.CharaPosition else Vector2.ZERO
-	selectorChara.position.y +=45
+	_move_selectors_to_selected()
 
 func load_characters_from_gamestat():
 	characters.clear()
@@ -193,21 +201,39 @@ func _swap_characters(chara1: CharaExplo, chara2: CharaExplo) -> void:
 	var portrait1= chara1.exploPortrait
 	var portrait2= chara2.exploPortrait
 
-	move_character_to_slot(chara1, slots[slot2])
-	chara1.characterData.Chara_position = slot2
-	chara1.move()
-	portrait2.set_occupant(chara1)
+	_swapping = true
 
-	move_character_to_slot(chara2, slots[slot1])
+	# Les deux personnages glissent EN MEME TEMPS vers la place de l'autre :
+	# assign_character() est une coroutine, on ne l'attend donc pas ici, sinon
+	# le second ne partirait qu'une fois le premier arrive.
+	slots[slot2].assign_character(chara1, swap_move_time)
+	slots[slot1].assign_character(chara2, swap_move_time)
+
+	chara1.characterData.Chara_position = slot2
 	chara2.characterData.Chara_position = slot1
-	chara2.move()
+	portrait2.set_occupant(chara1)
 	portrait1.set_occupant(chara2)
-	move_mode = false
-	selectorChara.position= selected_character.CharaPosition.charaUI.global_position if selected_character.CharaPosition else Vector2.ZERO
-	selectorChara.position.y +=45
+
+	# Les portraits ont echange leurs occupants : les selecteurs suivent, au
+	# meme rythme que les personnages.
+	_move_selectors_to_selected(swap_move_time)
+
+	await get_tree().create_timer(swap_move_time).timeout
+	_swapping = false
+	_refresh_move_button()
 
 
 func selectCharacter(thechara: CharaExplo):
+	# Les clics sont ignores tant que l'echange en cours n'est pas termine.
+	if _swapping:
+		return
+
+	# --- INTERCEPTION : mode deplacement (bouton ExploSkillButtonMove)
+	if move_mode:
+		if thechara != null and thechara != selected_character:
+			_swap_characters(thechara, selected_character)
+		set_move_mode(false)
+		return
 
 	# --- INTERCEPTION : mode "choix de cible pour un skill exploration"
 	if is_selecting_explo_target and pending_explo_skill != null:
@@ -222,11 +248,9 @@ func selectCharacter(thechara: CharaExplo):
 		selected_character.unselected()
 		selected_character = thechara
 		(thechara.sprite.material as ShaderMaterial).set_shader_parameter("enabled", true)
-		var i = characters.find(thechara)
-		portrait_selector.position = portraits[i].position
-		selectorChara.position= selected_character.CharaPosition.charaUI.global_position if selected_character != null else Vector2.ZERO
-		selectorChara.position.y +=45
-		#selectorChara.position.y -=46
+		# Le portrait suit le SLOT du personnage, pas son index de spawn :
+		# characters.find() designait le mauvais portrait apres un echange.
+		_move_selectors_to_selected()
 		NameLabel.text=chara.Name
 		Def.bbcode_enabled = true
 		Att.bbcode_enabled = true
@@ -252,8 +276,9 @@ func selectCharacter(thechara: CharaExplo):
 		LustProgressBar.value=chara.current_horniness
 		update_equipment_icons(chara)
 
-		# Refresh du bouton skill (cooldown, disponibilité, etc.)
+		# Refresh des boutons d'action (cooldown, disponibilité, etc.)
 		_refresh_explo_skill_button()
+		_refresh_move_button()
 
 func update_equipment_icons(character: CharacterData):
 	var slots = [
@@ -293,11 +318,10 @@ func _on_button_mouse_exited() -> void:
 	current_tween = create_tween()
 	current_tween.tween_property(Doortext, "scale", startsize, 0.2)
 
+## Ancien bouton "move" apparaissant au survol (scene exploration35 heritee).
+## Redirige vers le mode deplacement du bouton ExploSkillButtonMove.
 func _on_move_button_button_down() -> void:
-	move_mode = true
-	selected_character.want_to_move()
-	_swap_characters(over_chara, selected_character)
-	print("move mode")
+	_on_move_skill_button_pressed()
 
 
 func _on_button_2_button_down() -> void:
@@ -362,27 +386,129 @@ func load_interactable():
 
 
 # --------------------------------------------------------------------
-# SKILL D'EXPLORATION (lust → guilt, etc.)
+# MODE DEPLACEMENT (bouton ExploSkillButtonMove)
+# --------------------------------------------------------------------
+
+## Recale les deux selecteurs (portrait en haut, marqueur au sol) sur le
+## personnage selectionne, en passant par son portrait et son slot courants
+## plutot que par son index dans `characters`.
+## `movetime` > 0 fait glisser les selecteurs au lieu de les teleporter.
+func _move_selectors_to_selected(movetime: float = 0.0) -> void:
+	if selected_character == null:
+		return
+
+	var portrait_target: Vector2 = portrait_selector.position
+	if selected_character.exploPortrait != null:
+		portrait_target = selected_character.exploPortrait.position
+
+	var has_ground_target: bool = selectorChara != null and selected_character.CharaPosition != null
+	var ground_target: Vector2 = Vector2.ZERO
+	if has_ground_target:
+		ground_target = selected_character.CharaPosition.charaUI.global_position
+		ground_target.y += 45
+
+	if movetime <= 0.0:
+		portrait_selector.position = portrait_target
+		if has_ground_target:
+			selectorChara.position = ground_target
+		return
+
+	var tween := create_tween()
+	tween.parallel().tween_property(portrait_selector, "position", portrait_target, movetime) \
+			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	if has_ground_target:
+		tween.parallel().tween_property(selectorChara, "position", ground_target, movetime) \
+				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
+## Grise le bouton quand aucun personnage n'est selectionne ou que celui-ci ne
+## peut pas etre deplace, et signale visuellement le mode actif.
+func _refresh_move_button() -> void:
+	if explo_move_button == null:
+		return
+	var usable: bool = selected_character != null \
+			and selected_character.characterData != null \
+			and selected_character.characterData.can_be_moved
+	explo_move_button.disabled = not usable or _swapping
+	explo_move_button.modulate = Color(1.4, 1.0, 0.6) if move_mode else Color.WHITE
+
+
+## Bascule le mode deplacement : une fleche apparait au-dessus de chaque
+## personnage NON selectionne. Cliquer sur l'un d'eux (sur la scene ou sur son
+## portrait) echange sa position avec celle du personnage selectionne.
+func set_move_mode(on: bool) -> void:
+	move_mode = on
+	for c in characters:
+		if c != null:
+			c.set_move_target(on and c != selected_character)
+	_refresh_move_button()
+
+
+func _on_move_skill_button_pressed() -> void:
+	if selected_character == null:
+		return
+	if move_mode:
+		set_move_mode(false)
+		return
+	if selected_character.characterData != null and not selected_character.characterData.can_be_moved:
+		print("%s ne peut pas etre deplace." % selected_character.characterData.Charaname)
+		return
+
+	# Le mode deplacement et le ciblage de skill s'excluent.
+	if is_selecting_explo_target:
+		is_selecting_explo_target = false
+		pending_explo_skill = null
+		_highlight_explo_targets(false)
+		if selected_character.sprite.material is ShaderMaterial:
+			(selected_character.sprite.material as ShaderMaterial).set_shader_parameter("enabled", true)
+
+	set_move_mode(true)
+
+
+# --------------------------------------------------------------------
+# SKILL D'EXPLORATION (lust -> guilt, etc.)
 # --------------------------------------------------------------------
 
 ## Met à jour l'icône / l'état disabled du bouton skill en fonction du
 ## personnage sélectionné et de son cooldown.
+## Sprite2D d'icône posée dans la scène sous le bouton de skill. C'est elle
+## qu'on met à jour — voir _refresh_explo_skill_button().
+func _skill_button_icon() -> Sprite2D:
+	if explo_skill_button == null:
+		return null
+	for child in explo_skill_button.get_children():
+		if child is Sprite2D:
+			return child
+	return null
+
+
 func _refresh_explo_skill_button() -> void:
 	if explo_skill_button == null:
 		return
-	if selected_character == null:
+
+	# L'icône était affichée DEUX FOIS : par la Sprite2D de la scène (texture du
+	# fouet en dur, centrée et à l'échelle 0.83) et par Button.icon assigné ici
+	# avec la même texture, mais dessinée à sa taille native et au placement du
+	# thème. On ne garde que la Sprite2D : elle suit le personnage sélectionné
+	# et s'aligne sur l'icône du bouton de déplacement, juste en dessous.
+	explo_skill_button.icon = null
+	var icon_sprite := _skill_button_icon()
+
+	var skill: ExplorationSkill = null
+	if selected_character != null:
+		var skills: Array = selected_character.characterData.exploration_skill_resources
+		if not skills.is_empty() and skills[0] != null:
+			skill = skills[0]
+
+	if skill == null:
 		explo_skill_button.disabled = true
-		explo_skill_button.icon = null
+		if icon_sprite != null:
+			icon_sprite.visible = false
 		return
 
-	var skills: Array = selected_character.characterData.exploration_skill_resources
-	if skills.is_empty() or skills[0] == null:
-		explo_skill_button.disabled = true
-		explo_skill_button.icon = null
-		return
-
-	var skill: ExplorationSkill = skills[0]
-	explo_skill_button.icon = skill.icon
+	if icon_sprite != null:
+		icon_sprite.texture = skill.icon
+		icon_sprite.visible = skill.icon != null
 	explo_skill_button.disabled = not skill.can_use(selected_character.characterData)
 
 
@@ -401,6 +527,7 @@ func _on_explo_skill_button_pressed() -> void:
 		print("Skill non utilisable (cooldown ou pas assez de Lust)")
 		return
 
+	set_move_mode(false)
 	pending_explo_skill = skill
 
 	# Si le skill ne cible que le caster, on l'applique direct

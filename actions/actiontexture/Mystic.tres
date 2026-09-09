@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=22 format=3 uid="uid://c1xql2qyr4th5"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=23 format=3 uid="uid://c1xql2qyr4th5"]
 
 [ext_resource type="Texture2D" uid="uid://diwmoyaawsxq6" path="res://characters/portraits/PORTRAIT_hero_mystic.png" id="1_m5m7p"]
 [ext_resource type="Texture2D" uid="uid://chqvuss7wfueq" path="res://characters/charatexture/demo characters/HERO_mystic_cc_hit.png" id="2_ovh7i"]
@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="10_kcgfw"]
 [ext_resource type="Texture2D" uid="uid://dd4k5wxaesfo4" path="res://characters/exploPortrait/MysticExploPortrait.png" id="11_g0sk4"]
 [ext_resource type="Texture2D" uid="uid://cfbpe4u16v3hx" path="res://characters/characterInitiative/MysticIniPortrait.png" id="12_or2ga"]
-[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="12_ovh7i"]
+[ext_resource type="Script" path="res://scripts/exploration/ExplorationSkill.gd" id="12_ovh7i"]
 [ext_resource type="Texture2D" uid="uid://he220dsml4k6" path="res://characters/charatexture/demo characters/HERO_mystic_cc_idle.png" id="13_1l0ed"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="14_a4wx8"]
 [ext_resource type="Resource" uid="uid://m6nw8l2ax4to" path="res://actions/HerosCombatSkills/ChangeMask.tres" id="15_faxul"]
@@ -21,6 +21,7 @@
 [ext_resource type="Resource" uid="uid://b0gt00v7dl0u7" path="res://actions/HerosCombatSkills/MysticGrab2.tres" id="18_pqop0"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="19_vhhps"]
 [ext_resource type="Texture2D" uid="uid://xvf1umygybrb" path="res://camp_imgs/Camp_char_sit_M.png" id="20_ouxh7"]
+[ext_resource type="Texture2D" uid="uid://dpas0vv64msmk" path="res://characters/demo characters peek/HERO_mystic_peek.png" id="99_peektex"]
 
 [resource]
 script = ExtResource("14_a4wx8")
@@ -33,6 +34,7 @@ Hit_texture = ExtResource("2_ovh7i")
 initiative_icon = ExtResource("12_or2ga")
 Dialogue_texture = ExtResource("1_m5m7p")
 textureCamp = ExtResource("20_ouxh7")
+peek_texture = ExtResource("99_peektex")
 Name = "Mystic"
 Charaname = "Mystic"
 IsDemon = false

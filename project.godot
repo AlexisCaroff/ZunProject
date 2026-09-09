@@ -20,6 +20,7 @@ config/icon="uid://dsd4dhs6pbknj"
 GameState="*res://scripts/GameStat.gd"
 Utils="*res://scripts/utils.gd"
 AudioManager="*res://Autoload/audio_manager.gd"
+SaveManager="*res://Autoload/save_manager.gd"
 
 [display]
 

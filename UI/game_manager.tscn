@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dg0coy6r6f1ww"]
+[gd_scene load_steps=25 format=3 uid="uid://dg0coy6r6f1ww"]
 
 [ext_resource type="Script" uid="uid://d12jn42j03tgg" path="res://GameManager.gd" id="1_838hb"]
 [ext_resource type="Resource" uid="uid://7dlbup10473y" path="res://lvl/donjonTestePorte.tres" id="2_soe0u"]
@@ -21,6 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://b5cqyywvqxjb8" path="res://tuto/intro1.png" id="17_43qkp"]
 [ext_resource type="PackedScene" uid="uid://bvgh80ryq8f31" path="res://UI/cinematic/introCinematc.tscn" id="19_nm67f"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="21_oavjs"]
+[ext_resource type="Script" uid="uid://epu8n2lrsmtu" path="res://UI/save_button.gd" id="22_savebtn"]
+[ext_resource type="PackedScene" path="res://UI/save_menu.tscn" id="23_savemenu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n5q86"]
 
@@ -47,40 +49,6 @@ visible = false
 z_index = -1
 position = Vector2(258.4, 54)
 scale = Vector2(0.39206, 0.398946)
-texture = ExtResource("12_nm67f")
-
-[node name="ButtonJournal" type="Button" parent="."]
-z_index = 6
-offset_left = 26.0
-offset_top = 3.0
-offset_right = 142.0
-offset_bottom = 326.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n5q86")
-flat = true
-script = ExtResource("12_n5q86")
-
-[node name="Seau" type="Sprite2D" parent="ButtonJournal"]
-position = Vector2(63, 61.3374)
-scale = Vector2(0.261958, 0.24937)
-texture = ExtResource("13_n5q86")
-
-[node name="ButtonQuit" type="Button" parent="ButtonJournal"]
-z_index = 2
-layout_mode = 0
-offset_left = -160.0
-offset_top = 113.0
-offset_right = -31.0
-offset_bottom = 171.0
-theme_override_fonts/font = ExtResource("4_dhxbs")
-theme_override_font_sizes/font_size = 40
-text = "Quit"
-flat = true
-script = ExtResource("7_k66he")
-
-[node name="DialogueBox" type="Sprite2D" parent="ButtonJournal/ButtonQuit"]
-z_index = -1
-position = Vector2(68, 31.5)
-scale = Vector2(0.19542, 0.391304)
 texture = ExtResource("12_nm67f")
 
 [node name="Label" type="RichTextLabel" parent="."]
@@ -170,3 +138,63 @@ color = Color(0, 0, 0, 1)
 position = Vector2(960, 540)
 script = ExtResource("21_oavjs")
 metadata/_custom_type_script = "uid://devdej4xpva2i"
+
+[node name="SaveLayer" type="CanvasLayer" parent="."]
+layer = 11
+
+[node name="ButtonJournal" type="Button" parent="SaveLayer"]
+z_index = 6
+offset_left = 26.0
+offset_top = 3.0
+offset_right = 142.0
+offset_bottom = 326.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n5q86")
+flat = true
+script = ExtResource("12_n5q86")
+
+[node name="Seau" type="Sprite2D" parent="SaveLayer/ButtonJournal"]
+position = Vector2(63, 61.3374)
+scale = Vector2(0.261958, 0.24937)
+texture = ExtResource("13_n5q86")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SaveLayer/ButtonJournal"]
+layout_mode = 0
+offset_left = -160.0
+offset_top = 113.0
+offset_right = -31.0
+offset_bottom = 229.0
+theme_override_constants/separation = 20
+
+[node name="ButtonSave" type="Button" parent="SaveLayer/ButtonJournal/VBoxContainer"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_dhxbs")
+theme_override_font_sizes/font_size = 32
+text = "Save"
+flat = true
+script = ExtResource("22_savebtn")
+
+[node name="DialogueBox" type="Sprite2D" parent="SaveLayer/ButtonJournal/VBoxContainer/ButtonSave"]
+z_index = -1
+position = Vector2(68, 31.5)
+scale = Vector2(0.19542, 0.391304)
+texture = ExtResource("12_nm67f")
+
+[node name="ButtonQuit" type="Button" parent="SaveLayer/ButtonJournal/VBoxContainer"]
+z_index = 2
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_dhxbs")
+theme_override_font_sizes/font_size = 40
+text = "Quit"
+flat = true
+script = ExtResource("7_k66he")
+
+[node name="DialogueBox" type="Sprite2D" parent="SaveLayer/ButtonJournal/VBoxContainer/ButtonQuit"]
+z_index = -1
+position = Vector2(68, 31.5)
+scale = Vector2(0.19542, 0.391304)
+texture = ExtResource("12_nm67f")
+
+[node name="SaveMenu" parent="." instance=ExtResource("23_savemenu")]
+visible = false

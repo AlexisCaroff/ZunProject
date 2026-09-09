@@ -1,35 +1,11 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=14 format=3 uid="uid://bmkp0brav8l87"]
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://bmkp0brav8l87"]
 
 [ext_resource type="Texture2D" uid="uid://fe1y4mug6b75" path="res://characters/charatexture/demo characters/HERO_hunter_throw.png" id="1_n3hnu"]
 [ext_resource type="AudioStream" uid="uid://cyqpgjkdqkdr3" path="res://actions/sound/Weapon Whips 02.wav" id="2_iabra"]
 [ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="3_ofqht"]
-[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_vlstb"]
-[ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="4_qoo6w"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_bx3cj"]
-[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="5_r265m"]
-[ext_resource type="Texture2D" uid="uid://c6qss13x88o50" path="res://actions/damageEffect/damageeffecttexture/hit.png" id="6_iabra"]
 [ext_resource type="Texture2D" uid="uid://b4oubet2ttcx0" path="res://actions/actiontexture/UI icons/ICON_hunter_bolas.png" id="8_iabra"]
 [ext_resource type="PackedScene" uid="uid://cqea4mekfk8gb" path="res://actions/skillEffects/FX/Scene/hit_standar.tscn" id="10_jigks"]
-
-[sub_resource type="Resource" id="Resource_i4eos"]
-script = ExtResource("3_vlstb")
-MagicDMG = false
-amount = 5
-damage_target_stat = 0
-metadata/_custom_type_script = "uid://bjsbovfjff2wo"
-
-[sub_resource type="Resource" id="Resource_vlstb"]
-script = ExtResource("4_qoo6w")
-metadata/_custom_type_script = "uid://tjywmaoy4ejj"
-
-[sub_resource type="Resource" id="Resource_jigks"]
-script = ExtResource("5_r265m")
-name = "Stunn"
-uitexture = ExtResource("6_iabra")
-affected_stat = 7
-amount = 0
-duration = 1
-metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [resource]
 script = ExtResource("5_bx3cj")
@@ -40,9 +16,10 @@ icon = ExtResource("8_iabra")
 attack_sound = ExtResource("2_iabra")
 barkSkill = ""
 required_position = 0
+range = 3
 ImageSkill = ExtResource("1_n3hnu")
 the_target_type = 6
-effects = Array[ExtResource("3_ofqht")]([SubResource("Resource_i4eos"), SubResource("Resource_vlstb"), SubResource("Resource_jigks")])
+effects = Array[ExtResource("3_ofqht")]([])
 two_target_Type = false
 the_second_target_type = 1
 second_effects = Array[ExtResource("3_ofqht")]([])

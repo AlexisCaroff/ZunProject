@@ -4,9 +4,10 @@ class_name Map
 var Rooms: Array[Node2D] = []
 var Doors: Array[Node2D] = []
 
-@onready var oldposition: Node2D
-@onready var TeamPositisonIndicator = $Position
-@export var move_time: float = 1.0
+@onready var TeamPositisonIndicator: Sprite2D = $Position
+## Durée du glissement du pointeur d'équipe vers sa nouvelle salle/porte.
+@export var move_time: float = 0.6
+var _pointer_tween: Tween
 var tween: Tween
 @onready var camera: Camera2D = $Camera2D
 var is_dragging := false
@@ -26,9 +27,6 @@ var gm: GameManager
 
 func _ready() -> void:
 	gm = get_tree().root.get_node("GameManager") as GameManager
-
-	if oldposition != null:
-		TeamPositisonIndicator.position = oldposition.position
 
 	for child in $DonjonRooms.get_children():
 		Rooms.append(child)
@@ -122,6 +120,7 @@ func focus_on_room(room: RoomResource, _viewport = null):
 	if focusedRoom == null:
 		return
 	var target_pos = focusedRoom.position
+	_place_team_indicator(target_pos)
 	var thetween = create_tween()
 	thetween.tween_property(camera, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
@@ -184,5 +183,34 @@ func focus_door(room: RoomResource, _viewport = null):
 		target_pos = focusedRoom.position
 
 	if target_pos != null:
+		_place_team_indicator(target_pos)
 		var thetween = create_tween()
 		thetween.tween_property(camera, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
+# ════════════════════════════════════════════════════════════════════
+#  POINTEUR D'ÉQUIPE
+# ════════════════════════════════════════════════════════════════════
+
+## Amène le pointeur sur la salle — ou la porte — où se trouve le groupe.
+## La mini-carte étant ré-instanciée à chaque changement de scène, la position
+## de départ vient du GameManager : c'est elle qui fait que le pointeur glisse
+## depuis la salle précédente au lieu de réapparaître ailleurs.
+## La rotation lente est gérée à part par rotateSprite.gd sur le nœud Position.
+func _place_team_indicator(target_pos: Vector2) -> void:
+	if TeamPositisonIndicator == null:
+		return
+	TeamPositisonIndicator.visible = true
+
+	var previous: Vector2 = gm.map_pointer_position if gm != null else Vector2.INF
+	# Première salle de la partie : le pointeur se pose sans traverser la carte.
+	TeamPositisonIndicator.position = previous if previous.is_finite() else target_pos
+	if gm != null:
+		gm.map_pointer_position = target_pos
+
+	if TeamPositisonIndicator.position.is_equal_approx(target_pos):
+		return
+	if _pointer_tween != null and _pointer_tween.is_valid():
+		_pointer_tween.kill()
+	_pointer_tween = create_tween()
+	_pointer_tween.tween_property(TeamPositisonIndicator, "position", target_pos, move_time) 			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
