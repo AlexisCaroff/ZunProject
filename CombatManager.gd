@@ -42,6 +42,20 @@ var combatChara = 	preload("res://characters/CombatChara.tscn")
 ## Chance qu'un tirage donne quelque chose. -1 = valeur de la table.
 @export_range(-1.0, 1.0, 0.05) var loot_drop_chance: float = -1.0
 
+# ── Argent ───────────────────────────────────────────────────────────
+## Probabilité que la rencontre rapporte de l'argent.
+@export_range(0.0, 1.0, 0.05) var money_chance: float = 0.6
+## Fourchette du montant tiré (bornes incluses).
+@export var money_min: int = 5
+@export var money_max: int = 25
+## Icône de la bourse sur l'écran de victoire.
+@export var money_texture: Texture2D = preload("res://UI/UI boxes/UI_crystal.png")
+
+# ── Prisonniers ──────────────────────────────────────────────────────
+## Ennemis NON démons mis hors combat : ils sont ramenés à la victoire.
+## Les démons, eux, donnent des cristaux (cf. nb_crystaleloot).
+var nb_prisoners: int = 0
+
 #stat combat manager
 @onready var audio = $AudioStreamPlayer2D
 @onready var canvas =$"../CanvasLayer"
@@ -493,6 +507,12 @@ func _check_victory():
 				enemy._current_slot.remove_character()
 			for child in enemy.buff_bar.get_children():
 				child.queue_free()
+			# Un non-démon vaincu se ramène ligoté. On le compte ICI, juste
+			# avant de le retirer : à la victoire il ne serait plus dans la
+			# liste. Les démons, eux, donnent un cristal.
+			if enemy.characterData and not enemy.characterData.IsDemon:
+				nb_prisoners += 1
+				print("⛓️ prisonnier : ", enemy.characterData.Charaname)
 			enemies.erase(enemy)
 			enemy.queue_free()
 	await _check_frontline_advance() 
@@ -507,13 +527,17 @@ func _check_victory():
 		# Bonus cristaux : chaque démon encore présent (vivant mais incapacité)
 		# en donne 1. Les démons morts par magie ont déjà été comptés dans
 		# Character.take_damage().
+		# Les survivants incapacités se répartissent selon leur nature :
+		# démon → cristal, le reste → prisonnier.
 		for enemy: Character in enemies:
-			if is_instance_valid(enemy) \
-					and enemy.characterData \
-					and enemy.characterData.IsDemon \
-					and not enemy.is_dead():
+			if not is_instance_valid(enemy) or enemy.characterData == null or enemy.is_dead():
+				continue
+			if enemy.characterData.IsDemon:
 				nb_crystaleloot += 1
 				print("💎 +1 cristal (démon incapacité : ", enemy.characterData.Charaname, ")")
+			else:
+				nb_prisoners += 1
+				print("⛓️ prisonnier (incapacité) : ", enemy.characterData.Charaname)
 		_show_victory()
 
 
@@ -570,6 +594,20 @@ func _show_victory():
 	# rencontre (un boss) d'en tirer davantage.
 	for extra in gm.roll_loot(loot_bonus_rolls, loot_drop_chance):
 		encounter.loots.append(extra)
+
+	# ── Argent ───────────────────────────────────────────────────────
+	# Tiré au sort comme les potions. La bourse passe dans le butin pour
+	# que le joueur la voie défiler, mais add_to_inventory l'enverra au
+	# compteur sans lui donner de case.
+	if randf() < money_chance:
+		var amount := randi_range(min(money_min, money_max), max(money_min, money_max))
+		if amount > 0:
+			encounter.loots.append(MoneyPouch.make(amount, money_texture))
+
+	# ── Prisonniers ──────────────────────────────────────────────────
+	# Ramassés automatiquement, sans passer par l'écran de butin.
+	gm.add_prisoners(nb_prisoners)
+	nb_prisoners = 0
 
 	victory_ui.showLoot(encounter.loots, gm)
 

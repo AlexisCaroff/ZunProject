@@ -17,6 +17,17 @@ var campement_node: Node = null
 ## défaut ci-dessous ; l'assigner dans l'inspecteur la remplace.
 @export var loot_table: LootTable
 const DEFAULT_LOOT_TABLE_PATH := "res://Items/loot/PotionLootTable.tres"
+
+# ── Ressources de l'équipe ───────────────────────────────────────────
+# Deux compteurs, distincts du sac : ils n'occupent aucune case et sont
+# affichés par le panneau d'inventaire (exploration, porte, combat).
+# ATTENTION : l'argent n'a rien à voir avec les cristaux de combat, qui
+# restent, eux, un objet rangé dans le sac.
+@export var money: int = 0
+## Ennemis non-démons vaincus, ramenés automatiquement en fin de combat.
+@export var prisoners: int = 0
+signal resources_changed(money: int, prisoners: int)
+
 @export var characters: Array[CharacterData] = []
 @onready var sceneTransition = $SceneTransition
 @export var start_menu_scene: PackedScene = preload("res://UI/menuBase.tscn")
@@ -355,6 +366,12 @@ func add_to_inventory(item: Equipment):
 	if item == null:
 		return
 
+	# Une bourse traverse l'écran de victoire comme une carte de butin, puis
+	# verse son contenu au compteur. Elle n'occupe jamais de case.
+	if item is MoneyPouch:
+		add_money((item as MoneyPouch).number)
+		return
+
 	if item is Potion:
 		var incoming: Potion = item as Potion
 		# On ne met jamais le .tres partagé dans l'inventaire : `number` est
@@ -380,6 +397,39 @@ func add_to_inventory(item: Equipment):
 	print ("add "+ item.name+" to inventory")
 	for i in inventory:
 		print ( i.name + " is in Inventory GM ")
+
+
+# ════════════════════════════════════════════════════════════════════
+#  ARGENT & PRISONNIERS
+# ════════════════════════════════════════════════════════════════════
+
+## Verse (ou retire, avec un montant négatif) de l'argent. Le total ne
+## descend jamais sous zéro.
+func add_money(amount: int) -> void:
+	if amount == 0:
+		return
+	money = max(0, money + amount)
+	emit_signal("resources_changed", money, prisoners)
+	print("💰 %+d → %d gold" % [amount, money])
+
+
+## Ajoute des prisonniers ramenés d'un combat.
+func add_prisoners(count: int) -> void:
+	if count == 0:
+		return
+	prisoners = max(0, prisoners + count)
+	emit_signal("resources_changed", money, prisoners)
+	print("⛓️ %+d → %d prisonnier(s)" % [count, prisoners])
+
+
+## Dépense `amount` si l'équipe en a les moyens. Retourne false et ne
+## touche à rien sinon — de quoi brancher une boutique sans y repenser.
+func spend_money(amount: int) -> bool:
+	if amount <= 0 or money < amount:
+		return false
+	money -= amount
+	emit_signal("resources_changed", money, prisoners)
+	return true
 
 
 ## Retire `count` exemplaires d'un objet du sac. Retourne true si la pile est

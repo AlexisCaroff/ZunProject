@@ -280,6 +280,9 @@ func capture_state(gm) -> Dictionary:
 		"characters": characters,
 		"rooms": rooms,
 		"inventory": inventory,
+		# Compteurs hors sac : argent et prisonniers ramenés des combats.
+		"money": gm.money,
+		"prisoners": gm.prisoners,
 	}
 
 
@@ -409,6 +412,12 @@ func _restore_buff(entry) -> Buff:
 ## l'exécution (cristaux de victoire, cf. CombatManager._show_victory) n'ont
 ## pas de resource_path : leurs champs sont sérialisés tels quels.
 func _capture_equipment(eq: Equipment) -> Dictionary:
+	# Une bourse n'atteint le sac que le temps de l'écran de victoire, mais
+	# elle peut être sauvegardée dans encounter.loots : on garde sa classe,
+	# sinon elle reviendrait en Equipment ordinaire et prendrait une case.
+	if eq is MoneyPouch:
+		return {"money_pouch": true, "number": eq.number}
+
 	# Une potion en inventaire est TOUJOURS une copie du .tres (sinon la
 	# quantité muterait la ressource partagée) : on sauvegarde le chemin
 	# d'origine plus la taille de la pile.
@@ -486,6 +495,11 @@ func apply_state(data: Dictionary, gm) -> bool:
 	gm.inventory = inventory
 
 	# ── GameManager ─────────────────────────────────────────────────
+	# Une sauvegarde antérieure à ces compteurs repart de zéro.
+	gm.money     = _as_int(data.get("money", 0))
+	gm.prisoners = _as_int(data.get("prisoners", 0))
+	gm.emit_signal("resources_changed", gm.money, gm.prisoners)
+
 	gm.teamCorrupted = _as_bool(data.get("team_corrupted", false))
 	gm.current_room_Ressource   = gm.get_room_by_id(str(data.get("current_room_id", "")))
 	gm.last_room_Ressource      = gm.get_room_by_id(str(data.get("last_room_id", "")))
@@ -621,6 +635,9 @@ func _apply_room(room: RoomResource, d: Dictionary) -> void:
 func _restore_equipment(entry) -> Equipment:
 	if typeof(entry) != TYPE_DICTIONARY:
 		return null
+
+	if entry.get("money_pouch", false):
+		return MoneyPouch.make(_as_int(entry.get("number", 0)))
 
 	if not entry.get("inline", false):
 		var path := str(entry.get("path", ""))

@@ -5,6 +5,14 @@ class_name InventoryUI
 @export var inventory_size_x := 5
 @export var inventory_size_y := 5
 @export var emptySlotTexture : Texture2D = preload("res://UI/UI inventory/UI_inventory_pack_frame.png")
+
+## Côté de l'icône dessinée dans une case. La case elle-même ne fait que 64 px
+## (taille minimale dans la GridContainer) : l'icône déborde volontairement,
+## c'est la séparation de 60 px de la grille qui recrée l'espacement visuel.
+const CELL_ICON_SIZE := 120.0
+## Marge du compteur de pile par rapport au coin bas-droit de l'icône.
+const COUNT_INSET := Vector2(10.0, 8.0)
+
 # --- Références
 @onready var startMenuButton = $CanvasLayer/ButtonMenu
 @onready var canvasLayer = $CanvasLayer
@@ -356,18 +364,41 @@ func create_inventory_cell(index: int) -> Control:
 	var container = Control.new()
 	container.custom_minimum_size = Vector2(64, 64)
 
+	# Cadre de case vide, toujours présent : l'objet se superpose par-dessus au
+	# lieu de le remplacer, donc la grille reste lisible même pleine.
+	var bg = TextureRect.new()
+	bg.name = "Bg"
+	bg.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	bg.custom_minimum_size = Vector2(CELL_ICON_SIZE, CELL_ICON_SIZE)
+	bg.texture = emptySlotTexture
+	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	container.add_child(bg)
+
 	var icon = TextureRect.new()
 	icon.name = "Icon"
 	icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	icon.custom_minimum_size = Vector2(120, 120)
+	icon.custom_minimum_size = Vector2(CELL_ICON_SIZE, CELL_ICON_SIZE)
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	container.add_child(icon)
 
-	# Compteur de pile, affiché en bas à droite de la case pour les potions.
+	# Compteur de pile, affiché en bas à droite de l'icône pour les potions.
+	#
+	# La case ne mesure que 64x64 alors que l'icône en fait 120 et déborde :
+	# ancrer le label en bas à droite de la case le projetait à 64 + 76 = 140 px,
+	# soit une colonne plus loin et une ligne plus bas. On le cale donc sur le
+	# coin haut-gauche avec des offsets qui recouvrent l'icône, et c'est
+	# l'alignement du texte qui le pousse dans le coin bas-droit.
 	var count = Label.new()
 	count.name = "Count"
-	count.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
-	count.position = Vector2(76, 78)
+	count.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	count.offset_left = 0.0
+	count.offset_top = 0.0
+	count.offset_right = CELL_ICON_SIZE - COUNT_INSET.x
+	count.offset_bottom = CELL_ICON_SIZE - COUNT_INSET.y
+	count.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	count.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
 	count.add_theme_font_size_override("font_size", 22)
 	count.add_theme_color_override("font_color", Color(0.95, 0.90, 0.75))
 	count.add_theme_color_override("font_outline_color", Color(0, 0, 0))
@@ -766,7 +797,9 @@ func update_inventory_ui():
 		var cell = inventory_grid.get_child(i)
 		var icon = cell.get_node("Icon")
 
-		icon.texture = item.icon if item != null else emptySlotTexture
+		# Le cadre de case ("Bg") reste affiché en permanence : on ne remplit
+		# plus que la couche du dessus, qui est vide quand la case l'est.
+		icon.texture = item.icon if item != null else null
 
 		# Compteur de pile (potions surtout, mais valable pour tout objet
 		# dont `number` dépasse 1 — l'or par exemple).

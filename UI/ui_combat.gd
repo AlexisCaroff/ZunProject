@@ -54,17 +54,35 @@ class_name UI_combat
 @onready var MenuPerso:InventoryUI = $"../MenuPerso"
 @onready var charaPortraitButton = $CanvasLayer/charaPortrait/charaPortraitButton
 
+# ── Sac d'équipe consultable pendant le combat ───────────────────────
+# Construit par code : il y a quatre scènes de combat (normale + trois
+# boss), les mêmes nœuds posés quatre fois seraient quatre fois le même
+# travail à refaire à chaque retouche.
+#
+# Lecture seule : on regarde ce qu'on a, on ne boit pas depuis ici. Boire
+# passe par le menu perso, qui sait déjà gérer le tour, la cible et la fin
+# de tour — refaire cette logique ici en ferait une deuxième version à
+# maintenir.
+@export var bag_rect: Rect2 = Rect2(1420, 802, 480, 264)
+@export var bag_bg: Texture2D = preload("res://UI/UI inventory/UI_inventory_box_pack.png")
+@export var bag_icon: Texture2D = preload("res://UI/UI inventory/UI_inventory_button_bag.png")
+@export var bag_map_icon: Texture2D = preload("res://UI/UI inventory/UI_inventory_button_map.png")
+var inventory_panel: DoorInventory = null
+var bag_toggle: Button = null
+var showing_inventory: bool = false
+
 
 func _ready():
 	var current_character = combat_manager.get_current_character()
 	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
 	await get_tree().process_frame
 	#call_deferred("update_ui_for_current_character", current_character)
-	
-	
+
+
 	if donjon_map:
 		donjon_map.focus_on_room(gm.current_room_Ressource, viewport)
 
+	_setup_bag(gm)
 	charaPortraitButton.connect("button_down", showMenuPerso)
 	#MenuPerso.inventory_items = gm.inventory
 	#MenuPerso.update_inventory_ui()
@@ -307,3 +325,105 @@ func updateRound(roundnumber:int):
 	var big_size    = Vector2(theScale .x * 1.1, theScale .y * 1.3)
 	tween.tween_property(RoundNumbersHolder, "scale", big_size,  0.2)
 	tween.tween_property(RoundNumbersHolder, "scale", theScale  , 0.2)
+
+
+# ════════════════════════════════════════════════════════════════════
+#  SAC D'ÉQUIPE EN COMBAT
+# ════════════════════════════════════════════════════════════════════
+
+func _setup_bag(gm: GameManager) -> void:
+	var layer := get_node_or_null("CanvasLayer") as CanvasLayer
+	if layer == null:
+		return
+
+	inventory_panel = DoorInventory.create_panel(bag_rect, bag_bg)
+	# Réglages avant l'entrée dans l'arbre : c'est _ready() du panneau qui
+	# construit la grille, il lit ces valeurs à ce moment-là.
+	inventory_panel.cell_size = Vector2(72, 72)
+	inventory_panel.cell_separation = 4
+	inventory_panel.potions_usable = false
+	inventory_panel.z_index = 9
+	inventory_panel.visible = false
+	layer.add_child(inventory_panel)
+
+	# La scène de combat a déjà un bouton posé au-dessus de la carte, câblé
+	# à rien : on s'en sert. S'il manque (autre scène de boss), on en crée un.
+	bag_toggle = get_node_or_null("CanvasLayer/ContourMap/ButtonMap") as Button
+	if bag_toggle == null:
+		bag_toggle = Button.new()
+		bag_toggle.name = "ToggleMapInventory"
+		bag_toggle.flat = true
+		bag_toggle.focus_mode = Control.FOCUS_NONE
+		bag_toggle.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+		bag_toggle.z_index = 10
+		bag_toggle.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		bag_toggle.offset_left = bag_rect.position.x + bag_rect.size.x - 104.0
+		bag_toggle.offset_top = bag_rect.position.y - 62.0
+		bag_toggle.offset_right = bag_toggle.offset_left + 104.0
+		bag_toggle.offset_bottom = bag_toggle.offset_top + 104.0
+		layer.add_child(bag_toggle)
+
+		var icon := Sprite2D.new()
+		icon.name = "IconBag"
+		icon.position = Vector2(52, 52)
+		icon.scale = Vector2(0.35, 0.35)
+		icon.texture = bag_icon
+		bag_toggle.add_child(icon)
+
+		var icon_map := Sprite2D.new()
+		icon_map.name = "IconMap"
+		icon_map.visible = false
+		icon_map.position = Vector2(52, 52)
+		icon_map.scale = Vector2(0.35, 0.35)
+		icon_map.texture = bag_map_icon
+		bag_toggle.add_child(icon_map)
+
+	bag_toggle.tooltip_text = "Carte / sac d'équipe"
+	if not bag_toggle.pressed.is_connected(_on_toggle_map_inventory):
+		bag_toggle.pressed.connect(_on_toggle_map_inventory)
+
+	# Un objet ramassé pendant que le sac est ouvert doit s'y afficher.
+	if gm != null and not gm.inventory_changed.is_connected(_on_bag_inventory_changed):
+		gm.inventory_changed.connect(_on_bag_inventory_changed)
+
+	_apply_map_inventory_view()
+
+
+func _on_toggle_map_inventory() -> void:
+	showing_inventory = not showing_inventory
+	_apply_map_inventory_view()
+
+
+func _on_bag_inventory_changed(_item = null) -> void:
+	if showing_inventory and inventory_panel != null:
+		var gm := get_tree().root.get_node_or_null("GameManager") as GameManager
+		if gm != null:
+			inventory_panel.refresh(gm.inventory)
+
+
+## La carte et le sac occupent le même coin. On masque la vue de la carte
+## mais PAS son cadre : le bouton de bascule est posé dessus, le cacher
+## rendrait le retour impossible.
+func _apply_map_inventory_view() -> void:
+	var map_view := get_node_or_null("CanvasLayer/SubViewportContainer") as Control
+	if map_view:
+		map_view.visible = not showing_inventory
+	if inventory_panel:
+		inventory_panel.visible = showing_inventory
+		if showing_inventory:
+			var gm := get_tree().root.get_node_or_null("GameManager") as GameManager
+			if gm != null:
+				inventory_panel.refresh(gm.inventory)
+	if bag_toggle:
+		# L'icône annonce la vue vers laquelle on basculera. Le bouton déjà
+		# présent dans la scène de combat n'a qu'une icône de carte : dans ce
+		# cas on la laisse allumée, sinon le bouton deviendrait vide.
+		var bag := bag_toggle.get_node_or_null("IconBag") as CanvasItem
+		var mp := bag_toggle.get_node_or_null("IconMap") as CanvasItem
+		if bag != null and mp != null:
+			bag.visible = not showing_inventory
+			mp.visible = showing_inventory
+		elif bag != null:
+			bag.visible = true
+		elif mp != null:
+			mp.visible = true

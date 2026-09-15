@@ -9,23 +9,38 @@ class_name DoorInventory
 #  potions se boivent directement d'ici : cliquer dessus ouvre le popup de
 #  confirmation et la potion part au personnage sélectionné devant la porte.
 #
-#  La grille est construite par code — la mise en page ne dépend que de
-#  columns / cell_size, pas d'une hiérarchie de nœuds à maintenir.
+#  La grille et la colonne de compteurs sont construites par code et se
+#  dimensionnent sur le rectangle du panneau : la même scène sert en
+#  exploration, devant une porte et en combat sans réglage par scène.
 # ════════════════════════════════════════════════════════════════════
 
 const EMPTY_SLOT_TEX := preload("res://UI/UI inventory/UI_inventory_pack_frame.png")
+const MONEY_TEX      := preload("res://UI/UI boxes/UI_crystal.png")
+const PRISONER_TEX   := preload("res://UI/UI boxes/UI_prisoner.png")
 
 @export var columns: int = 5
 @export var rows: int = 3
+## Taille MAXIMALE d'une case : elle est réduite si le panneau est trop
+## étroit pour loger à la fois la grille et les compteurs.
 @export var cell_size: Vector2 = Vector2(84, 84)
 @export var cell_separation: int = 6
 ## Permet de boire les potions depuis ce panneau.
 @export var potions_usable: bool = true
 
+@export_group("Compteurs")
+## Colonne argent / prisonniers, à droite de la grille.
+@export var show_counters: bool = true
+@export var counter_width: float = 112.0
+@export var counter_icon_size: float = 46.0
+@export var counter_font_size: int = 26
+@export_group("")
+
 @onready var grid: GridContainer = $Grid
 @onready var tooltip: Label = $Tooltip
 
 var _cells: Array[TextureRect] = []
+var _money_label: Label = null
+var _prisoner_label: Label = null
 
 ## Rendu par la scène hôte (Door) : à qui profite la potion.
 var _target_provider: Callable = Callable()
@@ -46,9 +61,118 @@ func _ready() -> void:
 	grid.columns = columns
 	grid.add_theme_constant_override("h_separation", cell_separation)
 	grid.add_theme_constant_override("v_separation", cell_separation)
+	_layout()
 	_build_cells()
+	if show_counters:
+		_build_counters()
 	if tooltip:
 		tooltip.text = ""
+
+
+## Répartit la largeur du panneau entre la grille et la colonne de
+## compteurs, et rétrécit les cases si besoin. Sans ça, une grille réglée
+## pour un panneau large déborde du cadre dans un panneau plus étroit.
+func _layout() -> void:
+	var pad := 18.0
+	var reserved: float = counter_width if show_counters else 0.0
+	var avail: float = size.x - pad * 2.0 - reserved
+	var cols: int = max(1, columns)
+	var cell: float = min(cell_size.x,
+			(avail - cell_separation * (cols - 1)) / float(cols))
+	cell = max(24.0, cell)
+	cell_size = Vector2(cell, cell)
+
+	var grid_w: float = cell * cols + cell_separation * (cols - 1)
+	var grid_h: float = cell * max(1, rows) + cell_separation * (max(1, rows) - 1)
+	grid.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	grid.offset_left = pad
+	grid.offset_top = max(10.0, (size.y - grid_h) * 0.5 - 12.0)
+	grid.offset_right = grid.offset_left + grid_w
+	grid.offset_bottom = grid.offset_top + grid_h
+
+	if tooltip:
+		tooltip.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		tooltip.offset_left = pad
+		tooltip.offset_top = grid.offset_bottom + 4.0
+		tooltip.offset_right = pad + grid_w + reserved
+		tooltip.offset_bottom = tooltip.offset_top + 30.0
+
+
+## Colonne à droite de la grille : une pastille par ressource, avec son
+## nombre. Les valeurs viennent du GameManager et se rafraîchissent sur
+## son signal resources_changed.
+func _build_counters() -> void:
+	var old := get_node_or_null("Counters")
+	if old:
+		old.free()
+
+	var col := VBoxContainer.new()
+	col.name = "Counters"
+	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	col.add_theme_constant_override("separation", 14)
+	add_child(col)
+	col.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	col.offset_left = grid.offset_right + 14.0
+	col.offset_right = col.offset_left + counter_width
+	col.offset_top = grid.offset_top + 6.0
+	col.offset_bottom = grid.offset_bottom
+
+	_money_label = _make_counter_row(col, MONEY_TEX, "Argent")
+	_prisoner_label = _make_counter_row(col, PRISONER_TEX, "Prisonniers")
+
+	var gm := get_tree().root.get_node_or_null("GameManager") as GameManager
+	if gm != null:
+		if not gm.resources_changed.is_connected(_on_resources_changed):
+			gm.resources_changed.connect(_on_resources_changed)
+		_on_resources_changed(gm.money, gm.prisoners)
+
+
+func _make_counter_row(parent: Control, tex: Texture2D, tip: String) -> Label:
+	var row := HBoxContainer.new()
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_theme_constant_override("separation", 8)
+	parent.add_child(row)
+
+	var icon := TextureRect.new()
+	icon.texture = tex
+	icon.custom_minimum_size = Vector2(counter_icon_size, counter_icon_size)
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.tooltip_text = tip
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_child(icon)
+
+	var value := Label.new()
+	value.text = "0"
+	value.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	value.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	value.add_theme_font_size_override("font_size", counter_font_size)
+	value.add_theme_color_override("font_color", Color(0.95, 0.90, 0.75))
+	value.add_theme_color_override("font_outline_color", Color(0, 0, 0))
+	value.add_theme_constant_override("outline_size", 6)
+	value.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_child(value)
+	return value
+
+
+func _on_resources_changed(money: int, prisoners: int) -> void:
+	if is_instance_valid(_money_label):
+		_money_label.text = str(money)
+	if is_instance_valid(_prisoner_label):
+		_prisoner_label.text = str(prisoners)
+
+
+## Relit les compteurs directement sur le GameManager, et rattrape au
+## passage un branchement de signal qui n'aurait pas pu se faire.
+func _refresh_counters() -> void:
+	if not show_counters:
+		return
+	var gm := get_tree().root.get_node_or_null("GameManager") as GameManager
+	if gm == null:
+		return
+	if not gm.resources_changed.is_connected(_on_resources_changed):
+		gm.resources_changed.connect(_on_resources_changed)
+	_on_resources_changed(gm.money, gm.prisoners)
 
 
 func _build_cells() -> void:
@@ -111,6 +235,10 @@ func _build_cells() -> void:
 
 ## Remplit la grille depuis le sac d'équipe. Les cases en trop restent vides.
 func refresh(items: Array[Equipment]) -> void:
+	# Filet de sécurité : si le GameManager n'était pas encore dans l'arbre
+	# quand les compteurs ont été construits, le signal n'a pas pu être
+	# branché. Les relire ici garantit des nombres justes à chaque ouverture.
+	_refresh_counters()
 	if _cells.is_empty():
 		return
 	for i in _cells.size():
@@ -216,3 +344,54 @@ func _selected_target() -> CharacterData:
 		if t is CharacterData:
 			return t
 	return null
+
+
+# ════════════════════════════════════════════════════════════════════
+#  FABRIQUE — panneau construit par code
+# ════════════════════════════════════════════════════════════════════
+#  L'exploration et la porte ont leur panneau posé dans la scène. Le
+#  combat, lui, existe en quatre scènes (normale + trois boss) : plutôt
+#  que d'ajouter les mêmes nœuds quatre fois à la main, ui_combat.gd
+#  appelle cette fabrique. Un seul endroit à corriger.
+#
+#  Les enfants sont créés AVANT l'entrée dans l'arbre : les @onready
+#  $Grid et $Tooltip doivent déjà exister quand _ready() se déclenche.
+# ════════════════════════════════════════════════════════════════════
+
+static func create_panel(rect: Rect2, bg_tex: Texture2D = null) -> DoorInventory:
+	var panel := DoorInventory.new()
+	panel.name = "InventoryPanel"
+	panel.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	panel.offset_left = rect.position.x
+	panel.offset_top = rect.position.y
+	panel.offset_right = rect.position.x + rect.size.x
+	panel.offset_bottom = rect.position.y + rect.size.y
+	panel.custom_minimum_size = rect.size
+	panel.mouse_filter = Control.MOUSE_FILTER_PASS
+
+	if bg_tex != null:
+		var bg := TextureRect.new()
+		bg.name = "Bg"
+		bg.texture = bg_tex
+		bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		bg.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		bg.offset_left = -10.0
+		bg.offset_top = -8.0
+		bg.offset_right = rect.size.x + 10.0
+		bg.offset_bottom = rect.size.y + 6.0
+		panel.add_child(bg)
+
+	var g := GridContainer.new()
+	g.name = "Grid"
+	g.mouse_filter = Control.MOUSE_FILTER_PASS
+	panel.add_child(g)
+
+	var tip := Label.new()
+	tip.name = "Tooltip"
+	tip.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	tip.add_theme_font_size_override("font_size", 20)
+	tip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	panel.add_child(tip)
+
+	return panel
