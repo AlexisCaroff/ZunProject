@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="Potion" load_steps=4 format=3 uid="uid://dwf5kc87po7at"]
+
+[ext_resource type="Script" uid="uid://b3n5n3cjlruiy" path="res://Items/ItemScripts/Potion.gd" id="1_potion"]
+[ext_resource type="Script" uid="uid://bkvdwvrmdt5aw" path="res://actions/skillEffects/Buff.gd" id="1_qhxal"]
+[ext_resource type="Texture2D" uid="uid://bt8mn1psaivap" path="res://Items/ItemIcons/POTION_vigor.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1_potion")
+stack_id = "potion_vigor"
+origin_path = ""
+max_stack = 9
+heal_stamina = 30
+heal_lust = 0
+heal_guilt = 0
+buffs = Array[ExtResource("1_qhxal")]([])
+grants_extra_turn = false
+usable_out_of_combat = true
+usable_in_combat = true
+ends_turn_in_combat = true
+confirm_text = ""
+icon = ExtResource("2_icon")
+name = "Potion de Vigueur"
+description = "Un remontant epais au gout de fer. Referme les chairs sans rien apaiser."
+isCursed = false
+number = 1
+Max_stamina_bonus = 0
+Max_lust_bonus = 0
+Max_Guilt_bonus = 0
+attack_bonus = 0
+defense_bonus = 0
+willpower_bonus = 0
+evasion_bonus = 0
+initiative_bonus = 0
+peekbonus = 0
+global_cooldown_reduction = 0
+skill_specific_cooldown = Dictionary[String, int]({})

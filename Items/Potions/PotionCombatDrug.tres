@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="Potion" load_steps=8 format=3 uid="uid://cjepo021b58y5"]
+
+[ext_resource type="Script" uid="uid://b3n5n3cjlruiy" path="res://Items/ItemScripts/Potion.gd" id="1_potion"]
+[ext_resource type="Texture2D" uid="uid://dk0xtcddolehn" path="res://Items/ItemIcons/POTION_combat_drug.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://bkvdwvrmdt5aw" path="res://actions/skillEffects/Buff.gd" id="3_buff"]
+[ext_resource type="Texture2D" uid="uid://btvnbxbbjq1w4" path="res://UI/debuffDeff.png" id="3_xbxjf"]
+[ext_resource type="Texture2D" uid="uid://dt33aj7kc370x" path="res://UI/buffinitiative.png" id="4_buff_icon"]
+
+[sub_resource type="Resource" id="Resource_drug_speed"]
+script = ExtResource("3_buff")
+name = "Fievre"
+description = "Initiative augmentee."
+icon = ExtResource("4_buff_icon")
+stat = 2
+amount = 4
+duration = 4
+
+[sub_resource type="Resource" id="Resource_fxghf"]
+script = ExtResource("3_buff")
+name = "Buff"
+description = "feeling everything"
+icon = ExtResource("3_xbxjf")
+stat = 3
+amount = -5
+duration = 3
+metadata/_custom_type_script = "uid://bkvdwvrmdt5aw"
+
+[resource]
+script = ExtResource("1_potion")
+stack_id = "potion_combat_drug"
+origin_path = ""
+max_stack = 5
+heal_stamina = 0
+heal_lust = 0
+heal_guilt = 0
+buffs = Array[ExtResource("3_buff")]([SubResource("Resource_drug_speed"), SubResource("Resource_fxghf")])
+grants_extra_turn = true
+usable_out_of_combat = true
+usable_in_combat = true
+ends_turn_in_combat = true
+confirm_text = "Injecter la Fievre Noire ? Un tour de plus, et le reste se paiera plus tard."
+icon = ExtResource("2_icon")
+name = "Fievre Noire"
+description = "Drogue de combat. Le corps part avant l'esprit : un tour d'avance, et l'initiative qui monte."
+isCursed = false
+number = 1
+Max_stamina_bonus = 0
+Max_lust_bonus = 0
+Max_Guilt_bonus = 0
+attack_bonus = 0
+defense_bonus = 0
+willpower_bonus = 0
+evasion_bonus = 0
+initiative_bonus = 0
+peekbonus = 0
+global_cooldown_reduction = 0
+skill_specific_cooldown = Dictionary[String, int]({})

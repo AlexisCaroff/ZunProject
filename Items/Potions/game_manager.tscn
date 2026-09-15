@@ -1,0 +1,207 @@
+[gd_scene load_steps=30 format=3 uid="uid://dg0coy6r6f1ww"]
+
+[ext_resource type="Script" uid="uid://d12jn42j03tgg" path="res://GameManager.gd" id="1_60im0"]
+[ext_resource type="Resource" uid="uid://7dlbup10473y" path="res://lvl/donjonTestePorte.tres" id="2_awj4p"]
+[ext_resource type="Resource" uid="uid://bjupnilvigvhl" path="res://lvl/salle0/Salle0.tres" id="3_fklad"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_y4st3"]
+[ext_resource type="Resource" uid="uid://bovg8sutwbfkk" path="res://Items/itemsRessources/keyRoom1.tres" id="5_8tqqo"]
+[ext_resource type="Resource" uid="uid://cjepo021b58y5" path="res://Items/Potions/PotionCombatDrug.tres" id="6_idef8"]
+[ext_resource type="Resource" uid="uid://dwf5kc87po7at" path="res://Items/Potions/PotionVigor.tres" id="7_anjbq"]
+[ext_resource type="Resource" uid="uid://e44xg4hlvlih" path="res://Items/Potions/PotionWill.tres" id="8_ih7h0"]
+[ext_resource type="Resource" uid="uid://rhqy4lm1q0e0" path="res://Items/loot/PotionLootTable.tres" id="9_6s4fx"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="10_elie0"]
+[ext_resource type="Resource" uid="uid://cw65x7yfthrul" path="res://characters/data/CharaPriest.tres" id="11_nq4xm"]
+[ext_resource type="Resource" uid="uid://uf5x5dpfh5ln" path="res://characters/data/CharaHunter.tres" id="12_e3ly7"]
+[ext_resource type="Resource" uid="uid://c1xql2qyr4th5" path="res://actions/actiontexture/Mystic.tres" id="13_um5rx"]
+[ext_resource type="Resource" uid="uid://b42qgncyvuw0n" path="res://characters/data/CharaWarrior2.tres" id="14_hmybu"]
+[ext_resource type="PackedScene" uid="uid://c2xke2vhr5vbh" path="res://UI/taste_roll_menu.tscn" id="15_4hqhr"]
+[ext_resource type="Texture2D" uid="uid://eqli6rl4sig3" path="res://UI/UI boxes/UI_camp_points.png" id="16_74axx"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="17_n3dyn"]
+[ext_resource type="Texture2D" uid="uid://u4r16y7nxe6o" path="res://logo.png" id="18_3etqm"]
+[ext_resource type="Script" uid="uid://nd54d0xcos1m" path="res://UI/SceneTransition.gd" id="19_mpws4"]
+[ext_resource type="PackedScene" uid="uid://bvgh80ryq8f31" path="res://UI/cinematic/introCinematc.tscn" id="20_pmv4k"]
+[ext_resource type="Texture2D" uid="uid://b5cqyywvqxjb8" path="res://tuto/intro1.png" id="21_i2pec"]
+[ext_resource type="Script" uid="uid://b1luajn2l3jft" path="res://UI/IntroWarnning.gd" id="22_j8vvw"]
+[ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="23_gwmfq"]
+[ext_resource type="Script" uid="uid://hqfnhl3n6kn" path="res://UI/button_journal.gd" id="24_54oh6"]
+[ext_resource type="Texture2D" uid="uid://db0f042psyftl" path="res://UI/UI boxes/UI_journal.png" id="25_yax66"]
+[ext_resource type="Script" uid="uid://epu8n2lrsmtu" path="res://UI/save_button.gd" id="26_jh2my"]
+[ext_resource type="Script" uid="uid://bhsro7sspbgqw" path="res://UI/buttonQuit.gd" id="27_07by6"]
+[ext_resource type="PackedScene" path="res://UI/save_menu.tscn" id="28_kma2v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n5q86"]
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_60im0")
+donjon = ExtResource("2_awj4p")
+TheRoom_we_are_in = ExtResource("3_fklad")
+LastRoom_we_were_in = ExtResource("3_fklad")
+last_room_Ressource = ExtResource("3_fklad")
+inventory = Array[ExtResource("4_y4st3")]([ExtResource("5_8tqqo"), ExtResource("6_idef8"), ExtResource("7_anjbq"), ExtResource("8_ih7h0")])
+loot_table = ExtResource("9_6s4fx")
+characters = Array[ExtResource("10_elie0")]([ExtResource("11_nq4xm"), ExtResource("12_e3ly7"), ExtResource("13_um5rx"), ExtResource("14_hmybu")])
+taste_roll_scene = ExtResource("15_4hqhr")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -200
+offset_left = -395.0
+offset_top = -274.0
+offset_right = 2218.0
+offset_bottom = 1428.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="DialogueBox" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+position = Vector2(258.4, 54)
+scale = Vector2(0.39206, 0.398946)
+texture = ExtResource("16_74axx")
+
+[node name="Label" type="RichTextLabel" parent="."]
+z_index = 6
+offset_left = 158.0
+offset_top = 9.0
+offset_right = 402.0
+offset_bottom = 64.0
+theme_override_colors/default_color = Color(0.494118, 0.231373, 0.278431, 1)
+theme_override_fonts/normal_font = ExtResource("17_n3dyn")
+theme_override_font_sizes/normal_font_size = 40
+text = "The nest"
+
+[node name="Label" type="Label" parent="Label"]
+visible = false
+z_index = 6
+layout_mode = 0
+offset_left = 1513.0
+offset_top = -8.0
+offset_right = 1757.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("17_n3dyn")
+theme_override_font_sizes/font_size = 30
+text = "Pre-Alpha test"
+horizontal_alignment = 1
+
+[node name="Label2" type="RichTextLabel" parent="."]
+z_index = 6
+offset_left = 162.0
+offset_top = 60.0
+offset_right = 406.0
+offset_bottom = 115.0
+theme_override_colors/default_color = Color(0.962638, 0.862894, 0.873405, 1)
+theme_override_fonts/normal_font = ExtResource("17_n3dyn")
+theme_override_font_sizes/normal_font_size = 25
+text = "Explore the ruins"
+
+[node name="endGame" type="ColorRect" parent="."]
+visible = false
+offset_right = 1978.0
+offset_bottom = 1059.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="endGame"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 231.0
+offset_right = 1397.0
+offset_bottom = 715.0
+theme_override_fonts/font = ExtResource("17_n3dyn")
+theme_override_font_sizes/font_size = 50
+text = "You've beaten the boss!
+
+Thanks for taking part in this first playtest!
+
+Leave us your feedback in the discord!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Logo" type="Sprite2D" parent="endGame"]
+position = Vector2(951, 842)
+scale = Vector2(0.816406, 0.816406)
+texture = ExtResource("18_3etqm")
+
+[node name="SceneTransition" type="CanvasLayer" parent="."]
+layer = 12
+follow_viewport_enabled = true
+script = ExtResource("19_mpws4")
+
+[node name="Cinematic" parent="SceneTransition" instance=ExtResource("20_pmv4k")]
+
+[node name="TextureRect" type="TextureRect" parent="SceneTransition"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("21_i2pec")
+script = ExtResource("22_j8vvw")
+
+[node name="ColorRect" type="ColorRect" parent="SceneTransition"]
+z_index = 2000
+offset_right = 4296.0
+offset_bottom = 2902.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+script = ExtResource("23_gwmfq")
+metadata/_custom_type_script = "uid://devdej4xpva2i"
+
+[node name="SaveLayer" type="CanvasLayer" parent="."]
+layer = 11
+
+[node name="ButtonJournal" type="Button" parent="SaveLayer"]
+z_index = 6
+offset_left = 26.0
+offset_top = 3.0
+offset_right = 142.0
+offset_bottom = 326.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n5q86")
+flat = true
+script = ExtResource("24_54oh6")
+
+[node name="Seau" type="Sprite2D" parent="SaveLayer/ButtonJournal"]
+position = Vector2(63, 61.3374)
+scale = Vector2(0.261958, 0.24937)
+texture = ExtResource("25_yax66")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SaveLayer/ButtonJournal"]
+layout_mode = 0
+offset_left = -160.0
+offset_top = 113.0
+offset_right = -31.0
+offset_bottom = 229.0
+theme_override_constants/separation = 20
+
+[node name="ButtonSave" type="Button" parent="SaveLayer/ButtonJournal/VBoxContainer"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_n3dyn")
+theme_override_font_sizes/font_size = 32
+text = "Save"
+flat = true
+script = ExtResource("26_jh2my")
+
+[node name="DialogueBox" type="Sprite2D" parent="SaveLayer/ButtonJournal/VBoxContainer/ButtonSave"]
+z_index = -1
+position = Vector2(68, 31.5)
+scale = Vector2(0.19542, 0.391304)
+texture = ExtResource("16_74axx")
+
+[node name="ButtonQuit" type="Button" parent="SaveLayer/ButtonJournal/VBoxContainer"]
+z_index = 2
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_n3dyn")
+theme_override_font_sizes/font_size = 40
+text = "Quit"
+flat = true
+script = ExtResource("27_07by6")
+
+[node name="DialogueBox" type="Sprite2D" parent="SaveLayer/ButtonJournal/VBoxContainer/ButtonQuit"]
+z_index = -1
+position = Vector2(68, 31.5)
+scale = Vector2(0.19542, 0.391304)
+texture = ExtResource("16_74axx")
+
+[node name="SaveMenu" parent="." instance=ExtResource("28_kma2v")]
+visible = false

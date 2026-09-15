@@ -33,6 +33,9 @@ var exploPortrait : ExploPortrait
 
 func _ready() -> void:
 	#print("chara ready")
+	# Permet à l'inventaire (menu perso) de retrouver la silhouette d'un
+	# personnage pour jouer le VFX de soin quand il boit une potion.
+	add_to_group("chara_explo")
 	var mat := ShaderMaterial.new()
 	mat.shader = load("res://characters/character_outline.gdshader")
 	sprite.material = mat

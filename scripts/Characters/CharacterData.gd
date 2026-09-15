@@ -17,6 +17,33 @@ class_name CharacterData
 @export var Charaname: String = "Classe"
 @export var IsDemon: bool = false
 @export var size : String= "average"
+
+# ════════════════════════════════════════════════════════════════════
+#  GENRE & ATTIRANCE
+# ════════════════════════════════════════════════════════════════════
+#  `presentation` est FIXE : elle se règle à la main dans l'inspecteur et
+#  ne se tire jamais au sort, parce que les scènes d'amour sont dessinées
+#  avec des corps précis.
+#
+#  `attracted_to_*` est TIRÉ au début de chaque partie par le menu
+#  TasteRollMenu (res://UI/taste_roll_menu.tscn). Au moins l'un des deux
+#  est vrai : personne n'est attiré par rien.
+#
+#  Deux personnages peuvent coucher ensemble si l'attirance est
+#  RÉCIPROQUE — voir is_compatible_with().
+# ════════════════════════════════════════════════════════════════════
+
+enum Presentation { FEMININE, MASCULINE, ANDROGYNOUS }
+
+## Comment ce personnage est perçu par les autres. À régler par personnage
+## dans l'inspecteur ; ANDROGYNOUS séduit les deux camps.
+@export var presentation: Presentation = Presentation.FEMININE
+
+@export_group("Attirance (tirée en début de partie)")
+@export var attracted_to_feminine: bool = true
+@export var attracted_to_masculine: bool = false
+@export_group("")
+
 # ---- Affinity
 @export var affinity: Dictionary[String, int] = {}
 # --- Stats de combat
@@ -106,3 +133,59 @@ var current_bark: Bark = null
 @export var inquisition :bool  = false
 @export var immobilized: bool  = false
 @export var immobilized_turns: int = 0
+
+
+# ════════════════════════════════════════════════════════════════════
+#  ATTIRANCE — API
+# ════════════════════════════════════════════════════════════════════
+
+## Ce personnage est-il attiré par `other` ? Sens unique.
+func is_attracted_to(other: CharacterData) -> bool:
+	if other == null:
+		return false
+	match other.presentation:
+		Presentation.FEMININE:
+			return attracted_to_feminine
+		Presentation.MASCULINE:
+			return attracted_to_masculine
+		Presentation.ANDROGYNOUS:
+			return attracted_to_feminine or attracted_to_masculine
+	return false
+
+
+## Attirance réciproque : la condition pour une scène d'amour.
+func is_compatible_with(other: CharacterData) -> bool:
+	if other == null or other == self:
+		return false
+	return is_attracted_to(other) and other.is_attracted_to(self)
+
+
+## Applique un tirage. Garantit qu'au moins une des deux attirances est
+## vraie — un personnage attiré par rien serait injouable côté romance.
+func set_taste(feminine: bool, masculine: bool) -> void:
+	if not feminine and not masculine:
+		feminine = true
+	attracted_to_feminine = feminine
+	attracted_to_masculine = masculine
+
+
+## Tire une attirance au sort. `bi_chance` est la probabilité d'être
+## attiré par les deux ; le reste se partage à parts égales.
+func roll_taste(bi_chance: float = 0.25) -> void:
+	if randf() < bi_chance:
+		set_taste(true, true)
+	elif randf() < 0.5:
+		set_taste(true, false)
+	else:
+		set_taste(false, true)
+
+
+## Libellé court, pour les tooltips et le journal.
+func taste_label() -> String:
+	if attracted_to_feminine and attracted_to_masculine:
+		return "Bi"
+	if attracted_to_feminine:
+		return "Feminine attracted"
+	if attracted_to_masculine:
+		return "Masculine attracted"
+	return "—"

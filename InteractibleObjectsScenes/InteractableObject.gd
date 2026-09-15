@@ -67,15 +67,20 @@ func resolve_choice(choice: InteractableChoice):
 			pass
 
 		InteractableChoice.EffectType.ITEM:
-			var item_ui = item_ui_scene.instantiate()
-			item_ui.setObject(choice.item.icon, choice.item.name)
-			get_tree().current_scene.add_child(item_ui)
-			item_ui.global_position = get_viewport_rect().size / 2 - item_ui.size / 2
-			item_ui.global_position.y -= 200
-			item_ui.despawn = true
-			await item_ui.animation_finished
+			await _give_item(gm, choice.item)
 
-			gm.add_to_inventory(choice.item)
+		InteractableChoice.EffectType.RANDOM_LOOT:
+			# Butin garanti d'abord, puis le tirage dans la table globale.
+			var found: Array[Equipment] = []
+			for fixed in choice.guaranteed_items:
+				if fixed != null:
+					found.append(fixed)
+			found.append_array(gm.roll_loot(choice.loot_rolls, choice.loot_chance))
+
+			if found.is_empty():
+				await _show_empty_chest()
+			for loot in found:
+				await _give_item(gm, loot)
 
 		InteractableChoice.EffectType.BUFF:
 			for chara in characters:
@@ -94,6 +99,37 @@ func resolve_choice(choice: InteractableChoice):
 		room.interactable_used = true
 		if choice.opening:
 			room.interactable_opened = true
+
+
+## Affiche la carte d'objet au centre de l'écran, attend le clic du joueur,
+## puis range l'objet dans le sac d'équipe.
+func _give_item(gm: GameManager, item) -> void:
+	if item == null:
+		return
+	var item_ui = item_ui_scene.instantiate()
+	var label: String = item.name
+	# Une pile de potions annonce sa quantité sur la carte.
+	if item is Potion and item.number > 1:
+		label = "%s x%d" % [item.name, item.number]
+	item_ui.setObject(item.icon, label)
+	get_tree().current_scene.add_child(item_ui)
+	item_ui.global_position = get_viewport_rect().size / 2 - item_ui.size / 2
+	item_ui.global_position.y -= 200
+	item_ui.despawn = true
+	await item_ui.animation_finished
+
+	gm.add_to_inventory(item)
+
+
+## Coffre vide : on le signale quand même, sinon l'ouverture n'a aucun retour.
+func _show_empty_chest() -> void:
+	var item_ui = item_ui_scene.instantiate()
+	item_ui.setObject(null, "Vide...")
+	get_tree().current_scene.add_child(item_ui)
+	item_ui.global_position = get_viewport_rect().size / 2 - item_ui.size / 2
+	item_ui.global_position.y -= 200
+	item_ui.despawn = true
+	await item_ui.animation_finished
 
 
 ## Applique le visuel "utilisé" : bouton désactivé, étiquette cachée,

@@ -12,9 +12,20 @@ var current_room_Ressource: RoomResource
 var campement_node: Node = null
 @onready var end =$endGame
 @export var inventory: Array[Equipment] = []
+## Table de butin aléatoire commune à tout le donjon : les récompenses de fin
+## de combat et les coffres y piochent. Laisser vide utilise la table par
+## défaut ci-dessous ; l'assigner dans l'inspecteur la remplace.
+@export var loot_table: LootTable
+const DEFAULT_LOOT_TABLE_PATH := "res://Items/loot/PotionLootTable.tres"
 @export var characters: Array[CharacterData] = []
 @onready var sceneTransition = $SceneTransition
 @export var start_menu_scene: PackedScene = preload("res://UI/menuBase.tscn")
+## Écran de tirage des attirances, joué une fois au début de chaque partie.
+## Laisser vide utilise la scène par défaut ci-dessous. On la charge à la
+## demande plutôt qu'en preload : un preload qui échoue (assets pas encore
+## importés au premier lancement) casserait tout le GameManager.
+@export var taste_roll_scene: PackedScene
+const DEFAULT_TASTE_ROLL_SCENE := "res://UI/taste_roll_menu.tscn"
 @export var teamCorrupted = false
 var start_menu: StartMenu = null
 var game_started: bool = false
@@ -85,10 +96,14 @@ func start_game():
 	if start_menu and is_instance_valid(start_menu):
 		start_menu.queue_free()
 		start_menu = null
- 
+
+	# Tirage des attirances, entre le menu principal et la première salle.
+	# Bloquant : le donjon ne se charge qu'une fois le joueur d'accord.
+	await run_taste_roll()
+
 	if donjon and donjon.start_room_id != "":
 		var start_room = get_room_by_id(donjon.start_room_id)
- 
+
 		if start_room:
 			current_room_Ressource = start_room
 			call_deferred("_enter_scene_in_current_room", start_room.exploration_scene)
@@ -97,6 +112,34 @@ func start_game():
  
 			
 		
+## Écran de tirage des attirances (res://UI/taste_roll_menu.tscn), joué une
+## fois par partie entre le menu principal et la première salle. On attend
+## `finished` : le joueur peut relancer le tirage autant qu'il veut avant de
+## valider. Un fichier manquant ne bloque pas le démarrage.
+func run_taste_roll() -> void:
+	if taste_roll_scene == null and ResourceLoader.exists(DEFAULT_TASTE_ROLL_SCENE):
+		var res = load(DEFAULT_TASTE_ROLL_SCENE)
+		if res is PackedScene:
+			taste_roll_scene = res
+	if taste_roll_scene == null:
+		push_warning("GameManager : écran de tirage introuvable, étape ignorée.")
+		return
+
+	var menu := taste_roll_scene.instantiate()
+	# Assigné AVANT l'entrée dans l'arbre : _ready() construit les cases avec.
+	menu.characters = characters
+	add_child(menu)
+
+	# L'écran arrive sur un fondu au noir : on rouvre pour le montrer.
+	await sceneTransition.fade_in()
+	await menu.finished
+	await sceneTransition.fade_out()
+
+	if is_instance_valid(menu):
+		menu.queue_free()
+	await get_tree().process_frame
+
+
 ## `skip_fade` : la scène porte enchaîne elle-même un glissement de décor
 ## avant d'appeler enter_room ; un fondu par-dessus casserait le raccord.
 func enter_room(room: RoomResource, changedoor: bool = false, skip_fade: bool = false):
@@ -302,12 +345,80 @@ func load_scene_direct(scene: PackedScene, encounter: CombatEncounter = null) ->
 	current_room_node = new_scene
 	await sceneTransition.fade_in()
 	
+## Ajoute un objet au sac d'équipe. Une potion se range dans une pile
+## existante quand il y en a une (et que la pile n'est pas pleine), sinon
+## elle occupe une nouvelle case.
+## Le signal porte toujours l'objet effectivement présent dans `inventory` :
+## InventoryUI s'en sert pour savoir s'il doit créer une case ou juste
+## rafraîchir le compteur d'une case déjà affichée.
 func add_to_inventory(item: Equipment):
+	if item == null:
+		return
+
+	if item is Potion:
+		var incoming: Potion = item as Potion
+		# On ne met jamais le .tres partagé dans l'inventaire : `number` est
+		# muté à chaque gorgée, ça corromprait la ressource pour tout le jeu.
+		if incoming.origin_path == "" and incoming.resource_path != "":
+			incoming = Potion.make(incoming, incoming.number)
+
+		for existing in inventory:
+			if existing is Potion and (existing as Potion).can_stack_with(incoming):
+				var stack: Potion = existing as Potion
+				if stack.number + incoming.number <= stack.max_stack:
+					stack.number += incoming.number
+					emit_signal("inventory_changed", stack)
+					print("add %d %s to inventory (pile : %d)" % [incoming.number, stack.name, stack.number])
+					return
+		inventory.append(incoming)
+		emit_signal("inventory_changed", incoming)
+		print("add " + incoming.name + " to inventory")
+		return
+
 	inventory.append(item)
 	emit_signal("inventory_changed", item)
 	print ("add "+ item.name+" to inventory")
 	for i in inventory:
 		print ( i.name + " is in Inventory GM ")
+
+
+## Retire `count` exemplaires d'un objet du sac. Retourne true si la pile est
+## tombée à zéro (la case doit alors être vidée côté UI).
+func remove_from_inventory(item: Equipment, count: int = 1) -> bool:
+	if item == null:
+		return false
+	if item is Potion:
+		var potion: Potion = item as Potion
+		potion.number -= count
+		if potion.number > 0:
+			return false
+	var idx := inventory.find(item)
+	if idx >= 0:
+		inventory.remove_at(idx)
+	return true
+
+
+## Tire du butin dans la table globale. `rolls`/`chance` à -1 reprennent les
+## réglages de la table. Les objets tirés ne sont PAS ajoutés à l'inventaire :
+## l'appelant décide quand (écran de victoire, ouverture de coffre…).
+func roll_loot(rolls: int = -1, chance: float = -1.0) -> Array[Equipment]:
+	var table := get_loot_table()
+	if table == null:
+		return [] as Array[Equipment]
+	return table.roll(rolls, chance)
+
+
+## Résout la table de butin : celle de l'inspecteur si elle est réglée, sinon
+## la table par défaut du projet (chargée à la demande pour qu'un fichier
+## manquant n'empêche pas le jeu de démarrer).
+func get_loot_table() -> LootTable:
+	if loot_table == null and ResourceLoader.exists(DEFAULT_LOOT_TABLE_PATH):
+		var res = load(DEFAULT_LOOT_TABLE_PATH)
+		if res is LootTable:
+			loot_table = res
+		else:
+			push_warning("GameManager : %s n'est pas une LootTable." % DEFAULT_LOOT_TABLE_PATH)
+	return loot_table
 
 func initialize_affinities(thecharacters: Array[CharacterData]):
 	for chara in thecharacters:

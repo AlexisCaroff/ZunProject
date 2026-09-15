@@ -11,7 +11,7 @@
 [ext_resource type="Resource" uid="uid://duwv5ufsa7tht" path="res://actions/CampSkill/LoveEffectH.tres" id="8_404pk"]
 [ext_resource type="Texture2D" uid="uid://dtsue4pkmdqi4" path="res://characters/charatexture/demo characters/HERO_hunter_down.png" id="9_4vg1p"]
 [ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="10_j4cyw"]
-[ext_resource type="Script" path="res://scripts/exploration/ExplorationSkill.gd" id="12_4vg1p"]
+[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="12_4vg1p"]
 [ext_resource type="Texture2D" uid="uid://cx3bcb0j5pxrn" path="res://characters/characterInitiative/HunterIniPortrait.png" id="12_404pk"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="12_x3tfg"]
 [ext_resource type="Texture2D" uid="uid://ysjg7rf1ovm5" path="res://characters/charatexture/demo characters/HERO_hunter_idle.png" id="13_isn0k"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dh6k7cso8hksn"
-path="res://.godot/imported/charaIcon.png-e683b1f0681cbfa9b21e75fa9fbbd6b3.ctex"
+uid="uid://cy7cv0o62q2ed"
+path="res://.godot/imported/SYM_attracted_feminine.png-968499fab2e4690b4003f761fe078f9c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/charaIcon.png"
-dest_files=["res://.godot/imported/charaIcon.png-e683b1f0681cbfa9b21e75fa9fbbd6b3.ctex"]
+source_file="res://UI/symbols/SYM_attracted_feminine.png"
+dest_files=["res://.godot/imported/SYM_attracted_feminine.png-968499fab2e4690b4003f761fe078f9c.ctex"]
 
 [params]
 

@@ -73,7 +73,6 @@ metadata/_edit_vertical_guides_ = [-690.0, -635.0]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 128
-visible = false
 follow_viewport_enabled = true
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
@@ -1267,6 +1266,7 @@ custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("12_7poab")
 text = "Description"
+scroll_active = false
 
 [node name="UiConvoBox3" type="Sprite2D" parent="CanvasLayer/ToolTipPanel"]
 position = Vector2(132.684, 88)

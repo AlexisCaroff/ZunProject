@@ -104,6 +104,13 @@ func startMasturbation(user:CharaCamp):
 
 	
 func startlove(user:CharaCamp, target: CharaCamp):
+	# L'attirance est tiree en debut de partie (TasteRollMenu) : sans
+	# reciprocite, pas de scene. Dernier verrou avant l'affichage.
+	if not user.characterData.is_compatible_with(target.characterData):
+		print("💔 Pas d'attirance reciproque entre %s et %s." % [
+			user.characterData.Charaname, target.characterData.Charaname])
+		return
+
 	camp = user.camp
 	bounce_enabled=true
 	var key1 = "%s+%s" % [user.characterData.Charaname, target.characterData.Charaname]

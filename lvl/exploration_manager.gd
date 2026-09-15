@@ -55,6 +55,16 @@ var selectorChara : Sprite2D
 var pending_explo_skill: ExplorationSkill = null
 var is_selecting_explo_target: bool = false
 
+# ── Panneau bas-droit : carte OU sac d'équipe ────────────────────────
+# Même mécanique que la scène porte : les deux occupent le même coin, le
+# bouton bascule de l'un à l'autre. Le sac réutilise DoorInventory, qui
+# lit gm.inventory et sait faire boire les potions.
+@onready var map_container = get_node_or_null("../SubViewportContainer")
+@onready var contour_map = get_node_or_null("../ContourMap")
+@onready var inventory_panel: DoorInventory = get_node_or_null("../InventoryPanel")
+@onready var toggle_map_inventory: Button = get_node_or_null("../ToggleMapInventory")
+var showing_inventory: bool = false
+
 
 func _ready():
 	for child in $"../HeroPosition".get_children():
@@ -84,6 +94,9 @@ func _ready():
 	menuPerso.characters=gm.characters
 	print ("characters atribués ")
 	menuPerso.change_in_equipment.connect(_on_character_equipment_changed)
+	# Une potion bue depuis le menu perso change les jauges : la fiche
+	# affichée en exploration doit suivre.
+	menuPerso.potion_used.connect(_on_potion_used)
 	#explo_skill_button.connect("button_down",_on_explo_skill_button_pressed)
 	load_characters_from_gamestat()
 	if gm.combat_just_ended:
@@ -135,6 +148,9 @@ func _ready():
 	if explo_move_button != null:
 		explo_move_button.connect("button_down", _on_move_skill_button_pressed)
 		_refresh_move_button()
+
+	# --- Bascule carte / sac d'équipe, dans le coin bas-droit
+	_setup_map_inventory_toggle()
 
 func _init_selection():
 	selectCharacter(characters[0])
@@ -296,6 +312,71 @@ func update_equipment_icons(character: CharacterData):
 
 func _on_character_equipment_changed(_chara: CharacterData):
 	selectCharacter(selected_character)
+
+
+## Une potion vient d'être bue : jauges du héros concerné, puis fiche à
+## l'écran si c'est lui qui est sélectionné.
+func _on_potion_used(_potion, target: CharacterData) -> void:
+	for chara in characters:
+		if chara != null and chara.characterData == target:
+			chara.update_display()
+			break
+	if selected_character != null and selected_character.characterData == target:
+		_refresh_stats_display(target)
+
+
+# ════════════════════════════════════════════════════════════════════
+#  PANNEAU BAS-DROIT — carte OU sac d'équipe
+# ════════════════════════════════════════════════════════════════════
+
+func _setup_map_inventory_toggle() -> void:
+	# Le sac doit savoir à qui profitent les potions bues depuis ici, et les
+	# jauges doivent suivre juste après. Ce câblage ne dépend pas du bouton
+	# de bascule : on le fait avant d'en sortir.
+	if inventory_panel != null:
+		inventory_panel.set_target_provider(func():
+			return selected_character.characterData if selected_character != null else null)
+		if not inventory_panel.potion_used.is_connected(_on_potion_used):
+			inventory_panel.potion_used.connect(_on_potion_used)
+		# Un objet ramassé pendant que le sac est ouvert doit s'y afficher.
+		if gm != null and not gm.inventory_changed.is_connected(_on_bag_inventory_changed):
+			gm.inventory_changed.connect(_on_bag_inventory_changed)
+
+	if toggle_map_inventory == null:
+		return
+	toggle_map_inventory.pressed.connect(_on_toggle_map_inventory)
+	_apply_map_inventory_view()
+
+
+func _on_toggle_map_inventory() -> void:
+	showing_inventory = not showing_inventory
+	_apply_map_inventory_view()
+
+
+func _on_bag_inventory_changed(_item = null) -> void:
+	if showing_inventory and inventory_panel != null and gm != null:
+		inventory_panel.refresh(gm.inventory)
+
+
+## La carte et le sac occupent le même coin : l'un cache l'autre. L'icône du
+## bouton montre la vue vers laquelle on basculera.
+func _apply_map_inventory_view() -> void:
+	if map_container:
+		map_container.visible = not showing_inventory
+	if contour_map:
+		contour_map.visible = not showing_inventory
+	if inventory_panel:
+		inventory_panel.visible = showing_inventory
+		if showing_inventory and gm != null:
+			inventory_panel.refresh(gm.inventory)
+	if toggle_map_inventory:
+		var bag = toggle_map_inventory.get_node_or_null("IconBag")
+		var mp = toggle_map_inventory.get_node_or_null("IconMapToggle")
+		if bag:
+			bag.visible = not showing_inventory
+		if mp:
+			mp.visible = showing_inventory
+
 
 func _on_button_button_down() -> void:
 	DoorNumber = 0

@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="10_kcgfw"]
 [ext_resource type="Texture2D" uid="uid://dd4k5wxaesfo4" path="res://characters/exploPortrait/MysticExploPortrait.png" id="11_g0sk4"]
 [ext_resource type="Texture2D" uid="uid://cfbpe4u16v3hx" path="res://characters/characterInitiative/MysticIniPortrait.png" id="12_or2ga"]
-[ext_resource type="Script" path="res://scripts/exploration/ExplorationSkill.gd" id="12_ovh7i"]
+[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="12_ovh7i"]
 [ext_resource type="Texture2D" uid="uid://he220dsml4k6" path="res://characters/charatexture/demo characters/HERO_mystic_cc_idle.png" id="13_1l0ed"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="14_a4wx8"]
 [ext_resource type="Resource" uid="uid://m6nw8l2ax4to" path="res://actions/HerosCombatSkills/ChangeMask.tres" id="15_faxul"]

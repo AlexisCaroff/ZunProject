@@ -64,18 +64,47 @@ var dragged_item : Equipment = null
 var dragged_slot_index : int = -1
 
 @onready var tooltip_panel = $CanvasLayer/ToolTipPanel
-@onready var tooltip_name = $CanvasLayer/ToolTipPanel/VBoxContainer/ToolTipName
-@onready var tooltip_desc = $CanvasLayer/ToolTipPanel/VBoxContainer/ToolTipDesc
+# Résolus par NOM et non par chemin : l'infobulle est recâblée à l'exécution
+# (cf. _setup_tooltip) et le chemin change. Chercher par nom marche aussi
+# bien avant qu'après, et survit à une réorganisation dans l'éditeur.
+var tooltip_name: RichTextLabel = null
+var tooltip_desc: RichTextLabel = null
+
+@export_group("Infobulle")
+## Largeur fixe de l'infobulle ; la hauteur, elle, suit la longueur du texte.
+@export var tooltip_width: float = 390.0
+## Marge intérieure entre le cadre et le texte (horizontale, verticale).
+@export var tooltip_padding: Vector2 = Vector2(22, 16)
+## Épaisseur des bords du cadre conservée à l'identique quelle que soit la
+## taille (découpe 9-slices de la texture).
+@export var tooltip_frame_margin: int = 26
+@export var tooltip_backdrop_color: Color = Color(0, 0, 0, 1)
+@export_group("")
+
+## Incrémenté à chaque affichage/masquage : une infobulle dont le tour est
+## passé (souris déjà ailleurs) ne doit pas se replacer après son await.
+var _tooltip_seq: int = 0
 
 
 var gm: GameManager
 signal change_in_equipment(character: CharacterData)
+
+# ── Potions ─────────────────────────────────────────────────────────
+## Popup de confirmation ouvert (un seul à la fois).
+var _potion_popup: PotionConfirmPopup = null
+## Garde-fou contre le double-clic : sans lui, deux clics rapides
+## consomment deux doses pour une seule confirmation.
+var _using_potion: bool = false
+## Émis après qu'une potion a été bue, pour que la scène hôte rafraîchisse
+## ses propres jauges (exploration, porte, combat).
+signal potion_used(potion: Potion, target: CharacterData)
 
 
 
 
 func _ready():
 
+	_setup_tooltip()
 	gm = get_tree().root.get_node("GameManager") as GameManager
 	hideMenu()
 	gm.inventory_changed.connect(_on_inventory_changed)
@@ -334,6 +363,19 @@ func create_inventory_cell(index: int) -> Control:
 	icon.custom_minimum_size = Vector2(120, 120)
 	container.add_child(icon)
 
+	# Compteur de pile, affiché en bas à droite de la case pour les potions.
+	var count = Label.new()
+	count.name = "Count"
+	count.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
+	count.position = Vector2(76, 78)
+	count.add_theme_font_size_override("font_size", 22)
+	count.add_theme_color_override("font_color", Color(0.95, 0.90, 0.75))
+	count.add_theme_color_override("font_outline_color", Color(0, 0, 0))
+	count.add_theme_constant_override("outline_size", 6)
+	count.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	count.text = ""
+	container.add_child(count)
+
 	var btn = Button.new()
 	btn.name = "Btn"
 	btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -365,6 +407,10 @@ func on_inventory_slot_pressed(index: int):
 	if dragged_item == null:
 		# Début de drag
 		if item != null:
+			# Une potion ne se traîne pas : elle se boit. Clic = confirmation.
+			if item is Potion:
+				ask_use_potion(index)
+				return
 			if GameState.current_phase == GameStat.GamePhase.COMBAT:
 				#print( "can't in Combat")
 				return
@@ -420,6 +466,14 @@ func place_item_in_inventory(index: int):
 
 
 func addItemToInventory(item: Equipment):
+	if item == null:
+		return
+	# La pile existe déjà dans la grille : rien à placer, juste le compteur
+	# à rafraîchir (gm.add_to_inventory a déjà incrémenté `number`).
+	if inventory_items.has(item):
+		update_inventory_ui()
+		return
+
 	for idx in range(inventory_items.size()):
 		if inventory_items[idx] == null:
 			inventory_items[idx] = item
@@ -427,6 +481,183 @@ func addItemToInventory(item: Equipment):
 			break
 
 	update_inventory_ui()
+
+
+# ════════════════════════════════════════════════════════════════════
+#  POTIONS
+# ════════════════════════════════════════════════════════════════════
+
+## Ouvre le popup de confirmation au niveau de la case cliquée.
+func ask_use_potion(index: int) -> void:
+	if _using_potion:
+		return
+	var potion := inventory_items[index] as Potion
+	if potion == null:
+		return
+
+	# Un seul popup à la fois.
+	if is_instance_valid(_potion_popup):
+		_potion_popup.queue_free()
+		_potion_popup = null
+
+	hide_tooltip()
+
+	var in_combat := _is_combat_phase()
+	var target := _potion_target()
+	var reason := ""
+	var can_use := true
+
+	if target == null:
+		can_use = false
+		reason = "Aucun personnage sélectionné."
+	elif not potion.is_usable(in_combat):
+		can_use = false
+		reason = "Pas pendant un combat." if in_combat else "Seulement pendant un combat."
+	elif in_combat and not _combat_turn_is_usable():
+		can_use = false
+		reason = "Attends ton tour."
+
+	var cell := inventory_grid.get_child(index) as Control
+	var anchor: Vector2 = cell.global_position + Vector2(60, 40)
+	var target_name := target.Name if target != null and target.Name != "" else "ce personnage"
+
+	_potion_popup = PotionConfirmPopup.open(
+		canvasLayer, potion, target_name, anchor, can_use, reason)
+	_potion_popup.confirmed.connect(func(): use_potion(index))
+
+
+## Consomme réellement la potion de la case `index`.
+func use_potion(index: int) -> void:
+	if _using_potion:
+		return
+	if index < 0 or index >= inventory_items.size():
+		return
+	var potion := inventory_items[index] as Potion
+	if potion == null:
+		return
+
+	var in_combat := _is_combat_phase()
+	if not potion.is_usable(in_combat):
+		return
+
+	var target := _potion_target()
+	if target == null:
+		return
+
+	_using_potion = true
+
+	# ── Application de l'effet ──────────────────────────────────────
+	var combat_chara := _combat_character_for(target)
+	if combat_chara != null:
+		potion.apply_to_character(combat_chara)
+	else:
+		potion.apply_to_data(target)
+		_animate_explo_target(target, potion)
+
+	_play_potion_sound(potion)
+
+	# ── Retrait de l'inventaire ─────────────────────────────────────
+	var emptied := gm.remove_from_inventory(potion, 1)
+	if emptied:
+		inventory_items[index] = null
+	update_inventory_ui()
+
+	# ── Rafraîchissement des affichages ─────────────────────────────
+	# select_character() recalcule les stats depuis base + équipement +
+	# characterData.buffs. En combat les buffs vivent sur le Character, pas
+	# sur la CharacterData : on laisse donc le Character réécrire ses stats
+	# juste après, sinon le bonus qu'on vient de poser serait effacé.
+	select_character(target)
+	if combat_chara != null:
+		combat_chara.update_stats()
+		combat_chara.update_ui()
+
+	emit_signal("potion_used", potion, target)
+
+	_using_potion = false
+
+	# ── En combat, boire coûte le tour ──────────────────────────────
+	if combat_chara != null and potion.ends_turn_in_combat:
+		var cm := _combat_manager()
+		if cm != null and cm.current_character == combat_chara:
+			hideMenu()
+			var combat_ui = cm.ui
+			if combat_ui != null and combat_ui.has_method("disableActionButton"):
+				combat_ui.disableActionButton()
+			await cm.end_currentChara_Turn()
+
+
+# ── Contexte : combat ou non ────────────────────────────────────────
+
+func _is_combat_phase() -> bool:
+	return GameState.current_phase == GameStat.GamePhase.COMBAT
+
+
+func _combat_manager() -> CombatManager:
+	return get_tree().get_first_node_in_group("combat_manager") as CombatManager
+
+
+## En combat la potion va au personnage dont c'est le tour ; sinon au
+## personnage affiché dans le menu.
+func _potion_target() -> CharacterData:
+	if _is_combat_phase():
+		var cm := _combat_manager()
+		if cm != null and cm.current_character != null \
+				and cm.current_character.characterData.is_player_controlled:
+			return cm.current_character.characterData
+	return selected_character
+
+
+## Le Character de combat correspondant à cette CharacterData, s'il y en a un.
+func _combat_character_for(cd: CharacterData) -> Character:
+	var cm := _combat_manager()
+	if cm == null:
+		return null
+	for hero in cm.heroes:
+		if hero.characterData == cd:
+			return hero
+	return null
+
+
+## Vrai si on peut agir : c'est le tour d'un héros joueur et aucune
+## animation n'est en cours.
+func _combat_turn_is_usable() -> bool:
+	var cm := _combat_manager()
+	if cm == null:
+		return false
+	if cm.current_character == null:
+		return false
+	if not cm.current_character.characterData.is_player_controlled:
+		return false
+	return not cm.is_animation_playing()
+
+
+## Le son de la gorgée. L'AudioManager ne gère que la musique : on passe
+## par un lecteur jetable, libéré tout seul à la fin du son.
+func _play_potion_sound(potion: Potion) -> void:
+	if potion.use_sound == null:
+		return
+	var player := AudioStreamPlayer.new()
+	player.stream = potion.use_sound
+	add_child(player)
+	player.finished.connect(player.queue_free)
+	player.play()
+
+
+## Hors combat, joue le VFX de soin sur le héros correspondant dans la
+## scène d'exploration (si elle est là) et rafraîchit son affichage.
+func _animate_explo_target(cd: CharacterData, potion: Potion) -> void:
+	for node in get_tree().get_nodes_in_group("chara_explo"):
+		var chara := node as CharaExplo
+		if chara == null or chara.characterData != cd:
+			continue
+		if potion.heal_stamina > 0:
+			chara.animate_heal(potion.heal_stamina, chara)
+		# Dans la scène porte, la silhouette n'a pas de jauges (pas de
+		# charaUI d'ExplorationPosition) : update_display() y planterait.
+		if chara.hp_Jauge != null:
+			chara.update_display()
+		return
 # --------------------------------------------------------------------
 # EQUIPMENT SLOTS UI
 # --------------------------------------------------------------------
@@ -505,6 +736,10 @@ func try_equip_on_character() -> bool:
 	if selected_character == null:
 		return false
 
+	# Une potion se boit, elle ne s'équipe pas.
+	if dragged_item is Potion:
+		return false
+
 	if selected_character.equipped_items.size() >= 2:
 		return false
 
@@ -532,6 +767,12 @@ func update_inventory_ui():
 		var icon = cell.get_node("Icon")
 
 		icon.texture = item.icon if item != null else emptySlotTexture
+
+		# Compteur de pile (potions surtout, mais valable pour tout objet
+		# dont `number` dépasse 1 — l'or par exemple).
+		var count = cell.get_node_or_null("Count")
+		if count != null:
+			count.text = "x%d" % item.number if item != null and item.number > 1 else ""
 	emit_signal("change_in_equipment", selected_character)
 
 func hideMenu():
@@ -563,13 +804,146 @@ func update_cooldown_bar(container: HBoxContainer, skill):
 			rect.color = Color(0.64,0.56,0.36)
 		container.add_child(rect)
 func _on_inventory_changed(item: Equipment):
+	# Un chargement de partie émet le signal avec null : on reconstruit alors
+	# toute la grille depuis gm.inventory plutôt que d'ajouter une case.
+	if item == null:
+		_rebuild_from_gm()
+		return
 	addItemToInventory(item)
+
+
+## Resynchronise la grille sur gm.inventory (chargement de sauvegarde).
+func _rebuild_from_gm() -> void:
+	for i in range(inventory_items.size()):
+		inventory_items[i] = null
+	for it in gm.inventory:
+		if it != null:
+			addItemToInventory(it)
+	update_inventory_ui()
+
+
+# ════════════════════════════════════════════════════════════════════
+#  INFOBULLE — mise en place
+# ════════════════════════════════════════════════════════════════════
+#  Dans la scène, ToolTipPanel est un PanelContainer de taille figée dont
+#  le fond est un Sprite2D à l'échelle figée : ni l'un ni l'autre ne suit
+#  la longueur du texte.
+#
+#  On le recâble ici, à l'exécution, plutôt que dans le .tscn : Godot
+#  réécrit le fichier de scène depuis sa copie mémoire dès qu'elle est
+#  ouverte dans l'éditeur, une modification faite hors éditeur serait donc
+#  perdue à la sauvegarde suivante. Le faire en code le met à l'abri.
+#
+#  Structure obtenue :
+#      ToolTipPanel
+#        ├ Backdrop (ColorRect)      le fond opaque
+#        ├ Frame    (NinePatchRect)  le cadre, bords d'épaisseur constante
+#        └ Margin   (MarginContainer)
+#           └ VBoxContainer          les libellés d'origine, inchangés
+# ════════════════════════════════════════════════════════════════════
+
+func _setup_tooltip() -> void:
+	if tooltip_panel == null:
+		return
+
+	# Par nom : marche avec la structure d'origine comme avec la nouvelle.
+	tooltip_name = tooltip_panel.find_child("ToolTipName", true, false) as RichTextLabel
+	tooltip_desc = tooltip_panel.find_child("ToolTipDesc", true, false) as RichTextLabel
+
+	_make_labels_grow(tooltip_name)
+	_make_labels_grow(tooltip_desc)
+
+	# Déjà recâblé (rechargement de scène, ou structure faite à la main).
+	if tooltip_panel.has_node("Margin"):
+		return
+
+	var vbox := tooltip_panel.get_node_or_null("VBoxContainer") as Control
+	if vbox == null:
+		push_warning("InventoryUI : VBoxContainer de l'infobulle introuvable, taille non adaptative.")
+		return
+
+	# Le cadre d'origine est un Sprite2D : on lui emprunte sa texture, puis
+	# on l'efface au profit du NinePatchRect.
+	var frame_tex: Texture2D = null
+	var old_box := tooltip_panel.get_node_or_null("UiConvoBox3") as Sprite2D
+	if old_box != null:
+		frame_tex = old_box.texture
+		old_box.visible = false
+
+	tooltip_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var backdrop := ColorRect.new()
+	backdrop.name = "Backdrop"
+	backdrop.color = tooltip_backdrop_color
+	backdrop.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	tooltip_panel.add_child(backdrop)
+	tooltip_panel.move_child(backdrop, 0)
+
+	if frame_tex != null:
+		var frame := NinePatchRect.new()
+		frame.name = "Frame"
+		frame.texture = frame_tex
+		frame.patch_margin_left = tooltip_frame_margin
+		frame.patch_margin_top = tooltip_frame_margin
+		frame.patch_margin_right = tooltip_frame_margin
+		frame.patch_margin_bottom = tooltip_frame_margin
+		frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		tooltip_panel.add_child(frame)
+		tooltip_panel.move_child(frame, 1)
+
+	var margin := MarginContainer.new()
+	margin.name = "Margin"
+	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	margin.add_theme_constant_override("margin_left", int(tooltip_padding.x))
+	margin.add_theme_constant_override("margin_right", int(tooltip_padding.x))
+	margin.add_theme_constant_override("margin_top", int(tooltip_padding.y))
+	margin.add_theme_constant_override("margin_bottom", int(tooltip_padding.y))
+	tooltip_panel.add_child(margin)
+
+	# Le VBox de la scène est déplacé tel quel sous la marge : polices,
+	# alignements et couleurs réglés dans l'éditeur sont conservés.
+	tooltip_panel.remove_child(vbox)
+	margin.add_child(vbox)
+
+
+## Un RichTextLabel ne grandit avec son texte que s'il a le droit de le
+## couper (autowrap) et de se dimensionner dessus (fit_content).
+func _make_labels_grow(label: RichTextLabel) -> void:
+	if label == null:
+		return
+	label.bbcode_enabled = true
+	label.fit_content = true
+	label.scroll_active = false
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.custom_minimum_size.y = 0.0
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+
 func show_tooltip(item: Equipment, cell_position: Vector2):
 	if item == null:
 		hide_tooltip()
 		return
+	# Si la scène n'expose pas les libellés attendus, on n'affiche rien
+	# plutôt que de planter sur une référence nulle.
+	if tooltip_name == null or tooltip_desc == null:
+		return
 
+	_tooltip_seq += 1
 	tooltip_name.text = item.name
+
+	# Les potions décrivent leurs effets, pas des bonus d'équipement.
+	if item is Potion:
+		var potion := item as Potion
+		tooltip_desc.bbcode_enabled = true
+		var txt := ""
+		if potion.description != "":
+			txt += "[i]%s[/i]\n" % potion.description
+		txt += potion.effects_bbcode()
+		txt += "\n[color=888888][i]Clic pour boire[/i][/color]"
+		tooltip_desc.text = txt
+		tooltip_panel.visible = true
+		_fit_and_place_tooltip(cell_position)
+		return
 
 
 
@@ -593,36 +967,63 @@ func show_tooltip(item: Equipment, cell_position: Vector2):
 		stats += "[color=AAAAAA]    Stress max: +%d[/color]\n" % item.Max_Guilt_bonus
 
 	tooltip_desc.bbcode_enabled = true
-	tooltip_desc.text = "  " + item.description if item.get("description") else "" + stats
+	# La description ET les stats. L'ancienne ligne était un ternaire mal
+	# parenthésé ("  " + desc if desc else "" + stats) : dès qu'un objet avait
+	# une description, ses bonus disparaissaient de l'infobulle.
+	var desc := ""
+	if item.description != "":
+		desc = "[i]%s[/i]\n" % item.description
+	tooltip_desc.text = desc + stats
 
 	tooltip_panel.visible = true
-	_reposition_tooltip(cell_position)
+	_fit_and_place_tooltip(cell_position)
 
 func startmenu():
 	gm.spawn_start_menu()
 	gm.current_room_node.queue_free()
 
 func hide_tooltip():
+	_tooltip_seq += 1
 	tooltip_panel.visible = false
 
+
+## Redimensionne l'infobulle sur son contenu, puis la place.
+## La largeur est fixe (tooltip_width) et les RichTextLabel sont en
+## `fit_content` + autowrap : leur hauteur minimale suit donc le texte, et
+## remettre `size.y` à 0 ramène le panneau pile à cette hauteur minimale —
+## c'est ce qui le fait aussi bien grandir que rapetisser.
+func _fit_and_place_tooltip(near: Vector2) -> void:
+	var seq := _tooltip_seq
+
+	# Largeur d'abord : c'est elle qui décide où le texte se coupe, donc la
+	# hauteur qu'il faudra. On laisse ensuite passer une frame pour que les
+	# labels recalculent leur hauteur avec cette largeur.
+	tooltip_panel.size = Vector2(tooltip_width, 0.0)
+	await get_tree().process_frame
+
+	# La souris est peut-être déjà repartie ailleurs entre-temps.
+	if seq != _tooltip_seq or not is_instance_valid(tooltip_panel):
+		return
+
+	tooltip_panel.size = Vector2(tooltip_width, 0.0)
+	_reposition_tooltip(near)
+
+
 func _reposition_tooltip(near: Vector2):
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	var tp_size: Vector2 = tooltip_panel.size
+	var margin := 12.0
+	var pos: Vector2 = near + Vector2(-16, 0)
 
+	# Déborde à droite → passer à gauche du slot.
+	# 136 = largeur slot (120) + marge (16).
+	if pos.x + tp_size.x > viewport_size.x - margin:
+		pos.x = near.x - tp_size.x - 136
 
-	var viewport_size = get_viewport().get_visible_rect().size
-	var tp_size = tooltip_panel.size
-	var pos = near + Vector2(-16, 0)
-
-	# Déborde à droite → passer à gauche du slot
-	if pos.x + tp_size.x+500 > viewport_size.x:
-		pos.x = near.x - tp_size.x - 136  # 136 = largeur slot (120) + marge (16)
-
-
-	# Déborde en bas → remonter
-	if pos.y + tp_size.y > viewport_size.y:
-		pos.y = viewport_size.y - tp_size.y - 8
-
-	# Déborde en haut (si tooltip très grand)
-	if pos.y < 0:
-		pos.y = 8
+	# Rabat dans l'écran. Le clamp porte sur la taille RÉELLE du panneau :
+	# maintenant qu'il grandit avec le texte, une longue description ne doit
+	# pas sortir par le bas.
+	pos.x = clamp(pos.x, margin, max(margin, viewport_size.x - tp_size.x - margin))
+	pos.y = clamp(pos.y, margin, max(margin, viewport_size.y - tp_size.y - margin))
 
 	tooltip_panel.global_position = pos

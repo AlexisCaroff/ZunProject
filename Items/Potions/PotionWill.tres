@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="Potion" load_steps=6 format=3 uid="uid://e44xg4hlvlih"]
+
+[ext_resource type="Script" uid="uid://b3n5n3cjlruiy" path="res://Items/ItemScripts/Potion.gd" id="1_potion"]
+[ext_resource type="Texture2D" uid="uid://c8u7i32d5usns" path="res://Items/ItemIcons/POTION_will.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://bkvdwvrmdt5aw" path="res://actions/skillEffects/Buff.gd" id="3_buff"]
+[ext_resource type="Texture2D" uid="uid://blaxr6boo4hkf" path="res://UI/buffDeff.png" id="4_buff_icon"]
+
+[sub_resource type="Resource" id="Resource_will_guard"]
+script = ExtResource("3_buff")
+name = "Garde de l'Esprit"
+description = "Volonte augmentee : la Lust et la Culpabilite mordent moins."
+icon = ExtResource("4_buff_icon")
+stat = 3
+amount = 6
+duration = 4
+
+[resource]
+script = ExtResource("1_potion")
+stack_id = "potion_will"
+origin_path = ""
+max_stack = 9
+heal_stamina = 0
+heal_lust = 10
+heal_guilt = 0
+buffs = Array[ExtResource("3_buff")]([SubResource("Resource_will_guard")])
+grants_extra_turn = false
+usable_out_of_combat = true
+usable_in_combat = true
+ends_turn_in_combat = true
+confirm_text = ""
+icon = ExtResource("2_icon")
+name = "Elixir de Volonte"
+description = "Amer, glacant, lucide. Emousse le desir et durcit l'esprit contre ce qui le tente."
+isCursed = false
+number = 1
+Max_stamina_bonus = 0
+Max_lust_bonus = 0
+Max_Guilt_bonus = 0
+attack_bonus = 0
+defense_bonus = 0
+willpower_bonus = 0
+evasion_bonus = 0
+initiative_bonus = 0
+peekbonus = 0
+global_cooldown_reduction = 0
+skill_specific_cooldown = Dictionary[String, int]({})

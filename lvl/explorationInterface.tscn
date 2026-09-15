@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://badg2cpqmlnim"]
+[gd_scene load_steps=47 format=3 uid="uid://badg2cpqmlnim"]
 
 [ext_resource type="Texture2D" uid="uid://cds1jgu4rdn1e" path="res://UI/UI boxes/UI_fgwall_inquisition.png" id="1_d8pyn"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="4_e2h3q"]
@@ -21,9 +21,9 @@
 [ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="20_afdbq"]
 [ext_resource type="Script" uid="uid://gljyiwavrmws" path="res://lvl/Hall1/explo_portrait.gd" id="21_573td"]
 [ext_resource type="Texture2D" uid="uid://bl6qdsm60pd37" path="res://UI/exploCharaselector.png" id="22_01cjh"]
+[ext_resource type="Texture2D" uid="uid://dh6k7cso8hksn" path="res://UI/UI boxes/charaIcon.png" id="23_eprqm"]
 [ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="23_h3qb4"]
 [ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="24_n6ie4"]
-[ext_resource type="Texture2D" uid="uid://53cn2wxevdr3" path="res://UI/menuiCON.png" id="26_iv2bx"]
 [ext_resource type="Script" uid="uid://cxgw24yv778d8" path="res://lvl/chara_portraitButton.gd" id="26_prpp8"]
 [ext_resource type="Texture2D" uid="uid://b54elep5kk5sm" path="res://UI/UI boxes/UI_combat_portrait_frame.png" id="28_eprqm"]
 [ext_resource type="Script" uid="uid://d35u47t7s0fv4" path="res://UI/UICombatItem.gd" id="29_ijfhg"]
@@ -32,6 +32,10 @@
 [ext_resource type="Texture2D" uid="uid://ckki2ygke5r3x" path="res://actions/actiontexture/UI icons/ICON_move.png" id="32_hwivl"]
 [ext_resource type="Texture2D" uid="uid://bufr3w56ilg6r" path="res://actions/actiontexture/UI icons/ICON_priestess_whip.png" id="33_d8pyn"]
 [ext_resource type="Script" uid="uid://bb01afuki8pgo" path="res://UI/buttonBasic.gd" id="34_iv2bx"]
+[ext_resource type="Script" uid="uid://cfbofx5pni87y" path="res://scripts/door/door_inventory.gd" id="35_exinv"]
+[ext_resource type="Texture2D" uid="uid://cd52c3qv1laol" path="res://UI/UI inventory/UI_inventory_box_pack.png" id="36_bagbox"]
+[ext_resource type="Texture2D" uid="uid://bnqsm6vdxfcwy" path="res://UI/UI boxes/UI_button_map_on.png" id="36_ersvk"]
+[ext_resource type="Texture2D" uid="uid://k8pjtttjj3t0" path="res://UI/UI inventory/UI_inventory_button_bag.png" id="37_bagicon"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qg4ur"]
 
@@ -440,12 +444,12 @@ layout_mode = 1
 self_modulate = Color(0.95, 0.779792, 0.5415, 1)
 z_index = 6
 layout_mode = 0
-offset_left = 1794.0
-offset_top = 752.0
-offset_right = 1873.0
-offset_bottom = 826.0
+offset_left = 32.0
+offset_top = 804.0
+offset_right = 111.0
+offset_bottom = 878.0
 scale = Vector2(0.680271, 0.695491)
-texture = ExtResource("26_iv2bx")
+texture = ExtResource("23_eprqm")
 expand_mode = 1
 script = ExtResource("26_prpp8")
 normal_color = Color(0.392157, 0.282353, 0.12549, 1)
@@ -732,6 +736,70 @@ script = ExtResource("34_iv2bx")
 position = Vector2(50, 52.98)
 scale = Vector2(0.831065, 0.866774)
 texture = ExtResource("32_hwivl")
+
+[node name="InventoryPanel" type="Control" parent="."]
+z_index = 8
+anchors_preset = 0
+offset_left = 1412.0
+offset_top = 776.0
+offset_right = 1902.0
+offset_bottom = 1068.0
+script = ExtResource("35_exinv")
+cell_size = Vector2(72, 72)
+cell_separation = 4
+
+[node name="Bg" type="TextureRect" parent="InventoryPanel"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -8.0
+offset_right = 500.0
+offset_bottom = 300.0
+texture = ExtResource("36_bagbox")
+expand_mode = 1
+
+[node name="Grid" type="GridContainer" parent="InventoryPanel"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 28.0
+offset_right = 433.0
+offset_bottom = 252.0
+columns = 5
+
+[node name="Tooltip" type="Label" parent="InventoryPanel"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 249.0
+offset_right = 450.0
+offset_bottom = 283.0
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="ToggleMapInventory" type="Button" parent="."]
+z_index = 10
+layout_mode = 0
+offset_left = 1790.0
+offset_top = 719.0
+offset_right = 1894.0
+offset_bottom = 823.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_sp77w")
+flat = true
+
+[node name="IconBag" type="Sprite2D" parent="ToggleMapInventory"]
+position = Vector2(52, 52)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("37_bagicon")
+
+[node name="UiButtonTargetOff" type="Sprite2D" parent="ToggleMapInventory/IconBag"]
+z_index = -1
+position = Vector2(1.99515, 4.85217)
+scale = Vector2(2.21487, 2.26929)
+texture = ExtResource("30_d8pyn")
+
+[node name="IconMapToggle" type="Sprite2D" parent="ToggleMapInventory"]
+visible = false
+position = Vector2(52, 52)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("36_ersvk")
 
 [connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]

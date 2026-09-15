@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://c66s1enb5m070"]
+[gd_scene load_steps=15 format=3 uid="uid://c66s1enb5m070"]
 
 [ext_resource type="Script" uid="uid://b2fldnbm4784m" path="res://InteractibleObjectsScenes/InteractableObject.gd" id="1_82peo"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="2_1uasi"]
 [ext_resource type="Resource" uid="uid://ciw7rc628eq41" path="res://Items/itemsRessources/keyRoom3.tres" id="2_08jjl"]
 [ext_resource type="Script" uid="uid://n028octb10a5" path="res://scripts/InteractableObjectResource.gd" id="2_ib46f"]
 [ext_resource type="Script" uid="uid://b5vho57xy7r3r" path="res://scripts/InteractableChoice.gd" id="3_1uasi"]
@@ -17,6 +18,9 @@ effect_type = 1
 item = ExtResource("2_08jjl")
 tag = ""
 opening = false
+loot_rolls = 1
+loot_chance = 1.0
+guaranteed_items = Array[ExtResource("2_1uasi")]([])
 metadata/_custom_type_script = "uid://b5vho57xy7r3r"
 
 [sub_resource type="Resource" id="Resource_drpdm"]
@@ -25,6 +29,9 @@ text = ""
 effect_type = 0
 tag = ""
 opening = false
+loot_rolls = 1
+loot_chance = 1.0
+guaranteed_items = Array[ExtResource("2_1uasi")]([])
 metadata/_custom_type_script = "uid://b5vho57xy7r3r"
 
 [sub_resource type="Resource" id="Resource_1uasi"]

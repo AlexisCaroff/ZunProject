@@ -24,8 +24,14 @@ func apply(theuser: CharaCamp, target: CharaCamp):
 	camp = user.camp
 	if not camp:
 		return
-		
-	
+
+	# Filet de securite : campement.gd ne rend deja ciblables que les allies
+	# compatibles, mais l'effet peut etre declenche par un autre chemin.
+	if not theuser.characterData.is_compatible_with(target.characterData):
+		print("💔 %s et %s ne sont pas attires l'un par l'autre." % [
+			theuser.characterData.Charaname, target.characterData.Charaname])
+		return
+
 	var file_path := ""
 	match target.characterData.Charaname:
 		"Priestess": file_path = dialoguePriest

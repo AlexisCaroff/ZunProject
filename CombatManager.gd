@@ -35,6 +35,13 @@ var combatChara = 	preload("res://characters/CombatChara.tscn")
 @export var cristal_texture = preload("res://UI/cristalIcon.png")
 @export var encounter: CombatEncounter
 
+# ── Butin aléatoire ──────────────────────────────────────────────────
+## Nombre de tirages dans la table globale du GameManager à la victoire.
+## -1 = la valeur réglée sur la table elle-même.
+@export var loot_bonus_rolls: int = -1
+## Chance qu'un tirage donne quelque chose. -1 = valeur de la table.
+@export_range(-1.0, 1.0, 0.05) var loot_drop_chance: float = -1.0
+
 #stat combat manager
 @onready var audio = $AudioStreamPlayer2D
 @onready var canvas =$"../CanvasLayer"
@@ -81,6 +88,9 @@ var _outlined_skill_button: Button = null
 
 
 func _ready():
+	# Point d'entrée pour les UI hors hiérarchie du combat : l'inventaire du
+	# menu perso doit savoir qui joue pour lui faire boire une potion.
+	add_to_group("combat_manager")
 	gm= get_tree().root.get_node("GameManager") as GameManager
 	cam = get_viewport().get_camera_2d()
 	for child in $"../HeroPosition".get_children():
@@ -553,6 +563,14 @@ func _show_victory():
 	if nb_crystaleloot >0:
 		encounter.loots.append(cristal_item)
 	gm = get_tree().root.get_node("GameManager") as GameManager
+
+	# ── Butin aléatoire (potions) ────────────────────────────────────
+	# Le butin fixe de la rencontre reste garanti ; la table globale du
+	# GameManager y ajoute ce qu'elle tire. `loot_bonus_rolls` permet à une
+	# rencontre (un boss) d'en tirer davantage.
+	for extra in gm.roll_loot(loot_bonus_rolls, loot_drop_chance):
+		encounter.loots.append(extra)
+
 	victory_ui.showLoot(encounter.loots, gm)
 
 	gm.current_room_Ressource.ennemikilled=true

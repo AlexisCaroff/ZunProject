@@ -232,6 +232,17 @@ func show_chara_actions(thechara: CharaCamp):
 		
 		
 		
+## Vrai si ce camp skill mene a une scene d'amour : c'est le seul cas ou
+## l'attirance filtre les cibles.
+func _skill_is_romantic(skill: CampSkill) -> bool:
+	if skill == null:
+		return false
+	for effect in skill.effects:
+		if effect is CampLoveEffect:
+			return true
+	return false
+
+
 func _on_camp_skill_pressed(skill: CampSkill, user: CharaCamp) -> void:
 	# Exemple d'utilisation simple selon le target_type
 	
@@ -249,8 +260,13 @@ func _on_camp_skill_pressed(skill: CampSkill, user: CharaCamp) -> void:
 			user.set_targetable(true)
 		CampSkill.TargetType.ALLY:
 			# ouvrir une UI de sélection de cible (à implémenter) ; pour l'instant on choisit le premier allié valide
+			# Un skill romantique ne peut viser que les allies dont l'attirance
+			# est reciproque (tiree en debut de partie par TasteRollMenu).
+			var romantic := _skill_is_romantic(skill)
 			for c in characters:
 				if c is CharaCamp and c != user:
+					if romantic and not user.characterData.is_compatible_with(c.characterData):
+						continue
 					c.set_targetable(true)
 
 		CampSkill.TargetType.ALL_ALLIES:

@@ -321,10 +321,24 @@ func _capture_character(cd: CharacterData) -> Dictionary:
 	for s in cd.camp_skill_resources:
 		camp_used.append(s.used if s != null else false)
 
+	# Buffs en attente (potion bue hors combat, camp skill…) : Character._ready()
+	# les rejoue au début du prochain combat. Sans ça, une potion bue puis une
+	# sauvegarde = effet perdu.
+	var pending_buffs := []
+	for b in cd.buffs:
+		if b != null:
+			pending_buffs.append(_capture_buff(b))
+
 	return {
 		"path": cd.resource_path,
 		"charaname": cd.Charaname,
 		"chara_position": cd.Chara_position,
+		"pending_buffs": pending_buffs,
+		"acte_twice": cd.acte_twice,
+		# Tirée une fois par partie par TasteRollMenu : sans ça, un chargement
+		# ramènerait l'attirance réglée dans le .tres.
+		"attracted_to_feminine": cd.attracted_to_feminine,
+		"attracted_to_masculine": cd.attracted_to_masculine,
 		"current_stamina": cd.current_stamina,
 		"current_stress": cd.current_stress,
 		"current_horniness": cd.current_horniness,
@@ -365,10 +379,49 @@ func _capture_room(room: RoomResource) -> Dictionary:
 	return d
 
 
+## Un Buff est toujours une copie (Character.add_buff duplique) : on
+## sérialise ses champs. Le .tres d'origine n'est pas retrouvable.
+func _capture_buff(b: Buff) -> Dictionary:
+	return {
+		"name": b.name,
+		"description": b.description,
+		"icon": b.icon.resource_path if b.icon != null else "",
+		"stat": b.stat,
+		"amount": b.amount,
+		"duration": b.duration,
+	}
+
+
+func _restore_buff(entry) -> Buff:
+	if typeof(entry) != TYPE_DICTIONARY:
+		return null
+	var b := Buff.new()
+	b.name        = str(entry.get("name", "Buff"))
+	b.description = str(entry.get("description", ""))
+	b.stat        = _as_int(entry.get("stat", Buff.Stat.ATTACK))
+	b.amount      = _as_int(entry.get("amount", 0))
+	b.duration    = _as_int(entry.get("duration", 1))
+	b.icon        = Utils.load_texture(str(entry.get("icon", "")))
+	return b
+
+
 ## Un Equipment issu d'un .tres est référencé par son chemin. Ceux créés à
 ## l'exécution (cristaux de victoire, cf. CombatManager._show_victory) n'ont
 ## pas de resource_path : leurs champs sont sérialisés tels quels.
 func _capture_equipment(eq: Equipment) -> Dictionary:
+	# Une potion en inventaire est TOUJOURS une copie du .tres (sinon la
+	# quantité muterait la ressource partagée) : on sauvegarde le chemin
+	# d'origine plus la taille de la pile.
+	if eq is Potion:
+		var potion: Potion = eq as Potion
+		var src := potion.origin_path if potion.origin_path != "" else potion.resource_path
+		if src != "":
+			return {
+				"potion": true,
+				"path": src,
+				"number": potion.number,
+			}
+
 	if eq.resource_path != "":
 		return {"path": eq.resource_path}
 	return {
@@ -462,6 +515,23 @@ func _find_character_entry(entries: Array, cd: CharacterData, index: int) -> Dic
 
 func _apply_character(cd: CharacterData, d: Dictionary) -> void:
 	cd.Chara_position   = _as_int(d.get("chara_position", cd.Chara_position))
+
+	# _reset_transient() a vidé buffs et acte_twice juste avant : on remet les
+	# effets en attente (potion bue hors combat, camp skill du chasseur…).
+	cd.buffs.clear()
+	for entry in d.get("pending_buffs", []):
+		var b := _restore_buff(entry)
+		if b != null:
+			cd.buffs.append(b)
+	cd.acte_twice = _as_bool(d.get("acte_twice", false))
+
+	# Attirance tirée au début de la partie. Une sauvegarde d'avant cette
+	# fonctionnalité n'a pas les clés : on garde alors ce que dit le .tres.
+	cd.set_taste(
+		_as_bool(d.get("attracted_to_feminine", cd.attracted_to_feminine)),
+		_as_bool(d.get("attracted_to_masculine", cd.attracted_to_masculine))
+	)
+
 	cd.corruption       = _as_int(d.get("corruption", 0))
 	cd.corrupted        = _as_bool(d.get("corrupted", false))
 	cd.inquisition      = _as_bool(d.get("inquisition", false))
@@ -560,6 +630,11 @@ func _restore_equipment(entry) -> Equipment:
 		# load() renvoie l'instance partagée du cache : l'identité est préservée,
 		# ce dont dépendent gm.inventory.find() et has() dans InventoryUI.
 		var res = load(path)
+
+		# Une potion redevient une copie indépendante, avec sa quantité.
+		if entry.get("potion", false) and res is Potion:
+			return Potion.make(res as Potion, _as_int(entry.get("number", 1)))
+
 		return res if res is Equipment else null
 
 	var eq := Equipment.new()

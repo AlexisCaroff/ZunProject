@@ -536,10 +536,30 @@ func _tween_chara(node: CharaExplo, pos: Vector2, sc: Vector2, duration: float =
 # ════════════════════════════════════════════════════════════════════
 
 func _setup_map_inventory_toggle() -> void:
+	# Le sac doit savoir a qui profitent les potions bues depuis ici, et la
+	# fiche du personnage doit se rafraichir juste apres. Ce cablage ne
+	# depend pas du bouton de bascule : on le fait avant d'en sortir.
+	if inventory_panel != null:
+		inventory_panel.set_target_provider(func(): return selected_character)
+		if not inventory_panel.potion_used.is_connected(_on_potion_used):
+			inventory_panel.potion_used.connect(_on_potion_used)
+
 	if toggle_button == null:
 		return
 	toggle_button.pressed.connect(_on_toggle_map_inventory)
 	_apply_map_inventory_view()
+
+
+## Une potion vient d'etre bue depuis le sac : la fiche du personnage est
+## resynchronisee. On n'appelle PAS update_display() sur la silhouette : dans
+## la scene porte elle n'a pas de charaUI, donc pas de jauges a mettre a jour.
+func _on_potion_used(_potion, target: CharacterData) -> void:
+	if selected_character == target:
+		# selectCharacter reecrit tous les labels et toutes les jauges.
+		var keep_move := move_mode
+		move_mode = false
+		selectCharacter(target)
+		move_mode = keep_move
 
 
 func _on_toggle_map_inventory() -> void:

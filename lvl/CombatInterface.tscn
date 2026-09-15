@@ -37,7 +37,7 @@
 [ext_resource type="Shader" uid="uid://byep7wpo3y12v" path="res://characters/character_outline.gdshader" id="32_8up0w"]
 [ext_resource type="Script" uid="uid://bqnn7n8kuofir" path="res://UI/buttonSkipCombat.gd" id="32_a5bh2"]
 [ext_resource type="Script" uid="uid://dpfgacyh24syl" path="res://lvl/Hall1/overmenu.gd" id="34_ty8ym"]
-[ext_resource type="Texture2D" uid="uid://dh6k7cso8hksn" path="res://UI/charaIcon.png" id="35_5xk2w"]
+[ext_resource type="Texture2D" uid="uid://dh6k7cso8hksn" path="res://UI/UI boxes/charaIcon.png" id="35_5xk2w"]
 [ext_resource type="Texture2D" uid="uid://d03vlqaa471uv" path="res://UI/UI boxes/UI_convo_box2.png" id="37_hg6i8"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="38_rmchm"]
 [ext_resource type="Texture2D" uid="uid://cfoht4c53xv8e" path="res://UI/ennemiturn.png" id="40_qn3ef"]

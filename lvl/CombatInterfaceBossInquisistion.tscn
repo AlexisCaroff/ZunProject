@@ -34,7 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="33_8iu7i"]
 [ext_resource type="Script" uid="uid://cxgw24yv778d8" path="res://lvl/chara_portraitButton.gd" id="34_lb130"]
 [ext_resource type="Script" uid="uid://dpfgacyh24syl" path="res://lvl/Hall1/overmenu.gd" id="35_r7ice"]
-[ext_resource type="Texture2D" uid="uid://dh6k7cso8hksn" path="res://UI/charaIcon.png" id="36_84abj"]
+[ext_resource type="Texture2D" uid="uid://dh6k7cso8hksn" path="res://UI/UI boxes/charaIcon.png" id="36_84abj"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="37_hdckd"]
 [ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="38_ognea"]
 [ext_resource type="Texture2D" uid="uid://bpgas6hnffbe0" path="res://UI/sideButton.png" id="39_v5mui"]
