@@ -23,6 +23,8 @@ const INACTIVE := Color(0.55, 0.55, 0.55, 1)
 ## Noms des icônes présentes selon les scènes. La première trouvée porte
 ## l'icône du bouton ; les autres sont masquées.
 const ICON_NAMES := ["IconBag", "IconMap", "IconMapToggle"]
+## Cadre posé sous l'icône quand le bouton n'en a pas déjà un.
+const BOX_TEX := preload("res://UI/UI boxes/UI_combat_itembox.png")
 
 
 ## Dédouble `toggle`. `spacing` = distance entre les deux boutons, dans le
@@ -40,11 +42,17 @@ static func split(toggle: Button, map_tex: Texture2D, bag_tex: Texture2D,
 	bag.name = "ButtonBag"
 	bag.offset_left -= spacing
 	bag.offset_right -= spacing
-	toggle.get_parent().add_child(bag)
-	toggle.get_parent().move_child(bag, toggle.get_index())
+	# Ajout différé : split() est souvent appelé depuis un _ready(), quand le
+	# parent est encore occupé à ajouter ses enfants — un add_child direct
+	# échoue alors en silence et le bouton sac n'apparaît jamais.
+	var parent := toggle.get_parent()
+	parent.add_child.call_deferred(bag)
+	parent.move_child.call_deferred(bag, toggle.get_index())
 
 	_set_icon(toggle, map_tex)
 	_set_icon(bag, bag_tex)
+	add_hover(toggle)
+	add_hover(bag)
 	toggle.tooltip_text = "Map"
 	bag.tooltip_text = "Party bag"
 	return {"map": toggle, "bag": bag}
@@ -68,6 +76,38 @@ static func raise(pair: Dictionary, z: int) -> void:
 		if is_instance_valid(b):
 			b.z_as_relative = false
 			b.z_index = z
+
+
+## Donne un cadre au bouton s'il n'en porte pas déjà un (même cadre que les
+## cases d'objet). `size_px` = côté du cadre, dans le repère du bouton.
+static func ensure_box(button: Button, size_px: float = 81.0) -> void:
+	for n in button.find_children("*", "Sprite2D", true, false):
+		if (n as Sprite2D).texture == BOX_TEX:
+			return
+	var box := Sprite2D.new()
+	box.name = "Box"
+	box.texture = BOX_TEX
+	box.show_behind_parent = true
+	# Offsets et non `size` : le bouton sac n'est pas encore dans l'arbre.
+	box.position = Vector2(button.offset_right - button.offset_left,
+			button.offset_bottom - button.offset_top) * 0.5
+	box.scale = Vector2.ONE * (size_px / float(BOX_TEX.get_width()))
+	button.add_child(box)
+	button.move_child(box, 0)
+
+
+## Léger grossissement au survol, comme les boutons du combat. Un bouton
+## qui porte déjà lvl/button.gd (combat) a le sien : on n'y touche pas.
+static func add_hover(button: Button, factor: float = 1.15) -> void:
+	if "hover_scale" in button:
+		return
+	var rest := button.scale
+	button.pivot_offset = Vector2(button.offset_right - button.offset_left,
+			button.offset_bottom - button.offset_top) * 0.5
+	button.mouse_entered.connect(func():
+		button.create_tween().tween_property(button, "scale", rest * factor, 0.15) 				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT))
+	button.mouse_exited.connect(func():
+		button.create_tween().tween_property(button, "scale", rest, 0.15) 				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT))
 
 
 static func _texture_of(button: Button, names: Array) -> Texture2D:

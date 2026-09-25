@@ -389,10 +389,18 @@ func _setup_bag(gm: GameManager) -> void:
 	# Au-dessus du panneau du sac (z 9) : sinon, sac ouvert, les boutons
 	# passaient dessous. Le bouton fiche personnage voisin suit le même rang.
 	MapBagButtons.raise(map_bag_buttons, 10)
-	var chara_info := get_node_or_null("CanvasLayer/ContourMap/ButtonCharainfo") as CanvasItem
+	# L'icône carte du combat porte son cadre dans l'image ; celle du sac
+	# non. Cadre ajouté à la taille de l'icône carte (256 px × 0.38).
+	MapBagButtons.ensure_box(map_bag_buttons.bag, 97.0)
+	var chara_info := get_node_or_null("CanvasLayer/ContourMap/ButtonCharainfo") as Button
 	if chara_info != null:
 		chara_info.z_as_relative = false
 		chara_info.z_index = 10
+		map_bag_buttons["chara"] = chara_info
+		# Fiche personnage (overmenu.gd l'affiche) : le sac se referme.
+		chara_info.button_down.connect(func():
+			showing_inventory = false
+			_apply_map_inventory_view())
 
 	# Un objet ramassé pendant que le sac est ouvert doit s'y afficher.
 	if gm != null and not gm.inventory_changed.is_connected(_on_bag_inventory_changed):
@@ -431,4 +439,15 @@ func _apply_map_inventory_view() -> void:
 			var gm := get_tree().root.get_node_or_null("GameManager") as GameManager
 			if gm != null:
 				inventory_panel.refresh(gm.inventory)
+	# Trois vues dans le même coin : carte, sac, fiche personnage.
+	var overmenu := get_node_or_null("CanvasLayer/overmenu") as CanvasItem
+	if overmenu != null and showing_inventory:
+		overmenu.visible = false
 	MapBagButtons.set_active(map_bag_buttons, showing_inventory)
+	var chara_btn := map_bag_buttons.get("chara") as CanvasItem
+	if chara_btn != null and overmenu != null:
+		# Le bouton de la vue affichée est allumé, les autres grisés.
+		var chara_shown := overmenu.visible and not showing_inventory
+		chara_btn.modulate = MapBagButtons.ACTIVE if chara_shown else MapBagButtons.INACTIVE
+		if chara_shown:
+			(map_bag_buttons.map as CanvasItem).modulate = MapBagButtons.INACTIVE

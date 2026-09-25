@@ -643,6 +643,13 @@ func _setup_map_inventory_toggle() -> void:
 	if toggle_button == null:
 		return
 	map_bag_buttons = MapBagButtons.split(toggle_button, null, null, 88.0)
+	# L'ancien fond (IconMap) est une icône de carte AVEC son cadre : il ne
+	# peut servir qu'à un bouton. On le retire et chaque bouton reçoit son
+	# propre cadre, comme en exploration.
+	if icon_map != null:
+		icon_map.visible = false
+	MapBagButtons.ensure_box(map_bag_buttons.map)
+	MapBagButtons.ensure_box(map_bag_buttons.bag)
 	map_bag_buttons.map.pressed.connect(_show_inventory.bind(false))
 	map_bag_buttons.bag.pressed.connect(_show_inventory.bind(true))
 	_apply_map_inventory_view()
@@ -677,8 +684,6 @@ func _apply_map_inventory_view() -> void:
 		map_container.visible = not showing_inventory
 	if contour_map:
 		contour_map.visible = not showing_inventory
-	if icon_map:
-		icon_map.visible = not showing_inventory
 	if inventory_panel:
 		inventory_panel.visible = showing_inventory
 		if showing_inventory and Game_Manager != null:
