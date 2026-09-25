@@ -82,41 +82,66 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 		if front_targets.is_empty():
 			front_targets = targets
 
+		var swallow: Skill = null
 		if not SwallowEffect.is_holding(owner):
-			var swallow := _find(usable, swallow_skill_name)
-			if swallow != null and randf() < swallow_chance:
-				var prey := _pick_swallowable(front_targets)
-				if prey != null:
-					return {"skill": swallow, "target": [prey] as Array[PositionSlot]}
+			swallow = _find(usable, swallow_skill_name)
+		var prey := _pick_swallowable(front_targets) if swallow != null else null
+
+		if prey != null and randf() < swallow_chance:
+			return {"skill": swallow, "target": [prey] as Array[PositionSlot]}
 
 		var melee := _find(usable, melee_skill_name)
 		if melee != null:
 			var hit: PositionSlot = front_targets[randi() % front_targets.size()]
 			return {"skill": melee, "target": [hit] as Array[PositionSlot]}
 
+		var spray_front := _find(usable, spray_skill_name)
+		if spray_front != null:
+			return {"skill": spray_front, "target": targets}
+
+		# Rien d'autre à faire au contact : on avale plutôt que de bouger.
+		# Une pile en première ligne est déjà là où elle doit être.
+		if prey != null:
+			return {"skill": swallow, "target": [prey] as Array[PositionSlot]}
+		return {}
+
 	# ── 3. À distance : crachat de zone ──────────────────────────────
 	var spray := _find(usable, spray_skill_name)
 	if spray != null:
 		return {"skill": spray, "target": targets}
 
-	# ── 4. Dernier recours ───────────────────────────────────────────
+	# ── 4. En arrière sans crachat : revenir au contact ──────────────
 	# On ne retombe PAS sur AiBrain.decide_action : le pool générique
 	# pourrait tirer la digestion alors qu'aucun héros n'est avalé, et
 	# DamageEffectGrab planterait sur un CharaGrab nul.
-	var fallback := _find(usable, melee_skill_name)
-	if fallback != null:
-		var hit2: PositionSlot = targets[randi() % targets.size()]
-		return {"skill": fallback, "target": [hit2] as Array[PositionSlot]}
-
 	var move := _find(usable, "move")
 	if move != null:
-		var free := cm.enemy_positions.filter(
-			func(p: PositionSlot) -> bool: return not p.is_occupied())
-		if not free.is_empty():
-			var dest: PositionSlot = free[randi() % free.size()]
+		var dest := _front_destination(cm, owner)
+		if dest != null:
 			return {"skill": move, "target": [dest] as Array[PositionSlot]}
 
 	return {}
+
+
+## Slot de première ligne où aller : un libre de préférence, sinon celui
+## d'un allié déplaçable (Move.gd fait alors l'échange). Seuls les quatre
+## vrais slots comptent — le 5e est le slot « capturé », dont l'occupant
+## n'est pas déclaré alors qu'un héros avalé y est affiché.
+func _front_destination(cm: CombatManager, owner: Character) -> PositionSlot:
+	var pool: Array = cm.enemy_positions.slice(0, 4)
+	var free := pool.filter(func(p: PositionSlot) -> bool:
+		return p.position_data.isFront and not p.is_occupied())
+	if not free.is_empty():
+		return free[randi() % free.size()]
+	var swaps := pool.filter(func(p: PositionSlot) -> bool:
+		return p.position_data.isFront and p.is_occupied() \
+			and p.occupant != owner and not p.occupant.is_dead() \
+			and p.occupant.characterData.can_be_moved \
+			and not p.occupant.characterData.immobilized \
+			and not cm._is_anchored(p.occupant))
+	if not swaps.is_empty():
+		return swaps[randi() % swaps.size()]
+	return null
 
 
 # ─────────────────────────────────────────────────────────────
