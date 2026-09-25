@@ -231,7 +231,7 @@ func update_buffs() -> void:
 		buff.duration -= 1
 		if buff.duration <= 0:
 			remove_buff_at(i)
-		else:
+		elif i < buff_icons.size() and is_instance_valid(buff_icons[i]):
 			buff_icons[i].refresh()
 	# precision et immobilized sont recalculés par update_stats() via apply_to()
 	update_stats()
@@ -240,10 +240,43 @@ func update_buffs() -> void:
 func remove_buff_at(index: int):
 	var buff = buffs[index]
 	buffs.remove_at(index)
-	var icon = buff_icons[index]
-	buff_icons.remove_at(index)
-	icon.queue_free()
+	if index < buff_icons.size():
+		var icon = buff_icons[index]
+		buff_icons.remove_at(index)
+		# L'icône a pu être libérée ailleurs (ancienne version du nettoyage
+		# des morts) : on ne la libère qu'une fois.
+		if is_instance_valid(icon):
+			icon.queue_free()
 	print("remove buff " + buff.name)
+
+
+## Les icônes de buff vivent dans la BuffBar du SLOT, pas dans le
+## personnage. Quand il change de slot (avancée, échange), elles doivent le
+## suivre : restées dans l'ancienne barre, elles s'affichaient sous le
+## mauvais personnage et étaient libérées avec lui.
+func attach_buff_bar(new_bar: HBoxContainer) -> void:
+	if new_bar == null or new_bar == buff_bar:
+		return
+	for icon in buff_icons:
+		if is_instance_valid(icon):
+			icon.reparent(new_bar, false)
+	buff_bar = new_bar
+	# La barre d'un slot a pu être masquée par l'animation d'attaque de son
+	# précédent occupant (animate_attack la cache, after_skilluse ne réaffiche
+	# que la barre ACTUELLE de la cible). Sa visibilité suit donc celle de
+	# son nouveau propriétaire : visible, sauf s'il est lui-même en pleine
+	# animation — after_skilluse la rallumera.
+	# On ne touche pas à l'ancienne barre : lors d'un échange, elle devient
+	# celle de l'autre personnage, qui règle lui-même sa visibilité.
+	new_bar.visible = not (attacking or getattacked)
+
+
+## Libère les icônes de CE personnage uniquement (mort, fuite…).
+func clear_buff_icons() -> void:
+	for icon in buff_icons:
+		if is_instance_valid(icon):
+			icon.queue_free()
+	buff_icons.clear()
 
 
 func get_stat(stat_enum: int) -> int:
@@ -483,7 +516,7 @@ func take_damage(source: Character, stat: int, amount: int, typeMagic: bool, ski
 	for buff in buffs:
 		if buff.name == "Target":
 			combat_manager.pending_skill.reducecost = buff.amount
-	sprite.texture = characterData.Hit_texture
+	_show_hit_texture()
 
 	match stat:
 		DamageEffect.Stat.STAMINA:
@@ -612,6 +645,22 @@ func get_affinity(target: Character) -> int:
 #  VISUEL / RESET
 # ═══════════════════════════════════════════════════════════
 
+## Fatigué = stamina à 0 : le personnage reste affalé sur son sprite
+## « dead portrait », même quand on le frappe.
+func is_tired() -> bool:
+	return characterData != null and characterData.current_stamina <= 0
+
+
+## Sprite « touché », sauf pour un personnage fatigué qui garde son sprite
+## « dead portrait » pendant qu'on le frappe.
+func _show_hit_texture() -> void:
+	if is_tired():
+		if characterData.dead_portrait_texture != null:
+			sprite.texture = characterData.dead_portrait_texture
+		return
+	sprite.texture = characterData.Hit_texture
+
+
 func resetVisuel():
 	sprite.modulate = CharaColor
 	if _current_slot and not attacking and not getattacked:
@@ -666,7 +715,7 @@ func animate_start_Turn():
 
 func animate_get_horny(damage: int, source: Character = null):
 	emit_signal("skill_animation_started")
-	sprite.texture       = characterData.Hit_texture
+	_show_hit_texture()
 	var effect_instance  = HornyEffectScene.instantiate()
 	get_tree().current_scene.add_child(effect_instance)
 	effect_instance.global_position = global_position + Vector2(0, -30)
@@ -679,7 +728,8 @@ func animate_get_horny(damage: int, source: Character = null):
 		tween.tween_property(self, "scale", big_size,  0.2)
 		tween.tween_property(self, "scale", norm_size, 0.2)
 		await tween.finished
-		sprite.texture = characterData.portrait_texture
+		if not is_tired():
+			sprite.texture = characterData.portrait_texture
 	emit_signal("skill_animation_finished")
 
 
@@ -1025,6 +1075,8 @@ func after_skilluse(targets: Array) -> void:
 			tgt.scale   = tgt._current_slot.position_data.scale
 		if tgt.characterData.current_stamina > 0:
 			tgt.sprite.texture   = tgt.characterData.portrait_texture
+		elif tgt.characterData.dead_portrait_texture != null:
+			tgt.sprite.texture   = tgt.characterData.dead_portrait_texture
 
 	emit_signal("skill_animation_finished")
 

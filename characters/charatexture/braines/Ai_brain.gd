@@ -114,6 +114,9 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 
 	# ── Move : cible un slot ennemi selon la position requise par sa skill principale ──
 	if skill.name == "move":
+		# Le 5e slot ennemi est le slot « capturé » du boss (grab) : jamais une
+		# destination de déplacement.
+		var move_pool: Array = ennemisPositions.slice(0, 4)
 		var move_target_slots: Array = []
 		# Cherche la première skill d'attaque pour connaître la position requise
 		var attack_skill: Skill = null
@@ -125,21 +128,38 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 		if attack_skill != null:
 			match attack_skill.required_position:
 				attack_skill.position_requirement.FRONT:
-					move_target_slots = ennemisPositions.filter(
+					move_target_slots = move_pool.filter(
 						func(p: PositionSlot) -> bool: return p.position_data.isFront and not p.is_occupied()
 					)
 				attack_skill.position_requirement.BACK:
-					move_target_slots = ennemisPositions.filter(
+					move_target_slots = move_pool.filter(
 						func(p: PositionSlot) -> bool: return not p.position_data.isFront and not p.is_occupied()
 					)
 				_:  # ANY
-					move_target_slots = ennemisPositions.filter(
+					move_target_slots = move_pool.filter(
 						func(p: PositionSlot) -> bool: return not p.is_occupied()
 					)
 
+		# Rangée voulue pleine (typiquement : repoussé à l'arrière, celui qui a
+		# pris sa place occupe l'avant) → échange avec un allié de cette
+		# rangée. Move.gd gère l'échange quand le slot visé est occupé.
+		if move_target_slots.is_empty() and attack_skill != null \
+				and attack_skill.required_position != attack_skill.position_requirement.ANY:
+			var want_front: bool = attack_skill.required_position == attack_skill.position_requirement.FRONT
+			if owner._current_slot.position_data.isFront != want_front:
+				move_target_slots = move_pool.filter(func(p: PositionSlot) -> bool:
+					return p.position_data.isFront == want_front \
+						and p.is_occupied() \
+						and p.occupant != owner \
+						and not p.occupant.is_dead() \
+						and p.occupant.characterData.can_be_moved \
+						and not p.occupant.characterData.immobilized \
+						and not combat_manager._is_anchored(p.occupant)
+				)
+
 		# Fallback : n'importe quel slot libre
 		if move_target_slots.is_empty():
-			move_target_slots = ennemisPositions.filter(func(p: PositionSlot) -> bool: return not p.is_occupied())
+			move_target_slots = move_pool.filter(func(p: PositionSlot) -> bool: return not p.is_occupied())
 
 		if move_target_slots.is_empty():
 			print("%s veut se déplacer mais aucun slot libre." % owner.characterData.Charaname)

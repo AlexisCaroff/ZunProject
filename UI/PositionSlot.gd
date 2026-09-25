@@ -49,6 +49,7 @@ func assign_character(character: Character, movetime:float):
 		print("charaUI is null")
 	occupant.hornyJauge =CharaUI.HornyBar
 	occupant.hp_Jauge=CharaUI.HPProgressBar
+	occupant.attach_buff_bar(CharaUI.get_buff_bar())
 
 	occupant.dotsActions = CharaUI.actionpoints
 	occupant.z_index=self.z_index

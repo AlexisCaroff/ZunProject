@@ -505,8 +505,9 @@ func _check_victory():
 						pos.assign_character(enemy.CharaGrab, 0.3)
 			if enemy._current_slot:
 				enemy._current_slot.remove_character()
-			for child in enemy.buff_bar.get_children():
-				child.queue_free()
+			# Seulement SES icônes : la barre appartient au slot, un autre
+			# personnage peut y avoir les siennes.
+			enemy.clear_buff_icons()
 			# Un non-démon vaincu se ramène ligoté. On le compte ICI, juste
 			# avant de le retirer : à la victoire il ne serait plus dans la
 			# liste. Les démons, eux, donnent un cristal.
@@ -550,8 +551,7 @@ func _check_defeat():
 				ally._current_slot.remove_character()
 			ScreenLooseChara.visible = true
 			pause = true
-			for child in ally.buff_bar.get_children():
-				child.queue_free()
+			ally.clear_buff_icons()
 			heroes.erase(ally)
 			ally.queue_free()
 	await _check_frontline_advance() 
@@ -870,15 +870,29 @@ func _check_frontline_advance() -> void:
 	_advance_group_if_front_empty(hero_positions, heroes)
 	_advance_group_if_front_empty(enemy_positions, enemies)
 
+## Boss qui garde sa place quoi qu'il arrive. Mommy est posée sur deux slots
+## arrière (cf. le spawn des ennemis) : l'avancer la décalait à l'écran et
+## la mettait en front, où Mommy Grab (réservé au back) devient inutilisable.
+func _is_anchored(character: Character) -> bool:
+	return is_instance_valid(character) and character.characterData != null \
+			and character.characterData.Charaname == "Mommy"
+
+
 func _advance_group_if_front_empty(positions: Array[PositionSlot], group: Array[Character]) -> void:
 	# Vérifie si au moins une position front existe et est vide
 	var front_slots: Array[PositionSlot] = []
 	var back_slots_occupied: Array[PositionSlot] = []
 
+	var seen: Array[Character] = []
 	for slot in positions:
 		if slot.position_data.isFront:
 			front_slots.append(slot)
 		elif slot.occupant != null:
+			# Un boss ancré ne quitte jamais sa place, et un personnage qui
+			# occupe deux slots (Mommy) ne doit être compté qu'une fois.
+			if _is_anchored(slot.occupant) or slot.occupant in seen:
+				continue
+			seen.append(slot.occupant)
 			back_slots_occupied.append(slot)
 
 	# Y a-t-il encore quelqu'un en front ?

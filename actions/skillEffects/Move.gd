@@ -13,6 +13,14 @@ func apply(user: Character, target: PositionSlot) -> void:
  
 	var Chartarget := target.occupant
 	if Chartarget == null:
+		# Slot vide (choix de l'IA) : le lanceur s'y rend seul. Son ancien
+		# slot est libéré d'abord, sinon il resterait marqué occupé.
+		var old_slot: PositionSlot = user._current_slot
+		if old_slot == null or old_slot == target:
+			return
+		print("Move %s to empty slot %s" % [user.characterData.Charaname, target.name])
+		old_slot.remove_character()
+		user.combat_manager.move_character_to(user, target, 0.5)
 		return
 	if Chartarget.characterData.immobilized:
 		if target != user._current_slot:

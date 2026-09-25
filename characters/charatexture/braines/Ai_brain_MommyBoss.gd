@@ -118,6 +118,14 @@ func _fallback_attack(owner: Character, heroes: Array, enemies: Array) -> Dictio
 		return true
 	)
 
+	# Charme en recharge : plutôt que de passer son tour, Mommy se rabat sur
+	# ce que les tirages au sort de decide_action() n'ont pas retenu —
+	# invoquer si un slot est libre, sinon attraper si personne ne l'est.
+	if attack_skills.is_empty():
+		var backup := _backup_action(owner, heroes)
+		if not backup.is_empty():
+			return backup
+
 	# Dernier recours : "move" si rien d'autre
 	if attack_skills.is_empty():
 		attack_skills = owner.skills.filter(func(s: Skill) -> bool:
@@ -178,6 +186,31 @@ func _fallback_attack(owner: Character, heroes: Array, enemies: Array) -> Dictio
 		target = possible_targets[randi() % possible_targets.size()]
 
 	return {"skill": skill, "target": [target._current_slot] as Array[PositionSlot]}
+
+
+## Spawn puis grab, sans les pourcentages de decide_action(). Vide si aucun
+## des deux n'est possible.
+func _backup_action(owner: Character, heroes: Array) -> Dictionary:
+	var cm := owner.combat_manager
+	var usable := owner.skills.filter(func(s): return s.can_use())
+
+	var spawns := usable.filter(func(s): return s.Actiontype == "spawn" and not _is_tentacle_skill(s))
+	var free_slot := _find_free_enemy_slot(cm)
+	if not spawns.is_empty() and free_slot != null:
+		print("👾 Mommy (charme en recharge) spawn en ", free_slot.name)
+		return {"skill": spawns.pick_random(), "target": [free_slot] as Array[PositionSlot]}
+
+	var grabs := usable.filter(func(s): return s.name == "Mommy Grab")
+	if not grabs.is_empty() and not _has_living_tentacle_in_combat(cm):
+		var targets := heroes.filter(func(c: Character) -> bool:
+			return not c.is_dead() and not c.characterData.grab \
+				and c.characterData.current_horniness < 100)
+		if not targets.is_empty():
+			var target: Character = targets.pick_random()
+			print("🤲 Mommy (charme en recharge) grab sur ", target.characterData.Charaname)
+			return {"skill": grabs.pick_random(), "target": [target._current_slot] as Array[PositionSlot]}
+
+	return {}
 
 
 ## Premier slot ennemi libre hors [3] (tentacule) et [4] (grab).

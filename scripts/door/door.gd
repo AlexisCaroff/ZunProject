@@ -52,6 +52,17 @@ var animation: bool=false
 @onready var PeekBonus =$"../PeekBonus"
 @onready var return_button : Button=$"../Return"
 
+# ── Fiche du personnage sélectionné (portrait + objets, comme en combat) ──
+# Tous optionnels : door53 et BlockeddoorSalon2 ont leur propre copie de
+# l'interface, sans ces nœuds.
+@onready var chara_portrait: TextureRect = get_node_or_null("../charaPortrait")
+@onready var prev_chara_button: Button = get_node_or_null("../PrevCharacter")
+@onready var next_chara_button: Button = get_node_or_null("../NextCharacter")
+@onready var item_slots: Array = [get_node_or_null("../Items/Item1"), get_node_or_null("../Items/Item2")]
+## Vrai quand la scène a la présentation « exploration » des stats (icônes
+## épée / bouclier / volonté) : les libellés ne portent alors que la valeur.
+@onready var compact_stats: bool = get_node_or_null("../AttackIcon") != null
+
 # ── Personnages presents dans la scene porte ─────────────────────────
 @onready var hero_root: Node2D = $"../DoorHeroPosition"
 @onready var peek_pose: Node2D = get_node_or_null("../PositionPeek")
@@ -180,7 +191,42 @@ func _ready():
 	_setup_buff_row()
 	if move_button != null:
 		move_button.pressed.connect(_on_move_button_pressed)
+	if prev_chara_button != null:
+		prev_chara_button.pressed.connect(_cycle_character.bind(-1))
+	if next_chara_button != null:
+		next_chara_button.pressed.connect(_cycle_character.bind(1))
 	selectCharacter(characters[0])
+
+
+## Flèches de part et d'autre du portrait : personnage suivant / précédent,
+## dans l'ordre de la formation (celui des silhouettes à l'écran).
+func _cycle_character(step: int) -> void:
+	if _swapping or characters.is_empty():
+		return
+	# Une flèche n'est pas une cible d'échange : on sort du mode déplacement.
+	if move_mode:
+		set_move_mode(false)
+	var order: Array[CharacterData] = characters.duplicate()
+	order.sort_custom(func(a, b): return a.Chara_position < b.Chara_position)
+	var i := order.find(selected_character)
+	if i == -1:
+		i = 0
+	selectCharacter(order[(i + step + order.size()) % order.size()])
+
+
+## Même remplissage qu'en exploration et au camp.
+func _update_equipment_icons(chara: CharacterData) -> void:
+	for slot in item_slots:
+		if slot != null:
+			slot.remove_item()
+	var i := 0
+	for slot in item_slots:
+		if slot == null:
+			continue
+		if i >= chara.equipped_items.size():
+			break
+		slot.assigne_item(chara.equipped_items[i])
+		i += 1
 
 
 ## Pose les icones de buff dans le panneau du bas. Si la scene porte deja un
@@ -472,12 +518,21 @@ func selectCharacter(chara: CharacterData):
 		Horny.bbcode_enabled = true
 		PeekBonus.bbcode_enabled = true
 		kinks.bbcode_enabled = true
-		Att.text = "Attack: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
-		chara.attack, chara.base_attack, (chara.attack - chara.base_attack)]
-		Def.text = "Defense: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
-		chara.defense, chara.base_defense, (chara.defense - chara.base_defense)]
-		WillPower.text = "Willpower: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
-		chara.willpower, chara.base_willpower, (chara.willpower - chara.base_willpower)]
+		if chara_portrait != null:
+			chara_portrait.texture = chara.explorationPortrait
+		_update_equipment_icons(chara)
+		if compact_stats:
+			# Présentation exploration / camp : l'icône dit la stat.
+			Att.text = " %d" % chara.attack
+			Def.text = " %d" % chara.defense
+			WillPower.text = " %d" % chara.willpower
+		else:
+			Att.text = "Attack: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
+			chara.attack, chara.base_attack, (chara.attack - chara.base_attack)]
+			Def.text = "Defense: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
+			chara.defense, chara.base_defense, (chara.defense - chara.base_defense)]
+			WillPower.text = "Willpower: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
+			chara.willpower, chara.base_willpower, (chara.willpower - chara.base_willpower)]
 		
 		Stamina.text = "%d / %d" % [chara.current_stamina, chara.max_stamina]
 		StaminaProgressBar.max_value= chara.max_stamina
