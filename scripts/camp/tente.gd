@@ -43,6 +43,11 @@ var Tentescale : Vector2
 	"Priestess+Hunter": "res://LoveScene/PriestxHunter.tscn"
 }
 var current_love_scene: Node = null
+## Multiplicateur de cadence des animations dans la tente (images/seconde).
+@export var anim_speed_mult: float = 2.0
+## Profondeur de la scène d'amour : au-dessus de toute l'interface du camp
+## (objets, icônes de buff, fiche du personnage).
+const LOVE_SCENE_Z := 100
 var scene_path := ""
 var camp : Campement
 @onready var button : Button = $TenteButton
@@ -88,7 +93,7 @@ func startMasturbation(user:CharaCamp):
 
 	anim = SpriteFrames.new()
 	anim.set_animation_loop("default", true)
-	anim.set_animation_speed("default", 12.0)
+	anim.set_animation_speed("default", 12.0 * anim_speed_mult)
 
 	for tex in frames:
 		anim.add_frame("default", tex)
@@ -201,7 +206,7 @@ func _on_tente_button_button_down() -> void:
 			child.queue_free()
 		anim = SpriteFrames.new()
 		anim.set_animation_loop("default", true)
-		anim.set_animation_speed("default", 4.0) 
+		anim.set_animation_speed("default", 4.0 * anim_speed_mult)
 
 		for tex in frames:
 			anim.add_frame("default", tex)
@@ -248,9 +253,9 @@ func _on_tente_button_button_down() -> void:
 
 		tween.parallel().tween_property(self,"modulate:a",0.1,2.0)
 		tween.parallel().tween_property(anim, "speed_scale", 100, 0.50)
-		if anim.get_animation_speed("default")==2.0:
-			anim.set_animation_speed("default", 4.0) 
-		else : anim.set_animation_speed("default", 12.0) 
+		if anim.get_animation_speed("default") == 2.0 * anim_speed_mult:
+			anim.set_animation_speed("default", 4.0 * anim_speed_mult)
+		else : anim.set_animation_speed("default", 12.0 * anim_speed_mult) 
 		await cam.zoom_to_position(cam_pos, cam.baseZoom.x*1.5 ,2.0)
 		
 		
@@ -272,7 +277,7 @@ func _on_tente_button_button_down() -> void:
 			print ( "clic on tente with peoples inside")
 				# Instancie la nouvelle scène et l’ajoute au camp
 		current_love_scene = love_scene_packed.instantiate()
-		current_love_scene.z_index= 12
+		current_love_scene.z_index = LOVE_SCENE_Z
 		camp.add_child(current_love_scene)
 		cam.reset()
 		
@@ -337,7 +342,7 @@ func show_love_image(user: CharaCamp, target: CharaCamp):
 
 	anim = SpriteFrames.new()
 	anim.set_animation_loop("default", true)
-	anim.set_animation_speed("default", 12)
+	anim.set_animation_speed("default", 12.0 * anim_speed_mult)
 
 	for tex in frames:
 		anim.add_frame("default", tex) 

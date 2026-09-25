@@ -64,6 +64,8 @@ var is_selecting_explo_target: bool = false
 @onready var inventory_panel: DoorInventory = get_node_or_null("../InventoryPanel")
 @onready var toggle_map_inventory: Button = get_node_or_null("../ToggleMapInventory")
 var showing_inventory: bool = false
+## Boutons carte / sac côte à côte (cf. UI/map_bag_buttons.gd).
+var map_bag_buttons: Dictionary = {}
 
 # ── Ligne « Buffs : » de la fiche personnage ─────────────────────────
 # Les icônes sont construites par code (cf. UI/buff_row.gd). Si la scène
@@ -358,7 +360,14 @@ func _setup_map_inventory_toggle() -> void:
 
 	if toggle_map_inventory == null:
 		return
-	toggle_map_inventory.pressed.connect(_on_toggle_map_inventory)
+	map_bag_buttons = MapBagButtons.split(toggle_map_inventory, null, null, 88.0)
+	map_bag_buttons.map.pressed.connect(_show_inventory.bind(false))
+	map_bag_buttons.bag.pressed.connect(_show_inventory.bind(true))
+	_apply_map_inventory_view()
+
+
+func _show_inventory(on: bool) -> void:
+	showing_inventory = on
 	_apply_map_inventory_view()
 
 
@@ -383,13 +392,7 @@ func _apply_map_inventory_view() -> void:
 		inventory_panel.visible = showing_inventory
 		if showing_inventory and gm != null:
 			inventory_panel.refresh(gm.inventory)
-	if toggle_map_inventory:
-		var bag = toggle_map_inventory.get_node_or_null("IconBag")
-		var mp = toggle_map_inventory.get_node_or_null("IconMapToggle")
-		if bag:
-			bag.visible = not showing_inventory
-		if mp:
-			mp.visible = showing_inventory
+	MapBagButtons.set_active(map_bag_buttons, showing_inventory)
 
 
 func _on_button_button_down() -> void:

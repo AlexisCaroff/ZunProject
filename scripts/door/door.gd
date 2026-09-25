@@ -85,6 +85,8 @@ var _peek_rest_texture: Texture2D = null
 @onready var inventory_panel: DoorInventory = get_node_or_null("../InventoryPanel")
 @onready var toggle_button: Button = get_node_or_null("../ToggleMapInventory")
 var showing_inventory: bool = false
+## Boutons carte / sac côte à côte (cf. UI/map_bag_buttons.gd).
+var map_bag_buttons: Dictionary = {}
 
 # ── Transition glissee entre deux portes ─────────────────────────────
 ## Duree du defilement du decor quand on change de porte.
@@ -640,7 +642,14 @@ func _setup_map_inventory_toggle() -> void:
 
 	if toggle_button == null:
 		return
-	toggle_button.pressed.connect(_on_toggle_map_inventory)
+	map_bag_buttons = MapBagButtons.split(toggle_button, null, null, 88.0)
+	map_bag_buttons.map.pressed.connect(_show_inventory.bind(false))
+	map_bag_buttons.bag.pressed.connect(_show_inventory.bind(true))
+	_apply_map_inventory_view()
+
+
+func _show_inventory(on: bool) -> void:
+	showing_inventory = on
 	_apply_map_inventory_view()
 
 
@@ -674,13 +683,7 @@ func _apply_map_inventory_view() -> void:
 		inventory_panel.visible = showing_inventory
 		if showing_inventory and Game_Manager != null:
 			inventory_panel.refresh(Game_Manager.inventory)
-	if toggle_button:
-		var bag = toggle_button.get_node_or_null("IconBag")
-		var mp = toggle_button.get_node_or_null("IconMapToggle")
-		if bag:
-			bag.visible = not showing_inventory
-		if mp:
-			mp.visible = showing_inventory
+	MapBagButtons.set_active(map_bag_buttons, showing_inventory)
 
 
 # ════════════════════════════════════════════════════════════════════

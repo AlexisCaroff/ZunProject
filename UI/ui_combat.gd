@@ -70,6 +70,8 @@ class_name UI_combat
 var inventory_panel: DoorInventory = null
 var bag_toggle: Button = null
 var showing_inventory: bool = false
+## Boutons carte / sac côte à côte (cf. UI/map_bag_buttons.gd).
+var map_bag_buttons: Dictionary = {}
 
 
 func _ready():
@@ -378,14 +380,29 @@ func _setup_bag(gm: GameManager) -> void:
 		icon_map.texture = bag_map_icon
 		bag_toggle.add_child(icon_map)
 
-	bag_toggle.tooltip_text = "Carte / sac d'équipe"
-	if not bag_toggle.pressed.is_connected(_on_toggle_map_inventory):
-		bag_toggle.pressed.connect(_on_toggle_map_inventory)
+	# Le bouton de la scène est enfant du cadre de la carte (repère réduit à
+	# 0.75) : 96 unités locales ≈ 72 px à l'écran.
+	var spacing := 96.0 if bag_toggle.get_parent() is TextureRect else 88.0
+	map_bag_buttons = MapBagButtons.split(bag_toggle, null, bag_icon, spacing)
+	map_bag_buttons.map.pressed.connect(_show_inventory.bind(false))
+	map_bag_buttons.bag.pressed.connect(_show_inventory.bind(true))
+	# Au-dessus du panneau du sac (z 9) : sinon, sac ouvert, les boutons
+	# passaient dessous. Le bouton fiche personnage voisin suit le même rang.
+	MapBagButtons.raise(map_bag_buttons, 10)
+	var chara_info := get_node_or_null("CanvasLayer/ContourMap/ButtonCharainfo") as CanvasItem
+	if chara_info != null:
+		chara_info.z_as_relative = false
+		chara_info.z_index = 10
 
 	# Un objet ramassé pendant que le sac est ouvert doit s'y afficher.
 	if gm != null and not gm.inventory_changed.is_connected(_on_bag_inventory_changed):
 		gm.inventory_changed.connect(_on_bag_inventory_changed)
 
+	_apply_map_inventory_view()
+
+
+func _show_inventory(on: bool) -> void:
+	showing_inventory = on
 	_apply_map_inventory_view()
 
 
@@ -414,16 +431,4 @@ func _apply_map_inventory_view() -> void:
 			var gm := get_tree().root.get_node_or_null("GameManager") as GameManager
 			if gm != null:
 				inventory_panel.refresh(gm.inventory)
-	if bag_toggle:
-		# L'icône annonce la vue vers laquelle on basculera. Le bouton déjà
-		# présent dans la scène de combat n'a qu'une icône de carte : dans ce
-		# cas on la laisse allumée, sinon le bouton deviendrait vide.
-		var bag := bag_toggle.get_node_or_null("IconBag") as CanvasItem
-		var mp := bag_toggle.get_node_or_null("IconMap") as CanvasItem
-		if bag != null and mp != null:
-			bag.visible = not showing_inventory
-			mp.visible = showing_inventory
-		elif bag != null:
-			bag.visible = true
-		elif mp != null:
-			mp.visible = true
+	MapBagButtons.set_active(map_bag_buttons, showing_inventory)
