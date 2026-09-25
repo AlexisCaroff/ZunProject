@@ -15,6 +15,9 @@ func setup(damage_amount: int, _thecolor = null):
 	label.text = "" + str(damage_amount)
 	
 	anim.play("hit")
+	# Applique la 1re cle tout de suite : sinon le label est dessine une frame
+	# a sa position de scene avant que l'animation ne demarre.
+	anim.advance(0)
 
 
 

@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=15 format=3 uid="uid://cvpnvu50a3dp2"]
+[gd_resource type="Resource" script_class="Skill" load_steps=14 format=3 uid="uid://cvpnvu50a3dp2"]
 
 [ext_resource type="Texture2D" uid="uid://ltw8c8afgkv8" path="res://characters/charatexture/demo characters/HERO_warrior_bash.png" id="1_jvdxv"]
 [ext_resource type="AudioStream" uid="uid://daejgs7ixjjp3" path="res://actions/sound/Weapon Sword Whips 01.wav" id="2_nafb2"]
 [ext_resource type="PackedScene" uid="uid://bn67hgtv6jvaq" path="res://actions/skillEffects/FX/Scene/charge_fx.tscn" id="3_tuxwj"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="4_ro064"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="5_igsv3"]
 [ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="6_p7jql"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="7_x2y7g"]
@@ -44,10 +43,10 @@ required_position = 1
 range = 3
 ImageSkill = ExtResource("1_jvdxv")
 the_target_type = 5
-effects = Array[ExtResource("4_ro064")]([SubResource("Resource_w03xy"), SubResource("Resource_g7kqd"), SubResource("Resource_e8pbf")])
+effects = Array[Resource]([SubResource("Resource_w03xy"), SubResource("Resource_g7kqd"), SubResource("Resource_e8pbf")])
 two_target_Type = false
 the_second_target_type = 0
-second_effects = Array[ExtResource("4_ro064")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

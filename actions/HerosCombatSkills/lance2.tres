@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://d3y2bgoe47tnt"]
+
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_dmg"]
+[ext_resource type="Texture2D" uid="uid://bywr6bvpagx5v" path="res://actions/actiontexture/UI icons/ICON_hunter_stab.png" id="3_icon"]
+[ext_resource type="Texture2D" uid="uid://cdhidvnxb6h10" path="res://characters/charatexture/demo characters/HERO_hunter_thrust.png" id="4_image"]
+[ext_resource type="AudioStream" uid="uid://dovp7wcqjx7ux" path="res://actions/sound/Weapon Sword Whips 02.wav" id="5_sound"]
+[ext_resource type="PackedScene" uid="uid://dacqrw5c17fup" path="res://actions/skillEffects/FX/Scene/dashAttack.tscn" id="6_castfx"]
+[ext_resource type="PackedScene" uid="uid://cqea4mekfk8gb" path="res://actions/skillEffects/FX/Scene/hit_standar.tscn" id="7_hitfx"]
+
+[sub_resource type="Resource" id="Resource_lance_dmg"]
+script = ExtResource("2_dmg")
+MagicDMG = false
+amount = 20
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[resource]
+script = ExtResource("1_skill")
+name = "Spear"
+descriptionName = "Spear"
+description = "Strikes an enemy, dealing damage"
+icon = ExtResource("3_icon")
+attack_sound = ExtResource("5_sound")
+barkSkill = ""
+required_position = 0
+range = 2
+ImageSkill = ExtResource("4_image")
+the_target_type = 0
+effects = Array[Resource]([SubResource("Resource_lance_dmg")])
+two_target_Type = false
+the_second_target_type = 1
+second_effects = Array[Resource]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 4
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 1.0
+tags = Array[String]([])
+is_contact = true
+distance_contact = 600.0
+caster_effect_scene = ExtResource("6_castfx")
+target_effect_scene = ExtResource("7_hitfx")
+caster_effect_anchor = 0
+target_effect_anchor = 0
+is_beneficial = false
+skip_target_return_anim = false
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

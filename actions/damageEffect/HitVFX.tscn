@@ -142,13 +142,13 @@ z_as_relative = false
 script = ExtResource("1_ktxfw")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 159.0
-offset_top = -274.0
-offset_right = 245.0
-offset_bottom = -155.0
+offset_left = -25.0
+offset_top = -72.0
+offset_right = 61.0
+offset_bottom = 47.0
 theme_override_fonts/font = ExtResource("2_nu7he")
-theme_override_font_sizes/font_size = 50
-text = "14"
+theme_override_font_sizes/font_size = 20
+text = ""
 horizontal_alignment = 1
 vertical_alignment = 1
 

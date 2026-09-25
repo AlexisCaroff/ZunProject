@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=44 format=3 uid="uid://co5mh354m7vcm"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=43 format=3 uid="uid://co5mh354m7vcm"]
 
 [ext_resource type="Texture2D" uid="uid://sdb07y8ys371" path="res://characters/charatexture/demo characters/ENEMY_nymph_M_hit.png" id="1_sko64"]
 [ext_resource type="Script" uid="uid://cf2k68rgsdle0" path="res://characters/charatexture/braines/Ai_brain.gd" id="2_ejruj"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="10_jr0gc"]
 [ext_resource type="Texture2D" uid="uid://dilhgwuvvqcbb" path="res://characters/charatexture/demo characters/ENEMY_nymph_M_shoot.png" id="11_7suoy"]
 [ext_resource type="PackedScene" uid="uid://b0xlvqrqes381" path="res://actions/skillEffects/FX/Scene/spitEnnemy_FX.tscn" id="12_wahje"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="13_6iske"]
 [ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="14_a2r24"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="14_jw3aa"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="15_8gy0o"]
@@ -81,10 +80,10 @@ required_position = 2
 range = 3
 ImageSkill = ExtResource("11_7suoy")
 the_target_type = 0
-effects = Array[ExtResource("13_6iske")]([SubResource("Resource_coij5"), SubResource("Resource_g6l6p"), SubResource("Resource_df3d6"), SubResource("Resource_vgxbl")])
+effects = Array[Resource]([SubResource("Resource_coij5"), SubResource("Resource_g6l6p"), SubResource("Resource_df3d6"), SubResource("Resource_vgxbl")])
 two_target_Type = false
 the_second_target_type = 0
-second_effects = Array[ExtResource("13_6iske")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"
@@ -123,10 +122,10 @@ required_position = 1
 range = 1
 ImageSkill = ExtResource("22_dry7m")
 the_target_type = 0
-effects = Array[ExtResource("13_6iske")]([SubResource("Resource_d6f35")])
+effects = Array[Resource]([SubResource("Resource_d6f35")])
 two_target_Type = false
 the_second_target_type = 0
-second_effects = Array[ExtResource("13_6iske")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"
@@ -175,10 +174,10 @@ required_position = 0
 range = 3
 ImageSkill = ExtResource("11_7suoy")
 the_target_type = 0
-effects = Array[ExtResource("13_6iske")]([SubResource("Resource_jrqoj"), SubResource("Resource_3h4no")])
+effects = Array[Resource]([SubResource("Resource_jrqoj"), SubResource("Resource_3h4no")])
 two_target_Type = false
 the_second_target_type = 0
-second_effects = Array[ExtResource("13_6iske")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

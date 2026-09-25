@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://bptddsqeaq28h"]
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://bptddsqeaq28h"]
 
 [ext_resource type="Texture2D" uid="uid://ci6or334e3v7" path="res://characters/charatexture/demo characters/HERO_priestess_cast.png" id="1_hfoqm"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_bcdhv"]
 [ext_resource type="PackedScene" uid="uid://cwsj8uqak0drf" path="res://actions/skillEffects/FX/Scene/Healing_fx.tscn" id="2_f0lrn"]
 [ext_resource type="Script" uid="uid://bp8u5at2ojgse" path="res://actions/skillEffects/healEffect.gd" id="2_j3stq"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_vquxc"]
 [ext_resource type="Texture2D" uid="uid://v5w3ijq30q7q" path="res://actions/actiontexture/UI icons/ICON_priestess_vitality.png" id="5_f0lrn"]
 [ext_resource type="PackedScene" uid="uid://xaab2xdp41sl" path="res://actions/skillEffects/FX/Scene/healed.tscn" id="7_gojej"]
 
@@ -25,10 +24,10 @@ required_position = 0
 range = 3
 ImageSkill = ExtResource("1_hfoqm")
 the_target_type = 1
-effects = Array[ExtResource("2_vquxc")]([SubResource("Resource_svn31")])
+effects = Array[Resource]([SubResource("Resource_svn31")])
 two_target_Type = false
 the_second_target_type = 0
-second_effects = Array[ExtResource("2_vquxc")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "heal"

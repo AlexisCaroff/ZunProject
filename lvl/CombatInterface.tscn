@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://0x6um7xfv678" path="res://characters/exploPortrait/BossExploPortrait.png" id="9_junmr"]
 [ext_resource type="Texture2D" uid="uid://b6ydx3ktka8fh" path="res://UI/UI boxes/UI_convo_box.png" id="9_qx47d"]
 [ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="10_8up0w"]
-[ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://lvl/Hall1/encounter1.tres" id="11_yspa4"]
+[ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://characters/data/encounter1.tres" id="11_yspa4"]
 [ext_resource type="Texture2D" uid="uid://botdpxnd77na1" path="res://characters/exploPortrait/WarriorExploPortrait.png" id="13_6ueg6"]
 [ext_resource type="Script" uid="uid://cxgw24yv778d8" path="res://lvl/chara_portraitButton.gd" id="14_5brbe"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="14_j11dg"]

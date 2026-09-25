@@ -90,6 +90,17 @@ var _swapping: bool = false
 ## ensemble (cf. _slide_to_room).
 @export var door_fade_time: float = 0.25
 var _sliding: bool = false
+
+# ── Ligne « Buffs : » de la fiche personnage ─────────────────────────
+# Meme composant que l'exploration (cf. UI/buff_row.gd), construit par
+# code. Si la scene contient un libelle nomme "Buffs", les icones se posent
+# automatiquement derriere son texte ; sinon la ligne ecrit son propre titre.
+## Coin haut-gauche de la ligne quand la scene n'a pas de libelle "Buffs".
+@export var buffs_row_position: Vector2 = Vector2(1061, 1010)
+## Decalage a appliquer aux icones posees derriere le libelle "Buffs".
+@export var buffs_icons_nudge: Vector2 = Vector2.ZERO
+var buff_row: BuffRow = null
+
 func _ready():
 	GameState.current_phase = GameStat.GamePhase.DOOR
 	Game_Manager = get_tree().root.get_node("GameManager") 
@@ -98,6 +109,11 @@ func _ready():
 		Game_Manager.show_history_scene(Game_Manager.current_room_Ressource.door_scene_History)
 		Game_Manager.current_room_Ressource.door_history_played =true
 	characters=Game_Manager.characters
+	# Etat de repos identique a celui laisse par _on_mouse_exited (pivot au
+	# centre, echelle startsize) : sans ca le texte « saute » au premier survol.
+	_center_door_text()
+	Doortext.resized.connect(_center_door_text)
+	Doortext.scale = startsize
 	peek_scene = load("res://UI/peekScene.tscn").instantiate()
 	sub_viewport.add_child(peek_scene)
 	var empty := StyleBoxEmpty.new()
@@ -161,9 +177,26 @@ func _ready():
 		donjon_map.focus_door(Game_Manager.current_room_Ressource, viewport)
 		#donjon_map.move_to_position(donjon_map.curentposition)
 	_setup_map_inventory_toggle()
+	_setup_buff_row()
 	if move_button != null:
 		move_button.pressed.connect(_on_move_button_pressed)
 	selectCharacter(characters[0])
+
+
+## Pose les icones de buff dans le panneau du bas. Si la scene porte deja un
+## libelle nomme "Buffs", elles se collent derriere son texte et aucun titre
+## n'est ecrit ; sinon la ligne dessine son propre « Buffs : ».
+func _setup_buff_row() -> void:
+	var host := get_parent()
+	if host == null:
+		return
+	var anchor := host.get_node_or_null("Buffs") as Control
+	if anchor != null:
+		buff_row = BuffRow.create(host,
+				BuffRow.position_after(anchor) + buffs_icons_nudge,
+				anchor, false)
+	else:
+		buff_row = BuffRow.create(host, buffs_row_position, PeekBonus, true)
 
 func load_chara():
 	for i in characters.size():
@@ -221,6 +254,10 @@ func _portrait_for(data: CharacterData) -> Node:
 	return null
 			
 			
+func _center_door_text() -> void:
+	Doortext.pivot_offset = Doortext.size / 2
+
+
 func _on_mouse_exited() -> void:
 	Doortext.scale = big_size	
 	Doortext.set_pivot_offset(Doortext.size/ 2)
@@ -457,6 +494,8 @@ func selectCharacter(chara: CharacterData):
 			kinks.text = "Kinks: [color=AAAAAA][i]none[/i][/color]"
 		else:
 			kinks.text = "Kinks: %s" % ", ".join(chara.tags)
+		if buff_row != null:
+			buff_row.show_for(chara)
 		
 		
 		

@@ -10,8 +10,14 @@ class_name PotionConfirmPopup
 #
 #  Usage :
 #      var popup := PotionConfirmPopup.open(parent_canvas, potion,
-#                                           "Priestess", slot_global_pos)
+#                                           "Priestess", slot_global_pos,
+#                                           true, "", self)
 #      popup.confirmed.connect(...)
+#
+#  `opener` (le dernier argument) est l'inventaire qui ouvre le popup :
+#  s'il quitte l'arbre (changement de salle) ou se cache, le popup se
+#  ferme avec lui. Sans ça, un popup posé sur une scène persistante
+#  restait ouvert par-dessus la salle suivante.
 # ════════════════════════════════════════════════════════════════════
 
 signal confirmed
@@ -32,13 +38,30 @@ var _closed: bool = false
 ## au-dessus de l'inventaire.
 static func open(parent: Node, potion: Potion, target_name: String,
 		anchor_global: Vector2, can_use: bool = true,
-		reason: String = "") -> PotionConfirmPopup:
+		reason: String = "", opener: Node = null) -> PotionConfirmPopup:
 	var popup := PotionConfirmPopup.new()
 	popup._potion = potion
 	parent.add_child(popup)
 	popup._build(potion, target_name, can_use, reason)
 	popup._place_near(anchor_global)
+	popup._bind_to(opener)
 	return popup
+
+
+## Ferme le popup quand l'inventaire qui l'a ouvert disparaît ou se cache.
+func _bind_to(opener: Node) -> void:
+	if opener == null:
+		return
+	opener.tree_exiting.connect(_on_cancel)
+	# Méthodes et non lambdas : Godot retire ces connexions tout seul quand
+	# le popup est libéré, l'inventaire ne rappelle jamais un popup détruit.
+	if opener is CanvasItem:
+		opener.visibility_changed.connect(_on_opener_visibility_changed.bind(opener))
+
+
+func _on_opener_visibility_changed(opener: CanvasItem) -> void:
+	if is_instance_valid(opener) and not opener.is_visible_in_tree():
+		_on_cancel()
 
 
 func _init() -> void:
@@ -120,7 +143,7 @@ func _build(potion: Potion, target_name: String, can_use: bool, reason: String) 
 		question.text = "[center]%s[/center]" % potion.confirm_message(target_name)
 	else:
 		question.text = "[center][color=CC5555]%s[/color][/center]" % (
-			reason if reason != "" else "Impossible d'utiliser cette potion ici.")
+			reason if reason != "" else "This potion can't be used here.")
 	box.add_child(question)
 
 	# ── Boutons ─────────────────────────────────────────────────────
@@ -130,11 +153,11 @@ func _build(potion: Potion, target_name: String, can_use: bool, reason: String) 
 	box.add_child(buttons)
 
 	if can_use:
-		var yes := _make_button("Boire", GOLD)
+		var yes := _make_button("Drink", GOLD)
 		yes.pressed.connect(_on_confirm)
 		buttons.add_child(yes)
 
-	var no := _make_button("Annuler" if can_use else "Fermer", GOLD_DIM)
+	var no := _make_button("Cancel" if can_use else "Close", GOLD_DIM)
 	no.pressed.connect(_on_cancel)
 	buttons.add_child(no)
 

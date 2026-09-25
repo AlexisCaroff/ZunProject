@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=14 format=3 uid="uid://c4nfaoik03hsb"]
+[gd_resource type="Resource" script_class="Skill" load_steps=13 format=3 uid="uid://c4nfaoik03hsb"]
 
 [ext_resource type="Texture2D" uid="uid://bgwids84xh2rv" path="res://characters/charatexture/demo characters/INQUISITION_punisher_shield.png" id="1_002ci"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_oe01q"]
 [ext_resource type="PackedScene" uid="uid://ounw7l2iaxnn" path="res://actions/skillEffects/FX/Scene/Taunt_fx.tscn" id="2_vipaf"]
 [ext_resource type="Script" uid="uid://cjfkha61akav3" path="res://actions/skillEffects/TauntEffect.gd" id="3_oe01q"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="4_exsrh"]
@@ -45,10 +44,10 @@ required_position = 0
 range = 3
 ImageSkill = ExtResource("1_002ci")
 the_target_type = 0
-effects = Array[ExtResource("2_oe01q")]([SubResource("Resource_rhjvp"), SubResource("Resource_tdhku")])
+effects = Array[Resource]([SubResource("Resource_rhjvp"), SubResource("Resource_tdhku")])
 two_target_Type = true
 the_second_target_type = 2
-second_effects = Array[ExtResource("2_oe01q")]([SubResource("Resource_qg1gn")])
+second_effects = Array[Resource]([SubResource("Resource_qg1gn")])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

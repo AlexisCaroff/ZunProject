@@ -29,6 +29,7 @@ var campposition :CampPosition
 var targetable : bool = false 
 var CharaScale : Vector2
 const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
+const BUFF_UI := preload("res://UI/buffUi.tscn")
 var characterData: CharacterData
 var CharaCampPoints : int = 2
 var camp : Campement
@@ -69,13 +70,9 @@ func set_targetable(targe : bool):
 func add_buff(buff: Buff):
 	var new_buff = buff.duplicate()
 	characterData.buffs.append(new_buff)
-	var icon = TextureRect.new()
-	icon.texture = buff.icon
-	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	icon.custom_minimum_size = Vector2(32, 32)
-	icon.size= Vector2(32, 32)
-	buff_bar.add_child(icon)
+	_add_buff_icon(new_buff)
+	if camp != null and camp.get("selected_chara") == self:
+		camp.refresh_buffs(characterData)
 	#buff_icons.add_child(icon)
 	print("add buff")
 	
@@ -90,7 +87,25 @@ func update_display() -> void:
 	Selector.texture =portrait_texture
 	
 	sprite.texture = portrait_texture
-	
+	# La BuffBar du slot est reconstruite à partir des données : c'est la
+	# seule source de vérité hors combat.
+	if buff_bar != null:
+		for child in buff_bar.get_children():
+			buff_bar.remove_child(child)
+			child.queue_free()
+		for buff in characterData.buffs:
+			_add_buff_icon(buff)
+
+
+## Même icône qu'en combat (UI/buffUi.tscn) : même taille, même espacement
+## dans la BuffBar, et l'infobulle stat / montant / tours au survol.
+func _add_buff_icon(buff: Buff) -> void:
+	if buff_bar == null:
+		return
+	var icon = BUFF_UI.instantiate()
+	buff_bar.add_child(icon)
+	icon.updatebuff(buff)
+
 func gomasturbate():
 	campposition.visible=false
 	

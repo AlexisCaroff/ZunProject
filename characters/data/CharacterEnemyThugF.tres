@@ -1,0 +1,86 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=15 format=3 uid="uid://kwnj2hlwpoh2"]
+
+[ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_bark"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="2_data"]
+[ext_resource type="Script" uid="uid://cf2k68rgsdle0" path="res://characters/charatexture/braines/Ai_brain.gd" id="3_brain"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_equip"]
+[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="5_exploskill"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="6_campskill"]
+[ext_resource type="Texture2D" uid="uid://qfml2ojbw0gr" path="res://characters/charatexture/demo characters/ENEMY_thugF_idle.png" id="7_idle"]
+[ext_resource type="Texture2D" uid="uid://bje2hku4spkqq" path="res://characters/charatexture/demo characters/ENEMY_thugF_hit.png" id="8_hit"]
+[ext_resource type="Texture2D" uid="uid://dsux5esvm6idj" path="res://characters/charatexture/demo characters/ENEMY_thugF_down.png" id="9_down"]
+[ext_resource type="Texture2D" uid="uid://b0yhh4guwwtsh" path="res://characters/exploPortrait/AdictExploPortrait.png" id="10_exploportrait"]
+[ext_resource type="Texture2D" uid="uid://dk5o25ag7k1yc" path="res://characters/characterInitiative/Addict_Ini_Portrait.png" id="11_iniportrait"]
+[ext_resource type="Resource" uid="uid://brygm74u3ky7r" path="res://actions/ennemiCombatSkills/thugFSlimeThrow.tres" id="12_throw"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="13_move"]
+
+[sub_resource type="Resource" id="Resource_thugfbrain"]
+script = ExtResource("3_brain")
+name = "Default AI"
+description = "IA basique : le Slime Throw est utilisable depuis n'importe quelle position, elle tire donc à chaque tour sans jamais bouger."
+metadata/_custom_type_script = "uid://cf2k68rgsdle0"
+
+[resource]
+script = ExtResource("2_data")
+headPosition = Vector2(10, -120)
+torso_Position = Vector2(0, 0)
+portrait_texture = ExtResource("7_idle")
+explorationPortrait = ExtResource("10_exploportrait")
+dead_portrait_texture = ExtResource("9_down")
+Hit_texture = ExtResource("8_hit")
+initiative_icon = ExtResource("11_iniportrait")
+Name = "Thug"
+Charaname = "ThugF"
+IsDemon = false
+size = "average"
+presentation = 0
+attracted_to_feminine = false
+attracted_to_masculine = true
+affinity = Dictionary[String, int]({})
+base_max_stamina = 95
+base_max_stress = 100
+base_max_horniness = 100
+base_attack = 7
+base_defense = 4
+base_willpower = 5
+base_initiative = 16
+base_evasion = 5
+base_precision = 100
+attack = 7
+defense = 4
+willpower = 5
+evasion = 5
+initiative = 16
+peek = 0
+equipped_items = Array[ExtResource("4_equip")]([])
+stun = false
+grab = false
+Chara_position = 2
+max_stamina = 95
+max_stress = 100
+max_horniness = 100
+current_stamina = 95
+current_stress = 0
+current_horniness = 0
+isOneshot = false
+skill_resources = Array[Resource]([ExtResource("12_throw"), ExtResource("13_move")])
+exploration_skill_resources = Array[ExtResource("5_exploskill")]([])
+tags = Array[String]([])
+assist = ""
+is_player_controlled = false
+ai_brain = SubResource("Resource_thugfbrain")
+can_be_moved = true
+min_durationIddle = 0.7
+max_durationIddle = 1.1
+min_scale = 0.96
+max_scale = 1.01
+corruption = 0
+camp_skill_resources = Array[ExtResource("6_campskill")]([])
+bark_scene = ExtResource("1_bark")
+taunts = ["Attrape ça !", "Ça colle, hein ?", "Reste tranquille, chéri.", "Tu vas adorer."]
+reaction = ["", "", ""]
+affinityReaction = ["", "", ""]
+corrupted = false
+inquisition = false
+immobilized = false
+immobilized_turns = 0

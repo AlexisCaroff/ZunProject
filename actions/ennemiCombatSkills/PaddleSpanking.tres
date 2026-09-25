@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://ypnfqe2auka1"]
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://ypnfqe2auka1"]
 
 [ext_resource type="Texture2D" uid="uid://dogj147dqfwqb" path="res://characters/charatexture/demo characters/INQUISITION_punisher_spank.png" id="1_7xlqq"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_18tr0"]
 [ext_resource type="PackedScene" uid="uid://dacqrw5c17fup" path="res://actions/skillEffects/FX/Scene/dashAttack.tscn" id="2_six7k"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="4_68f7u"]
 [ext_resource type="Texture2D" uid="uid://b4oubet2ttcx0" path="res://actions/actiontexture/UI icons/ICON_hunter_bolas.png" id="5_3cms5"]
@@ -33,10 +32,10 @@ required_position = 0
 range = 3
 ImageSkill = ExtResource("1_7xlqq")
 the_target_type = 5
-effects = Array[ExtResource("2_18tr0")]([SubResource("Resource_ar5br"), SubResource("Resource_wsfjn")])
+effects = Array[Resource]([SubResource("Resource_ar5br"), SubResource("Resource_wsfjn")])
 two_target_Type = false
 the_second_target_type = 2
-second_effects = Array[ExtResource("2_18tr0")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

@@ -200,10 +200,10 @@ texture = ExtResource("11_qed8k")
 [node name="Door" type="Button" parent="."]
 z_index = 12
 layout_mode = 0
-offset_left = 1138.0
-offset_top = 368.0
-offset_right = 1423.0
-offset_bottom = 657.0
+offset_left = 1131.0
+offset_top = 370.0
+offset_right = 1416.0
+offset_bottom = 659.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_5ypre")
 flat = true
 script = ExtResource("15_g7kgf")
@@ -211,18 +211,18 @@ chara_explo_scene = ExtResource("40_charaexp")
 
 [node name="DoorText" type="TextureRect" parent="Door"]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 164.0
-offset_right = 346.0
-offset_bottom = 286.0
+offset_left = 15.0
+offset_top = 166.0
+offset_right = 329.0
+offset_bottom = 288.0
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("16_5tf2j")
 
 [node name="pose1" type="Node2D" parent="."]
-position = Vector2(1133, 369)
+position = Vector2(1114, 369)
 
 [node name="pose2" type="Node2D" parent="."]
-position = Vector2(791, 727)
+position = Vector2(779, 727)
 
 [node name="EmbuscadeUI" type="TextureRect" parent="."]
 visible = false
@@ -562,7 +562,7 @@ normal_scale = Vector2(0.8, 0.8)
 hover_scale = Vector2(1, 1)
 
 [node name="UiDoorArrowRight" type="Sprite2D" parent="Return"]
-position = Vector2(522, 33)
+position = Vector2(535, 33)
 rotation = -1.5708
 scale = Vector2(0.345312, 0.345312)
 texture = ExtResource("9_jb1p8")

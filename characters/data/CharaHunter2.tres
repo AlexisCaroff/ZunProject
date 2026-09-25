@@ -1,0 +1,91 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=23 format=3 uid="uid://uf5x5dpfh5ln"]
+
+[ext_resource type="Texture2D" uid="uid://17kns8mwbxnn" path="res://characters/portraits/PORTRAIT_hero_hunter_hood.png" id="1_cpley"]
+[ext_resource type="Texture2D" uid="uid://dlo2fppwhny1b" path="res://characters/charatexture/demo characters/HERO_hunter_hit.png" id="2_033uh"]
+[ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="3_mvoki"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="4_grh8c"]
+[ext_resource type="Resource" uid="uid://mkaq7ws2yox8" path="res://actions/CampSkill/ActeTwiceSkill.tres" id="5_84vvf"]
+[ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="6_x1c52"]
+[ext_resource type="Resource" uid="uid://y8ibrfop35on" path="res://actions/CampSkill/dialogueHunter.tres" id="7_35yqk"]
+[ext_resource type="Resource" uid="uid://duwv5ufsa7tht" path="res://actions/CampSkill/LoveEffectH.tres" id="8_oabva"]
+[ext_resource type="Texture2D" uid="uid://dtsue4pkmdqi4" path="res://characters/charatexture/demo characters/HERO_hunter_down.png" id="9_ms8lc"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="10_p1bqb"]
+[ext_resource type="Texture2D" uid="uid://cf43wgqgy325d" path="res://characters/exploPortrait/HunterExploPortrait.png" id="11_dbh83"]
+[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="12_qorlf"]
+[ext_resource type="Texture2D" uid="uid://cx3bcb0j5pxrn" path="res://characters/characterInitiative/HunterIniPortrait.png" id="13_wosid"]
+[ext_resource type="Texture2D" uid="uid://burkm7br8hoys" path="res://characters/demo characters peek/HERO_hunter_peek.png" id="14_bv626"]
+[ext_resource type="Texture2D" uid="uid://ysjg7rf1ovm5" path="res://characters/charatexture/demo characters/HERO_hunter_idle.png" id="15_cuwje"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="16_wlnu0"]
+[ext_resource type="Resource" uid="uid://b4b0b3m5m5cxi" path="res://actions/HerosCombatSkills/Targetting2.tres" id="17_wywbq"]
+[ext_resource type="Resource" uid="uid://d2amlryi7mwc3" path="res://actions/HerosCombatSkills/Sel2.tres" id="18_puplj"]
+[ext_resource type="Resource" uid="uid://br6ni1oo0vs10" path="res://actions/HerosCombatSkills/lanceH.tres" id="19_cpley"]
+[ext_resource type="Resource" uid="uid://54iklp50nwqs" path="res://actions/HerosCombatSkills/bollas2.tres" id="20_qs28j"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="21_7qkfi"]
+[ext_resource type="Texture2D" uid="uid://dqk35k04yhaeb" path="res://camp_imgs/Camp_char_sit_H.png" id="22_vgd6i"]
+
+[resource]
+script = ExtResource("16_wlnu0")
+headPosition = Vector2(-29, -91)
+torso_Position = Vector2(0, -30)
+portrait_texture = ExtResource("15_cuwje")
+explorationPortrait = ExtResource("11_dbh83")
+dead_portrait_texture = ExtResource("9_ms8lc")
+Hit_texture = ExtResource("2_033uh")
+initiative_icon = ExtResource("13_wosid")
+Dialogue_texture = ExtResource("1_cpley")
+textureCamp = ExtResource("22_vgd6i")
+peek_texture = ExtResource("14_bv626")
+Name = "Hunter"
+Charaname = "Hunter"
+IsDemon = false
+size = "Small"
+presentation = 1
+attracted_to_feminine = true
+attracted_to_masculine = false
+affinity = Dictionary[String, int]({})
+base_max_stamina = 100
+base_max_stress = 100
+base_max_horniness = 100
+base_attack = 10
+base_defense = 5
+base_willpower = 5
+base_initiative = 20
+base_evasion = 5
+base_precision = 100
+attack = 10
+defense = 5
+willpower = 5
+evasion = 5
+initiative = 3
+peek = 0
+equipped_items = Array[ExtResource("10_p1bqb")]([])
+stun = false
+grab = false
+Chara_position = 1
+max_stamina = 100
+max_stress = 100
+max_horniness = 100
+current_stamina = 100
+current_stress = 0
+current_horniness = 40
+isOneshot = false
+skill_resources = Array[Resource]([ExtResource("17_wywbq"), ExtResource("18_puplj"), ExtResource("19_cpley"), ExtResource("20_qs28j"), ExtResource("21_7qkfi")])
+exploration_skill_resources = Array[ExtResource("12_qorlf")]([])
+tags = Array[String](["sub", "degenerate", "jailor"])
+assist = ""
+is_player_controlled = true
+can_be_moved = true
+min_durationIddle = 0.6
+max_durationIddle = 1.0
+min_scale = 0.95
+max_scale = 1.0
+corruption = 0
+camp_skill_resources = Array[ExtResource("4_grh8c")]([ExtResource("5_84vvf"), ExtResource("6_x1c52"), ExtResource("7_35yqk"), ExtResource("8_oabva")])
+bark_scene = ExtResource("3_mvoki")
+taunts = ["Is that all you've got?", "Try harder!", "Pathetic!", "You're wide open!", "You fight like a wet noodle!", "Oops! Did that hurt?"]
+reaction = ["", "", ""]
+affinityReaction = ["", "", ""]
+corrupted = false
+inquisition = false
+immobilized = false
+immobilized_turns = 0

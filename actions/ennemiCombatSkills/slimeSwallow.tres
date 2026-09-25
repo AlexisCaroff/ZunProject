@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://droljic3741tj"]
+
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_skill"]
+[ext_resource type="Script" uid="uid://mvqeauo7bwyy" path="res://actions/skillEffects/SwallowEffect.gd" id="3_swallow"]
+[ext_resource type="Texture2D" uid="uid://dd6hwp3hnsqp3" path="res://characters/charatexture/demo characters/ENEMY_slimepile_full.png" id="4_full"]
+[ext_resource type="Texture2D" uid="uid://c3m2sa2rmcyut" path="res://characters/charatexture/demo characters/ENEMY_slimepile_hit.png" id="5_fullhit"]
+[ext_resource type="Texture2D" uid="uid://ccnq4lbltabiy" path="res://actions/actiontexture/tentacles.png" id="6_icon"]
+[ext_resource type="PackedScene" uid="uid://7n55anqhulp1" path="res://actions/skillEffects/FX/Scene/grabTargetAdict.tscn" id="7_fx"]
+
+[sub_resource type="Resource" id="Resource_slimeswallow"]
+script = ExtResource("3_swallow")
+full_texture = ExtResource("4_full")
+full_hit_texture = ExtResource("5_fullhit")
+
+[resource]
+script = ExtResource("2_skill")
+name = "Slime Swallow"
+descriptionName = "Slime Swallow"
+description = "Engloutit un héros au contact. Il ne peut plus agir tant qu'il n'est pas recraché."
+icon = ExtResource("6_icon")
+barkSkill = ""
+required_position = 1
+range = 1
+ImageSkill = ExtResource("4_full")
+the_target_type = 0
+effects = Array[Resource]([SubResource("Resource_slimeswallow")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[Resource]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 4
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+is_contact = true
+distance_contact = 500.0
+target_effect_scene = ExtResource("7_fx")
+caster_effect_anchor = 0
+target_effect_anchor = 2
+is_beneficial = false
+skip_target_return_anim = true
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

@@ -1,0 +1,92 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=17 format=3 uid="uid://dkk06xluhii6o"]
+
+[ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_bark"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="2_data"]
+[ext_resource type="Script" uid="uid://3scbqd3k1qe7" path="res://characters/charatexture/braines/Ai_brain_StoneSlime.gd" id="3_brain"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_equip"]
+[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="5_exploskill"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="6_campskill"]
+[ext_resource type="Texture2D" uid="uid://d0v704dayk7v0" path="res://characters/charatexture/demo characters/ENEMY_stoneslime_idle.png" id="7_idle"]
+[ext_resource type="Texture2D" uid="uid://da3gaj4vdr60p" path="res://characters/charatexture/demo characters/ENEMY_stoneslime_hit.png" id="8_hit"]
+[ext_resource type="Texture2D" uid="uid://bu4ycbuwkfsok" path="res://characters/charatexture/demo characters/ENEMY_stoneslime_down.png" id="9_down"]
+[ext_resource type="Texture2D" uid="uid://dbq25fw4dr1n0" path="res://characters/exploPortrait/SpitterExploPortrait.png" id="10_exploportrait"]
+[ext_resource type="Texture2D" uid="uid://ctwjj2s4rqugl" path="res://characters/characterInitiative/SlimIniPortrait.png" id="11_iniportrait"]
+[ext_resource type="Resource" uid="uid://bfsxm51g7h56n" path="res://actions/ennemiCombatSkills/stoneCharge.tres" id="12_charge"]
+[ext_resource type="Resource" uid="uid://bhx6v6g85xwd8" path="res://actions/ennemiCombatSkills/stoneSkin.tres" id="13_skin"]
+[ext_resource type="Resource" uid="uid://7y1uscqt8y07" path="res://actions/ennemiCombatSkills/stoneWall.tres" id="14_wall"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="15_move"]
+
+[sub_resource type="Resource" id="Resource_stonebrain"]
+script = ExtResource("3_brain")
+charge_skill_name = "Stone Charge"
+guard_skill_name = "Stone Skin"
+intercept_skill_name = "Stone Wall"
+move_skill_name = "move"
+intercept_chance = 0.6
+name = "Stone Slime AI"
+description = "Tank : rejoint la première ligne, se durcit, s'interpose devant ses alliés, puis charge."
+
+[resource]
+script = ExtResource("2_data")
+headPosition = Vector2(0, -70)
+torso_Position = Vector2(0, 0)
+portrait_texture = ExtResource("7_idle")
+explorationPortrait = ExtResource("10_exploportrait")
+dead_portrait_texture = ExtResource("9_down")
+Hit_texture = ExtResource("8_hit")
+initiative_icon = ExtResource("11_iniportrait")
+Name = "Stone Slime"
+Charaname = "StoneSlime"
+IsDemon = true
+size = "big"
+presentation = 2
+attracted_to_feminine = true
+attracted_to_masculine = true
+affinity = Dictionary[String, int]({})
+base_max_stamina = 160
+base_max_stress = 100
+base_max_horniness = 100
+base_attack = 8
+base_defense = 12
+base_willpower = 4
+base_initiative = 6
+base_evasion = 2
+base_precision = 100
+attack = 8
+defense = 12
+willpower = 4
+evasion = 2
+initiative = 6
+peek = 0
+equipped_items = Array[ExtResource("4_equip")]([])
+stun = false
+grab = false
+Chara_position = 0
+max_stamina = 160
+max_stress = 100
+max_horniness = 100
+current_stamina = 160
+current_stress = 0
+current_horniness = 0
+isOneshot = false
+skill_resources = Array[Resource]([ExtResource("12_charge"), ExtResource("13_skin"), ExtResource("14_wall"), ExtResource("15_move")])
+exploration_skill_resources = Array[ExtResource("5_exploskill")]([])
+tags = Array[String]([])
+assist = ""
+is_player_controlled = false
+ai_brain = SubResource("Resource_stonebrain")
+can_be_moved = true
+min_durationIddle = 1.1
+max_durationIddle = 1.6
+min_scale = 0.97
+max_scale = 1.0
+corruption = 0
+camp_skill_resources = Array[ExtResource("6_campskill")]([])
+bark_scene = ExtResource("1_bark")
+taunts = ["*craquement*", "Grrmmm.", "*roulement de pierre*", "Tchac."]
+reaction = ["", "", ""]
+affinityReaction = ["", "", ""]
+corrupted = false
+inquisition = false
+immobilized = false
+immobilized_turns = 0

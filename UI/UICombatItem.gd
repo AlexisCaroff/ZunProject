@@ -9,13 +9,36 @@ var equipement : Equipment = null
 @onready var label = $RichTextLabel
 
 
+const ITEM_BOX := preload("res://UI/UI boxes/UI_combat_itembox.png")
+
+
 func _ready():
+	_ensure_box()
 	button.connect("mouse_entered", over)
 	button.connect("mouse_exited",exit)
 	normal_scale= scale
 	
 	
 	label.pivot_offset = label.size / 2
+## Le cadre doit rester visible, vide ou non. En combat il était la texture
+## du Sprite lui-même : l'icône de l'objet l'écrasait, et remove_item()
+## l'effaçait. On le déplace dans un enfant dessiné derrière, la texture du
+## Sprite ne porte plus que l'icône. L'exploration a déjà son cadre en
+## enfant (TextureRect) : rien à faire.
+func _ensure_box() -> void:
+	for child in get_children():
+		if child is TextureRect and child.texture == ITEM_BOX:
+			return
+	var box := Sprite2D.new()
+	box.name = "Box"
+	box.texture = ITEM_BOX
+	box.show_behind_parent = true
+	add_child(box)
+	move_child(box, 0)
+	if texture == ITEM_BOX:
+		texture = null
+
+
 func assigne_item(item:Equipment):
 	
 	equipement = item

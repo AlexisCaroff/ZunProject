@@ -21,6 +21,7 @@ var hornyJauge
 var LustProgressBar
 
 const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
+const BUFF_UI := preload("res://UI/buffUi.tscn")
 # --- Infos de base
 @export var Charaname: String = "name"
 @export var IsDemon: bool = false
@@ -47,8 +48,11 @@ func load_chara() -> void:
 	Charaname = characterData.Charaname
 	sprite.texture =characterData.portrait_texture
 
-	for buff in characterData.buffs:
-		add_buff(buff, true)
+	# Les icônes de buff ne sont PAS posées ici. À cet instant buff_bar
+	# désigne encore la HBoxContainer locale de la scène, au-dessus de la
+	# tête ; ExplorationPosition._bind_occupant la remplace ensuite par
+	# celle du slot puis appelle update_display(), qui la remplit. Remplir
+	# les deux affichait chaque buff en double.
 
 
 func update_display() -> void:
@@ -62,15 +66,18 @@ func update_display() -> void:
 
 	# Synchronise la buff_bar avec characterData.buffs
 	for child in buff_bar.get_children():
+		buff_bar.remove_child(child)
 		child.queue_free()
+	# Filet de sécurité : une fois le personnage rattaché à son slot, la
+	# barre locale de la scène ne sert plus. On la vide pour qu'un ancien
+	# jeu d'icônes n'y reste pas affiché en double au-dessus de la tête.
+	var local_bar := get_node_or_null("HBoxContainer")
+	if local_bar != null and local_bar != buff_bar:
+		for child in local_bar.get_children():
+			local_bar.remove_child(child)
+			child.queue_free()
 	for buff in characterData.buffs:
-		var icon := TextureRect.new()
-		icon.texture = buff.icon
-		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		icon.custom_minimum_size = Vector2(32, 32)
-		icon.size = Vector2(32, 32)
-		buff_bar.add_child(icon)
+		_add_buff_icon(buff)
 
 
 
@@ -82,17 +89,23 @@ func set_move_target(state: bool) -> void:
 func add_buff(buff: Buff, isload:bool =false):
 
 	var new_buff = buff.duplicate()
-	var icon = TextureRect.new()
-	icon.texture = new_buff.icon
-	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	icon.custom_minimum_size = Vector2(32, 32)
-	icon.size= Vector2(32, 32)
-	buff_bar.add_child(icon)
-	if !load:
+	_add_buff_icon(new_buff)
+	# `load` est la fonction native de Godot, toujours vraie : la condition
+	# n'était jamais prise et le buff n'atterrissait pas dans les données.
+	if !isload:
 		characterData.buffs.append(buff)
 	#buff_icons.add_child(icon)
 	print("add buff")
+
+## Même icône qu'en combat (UI/buffUi.tscn) : même taille, même espacement
+## dans la BuffBar, et l'infobulle stat / montant / tours au survol.
+func _add_buff_icon(buff: Buff) -> void:
+	if buff_bar == null:
+		return
+	var icon = BUFF_UI.instantiate()
+	buff_bar.add_child(icon)
+	icon.updatebuff(buff)
+
 
 signal skill_animation_started
 signal skill_animation_finished

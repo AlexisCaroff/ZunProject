@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://dxj1ksi0rq6i6"]
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://dxj1ksi0rq6i6"]
 
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_2gtcg"]
 [ext_resource type="Texture2D" uid="uid://bu3l6pyorqnws" path="res://characters/charatexture/demo characters/ENEMY_addict_tentagrab.png" id="1_7m3nb"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_2odx0"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_jtfnp"]
@@ -36,10 +35,10 @@ required_position = 0
 range = 2
 ImageSkill = ExtResource("1_7m3nb")
 the_target_type = 0
-effects = Array[ExtResource("1_2gtcg")]([SubResource("Resource_t3sey"), SubResource("Resource_t52hr")])
+effects = Array[Resource]([SubResource("Resource_t3sey"), SubResource("Resource_t52hr")])
 two_target_Type = false
 the_second_target_type = 0
-second_effects = Array[ExtResource("1_2gtcg")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

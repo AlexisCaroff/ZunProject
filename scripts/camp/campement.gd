@@ -7,6 +7,7 @@ class_name Campement
 @onready var action_panel = $ActionPanel
 @onready var AttLabel = $AttLabel2
 @onready var DefLabel = $DefLabel2
+@onready var WillPowerLabel = $WillPower2
 @onready var Stamina = $Stamina2
 @onready var StaminaBar: ProgressBar = $StaminaProgressBar
 @onready var guilt= $Guilt2
@@ -14,6 +15,9 @@ class_name Campement
 @onready var horny = $Horny2
 @onready var hornyBar: ProgressBar = $LustProgressBar
 @onready var CharacterName = $Charaname
+## Décalage des icônes de buff posées derrière le libellé « Buff: ».
+@export var buffs_icons_nudge: Vector2 = Vector2.ZERO
+var buff_row: BuffRow = null
 var selected_chara: CharaCamp = null
 @onready var exitButton =$ExitButton
 @onready var slots =$HeroPosition .get_children() # conteneur des ExploPositionSlot
@@ -38,6 +42,8 @@ var skillcampmode : bool = true
 @onready var QuitmapButton = $QuittMapButton
 @onready var contourMap=$ContourMap
 @onready var MenuPerso = $MenuPerso
+## Les deux cases d'équipement sous le portrait (UI/UICombatItem.gd).
+@onready var item_slots: Array = [$Items/Item1, $Items/Item2]
 @onready var MenuPersoButton=$charaPortrait2/charaPortraitButton
 @onready var CharactersAffinity= [
 	$CharactersPanelAffinity/chara1,
@@ -49,6 +55,13 @@ func _ready():
 	gm = get_tree().root.get_node("GameManager") as GameManager
 	MenuPerso.characters = gm.characters
 	load_characters_from_gamestat()
+	# Comme en exploration : les icônes se collent derrière le libellé
+	# « Buff: » de la scène.
+	var buffs_anchor := get_node_or_null("Buffs") as Control
+	if buffs_anchor != null:
+		buff_row = BuffRow.create(self,
+				BuffRow.position_after(buffs_anchor) + buffs_icons_nudge,
+				buffs_anchor, false, 20)
 	selected_chara = characters[0]
 	(selected_chara.sprite.material as ShaderMaterial).set_shader_parameter("enabled", true)
 # -------Heal chara----------------
@@ -70,6 +83,8 @@ func _ready():
 	mapButton.connect("button_down",toggleshowMap)
 	QuitmapButton.connect("button_down",toggleshowMap)
 	MenuPersoButton.connect("button_down",showMenuPerso)
+	if MenuPerso.has_signal("change_in_equipment"):
+		MenuPerso.change_in_equipment.connect(_on_character_equipment_changed)
 	
 #func startLovescene():
 	
@@ -108,20 +123,56 @@ func changeSelectedCharacter(occupant:CharaCamp):
 	updateUICharacter(occupant.characterData)
 	occupant.animate_selected()
 	
+## Redessine la ligne des buffs ; appelé aussi par CharaCamp.add_buff quand
+## une action de camp en ajoute un au personnage affiché.
+func refresh_buffs(character: CharacterData) -> void:
+	if buff_row != null:
+		buff_row.show_for(character)
+
+
+## Même remplissage qu'en exploration (exploration_manager.gd).
+func update_equipment_icons(character: CharacterData) -> void:
+	for slot in item_slots:
+		slot.remove_item()
+	for i in range(min(character.equipped_items.size(), item_slots.size())):
+		item_slots[i].assigne_item(character.equipped_items[i])
+
+
+## Équipement modifié depuis le menu personnage : on redessine la fiche du
+## héros affiché (les stats bougent avec l'objet).
+func _on_character_equipment_changed(_chara: CharacterData) -> void:
+	if selected_chara != null:
+		updateUICharacter(selected_chara.characterData)
+
+
+## Appelé par les portraits d'affinité du panneau du haut
+## (CharaIventoryUI.gd) : sélectionne le héros correspondant dans le camp.
+func select_character(chara: CharacterData) -> void:
+	for c in characters:
+		if c.characterData == chara:
+			changeSelectedCharacter(c)
+			return
+
+
 func updateUICharacter(character:CharacterData):
 	portraitCharaselect.texture = character.explorationPortrait
 	CharacterName.text = character.Name
-	AttLabel.text = "Attaque: %d" % [character.attack]
-	DefLabel.text = "Defence: %d" % [character.defense]
-	Stamina.text = " %d / %d" % [character.current_stamina, character.max_stamina]
+	# Même présentation qu'en exploration : l'icône dit la stat, le libellé
+	# ne porte que la valeur.
+	AttLabel.text = " %d" % character.attack
+	DefLabel.text = " %d" % character.defense
+	WillPowerLabel.text = " %d" % character.willpower
+	Stamina.text = "%d / %d" % [character.current_stamina, character.max_stamina]
 	StaminaBar.max_value = character.max_stamina
 	StaminaBar.value=character.current_stamina
-	guilt.text = " %d / %d" % [character.current_stress, character.max_stress]
+	guilt.text = "%d / %d" % [character.current_stress, character.max_stress]
 	guiltBar.max_value=character.max_stress
 	guiltBar.value=character.current_stress
-	horny.text = " %d / %d" % [character.current_horniness, character.max_horniness]
+	horny.text = "%d / %d" % [character.current_horniness, character.max_horniness]
 	hornyBar.max_value = character.max_horniness
 	hornyBar.value =character.current_horniness
+	refresh_buffs(character)
+	update_equipment_icons(character)
 	
 	var other_members : Array = []
 	for c in characters:
@@ -211,8 +262,17 @@ func show_chara_actions(thechara: CharaCamp):
 			btn.icon = skill.icon
 		var empty_style := StyleBoxEmpty.new()
 		btn.add_theme_stylebox_override("focus", empty_style)
-		btn.custom_minimum_size= Vector2(70,70)
-		btn.size=Vector2(70,70)
+		# Même bouton qu'en combat : 90 px, icône étirée au bouton, contour
+		# du shader prêt à s'allumer.
+		btn.custom_minimum_size= Vector2(90,90)
+		btn.size=Vector2(90,90)
+		btn.expand_icon = true
+		btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		var mat := ShaderMaterial.new()
+		mat.shader = load("res://characters/character_outline.gdshader")
+		mat.set_shader_parameter("enabled", false)
+		mat.set_shader_parameter("outline_direction", Vector2.ZERO)
+		btn.material = mat
 		btn.Actiontext = skill.name
 		if skill.cost>campPoints:
 			btn.disabled=true
@@ -222,13 +282,6 @@ func show_chara_actions(thechara: CharaCamp):
 
 		action_panel.add_child(btn)
 
-		# Création d'une ligne de cercles représentant le coût (un HBox par skill)
-		var cost_row := HBoxContainer.new()
-		for j in range(max(0, skill.cost)):
-			var circle := TextureRect.new()
-			circle.texture = preload("res://UI/cost_circle.png") # remplace par ton sprite
-			circle.custom_minimum_size = Vector2(16, 16)
-			cost_row.add_child(circle)
 		
 		
 		

@@ -540,20 +540,20 @@ func ask_use_potion(index: int) -> void:
 
 	if target == null:
 		can_use = false
-		reason = "Aucun personnage sélectionné."
+		reason = "No character selected."
 	elif not potion.is_usable(in_combat):
 		can_use = false
-		reason = "Pas pendant un combat." if in_combat else "Seulement pendant un combat."
+		reason = "Not during combat." if in_combat else "Only during combat."
 	elif in_combat and not _combat_turn_is_usable():
 		can_use = false
-		reason = "Attends ton tour."
+		reason = "Wait for your turn."
 
 	var cell := inventory_grid.get_child(index) as Control
 	var anchor: Vector2 = cell.global_position + Vector2(60, 40)
-	var target_name := target.Name if target != null and target.Name != "" else "ce personnage"
+	var target_name := target.Name if target != null and target.Name != "" else "this character"
 
 	_potion_popup = PotionConfirmPopup.open(
-		canvasLayer, potion, target_name, anchor, can_use, reason)
+		canvasLayer, potion, target_name, anchor, can_use, reason, self)
 	_potion_popup.confirmed.connect(func(): use_potion(index))
 
 
@@ -972,7 +972,7 @@ func show_tooltip(item: Equipment, cell_position: Vector2):
 		if potion.description != "":
 			txt += "[i]%s[/i]\n" % potion.description
 		txt += potion.effects_bbcode()
-		txt += "\n[color=888888][i]Clic pour boire[/i][/color]"
+		txt += "\n[color=888888][i]Click to drink[/i][/color]"
 		tooltip_desc.text = txt
 		tooltip_panel.visible = true
 		_fit_and_place_tooltip(cell_position)

@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://rxp2q7eq2hr5"]
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://rxp2q7eq2hr5"]
 
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_0d46u"]
 [ext_resource type="Texture2D" uid="uid://dbis8kchulhhc" path="res://characters/charatexture/demo characters/ENEMY_temptress_charm.png" id="1_0w17e"]
 [ext_resource type="Texture2D" uid="uid://c6ptbylmpvkdy" path="res://actions/CampSkill/masturbIcon.png" id="1_lqogb"]
 [ext_resource type="PackedScene" uid="uid://8vmc6rbjidyt" path="res://actions/damageEffect/trailAttackVFX.tscn" id="2_eymmy"]
@@ -25,10 +24,10 @@ required_position = 0
 range = 3
 ImageSkill = ExtResource("1_0w17e")
 the_target_type = 0
-effects = Array[ExtResource("1_0d46u")]([SubResource("Resource_lqogb")])
+effects = Array[Resource]([SubResource("Resource_lqogb")])
 two_target_Type = false
 the_second_target_type = 0
-second_effects = Array[ExtResource("1_0d46u")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

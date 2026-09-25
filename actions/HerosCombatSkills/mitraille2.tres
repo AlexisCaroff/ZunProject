@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://celpxos31e3k2"]
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://celpxos31e3k2"]
 
 [ext_resource type="Texture2D" uid="uid://bjl3tx6extox8" path="res://characters/charatexture/demo characters/HERO_mystic_ranged_shootbig.png" id="1_44xuo"]
 [ext_resource type="AudioStream" uid="uid://pyc1twsxl48d" path="res://actions/sound/Hammer1 (mp3cut.net).wav" id="2_qrpiw"]
 [ext_resource type="PackedScene" uid="uid://cctqpui77aw5" path="res://actions/skillEffects/FX/Scene/spitMystic_FX.tscn" id="3_u5tsq"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="4_rjgt8"]
 [ext_resource type="Texture2D" uid="uid://df4q4tno1vx4c" path="res://actions/actiontexture/UI icons/ICON_mystic_rang_spray.png" id="5_e0qpi"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="5_qrpiw"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="6_fq4on"]
@@ -28,10 +27,10 @@ required_position = 0
 range = 3
 ImageSkill = ExtResource("1_44xuo")
 the_target_type = 4
-effects = Array[ExtResource("4_rjgt8")]([SubResource("Resource_u5tsq")])
+effects = Array[Resource]([SubResource("Resource_u5tsq")])
 two_target_Type = false
 the_second_target_type = 1
-second_effects = Array[ExtResource("4_rjgt8")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

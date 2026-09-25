@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://b0gt00v7dl0u7"]
+[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://b0gt00v7dl0u7"]
 
 [ext_resource type="Texture2D" uid="uid://c2b35no4g7tky" path="res://demo characters/HERO_mystic_cc_tentagrab.png" id="1_wnuqu"]
 [ext_resource type="PackedScene" uid="uid://bj8buddu2d1up" path="res://actions/skillEffects/FX/Scene/TentacleGrabM.tscn" id="2_q3n3a"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="3_jgwtt"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="4_k4h32"]
 [ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="5_sh6m8"]
 [ext_resource type="Texture2D" uid="uid://crwjl88ks51cr" path="res://actions/actiontexture/UI icons/ICON_mystic_cc_grab.png" id="6_24qvg"]
@@ -37,10 +36,10 @@ required_position = 0
 range = 3
 ImageSkill = ExtResource("1_wnuqu")
 the_target_type = 0
-effects = Array[ExtResource("3_jgwtt")]([SubResource("Resource_clqko"), SubResource("Resource_kwmm0")])
+effects = Array[Resource]([SubResource("Resource_clqko"), SubResource("Resource_kwmm0")])
 two_target_Type = false
 the_second_target_type = 0
-second_effects = Array[ExtResource("3_jgwtt")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

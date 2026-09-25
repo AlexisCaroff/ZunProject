@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://o3alq0k34b2r"]
+[gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://o3alq0k34b2r"]
 
 [ext_resource type="Texture2D" uid="uid://5sxx1j4x2jr3" path="res://characters/charatexture/demo characters/INQUISITION_incapacitor_pin.png" id="1_nn0gt"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_1gmq2"]
 [ext_resource type="PackedScene" uid="uid://d74pdae8pwuk" path="res://actions/skillEffects/FX/Scene/saltHunter.tscn" id="2_nn0gt"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_gog1q"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="5_gog1q"]
@@ -37,10 +36,10 @@ required_position = 0
 range = 3
 ImageSkill = ExtResource("1_nn0gt")
 the_target_type = 4
-effects = Array[ExtResource("2_1gmq2")]([SubResource("Resource_3q5jt"), SubResource("Resource_j1cnl")])
+effects = Array[Resource]([SubResource("Resource_3q5jt"), SubResource("Resource_j1cnl")])
 two_target_Type = false
 the_second_target_type = 2
-second_effects = Array[ExtResource("2_1gmq2")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

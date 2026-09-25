@@ -32,7 +32,12 @@ enum target_type {
 @export var ImageSkill : Texture2D
 @export_enum("enemy", "ally", "self", "all ally", "all ennemy", "front ennemy","back ennemy","front ally","back ally","everyone","every other","everyone all","all ally and ennemy front")
 var the_target_type: int = target_type.ENNEMY
-@export var effects: Array[SkillEffect] = []
+## ATTENTION : typé Array[Resource] et NON Array[SkillEffect], volontairement.
+## Un Array[T] typé par script rejette silencieusement tout élément dont le
+## script ne compile pas au moment du chargement — le .tres se charge, le
+## tableau revient VIDE, et le moindre ré-enregistrement détruit les
+## sous-ressources. C'est ce qui avait vidé les compétences du Hunter.
+@export var effects: Array[Resource] = []
 @export var two_target_Type: bool = false
 
 enum second_target_type {
@@ -53,7 +58,7 @@ enum second_target_type {
 
 @export_enum("enemy", "ally", "self", "all ally", "all ennemy", "front ennemy","back ennemy","front ally","back ally","everyone","every other","everyone all","all ally and ennemy front")
 var the_second_target_type: int = second_target_type.ENNEMY
-@export var second_effects: Array[SkillEffect] = []
+@export var second_effects: Array[Resource] = []
 @export var usable_when_horny: bool = false
 @export var needtarget: bool = true
 @export var Actiontype : String = "attack" # attack, heal, boost
@@ -108,6 +113,11 @@ func can_use() -> bool:
 func use(target: PositionSlot = null, secondtarget: bool = false) -> PositionSlot:
 	owner.current_skill = self
 
+	# Un allié de la cible peut s'être interposé (cf. InterceptEffect) : on
+	# le substitue AVANT tout le reste, pour que le jet de précision, les
+	# effets et les animations portent bien sur lui.
+	target = _redirect_to_protector(target)
+
 	if combatManager:
 		combatManager.ui.log(owner.characterData.Charaname + " uses " + descriptionName)
 
@@ -157,6 +167,46 @@ func use(target: PositionSlot = null, secondtarget: bool = false) -> PositionSlo
 			target = await _apply_effect(target, effects)
 
 	return target
+
+
+## Redirige une attaque à cible unique vers l'allié qui s'est interposé
+## devant la cible. Ne touche à rien d'autre : les soins, les buffs et les
+## attaques de zone passent tout droit — sur une zone le protecteur est
+## déjà dans la liste des cibles et la prendrait deux fois.
+func _redirect_to_protector(target: PositionSlot) -> PositionSlot:
+	if target == null or target.occupant == null:
+		return target
+	if is_beneficial or the_target_type != target_type.ENNEMY:
+		return target
+	if owner == null or owner.characterData == null:
+		return target
+
+	var victim: Character = target.occupant
+	if victim.characterData == null:
+		return target
+	# Seules les attaques venues du camp adverse sont interceptables.
+	if owner.characterData.is_player_controlled == victim.characterData.is_player_controlled:
+		return target
+
+	var cm: CombatManager = combatManager
+	if cm == null:
+		cm = owner.combat_manager
+	if cm == null:
+		return target
+
+	var allies: Array = cm.heroes if victim.characterData.is_player_controlled else cm.enemies
+	var guard: Character = InterceptEffect.protector_of(victim, allies)
+	if guard == null or guard._current_slot == null:
+		return target
+
+	if cm.ui != null:
+		cm.ui.log("%s intercepts the blow aimed at %s" % [
+			guard.characterData.Charaname, victim.characterData.Charaname])
+	print("🧱 ", guard.characterData.Charaname, " intercepte le coup destiné à ",
+			victim.characterData.Charaname)
+	return guard._current_slot
+
+
 func pay_cost():
 	owner.characterData.current_stamina-= cost
 	if cooldown > 0:
@@ -164,7 +214,7 @@ func pay_cost():
 		reducecost =0
 	owner.update_ui()
 
-func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = effects) -> PositionSlot:
+func _apply_effect(target: PositionSlot, effects_array: Array[Resource] = effects) -> PositionSlot:
 	var heallovedOnesTrigger: bool = false
 
 	if !combatManager:
@@ -207,6 +257,14 @@ func _apply_effect(target: PositionSlot, effects_array: Array[SkillEffect] = eff
 			if tag == "degrader" and target != owner._current_slot:
 				target.occupant.characterData.current_stress += 2
 		for effecttoapply in effects_array:
+			# Garde-fou : si le script d'un effet n'a pas pu être rattaché au
+			# chargement (script en erreur, cache d'import périmé), l'élément
+			# arrive ici en Resource nue, sans apply(). On le signale au lieu
+			# de faire planter tout le combat.
+			if effecttoapply == null or not effecttoapply.has_method("apply"):
+				push_error("Skill « %s » : un effet est arrivé sans son script (%s). Le .tres est probablement bon — c'est le script de l'effet qui n'a pas compilé, ou le cache .godot qui est périmé." % [
+					name, effecttoapply])
+				continue
 			effecttoapply.apply(owner, target)
 
 	# Priestess en file après les dégâts

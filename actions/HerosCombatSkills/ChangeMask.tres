@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=16 format=3 uid="uid://m6nw8l2ax4to"]
+[gd_resource type="Resource" script_class="Skill" load_steps=15 format=3 uid="uid://m6nw8l2ax4to"]
 
 [ext_resource type="Texture2D" uid="uid://c5tseed6710ck" path="res://characters/charatexture/demo characters/HERO_mystic_maskchange.png" id="1_p0ux0"]
 [ext_resource type="Script" uid="uid://cy3v0dypme7n7" path="res://actions/skillEffects/Move.gd" id="2_kkbb7"]
 [ext_resource type="Script" uid="uid://c0arbc0klbc6c" path="res://actions/skillEffects/ChangeSkill.gd" id="2_tr7ti"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_vricj"]
 [ext_resource type="Texture2D" uid="uid://c12nmrfesundl" path="res://actions/actiontexture/UI icons/ICON_mystic_mask.png" id="4_crp1g"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="5_vricj"]
 [ext_resource type="Texture2D" uid="uid://cvvqwod3fqn5m" path="res://characters/charatexture/demo characters/HERO_mystic_ranged_hit.png" id="6_crp1g"]
@@ -38,10 +37,10 @@ required_position = 0
 range = 3
 ImageSkill = ExtResource("1_p0ux0")
 the_target_type = 1
-effects = Array[ExtResource("2_vricj")]([SubResource("Resource_vricj")])
+effects = Array[Resource]([SubResource("Resource_vricj")])
 two_target_Type = true
 the_second_target_type = 2
-second_effects = Array[ExtResource("2_vricj")]([SubResource("Resource_q2veb")])
+second_effects = Array[Resource]([SubResource("Resource_q2veb")])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

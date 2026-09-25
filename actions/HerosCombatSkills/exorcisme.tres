@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://b4f6tt51qrg3o"]
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://b4f6tt51qrg3o"]
 
 [ext_resource type="Texture2D" uid="uid://ci6or334e3v7" path="res://characters/charatexture/demo characters/HERO_priestess_cast.png" id="1_i6idu"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_ar1fo"]
 [ext_resource type="PackedScene" uid="uid://cy1wq8hxnqi8u" path="res://actions/skillEffects/FX/Scene/Exorcisme_Pristress_FX.tscn" id="2_jl83b"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_wh88t"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="4_mane8"]
@@ -26,10 +25,10 @@ required_position = 0
 range = 3
 ImageSkill = ExtResource("1_i6idu")
 the_target_type = 0
-effects = Array[ExtResource("2_ar1fo")]([SubResource("Resource_i4eos")])
+effects = Array[Resource]([SubResource("Resource_i4eos")])
 two_target_Type = false
 the_second_target_type = 3
-second_effects = Array[ExtResource("2_ar1fo")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

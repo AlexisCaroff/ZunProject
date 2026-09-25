@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://ds3vigal0aygx" path="res://lvl/Hall1/SpriteActionCombat.gd" id="2_lebof"]
 [ext_resource type="Texture2D" uid="uid://0x6um7xfv678" path="res://characters/exploPortrait/BossExploPortrait.png" id="4_h1mji"]
 [ext_resource type="PackedScene" uid="uid://bybkgif0h2tv0" path="res://CombatManager.tscn" id="5_1jj77"]
-[ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://lvl/Hall1/encounter1.tres" id="6_0clmy"]
+[ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://characters/data/encounter1.tres" id="6_0clmy"]
 [ext_resource type="AudioStream" uid="uid://bv7eg2rwowxuj" path="res://actions/sound/magicSlurp.mp3" id="7_m27o5"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="8_heaaa"]
 [ext_resource type="Texture2D" uid="uid://b6ydx3ktka8fh" path="res://UI/UI boxes/UI_convo_box.png" id="9_41jra"]

@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=13 format=3 uid="uid://nri716ki3ipb"]
+[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://nri716ki3ipb"]
 
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_jh1m6"]
 [ext_resource type="Texture2D" uid="uid://dflxvs46sww1w" path="res://characters/charatexture/demo characters/ENEMY_nymph_F_shoot.png" id="1_vb7f5"]
 [ext_resource type="PackedScene" uid="uid://b0xlvqrqes381" path="res://actions/skillEffects/FX/Scene/spitEnnemy_FX.tscn" id="2_n6mpd"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_vb7f5"]
@@ -38,10 +37,10 @@ required_position = 0
 range = 3
 ImageSkill = ExtResource("1_vb7f5")
 the_target_type = 0
-effects = Array[ExtResource("1_jh1m6")]([SubResource("Resource_jrqoj"), SubResource("Resource_3h4no")])
+effects = Array[Resource]([SubResource("Resource_jrqoj"), SubResource("Resource_3h4no")])
 two_target_Type = false
 the_second_target_type = 0
-second_effects = Array[ExtResource("1_jh1m6")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=17 format=3 uid="uid://bp426legb2qkr"]
+[gd_resource type="Resource" script_class="Skill" load_steps=16 format=3 uid="uid://bp426legb2qkr"]
 
 [ext_resource type="Texture2D" uid="uid://5sxx1j4x2jr3" path="res://characters/charatexture/demo characters/INQUISITION_incapacitor_pin.png" id="1_36e8l"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_36e8l"]
 [ext_resource type="PackedScene" uid="uid://bn67hgtv6jvaq" path="res://actions/skillEffects/FX/Scene/charge_fx.tscn" id="2_mfcwu"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_g0hup"]
 [ext_resource type="Script" uid="uid://dvysavdlqaph" path="res://actions/skillEffects/addcooldownEffect.gd" id="4_g0hup"]
@@ -50,10 +49,10 @@ required_position = 0
 range = 3
 ImageSkill = ExtResource("1_36e8l")
 the_target_type = 0
-effects = Array[ExtResource("2_36e8l")]([SubResource("Resource_3q5jt"), SubResource("Resource_ixvgo"), SubResource("Resource_4ktlx")])
+effects = Array[Resource]([SubResource("Resource_3q5jt"), SubResource("Resource_ixvgo"), SubResource("Resource_4ktlx")])
 two_target_Type = true
 the_second_target_type = 2
-second_effects = Array[ExtResource("2_36e8l")]([SubResource("Resource_0ntxy"), SubResource("Resource_opj7a")])
+second_effects = Array[Resource]([SubResource("Resource_0ntxy"), SubResource("Resource_opj7a")])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

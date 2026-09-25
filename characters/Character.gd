@@ -55,6 +55,12 @@ var CharaColor                 = Color(1.0, 1.0, 1.0, 1.0)
 var acte_twice     : bool      = false
 var exibBonusAtt               = 0
 var CharaGrab      : Character = null
+## Allié devant lequel ce personnage s'interpose : les attaques simples qui
+## le visent sont redirigées sur nous (cf. InterceptEffect, et la
+## redirection dans Skill.use()). Le compteur descend à chaque fin de tour
+## du protecteur.
+var protecting     : Character = null
+var protect_turns  : int       = 0
 var current_bark   : Bark      = null
 @export var characterData : CharacterData
 var current_skill  : Skill     = null
@@ -371,6 +377,13 @@ func end_turn():
 	combat_manager.ui.update_ui_for_current_character(self)
 	stunned = false
 	surprise = false
+	# L'interposition ne tient que quelques tours. Le compteur vit sur le
+	# protecteur : c'est lui qui joue à coup sûr, même si le protégé est
+	# étourdi, capturé ou trop excité pour agir.
+	if protect_turns > 0:
+		protect_turns -= 1
+		if protect_turns <= 0:
+			protecting = null
 
 func play_ai_turn(heroes: Array, enemies: Array):
 	if not characterData or characterData.ai_brain == null:
@@ -537,6 +550,13 @@ func take_damage(source: Character, stat: int, amount: int, typeMagic: bool, ski
 
 	shake_camera(20.0)
 	update_ui()
+
+	# Certains ennemis réagissent au fait d'encaisser : la pile de Slimes
+	# recrache le héros qu'elle a avalé une fois passée sous 50 % de PV.
+	# Le comportement vit dans le cerveau d'IA, pas ici.
+	if characterData != null and characterData.ai_brain != null \
+			and characterData.ai_brain.has_method("on_damage_taken"):
+		characterData.ai_brain.on_damage_taken(self)
 
 
 # ═══════════════════════════════════════════════════════════

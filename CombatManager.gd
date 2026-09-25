@@ -30,7 +30,7 @@ var pending_skill: Skill:
 
 @onready var hero_positions: Array[PositionSlot]=[]
 @onready var enemy_positions: Array[PositionSlot] =[]
-var combatChara = 	preload("res://characters/CombatChara.tscn")
+var combatChara = 	load("res://characters/CombatChara.tscn")
 
 @export var cristal_texture = preload("res://UI/cristalIcon.png")
 @export var encounter: CombatEncounter

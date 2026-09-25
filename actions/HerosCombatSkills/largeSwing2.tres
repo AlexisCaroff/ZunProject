@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://5fcbub8rim5w"]
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://5fcbub8rim5w"]
 
 [ext_resource type="Texture2D" uid="uid://divgajf7h32wb" path="res://characters/charatexture/demo characters/HERO_warrior_axe.png" id="1_kw8bn"]
 [ext_resource type="AudioStream" uid="uid://daejgs7ixjjp3" path="res://actions/sound/Weapon Sword Whips 01.wav" id="2_gqpxp"]
 [ext_resource type="PackedScene" uid="uid://cnsfkllro1fsp" path="res://actions/skillEffects/FX/Scene/slashAttack.tscn" id="3_lmpag"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="4_aua1c"]
 [ext_resource type="Texture2D" uid="uid://d24gv8aeirsdm" path="res://actions/actiontexture/UI icons/ICON_warrior_slash.png" id="5_b5v2w"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="5_gqpxp"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="6_ynqil"]
@@ -28,10 +27,10 @@ required_position = 1
 range = 3
 ImageSkill = ExtResource("1_kw8bn")
 the_target_type = 5
-effects = Array[ExtResource("4_aua1c")]([SubResource("Resource_lmpag")])
+effects = Array[Resource]([SubResource("Resource_lmpag")])
 two_target_Type = false
 the_second_target_type = 1
-second_effects = Array[ExtResource("4_aua1c")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

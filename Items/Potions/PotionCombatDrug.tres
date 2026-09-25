@@ -8,8 +8,8 @@
 
 [sub_resource type="Resource" id="Resource_drug_speed"]
 script = ExtResource("3_buff")
-name = "Fievre"
-description = "Initiative augmentee."
+name = "Fever"
+description = "Increased initiative."
 icon = ExtResource("4_buff_icon")
 stat = 2
 amount = 4
@@ -38,10 +38,10 @@ grants_extra_turn = true
 usable_out_of_combat = true
 usable_in_combat = true
 ends_turn_in_combat = true
-confirm_text = "Injecter la Fievre Noire ? Un tour de plus, et le reste se paiera plus tard."
+confirm_text = "Inject the Black Fever? One more turn now, and the rest will be paid for later."
 icon = ExtResource("2_icon")
-name = "Fievre Noire"
-description = "Drogue de combat. Le corps part avant l'esprit : un tour d'avance, et l'initiative qui monte."
+name = "Black Fever"
+description = "Combat drug. The body moves before the mind: a turn ahead, and rising initiative."
 isCursed = false
 number = 1
 Max_stamina_bonus = 0

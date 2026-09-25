@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://daik6fj7sis15"]
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://daik6fj7sis15"]
 
 [ext_resource type="Texture2D" uid="uid://du3h3js8flb8e" path="res://characters/charatexture/demo characters/ENEMY_temptress_whip.png" id="1_cvhwe"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_lxrva"]
 [ext_resource type="Script" uid="uid://dvysavdlqaph" path="res://actions/skillEffects/addcooldownEffect.gd" id="2_7pp0c"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_vmp0o"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_cvhwe"]
@@ -29,10 +28,10 @@ required_position = 1
 range = 3
 ImageSkill = ExtResource("1_cvhwe")
 the_target_type = 0
-effects = Array[ExtResource("1_lxrva")]([SubResource("Resource_2t4vb"), SubResource("Resource_jrlbw")])
+effects = Array[Resource]([SubResource("Resource_2t4vb"), SubResource("Resource_jrlbw")])
 two_target_Type = false
 the_second_target_type = 0
-second_effects = Array[ExtResource("1_lxrva")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

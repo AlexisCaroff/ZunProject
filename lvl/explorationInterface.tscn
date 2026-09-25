@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://badg2cpqmlnim"]
+[gd_scene load_steps=53 format=3 uid="uid://badg2cpqmlnim"]
 
 [ext_resource type="Texture2D" uid="uid://cds1jgu4rdn1e" path="res://UI/UI boxes/UI_fgwall_inquisition.png" id="1_d8pyn"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="4_e2h3q"]
@@ -36,6 +36,12 @@
 [ext_resource type="Texture2D" uid="uid://cd52c3qv1laol" path="res://UI/UI inventory/UI_inventory_box_pack.png" id="36_bagbox"]
 [ext_resource type="Texture2D" uid="uid://bnqsm6vdxfcwy" path="res://UI/UI boxes/UI_button_map_on.png" id="36_ersvk"]
 [ext_resource type="Texture2D" uid="uid://k8pjtttjj3t0" path="res://UI/UI inventory/UI_inventory_button_bag.png" id="37_bagicon"]
+[ext_resource type="Texture2D" uid="uid://cfdyo8xe6oc4d" path="res://UI/WillPowerIcon.png" id="37_j0o3j"]
+[ext_resource type="Texture2D" uid="uid://blaxr6boo4hkf" path="res://UI/buffDeff.png" id="38_dip6q"]
+[ext_resource type="Texture2D" uid="uid://2whv8qtlghmo" path="res://UI/attack.png" id="39_0fyrk"]
+[ext_resource type="Texture2D" uid="uid://c1gp1kt7n8v64" path="res://UI/GuiltIcon.png" id="40_nvbu6"]
+[ext_resource type="Texture2D" uid="uid://mrdo8u7sgwwq" path="res://UI/lustIcon.png" id="41_gdhh8"]
+[ext_resource type="Texture2D" uid="uid://c3jrt50dlc2fd" path="res://UI/Stamina.png" id="42_2rhrc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qg4ur"]
 
@@ -551,56 +557,71 @@ offset_bottom = 55.0
 texture = ExtResource("30_d8pyn")
 expand_mode = 1
 
-[node name="AttLabel" type="RichTextLabel" parent="."]
+[node name="Buffs" type="RichTextLabel" parent="."]
 z_index = 6
 layout_mode = 0
-offset_left = 563.0
-offset_top = 972.0
-offset_right = 904.0
-offset_bottom = 1027.0
-theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
-theme_override_fonts/normal_font = ExtResource("5_furl3")
-theme_override_fonts/italics_font = ExtResource("5_furl3")
-theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/normal_font_size = 20
-text = "Attack :"
-
-[node name="DefLabel" type="RichTextLabel" parent="."]
-z_index = 6
-layout_mode = 0
-offset_left = 563.0
-offset_top = 1004.0
-offset_right = 909.0
-offset_bottom = 1059.0
-theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
-theme_override_fonts/normal_font = ExtResource("5_furl3")
-theme_override_fonts/italics_font = ExtResource("5_furl3")
-theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/normal_font_size = 20
-text = "Defence:"
-
-[node name="WillPower" type="RichTextLabel" parent="."]
-z_index = 6
-layout_mode = 0
-offset_left = 563.0
+offset_left = 537.0
 offset_top = 1036.0
-offset_right = 898.0
+offset_right = 878.0
 offset_bottom = 1091.0
 theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
 theme_override_fonts/normal_font = ExtResource("5_furl3")
 theme_override_fonts/italics_font = ExtResource("5_furl3")
 theme_override_font_sizes/bold_italics_font_size = 20
-theme_override_font_sizes/normal_font_size = 20
-text = "Willpower:"
+theme_override_font_sizes/normal_font_size = 30
+text = "Buff: 
+"
+
+[node name="AttLabel" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 564.0
+offset_top = 992.0
+offset_right = 905.0
+offset_bottom = 1047.0
+theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
+theme_override_fonts/normal_font = ExtResource("5_furl3")
+theme_override_fonts/italics_font = ExtResource("5_furl3")
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/normal_font_size = 30
+text = "Attack "
+
+[node name="DefLabel" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 680.0
+offset_top = 993.0
+offset_right = 1026.0
+offset_bottom = 1048.0
+theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
+theme_override_fonts/normal_font = ExtResource("5_furl3")
+theme_override_fonts/italics_font = ExtResource("5_furl3")
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/normal_font_size = 30
+text = "Defence"
+
+[node name="WillPower" type="RichTextLabel" parent="."]
+z_index = 6
+layout_mode = 0
+offset_left = 808.0
+offset_top = 992.0
+offset_right = 1143.0
+offset_bottom = 1047.0
+theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
+theme_override_fonts/normal_font = ExtResource("5_furl3")
+theme_override_fonts/italics_font = ExtResource("5_furl3")
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/normal_font_size = 30
+text = "Willpower"
 
 [node name="StaminaProgressBar" type="ProgressBar" parent="."]
 modulate = Color(0.878431, 0.584314, 0.341176, 1)
 layout_mode = 0
-offset_left = 638.0
-offset_top = 864.0
-offset_right = 819.0
-offset_bottom = 886.0
-scale = Vector2(1.00234, 0.561213)
+offset_left = 598.0
+offset_top = 865.0
+offset_right = 779.0
+offset_bottom = 887.0
+scale = Vector2(1.00234, 1.40121)
 theme_override_styles/background = SubResource("StyleBoxFlat_hwivl")
 theme_override_styles/fill = SubResource("StyleBoxFlat_d8pyn")
 value = 72.93
@@ -609,11 +630,11 @@ show_percentage = false
 [node name="LustProgressBar" type="ProgressBar" parent="."]
 modulate = Color(0.933333, 0.109804, 0.72549, 1)
 layout_mode = 0
-offset_left = 638.0
-offset_top = 897.0
-offset_right = 820.0
-offset_bottom = 919.0
-scale = Vector2(1.00234, 0.561213)
+offset_left = 598.0
+offset_top = 907.0
+offset_right = 780.0
+offset_bottom = 929.0
+scale = Vector2(1.00234, 1.40121)
 theme_override_styles/background = SubResource("StyleBoxFlat_hwivl")
 theme_override_styles/fill = SubResource("StyleBoxFlat_d8pyn")
 value = 72.93
@@ -622,11 +643,11 @@ show_percentage = false
 [node name="GuiltProgressBar" type="ProgressBar" parent="."]
 modulate = Color(0.266667, 0.294118, 0.364706, 1)
 layout_mode = 0
-offset_left = 638.0
-offset_top = 930.0
-offset_right = 820.0
-offset_bottom = 952.0
-scale = Vector2(1.00234, 0.561213)
+offset_left = 598.0
+offset_top = 949.0
+offset_right = 780.0
+offset_bottom = 971.0
+scale = Vector2(1.00234, 1.40121)
 theme_override_styles/background = SubResource("StyleBoxFlat_hwivl")
 theme_override_styles/fill = SubResource("StyleBoxFlat_d8pyn")
 value = 72.93
@@ -635,11 +656,11 @@ show_percentage = false
 [node name="Stamina" type="RichTextLabel" parent="."]
 z_index = 6
 layout_mode = 0
-offset_left = 831.0
-offset_top = 855.0
-offset_right = 952.0
-offset_bottom = 910.0
-theme_override_colors/default_color = Color(0.886275, 0.588235, 0.345098, 1)
+offset_left = 602.0
+offset_top = 868.0
+offset_right = 723.0
+offset_bottom = 923.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("5_furl3")
 theme_override_font_sizes/normal_font_size = 20
 text = "120/120"
@@ -647,11 +668,11 @@ text = "120/120"
 [node name="Horny" type="RichTextLabel" parent="."]
 z_index = 6
 layout_mode = 0
-offset_left = 831.0
-offset_top = 888.0
-offset_right = 947.0
-offset_bottom = 943.0
-theme_override_colors/default_color = Color(1, 0.113725, 0.776471, 1)
+offset_left = 603.0
+offset_top = 910.0
+offset_right = 719.0
+offset_bottom = 965.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("5_furl3")
 theme_override_font_sizes/normal_font_size = 20
 text = "80/100"
@@ -659,53 +680,14 @@ text = "80/100"
 [node name="Guilt" type="RichTextLabel" parent="."]
 z_index = 6
 layout_mode = 0
-offset_left = 831.0
-offset_top = 924.0
-offset_right = 945.0
-offset_bottom = 979.0
-theme_override_colors/default_color = Color(0.270588, 0.298039, 0.372549, 1)
+offset_left = 602.0
+offset_top = 952.0
+offset_right = 716.0
+offset_bottom = 1007.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("5_furl3")
 theme_override_font_sizes/normal_font_size = 20
 text = "10/100"
-
-[node name="Stamina2" type="RichTextLabel" parent="."]
-z_index = 6
-layout_mode = 0
-offset_left = 564.0
-offset_top = 855.0
-offset_right = 635.0
-offset_bottom = 910.0
-theme_override_colors/default_color = Color(0.886275, 0.588235, 0.345098, 1)
-theme_override_fonts/normal_font = ExtResource("5_furl3")
-theme_override_font_sizes/normal_font_size = 20
-text = "Stamina :	
-"
-
-[node name="Horny2" type="RichTextLabel" parent="."]
-z_index = 6
-layout_mode = 0
-offset_left = 564.0
-offset_top = 888.0
-offset_right = 633.0
-offset_bottom = 943.0
-theme_override_colors/default_color = Color(1, 0.113725, 0.776471, 1)
-theme_override_fonts/normal_font = ExtResource("5_furl3")
-theme_override_font_sizes/normal_font_size = 20
-text = "Lust:
-"
-
-[node name="Guilt2" type="RichTextLabel" parent="."]
-z_index = 6
-layout_mode = 0
-offset_left = 564.0
-offset_top = 924.0
-offset_right = 783.0
-offset_bottom = 979.0
-theme_override_colors/default_color = Color(0.270588, 0.298039, 0.372549, 1)
-theme_override_fonts/normal_font = ExtResource("5_furl3")
-theme_override_font_sizes/normal_font_size = 20
-text = "Guilt:
-"
 
 [node name="ExploSkillButton" type="Button" parent="."]
 layout_mode = 0
@@ -800,6 +782,41 @@ visible = false
 position = Vector2(52, 52)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("36_ersvk")
+
+[node name="WillPowerIcon" type="Sprite2D" parent="."]
+modulate = Color(0.222684, 0.533742, 0.748564, 1)
+position = Vector2(789, 1014.75)
+scale = Vector2(0.225817, 0.231132)
+texture = ExtResource("37_j0o3j")
+
+[node name="BuffDeff" type="Sprite2D" parent="."]
+position = Vector2(661, 1014.75)
+scale = Vector2(0.669231, 0.669231)
+texture = ExtResource("38_dip6q")
+
+[node name="Attack" type="Sprite2D" parent="."]
+modulate = Color(0.286275, 0.576471, 0.784314, 1)
+position = Vector2(551, 1011.75)
+scale = Vector2(0.375, 0.320475)
+texture = ExtResource("39_0fyrk")
+
+[node name="GuiltIcon" type="Sprite2D" parent="."]
+modulate = Color(0.266667, 0.294118, 0.364706, 1)
+position = Vector2(549.643, 970.388)
+scale = Vector2(0.842105, 0.715686)
+texture = ExtResource("40_nvbu6")
+
+[node name="LustIcon" type="Sprite2D" parent="."]
+modulate = Color(0.933333, 0.109804, 0.72549, 1)
+position = Vector2(553, 927)
+scale = Vector2(0.598361, 0.598361)
+texture = ExtResource("41_gdhh8")
+
+[node name="Stamina2" type="Sprite2D" parent="."]
+modulate = Color(0.878431, 0.584314, 0.341176, 1)
+position = Vector2(553.643, 881)
+scale = Vector2(0.622449, 0.622449)
+texture = ExtResource("42_2rhrc")
 
 [connection signal="button_down" from="HeroPosition/position1/Button" to="HeroPosition/position1" method="_on_button_button_down"]
 [connection signal="button_down" from="HeroPosition/position2/Button" to="HeroPosition/position2" method="_on_button_button_down"]

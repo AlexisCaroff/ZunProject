@@ -26,6 +26,7 @@ const SYM_MASC := preload("res://UI/symbols/SYM_attracted_masculine.png")
 const SYM_FEM  := preload("res://UI/symbols/SYM_attracted_feminine.png")
 const DIAMOND_FRAME := preload("res://UI/UI boxes/UI_affinity_portait_frame.png")
 const DIAMOND_MASK  := preload("res://UI/diamond_mask.gdshader")
+const GLOW_TEX      := preload("res://UI/symbols/FX_title_glow.png")
 
 ## Couleur d'un glyphe actif / inactif.
 const SYM_ON  := Color(1, 1, 1, 1)
@@ -63,6 +64,18 @@ const PORTRAIT_TEXTURE_PX := 256
 ## Cadence du clignotement pendant le tirage.
 @export var flicker_step: float = 0.06
 
+@export_group("Fin du tirage")
+## Taille du bouton « Let's go » pendant le tirage (il reste cliquable).
+@export var go_rolling_scale: float = 0.85
+## Taille du bouton une fois le tirage terminé.
+@export var go_ready_scale: float = 1.15
+## Taille du halo sous chaque portrait, relative au losange.
+@export var glow_size: float = 1.9
+## Opacité du halo au repos, une fois l'éclat initial retombé.
+@export_range(0.0, 1.0, 0.05) var glow_rest_alpha: float = 0.55
+## Durée d'une respiration du halo au repos.
+@export var glow_pulse_time: float = 1.6
+
 @onready var box: TextureRect = $CanvasLayer/Box
 @onready var slots_root: Control = $CanvasLayer/Box/Slots
 @onready var roll_button: Button = $CanvasLayer/RollButton
@@ -76,6 +89,9 @@ var characters: Array[CharacterData] = []
 ## Une entrée par case : { data, root, fem, masc, portrait }
 var _slots: Array[Dictionary] = []
 var _rolling: bool = false
+## Vrai dès que le joueur a validé : les tirages en cours s'arrêtent net.
+var _closing: bool = false
+var _go_tween: Tween = null
 
 
 func _ready() -> void:
@@ -89,6 +105,7 @@ func _ready() -> void:
 	go_button.pressed.connect(_on_go)
 
 	_build_slots()
+	_set_go_ready(false, true)
 	# Le menu s'ouvre en tirant tout seul : le joueur voit le hasard à
 	# l'œuvre, il n'a pas à le déclencher.
 	roll_all()
@@ -124,7 +141,72 @@ func _make_slot(data: CharacterData) -> Dictionary:
 	root.custom_minimum_size = Vector2(slot_spacing.x, slot_spacing.y)
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	# ── Cadre losange ───────────────────────────────────────────────
+	# ── Halo sous le portrait, allumé à la fin du tirage ────────────
+	# Premier enfant = dessiné derrière le cadre et le portrait.
+	var glow := TextureRect.new()
+	glow.name = "Glow"
+	glow.texture = GLOW_TEX
+	glow.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	glow.stretch_mode = TextureRect.STRETCH_SCALE
+	glow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var glow_mat := CanvasItemMaterial.new()
+	glow_mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+	glow.material = glow_mat
+	glow.modulate.a = 0.0
+	root.add_child(glow)
+	var glow_px := portrait_size * glow_size
+	_place(glow, Vector2.ONE * (portrait_size - glow_px) * 0.5, Vector2(glow_px, glow_px))
+
+	# Le portrait d'exploration est déjà un losange avec son propre cadre :
+	# on l'affiche tel quel. Sinon on retombe sur l'ancien montage (cadre +
+	# buste recadré et découpé par le shader).
+	var portrait: TextureRect
+	if data.explorationPortrait != null:
+		portrait = TextureRect.new()
+		portrait.name = "Portrait"
+		portrait.texture = data.explorationPortrait
+		portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		portrait.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		root.add_child(portrait)
+		_place(portrait, Vector2.ZERO, Vector2(portrait_size, portrait_size))
+	else:
+		portrait = _make_cropped_portrait(root, data)
+
+	# ── Bouton de re-tirage individuel ──────────────────────────────
+	var btn := Button.new()
+	btn.name = "Reroll"
+	btn.flat = true
+	btn.focus_mode = Control.FOCUS_NONE
+	btn.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	btn.tooltip_text = "%s — clic pour retirer au sort" % data.Name
+	root.add_child(btn)
+	_place(btn, Vector2.ZERO, Vector2(portrait_size, portrait_size))
+
+	# ── Les deux glyphes ────────────────────────────────────────────
+	var masc := _make_symbol(SYM_MASC, symbol_offset)
+	var fem := _make_symbol(SYM_FEM, symbol_offset + Vector2(symbol_gap, 0))
+	root.add_child(masc)
+	root.add_child(fem)
+	_place(masc, masc.get_meta("place_pos"), Vector2(symbol_size, symbol_size))
+	_place(fem, fem.get_meta("place_pos"), Vector2(symbol_size, symbol_size))
+
+	var slot := {
+		"data": data,
+		"root": root,
+		"fem": fem,
+		"masc": masc,
+		"portrait": portrait,
+		"glow": glow,
+		"done": false,
+	}
+	btn.pressed.connect(func(): _reroll_one(slot))
+	return slot
+
+
+## Ancien montage, pour un personnage sans portrait d'exploration : cadre
+## losange + buste recadré sur la tête et découpé par le shader.
+func _make_cropped_portrait(root: Control, data: CharacterData) -> TextureRect:
 	var frame := TextureRect.new()
 	frame.name = "Frame"
 	frame.texture = DIAMOND_FRAME
@@ -153,34 +235,7 @@ func _make_slot(data: CharacterData) -> Dictionary:
 	portrait.material = mat
 	root.add_child(portrait)
 	_place(portrait, Vector2(inset, inset), Vector2(side, side))
-
-	# ── Bouton de re-tirage individuel ──────────────────────────────
-	var btn := Button.new()
-	btn.name = "Reroll"
-	btn.flat = true
-	btn.focus_mode = Control.FOCUS_NONE
-	btn.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
-	btn.tooltip_text = "%s — clic pour retirer au sort" % data.Name
-	root.add_child(btn)
-	_place(btn, Vector2.ZERO, Vector2(portrait_size, portrait_size))
-
-	# ── Les deux glyphes ────────────────────────────────────────────
-	var masc := _make_symbol(SYM_MASC, symbol_offset)
-	var fem := _make_symbol(SYM_FEM, symbol_offset + Vector2(symbol_gap, 0))
-	root.add_child(masc)
-	root.add_child(fem)
-	_place(masc, masc.get_meta("place_pos"), Vector2(symbol_size, symbol_size))
-	_place(fem, fem.get_meta("place_pos"), Vector2(symbol_size, symbol_size))
-
-	var slot := {
-		"data": data,
-		"root": root,
-		"fem": fem,
-		"masc": masc,
-		"portrait": portrait,
-	}
-	btn.pressed.connect(func(): _reroll_one(slot))
-	return slot
+	return portrait
 
 
 func _make_symbol(tex: Texture2D, pos: Vector2) -> TextureRect:
@@ -268,17 +323,22 @@ func roll_all() -> void:
 		return
 	_rolling = true
 	_set_controls_enabled(false)
+	_set_go_ready(false)
 	_spin_dice()
 
 	for i in _slots.size():
+		_set_glow(_slots[i], false)
 		_roll_slot(_slots[i], i * stagger)
 
 	var total: float = roll_spin_time + stagger * float(max(0, _slots.size() - 1)) + 0.2
 	await get_tree().create_timer(total).timeout
-	if not is_inside_tree():
+	if not is_inside_tree() or _closing:
 		return
 	_rolling = false
 	_set_controls_enabled(true)
+	_set_go_ready(true)
+	for slot in _slots:
+		_set_glow(slot, true)
 
 
 func _reroll_one(slot: Dictionary) -> void:
@@ -286,32 +346,43 @@ func _reroll_one(slot: Dictionary) -> void:
 		return
 	_rolling = true
 	_set_controls_enabled(false)
+	_set_glow(slot, false)
 	await _roll_slot(slot, 0.0)
-	if not is_inside_tree():
+	if not is_inside_tree() or _closing:
 		return
 	_rolling = false
 	_set_controls_enabled(true)
+	_set_glow(slot, true)
 
 
 ## Fait défiler les glyphes au hasard, puis fige le résultat du tirage.
 func _roll_slot(slot: Dictionary, delay: float) -> void:
+	slot["done"] = false
 	if delay > 0.0:
 		await get_tree().create_timer(delay).timeout
-	if not is_inside_tree():
+	# _closing : le joueur a validé pendant le tirage, _on_go a déjà figé
+	# le résultat de cette case.
+	if not is_inside_tree() or _closing:
 		return
 
 	var elapsed: float = 0.0
 	while elapsed < roll_spin_time:
 		await get_tree().create_timer(flicker_step).timeout
-		if not is_inside_tree():
+		if not is_inside_tree() or _closing:
 			return
 		elapsed += flicker_step
 		_paint(slot, randf() < 0.5, randf() < 0.5)
 
+	_finish_slot(slot)
+	_pop(slot)
+
+
+## Tire et affiche le résultat définitif d'une case.
+func _finish_slot(slot: Dictionary) -> void:
 	var data: CharacterData = slot["data"]
 	data.roll_taste(bi_chance)
 	_paint(slot, data.attracted_to_feminine, data.attracted_to_masculine)
-	_pop(slot)
+	slot["done"] = true
 	print("🎲 %s → %s" % [data.Charaname, data.taste_label()])
 
 
@@ -359,20 +430,96 @@ func _on_make_them_bi() -> void:
 		data.set_taste(true, true)
 		_paint(slot, true, true)
 		_pop(slot)
+		_set_glow(slot, true)
 
 
+## Cliquable même pendant le tirage : les cases pas encore figées reçoivent
+## leur résultat tout de suite, sinon elles le tireraient après coup, une fois
+## la partie lancée.
 func _on_go() -> void:
-	if _rolling:
+	if _closing:
 		return
+	_closing = true
+	for slot in _slots:
+		if not slot["done"]:
+			_finish_slot(slot)
+	_rolling = false
 	_set_controls_enabled(false)
+	go_button.disabled = true
 	emit_signal("finished")
 
 
+## Le bouton « Let's go » n'est PAS concerné : il reste actif pendant le tirage.
 func _set_controls_enabled(on: bool) -> void:
 	roll_button.disabled = not on
 	bi_button.disabled = not on
-	go_button.disabled = not on
 	for slot in _slots:
 		var btn := (slot["root"] as Control).get_node_or_null("Reroll") as Button
 		if btn != null:
 			btn.disabled = not on
+
+
+# ════════════════════════════════════════════════════════════════════
+#  FIN DU TIRAGE — bouton et halos
+# ════════════════════════════════════════════════════════════════════
+
+## Petit pendant le tirage, il grossit d'un coup quand tout est figé.
+## normal_scale / hover_scale sont ceux de lvl/button.gd : le survol repart
+## de la nouvelle taille au lieu de la ramener à 1.
+func _set_go_ready(is_ready: bool, instant: bool = false) -> void:
+	var target := Vector2.ONE * (go_ready_scale if is_ready else go_rolling_scale)
+	go_button.set("normal_scale", target)
+	go_button.set("hover_scale", target * 1.1)
+	if _go_tween:
+		_go_tween.kill()
+	if instant:
+		go_button.scale = target
+		return
+	_go_tween = create_tween()
+	if is_ready:
+		_go_tween.tween_property(go_button, "scale", target, 0.4) \
+				.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	else:
+		_go_tween.tween_property(go_button, "scale", target, 0.2) \
+				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+
+## Halo sous le portrait : un éclat quand la case est figée, puis une lente
+## respiration. `on = false` l'éteint (nouveau tirage).
+func _set_glow(slot: Dictionary, on: bool) -> void:
+	var glow: TextureRect = slot.get("glow")
+	if not is_instance_valid(glow):
+		return
+	var old: Tween = slot.get("glow_tween")
+	if old:
+		old.kill()
+	var tween := create_tween()
+	slot["glow_tween"] = tween
+	if not on:
+		tween.tween_property(glow, "modulate:a", 0.0, 0.15)
+		return
+
+	glow.scale = Vector2.ONE * 0.5
+	glow.modulate.a = 0.0
+	# Éclat
+	tween.set_parallel(true)
+	tween.tween_property(glow, "scale", Vector2.ONE * 1.15, 0.3) \
+			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_property(glow, "modulate:a", 1.0, 0.2)
+	tween.set_parallel(false)
+	tween.tween_property(glow, "scale", Vector2.ONE, 0.35) \
+			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.parallel().tween_property(glow, "modulate:a", glow_rest_alpha, 0.35)
+	# Respiration, sans fin (le tween meurt avec le menu)
+	tween.tween_callback(func(): _breathe_glow(slot))
+
+
+func _breathe_glow(slot: Dictionary) -> void:
+	var glow: TextureRect = slot.get("glow")
+	if not is_instance_valid(glow):
+		return
+	var tween := create_tween().set_loops()
+	slot["glow_tween"] = tween
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(glow, "modulate:a", glow_rest_alpha * 0.55, glow_pulse_time * 0.5)
+	tween.tween_property(glow, "modulate:a", glow_rest_alpha, glow_pulse_time * 0.5)

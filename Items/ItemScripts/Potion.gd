@@ -160,15 +160,15 @@ func effects_bbcode() -> String:
 	if heal_guilt > 0:
 		lines.append("[color=AAAAAA]-%d Guilt[/color]" % heal_guilt)
 	if grants_extra_turn:
-		lines.append("[color=FFFF66]Un tour supplémentaire[/color]")
+		lines.append("[color=FFFF66]One extra turn[/color]")
 	for b in buffs:
 		if b == null:
 			continue
 		if b.amount != 0:
-			lines.append("[color=CC99FF]%s %+d (%d tours)[/color]" % [
+			lines.append("[color=CC99FF]%s %+d (%d turns)[/color]" % [
 				Buff.Stat.keys()[b.stat], b.amount, b.duration])
 		else:
-			lines.append("[color=CC99FF]%s (%d tours)[/color]" % [
+			lines.append("[color=CC99FF]%s (%d turns)[/color]" % [
 				Buff.Stat.keys()[b.stat], b.duration])
 	return "\n".join(lines)
 
@@ -176,4 +176,4 @@ func effects_bbcode() -> String:
 func confirm_message(target_name: String) -> String:
 	if confirm_text != "":
 		return confirm_text
-	return "Faire boire %s à %s ?" % [name, target_name]
+	return "Give %s to %s?" % [name, target_name]

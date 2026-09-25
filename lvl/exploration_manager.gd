@@ -65,6 +65,17 @@ var is_selecting_explo_target: bool = false
 @onready var toggle_map_inventory: Button = get_node_or_null("../ToggleMapInventory")
 var showing_inventory: bool = false
 
+# ── Ligne « Buffs : » de la fiche personnage ─────────────────────────
+# Les icônes sont construites par code (cf. UI/buff_row.gd). Si la scène
+# contient un libellé nommé "Buffs", elles se posent automatiquement juste
+# derrière son texte ; sinon la ligne dessine son propre titre à
+# buffs_row_position.
+## Coin haut-gauche de la ligne quand la scène n'a pas de libellé "Buffs".
+@export var buffs_row_position: Vector2 = Vector2(700, 994)
+## Décalage à appliquer aux icônes posées derrière le libellé "Buffs".
+@export var buffs_icons_nudge: Vector2 = Vector2.ZERO
+var buff_row: BuffRow = null
+
 
 func _ready():
 	for child in $"../HeroPosition".get_children():
@@ -98,6 +109,7 @@ func _ready():
 	# affichée en exploration doit suivre.
 	menuPerso.potion_used.connect(_on_potion_used)
 	#explo_skill_button.connect("button_down",_on_explo_skill_button_pressed)
+	_setup_buff_row()
 	load_characters_from_gamestat()
 	if gm.combat_just_ended:
 		print("💚 Post-combat heal sur l'équipe.")
@@ -274,12 +286,12 @@ func selectCharacter(thechara: CharaExplo):
 		Stamina.bbcode_enabled = true
 		Guilt.bbcode_enabled = true
 		Horny.bbcode_enabled = true
-		Att.text = "Attack: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
-		chara.attack, chara.base_attack, (chara.attack - chara.base_attack)]
-		Def.text = "Defense: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
-		chara.defense, chara.base_defense, (chara.defense - chara.base_defense)]
-		WillPower.text = "Willpower: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
-		chara.willpower, chara.base_willpower, (chara.willpower - chara.base_willpower)]
+		Att.text = " %d [color=AAAAAA]" % [
+		chara.attack]
+		Def.text = " %d [color=AAAAAA] " % [
+		chara.defense]
+		WillPower.text = " %d [color=AAAAAA]" % [
+		chara.willpower]
 
 		Stamina.text = "%d / %d" % [chara.current_stamina, chara.max_stamina]
 		StaminaProgressBar.max_value= chara.max_stamina
@@ -290,6 +302,8 @@ func selectCharacter(thechara: CharaExplo):
 		Horny.text = "%d / %d" % [chara.current_horniness, chara.max_horniness]
 		LustProgressBar.max_value=chara.max_horniness
 		LustProgressBar.value=chara.current_horniness
+		if buff_row != null:
+			buff_row.show_for(chara)
 		update_equipment_icons(chara)
 
 		# Refresh des boutons d'action (cooldown, disponibilité, etc.)
@@ -696,3 +710,21 @@ func _refresh_stats_display(chara: CharacterData) -> void:
 	Horny.text = "%d / %d" % [chara.current_horniness, chara.max_horniness]
 	LustProgressBar.max_value = chara.max_horniness
 	LustProgressBar.value = chara.current_horniness
+	if buff_row != null:
+		buff_row.show_for(chara)
+
+
+## Pose les icônes de buff dans le panneau du bas. Si la scène porte déjà un
+## libellé nommé "Buffs", elles se collent derrière son texte et aucun titre
+## n'est écrit ; sinon la ligne dessine son propre « Buffs : ».
+func _setup_buff_row() -> void:
+	var host := get_parent()
+	if host == null:
+		return
+	var anchor := host.get_node_or_null("Buffs") as Control
+	if anchor != null:
+		buff_row = BuffRow.create(host,
+				BuffRow.position_after(anchor) + buffs_icons_nudge,
+				anchor, false)
+	else:
+		buff_row = BuffRow.create(host, buffs_row_position, Att, true)

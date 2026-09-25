@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dg3aat08m30vy"]
 
 [ext_resource type="Script" uid="uid://blgghrqrf6qji" path="res://peek.gd" id="1_2c73c"]
-[ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://lvl/Hall1/encounter1.tres" id="2_amsrx"]
+[ext_resource type="Resource" uid="uid://cbfjexgqn4it1" path="res://characters/data/encounter1.tres" id="2_amsrx"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_amsrx"]
 [ext_resource type="Texture2D" uid="uid://c4wdk6bhq5nah" path="res://scenes/backgrounds dungeon demo/BG_dungeon_hall.png" id="3_e7bfl"]
 [ext_resource type="Texture2D" uid="uid://dmywh27l7sqm1" path="res://UI/mask.png" id="5_4c7x2"]

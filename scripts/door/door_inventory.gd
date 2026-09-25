@@ -117,8 +117,8 @@ func _build_counters() -> void:
 	col.offset_top = grid.offset_top + 6.0
 	col.offset_bottom = grid.offset_bottom
 
-	_money_label = _make_counter_row(col, MONEY_TEX, "Argent")
-	_prisoner_label = _make_counter_row(col, PRISONER_TEX, "Prisonniers")
+	_money_label = _make_counter_row(col, MONEY_TEX, "Money")
+	_prisoner_label = _make_counter_row(col, PRISONER_TEX, "Prisoners")
 
 	var gm := get_tree().root.get_node_or_null("GameManager") as GameManager
 	if gm != null:
@@ -272,7 +272,7 @@ func _on_cell_hovered(index: int) -> void:
 		if it.number > 1:
 			label += " x%d" % it.number
 		if potions_usable and it is Potion:
-			label += "  —  clic pour boire"
+			label += "  —  click to drink"
 		tooltip.text = label
 
 
@@ -304,18 +304,18 @@ func _on_cell_pressed(index: int) -> void:
 	var reason := ""
 	if target == null:
 		can_use = false
-		reason = "Aucun personnage sélectionné."
+		reason = "No character selected."
 	elif not potion.is_usable(false):
 		can_use = false
-		reason = "Seulement pendant un combat."
+		reason = "Only during combat."
 
 	var anchor: Vector2 = _cells[index].global_position + Vector2(cell_size.x * 0.5, 0)
-	var target_name := target.Name if target != null and target.Name != "" else "ce personnage"
+	var target_name := target.Name if target != null and target.Name != "" else "this character"
 
 	# Le popup est posé sur la scène courante (et non sur ce panneau, qui
 	# n'occupe qu'un coin de l'écran) pour rester centré et cliquable.
 	_popup = PotionConfirmPopup.open(
-		get_tree().current_scene, potion, target_name, anchor, can_use, reason)
+		get_tree().current_scene, potion, target_name, anchor, can_use, reason, self)
 	_popup.confirmed.connect(func(): _use_potion(potion))
 
 

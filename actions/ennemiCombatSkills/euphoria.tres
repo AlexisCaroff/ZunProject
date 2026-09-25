@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://daxgjjbu82mgo"]
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://daxgjjbu82mgo"]
 
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="1_11uf3"]
 [ext_resource type="Texture2D" uid="uid://dk7w4qddh43na" path="res://characters/charatexture/demo characters/ENEMY_addict_euphoria.png" id="1_383f7"]
 [ext_resource type="PackedScene" uid="uid://b0odwqc7e8b6o" path="res://actions/skillEffects/FX/Scene/Euphoria.tscn" id="2_6saam"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_devca"]
@@ -29,10 +28,10 @@ required_position = 0
 range = 3
 ImageSkill = ExtResource("1_383f7")
 the_target_type = 2
-effects = Array[ExtResource("1_11uf3")]([SubResource("Resource_383f7")])
+effects = Array[Resource]([SubResource("Resource_383f7")])
 two_target_Type = false
 the_second_target_type = 0
-second_effects = Array[ExtResource("1_11uf3")]([])
+second_effects = Array[Resource]([])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

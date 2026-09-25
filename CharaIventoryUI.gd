@@ -2,7 +2,10 @@ extends TextureRect
 
 var chara :CharacterData
 @onready var button =$Button
-@onready var inventory = $"../../.."
+## Nœud qui sait sélectionner un personnage : le menu d'inventaire
+## (InvetoryUI.gd) ou le camp (campement.gd). Cherché en remontant l'arbre,
+## la profondeur n'étant pas la même dans les deux scènes.
+@onready var inventory: Node = _find_selector()
 @export var normal_color: Color = Color.WHITE
 @export var hover_color: Color = Color.BISQUE
 
@@ -22,7 +25,18 @@ func _ready():
 	button.connect("mouse_exited",exit)
 	normal_scale = thetexture.scale
 #	thetexture.pivot_offset = thetexture.size / 2
+func _find_selector() -> Node:
+	var n := get_parent()
+	while n != null:
+		if n.has_method("select_character"):
+			return n
+		n = n.get_parent()
+	return null
+
+
 func  select_Chara():
+	if inventory == null or chara == null:
+		return
 	inventory.select_character(chara)
 func set_chara(character:CharacterData, affinity: int):
 	chara=character

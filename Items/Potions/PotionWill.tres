@@ -7,8 +7,8 @@
 
 [sub_resource type="Resource" id="Resource_will_guard"]
 script = ExtResource("3_buff")
-name = "Garde de l'Esprit"
-description = "Volonte augmentee : la Lust et la Culpabilite mordent moins."
+name = "Mind Guard"
+description = "Increased willpower: Lust and Guilt bite less."
 icon = ExtResource("4_buff_icon")
 stat = 3
 amount = 6
@@ -29,8 +29,8 @@ usable_in_combat = true
 ends_turn_in_combat = true
 confirm_text = ""
 icon = ExtResource("2_icon")
-name = "Elixir de Volonte"
-description = "Amer, glacant, lucide. Emousse le desir et durcit l'esprit contre ce qui le tente."
+name = "Willpower Elixir"
+description = "Bitter, icy, lucid. It dulls desire and hardens the mind against what tempts it."
 isCursed = false
 number = 1
 Max_stamina_bonus = 0

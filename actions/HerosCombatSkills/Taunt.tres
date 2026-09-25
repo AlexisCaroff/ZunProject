@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=16 format=3 uid="uid://behrtqotkyvnx"]
+[gd_resource type="Resource" script_class="Skill" load_steps=15 format=3 uid="uid://behrtqotkyvnx"]
 
 [ext_resource type="Texture2D" uid="uid://f8o3t710mcxl" path="res://characters/charatexture/demo characters/HERO_warrior_roar.png" id="1_3o4k5"]
 [ext_resource type="PackedScene" uid="uid://ounw7l2iaxnn" path="res://actions/skillEffects/FX/Scene/Taunt_fx.tscn" id="2_5kxhq"]
 [ext_resource type="Script" uid="uid://cjfkha61akav3" path="res://actions/skillEffects/TauntEffect.gd" id="2_wwy36"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_yu2gj"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="3_wwy36"]
 [ext_resource type="Texture2D" uid="uid://cnxu4nek43q22" path="res://UI/taunt.png" id="5_v6fax"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="6_aki42"]
@@ -51,10 +50,10 @@ required_position = 0
 range = 3
 ImageSkill = ExtResource("1_3o4k5")
 the_target_type = 0
-effects = Array[ExtResource("2_yu2gj")]([SubResource("Resource_yu2gj"), SubResource("Resource_5kxhq")])
+effects = Array[Resource]([SubResource("Resource_yu2gj"), SubResource("Resource_5kxhq")])
 two_target_Type = true
 the_second_target_type = 2
-second_effects = Array[ExtResource("2_yu2gj")]([SubResource("Resource_5uy07"), SubResource("Resource_qng7d")])
+second_effects = Array[Resource]([SubResource("Resource_5uy07"), SubResource("Resource_qng7d")])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"

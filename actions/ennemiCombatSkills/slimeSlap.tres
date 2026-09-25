@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://c8c4fx386kra8"]
+
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_skill"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_dmg"]
+[ext_resource type="Texture2D" uid="uid://b80ji1xecaebl" path="res://actions/actiontexture/spawnSlime.png" id="4_icon"]
+[ext_resource type="Texture2D" uid="uid://clvqybwb0fh7h" path="res://characters/charatexture/demo characters/ENEMY_slimepile_attack.png" id="5_image"]
+[ext_resource type="PackedScene" uid="uid://cqea4mekfk8gb" path="res://actions/skillEffects/FX/Scene/hit_standar.tscn" id="6_fx"]
+
+[sub_resource type="Resource" id="Resource_slimeslap"]
+script = ExtResource("3_dmg")
+MagicDMG = false
+amount = 12
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[resource]
+script = ExtResource("2_skill")
+name = "Slime Slap"
+descriptionName = "Slime Slap"
+description = "Une masse de slime s'abat sur un héros au contact."
+icon = ExtResource("4_icon")
+barkSkill = ""
+required_position = 1
+range = 1
+ImageSkill = ExtResource("5_image")
+the_target_type = 0
+effects = Array[Resource]([SubResource("Resource_slimeslap")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[Resource]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 1
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+is_contact = true
+distance_contact = 300.0
+target_effect_scene = ExtResource("6_fx")
+caster_effect_anchor = 0
+target_effect_anchor = 2
+is_beneficial = false
+skip_target_return_anim = false
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"
