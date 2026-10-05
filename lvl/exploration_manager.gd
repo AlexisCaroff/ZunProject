@@ -326,6 +326,12 @@ func update_equipment_icons(character: CharacterData):
 		var equip: Equipment = character.equipped_items[i]
 		slots[i].assigne_item(equip)
 
+## Objet équipé depuis le petit sac : fiche, cases d'objet et stats.
+func _on_item_equipped(_item: Equipment, _target: CharacterData) -> void:
+	if selected_character != null:
+		selectCharacter(selected_character)
+
+
 func _on_character_equipment_changed(_chara: CharacterData):
 	selectCharacter(selected_character)
 
@@ -354,6 +360,8 @@ func _setup_map_inventory_toggle() -> void:
 			return selected_character.characterData if selected_character != null else null)
 		if not inventory_panel.potion_used.is_connected(_on_potion_used):
 			inventory_panel.potion_used.connect(_on_potion_used)
+		if not inventory_panel.item_equipped.is_connected(_on_item_equipped):
+			inventory_panel.item_equipped.connect(_on_item_equipped)
 		# Un objet ramassé pendant que le sac est ouvert doit s'y afficher.
 		if gm != null and not gm.inventory_changed.is_connected(_on_bag_inventory_changed):
 			gm.inventory_changed.connect(_on_bag_inventory_changed)

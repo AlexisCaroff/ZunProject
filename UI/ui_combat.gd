@@ -344,6 +344,7 @@ func _setup_bag(gm: GameManager) -> void:
 	inventory_panel.cell_size = Vector2(72, 72)
 	inventory_panel.cell_separation = 4
 	inventory_panel.potions_usable = false
+	inventory_panel.equip_enabled = false
 	inventory_panel.z_index = 9
 	inventory_panel.visible = false
 	layer.add_child(inventory_panel)

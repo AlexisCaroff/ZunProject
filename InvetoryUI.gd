@@ -53,6 +53,12 @@ const COUNT_INSET := Vector2(10.0, 8.0)
 @onready var LustProgressBar=$CanvasLayer/LustProgressBar
 @onready var GuiltProgressBar=$CanvasLayer/GuiltProgressBar
 @onready var KinksList=$CanvasLayer/KinksList
+## Marqueurs d'attirance (triangle = féminin, carré = masculin), allumés
+## selon le tirage du TasteRollMenu. Mêmes icônes que ce menu.
+@onready var attraction_fem: CanvasItem = get_node_or_null("CanvasLayer/UiInventoryGenderF")
+@onready var attraction_masc: CanvasItem = get_node_or_null("CanvasLayer/UiInventoryGenderM")
+const ATTRACTION_ON := Color(1, 1, 1, 1)
+const ATTRACTION_OFF := Color(0.28, 0.28, 0.28, 1)
 # --- Camp skill / Assist
 @onready var CampsSkill = $CanvasLayer/CampsSkill
 @onready var CampsSkillCooldown = $CanvasLayer/CampsSkill/CooldownBar
@@ -209,6 +215,7 @@ func select_character(chara:CharacterData):
 
 	for tag in chara.tags:
 		KinksList.text += tag + "\n"
+	_show_attraction(chara)
 	Charaname.text=chara.Charaname
 	Def.bbcode_enabled = true
 	Att.bbcode_enabled = true
@@ -692,6 +699,17 @@ func _animate_explo_target(cd: CharacterData, potion: Potion) -> void:
 # --------------------------------------------------------------------
 # EQUIPMENT SLOTS UI
 # --------------------------------------------------------------------
+
+func _show_attraction(chara: CharacterData) -> void:
+	if attraction_fem != null:
+		attraction_fem.modulate = ATTRACTION_ON if chara.attracted_to_feminine else ATTRACTION_OFF
+		if attraction_fem is Control:
+			(attraction_fem as Control).tooltip_text = "Attracted to women" if chara.attracted_to_feminine else "Not attracted to women"
+	if attraction_masc != null:
+		attraction_masc.modulate = ATTRACTION_ON if chara.attracted_to_masculine else ATTRACTION_OFF
+		if attraction_masc is Control:
+			(attraction_masc as Control).tooltip_text = "Attracted to men" if chara.attracted_to_masculine else "Not attracted to men"
+
 
 func update_equipment_slots():
 

@@ -180,6 +180,88 @@ func roll_taste(bi_chance: float = 0.25) -> void:
 		set_taste(false, true)
 
 
+## Vrai si chaque membre de `team` a au moins un partenaire possible
+## (attirance réciproque) dans l'équipe : personne n'est privé de scène au
+## camp, et l'équipe ne peut pas tomber sur « tout le monde n'aime que les
+## femmes », qui laisserait les hommes sans rien.
+static func team_is_valid(team: Array) -> bool:
+	for a in team:
+		if a == null:
+			continue
+		var has_partner := false
+		for b in team:
+			if b != null and a.is_compatible_with(b):
+				has_partner = true
+				break
+		if not has_partner:
+			return false
+	return true
+
+
+## Tire les attirances de toute l'équipe en respectant team_is_valid().
+## On retire tout le monde jusqu'à `attempts` fois ; si le hasard n'y arrive
+## pas (équipe très déséquilibrée), on répare à la main.
+static func roll_team(team: Array, bi_chance: float = 0.25, attempts: int = 60) -> void:
+	for i in attempts:
+		for c in team:
+			if c != null:
+				c.roll_taste(bi_chance)
+		if team_is_valid(team):
+			return
+	_repair_team(team)
+
+
+## Retire un seul membre en gardant l'équipe valide. Si aucun tirage ne
+## convient, il garde son attirance actuelle.
+static func reroll_member(member: CharacterData, team: Array,
+		bi_chance: float = 0.25, attempts: int = 40) -> void:
+	var old_fem := member.attracted_to_feminine
+	var old_masc := member.attracted_to_masculine
+	for i in attempts:
+		member.roll_taste(bi_chance)
+		if team_is_valid(team):
+			return
+	member.set_taste(old_fem, old_masc)
+	if not team_is_valid(team):
+		_repair_team(team)
+
+
+## Dernier recours : chaque personnage isolé est rendu compatible avec un
+## autre membre, en ajoutant (sans en retirer) les attirances nécessaires
+## des deux côtés.
+static func _repair_team(team: Array) -> void:
+	for a in team:
+		if a == null:
+			continue
+		var isolated := true
+		for b in team:
+			if b != null and a.is_compatible_with(b):
+				isolated = false
+				break
+		if not isolated:
+			continue
+		var partner: CharacterData = null
+		for b in team:
+			if b != null and b != a:
+				partner = b
+				break
+		if partner == null:
+			return
+		a._add_attraction_to(partner)
+		partner._add_attraction_to(a)
+
+
+func _add_attraction_to(other: CharacterData) -> void:
+	match other.presentation:
+		Presentation.FEMININE:
+			attracted_to_feminine = true
+		Presentation.MASCULINE:
+			attracted_to_masculine = true
+		_:
+			if not attracted_to_feminine and not attracted_to_masculine:
+				attracted_to_feminine = true
+
+
 ## Libellé court, pour les tooltips et le journal.
 func taste_label() -> String:
 	if attracted_to_feminine and attracted_to_masculine:

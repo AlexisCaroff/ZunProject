@@ -26,6 +26,9 @@ const PRISONER_TEX   := preload("res://UI/UI boxes/UI_prisoner.png")
 @export var cell_separation: int = 6
 ## Permet de boire les potions depuis ce panneau.
 @export var potions_usable: bool = true
+## Cliquer un objet d'équipement l'équipe sur le personnage sélectionné
+## (exploration, porte). Désactivé en combat.
+@export var equip_enabled: bool = true
 
 @export_group("Compteurs")
 ## Colonne argent / prisonniers, à droite de la grille.
@@ -49,6 +52,8 @@ var _using_potion: bool = false
 
 ## Émis après qu'une potion a été bue, pour que la porte rafraîchisse ses jauges.
 signal potion_used(potion: Potion, target: CharacterData)
+## Un objet vient d'être équipé depuis ce sac : la fiche doit se redessiner.
+signal item_equipped(item: Equipment, target: CharacterData)
 
 
 ## La scène porte déclare ici comment trouver le personnage sélectionné :
@@ -273,6 +278,8 @@ func _on_cell_hovered(index: int) -> void:
 			label += " x%d" % it.number
 		if potions_usable and it is Potion:
 			label += "  —  click to drink"
+		elif equip_enabled and not (it is Potion):
+			label += "  —  click to equip"
 		tooltip.text = label
 
 
@@ -286,14 +293,16 @@ func _on_cell_unhovered() -> void:
 # ════════════════════════════════════════════════════════════════════
 
 func _on_cell_pressed(index: int) -> void:
+	var items := _current_items()
+	if index >= items.size() or items[index] == null:
+		return
+	if not (items[index] is Potion):
+		if equip_enabled:
+			_equip(items[index])
+		return
 	if not potions_usable or _using_potion:
 		return
-	var items := _current_items()
-	if index >= items.size():
-		return
 	var potion := items[index] as Potion
-	if potion == null:
-		return
 
 	if is_instance_valid(_popup):
 		_popup.queue_free()
@@ -317,6 +326,67 @@ func _on_cell_pressed(index: int) -> void:
 	_popup = PotionConfirmPopup.open(
 		get_tree().current_scene, potion, target_name, anchor, can_use, reason, self)
 	_popup.confirmed.connect(func(): _use_potion(potion))
+
+
+# ════════════════════════════════════════════════════════════════════
+#  ÉQUIPEMENT
+# ════════════════════════════════════════════════════════════════════
+
+## Même règle que le menu personnage (InvetoryUI.try_equip_on_character) :
+## deux objets au plus, une potion ne s'équipe pas.
+const MAX_EQUIPPED := 2
+
+
+func _equip(item: Equipment) -> void:
+	var target := _selected_target()
+	if target == null:
+		_flash_tooltip("No character selected.")
+		return
+	if target.equipped_items.size() >= MAX_EQUIPPED:
+		_flash_tooltip("%s already carries two items." % target.Name)
+		return
+
+	var gm := get_tree().root.get_node_or_null("GameManager") as GameManager
+	if gm != null:
+		var idx := gm.inventory.find(item)
+		if idx >= 0:
+			gm.inventory.remove_at(idx)
+	target.equipped_items.append(item)
+	recompute_stats(target)
+	if gm != null:
+		refresh(gm.inventory)
+	_flash_tooltip("%s equipped %s." % [target.Name, item.name])
+	emit_signal("item_equipped", item, target)
+
+
+## Stats d'une CharacterData = base + objets + buffs. Même calcul que le menu
+## personnage (InvetoryUI.select_character), pour qu'un objet équipé d'ici
+## compte immédiatement.
+static func recompute_stats(chara: CharacterData) -> void:
+	chara.max_stamina = chara.base_max_stamina
+	chara.max_horniness = chara.base_max_horniness
+	chara.max_stress = chara.base_max_stress
+	chara.attack = chara.base_attack
+	chara.defense = chara.base_defense
+	chara.initiative = chara.base_initiative
+	chara.willpower = chara.base_willpower
+	chara.evasion = chara.base_evasion
+	for eq in chara.equipped_items:
+		chara.attack += eq.attack_bonus
+		chara.defense += eq.defense_bonus
+		chara.max_horniness += eq.Max_lust_bonus
+		chara.max_stamina += eq.Max_stamina_bonus
+		chara.max_stress += eq.Max_Guilt_bonus
+		chara.willpower += eq.willpower_bonus
+		chara.evasion += eq.evasion_bonus
+		chara.initiative += eq.initiative_bonus
+	for buff in chara.buffs:
+		buff.apply_to(chara)
+
+
+func _flash_tooltip(text: String) -> void:
+	if tooltip != null:
+		tooltip.text = text
 
 
 func _use_potion(potion: Potion) -> void:

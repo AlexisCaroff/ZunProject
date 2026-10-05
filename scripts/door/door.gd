@@ -639,6 +639,9 @@ func _setup_map_inventory_toggle() -> void:
 		inventory_panel.set_target_provider(func(): return selected_character)
 		if not inventory_panel.potion_used.is_connected(_on_potion_used):
 			inventory_panel.potion_used.connect(_on_potion_used)
+		# Objet équipé depuis le sac : même rafraîchissement de la fiche.
+		if not inventory_panel.item_equipped.is_connected(_on_potion_used):
+			inventory_panel.item_equipped.connect(_on_potion_used)
 
 	if toggle_button == null:
 		return
@@ -650,6 +653,9 @@ func _setup_map_inventory_toggle() -> void:
 		icon_map.visible = false
 	MapBagButtons.ensure_box(map_bag_buttons.map)
 	MapBagButtons.ensure_box(map_bag_buttons.bag)
+	# Sous la vue de peek (SubViewportContainer, z 10), au-dessus du sac (z 8).
+	map_bag_buttons.map.z_index = 9
+	map_bag_buttons.bag.z_index = 9
 	map_bag_buttons.map.pressed.connect(_show_inventory.bind(false))
 	map_bag_buttons.bag.pressed.connect(_show_inventory.bind(true))
 	_apply_map_inventory_view()

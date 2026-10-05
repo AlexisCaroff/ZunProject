@@ -22,8 +22,9 @@ class_name TasteRollMenu
 
 signal finished
 
-const SYM_MASC := preload("res://UI/symbols/SYM_attracted_masculine.png")
-const SYM_FEM  := preload("res://UI/symbols/SYM_attracted_feminine.png")
+# Mêmes icônes que les marqueurs d'attirance du menu personnage.
+const SYM_MASC := preload("res://UI/UI inventory/UI_inventory_gender_M.png")
+const SYM_FEM  := preload("res://UI/UI inventory/UI_inventory_gender_F.png")
 const DIAMOND_FRAME := preload("res://UI/UI boxes/UI_affinity_portait_frame.png")
 const DIAMOND_MASK  := preload("res://UI/diamond_mask.gdshader")
 const GLOW_TEX      := preload("res://UI/symbols/FX_title_glow.png")
@@ -325,6 +326,9 @@ func roll_all() -> void:
 	_set_controls_enabled(false)
 	_set_go_ready(false)
 	_spin_dice()
+	# Le résultat est décidé ici pour toute l'équipe (chacun doit avoir au
+	# moins un partenaire possible) ; l'animation ne fait que le dévoiler.
+	CharacterData.roll_team(_slot_datas(), bi_chance)
 
 	for i in _slots.size():
 		_set_glow(_slots[i], false)
@@ -347,6 +351,7 @@ func _reroll_one(slot: Dictionary) -> void:
 	_rolling = true
 	_set_controls_enabled(false)
 	_set_glow(slot, false)
+	CharacterData.reroll_member(slot["data"], _slot_datas(), bi_chance)
 	await _roll_slot(slot, 0.0)
 	if not is_inside_tree() or _closing:
 		return
@@ -377,13 +382,20 @@ func _roll_slot(slot: Dictionary, delay: float) -> void:
 	_pop(slot)
 
 
-## Tire et affiche le résultat définitif d'une case.
+## Affiche le résultat définitif d'une case (déjà tiré par roll_all ou
+## _reroll_one, au niveau de l'équipe).
 func _finish_slot(slot: Dictionary) -> void:
 	var data: CharacterData = slot["data"]
-	data.roll_taste(bi_chance)
 	_paint(slot, data.attracted_to_feminine, data.attracted_to_masculine)
 	slot["done"] = true
 	print("🎲 %s → %s" % [data.Charaname, data.taste_label()])
+
+
+func _slot_datas() -> Array:
+	var out: Array = []
+	for slot in _slots:
+		out.append(slot["data"])
+	return out
 
 
 func _paint(slot: Dictionary, feminine: bool, masculine: bool) -> void:
