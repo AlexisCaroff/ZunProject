@@ -40,6 +40,9 @@ const DEFAULT_TASTE_ROLL_SCENE := "res://UI/taste_roll_menu.tscn"
 @export var teamCorrupted = false
 var start_menu: StartMenu = null
 var game_started: bool = false
+## Didacticiels et dialogues « une seule fois par partie » déjà vus
+## (clé -> true). Remis à zéro à chaque nouvelle partie, sauvegardé.
+var tutorials: Dictionary = {}
 var combat_just_ended: bool = false
 
 # ── Sauvegarde ────────────────────────────────────────────────────────
@@ -80,6 +83,40 @@ func _ready():
 		save_menu.hide_menu()
 	await sceneTransition.fade_in()
 
+## La lust n'est pas encore présentée au joueur : avant le combat du
+## tutoriel (salle avec combat_lust_tutorial non nettoyée) et tant que son
+## dialogue n'est pas passé. Les jauges de lust restent masquées partout.
+func lust_ui_hidden() -> bool:
+	if tutorials.get("lust", false) or donjon == null:
+		return false
+	for r: RoomResource in donjon.rooms:
+		if r != null and r.combat_lust_tutorial != null and not r.ennemikilled:
+			return true
+	return false
+
+
+## Vrai la PREMIÈRE fois qu'on le demande pour `key` dans la partie, puis
+## faux : sert à ne montrer chaque tutoriel / dialogue scénarisé qu'une fois.
+func tutorial_once(key: String) -> bool:
+	if tutorials.get(key, false):
+		return false
+	tutorials[key] = true
+	return true
+
+
+## Défilement + voix du narrateur, joués après « Start » (et non plus avant
+## le menu). Ne se joue qu'une fois par lancement : le nœud se libère à la fin.
+func _play_intro_cinematic() -> void:
+	var cine := sceneTransition.get_node_or_null("Cinematic")
+	if cine == null or not cine.has_signal("finished"):
+		return
+	cine.visible = true
+	cine._Start()
+	await sceneTransition.fade_in()
+	await cine.finished
+	await sceneTransition.fade_out()
+
+
 func spawn_start_menu():
 	if start_menu_scene == null:
 		push_error("❌ Start menu scene not set")
@@ -101,12 +138,16 @@ func start_game():
 	# ça, une nouvelle partie hérite des jauges et des affinités de la précédente.
 	SaveManager.restore_pristine(self)
 	SaveManager.delete_slot(SaveManager.AUTO_SLOT)
+	tutorials = {}
 	map_pointer_position = Vector2.INF
  
 	await sceneTransition.fade_out()
 	if start_menu and is_instance_valid(start_menu):
 		start_menu.queue_free()
 		start_menu = null
+
+	# Introduction du donjon par le narrateur, juste après « Start ».
+	await _play_intro_cinematic()
 
 	# Tirage des attirances, entre le menu principal et la première salle.
 	# Bloquant : le donjon ne se charge qu'une fois le joueur d'accord.
@@ -158,6 +199,25 @@ func enter_room(room: RoomResource, changedoor: bool = false, skip_fade: bool = 
 		last_room_Ressource = current_room_Ressource
 	current_room_Ressource = room
  
+	# Salle sans porte (Hall1, premier contact) : on y entre directement, en
+	# combat si l'ennemi est encore là, sinon en exploration.
+	if room.skip_door:
+		if room.combat_scene and room.encounter and not room.ennemikilled:
+			GameState.current_phase = GameStat.GamePhase.COMBAT
+			_enter_scene_in_current_room(room.combat_scene)
+		elif room.after_combat_room_id != "":
+			# Salle de combat déjà nettoyée et sans exploration : on passe à
+			# la suite. changedoor = true garde la salle précédente comme
+			# « retour » de la porte.
+			var next_room := get_room_by_id(room.after_combat_room_id)
+			if next_room:
+				current_room_Ressource = last_room_Ressource
+				enter_room(next_room, true)
+		else:
+			GameState.current_phase = GameStat.GamePhase.EXPLORATION
+			_enter_scene_in_current_room(room.exploration_scene)
+		return
+
 	# Une porte n'est pas du combat — on remet la phase à EXPLORATION.
 	GameState.current_phase = GameStat.GamePhase.EXPLORATION
 	current_scene_kind = SaveManager.SCENE_DOOR

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="RoomResource" load_steps=6 format=3 uid="uid://dl72078efa3c"]
+
+[ext_resource type="Script" uid="uid://oj44pgv34ji0" path="res://lvl/RoomRessource.gd" id="1_room"]
+[ext_resource type="PackedScene" path="res://lvl/Tuto/combat_tuto.tscn" id="2_combat"]
+[ext_resource type="Resource" uid="uid://lsyt4mfq7fsd" path="res://lvl/Tuto/encounterTuto.tres" id="3_enc"]
+[ext_resource type="Resource" uid="uid://by46o5w8bfhb1" path="res://dialogue/tuto/afterFirstCombat.tres" id="4_post"]
+[ext_resource type="Resource" path="res://dialogue/tuto/lustTutorial.tres" id="5_lust"]
+
+[resource]
+script = ExtResource("1_room")
+room_id = "TutoHall"
+position_on_map = 0
+combat_scene = ExtResource("2_combat")
+Post_combat_scene_History = ExtResource("4_post")
+encounter = ExtResource("3_enc")
+CanCamp = false
+skip_door = true
+after_combat_room_id = "Hall1"
+combat_lust_tutorial = ExtResource("5_lust")
+lust_tutorial_after = "Spitter"
+lust_tutorial_skill = "Poison"
+lust_tutorial_target = "Priestess"
+connected_room_ids = Array[String](["Hall1"])
+blocked_room_ids = Array[String]([])
+explored = false
+ennemikilled = false
+CampDone = false
+keyName = ""
+locked = false
+metadata/_custom_type_script = "uid://oj44pgv34ji0"

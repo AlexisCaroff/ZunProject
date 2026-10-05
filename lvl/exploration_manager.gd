@@ -89,6 +89,17 @@ func _ready():
 	gm = get_tree().root.get_node("GameManager") as GameManager
 	GameState.current_phase = GameStat.GamePhase.EXPLORATION
 	GoToCampement.visible=false
+	# Lust pas encore présentée (avant le combat du tutoriel) : ligne de la
+	# fiche masquée aussi (les jauges des slots, elles, sont gérées par
+	# positionexplo.gd).
+	if gm.lust_ui_hidden():
+		# La culpabilité arrive avec la lust : la montrer seule laisserait le
+		# trou de la ligne lust juste au-dessus.
+		for path in ["../Horny", "../LustProgressBar", "../LustIcon",
+				"../Guilt", "../GuiltProgressBar", "../GuiltIcon"]:
+			var n := get_node_or_null(path) as CanvasItem
+			if n != null:
+				n.visible = false
 	GoToCampement.scale=Vector2(0.0,0.0)
 	if gm.current_room_Ressource.CanCamp:
 		campButton=$Campement
@@ -134,11 +145,16 @@ func _ready():
 			chara.update_display()
 	selected_character =characters[0]
 	selected_character.animate_selected()
+	var history_overlay: Node = null
 	if gm.current_room_Ressource.exploration_scene_history != null \
 			and not gm.current_room_Ressource.exploration_history_played:
 		print("find history Scene")
-		gm.show_history_scene(gm.current_room_Ressource.exploration_scene_history)
+		history_overlay = gm.show_history_scene(gm.current_room_Ressource.exploration_scene_history)
 		gm.current_room_Ressource.exploration_history_played = true
+	# Premier campement trouvé de la partie : dialogue, après celui de la salle.
+	var room_res: RoomResource = gm.current_room_Ressource
+	if room_res.CanCamp and not room_res.CampDone and gm.tutorial_once("camp_found"):
+		_play_after(history_overlay, CAMP_FOUND_DIALOGUE)
 
 	portrait_selector.position = portraits[0].position
 
@@ -165,6 +181,19 @@ func _ready():
 
 	# --- Bascule carte / sac d'équipe, dans le coin bas-droit
 	_setup_map_inventory_toggle()
+
+const CAMP_FOUND_DIALOGUE := "res://dialogue/tuto/campFound.tres"
+
+
+## Joue un dialogue (HistoryScene) une fois `previous` refermé, sans bloquer
+## le _ready() qui l'appelle.
+func _play_after(previous: Node, history_path: String) -> void:
+	if previous != null and is_instance_valid(previous):
+		await previous.history_finished
+	var res := load(history_path) as HistoryScene
+	if res != null:
+		gm.show_history_scene(res)
+
 
 func _init_selection():
 	selectCharacter(characters[0])
@@ -317,6 +346,9 @@ func update_equipment_icons(character: CharacterData):
 		Items.get_node("Item1"),
 		Items.get_node("Item2")
 	]
+	for s in slots:
+		if not s.unequip_requested.is_connected(_on_unequip_requested):
+			s.unequip_requested.connect(_on_unequip_requested)
 
 	for s in slots:
 		s.remove_item()
@@ -330,6 +362,31 @@ func update_equipment_icons(character: CharacterData):
 func _on_item_equipped(_item: Equipment, _target: CharacterData) -> void:
 	if selected_character != null:
 		selectCharacter(selected_character)
+
+
+func _on_unequip_requested(item: Equipment) -> void:
+	if selected_character == null:
+		return
+	_unequip_item(item, selected_character.characterData)
+	selectCharacter(selected_character)
+	if showing_inventory and inventory_panel != null and gm != null:
+		inventory_panel.refresh(gm.inventory)
+
+
+## Clic sur un objet des cases sous le portrait : il retourne dans le sac
+## d'équipe. add_to_inventory() prévient aussi le menu personnage, qui range
+## l'objet dans sa grille.
+func _unequip_item(item: Equipment, chara: CharacterData) -> void:
+	if chara == null or item == null:
+		return
+	var idx := chara.equipped_items.find(item)
+	if idx < 0:
+		return
+	chara.equipped_items.remove_at(idx)
+	var gm_node := get_tree().root.get_node_or_null("GameManager") as GameManager
+	if gm_node != null:
+		gm_node.add_to_inventory(item)
+	DoorInventory.recompute_stats(chara)
 
 
 func _on_character_equipment_changed(_chara: CharacterData):

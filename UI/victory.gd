@@ -43,12 +43,24 @@ func _on_continue_pressed() -> void:
 		return
 
 	
-	if gm.current_room_Ressource.Post_combat_scene_History != null:
+	if gm.current_room_Ressource.Post_combat_scene_History != null \
+			and not gm.current_room_Ressource.post_combat_history_played:
+		gm.current_room_Ressource.post_combat_history_played = true
 		var history = gm.current_room_Ressource.Post_combat_scene_History
 		var overlay = gm.show_history_scene(history)
 
 	
 		await overlay.history_finished
+
+	# Combat du tutoriel : pas d'exploration, on enchaîne sur la porte de la
+	# salle suivante (Hall1). changedoor = true : le « retour » de cette
+	# porte reste la salle d'avant le combat (l'entrée du donjon).
+	var next_id: String = gm.current_room_Ressource.after_combat_room_id
+	if next_id != "":
+		var next_room := gm.get_room_by_id(next_id)
+		if next_room:
+			gm.enter_room(next_room, true)
+			return
 
 	if gm.current_room_Ressource.exploration_scene:
 		call_deferred("_enter_exploration_scene", gm)

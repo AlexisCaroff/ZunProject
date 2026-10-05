@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bg44l1eibyvid"]
+[gd_scene load_steps=13 format=3 uid="uid://bg44l1eibyvid"]
 
 [ext_resource type="Script" uid="uid://2yw45k1rwvdf" path="res://DialogueUI.gd" id="1_6e3n1"]
 [ext_resource type="Texture2D" uid="uid://xbjwv5qg2xmp" path="res://characters/portraits/PORTRAIT_hero_hunter.png" id="2_om3t3"]
@@ -11,6 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://cwkldn58q4lyh" path="res://UI/UI boxes/UI_convo_name_Bkg.png" id="8_qn32y"]
 [ext_resource type="Texture2D" uid="uid://djk5rtb1m8cpd" path="res://UI/UI boxes/UI_click_left.png" id="10_5qnbt"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="11_y5125"]
+
+[sub_resource type="FontVariation" id="FontVariation_y5125"]
+base_font = ExtResource("5_om3t3")
+variation_transform = Transform2D(1, 0, 0.2, 1, 0, 0)
 
 [node name="DialogueUI" type="Control"]
 z_index = 20
@@ -147,6 +151,7 @@ offset_top = 814.0
 offset_right = 1698.61
 offset_bottom = 1039.0
 theme_override_fonts/normal_font = ExtResource("5_om3t3")
+theme_override_fonts/italics_font = SubResource("FontVariation_y5125")
 theme_override_font_sizes/normal_font_size = 35
 bbcode_enabled = true
 text = "Teste dialogue

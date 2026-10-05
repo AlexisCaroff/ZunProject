@@ -1,7 +1,7 @@
-Warrior: What have we here? 
-Hunter: A relic? The heretics must have stolen it.
-Warrior: The warrior grins. Treasure to be liberated, then. 
-Mystic: Caution, Sam’at.  The corruption in this place can taint even sacred objects.
-Priestess: Relics are the property of the church. We must retrieve them.
-Warrior: Any finder’s fee for us?
-Priestess: The priestess scoffs. We shall see. 
+Warrior : What have we here?
+Hunter : A relic? The heretics must have stolen it.
+Warrior : [i]The warrior grins.[/i] Treasure to be liberated, then.
+Mystic : Caution, Sam’at. The corruption in this place can taint even sacred objects.
+Priestess : Relics are the property of the church. We must retrieve them.
+Warrior : Any finder’s fee for us?
+Priestess : [i]The priestess scoffs.[/i] We shall see.

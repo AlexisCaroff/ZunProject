@@ -50,6 +50,9 @@ func assign_character(character: Character, movetime:float):
 	occupant.hornyJauge =CharaUI.HornyBar
 	occupant.hp_Jauge=CharaUI.HPProgressBar
 	occupant.attach_buff_bar(CharaUI.get_buff_bar())
+	if occupant.characterData.is_player_controlled and combat_manager != null \
+			and combat_manager.get("lust_hidden") == true:
+		combat_manager.set_chara_ui_lust_visible(CharaUI, false)
 
 	occupant.dotsActions = CharaUI.actionpoints
 	occupant.z_index=self.z_index

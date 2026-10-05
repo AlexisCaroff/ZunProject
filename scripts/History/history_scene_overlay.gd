@@ -20,6 +20,13 @@ func setup_from_resource(data: HistoryScene):
 	# Background
 	
 	background.texture = data.illustration
+	if data.fill_width and data.illustration != null:
+		_fill_width(data.illustration)
+	if data.show_scene_behind:
+		background.visible = false
+		var black := get_node_or_null("CanvasLayer/ColorRect") as CanvasItem
+		if black != null:
+			black.visible = false
 	if dialogue_manager==null:
 		dialogue_manager = $DialogueManager
 	# Dialogue
@@ -42,6 +49,16 @@ func setup_from_resource(data: HistoryScene):
 	dialogue_manager.choice_made.connect(_on_choice_made)
 
 	dialogue_manager.start_dialogue()
+
+## Largeur de l'écran, proportions gardées, bord haut à 0. Le ColorRect noir
+## de la scène, derrière, remplit la bande vide sous l'image.
+func _fill_width(tex: Texture2D) -> void:
+	var view_w: float = ProjectSettings.get_setting("display/window/size/viewport_width", 1920)
+	var k: float = view_w / float(tex.get_width())
+	background.centered = true
+	background.scale = Vector2(k, k)
+	background.position = Vector2(view_w * 0.5, tex.get_height() * k * 0.5)
+
 
 func _on_dialogue_finished():
 	if not dialogue_manager.is_Choice:

@@ -14,6 +14,21 @@ extends Resource
 @export var exploration_scene_history: HistoryScene
 @export var encounter: Resource  # Encounter.tres
 @export var CanCamp: bool = false
+## On entre dans la salle sans passer par sa porte (combat ou exploration
+## directement). Hall1 : le premier contact suit l'entrée dans le donjon.
+@export var skip_door: bool = false
+## Après la victoire, on va à la porte de cette salle au lieu de
+## l'exploration (salle de combat du tutoriel, sans exploration propre).
+@export var after_combat_room_id: String = ""
+## Combat du tutoriel : jauges de lust masquées jusqu'au premier gain de lust
+## d'un héros, qui met le combat en pause et lance ce dialogue (une fois).
+@export var combat_lust_tutorial: HistoryScene
+## Charaname de l'ennemi dont la première action lance ce dialogue.
+@export var lust_tutorial_after: String = ""
+## Pendant ce combat, cet ennemi utilise toujours cette compétence sur ce
+## héros (Charaname) quand il le peut.
+@export var lust_tutorial_skill: String = ""
+@export var lust_tutorial_target: String = ""
 @export var connected_room_ids: Array[String] = []
 @export var blocked_room_ids: Array[String] = []
 @export var explored: bool = false

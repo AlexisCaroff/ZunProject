@@ -224,6 +224,8 @@ func _start():
 			enemies.append(chara)
 			chara.ShadowBackground = ShadowBackground
 			var slot_index = i
+			if i < encounter.enemy_slots.size():
+				slot_index = clampi(encounter.enemy_slots[i], 0, enemy_positions.size() - 1)
 			var slot = enemy_positions[slot_index]
 			move_character_to(chara, slot, 0)
 			if chara.characterData.Charaname == "Mommy":
@@ -250,7 +252,127 @@ func _start():
 	_ensure_unique_skill_button_materials()
 
 
+# ════════════════════════════════════════════════════════════════════
+#  TUTORIEL DE LA LUST (combat du tutoriel)
+# ════════════════════════════════════════════════════════════════════
+## Jauges de lust des héros masquées (lues aussi par PositionSlot quand un
+## héros change de case).
+var lust_hidden: bool = false
+var _lust_baseline: Dictionary = {}   # Character -> lust au début du combat
+## L'ennemi déclencheur vient de jouer : dialogue au prochain tour.
+var _lust_trigger_pending: bool = false
+
+
+func _setup_lust_tutorial() -> void:
+	var room: RoomResource = gm.current_room_Ressource
+	if room == null or room.combat_lust_tutorial == null or gm.tutorials.get("lust", false):
+		return
+	lust_hidden = true
+	_lust_baseline.clear()
+	for hero in heroes:
+		if is_instance_valid(hero):
+			_lust_baseline[hero] = hero.characterData.current_horniness
+	_apply_lust_visibility()
+
+
+func _apply_lust_visibility() -> void:
+	var shown := not lust_hidden
+	for hero in heroes:
+		if is_instance_valid(hero) and hero._current_slot and hero._current_slot.CharaUI:
+			set_chara_ui_lust_visible(hero._current_slot.CharaUI, shown)
+	if ui:
+		# Culpabilité masquée avec la lust : elle apparaît en même temps.
+		for path in ["CanvasLayer/Horny3", "CanvasLayer/Horny2", "CanvasLayer/LustProgressBar",
+				"CanvasLayer/Guilt3", "CanvasLayer/Guilt2", "CanvasLayer/GuiltProgressBar"]:
+			var n := ui.get_node_or_null(path) as CanvasItem
+			if n != null:
+				n.visible = shown
+
+
+static func set_chara_ui_lust_visible(chara_ui, shown: bool) -> void:
+	for key in ["TheHornyBar", "LustProgressBar", "LustProgressBarSeparator"]:
+		var n = chara_ui.get(key)
+		if n is CanvasItem:
+			n.visible = shown
+
+
+## Combat du tutoriel : l'ennemi déclencheur joue toujours la même action
+## (lust_tutorial_skill sur lust_tutorial_target), pour que le dialogue qui
+## suit colle à ce qu'on vient de voir. {} = l'IA décide normalement (skill
+## en recharge, cible hors de combat…).
+var _forced_action_done: bool = false
+
+func forced_ai_decision(c: Character) -> Dictionary:
+	var room: RoomResource = gm.current_room_Ressource
+	if _forced_action_done or room == null or room.lust_tutorial_after == "" 			or room.lust_tutorial_skill == "":
+		return {}
+	if c.characterData.Charaname != room.lust_tutorial_after:
+		return {}
+	var skill: Skill = null
+	for s in c.skills:
+		# Nom interne, nom affiché ou nom du fichier .tres : on accepte les trois.
+		var wanted := room.lust_tutorial_skill
+		if s.name == wanted or s.descriptionName == wanted \
+				or s.resource_path.get_file().get_basename() == wanted:
+			skill = s
+			break
+	if skill == null:
+		push_warning("Tutoriel : %s n'a pas la compétence %s." % [c.characterData.Charaname, room.lust_tutorial_skill])
+		return {}
+	var target := get_hero_by_name(room.lust_tutorial_target)
+	if target == null or not is_instance_valid(target) or target.is_dead() 			or target.characterData.grab or target._current_slot == null:
+		push_warning("Tutoriel : cible %s indisponible." % room.lust_tutorial_target)
+		return {}
+	# Première action de cet ennemi uniquement, et sans condition : ni
+	# recharge, ni position requise (Skill.use() revérifie can_use()), ni
+	# raté — sinon le dialogue qui suit n'aurait plus de sens. Les skills
+	# sont dupliquées par personnage (_updateSkills) : seul ce Spitter change.
+	_forced_action_done = true
+	skill.current_cooldown = 0
+	skill.required_position = Skill.position_requirement.ANY
+	skill.allways_hit = true
+	print("🎯 Tutoriel : %s utilise %s sur %s" % [c.characterData.Charaname, skill.name, target.characterData.Charaname])
+	var slots: Array[PositionSlot] = [target._current_slot]
+	return {"skill": skill, "target": slots}
+
+
+## Appelé entre deux tours : si un héros a pris de la lust (coup, poison,
+## avalage…), dialogue du tutoriel, combat en pause, héros masqués pour ne
+## laisser voir que les ennemis. Une seule fois.
+func _maybe_lust_tutorial() -> void:
+	if not lust_hidden:
+		return
+	# Déclenché par la première action de l'ennemi désigné par la salle
+	# (lust_tutorial_after), pas par un gain de lust : certains héros en
+	# prennent en attaquant (tag « sadist »…), ce qui le lançait trop tôt.
+	if not _lust_trigger_pending or not gm.tutorial_once("lust"):
+		return
+	_lust_trigger_pending = false
+
+	GameState.Pause = true
+	var hidden_uis: Array = []
+	for hero in heroes:
+		if is_instance_valid(hero):
+			hero.visible = false
+			if hero._current_slot and hero._current_slot.CharaUI and hero._current_slot.CharaUI.visible:
+				hero._current_slot.CharaUI.visible = false
+				hidden_uis.append(hero._current_slot.CharaUI)
+	var overlay = gm.show_history_scene(gm.current_room_Ressource.combat_lust_tutorial)
+	await overlay.history_finished
+	for hero in heroes:
+		if is_instance_valid(hero):
+			hero.visible = true
+	for cui in hidden_uis:
+		if is_instance_valid(cui):
+			cui.visible = true
+	# Retour au combat : les jauges de lust apparaissent.
+	lust_hidden = false
+	_apply_lust_visibility()
+	GameState.Pause = false
+
+
 func _start_combat_flow() -> void:
+	_setup_lust_tutorial()
 	if ui:
 		ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
@@ -295,6 +417,8 @@ func next_turn():
 
 	_check_victory()
 	_check_defeat()
+
+	await _maybe_lust_tutorial()
 
 	while is_pause():
 		await get_tree().process_frame
@@ -407,6 +531,10 @@ func next_turn():
 	else:
 		await get_tree().create_timer(1.5).timeout
 		current_character.play_ai_turn(heroes, enemies)
+		# Tutoriel de la lust : il suit la première action de cet ennemi.
+		if lust_hidden and current_character.characterData.Charaname \
+				== gm.current_room_Ressource.lust_tutorial_after:
+			_lust_trigger_pending = true
 		await end_currentChara_Turn()
 
 

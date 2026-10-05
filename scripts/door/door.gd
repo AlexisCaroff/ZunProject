@@ -121,6 +121,10 @@ func _ready():
 		print("find history Scene")
 		Game_Manager.show_history_scene(Game_Manager.current_room_Ressource.door_scene_History)
 		Game_Manager.current_room_Ressource.door_history_played =true
+	# Didacticiel porte / peek (intro2) : à la première porte de la partie.
+	var door_tuto := get_node_or_null("../Intro2") as CanvasItem
+	if door_tuto != null and Game_Manager.tutorial_once("door"):
+		door_tuto.visible = true
 	characters=Game_Manager.characters
 	# Etat de repos identique a celui laisse par _on_mouse_exited (pivot au
 	# centre, echelle startsize) : sans ca le texte « saute » au premier survol.
@@ -193,11 +197,45 @@ func _ready():
 	_setup_buff_row()
 	if move_button != null:
 		move_button.pressed.connect(_on_move_button_pressed)
+	# Cases d'objet SOUS la vue de peek (SubViewportContainer, z 10) : leur
+	# conteneur Items est à 8, un z propre de 8 les montait à 16. Réglé ici
+	# plutôt que dans la scène, qu'une sauvegarde de l'éditeur peut écraser.
+	for slot in item_slots:
+		if slot != null:
+			slot.z_index = 0
 	if prev_chara_button != null:
 		prev_chara_button.pressed.connect(_cycle_character.bind(-1))
 	if next_chara_button != null:
 		next_chara_button.pressed.connect(_cycle_character.bind(1))
 	selectCharacter(characters[0])
+
+
+func _on_unequip_requested(item: Equipment) -> void:
+	if selected_character == null:
+		return
+	_unequip_item(item, selected_character)
+	# selectCharacter() ferait un échange en mode déplacement.
+	if move_mode:
+		set_move_mode(false)
+	selectCharacter(selected_character)
+	if showing_inventory and inventory_panel != null and Game_Manager != null:
+		inventory_panel.refresh(Game_Manager.inventory)
+
+
+## Clic sur un objet des cases sous le portrait : il retourne dans le sac
+## d'équipe. add_to_inventory() prévient aussi le menu personnage, qui range
+## l'objet dans sa grille.
+func _unequip_item(item: Equipment, chara: CharacterData) -> void:
+	if chara == null or item == null:
+		return
+	var idx := chara.equipped_items.find(item)
+	if idx < 0:
+		return
+	chara.equipped_items.remove_at(idx)
+	var gm_node := get_tree().root.get_node_or_null("GameManager") as GameManager
+	if gm_node != null:
+		gm_node.add_to_inventory(item)
+	DoorInventory.recompute_stats(chara)
 
 
 ## Flèches de part et d'autre du portrait : personnage suivant / précédent,
@@ -221,6 +259,8 @@ func _update_equipment_icons(chara: CharacterData) -> void:
 	for slot in item_slots:
 		if slot != null:
 			slot.remove_item()
+			if not slot.unequip_requested.is_connected(_on_unequip_requested):
+				slot.unequip_requested.connect(_on_unequip_requested)
 	var i := 0
 	for slot in item_slots:
 		if slot == null:

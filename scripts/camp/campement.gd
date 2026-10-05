@@ -85,6 +85,22 @@ func _ready():
 	MenuPersoButton.connect("button_down",showMenuPerso)
 	if MenuPerso.has_signal("change_in_equipment"):
 		MenuPerso.change_in_equipment.connect(_on_character_equipment_changed)
+	if gm.tutorial_once("camp_first"):
+		_first_camp_intro()
+
+
+const CAMP_FIRST_DIALOGUE := "res://dialogue/tuto/campFirst.tres"
+
+## Première entrée au camp de la partie : dialogue de l'équipe, puis le
+## didacticiel du camp (intro4, nœud Intro2 de la scène).
+func _first_camp_intro() -> void:
+	var res := load(CAMP_FIRST_DIALOGUE) as HistoryScene
+	if res != null:
+		var overlay := gm.show_history_scene(res)
+		await overlay.history_finished
+	var tuto := get_node_or_null("Intro2") as CanvasItem
+	if tuto != null and is_inside_tree():
+		tuto.visible = true
 	
 #func startLovescene():
 	

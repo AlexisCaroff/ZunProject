@@ -57,3 +57,10 @@ func _bind_occupant(chara: CharaExplo) -> void:
 	occupant.CharaPosition = self
 	occupant.z_index = self.z_index
 	occupant.update_display()
+	# Lust pas encore présentée (avant le combat du tutoriel) : jauges masquées.
+	var gm_node := get_tree().root.get_node_or_null("GameManager") as GameManager
+	var lust_shown := gm_node == null or not gm_node.lust_ui_hidden()
+	for key in ["TheHornyBar", "LustProgressBar", "LustProgressBarSeparator"]:
+		var n = charaUI.get(key)
+		if n is CanvasItem:
+			n.visible = lust_shown

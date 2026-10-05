@@ -283,6 +283,7 @@ func capture_state(gm) -> Dictionary:
 		# Compteurs hors sac : argent et prisonniers ramenés des combats.
 		"money": gm.money,
 		"prisoners": gm.prisoners,
+		"tutorials": gm.tutorials.duplicate(),
 	}
 
 
@@ -497,6 +498,8 @@ func apply_state(data: Dictionary, gm) -> bool:
 	# ── GameManager ─────────────────────────────────────────────────
 	# Une sauvegarde antérieure à ces compteurs repart de zéro.
 	gm.money     = _as_int(data.get("money", 0))
+	var tutos = data.get("tutorials", {})
+	gm.tutorials = tutos.duplicate() if typeof(tutos) == TYPE_DICTIONARY else {}
 	gm.prisoners = _as_int(data.get("prisoners", 0))
 	gm.emit_signal("resources_changed", gm.money, gm.prisoners)
 

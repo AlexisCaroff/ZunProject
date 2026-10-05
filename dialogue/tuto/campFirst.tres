@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="HistoryScene" load_steps=3 format=3]
+
+[ext_resource type="Script" uid="uid://du5qr73uxmcdu" path="res://scripts/History/HistoryScene.gd" id="1_hist"]
+[ext_resource type="Texture2D" uid="uid://87y4s7750hu4" path="res://scenes/backgrounds dungeon demo/BG_dungeon_storeroom.png" id="2_illu"]
+
+[resource]
+script = ExtResource("1_hist")
+illustration = ExtResource("2_illu")
+fill_width = true
+dialogue_file = "res://dialogue/tuto/campFirst.txt"
+title = ""
+participants = Array[String]([])
+is_choice = false
+choice_1_text = ""
+choice_2_text = ""
+metadata/_custom_type_script = "uid://du5qr73uxmcdu"

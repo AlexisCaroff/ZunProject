@@ -423,7 +423,12 @@ func play_ai_turn(heroes: Array, enemies: Array):
 		push_error("Aucun AiBrain assigné à %s" % name)
 		return
 
-	var decision = characterData.ai_brain.decide_action(self, heroes, enemies)
+	# Action imposée par le tutoriel, sinon le cerveau de l'IA.
+	var decision: Dictionary = {}
+	if combat_manager != null:
+		decision = combat_manager.forced_ai_decision(self)
+	if decision.is_empty():
+		decision = characterData.ai_brain.decide_action(self, heroes, enemies)
 	if decision.is_empty():
 		print("no decision")
 		resetVisuel()

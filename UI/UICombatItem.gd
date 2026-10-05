@@ -8,6 +8,15 @@ var normal_scale: Vector2
 var equipement : Equipment = null
 @onready var label = $RichTextLabel
 
+## Clic sur un objet équipé. Seules les scènes qui le connectent
+## (exploration, porte) permettent de déséquiper : en combat, rien.
+signal unequip_requested(item: Equipment)
+
+## Infobulle posée à DROITE de la case, pour ne pas recouvrir l'objet.
+## Repère local du slot (le cadre fait ~112 px, centré sur 0).
+@export var tooltip_offset: Vector2 = Vector2(66, -34)
+@export var tooltip_width: float = 260.0
+
 
 const ITEM_BOX := preload("res://UI/UI boxes/UI_combat_itembox.png")
 
@@ -19,7 +28,22 @@ func _ready():
 	normal_scale= scale
 	
 	
-	label.pivot_offset = label.size / 2
+	button.pressed.connect(_on_pressed)
+
+	label.position = tooltip_offset
+	label.size = Vector2(tooltip_width, label.size.y)
+	label.fit_content = true
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	# Le grossissement au survol part du bord gauche, collé à la case.
+	label.pivot_offset = Vector2(0, label.size.y / 2)
+
+
+func _on_pressed() -> void:
+	if equipement != null:
+		emit_signal("unequip_requested", equipement)
+
+
 ## Le cadre doit rester visible, vide ou non. En combat il était la texture
 ## du Sprite lui-même : l'icône de l'objet l'écrasait, et remove_item()
 ## l'effaçait. On le déplace dans un enfant dessiné derrière, la texture du
