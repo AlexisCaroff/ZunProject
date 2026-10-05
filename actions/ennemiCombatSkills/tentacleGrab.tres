@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=9 format=3 uid="uid://dxj1ksi0rq6i6"]
+
+[ext_resource type="Texture2D" uid="uid://bu3l6pyorqnws" path="res://characters/charatexture/demo characters/ENEMY_addict_tentagrab.png" id="1_7m3nb"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_2odx0"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_jtfnp"]
+[ext_resource type="Script" uid="uid://cxxxcftffxxjh" path="res://actions/skillEffects/MoveToPosition.gd" id="3_7m3nb"]
+[ext_resource type="Texture2D" uid="uid://ccnq4lbltabiy" path="res://actions/actiontexture/tentacles.png" id="4_2x4hl"]
+[ext_resource type="PackedScene" uid="uid://7n55anqhulp1" path="res://actions/skillEffects/FX/Scene/grabTargetAdict.tscn" id="7_2x4hl"]
+
+[sub_resource type="Resource" id="Resource_t3sey"]
+script = ExtResource("2_jtfnp")
+MagicDMG = false
+amount = 10
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[sub_resource type="Resource" id="Resource_t52hr"]
+script = ExtResource("3_7m3nb")
+mode = 0
+speed = 0.5
+slot_pairing = {
+3: 1,
+4: 2
+}
+metadata/_custom_type_script = "uid://cxxxcftffxxjh"
+
+[resource]
+script = ExtResource("2_2odx0")
+name = "TentacleGrab"
+descriptionName = "Tentacle Grab"
+description = "Inflige des dégâts à un ennemi"
+icon = ExtResource("4_2x4hl")
+barkSkill = ""
+required_position = 0
+range = 2
+ImageSkill = ExtResource("1_7m3nb")
+the_target_type = 0
+effects = Array[Resource]([SubResource("Resource_t3sey"), SubResource("Resource_t52hr")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[Resource]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+is_contact = true
+distance_contact = 700.0
+target_effect_scene = ExtResource("7_2x4hl")
+caster_effect_anchor = 0
+target_effect_anchor = 2
+is_beneficial = false
+skip_target_return_anim = true
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

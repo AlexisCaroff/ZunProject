@@ -1,0 +1,197 @@
+[gd_scene load_steps=11 format=3 uid="uid://c2xke2vhr5vbh"]
+
+[ext_resource type="Script" uid="uid://dryux0nhgos43" path="res://UI/taste_roll_menu.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://di8781jnr3hw8" path="res://UI/UI boxes/UI_combat_victory.png" id="2_box"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="3_font"]
+[ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="4_button"]
+[ext_resource type="Texture2D" uid="uid://eqli6rl4sig3" path="res://UI/UI boxes/UI_camp_points.png" id="5_plate"]
+[ext_resource type="Texture2D" uid="uid://cy7cv0o62q2ed" path="res://UI/symbols/SYM_attracted_feminine.png" id="6_fem"]
+[ext_resource type="Texture2D" uid="uid://db1tpsdhxsc0d" path="res://UI/symbols/SYM_attracted_masculine.png" id="7_masc"]
+[ext_resource type="Texture2D" uid="uid://nmmbaqtaauac" path="res://UI/symbols/SYM_dice.png" id="8_dice"]
+[ext_resource type="Texture2D" uid="uid://b7mv4shvy4f80" path="res://UI/symbols/FX_title_glow.png" id="9_glow"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_focus"]
+
+[node name="TasteRollMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Dim" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.72)
+
+[node name="Glow" type="Sprite2D" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.55)
+position = Vector2(954, 205)
+scale = Vector2(1.15, 1.15)
+texture = ExtResource("9_glow")
+
+[node name="Box" type="TextureRect" parent="CanvasLayer"]
+offset_left = 417.0
+offset_top = 81.0
+offset_right = 1503.0
+offset_bottom = 999.0
+mouse_filter = 2
+texture = ExtResource("2_box")
+
+[node name="TitleMain" type="Label" parent="CanvasLayer/Box"]
+layout_mode = 0
+offset_left = 337.0
+offset_top = 170.0
+offset_right = 737.0
+offset_bottom = 230.0
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 35
+text = "ROLL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleSub" type="Label" parent="CanvasLayer/Box"]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 204.0
+offset_right = 787.0
+offset_bottom = 260.0
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 34
+text = "character tastes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slots" type="Control" parent="CanvasLayer/Box"]
+anchors_preset = 0
+offset_left = -2.0
+offset_top = -7.0
+offset_right = 1084.0
+offset_bottom = 911.0
+mouse_filter = 2
+
+[node name="Legend" type="VBoxContainer" parent="CanvasLayer/Box"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 706.0
+offset_right = 605.0
+offset_bottom = 826.0
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="RowFeminine" type="HBoxContainer" parent="CanvasLayer/Box/Legend"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 18
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Box/Legend/RowFeminine"]
+modulate = Color(0.45, 0.45, 0.45, 1)
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_fem")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/Box/Legend/RowFeminine"]
+modulate = Color(0.62, 0.62, 0.62, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 26
+text = "Feminine attracted"
+vertical_alignment = 1
+
+[node name="RowMasculine" type="HBoxContainer" parent="CanvasLayer/Box/Legend"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 18
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/Box/Legend/RowMasculine"]
+modulate = Color(0.45, 0.45, 0.45, 1)
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("7_masc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/Box/Legend/RowMasculine"]
+modulate = Color(0.62, 0.62, 0.62, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 26
+text = "Masculine attracted"
+vertical_alignment = 1
+
+[node name="RollButton" type="Button" parent="CanvasLayer"]
+visible = false
+offset_left = 919.0
+offset_top = 344.0
+offset_right = 989.0
+offset_bottom = 414.0
+tooltip_text = "Retirer tout au sort"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+flat = true
+script = ExtResource("4_button")
+hover_scale = Vector2(1.15, 1.15)
+
+[node name="Dice" type="Sprite2D" parent="CanvasLayer/RollButton"]
+position = Vector2(35, 35)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("8_dice")
+
+[node name="BiButton" type="Button" parent="CanvasLayer"]
+offset_left = 1174.0
+offset_top = 221.0
+offset_right = 1424.0
+offset_bottom = 277.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+flat = true
+script = ExtResource("4_button")
+
+[node name="Plate" type="Sprite2D" parent="CanvasLayer/BiButton"]
+z_index = -1
+position = Vector2(125, 28)
+scale = Vector2(0.3817, 0.3478)
+texture = ExtResource("5_plate")
+
+[node name="Label" type="Label" parent="CanvasLayer/BiButton"]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 28
+text = "Just make them bi!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoButton" type="Button" parent="CanvasLayer"]
+offset_left = 826.0
+offset_top = 941.0
+offset_right = 1082.0
+offset_bottom = 1001.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
+flat = true
+script = ExtResource("4_button")
+
+[node name="Plate" type="Sprite2D" parent="CanvasLayer/GoButton"]
+z_index = -1
+position = Vector2(128, 30)
+scale = Vector2(0.3908, 0.3727)
+texture = ExtResource("5_plate")
+
+[node name="Label" type="Label" parent="CanvasLayer/GoButton"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 35
+text = "Let's go!"
+horizontal_alignment = 1
+vertical_alignment = 1

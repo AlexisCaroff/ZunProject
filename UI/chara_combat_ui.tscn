@@ -1,0 +1,171 @@
+[gd_scene load_steps=9 format=3 uid="uid://cifpdtrct42ek"]
+
+[ext_resource type="Script" uid="uid://ckeut5nsvwp2s" path="res://UI/chara_combat_ui.gd" id="1_n50uc"]
+[ext_resource type="Texture2D" uid="uid://b8ijg06ov8dt8" path="res://actions/dote.png" id="1_qnl5p"]
+[ext_resource type="Texture2D" uid="uid://bri15xc6cn1ul" path="res://actions/hornyJauge.png" id="2_n50uc"]
+[ext_resource type="Texture2D" uid="uid://bk1gu5cgtgkfy" path="res://actions/hornyJaugePleine.png" id="3_50q8f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_72423"]
+bg_color = Color(0.292969, 0.292969, 0.292969, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkmsr"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n50uc"]
+bg_color = Color(0.322933, 0.269602, 0.368663, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50q8f"]
+bg_color = Color(0.820967, 0.00210543, 0.99056, 1)
+
+[node name="charaCombatUI" type="Node2D"]
+z_index = 3
+z_as_relative = false
+script = ExtResource("1_n50uc")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = 21.0
+offset_right = 40.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.881089, 0.333283)
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="DotAction1" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(0.642019, 0.561016, 0.364715, 1)
+layout_mode = 2
+texture = ExtResource("1_qnl5p")
+
+[node name="DotAction2" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(0.642019, 0.561016, 0.364715, 1)
+layout_mode = 2
+texture = ExtResource("1_qnl5p")
+
+[node name="DotAction3" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(0.642019, 0.561016, 0.364715, 1)
+layout_mode = 2
+texture = ExtResource("1_qnl5p")
+
+[node name="DotAction4" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(0.642019, 0.561016, 0.364715, 1)
+layout_mode = 2
+texture = ExtResource("1_qnl5p")
+
+[node name="DotAction5" type="TextureRect" parent="HBoxContainer2"]
+modulate = Color(0.642019, 0.561016, 0.364715, 1)
+layout_mode = 2
+texture = ExtResource("1_qnl5p")
+
+[node name="HPProgressBar" type="ProgressBar" parent="."]
+modulate = Color(0.87, 0.64264, 0.4437, 1)
+offset_left = -41.0
+offset_top = 6.0
+offset_right = 55.0
+offset_bottom = 12.0
+scale = Vector2(0.881089, 0.685443)
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_72423")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vkmsr")
+value = 30.0
+show_percentage = false
+
+[node name="LustProgressBar" type="ProgressBar" parent="."]
+offset_left = -41.0
+offset_top = 13.0
+offset_right = 55.0
+offset_bottom = 23.0
+scale = Vector2(0.881089, 0.45067)
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_n50uc")
+theme_override_styles/fill = SubResource("StyleBoxFlat_50q8f")
+step = 2.5
+show_percentage = false
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+modulate = Color(0.09375, 0.09375, 0.09375, 1)
+clip_contents = true
+custom_minimum_size = Vector2(20, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = 13.0
+offset_right = 625.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.125744, 0.447003)
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 64
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect6" type="ColorRect" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect7" type="ColorRect" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect8" type="ColorRect" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect9" type="ColorRect" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="ColorRect10" type="ColorRect" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(6, 10)
+layout_mode = 2
+
+[node name="HornyJauge" type="Sprite2D" parent="."]
+position = Vector2(46, 11)
+scale = Vector2(0.282564, 0.282564)
+texture = ExtResource("2_n50uc")
+
+[node name="HornyJaugePleine" type="Sprite2D" parent="HornyJauge"]
+texture = ExtResource("3_50q8f")
+
+[node name="BuffBar" type="HBoxContainer" parent="."]
+z_index = 6
+custom_minimum_size = Vector2(32, 32)
+offset_left = -267.0
+offset_top = -21.0
+offset_right = 248.0
+offset_bottom = 11.0
+theme_override_constants/separation = 32
+alignment = 1

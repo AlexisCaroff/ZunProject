@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://b7ana3ldrsk7j"]
+
+[ext_resource type="Texture2D" uid="uid://my531w0fne5p" path="res://Items/ItemIcons/gold.png" id="1_21eyw"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="1_qyyvt"]
+
+[resource]
+script = ExtResource("1_qyyvt")
+icon = ExtResource("1_21eyw")
+name = "Golds"
+description = "some gold"
+isCursed = false
+number = 10
+Max_stamina_bonus = 0
+Max_lust_bonus = 0
+Max_Guilt_bonus = 0
+attack_bonus = 0
+defense_bonus = 0
+willpower_bonus = 0
+evasion_bonus = 0
+initiative_bonus = 0
+peekbonus = 0
+global_cooldown_reduction = 0
+skill_specific_cooldown = Dictionary[String, int]({})
+metadata/_custom_type_script = "uid://ha2eko5otag4"

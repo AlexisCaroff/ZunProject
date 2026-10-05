@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=3 uid="uid://bj8buddu2d1up"]
+
+[ext_resource type="Script" uid="uid://dacdwm0tqo27r" path="res://anim_fx.gd" id="1_6iprt"]
+[ext_resource type="Texture2D" uid="uid://b6j3rg27uuhgn" path="res://characters/charatexture/demo characters/HERO_mystic_cc_tentagrab.png" id="2_5rypg"]
+[ext_resource type="Texture2D" uid="uid://dqiwmaugg2jig" path="res://actions/skillEffects/FX/FX_stab.png" id="3_kpqvj"]
+
+[sub_resource type="Animation" id="Animation_7h147"]
+resource_name = "FX_anim"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FxCharge:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.233333, 0.5, 0.766667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FxCharge2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.466667, 0.733334, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fwcky"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FxCharge:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lvn5b"]
+_data = {
+&"FX_anim": SubResource("Animation_7h147"),
+&"RESET": SubResource("Animation_fwcky")
+}
+
+[node name="AnimFX" type="Node2D"]
+script = ExtResource("1_6iprt")
+
+[node name="HeroWarriorBash" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(80, -145)
+scale = Vector2(0.210205, 0.210205)
+texture = ExtResource("2_5rypg")
+
+[node name="FxCharge" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-55, -60)
+rotation = -0.0433654
+scale = Vector2(0.173716, 0.228516)
+texture = ExtResource("3_kpqvj")
+
+[node name="FxCharge2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+position = Vector2(117, -115)
+rotation = 0.055169
+scale = Vector2(0.288791, 0.228516)
+texture = ExtResource("3_kpqvj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lvn5b")
+}

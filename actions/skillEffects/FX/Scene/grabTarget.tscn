@@ -1,0 +1,132 @@
+[gd_scene load_steps=8 format=3 uid="uid://vf2fr2rqom33"]
+
+[ext_resource type="Script" uid="uid://dacdwm0tqo27r" path="res://anim_fx.gd" id="1_rf7k2"]
+[ext_resource type="Texture2D" uid="uid://dw6mlmcxoge8o" path="res://characters/charatexture/demo characters/ENEMY_temptress_hit.png" id="2_s4ndn"]
+[ext_resource type="Texture2D" uid="uid://by6bo76g1io6k" path="res://actions/skillEffects/FX/FX_grab_mystic001.png" id="3_wjjtc"]
+[ext_resource type="Texture2D" uid="uid://bkcf6aao8ybf8" path="res://actions/skillEffects/FX/FX_grab_mystic002.png" id="4_ohfdx"]
+
+[sub_resource type="Animation" id="Animation_7h147"]
+resource_name = "FX_anim"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FxCharge:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.466667, 0.766667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FxCharge2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.333333, 0.733334, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FxCharge:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.19, 0.433333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.152), Vector2(0.150964, 0.151682)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FxCharge2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.09, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.144), Vector2(0.149395, 0.144013)]
+}
+
+[sub_resource type="Animation" id="Animation_fwcky"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FxCharge:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FxCharge:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.150964, 0.151682)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FxCharge2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.149395, 0.144013)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lvn5b"]
+_data = {
+&"FX_anim": SubResource("Animation_7h147"),
+&"RESET": SubResource("Animation_fwcky")
+}
+
+[node name="AnimFX" type="Node2D"]
+script = ExtResource("1_rf7k2")
+
+[node name="HeroWarriorBash" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-83, -111)
+scale = Vector2(0.210205, 0.210205)
+texture = ExtResource("2_s4ndn")
+flip_h = true
+
+[node name="FxCharge" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(34, -9.35584)
+rotation = 0.400681
+scale = Vector2(0.150964, 0.151682)
+texture = ExtResource("3_wjjtc")
+offset = Vector2(-250, 0)
+
+[node name="FxCharge2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-39, -11)
+scale = Vector2(0.149395, 0.144013)
+texture = ExtResource("4_ohfdx")
+offset = Vector2(250, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lvn5b")
+}

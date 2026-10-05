@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://bn67hgtv6jvaq"]
+
+[ext_resource type="Script" uid="uid://dacdwm0tqo27r" path="res://anim_fx.gd" id="1_f8nm1"]
+[ext_resource type="Texture2D" uid="uid://i4c7mn71iv6q" path="res://demo characters/HERO_warrior_bash.png" id="2_jipqg"]
+[ext_resource type="Texture2D" uid="uid://b3stvq6r8gbr5" path="res://actions/skillEffects/FX/FX_charge.png" id="3_bx02c"]
+
+[sub_resource type="Animation" id="Animation_7h147"]
+resource_name = "FX_anim"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FxCharge:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.233333, 0.5, 0.766667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fwcky"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FxCharge:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lvn5b"]
+_data = {
+&"FX_anim": SubResource("Animation_7h147"),
+&"RESET": SubResource("Animation_fwcky")
+}
+
+[node name="AnimFX" type="Node2D"]
+script = ExtResource("1_f8nm1")
+
+[node name="HeroWarriorBash" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(80, -145)
+scale = Vector2(0.210205, 0.210205)
+texture = ExtResource("2_jipqg")
+
+[node name="FxCharge" type="Sprite2D" parent="."]
+position = Vector2(100, -51)
+scale = Vector2(0.245807, 0.236951)
+texture = ExtResource("3_bx02c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lvn5b")
+}

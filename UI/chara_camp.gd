@@ -3,134 +3,116 @@ class_name CharaCamp
 @export var portrait_texture: Texture2D
 @export var dead_portrait_texture: Texture2D
 @export var initiative_icon: Texture2D
-var campSkills: Array[CampSkill] = []
+
 var portrait_path: String = ""
 var dead_portrait_path: String = ""
 var initiative_icon_path: String = ""
 @onready var name_label = $name
-@onready var hp_label = $HP
-@onready var stress_label = $Stress
-@onready var horny_label = $horny
+@onready var Selector =$pivot/Selector
+#@onready var stress_label = $Stress
+@onready var ui :CharaUi
 @onready var sprite = $pivot/HerosTexture1
-@onready var buff_bar = $HBuffsContainer
-@onready var hp_Jauge=$HP/HPProgressBar
-@onready var guilt_Jauge=$Stress/GuiltrogressBar
-@onready var horny_Jauge=$horny/HornyProgressBar
+@onready var buff_bar
+@onready var hp_Jauge 
+@onready var horny_Jauge 
+@onready var horny_Rect 
+@onready var actionspoints : Array[TextureRect] 
+
 @onready var Arrow = $Arrow
 # --- Infos de base
-@export var Charaname: String = "name"
-@export var IsDemon: bool = false
-var camp_skill_resources: Array[CampSkill] = []
-# --- Stats de combat
-@export var base_attack: int = 10
-@export var base_defense: int = 5
-@export var base_willpower: int = 5
-@export var base_initiative: int = 1
-@export var base_evasion: int = 5
 
-@export var attack: int = 10
-@export var defense: int = 5
-@export var willpower: int = 5
-@export var evasion: int = 5
-@export var initiative: int = 1
-var buffs: Array[Buff] = []
-@onready var buff_icons = $HBuffsContainer
+
+@onready var buff_icons 
 # --- Valeurs dynamiques
-var current_stamina: int = 100
-var max_stamina: int = 100
-var current_stress: int = 0
-var max_stress: int =100
-var current_horny: int = 0 
-var max_horniness: int = 100
-var current_position: int =0
 
-
-var campposition
+var campposition :CampPosition 
 var targetable : bool = false 
 var CharaScale : Vector2
 const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
-
+const BUFF_UI := preload("res://UI/buffUi.tscn")
+var characterData: CharacterData
 var CharaCampPoints : int = 2
 var camp : Campement
+var camp_skills: Array[CampSkill] = []
 
 
 func _ready() -> void:
+	var mat := ShaderMaterial.new()
+	mat.shader = load("res://characters/character_outline.gdshader")
+	sprite.material = mat
+	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
+	for p in actionspoints:
+		p.visible =false
 	CharaScale= self.scale
 	print("chara ready")
-	
+
+func set_UI(theUI):
+	print("set UI for "+characterData.Charaname)
+	ui = theUI
+	buff_bar    = ui.get_buff_bar()
+	hp_Jauge    = ui.getHpbar()
+	horny_Jauge = ui.getLustbar()
+	horny_Rect  = ui.get_HornyBar()
+	actionspoints = ui.getactionpoints()
+	buff_icons  = ui.get_buff_bar()
 	update_display()
 
 # Appelée après instanciation, pour charger les données du GameStat
-func load_from_dict(data: Dictionary) -> void:
-	if data.has("name"):
-		Charaname = data["name"]
-		print(Charaname)
-	if data.has("attack"):
-		attack = data["attack"]
-	if data.has("defense"):
-		defense = data["defense"]
-	if data.has("willpower"):
-		willpower = data["willpower"]
-	if data.has("evasion"):
-		evasion = data["evasion"]
-	if data.has("initiative"):
-		initiative = data["initiative"]
-	if data.has("stamina"):
-		current_stamina = data["stamina"]
-	if data.has("max_stamina"):
-		max_stamina = data["max_stamina"]
-	if data.has("stress"):
-		current_stress = data["stress"]
-	if data.has("horny"):
-		current_horny = data["horny"]
-	if data.has("portrait_texture_path"):
-		var portrait_path = data["portrait_texture_path"]
-		portrait_texture = Utils.load_texture(portrait_path)
-	if data.has("dead_portrait_texture_path"):
-		var dead_portrait_path = data["dead_portrait_texture_path"]
-		dead_portrait_texture = Utils.load_texture(dead_portrait_path)
-	if data.has("initiative_icon_path"):
-		var initiative_icon_path = data["initiative_icon_path"]
-		initiative_icon = Utils.load_texture(initiative_icon_path)
-	if data.has("position"):
-		var position= data["position"]
-		current_position=position
-	if data.has("camp_skills"):
-		camp_skill_resources = data["camp_skills"]
+func load_camp_chara(charaData : CharacterData) -> void:
+		characterData=charaData 
+		portrait_texture = charaData.textureCamp
+		_updateSkills(characterData.camp_skill_resources)
+	
 		
 func set_targetable(targe : bool):
 	targetable = targe 
 	Arrow.visible= targe
 func add_buff(buff: Buff):
 	var new_buff = buff.duplicate()
-	buffs.append(new_buff)
-	var icon = TextureRect.new()
-	icon.texture = buff.icon
-	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	icon.custom_minimum_size = Vector2(20, 20)
-	buff_bar.add_child(icon)
+	characterData.buffs.append(new_buff)
+	_add_buff_icon(new_buff)
+	if camp != null and camp.get("selected_chara") == self:
+		camp.refresh_buffs(characterData)
 	#buff_icons.add_child(icon)
 	print("add buff")
 	
 func update_display() -> void:
-	if not hp_Jauge or not guilt_Jauge or not horny_Jauge:
-		hp_Jauge=$HP/HPProgressBar
-		guilt_Jauge=$Stress/GuiltrogressBar
-		horny_Jauge=$horny/HornyProgressBar
-		# return
-	hp_Jauge.value=current_stamina
-	guilt_Jauge.value=current_stress
-	horny_Jauge.value=current_horny
-	name_label.text = Charaname
-
+	if not hp_Jauge or not horny_Jauge:
+		push_warning("CharaCamp: UI non initialisée pour " + characterData.Charaname)
+		return
+	hp_Jauge.value=characterData.current_stamina
+	horny_Jauge.value=characterData.current_horniness
+	horny_Rect.modulate.a =characterData.current_horniness
+	name_label.text = characterData.Name
+	Selector.texture =portrait_texture
 	
 	sprite.texture = portrait_texture
-	
+	# La BuffBar du slot est reconstruite à partir des données : c'est la
+	# seule source de vérité hors combat.
+	if buff_bar != null:
+		for child in buff_bar.get_children():
+			buff_bar.remove_child(child)
+			child.queue_free()
+		for buff in characterData.buffs:
+			_add_buff_icon(buff)
+
+
+## Même icône qu'en combat (UI/buffUi.tscn) : même taille, même espacement
+## dans la BuffBar, et l'infobulle stat / montant / tours au survol.
+func _add_buff_icon(buff: Buff) -> void:
+	if buff_bar == null:
+		return
+	var icon = BUFF_UI.instantiate()
+	buff_bar.add_child(icon)
+	icon.updatebuff(buff)
+
 func gomasturbate():
 	campposition.visible=false
 	
+signal skill_animation_started
+signal skill_animation_finished
 func animate_heal(damage:int, source:CharaCamp, color=null):
-	#emit_signal("skill_animation_started")
+	emit_signal("skill_animation_started")
 	var effect_instance = healEffectScene.instantiate()
 	get_tree().current_scene.add_child(effect_instance)
 	effect_instance.global_position = global_position + Vector2(0, -140)
@@ -138,10 +120,33 @@ func animate_heal(damage:int, source:CharaCamp, color=null):
 		effect_instance.setup(damage,color)
 		
 	var tween := create_tween() as Tween
-	var tween2 := create_tween() as Tween
+	
 	var normal_size = CharaScale
 	var big_size= Vector2(1.0,1.05) 
 	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
 	tween.tween_property(self, "scale", normal_size, 0.2)
 	await tween.finished
-	#emit_signal("skill_animation_finished")
+	emit_signal("skill_animation_finished")
+
+
+func animate_selected():
+	emit_signal("skill_animation_started")
+	
+	var tween := create_tween() as Tween
+	var CharaScale = self.scale
+	var normal_size = CharaScale
+	var big_size= Vector2(1.0,1.1) 
+	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
+	tween.tween_property(self, "scale", normal_size, 0.2)
+	await tween.finished
+	emit_signal("skill_animation_finished")
+	
+func _updateSkills(updated_skills: Array[CampSkill] ):
+	camp_skills.clear()
+	for s in updated_skills:
+		if s == null:
+			push_error("Une ressource de compétence est nulle dans %s" % name)
+			continue
+		var inst= s.duplicate()
+		
+		camp_skills.append(inst)

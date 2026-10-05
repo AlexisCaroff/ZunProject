@@ -2,42 +2,66 @@ extends SkillEffect
 class_name SkillEffectSpawnEnemy
 
 @export var enemy_scene: PackedScene
-@export var max_spawn: int = 1  # combien d'ennemis peuvent être spawn
+@export var max_spawn: int = 1
 @export var spawn_delay: float = 0.5
 
-func apply(user: Character, target: PositionSlot) -> void:
+var combatmanager: CombatManager
+
+func apply(_user: Character, target: PositionSlot) -> void:
+	combatmanager = _user.combat_manager
 	if not enemy_scene:
 		push_error("Aucune scène d'ennemi assignée à SkillEffectSpawnEnemy")
 		return
-	
-	var combat_manager = target.combat_manager
-	if combat_manager == null:
+	if target.combat_manager == null:
 		push_error("Impossible de trouver le combat_manager depuis le target slot")
 		return
-	
-	# Chercher les slots ennemis disponibles
-	var empty_slots: Array[PositionSlot] = []
-	for slot in combat_manager.enemy_positions:
-		if not slot.is_occupied():
-			empty_slots.append(slot)
-	
-	if empty_slots.is_empty():
-		print("Aucun slot libre pour spawn un ennemi")
-		return
-	
-	var spawn_count = min(max_spawn, empty_slots.size())
-	
-	for i in range(spawn_count):
-		var slot = empty_slots[i]
-		_spawn_enemy_in_slot(slot)
+
+	# Joue le caster_effect_scene de la skill si présent
+	var skill := _user.current_skill
+	if skill and skill.caster_effect_scene:
+		var vfx := skill.caster_effect_scene.instantiate()
+		combatmanager.add_child(vfx)
+		match skill.caster_effect_anchor:
+			skill.EffectAnchor.HEAD:
+				vfx.global_position = _user.global_position + Vector2(0, -100)
+			skill.EffectAnchor.TORSO:
+				vfx.global_position = _user.global_position + Vector2(0, -50)
+			_:
+				vfx.global_position = _user.global_position
+
+	_spawn_enemy_in_slot(target)
 
 
-
-func _spawn_enemy_in_slot(slot: PositionSlot):
-	var new_enemy = enemy_scene.instantiate()
-	slot.add_child(new_enemy)
-	slot.assign_character(new_enemy, 0.5)
-	new_enemy.is_player_controlled = false
-	new_enemy.combat_manager = slot.combat_manager
+func _spawn_enemy_in_slot(slot: PositionSlot) -> void:
+	var new_enemy: Character = enemy_scene.instantiate()
+	combatmanager.add_child(new_enemy)
+	new_enemy.characterData = new_enemy.characterData.duplicate(true)
+	new_enemy.characterData.is_player_controlled = false
+	new_enemy.combat_manager = combatmanager
+	new_enemy.ShadowBackground = combatmanager.ShadowBackground
 	new_enemy.name = "Spawned_" + str(randi() % 1000)
-	print("Spawned new enemy in slot: ", slot.name)
+	new_enemy.characterData.Charaname = new_enemy.name
+
+	# ── Stats runtime ────────────────────────────────────────────────
+	new_enemy.update_stats()
+	new_enemy.characterData.current_stamina   = new_enemy.characterData.max_stamina
+	new_enemy.characterData.current_stress    = clamp(new_enemy.characterData.current_stress,    0, new_enemy.characterData.max_stress)
+	new_enemy.characterData.current_horniness = clamp(new_enemy.characterData.current_horniness, 0, new_enemy.characterData.max_horniness)
+
+	# ── Placement ───────────────────────────────────────────────────
+	new_enemy._current_slot = slot
+	combatmanager.move_character_to(new_enemy, slot, 0.0)
+
+	# ── Enregistrement — UNE seule fois ─────────────────────────────
+	combatmanager.enemies.append(new_enemy)
+
+	# ── Connexion des signaux animation (indispensable !) ────────────
+	new_enemy.skill_animation_started.connect(combatmanager._on_skill_animation_started)
+	new_enemy.skill_animation_finished.connect(combatmanager._on_skill_animation_finished)
+
+	# ── File de tours ────────────────────────────────────────────────
+	combatmanager.turn_queue.append(new_enemy)
+	combatmanager.ui.update_turn_queue_ui(combatmanager.turn_queue)
+	new_enemy.update_ui()
+
+	print("✅ Spawned: ", new_enemy.name, " in slot: ", slot.name)

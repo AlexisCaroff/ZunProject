@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://ddokwgifpnrcf"]
+
+[ext_resource type="Texture2D" uid="uid://3y4fn44cqfxy" path="res://Items/ItemIcons/LOOT_ring.png" id="1_dw1wr"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="1_e17xq"]
+
+[resource]
+script = ExtResource("1_e17xq")
+icon = ExtResource("1_dw1wr")
+name = "Ring"
+description = "+2 attack"
+isCursed = true
+number = 1
+Max_stamina_bonus = 0
+Max_lust_bonus = 1
+Max_Guilt_bonus = 0
+attack_bonus = 2
+defense_bonus = 0
+willpower_bonus = 0
+evasion_bonus = 0
+initiative_bonus = 0
+peekbonus = 0
+global_cooldown_reduction = 0
+skill_specific_cooldown = Dictionary[String, int]({})
+metadata/_custom_type_script = "uid://ha2eko5otag4"

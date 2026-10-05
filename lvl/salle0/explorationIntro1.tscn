@@ -1,0 +1,184 @@
+[gd_scene load_steps=13 format=3 uid="uid://d0tw3ef8bhc71"]
+
+[ext_resource type="PackedScene" uid="uid://badg2cpqmlnim" path="res://lvl/explorationInterface.tscn" id="1_base"]
+[ext_resource type="Texture2D" uid="uid://dqmm3ti6bsl02" path="res://scenes/BG doors demo/DOOR_dungeon_hall.png" id="2_DOOR_dungeon_h"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_atmosphere"]
+[ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="4_gradiant"]
+[ext_resource type="Texture2D" uid="uid://cfwlbo0pguis6" path="res://UI/DOORR_dungeon_hall.png" id="5_DOORR_dungeon_"]
+[ext_resource type="Script" uid="uid://c1wsrjftjjn7c" path="res://lvl/salle0/doorr_dungeon_hallOPenning.gd" id="6_doorr_dungeon_"]
+[ext_resource type="Texture2D" uid="uid://dytsjthnt28u" path="res://UI/DOORL_dungeon_hall.png" id="7_DOORL_dungeon_"]
+[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="8_carolingia"]
+[ext_resource type="Texture2D" uid="uid://jhd7rid3c1c1" path="res://actions/actiontexture/moveIcon.png" id="9_moveIcon"]
+[ext_resource type="Script" uid="uid://conijhbkctdj2" path="res://lvl/moveExplo.gd" id="10_moveExplo"]
+[ext_resource type="FontFile" uid="uid://dy4n8qboodyud" path="res://font/MarcellusSC-Regular.ttf" id="11_MarcellusSC_Re"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="12_Euphorigenic"]
+
+[node name="ExploInterface2" instance=ExtResource("1_base")]
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = 1.0
+
+[node name="ZunBg" type="Sprite2D" parent="." index="0"]
+position = Vector2(1293, 495)
+scale = Vector2(0.845315, 0.815178)
+texture = ExtResource("2_DOOR_dungeon_h")
+
+[node name="ZunBg2" type="Sprite2D" parent="." index="1"]
+position = Vector2(-934.5, 540)
+scale = Vector2(1.05291, 1)
+texture = ExtResource("2_DOOR_dungeon_h")
+
+[node name="atmosphere" parent="." index="2" instance=ExtResource("3_atmosphere")]
+position = Vector2(2, 352)
+
+[node name="Gradiant2" type="Sprite2D" parent="." index="3"]
+position = Vector2(307, 446)
+rotation = -3.03799
+scale = Vector2(1.3404, 1.72265)
+skew = 0.01116
+texture = ExtResource("4_gradiant")
+
+[node name="exploUI" parent="." index="4"]
+position = Vector2(961, 894.102)
+scale = Vector2(0.75, 0.78)
+
+[node name="ColorRect" type="ColorRect" parent="." index="5"]
+layout_mode = 0
+offset_left = 1120.0
+offset_top = 149.0
+offset_right = 1443.0
+offset_bottom = 599.0
+color = Color(0.0546875, 0.0193015, 0.0450368, 1)
+
+[node name="DoorrDungeonHall" type="Sprite2D" parent="." index="6"]
+position = Vector2(1446.47, 373.209)
+rotation = 1.5708
+scale = Vector2(0.810313, 0.780942)
+texture = ExtResource("5_DOORR_dungeon_")
+offset = Vector2(0, 101.44)
+script = ExtResource("6_doorr_dungeon_")
+theskew = 0.05
+
+[node name="DoorlDungeonHall" type="Sprite2D" parent="." index="7"]
+position = Vector2(1119.94, 371.706)
+rotation = 1.5708
+scale = Vector2(0.805025, 0.816101)
+skew = 0.00349066
+texture = ExtResource("7_DOORL_dungeon_")
+offset = Vector2(0, -104.11)
+script = ExtResource("6_doorr_dungeon_")
+theskew = -0.05
+
+[node name="HeroPosition" parent="." index="15"]
+position = Vector2(679, 677)
+
+[node name="position1" parent="HeroPosition" index="0"]
+position = Vector2(-284.286, -1.52588e-05)
+
+[node name="charaUI" parent="HeroPosition/position1" index="2"]
+visible = false
+
+[node name="position2" parent="HeroPosition" index="1"]
+z_index = 1
+
+[node name="charaUI" parent="HeroPosition/position2" index="2"]
+visible = false
+
+[node name="position3" parent="HeroPosition" index="2"]
+z_index = 2
+position = Vector2(-22.8571, 2.85716)
+
+[node name="charaUI" parent="HeroPosition/position3" index="2"]
+visible = false
+
+[node name="charaUI" parent="HeroPosition/position4" index="2"]
+visible = false
+
+[node name="ExplorationManager" parent="." index="16"]
+showselector = false
+
+[node name="Button" parent="ExplorationManager" index="0"]
+z_index = 5
+offset_left = 1090.0
+offset_top = 78.0
+offset_right = 1477.0
+offset_bottom = 625.0
+
+[node name="Doortext" parent="ExplorationManager/Button" index="0"]
+visible = false
+
+[node name="Campement" parent="ExplorationManager" index="3"]
+visible = false
+
+[node name="DoorTuto" parent="ExplorationManager" index="4"]
+offset_left = 814.0
+offset_top = 231.0
+offset_right = 1055.0
+offset_bottom = 336.0
+
+[node name="RichTextLabel2" parent="ExplorationManager/DoorTuto" index="0"]
+text = "Enter the dungeon"
+
+[node name="moveButton" type="Button" parent="." index="18"]
+visible = false
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 0
+offset_left = 117.0
+offset_top = -129.0
+offset_right = 207.0
+offset_bottom = -29.0
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("8_carolingia")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("9_moveIcon")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("10_moveExplo")
+
+[node name="cooldownA" type="Label" parent="moveButton" index="0"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="DoorBg2" type="Sprite2D" parent="." index="21"]
+position = Vector2(1293, 42.4142)
+scale = Vector2(0.842488, 0.823097)
+texture = ExtResource("2_DOOR_dungeon_h")
+region_enabled = true
+region_rect = Rect2(0, 0, 2476, 261.447)
+region_filter_clip_enabled = true
+
+[node name="MenuPerso" parent="." index="22"]
+visible = false
+
+[node name="Items" parent="." index="24"]
+position = Vector2(1055, 886)
+
+[node name="Item1" parent="Items" index="0"]
+position = Vector2(229.667, 0)
+
+[node name="Button" parent="Items/Item1" index="1"]
+metadata/_edit_use_anchors_ = true
+
+[node name="Item2" parent="Items" index="1"]
+position = Vector2(229.667, 117.042)
+
+[node name="Button" parent="Items/Item2" index="0"]
+offset_right = 81.0
+offset_bottom = 21.0
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" parent="Items/Item2" index="1"]
+theme_override_fonts/normal_font = ExtResource("11_MarcellusSC_Re")
+theme_override_fonts/bold_italics_font = ExtResource("12_Euphorigenic")
+theme_override_fonts/bold_font = ExtResource("12_Euphorigenic")
+theme_override_font_sizes/normal_font_size = 15
+theme_override_font_sizes/bold_font_size = 20
+
+[node name="IconPriestessWhip" parent="ExploSkillButton" index="0"]
+visible = false
+
+[connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="moveButton" to="moveButton" method="_on_mouse_exited"]

@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://br6ni1oo0vs10"]
+
+[ext_resource type="Texture2D" uid="uid://cy53cswle6tyg" path="res://demo characters/HERO_hunter_thrust.png" id="1_kqd0f"]
+[ext_resource type="PackedScene" uid="uid://dacqrw5c17fup" path="res://actions/skillEffects/FX/Scene/dashAttack.tscn" id="2_ugu7h"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_d0if2"]
+[ext_resource type="Texture2D" uid="uid://bywr6bvpagx5v" path="res://actions/actiontexture/UI icons/ICON_hunter_stab.png" id="4_fidb7"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="5_44474"]
+[ext_resource type="PackedScene" uid="uid://cqea4mekfk8gb" path="res://actions/skillEffects/FX/Scene/hit_standar.tscn" id="6_mvbp4"]
+
+[sub_resource type="Resource" id="Resource_kqd0f"]
+script = ExtResource("3_d0if2")
+MagicDMG = false
+amount = 30
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[resource]
+script = ExtResource("5_44474")
+name = "Spear"
+descriptionName = "Spear"
+description = "Inflict damage to an ennemi"
+icon = ExtResource("4_fidb7")
+barkSkill = ""
+required_position = 0
+range = 2
+ImageSkill = ExtResource("1_kqd0f")
+the_target_type = 0
+effects = Array[Resource]([SubResource("Resource_kqd0f")])
+two_target_Type = false
+the_second_target_type = 0
+second_effects = Array[Resource]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 4
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 0.3
+tags = Array[String]([])
+is_contact = false
+distance_contact = 600.0
+caster_effect_scene = ExtResource("2_ugu7h")
+target_effect_scene = ExtResource("6_mvbp4")
+caster_effect_anchor = 0
+target_effect_anchor = 2
+is_beneficial = false
+skip_target_return_anim = false
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

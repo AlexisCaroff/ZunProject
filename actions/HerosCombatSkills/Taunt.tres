@@ -1,18 +1,29 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://behrtqotkyvnx"]
+[gd_resource type="Resource" script_class="Skill" load_steps=15 format=3 uid="uid://behrtqotkyvnx"]
 
-[ext_resource type="Texture2D" uid="uid://dmd71tk5hpefb" path="res://actions/actiontexture/SkillImage/HERO_WARRIOR_Taunt.png" id="1_aki42"]
+[ext_resource type="Texture2D" uid="uid://f8o3t710mcxl" path="res://characters/charatexture/demo characters/HERO_warrior_roar.png" id="1_3o4k5"]
+[ext_resource type="PackedScene" uid="uid://ounw7l2iaxnn" path="res://actions/skillEffects/FX/Scene/Taunt_fx.tscn" id="2_5kxhq"]
 [ext_resource type="Script" uid="uid://cjfkha61akav3" path="res://actions/skillEffects/TauntEffect.gd" id="2_wwy36"]
-[ext_resource type="Script" uid="uid://holgglh06ynn" path="res://actions/HerosCombatSkills/SkillEffect.gd" id="2_yu2gj"]
-[ext_resource type="Texture2D" uid="uid://b4a5l81b2i8a5" path="res://actions/actiontexture/taunt.png" id="3_ukosw"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="3_wwy36"]
+[ext_resource type="Texture2D" uid="uid://cnxu4nek43q22" path="res://UI/taunt.png" id="5_v6fax"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="6_aki42"]
 [ext_resource type="Script" uid="uid://2vsqpp6jqiow" path="res://actions/skillEffects/ReduceCooldownEffect.gd" id="6_ukosw"]
-[ext_resource type="Texture2D" uid="uid://2u65ql48338r" path="res://actions/bufftexture/buffDeff.png" id="8_yu2gj"]
+[ext_resource type="Texture2D" uid="uid://8idtahv35xc6" path="res://actions/actiontexture/UI icons/ICON_warrior_roar.png" id="6_v6fax"]
+[ext_resource type="Texture2D" uid="uid://blaxr6boo4hkf" path="res://UI/buffDeff.png" id="8_3o4k5"]
+[ext_resource type="PackedScene" uid="uid://dnmnprn0sygoi" path="res://actions/skillEffects/FX/Scene/Taunted_fx.tscn" id="11_6l5cr"]
 
 [sub_resource type="Resource" id="Resource_yu2gj"]
 script = ExtResource("2_wwy36")
 duration = 1
 metadata/_custom_type_script = "uid://cjfkha61akav3"
+
+[sub_resource type="Resource" id="Resource_5kxhq"]
+script = ExtResource("6_aki42")
+name = "Taunt"
+uitexture = ExtResource("5_v6fax")
+affected_stat = 8
+amount = 0
+duration = 1
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [sub_resource type="Resource" id="Resource_5uy07"]
 script = ExtResource("6_ukosw")
@@ -21,25 +32,28 @@ metadata/_custom_type_script = "uid://2vsqpp6jqiow"
 
 [sub_resource type="Resource" id="Resource_qng7d"]
 script = ExtResource("6_aki42")
-uitexture = ExtResource("8_yu2gj")
+name = "Defence"
+uitexture = ExtResource("8_3o4k5")
 affected_stat = 1
-amount = 5000
-duration = 2
+amount = 10
+duration = 3
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [resource]
 script = ExtResource("3_wwy36")
 name = "Taunt"
-descriptionName = "Taunt"
-description = "taunt one ennemi and reset cooldown"
-icon = ExtResource("3_ukosw")
+descriptionName = "Roar"
+description = "Taunt one ennemi and reset 2 cooldowns on skills"
+icon = ExtResource("6_v6fax")
+barkSkill = ""
 required_position = 0
-ImageSkill = ExtResource("1_aki42")
+range = 3
+ImageSkill = ExtResource("1_3o4k5")
 the_target_type = 0
-effects = Array[ExtResource("2_yu2gj")]([SubResource("Resource_yu2gj")])
+effects = Array[Resource]([SubResource("Resource_yu2gj"), SubResource("Resource_5kxhq")])
 two_target_Type = true
 the_second_target_type = 2
-second_effects = Array[ExtResource("2_yu2gj")]([SubResource("Resource_5uy07"), SubResource("Resource_qng7d")])
+second_effects = Array[Resource]([SubResource("Resource_5uy07"), SubResource("Resource_qng7d")])
 usable_when_horny = false
 needtarget = true
 Actiontype = "attack"
@@ -48,6 +62,14 @@ cooldown = 5
 current_cooldown = 0
 precision = 100
 allways_hit = false
-duration = 1.0
+duration = 2.0
 tags = Array[String]([])
+is_contact = false
+distance_contact = 0.0
+caster_effect_scene = ExtResource("2_5kxhq")
+target_effect_scene = ExtResource("11_6l5cr")
+caster_effect_anchor = 0
+target_effect_anchor = 1
+is_beneficial = false
+skip_target_return_anim = false
 metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

@@ -1,0 +1,75 @@
+[gd_scene load_steps=13 format=3 uid="uid://buglnok83dpyf"]
+
+[ext_resource type="Texture2D" uid="uid://10mgmjx7fwya" path="res://Zun_bg.png" id="1_5w4ms"]
+[ext_resource type="Texture2D" uid="uid://df6e4btmrj1i8" path="res://props/campFire.png" id="2_eaicd"]
+[ext_resource type="Texture2D" uid="uid://dggwxrbeaep38" path="res://props/camp_bg.png" id="3_27olt"]
+[ext_resource type="Texture2D" uid="uid://6bw7q7nqrbxc" path="res://props/flame.png" id="10_sayfq"]
+[ext_resource type="Texture2D" uid="uid://cc5eq6g7p535a" path="res://props/boles.png" id="17_om8id"]
+[ext_resource type="Texture2D" uid="uid://cbbc3rht6f8fd" path="res://props/sac.png" id="18_lolw3"]
+[ext_resource type="Shader" uid="uid://nehgn30c71ua" path="res://characters/flame2.gdshader" id="19_1im0x"]
+[ext_resource type="Texture2D" uid="uid://okan3l38r1ob" path="res://characters/charatexture/noise4.png" id="20_6judf"]
+[ext_resource type="Texture2D" uid="uid://b2ck1i66jrr41" path="res://characters/charatexture/Fire.png" id="21_1qsc3"]
+[ext_resource type="Shader" uid="uid://ci6t01o8wrsor" path="res://characters/flame.gdshader" id="22_376c0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5leyo"]
+shader = ExtResource("19_1im0x")
+shader_parameter/deform_texture = ExtResource("20_6judf")
+shader_parameter/deform_strength = 2.0
+shader_parameter/scroll_speed = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ifies"]
+shader = ExtResource("22_376c0")
+shader_parameter/deform_texture = ExtResource("20_6judf")
+shader_parameter/deform_strength_x = 1.0
+shader_parameter/deform_strength_y = 0.5
+shader_parameter/scroll_speed = 0.4
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ZunBg" type="Sprite2D" parent="."]
+position = Vector2(961, 402)
+texture = ExtResource("1_5w4ms")
+
+[node name="CampFire" type="Sprite2D" parent="."]
+z_index = 3
+position = Vector2(1221, 661)
+scale = Vector2(1.08411, 0.906955)
+texture = ExtResource("2_eaicd")
+
+[node name="Tente" type="Sprite2D" parent="."]
+position = Vector2(440.546, 640.291)
+rotation = 0.0304331
+scale = Vector2(2.05629, 2.08725)
+texture = ExtResource("3_27olt")
+offset = Vector2(12.055, -102.525)
+
+[node name="Boles" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(1435.14, 657.157)
+scale = Vector2(1.19094, 1.16456)
+texture = ExtResource("17_om8id")
+
+[node name="Sac" type="Sprite2D" parent="."]
+position = Vector2(1668.57, 607.353)
+scale = Vector2(0.839673, 0.858693)
+texture = ExtResource("18_lolw3")
+
+[node name="Fire" type="Sprite2D" parent="."]
+z_index = 3
+material = SubResource("ShaderMaterial_5leyo")
+position = Vector2(1225, 550.5)
+scale = Vector2(1, 1.83064)
+texture = ExtResource("21_1qsc3")
+
+[node name="Fire2" type="Sprite2D" parent="."]
+z_index = 3
+material = SubResource("ShaderMaterial_ifies")
+position = Vector2(1227, 583.875)
+scale = Vector2(1.19847, 1.38508)
+texture = ExtResource("10_sayfq")

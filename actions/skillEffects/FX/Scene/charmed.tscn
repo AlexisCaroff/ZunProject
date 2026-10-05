@@ -1,0 +1,173 @@
+[gd_scene load_steps=13 format=3 uid="uid://8j60vwihncpy"]
+
+[ext_resource type="Script" uid="uid://dacdwm0tqo27r" path="res://anim_fx.gd" id="1_b2bs8"]
+[ext_resource type="Texture2D" uid="uid://d1ykwhrs10yla" path="res://demo characters/HERO_hunter_hit.png" id="2_b2bs8"]
+[ext_resource type="Texture2D" uid="uid://5cudqvyuf1qx" path="res://actions/skillEffects/FX/FX_charm001 _under.png" id="3_eshel"]
+[ext_resource type="Texture2D" uid="uid://1ll3k1mai4xn" path="res://actions/skillEffects/FX/FX_lust.png" id="4_ydai6"]
+
+[sub_resource type="Animation" id="Animation_7h147"]
+resource_name = "FX_anim"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FxCharge:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.233333, 0.5, 0.766667, 1),
+"transitions": PackedFloat32Array(1, 0.965936, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FxCharge:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.300197, -0.0272677]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FxCharge:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.22), Vector2(0.297094, 0.326243)]
+}
+
+[sub_resource type="Animation" id="Animation_fwcky"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FxCharge:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FxCharge:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.0272677]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FxCharge:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.297094, 0.326243)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lvn5b"]
+_data = {
+&"FX_anim": SubResource("Animation_7h147"),
+&"RESET": SubResource("Animation_fwcky")
+}
+
+[sub_resource type="Gradient" id="Gradient_7348b"]
+offsets = PackedFloat32Array(0, 0.670103, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.945017, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ydai6"]
+gradient = SubResource("Gradient_7348b")
+
+[sub_resource type="Curve" id="Curve_r27r1"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0.655063), 0.0, 0.0, 0, 0, Vector2(1, 1.69177), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_bwult"]
+curve = SubResource("Curve_r27r1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kgqd5"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 3.9
+direction = Vector3(0, -2, 0)
+spread = 90.0
+initial_velocity_min = 50.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.2
+scale_over_velocity_curve = SubResource("CurveTexture_bwult")
+color_ramp = SubResource("GradientTexture1D_ydai6")
+
+[node name="AnimFX" type="Node2D"]
+script = ExtResource("1_b2bs8")
+
+[node name="HeroWarriorBash" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(99, -46)
+scale = Vector2(0.210205, 0.210205)
+texture = ExtResource("2_b2bs8")
+
+[node name="FxCharge" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-8, -3)
+rotation = -0.0272677
+scale = Vector2(0.297094, 0.326243)
+texture = ExtResource("3_eshel")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lvn5b")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+amount = 6
+texture = ExtResource("4_ydai6")
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.83
+process_material = SubResource("ParticleProcessMaterial_kgqd5")

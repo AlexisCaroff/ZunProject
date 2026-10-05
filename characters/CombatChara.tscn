@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=3 uid="uid://qffxu8t8mvlx"]
+
+[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_i21nx"]
+[ext_resource type="Resource" uid="uid://uf5x5dpfh5ln" path="res://characters/data/CharaHunter2.tres" id="2_qgiwc"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="2_uoxmb"]
+[ext_resource type="Shader" uid="uid://byep7wpo3y12v" path="res://characters/character_outline.gdshader" id="4_fn4af"]
+[ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="4_qgiwc"]
+[ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="5_5cv4u"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="6_fn4af"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="7_pv5ss"]
+[ext_resource type="Script" uid="uid://cf5uoxm4f4cop" path="res://characters/arrow.gd" id="7_uoxmb"]
+[ext_resource type="Texture2D" uid="uid://cklfohx1babt0" path="res://UI/lootItem.png" id="8_osbnm"]
+[ext_resource type="Texture2D" uid="uid://ci6or334e3v7" path="res://characters/charatexture/demo characters/HERO_priestess_cast.png" id="23_3m50t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pv5ss"]
+shader = ExtResource("4_fn4af")
+shader_parameter/enabled = true
+shader_parameter/outline_color = Color(0.80472, 0.769884, 0.726378, 1)
+shader_parameter/outline_width = 5.0
+shader_parameter/outline_direction = Vector2(0, -5)
+
+[node name="Warrior" type="Node2D"]
+z_as_relative = false
+script = ExtResource("1_i21nx")
+characterData = ExtResource("2_qgiwc")
+metadata/converted = true
+metadata/character_data_path = "res://characters/data/CharaWarrior.tres"
+
+[node name="name" type="Label" parent="."]
+visible = false
+offset_left = -89.0
+offset_top = -253.0
+offset_right = -45.0
+offset_bottom = -230.0
+text = "name"
+
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(51, 23)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("2_uoxmb")
+min_scale = 1.2
+max_scale = 1.25
+scalemini = 1.2
+min_duration = 0.8
+
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+material = SubResource("ShaderMaterial_pv5ss")
+offset_left = -154.167
+offset_top = -313.333
+offset_right = 16.8333
+offset_bottom = -82.3333
+scale = Vector2(1.87875, 1.51287)
+mouse_filter = 2
+texture = ExtResource("23_3m50t")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Skill" type="TextureRect" parent="."]
+visible = false
+offset_left = -133.0
+offset_top = -316.0
+offset_right = 443.0
+offset_bottom = 260.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_qgiwc")
+script = ExtResource("5_5cv4u")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+modulate = Color(0.77, 0.616513, 0.4158, 1)
+position = Vector2(2, -178)
+scale = Vector2(0.0897035, 0.0897035)
+texture = ExtResource("6_fn4af")
+offset = Vector2(0, 116.49)
+script = ExtResource("7_uoxmb")
+
+[node name="contexte" type="Label" parent="."]
+visible = false
+z_index = 15
+offset_left = -131.0
+offset_top = -214.0
+offset_right = 179.0
+offset_bottom = -52.0
+scale = Vector2(0.825763, 0.821068)
+theme_override_fonts/font = ExtResource("7_pv5ss")
+theme_override_font_sizes/font_size = 40
+text = "Skill name"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="LootItem" type="Sprite2D" parent="contexte"]
+z_index = -1
+position = Vector2(161, 28)
+scale = Vector2(2.34924, 0.637405)
+texture = ExtResource("8_osbnm")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-37, -103)

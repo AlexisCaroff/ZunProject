@@ -3,28 +3,44 @@ extends SkillEffect
 
 var Chartarget:Character
 
-func apply(user: Character, target: PositionSlot):
-	Chartarget=target.occupant
-	if !Chartarget.can_be_moved:
-		return
-	var cm = user.combat_manager
-	var slots = cm.get_positions(Chartarget.is_player_controlled)
-	print("Move "+user.Charaname+" to "+Chartarget.Charaname+" position")
-
-	var user_slot = user.current_slot
-
-	if Chartarget.current_slot==null:
-		return
-		
-	if Chartarget.current_slot.is_occupied():
-		
-		var target_current_slot = Chartarget.current_slot
-		if target_current_slot == null:
-			push_error("Le personnage cible n'a pas de slot assigné.")
+func apply(user: Character, target: PositionSlot) -> void:
+	# Si l'utilisateur est immobilisé, il ne peut cibler que sa propre position.
+	# Move.gd reçoit la cible déjà choisie — si ce n'est pas le slot du user, on annule.
+	if user.characterData.get("immobilized") == true:
+		if target != user._current_slot:
+			print("%s est immobilisé — déplacement annulé." % user.characterData.Charaname)
 			return
-		cm.swap_characters(target_current_slot, user_slot, 1.7)
-		
+ 
+	var Chartarget := target.occupant
+	if Chartarget == null:
+		# Slot vide (choix de l'IA) : le lanceur s'y rend seul. Son ancien
+		# slot est libéré d'abord, sinon il resterait marqué occupé.
+		var old_slot: PositionSlot = user._current_slot
+		if old_slot == null or old_slot == target:
+			return
+		print("Move %s to empty slot %s" % [user.characterData.Charaname, target.name])
+		old_slot.remove_character()
+		user.combat_manager.move_character_to(user, target, 0.5)
+		return
+	if Chartarget.characterData.immobilized:
+		if target != user._current_slot:
+			print("%s est immobilisé — déplacement annulé." % user.characterData.Charaname)
+			return
+	if !Chartarget.characterData.can_be_moved:
+		return
+ 
+	var cm = user.combat_manager
+	print("Move %s to %s position" % [user.characterData.Charaname, Chartarget.characterData.Charaname])
+ 
+	var user_slot = user._current_slot
+	if Chartarget._current_slot == null:
+		return
+ 
+	if Chartarget._current_slot.is_occupied():
+		cm.swap_characters(Chartarget._current_slot, user_slot, 0.5)
+		user.update_ui()
+		Chartarget.update_ui()
 	else:
-		cm.move_character_to(Chartarget, user_slot,.7)
-
+		cm.move_character_to(Chartarget, user_slot, 0.5)
+		Chartarget.update_ui()
 	

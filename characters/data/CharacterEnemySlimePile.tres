@@ -1,0 +1,93 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=17 format=3 uid="uid://b3xbgreha0qyh"]
+
+[ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="1_bark"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="2_data"]
+[ext_resource type="Script" uid="uid://c2t82ekbv5wsc" path="res://characters/charatexture/braines/Ai_brain_SlimePile.gd" id="3_brain"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_equip"]
+[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="5_exploskill"]
+[ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="6_campskill"]
+[ext_resource type="Texture2D" uid="uid://bcwub0gbogsfq" path="res://characters/charatexture/demo characters/ENEMY_slimepile_idle.png" id="7_idle"]
+[ext_resource type="Texture2D" uid="uid://c3m2sa2rmcyut" path="res://characters/charatexture/demo characters/ENEMY_slimepile_hit.png" id="8_hit"]
+[ext_resource type="Texture2D" uid="uid://db782q883ooya" path="res://characters/charatexture/demo characters/ENEMY_slimepile_down.png" id="9_down"]
+[ext_resource type="Texture2D" uid="uid://dbq25fw4dr1n0" path="res://characters/exploPortrait/SpitterExploPortrait.png" id="10_exploportrait"]
+[ext_resource type="Texture2D" uid="uid://ctwjj2s4rqugl" path="res://characters/characterInitiative/SlimIniPortrait.png" id="11_iniportrait"]
+[ext_resource type="Resource" uid="uid://dnm6o3wuw8ysw" path="res://actions/ennemiCombatSkills/slimeSpray.tres" id="12_spray"]
+[ext_resource type="Resource" uid="uid://droljic3741tj" path="res://actions/ennemiCombatSkills/slimeSwallow.tres" id="14_swallow"]
+[ext_resource type="Resource" uid="uid://cwrtp7vswcwpp" path="res://actions/ennemiCombatSkills/slimeDigest.tres" id="15_digest"]
+[ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="16_move"]
+
+[sub_resource type="Resource" id="Resource_slimebrain"]
+script = ExtResource("3_brain")
+digest_skill_name = "Slime Digest"
+swallow_skill_name = "Slime Swallow"
+melee_skill_name = "Slime Slap"
+spray_skill_name = "Slime Spray"
+release_threshold = 0.5
+swallow_chance = 0.5
+name = "Slime Pile AI"
+description = "Digère sa proie tant qu'elle est avalée, frappe au contact, crache un poison de lust à distance."
+
+[resource]
+script = ExtResource("2_data")
+headPosition = Vector2(0, -60)
+torso_Position = Vector2(0, 0)
+portrait_texture = ExtResource("7_idle")
+explorationPortrait = ExtResource("10_exploportrait")
+dead_portrait_texture = ExtResource("9_down")
+Hit_texture = ExtResource("8_hit")
+initiative_icon = ExtResource("11_iniportrait")
+Name = "Slime Pile"
+Charaname = "SlimePile"
+IsDemon = true
+size = "big"
+presentation = 2
+attracted_to_feminine = true
+attracted_to_masculine = true
+affinity = Dictionary[String, int]({})
+base_max_stamina = 140
+base_max_stress = 100
+base_max_horniness = 100
+base_attack = 9
+base_defense = 6
+base_willpower = 5
+base_initiative = 8
+base_evasion = 3
+base_precision = 100
+attack = 9
+defense = 6
+willpower = 5
+evasion = 3
+initiative = 8
+peek = 0
+equipped_items = Array[ExtResource("4_equip")]([])
+stun = false
+grab = false
+Chara_position = 0
+max_stamina = 140
+max_stress = 100
+max_horniness = 100
+current_stamina = 140
+current_stress = 0
+current_horniness = 0
+isOneshot = false
+skill_resources = Array[Resource]([ExtResource("14_swallow"), ExtResource("14_swallow"), ExtResource("12_spray"), ExtResource("15_digest"), ExtResource("16_move")])
+exploration_skill_resources = Array[ExtResource("5_exploskill")]([])
+tags = Array[String]([])
+assist = ""
+is_player_controlled = false
+ai_brain = SubResource("Resource_slimebrain")
+can_be_moved = true
+min_durationIddle = 0.9
+max_durationIddle = 1.4
+min_scale = 0.94
+max_scale = 1.02
+corruption = 0
+camp_skill_resources = Array[ExtResource("6_campskill")]([])
+bark_scene = ExtResource("1_bark")
+taunts = ["Glorp...", "Sploutch !", "*gargouillis*", "Bloub bloub."]
+reaction = ["", "", ""]
+affinityReaction = ["", "", ""]
+corrupted = false
+inquisition = false
+immobilized = false
+immobilized_turns = 0

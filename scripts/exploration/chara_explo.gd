@@ -2,97 +2,197 @@ extends Node2D
 class_name CharaExplo
 
 # --- Données d'affichage
-@export var portrait_texture: Texture2D
+
 @export var dead_portrait_texture: Texture2D
 @export var initiative_icon: Texture2D
 var portrait_path: String = ""
 var dead_portrait_path: String = ""
 var initiative_icon_path: String = ""
+
 @onready var sprite = $pivot/HerosTexture1
+## Flèche affichée au-dessus de la tête quand ce personnage est une cible
+## d'échange valide (mode déplacement).
+@onready var arrow: Sprite2D = $Arrow
+
 @onready var buff_bar = $HBoxContainer
-@onready var hp_Jauge=$HPProgressBar
+var hp_Jauge
 
-@onready var hornyJauge=$HornyJauge/HornyJaugePleine
+var hornyJauge
+var LustProgressBar
 
+const healEffectScene := preload("res://actions/damageEffect/HealVFX.tscn")
+const BUFF_UI := preload("res://UI/buffUi.tscn")
 # --- Infos de base
 @export var Charaname: String = "name"
 @export var IsDemon: bool = false
 
-# --- Stats de combat
-@export var base_attack: int = 10
-@export var base_defense: int = 5
-@export var base_willpower: int = 5
-@export var base_initiative: int = 1
-@export var base_evasion: int = 5
 
-@export var attack: int = 10
-@export var defense: int = 5
-@export var willpower: int = 5
-@export var evasion: int = 5
-@export var initiative: int = 1
 
-# --- Valeurs dynamiques
-var current_stamina: int = 100
-var max_stamina: int = 100
-var current_stress: int = 0
-var max_stress: int =100
-var current_horny: int = 0 
-var max_horniness: int = 100
-var current_position: int =0
+var CharaPosition :ExplorationPosition
+var characterData : CharacterData
+var exploPortrait : ExploPortrait
 
 func _ready() -> void:
-	print("chara ready")
-	update_display()
+	#print("chara ready")
+	# Permet à l'inventaire (menu perso) de retrouver la silhouette d'un
+	# personnage pour jouer le VFX de soin quand il boit une potion.
+	add_to_group("chara_explo")
+	var mat := ShaderMaterial.new()
+	mat.shader = load("res://characters/character_outline.gdshader")
+	sprite.material = mat
+	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
+	arrow.visible = false
 
 # Appelée après instanciation, pour charger les données du GameStat
-func load_from_dict(data: Dictionary) -> void:
-	if data.has("name"):
-		Charaname = data["name"]
-		print(Charaname)
-	if data.has("attack"):
-		attack = data["attack"]
-	if data.has("defense"):
-		defense = data["defense"]
-	if data.has("willpower"):
-		willpower = data["willpower"]
-	if data.has("evasion"):
-		evasion = data["evasion"]
-	if data.has("initiative"):
-		initiative = data["initiative"]
-	if data.has("stamina"):
-		current_stamina = data["stamina"]
-	if data.has("max_stamina"):
-		max_stamina = data["max_stamina"]
-	if data.has("stress"):
-		current_stress = data["stress"]
-	if data.has("horny"):
-		current_horny = data["horny"]
-	if data.has("portrait_texture_path"):
-		var port_path = data["portrait_texture_path"]
-		portrait_texture = Utils.load_texture(port_path)
-	if data.has("dead_portrait_texture_path"):
-		var dead_port_path = data["dead_portrait_texture_path"]
-		dead_portrait_texture = Utils.load_texture(dead_port_path)
-	if data.has("initiative_icon_path"):
-		var init_icon_path = data["initiative_icon_path"]
-		initiative_icon = Utils.load_texture(init_icon_path)
-	if data.has("position"):
-		var pos= data["position"]
-		current_position=pos
-		
-	
+func load_chara() -> void:
+	Charaname = characterData.Charaname
+	sprite.texture =characterData.portrait_texture
+
+	# Les icônes de buff ne sont PAS posées ici. À cet instant buff_bar
+	# désigne encore la HBoxContainer locale de la scène, au-dessus de la
+	# tête ; ExplorationPosition._bind_occupant la remplace ensuite par
+	# celle du slot puis appelle update_display(), qui la remplit. Remplir
+	# les deux affichait chaque buff en double.
+
 
 func update_display() -> void:
-	if not hp_Jauge or not hornyJauge:
-		hp_Jauge=$HP/HPProgressBar
+	sprite.texture = characterData.portrait_texture
 
-		hornyJauge=$HornyJauge/HornyJaugePleine
-		# return
-	hp_Jauge.max_value=max_stamina
-	hp_Jauge.value=current_stamina
+	hp_Jauge.max_value = characterData.max_stamina
+	hp_Jauge.value = characterData.current_stamina
+	LustProgressBar.max_value = characterData.max_horniness
+	LustProgressBar.value = characterData.current_horniness
+	hornyJauge.self_modulate.a = (characterData.current_horniness * 2.0) / characterData.max_horniness
+
+	# Synchronise la buff_bar avec characterData.buffs
+	for child in buff_bar.get_children():
+		buff_bar.remove_child(child)
+		child.queue_free()
+	# Filet de sécurité : une fois le personnage rattaché à son slot, la
+	# barre locale de la scène ne sert plus. On la vide pour qu'un ancien
+	# jeu d'icônes n'y reste pas affiché en double au-dessus de la tête.
+	var local_bar := get_node_or_null("HBoxContainer")
+	if local_bar != null and local_bar != buff_bar:
+		for child in local_bar.get_children():
+			local_bar.remove_child(child)
+			child.queue_free()
+	for buff in characterData.buffs:
+		_add_buff_icon(buff)
+
+
+
+
+## Affiche ou masque la flèche de sélection au-dessus de la tête.
+func set_move_target(state: bool) -> void:
+	arrow.visible = state
+
+func add_buff(buff: Buff, isload:bool =false):
+
+	var new_buff = buff.duplicate()
+	_add_buff_icon(new_buff)
+	# `load` est la fonction native de Godot, toujours vraie : la condition
+	# n'était jamais prise et le buff n'atterrissait pas dans les données.
+	if !isload:
+		characterData.buffs.append(buff)
+	#buff_icons.add_child(icon)
+	print("add buff")
+
+## Même icône qu'en combat (UI/buffUi.tscn) : même taille, même espacement
+## dans la BuffBar, et l'infobulle stat / montant / tours au survol.
+func _add_buff_icon(buff: Buff) -> void:
+	if buff_bar == null:
+		return
+	var icon = BUFF_UI.instantiate()
+	buff_bar.add_child(icon)
+	icon.updatebuff(buff)
+
+
+signal skill_animation_started
+signal skill_animation_finished
+func animate_heal(damage:int, _source:CharaExplo, color=null):
+	emit_signal("skill_animation_started")
+	var effect_instance = healEffectScene.instantiate()
+	get_tree().current_scene.add_child(effect_instance)
+	effect_instance.global_position = global_position + Vector2(0, -140)
+	if effect_instance.has_method("setup"):
+		effect_instance.setup(damage,color)
+
+	var tween := create_tween() as Tween
+
+	var normal_size = self.scale
+	var big_size= Vector2(1.0,1.05)
+	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
+	tween.tween_property(self, "scale", normal_size, 0.2)
+	await tween.finished
+	emit_signal("skill_animation_finished")
+
+func animate_selected():
+	emit_signal("skill_animation_started")
+
+
+	var tween := create_tween() as Tween
+	var CharaScale = self.scale
+	var normal_size = CharaScale
+	var big_size= Vector2(1.0,1.1)
+	tween.tween_property(self, "scale", big_size, 0.2).set_delay(0.2)
+	tween.tween_property(self, "scale", normal_size, 0.2)
+	await tween.finished
+	emit_signal("skill_animation_finished")
+
+func unselected():
+	sprite.self_modulate.a =1.0
+	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
+
+
+# --------------------------------------------------------------------
+# ANIMATIONS DE SKILL D'EXPLORATION
+# --------------------------------------------------------------------
+
+## Animation du LANCEUR : petit "casting" + VFX optionnel sur lui-même.
+func animate_explo_skill_cast(skill: ExplorationSkill, target :CharaExplo) -> void:
+	emit_signal("skill_animation_started")
+	var restpos= self.position
+	var tween1 := create_tween() as Tween
+	z_index=target.z_index
+	tween1.tween_property(self, "position",Vector2(target.position.x-200, target.position.y),0.1)
+	await tween1.finished
+	# VFX sur le lanceur
+	if skill != null and skill.caster_effect_scene != null:
+		var vfx = skill.caster_effect_scene.instantiate()
+		get_tree().current_scene.add_child(vfx)
+		vfx.global_position = global_position + Vector2(0, -140)
+		vfx.z_index=self.z_index+1
+	if skill.animTexture != null:
+		sprite.texture=skill.animTexture
+	var tween := create_tween() as Tween
+	var normal_size : Vector2 = self.scale
+	var cast_size : Vector2 = Vector2(normal_size.x * 0.93, normal_size.y * 1.07)
+	# léger "préparation" avant d'agir
+	tween.tween_property(self, "scale", cast_size, 0.25)
+	tween.tween_property(self, "scale", normal_size, 0.2)
+	emit_signal("skill_animation_finished")
+	tween.tween_property(self, "position",restpos,0.2).set_delay(0.5)
+	await tween.finished
 	
-	hornyJauge.self_modulate.a = (current_horny*2.0)/max_horniness
-
-
+	sprite.texture= characterData.portrait_texture
 	
-	sprite.texture = portrait_texture
+
+
+## Animation de la CIBLE : "impact" + VFX optionnel.
+## Si la cible == le lanceur, c'est OK (auto-cast), on joue les deux séquentiellement.
+func animate_explo_skill_target(skill: ExplorationSkill, _source: CharaExplo) -> void:
+	emit_signal("skill_animation_started")
+
+	# VFX sur la cible
+	if skill != null and skill.target_effect_scene != null:
+		var vfx = skill.target_effect_scene.instantiate()
+		get_tree().current_scene.add_child(vfx)
+		vfx.global_position = global_position + Vector2(0, -140)
+		vfx.z_index=self.z_index+1
+	var tween := create_tween() as Tween
+	var normal_size : Vector2 = self.scale
+	var impact_size : Vector2 = Vector2(normal_size.x * 1.08, normal_size.y * 1.08)
+	tween.tween_property(self, "scale", impact_size, 0.15)
+	tween.tween_property(self, "scale", normal_size, 0.25)
+	await tween.finished
+	emit_signal("skill_animation_finished")

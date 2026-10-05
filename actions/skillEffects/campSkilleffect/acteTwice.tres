@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Acte_twice" load_steps=2 format=3 uid="uid://bt2gq256vdvku"]
+
+[ext_resource type="Script" uid="uid://cuxffk7abiqqg" path="res://scripts/camp/CampsSkills/twoturneCampeffect.gd" id="1_xrdpc"]
+
+[resource]
+script = ExtResource("1_xrdpc")
+metadata/_custom_type_script = "uid://cuxffk7abiqqg"

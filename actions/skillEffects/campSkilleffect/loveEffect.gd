@@ -2,50 +2,65 @@ extends CampEffect
 class_name CampLoveEffect
 
 @export var name : String
-@export var love_images := {
-	"Priest+Mystic": "res://LoveScene/PriestxMystic.jpg",
-	"Mystic+Hunter": "res://LoveScene/MysticxHunter.jpg",
-	"Priest+Warrior": "res://LoveScene/PriestxWarrior.jpg",
-	"Hunter+Warrior": "res://LoveScene/HunterxWarrior.jpg",
-	"Mystic+Warrior":"res://LoveScene/WarriorxMystic.jpg", 
-	"Priest+Hunter":"res://LoveScene/PriestxHunter.jpg"
+@export var love_scenes := {
+	"Priest+Mystic": "res://LoveScene/PriestxMystic.tscn",
+	"Mystic+Hunter": "res://LoveScene/MysticxHunter.tscn",
+	"Priest+Warrior": "res://LoveScene/PriestxWarrior.tscn",
+	"Hunter+Warrior": "res://LoveScene/HunterxWarrior.tscn",
+	"Mystic+Warrior": "res://LoveScene/WarriorxMystic.tscn",
+	"Priest+Hunter": "res://LoveScene/PriestxHunter.tscn"
 }
-var camp
-var love_image: Sprite2D
-var user
 
+@export_file("*.txt") var dialoguePriest: String
+@export_file("*.txt") var dialogueMystic: String
+@export_file("*.txt") var dialogueHunter: String
+@export_file("*.txt") var dialogueWarrior: String
+var camp
+var user
+var current_love_scene: Node = null
+var the_tente: tente
 func apply(theuser: CharaCamp, target: CharaCamp):
-	user=theuser
+	user = theuser
 	camp = user.camp
 	if not camp:
 		return
 
-	var key1 = "%s+%s" % [user.Charaname, target.Charaname]
-	var key2 = "%s+%s" % [target.Charaname, user.Charaname] # inverse (couple symétrique)
+	# Filet de securite : campement.gd ne rend deja ciblables que les allies
+	# compatibles, mais l'effet peut etre declenche par un autre chemin.
+	if not theuser.characterData.is_compatible_with(target.characterData):
+		print("💔 %s et %s ne sont pas attires l'un par l'autre." % [
+			theuser.characterData.Charaname, target.characterData.Charaname])
+		return
 
 	var file_path := ""
-	if love_images.has(key1):
-		file_path = love_images[key1]
-	elif love_images.has(key2):
-		file_path = love_images[key2]
+	match target.characterData.Charaname:
+		"Priestess": file_path = dialoguePriest
+		"Mystic":    file_path = dialogueMystic
+		"Hunter":    file_path = dialogueHunter
+		"Warrior":   file_path = dialogueWarrior
+		_:
+			print("Aucun dialogue défini pour ", target.characterData.Charaname)
+			return
 
-	if file_path == "":
-		print("⚠️ Aucun visuel pour ", user.Charaname, " et ", target.Charaname)
+	var dialogue_manager: DialogueManager = camp.get_node_or_null("DialogueManager")
+	if not dialogue_manager or file_path == "":
 		return
 
-	var texture := load(file_path)
-	if not texture:
-		push_error("Impossible de charger l'image : " + file_path)
-		return
 
-	# comme avant → afficher dans un TextureRect
-	love_image= camp.loveimage
-	love_image.texture= texture
-	love_image.visible=true
 
+	# load_dialogue détecte automatiquement les participants et configure le layout
+	dialogue_manager.load_dialogue(file_path)
+	dialogue_manager.start_dialogue()
+
+	dialogue_manager.dialogue_finished.connect(
+		func(): afterdialog(target),
+		CONNECT_ONE_SHOT
+	)
 	
 
-
-
-	
-		
+func afterdialog(target):
+	the_tente=camp.TheTente
+	the_tente.startlove(user, target)
+	target.characterData.affinity[user.characterData.Charaname] += 20
+	user.characterData.affinity[target.characterData.Charaname] += 20
+	camp.After_camp_skill(user.camp.skillused)

@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwnx8j1ha2w3o"]
+
+[ext_resource type="Texture2D" uid="uid://bktjtu30qytux" path="res://scenes/backgrounds dungeon demo/BG_dungeon_salon.png" id="1_ndmgr"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_lolqc"]
+[ext_resource type="PackedScene" uid="uid://h8pqs7tabdxj" path="res://lvl/CombatInterface.tscn" id="3_l2dsy"]
+[ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="4_0xt4u"]
+
+[node name="CombatInterface" type="Node2D"]
+
+[node name="ZunBg" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_ndmgr")
+
+[node name="atmosphere" parent="." instance=ExtResource("2_lolqc")]
+position = Vector2(2, 352)
+
+[node name="CombatInterface" parent="." instance=ExtResource("3_l2dsy")]
+
+[node name="MenuPerso" parent="." instance=ExtResource("4_0xt4u")]

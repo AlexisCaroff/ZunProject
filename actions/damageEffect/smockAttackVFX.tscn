@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://d0tjxl5jqwvvn"]
+
+[ext_resource type="Texture2D" uid="uid://k10dyj6s4n5i" path="res://vfx/noiseA.png" id="1_2mmov"]
+[ext_resource type="Script" uid="uid://7n8lsa5gwjxj" path="res://actions/damageEffect/SmockAttack.gd" id="1_e72fo"]
+
+[sub_resource type="Gradient" id="Gradient_e72fo"]
+offsets = PackedFloat32Array(0, 0.209386, 0.884477)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.409, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1w046"]
+gradient = SubResource("Gradient_e72fo")
+
+[sub_resource type="Curve" id="Curve_pa4uj"]
+_data = [Vector2(0, 0.325843), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0pas7"]
+curve = SubResource("Curve_pa4uj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dc1rg"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -9.99999
+angle_max = 10.0
+direction = Vector3(0, -10, 0)
+spread = 60.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, -10, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_0pas7")
+color_ramp = SubResource("GradientTexture1D_1w046")
+
+[node name="charmed" type="Node2D"]
+z_index = 40
+script = ExtResource("1_e72fo")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+texture = ExtResource("1_2mmov")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_dc1rg")

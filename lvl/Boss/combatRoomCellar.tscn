@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2ccaxlbll6fm"]
+
+[ext_resource type="Texture2D" uid="uid://uaiqhtk5leyc" path="res://scenes/BG_dungeon_boss.png" id="1_tbmd7"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_io4xa"]
+[ext_resource type="PackedScene" uid="uid://bvr5vf8uyqxhp" path="res://menu_Characters.tscn" id="4_8omqh"]
+[ext_resource type="PackedScene" uid="uid://cnmry3pyse3v5" path="res://lvl/CombatInterfaceMommyBoss.tscn" id="4_tbmd7"]
+
+[node name="CombatInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ZunBg" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_tbmd7")
+
+[node name="atmosphere" parent="." instance=ExtResource("3_io4xa")]
+position = Vector2(2, 352)
+
+[node name="MenuPerso" parent="." instance=ExtResource("4_8omqh")]
+layout_mode = 1
+
+[node name="CombatInterface" parent="." instance=ExtResource("4_tbmd7")]
+layout_mode = 1

@@ -5,35 +5,208 @@ class_name AiBrain
 @export var description: String = "IA basique qui choisit une compétence aléatoire utilisable et une cible valide."
 
 func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionary:
-	# Retourne un dictionnaire avec la skill choisie et la cible (ou null)
+	var combat_manager = owner.combat_manager
+	var ennemisPositions: Array = combat_manager.enemy_positions
+	var herosPositions: Array   = combat_manager.hero_positions
+
 	var usable_skills := owner.skills.filter(func(s): return s.can_use())
 	if usable_skills.is_empty():
-		print("%s n'a aucune compétence utilisable." % owner.name)
+		print("%s n'a aucune compétence utilisable." % owner.characterData.Charaname)
 		return {}
-	
+
+	# Retire les skills spéciales du pool générique uniquement s'il reste d'autres options.
+	# "spawnEnnemi" et "Mommy Grab" ne sont jamais choisis par l'IA générique.
+	for skill in usable_skills.duplicate():
+		if usable_skills.size() > 1 and skill.name in ["spawnEnnemi", "Mommy Grab"]:
+			usable_skills.erase(skill)
+	# "move" est retiré seulement s'il existe d'autres skills — il sert de dernier recours
+	# quand le personnage est en mauvaise position pour toutes ses attaques.
+	for skill in usable_skills.duplicate():
+		if usable_skills.size() > 1 and skill.name == "move":
+			usable_skills.erase(skill)
+
+	#for skill in usable_skills:
+	#	print(skill.name)
+
 	var skill: Skill = usable_skills[randi() % usable_skills.size()]
-	var possible_targets: Array[Character] = []
-	
+
+	# ── Helpers : slots vivants uniquement ───────────────────────────
+	# IMPORTANT : on exclut systématiquement les héros grab (.grab == true).
+	# Un héros grab n'occupe plus son hero_slot — son _current_slot pointe
+	# vers enemy_positions[4] (le "slot tentacule") qui n'a jamais d'occupant
+	# assigné. Le cibler renvoie un slot avec occupant == null et fait
+	# planter play_ai_turn / les effets de skill.
+	var alive_hero_slots: Array = herosPositions.filter(
+		func(p: PositionSlot) -> bool:
+			return p.is_occupied() \
+				and not p.occupant.is_dead() \
+				and not p.occupant.characterData.grab \
+				and p.occupant.characterData.current_horniness < 100
+	)
+	var alive_enemy_slots: Array = ennemisPositions.filter(
+		func(p: PositionSlot) -> bool:
+			return p.is_occupied() and not p.occupant.is_dead()
+	)
+
 	match skill.the_target_type:
 		skill.target_type.SELF:
-			return {"skill": skill, "target": owner}
+			var selfpositions: Array[PositionSlot] = []
+			selfpositions.append(owner._current_slot)
+			return {"skill": skill, "target": selfpositions}
+
+		# ✅ ALL_ALLY : tous les alliés de l'IA = alive_enemy_slots
+		skill.target_type.ALL_ALLY:
+			print("ALL_ALLY → ", alive_enemy_slots.map(func(s): return s.occupant.characterData.Charaname if s.occupant else "vide"))
+			return {"skill": skill, "target": alive_enemy_slots}
+
+		# ✅ ALL_ENNEMY : tous les ennemis de l'IA = alive_hero_slots
+		skill.target_type.ALL_ENNEMY:
+			print("ALL_ENNEMY → ", alive_hero_slots.map(func(s): return s.occupant.characterData.Charaname if s.occupant else "vide"))
+			return {"skill": skill, "target": alive_hero_slots}
+
+		# ✅ FRONT_ALLY : UN allié IA en première ligne (cible unique)
+		skill.target_type.FRONT_ALLY:
+			var front_allies := alive_enemy_slots.filter(
+				func(p: PositionSlot) -> bool: return p.position_data.isFront
+			)
+			if front_allies.is_empty():
+				front_allies = alive_enemy_slots  # fallback
+			if front_allies.is_empty():
+				return {}
+			var chosen: Array[PositionSlot] = [front_allies[randi() % front_allies.size()]]
+			return {"skill": skill, "target": chosen}
+
+		# ✅ BACK_ALLY : UN allié IA en deuxième ligne (cible unique)
+		skill.target_type.BACK_ALLY:
+			var back_allies := alive_enemy_slots.filter(
+				func(p: PositionSlot) -> bool: return not p.position_data.isFront
+			)
+			if back_allies.is_empty():
+				back_allies = alive_enemy_slots  # fallback
+			if back_allies.is_empty():
+				return {}
+			var chosen: Array[PositionSlot] = [back_allies[randi() % back_allies.size()]]
+			return {"skill": skill, "target": chosen}
+
+		# ✅ FRONT_ENNEMY : UN héros joueur en première ligne (cible unique)
+		skill.target_type.FRONT_ENNEMY:
+			var front_enemies := alive_hero_slots.filter(
+				func(p: PositionSlot) -> bool: return p.position_data.isFront
+			)
+			if front_enemies.is_empty():
+				front_enemies = alive_hero_slots  # fallback
+			if front_enemies.is_empty():
+				return {}
+			var chosen: Array[PositionSlot] = [front_enemies[randi() % front_enemies.size()]]
+			return {"skill": skill, "target": chosen}
+
+		# ✅ BACK_ENNEMY : UN héros joueur en deuxième ligne (cible unique)
+		skill.target_type.BACK_ENNEMY:
+			var back_enemies := alive_hero_slots.filter(
+				func(p: PositionSlot) -> bool: return not p.position_data.isFront
+			)
+			if back_enemies.is_empty():
+				back_enemies = alive_hero_slots  # fallback
+			if back_enemies.is_empty():
+				return {}
+			var chosen: Array[PositionSlot] = [back_enemies[randi() % back_enemies.size()]]
+			return {"skill": skill, "target": chosen}
+
+	# ── Move : cible un slot ennemi selon la position requise par sa skill principale ──
+	if skill.name == "move":
+		# Le 5e slot ennemi est le slot « capturé » du boss (grab) : jamais une
+		# destination de déplacement.
+		var move_pool: Array = ennemisPositions.slice(0, 4)
+		var move_target_slots: Array = []
+		# Cherche la première skill d'attaque pour connaître la position requise
+		var attack_skill: Skill = null
+		for s in owner.skills:
+			if s.name != "move":
+				attack_skill = s
+				break
+
+		if attack_skill != null:
+			match attack_skill.required_position:
+				attack_skill.position_requirement.FRONT:
+					move_target_slots = move_pool.filter(
+						func(p: PositionSlot) -> bool: return p.position_data.isFront and not p.is_occupied()
+					)
+				attack_skill.position_requirement.BACK:
+					move_target_slots = move_pool.filter(
+						func(p: PositionSlot) -> bool: return not p.position_data.isFront and not p.is_occupied()
+					)
+				_:  # ANY
+					move_target_slots = move_pool.filter(
+						func(p: PositionSlot) -> bool: return not p.is_occupied()
+					)
+
+		# Rangée voulue pleine (typiquement : repoussé à l'arrière, celui qui a
+		# pris sa place occupe l'avant) → échange avec un allié de cette
+		# rangée. Move.gd gère l'échange quand le slot visé est occupé.
+		if move_target_slots.is_empty() and attack_skill != null \
+				and attack_skill.required_position != attack_skill.position_requirement.ANY:
+			var want_front: bool = attack_skill.required_position == attack_skill.position_requirement.FRONT
+			if owner._current_slot.position_data.isFront != want_front:
+				move_target_slots = move_pool.filter(func(p: PositionSlot) -> bool:
+					return p.position_data.isFront == want_front \
+						and p.is_occupied() \
+						and p.occupant != owner \
+						and not p.occupant.is_dead() \
+						and p.occupant.characterData.can_be_moved \
+						and not p.occupant.characterData.immobilized \
+						and not combat_manager._is_anchored(p.occupant)
+				)
+
+		# Fallback : n'importe quel slot libre
+		if move_target_slots.is_empty():
+			move_target_slots = move_pool.filter(func(p: PositionSlot) -> bool: return not p.is_occupied())
+
+		if move_target_slots.is_empty():
+			print("%s veut se déplacer mais aucun slot libre." % owner.characterData.Charaname)
+			return {}
+
+		var targetPos: Array[PositionSlot] = []
+		targetPos.append(move_target_slots[randi() % move_target_slots.size()])
+		return {"skill": skill, "target": targetPos}
+
+	# ── Cible unique ─────────────────────────────────────────────────
+	# ── Cible unique ─────────────────────────────────────────────────
+	var candidate_slots: Array = []
+	match skill.the_target_type:
 		skill.target_type.ALLY:
-			possible_targets = enemies
+			candidate_slots = alive_enemy_slots
 		skill.target_type.ENNEMY:
-			possible_targets = heroes
-		skill.target_type.ALL_ALLY, skill.target_type.ALL_ENNEMY:
-			return {"skill": skill, "target": null}
+			candidate_slots = alive_hero_slots
 
-	# Nettoyer les cibles mortes
-	possible_targets = possible_targets.filter(func(c): return not c.is_dead())
+	# Applique le filtre de portée
+	candidate_slots = _filter_by_range(skill, candidate_slots, owner)
 
-	var target: Character = null
-	if owner.taunted_by != null and skill.the_target_type == skill.target_type.ENNEMY:
-		target = owner.taunted_by
-	else:
-		if possible_targets.size() > 0:
-			target = possible_targets[randi() % possible_targets.size()]
-		else:
-			target = owner  # fallback si tout le monde est mort
+	# Taunt (uniquement si la cible taunted_by est dans les slots filtrés)
+	if owner.taunted_by != null \
+			and is_instance_valid(owner.taunted_by) \
+			and not owner.taunted_by.is_dead() \
+			and not owner.taunted_by.characterData.grab \
+			and skill.the_target_type == skill.target_type.ENNEMY:
+		var taunt_slot := owner.taunted_by._current_slot
+		if taunt_slot in candidate_slots:
+			var result: Array[PositionSlot] = [taunt_slot]
+			return {"skill": skill, "target": result}
+
+	if candidate_slots.is_empty():
+		print("%s n'a aucune cible à portée pour %s." % [owner.characterData.Charaname, skill.name])
+		return {}
+
+	var targetPos: Array[PositionSlot] = [candidate_slots[randi() % candidate_slots.size()]]
+	return {"skill": skill, "target": targetPos}
 	
-	return {"skill": skill, "target": target}
+func _filter_by_range(skill: Skill, slots: Array, owner: Character) -> Array:
+	if skill.range == 3:
+		return slots  # portée max, pas de filtre
+	var caster_is_front: bool = owner._current_slot.position_data.isFront
+	return slots.filter(func(p: PositionSlot) -> bool:
+		var target_is_front: bool = p.position_data.isFront
+		match skill.range:
+			1: return caster_is_front and target_is_front
+			2: return caster_is_front or target_is_front
+		return true
+	)

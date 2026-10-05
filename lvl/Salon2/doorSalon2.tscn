@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://b45c38mgblp1f"]
+
+[ext_resource type="Texture2D" uid="uid://2b7qegerplyc" path="res://scenes/BG doors demo/DOOR_dungeon_salon.png" id="1_5xqm1"]
+[ext_resource type="Texture2D" uid="uid://cfwlbo0pguis6" path="res://UI/DOORR_dungeon_hall.png" id="2_xoc0m"]
+[ext_resource type="Texture2D" uid="uid://dytsjthnt28u" path="res://UI/DOORL_dungeon_hall.png" id="3_mndmg"]
+[ext_resource type="PackedScene" uid="uid://c8vf5b7mjdmmf" path="res://lvl/doorInstance.tscn" id="4_5olco"]
+
+[node name="Door" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.602564
+anchor_top = -0.15509
+anchor_right = 0.37452
+anchor_bottom = 0.714355
+offset_left = 1020.92
+offset_top = -129.503
+offset_right = 1395.92
+offset_bottom = 408.497
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="DoorBg" type="Sprite2D" parent="."]
+position = Vector2(1334.31, 542)
+scale = Vector2(0.781352, 0.79562)
+texture = ExtResource("1_5xqm1")
+
+[node name="ColorRect" type="ColorRect" parent="DoorBg"]
+anchors_preset = -1
+anchor_left = -0.0129241
+anchor_right = -0.0129241
+offset_left = -198.0
+offset_top = -422.0
+offset_right = 177.0
+offset_bottom = 116.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="DoorrDungeonHall" type="Sprite2D" parent="."]
+position = Vector2(1455.81, 420.59)
+rotation = 1.5708
+scale = Vector2(0.794935, 0.747183)
+texture = ExtResource("2_xoc0m")
+offset = Vector2(0, 101.44)
+
+[node name="DoorlDungeonHall" type="Sprite2D" parent="."]
+position = Vector2(1154.81, 418.682)
+rotation = 1.5708
+scale = Vector2(0.791125, 0.759046)
+texture = ExtResource("3_mndmg")
+offset = Vector2(0, -104.11)
+
+[node name="DoorBg2" type="Sprite2D" parent="."]
+position = Vector2(1334.31, 98)
+scale = Vector2(0.781352, 0.79562)
+texture = ExtResource("1_5xqm1")
+region_enabled = true
+region_rect = Rect2(0, 0, 2476, 261.447)
+region_filter_clip_enabled = true
+
+[node name="Door" parent="." instance=ExtResource("4_5olco")]
+layout_mode = 1

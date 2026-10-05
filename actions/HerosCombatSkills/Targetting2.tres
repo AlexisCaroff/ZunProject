@@ -1,0 +1,69 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://b4b0b3m5m5cxi"]
+
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="2_buff"]
+[ext_resource type="Texture2D" uid="uid://ctsbyb8u7ctto" path="res://actions/actiontexture/UI icons/ICON_hunter_meditate.png" id="3_icon"]
+[ext_resource type="Texture2D" uid="uid://fe1y4mug6b75" path="res://characters/charatexture/demo characters/HERO_hunter_throw.png" id="4_image"]
+[ext_resource type="Texture2D" uid="uid://diax5md43vxxd" path="res://UI/target.png" id="5_targeticon"]
+[ext_resource type="Texture2D" uid="uid://btvnbxbbjq1w4" path="res://UI/debuffDeff.png" id="6_defficon"]
+[ext_resource type="PackedScene" uid="uid://dnmnprn0sygoi" path="res://actions/skillEffects/FX/Scene/Taunted_fx.tscn" id="7_hitfx"]
+
+[sub_resource type="Resource" id="Resource_target_mark"]
+script = ExtResource("2_buff")
+name = "Target"
+uitexture = ExtResource("5_targeticon")
+affected_stat = 2
+amount = 2
+duration = 2
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[sub_resource type="Resource" id="Resource_target_defdown"]
+script = ExtResource("2_buff")
+name = "Debuff Defence"
+uitexture = ExtResource("6_defficon")
+affected_stat = 1
+amount = -5
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[sub_resource type="Resource" id="Resource_target_selfbuff"]
+script = ExtResource("2_buff")
+name = "buff Attack"
+affected_stat = 0
+amount = 5
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[resource]
+script = ExtResource("1_skill")
+name = "targeting"
+descriptionName = "Weak Point"
+description = "Marks an enemy for 2 turns: skills used against them have reduced cooldowns"
+icon = ExtResource("3_icon")
+barkSkill = ""
+required_position = 0
+range = 3
+ImageSkill = ExtResource("4_image")
+the_target_type = 0
+effects = Array[Resource]([SubResource("Resource_target_mark"), SubResource("Resource_target_defdown")])
+two_target_Type = false
+the_second_target_type = 2
+second_effects = Array[Resource]([SubResource("Resource_target_selfbuff")])
+usable_when_horny = true
+needtarget = true
+Actiontype = "attack"
+cost = 10
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 1.5
+tags = Array[String]([])
+is_contact = false
+distance_contact = 0.0
+target_effect_scene = ExtResource("7_hitfx")
+caster_effect_anchor = 0
+target_effect_anchor = 1
+is_beneficial = false
+skip_target_return_anim = false
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

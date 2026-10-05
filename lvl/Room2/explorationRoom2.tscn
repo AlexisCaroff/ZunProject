@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4akql58x7e18"]
+
+[ext_resource type="Texture2D" uid="uid://bktjtu30qytux" path="res://scenes/backgrounds dungeon demo/BG_dungeon_salon.png" id="1_abl21"]
+[ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="2_5etjj"]
+[ext_resource type="PackedScene" uid="uid://badg2cpqmlnim" path="res://lvl/explorationInterface.tscn" id="3_3t1ag"]
+[ext_resource type="Script" uid="uid://xdr1vvpbf7k0" path="res://lvl/Room2/open_room.gd" id="4_2rxg7"]
+[ext_resource type="Resource" uid="uid://bcvwbh3fvvtx2" path="res://lvl/Corridor2/Corridor2.tres" id="5_abl21"]
+
+[node name="ExploInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ZunBg" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_abl21")
+
+[node name="atmosphere" parent="." instance=ExtResource("2_5etjj")]
+position = Vector2(2, 352)
+
+[node name="ExploInterface" parent="." instance=ExtResource("3_3t1ag")]
+layout_mode = 1
+
+[node name="OpenRoom" type="Node2D" parent="."]
+script = ExtResource("4_2rxg7")
+roomToChange = ExtResource("5_abl21")

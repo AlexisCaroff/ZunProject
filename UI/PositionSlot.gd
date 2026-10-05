@@ -5,13 +5,15 @@ class_name PositionSlot
 @export var enemy_scene: PackedScene
 var occupant: Character = null
 @export var spawner : bool= false
-var combat_manager 
-@onready var imageinside = $TextureRect
+var combat_manager
+@onready var  button: Button = $Button
 var selfposition: Array[PositionSlot] = []
+@onready var CharaUI = $"charaCombatUI"
+@onready var shadow =$"TextureRect2"
 
 var is_ready: bool = false
 
-signal slot_selected(slot: PositionSlot)
+
 
 #@onready var click_button = $Button  # ou le nom de ton bouton dans le slot
 
@@ -20,41 +22,73 @@ func inside() -> Character:
 	if occupant == null:
 		push_error("Erreur : nobody inside"+name)
 	return occupant
-	
+
 func is_occupied() -> bool:
 	return occupant != null
-	
+
 func _ready():
 	selfposition.append(self)
 	is_ready= true
+	button.mouse_filter = Control.MOUSE_FILTER_PASS
+	button.connect("mouse_entered",_on_button_mouse_entered )
+	button.connect("mouse_exited",_on_button_mouse_exited )
+	button.connect("button_down",_on_button_button_down)
 	if GameState.current_phase == GameStat.GamePhase.COMBAT:
 		combat_manager = $"../../CombatManager"
 
+func Set_CharaUI():
+	CharaUI = $"charaCombatUI"
+
 func assign_character(character: Character, movetime:float):
+	await get_tree().process_frame
+	shadow.modulate.a =0.349
 	occupant = character
 	occupant.CharaScale = position_data.scale
+	if CharaUI == null :
+		CharaUI = $"charaCombatUI"
+		print("charaUI is null")
+	occupant.hornyJauge =CharaUI.HornyBar
+	occupant.hp_Jauge=CharaUI.HPProgressBar
+	occupant.attach_buff_bar(CharaUI.get_buff_bar())
+
+	occupant.dotsActions = CharaUI.actionpoints
+	occupant.z_index=self.z_index
+	if occupant.characterData.is_player_controlled==false:
+		for actionpoint in CharaUI.actionpoints:
+			actionpoint.visible=false
+		CharaUI.TheHornyBar.visible=false
+		CharaUI.LustProgressBar.visible=false
+		CharaUI.LustProgressBarSeparator.visible=false
+
+	#print("chara assigned to position")
 	if not is_ready:
 		await ready
-	imageinside.texture=character.initiative_icon
-	character.current_slot = self
+
+	character._current_slot = self
 	#print(character.Charaname,"→ current_slot défini à ", self.name)
-	var tween2 = get_tree().create_tween()
+
 	var tween = get_tree().create_tween()
-	tween.tween_property(character, "global_position", global_position, movetime)
-	tween2.tween_property(character, "scale", position_data.scale, movetime)
+	tween.parallel().tween_property(character, "global_position", self.global_position, movetime).set_delay(0.2)
+	tween.parallel().tween_property(character, "scale", position_data.scale, movetime).set_delay(0.2)
 	await tween.finished
-	await tween2.finished
-	character.CharaScale= position_data.scale
-	character.set_scale(position_data.scale)
-	
+	if character != null:
+		character.CharaScale= position_data.scale
+		character.global_position=self.global_position
+		character.set_scale(position_data.scale)
+
 	if position_data.buff:
 		position_data.buff.apply(character, character)
+	CharaUI.visible=true
+
+	shadow.modulate.a =0.3
 
 func remove_character():
 	if occupant:
 		occupant.resetVisuel()
 		occupant = null
-		
+	CharaUI.visible=false
+	shadow.modulate.a =0.1
+
 
 func _on_button_button_down() -> void:
 	if occupant and occupant.is_targetable:
@@ -92,7 +126,21 @@ func _on_button_button_down() -> void:
 						combat_manager._on_target_selected(selfposition)
 					Skill.target_type.EVERYONE:
 						combat_manager._on_target_selected(selfposition)
-							
+
+					# --- NOUVEAUX ---
+					Skill.target_type.EVERY_OTHER:
+						combat_manager._on_target_selected(selfposition)
+						print("one other targeted")
+					Skill.target_type.EVERYONE_ALL:
+						var all_positions: Array[PositionSlot] = []
+						all_positions.append_array(combat_manager.hero_positions)
+						all_positions.append_array(combat_manager.enemy_positions)
+						combat_manager._on_target_selected(all_positions)
+						print("everyone all targeted")
+					Skill.target_type.ALL_ALLY_AND_ENNEMY_FRONT:
+						combat_manager._on_target_selected(selfposition)
+						print("one front (ally or enemy) targeted")
+
 			combat_manager.CombatState.SELECTING_SECOND_TARGET:
 				match skill.the_second_target_type:
 					Skill.second_target_type.SELF:
@@ -125,51 +173,83 @@ func _on_button_button_down() -> void:
 					Skill.second_target_type.EVERYONE:
 						combat_manager._on_target_selected(selfposition)
 
+					# --- NOUVEAUX (second target) ---
+					Skill.second_target_type.EVERY_OTHER:
+						combat_manager._on_target_selected(selfposition)
+					Skill.second_target_type.EVERYONE_ALL:
+						var all_positions2: Array[PositionSlot] = []
+						all_positions2.append_array(combat_manager.hero_positions)
+						all_positions2.append_array(combat_manager.enemy_positions)
+						combat_manager._on_target_selected(all_positions2)
+					Skill.second_target_type.ALL_ALLY_AND_ENNEMY_FRONT:
+						combat_manager._on_target_selected(selfposition)
+
 func _on_button_mouse_entered() -> void:
 	if occupant == null:
 		return
-	combat_manager.ui.update_ui_for_current_character(occupant)
+	combat_manager.ui.update_ui_for_overed_character(occupant)
 	if combat_manager.pending_skill:
 		var skill = combat_manager.pending_skill
 		match combat_manager.combat_state:
 			combat_manager.CombatState.SELECTING_FIRST_TARGET:
 				match skill.the_target_type:
 					Skill.target_type.ALLY:
-						if occupant.is_player_controlled:
-							occupant.Selector.self_modulate.a= 1.0
+						if occupant.characterData.is_player_controlled:
+							occupant.Higlight()
 					Skill.target_type.FRONT_ALLY:
-						if occupant.is_player_controlled:
-							occupant.Selector.self_modulate.a= 1.0
+						if occupant.characterData.is_player_controlled:
+							occupant.Higlight()
 					Skill.target_type.FRONT_ENNEMY:
-						if !occupant.is_player_controlled:
-							occupant.Selector.self_modulate.a= 1.0
+						if !occupant.characterData.is_player_controlled:
+							occupant.Higlight()
 					Skill.target_type.BACK_ALLY:
-						occupant.Selector.self_modulate.a= 1.0
+						occupant.Higlight()
 					Skill.target_type.BACK_ENNEMY:
-						if !occupant.is_player_controlled:
-							occupant.Selector.self_modulate.a= 1.0
+						if !occupant.characterData.is_player_controlled:
+							occupant.Higlight()
 					Skill.target_type.ENNEMY:
-						if !occupant.is_player_controlled:
-							occupant.Selector.self_modulate.a= 1.0
+						if !occupant.characterData.is_player_controlled:
+							occupant.Higlight()
 					Skill.target_type.ALL_ALLY:
 						for chara in combat_manager.hero_positions:
-							if chara.occupant !=null:
-								chara.occupant.Selector.self_modulate.a= 1.0
+							if chara.occupant != null:
+								chara.occupant.Higlight()
 					Skill.target_type.ALL_ENNEMY:
 						for chara in combat_manager.enemy_positions:
-							if chara.occupant !=null:
-								chara.occupant.Selector.self_modulate.a=1.0
+							if chara.occupant != null:
+								chara.occupant.Higlight()
+
+					# --- NOUVEAUX ---
+					Skill.target_type.EVERY_OTHER:
+						# Tout le monde sauf le lanceur
+						if occupant != combat_manager.current_character:
+							occupant.Higlight()
+					Skill.target_type.EVERYONE_ALL:
+						# Hover sur quelqu'un = highlight de TOUT le monde
+						for chara in combat_manager.hero_positions:
+							if chara.occupant != null:
+								chara.occupant.Higlight()
+						for chara in combat_manager.enemy_positions:
+							if chara.occupant != null:
+								chara.occupant.Higlight()
+					Skill.target_type.ALL_ALLY_AND_ENNEMY_FRONT:
+						# Tous les alliés OU un ennemi en FRONT
+						if occupant.characterData.is_player_controlled:
+							occupant.Higlight()
+						elif occupant._current_slot != null \
+								and occupant._current_slot.position_data.isFront:
+							occupant.Higlight()
 	else :
-		occupant.Selector.self_modulate.a= 1.0
-	
+		occupant.Higlight()
+
 
 
 func _on_button_mouse_exited() -> void:
-	
+
 	if occupant == null:
 		return
-	combat_manager.ui.update_ui_for_current_character(combat_manager.current_character)
-	occupant.Selector.self_modulate.a= 0.0
+
+	occupant.resetHighlight()
 	if combat_manager.pending_skill:
 		var skill = combat_manager.pending_skill
 		match combat_manager.combat_state:
@@ -177,8 +257,18 @@ func _on_button_mouse_exited() -> void:
 				match skill.the_target_type:
 					Skill.target_type.ALL_ALLY:
 						for chara in combat_manager.hero_positions:
-							chara.occupant.Selector.self_modulate.a= 0.0
+							if chara.occupant != null:
+								chara.occupant.resetHighlight()
 					Skill.target_type.ALL_ENNEMY:
 						for chara in combat_manager.enemy_positions:
-							if chara.occupant !=null:
-								chara.occupant.Selector.self_modulate.a= 0.0
+							if chara.occupant != null:
+								chara.occupant.resetHighlight()
+
+					# --- NOUVEAU : reset le highlight de groupe ---
+					Skill.target_type.EVERYONE_ALL:
+						for chara in combat_manager.hero_positions:
+							if chara.occupant != null:
+								chara.occupant.resetHighlight()
+						for chara in combat_manager.enemy_positions:
+							if chara.occupant != null:
+								chara.occupant.resetHighlight()

@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://crq2yis3m8t41"]
+
+[ext_resource type="Script" uid="uid://c70rsb2k8g05v" path="res://characters/Character.gd" id="1_s58gp"]
+[ext_resource type="Resource" uid="uid://dm75andeiexh0" path="res://characters/data/CharacterEnemyMommyBoss.tres" id="2_5odt6"]
+[ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="3_sqe47"]
+[ext_resource type="Texture2D" uid="uid://s02pnbcj1wa5" path="res://characters/boss assets/BOSS_broodM_idle.png" id="4_sqe47"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="7_6olh6"]
+[ext_resource type="Texture2D" uid="uid://dxl5bsd0kuhpi" path="res://characters/boss assets/BOSS_broodM_butt.png" id="11_4imvw"]
+[ext_resource type="Script" uid="uid://cf5uoxm4f4cop" path="res://characters/arrow.gd" id="12_4imvw"]
+
+[node name="CharacterTestennemieMommy" type="Node2D"]
+script = ExtResource("1_s58gp")
+characterData = ExtResource("2_5odt6")
+metadata/converted = true
+metadata/character_data_path = "res://characters/data/CharacterEnemyMommyBoss.tres"
+
+[node name="pivotcorps" type="Node2D" parent="."]
+position = Vector2(-82, 40)
+script = ExtResource("3_sqe47")
+
+[node name="HerosTexture2" type="TextureRect" parent="pivotcorps"]
+offset_left = -6.0
+offset_top = -413.0
+offset_right = 165.0
+offset_bottom = -182.0
+scale = Vector2(3.07911, 2.02491)
+mouse_filter = 2
+texture = ExtResource("11_4imvw")
+expand_mode = 1
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="pivot" type="Node2D" parent="."]
+position = Vector2(-74, 41)
+script = ExtResource("3_sqe47")
+
+[node name="HerosTexture1" type="TextureRect" parent="pivot"]
+offset_left = -117.0
+offset_top = -368.0
+offset_right = 54.0
+offset_bottom = -137.0
+scale = Vector2(2.40353, 1.78102)
+mouse_filter = 2
+texture = ExtResource("4_sqe47")
+expand_mode = 1
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = -81.0
+offset_top = -257.203
+offset_right = 152.0
+offset_bottom = 124.797
+
+[node name="Arrow" type="Sprite2D" parent="."]
+modulate = Color(0.77, 0.616513, 0.4158, 1)
+position = Vector2(-36, -160)
+scale = Vector2(0.0897035, 0.0897035)
+texture = ExtResource("7_6olh6")
+offset = Vector2(0, 116.49)
+script = ExtResource("12_4imvw")
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]

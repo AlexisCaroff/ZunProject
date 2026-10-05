@@ -1,15 +1,18 @@
 extends Sprite2D
+class_name Interactable
 @onready var  explomanage = $"../ExplorationManager"
-var big_size = Vector2(1.5, 1.5)
-var startsize = Vector2(1.0,1.0)
+@export  var big_size = Vector2(0.8, 0.8)
+@export  var startsize = Vector2(0.6,0.6)
 var current_tween: Tween = null
 @export var amount:int = 30
 @onready var  etiquette = $etiquette
 @onready var dialogue_manager := $"../DialogueManager"
 @export var dialoguePass :String
+@onready var button: Button =$Button
 
 func _ready():
-
+	button =$Button
+	button.connect("button_down", _on_button_button_down)
 	# Charger un fichier de dialogue
 	dialogue_manager.load_dialogue(dialoguePass)
 	dialogue_manager.text_choice1 = "Use Kairn "
@@ -21,20 +24,19 @@ func _on_button_button_down() -> void:
 	
 func use_cairn():
 	var target :CharaExplo = explomanage.characters[randi() % explomanage.characters.size()]
-	target.current_stamina = min(target.max_stamina, target.current_stamina + amount)
+	target.characterData.current_stamina = min(target.characterData.max_stamina, target.characterData.current_stamina + amount)
 	target.update_display()
-	GameState.update_hero_stat(target.Charaname, "stamina", target.current_stamina)
-
+	
 func destroy_cairn():
 	for target in explomanage.characters:
-		target.current_stress = max(0, target.current_stress - amount)
+		target.characterData.current_stress = max(0, target.characterData.current_stress - amount)
 		target.update_display()
-		GameState.update_hero_stat(target.Charaname, "stress", target.current_stress)
-	self.visible=false
+		
+	self.visible=false 
 
 func _on_button_mouse_entered() -> void:
 	etiquette .scale = startsize 	
-
+	etiquette.visible=true
 	if current_tween:
 		current_tween.kill()
 	current_tween = create_tween()
@@ -49,7 +51,8 @@ func _on_button_mouse_exited() -> void:
 
 	current_tween = create_tween()
 	current_tween.tween_property(etiquette, "scale", startsize, 0.2)
-
+	await current_tween.finished
+	etiquette.visible=false
 
 func _on_Choice1_button_down() -> void:
 	use_cairn()

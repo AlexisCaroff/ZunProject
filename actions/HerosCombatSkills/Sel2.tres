@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=12 format=3 uid="uid://d2amlryi7mwc3"]
+
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="1_skill"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="2_dmg"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="3_buff"]
+[ext_resource type="Texture2D" uid="uid://drpnss51hobsj" path="res://UI/debuffAtt.png" id="4_bufficon"]
+[ext_resource type="Texture2D" uid="uid://dd54fh0lmlt5f" path="res://actions/actiontexture/UI icons/ICON_hunter_purify.png" id="5_icon"]
+[ext_resource type="Texture2D" uid="uid://fe1y4mug6b75" path="res://characters/charatexture/demo characters/HERO_hunter_throw.png" id="6_image"]
+[ext_resource type="AudioStream" uid="uid://cxxmgoai7q8bb" path="res://actions/sound/Weapon Arrow Shot 01.wav" id="7_sound"]
+[ext_resource type="PackedScene" uid="uid://d74pdae8pwuk" path="res://actions/skillEffects/FX/Scene/saltHunter.tscn" id="8_castfx"]
+[ext_resource type="PackedScene" uid="uid://bbt436f0mwo1e" path="res://actions/skillEffects/FX/Scene/hit_magicSalt.tscn" id="9_hitfx"]
+
+[sub_resource type="Resource" id="Resource_sel_debuff"]
+script = ExtResource("3_buff")
+name = "Purify"
+uitexture = ExtResource("4_bufficon")
+affected_stat = 0
+amount = -5
+duration = 3
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[sub_resource type="Resource" id="Resource_sel_dmg"]
+script = ExtResource("2_dmg")
+MagicDMG = true
+amount = 5
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[resource]
+script = ExtResource("1_skill")
+name = "Purify"
+descriptionName = "Purify"
+description = "Reduces all enemies’ attack and deals minor damage"
+icon = ExtResource("5_icon")
+attack_sound = ExtResource("7_sound")
+barkSkill = ""
+required_position = 0
+range = 3
+ImageSkill = ExtResource("6_image")
+the_target_type = 4
+effects = Array[Resource]([SubResource("Resource_sel_debuff"), SubResource("Resource_sel_dmg")])
+two_target_Type = false
+the_second_target_type = 1
+second_effects = Array[Resource]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 4
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 1.0
+tags = Array[String]([])
+is_contact = false
+distance_contact = 0.0
+caster_effect_scene = ExtResource("8_castfx")
+target_effect_scene = ExtResource("9_hitfx")
+caster_effect_anchor = 0
+target_effect_anchor = 2
+is_beneficial = false
+skip_target_return_anim = false
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

@@ -1,0 +1,66 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=13 format=3 uid="uid://3g8pbhljpdj0"]
+
+[ext_resource type="Texture2D" uid="uid://dxssxsjogep6w" path="res://characters/charatexture/demo characters/INQUISITION_incapacitor_stun.png" id="1_otwuq"]
+[ext_resource type="PackedScene" uid="uid://bn67hgtv6jvaq" path="res://actions/skillEffects/FX/Scene/charge_fx.tscn" id="2_rhd1m"]
+[ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="3_rhd1m"]
+[ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="4_0jruj"]
+[ext_resource type="Texture2D" uid="uid://qx0s5ypu8xhq" path="res://UI/star.png" id="5_ngxvp"]
+[ext_resource type="Script" uid="uid://tjywmaoy4ejj" path="res://actions/skillEffects/StunEffect.gd" id="6_usuah"]
+[ext_resource type="Texture2D" uid="uid://b4oubet2ttcx0" path="res://actions/actiontexture/UI icons/ICON_hunter_bolas.png" id="7_6x7cv"]
+[ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="8_e11jp"]
+[ext_resource type="PackedScene" uid="uid://cqea4mekfk8gb" path="res://actions/skillEffects/FX/Scene/hit_standar.tscn" id="10_0jruj"]
+
+[sub_resource type="Resource" id="Resource_3q5jt"]
+script = ExtResource("3_rhd1m")
+MagicDMG = false
+amount = 5
+damage_target_stat = 0
+metadata/_custom_type_script = "uid://bjsbovfjff2wo"
+
+[sub_resource type="Resource" id="Resource_ce7u7"]
+script = ExtResource("4_0jruj")
+name = "Stun"
+uitexture = ExtResource("5_ngxvp")
+affected_stat = 2
+amount = 0
+duration = 1
+metadata/_custom_type_script = "uid://c3dw018knk8mk"
+
+[sub_resource type="Resource" id="Resource_3plah"]
+script = ExtResource("6_usuah")
+metadata/_custom_type_script = "uid://tjywmaoy4ejj"
+
+[resource]
+script = ExtResource("8_e11jp")
+name = "Stun"
+descriptionName = "Stun"
+description = "debuff att and add miss chance"
+icon = ExtResource("7_6x7cv")
+barkSkill = ""
+required_position = 0
+range = 3
+ImageSkill = ExtResource("1_otwuq")
+the_target_type = 0
+effects = Array[Resource]([SubResource("Resource_3q5jt"), SubResource("Resource_ce7u7"), SubResource("Resource_3plah")])
+two_target_Type = false
+the_second_target_type = 2
+second_effects = Array[Resource]([])
+usable_when_horny = false
+needtarget = true
+Actiontype = "attack"
+cost = 0
+cooldown = 2
+current_cooldown = 0
+precision = 100
+allways_hit = false
+duration = 1.0
+tags = Array[String]([])
+is_contact = true
+distance_contact = 600.0
+caster_effect_scene = ExtResource("2_rhd1m")
+target_effect_scene = ExtResource("10_0jruj")
+caster_effect_anchor = 0
+target_effect_anchor = 1
+is_beneficial = false
+skip_target_return_anim = false
+metadata/_custom_type_script = "uid://cpvgnrd2pjm2j"

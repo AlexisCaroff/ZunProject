@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CombatEncounter" load_steps=9 format=3 uid="uid://cbfjexgqn4it1"]
+
+[ext_resource type="PackedScene" path="res://characters/CharacterEnemyStoneSlime.tscn" id="2_rtttf"]
+[ext_resource type="PackedScene" uid="uid://5086yfcspq70" path="res://characters/CharacterEnemySlimePile.tscn" id="2_vipsv"]
+[ext_resource type="Texture2D" uid="uid://c8uxagkudf0xe" path="res://UI/doorebuscade/PEEK_scare_nymphM.png" id="4_p2gta"]
+[ext_resource type="PackedScene" path="res://characters/CharacterEnemyThugF.tscn" id="4_r52qh"]
+[ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="5_r52qh"]
+[ext_resource type="Resource" uid="uid://cvdyu43xainie" path="res://Items/itemsRessources/Armor.tres" id="6_morhg"]
+[ext_resource type="Script" uid="uid://dmxcru3ra8jg" path="res://lvl/CombatEncounter.gd" id="7_1m0pg"]
+[ext_resource type="PackedScene" path="res://characters/CharacterEnemyThug.tscn" id="8_thug"]
+
+[resource]
+script = ExtResource("7_1m0pg")
+enemy_scenes = Array[PackedScene]([ExtResource("8_thug"), ExtResource("2_rtttf"), ExtResource("2_vipsv"), ExtResource("4_r52qh")])
+loots = Array[ExtResource("5_r52qh")]([ExtResource("6_morhg")])
+description = ""
+imageEmbuscade = ExtResource("4_p2gta")
+metadata/_custom_type_script = "uid://dmxcru3ra8jg"
