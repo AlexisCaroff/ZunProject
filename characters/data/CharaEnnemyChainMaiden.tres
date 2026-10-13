@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bw62jfvjc7876" path="res://characters/charatexture/demo characters/INQUISITION_chainmaiden_down.png" id="5_ylhrk"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_m26kp"]
 [ext_resource type="Texture2D" uid="uid://c5mbm8111iqb8" path="res://characters/exploPortrait/ChainMaidenExploPortrait.png" id="7_sm27d"]
-[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="8_sm27d"]
+[ext_resource type="Script" path="res://scripts/exploration/ExplorationSkill.gd" id="8_sm27d"]
 [ext_resource type="Texture2D" uid="uid://bnpg5r735arqt" path="res://characters/charatexture/demo characters/INQUISITION_chainmaiden_idle.png" id="8_x7hy0"]
 [ext_resource type="Texture2D" uid="uid://dhelkdmdp0rim" path="res://characters/characterInitiative/chainMaidenIniPortrait.png" id="8_ylhrk"]
 [ext_resource type="Resource" uid="uid://cwxukwuwcmaka" path="res://actions/ennemiCombatSkills/energySyphon.tres" id="10_fp0mp"]

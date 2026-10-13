@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_xgrsq"]
 [ext_resource type="Texture2D" uid="uid://bu74rv62dasvj" path="res://characters/exploPortrait/incapacitorExploPortrait.png" id="7_pya3q"]
 [ext_resource type="Texture2D" uid="uid://btd5hwb4320ak" path="res://characters/characterInitiative/IcapacitorIniPortrait.png" id="8_itfyc"]
-[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="8_lusgp"]
+[ext_resource type="Script" path="res://scripts/exploration/ExplorationSkill.gd" id="8_lusgp"]
 [ext_resource type="Texture2D" uid="uid://bre80a2pkbpsw" path="res://characters/charatexture/demo characters/INQUISITION_incapacitor_idle.png" id="9_5ubay"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="10_p7tkt"]
 [ext_resource type="Resource" uid="uid://bp426legb2qkr" path="res://actions/ennemiCombatSkills/Immobilise.tres" id="11_t5qaa"]

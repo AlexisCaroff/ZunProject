@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="2_data"]
 [ext_resource type="Script" uid="uid://cf2k68rgsdle0" path="res://characters/charatexture/braines/Ai_brain.gd" id="3_brain"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="4_equip"]
-[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="5_exploskill"]
+[ext_resource type="Script" path="res://scripts/exploration/ExplorationSkill.gd" id="5_exploskill"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="6_campskill"]
 [ext_resource type="Texture2D" uid="uid://qfml2ojbw0gr" path="res://characters/charatexture/demo characters/ENEMY_thugF_idle.png" id="7_idle"]
 [ext_resource type="Texture2D" uid="uid://bje2hku4spkqq" path="res://characters/charatexture/demo characters/ENEMY_thugF_hit.png" id="8_hit"]

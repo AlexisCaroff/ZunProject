@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cp18c4j8lgs6a" path="res://characters/charatexture/demo characters/ENEMY_nymph_F_idle.png" id="7_uby0a"]
 [ext_resource type="Resource" uid="uid://b12yj86cv1lo7" path="res://actions/ennemiCombatSkills/stickynet.tres" id="8_37cj1"]
 [ext_resource type="Texture2D" uid="uid://cgimx52mmw3ve" path="res://characters/characterInitiative/NympheIniPortrait.png" id="8_bq8kj"]
-[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="8_csovy"]
+[ext_resource type="Script" path="res://scripts/exploration/ExplorationSkill.gd" id="8_csovy"]
 [ext_resource type="Resource" uid="uid://cvpggc0yt3l4o" path="res://actions/ennemiCombatSkills/Ennemi_charme.tres" id="9_q077x"]
 [ext_resource type="Resource" uid="uid://nri716ki3ipb" path="res://actions/ennemiCombatSkills/BigpoisonHorny.tres" id="10_fn3av"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="11_66i88"]

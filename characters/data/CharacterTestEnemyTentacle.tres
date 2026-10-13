@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="4_xpfno"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="6_jf3mf"]
 [ext_resource type="Texture2D" uid="uid://b25krvl6etj57" path="res://characters/exploPortrait/BossTentacleExploPortrait.png" id="6_kl24q"]
-[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="7_jdbjj"]
+[ext_resource type="Script" path="res://scripts/exploration/ExplorationSkill.gd" id="7_jdbjj"]
 [ext_resource type="Texture2D" uid="uid://0p8u0kokfjf8" path="res://characters/characterInitiative/BossTentacleIniPortrait.png" id="7_srcuk"]
 [ext_resource type="Resource" uid="uid://byc26r5u5smx0" path="res://actions/ennemiCombatSkills/TentacleSquishes.tres" id="8_3a7ml"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="10_uqb7o"]

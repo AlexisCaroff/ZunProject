@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://0x6um7xfv678" path="res://characters/exploPortrait/BossExploPortrait.png" id="5_2ne5h"]
 [ext_resource type="Texture2D" uid="uid://c2n4nh46f5vwu" path="res://characters/boss assets/BOSS_broodM_Dead.png" id="5_6dkli"]
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="7_dyn70"]
-[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="8_2ne5h"]
+[ext_resource type="Script" path="res://scripts/exploration/ExplorationSkill.gd" id="8_2ne5h"]
 [ext_resource type="Texture2D" uid="uid://s02pnbcj1wa5" path="res://characters/boss assets/BOSS_broodM_idle.png" id="8_6dkli"]
 [ext_resource type="Texture2D" uid="uid://bxd3n5abhx0l5" path="res://characters/characterInitiative/BossIniPortrait.png" id="8_tr8hi"]
 [ext_resource type="Resource" uid="uid://deybvri8mc0gg" path="res://actions/ennemiCombatSkills/mommyGrab.tres" id="9_6dkli"]

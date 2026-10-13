@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="7_c4ft5"]
 [ext_resource type="Texture2D" uid="uid://dg73ll2dweg01" path="res://characters/charatexture/demo characters/ENEMY_addict_idle.png" id="7_d1p7c"]
 [ext_resource type="Texture2D" uid="uid://dk5o25ag7k1yc" path="res://characters/characterInitiative/Addict_Ini_Portrait.png" id="8_73j3b"]
-[ext_resource type="Script" uid="uid://d35547qcdy43f" path="res://scripts/exploration/ExplorationSkill.gd" id="8_hwt0x"]
+[ext_resource type="Script" path="res://scripts/exploration/ExplorationSkill.gd" id="8_hwt0x"]
 [ext_resource type="Resource" uid="uid://dxj1ksi0rq6i6" path="res://actions/ennemiCombatSkills/tentacleGrab.tres" id="8_pmwtu"]
 [ext_resource type="Resource" uid="uid://dkph6nihwi550" path="res://actions/ennemiCombatSkills/raving.tres" id="9_ydxm6"]
 [ext_resource type="Resource" uid="uid://daxgjjbu82mgo" path="res://actions/ennemiCombatSkills/euphoria.tres" id="10_1kvht"]
