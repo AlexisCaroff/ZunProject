@@ -23,13 +23,16 @@ uitexture = ExtResource("5_bufficon")
 affected_stat = 5
 amount = 5
 duration = 3
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [resource]
 script = ExtResource("2_skill")
 name = "Slime Throw"
 descriptionName = "Slime Throw"
-description = "Jette une poignée de slime : dégâts magiques et poison de lust (+5 par tour, 3 tours)."
+description = "Deals 11 + ATK - DEF magic damage, then Lust poison +1 step (Lust at the start of each of its turns).
+Target: 1 hero (any row)
+Accuracy 100% | Cooldown 1"
 icon = ExtResource("6_icon")
 barkSkill = ""
 required_position = 0

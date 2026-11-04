@@ -17,7 +17,9 @@ metadata/_custom_type_script = "uid://bp8u5at2ojgse"
 script = ExtResource("5_i2770")
 name = "Heal"
 descriptionName = "Heal"
-description = "heal for some amount"
+description = "Restores 20 stamina.
+Target: 1 ally, itself included
+Never misses | Cooldown 2"
 icon = ExtResource("4_htmn0")
 barkSkill = ""
 required_position = 0

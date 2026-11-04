@@ -280,6 +280,7 @@ func capture_state(gm) -> Dictionary:
 		"characters": characters,
 		"rooms": rooms,
 		"inventory": inventory,
+		"affinity_cards": gm.affinity_cards.map(func(c): return c.resource_path),
 		# Compteurs hors sac : argent et prisonniers ramenés des combats.
 		"money": gm.money,
 		"prisoners": gm.prisoners,
@@ -333,9 +334,15 @@ func _capture_character(cd: CharacterData) -> Dictionary:
 		if b != null:
 			pending_buffs.append(_capture_buff(b))
 
+	var fight_buffs := []
+	for b in cd.fight_buffs:
+		if b != null:
+			fight_buffs.append(_capture_buff(b))
+
 	return {
 		"path": cd.resource_path,
 		"charaname": cd.Charaname,
+		"fight_buffs": fight_buffs,
 		"chara_position": cd.Chara_position,
 		"pending_buffs": pending_buffs,
 		"acte_twice": cd.acte_twice,
@@ -365,10 +372,13 @@ func _capture_room(room: RoomResource) -> Dictionary:
 		"locked": room.locked,
 		"exploration_history_played": room.exploration_history_played,
 		"door_history_played": room.door_history_played,
+		"peeked": room.peeked,
+		"chest_trap_state": room.chest_trap_state,
 		"before_combat_history_played": room.before_combat_history_played,
 		"post_combat_history_played": room.post_combat_history_played,
 		"interactable_used": room.interactable_used,
 		"interactable_opened": room.interactable_opened,
+		"interactable_dialogue_seen": room.interactable_dialogue_seen,
 	}
 	# L'encounter peut être remplacé à l'exécution (BossIntroSequence) et son
 	# butin est modifié à la victoire — les deux doivent être restitués.
@@ -393,6 +403,7 @@ func _capture_buff(b: Buff) -> Dictionary:
 		"stat": b.stat,
 		"amount": b.amount,
 		"duration": b.duration,
+		"fights_left": b.fights_left,
 	}
 
 
@@ -405,6 +416,7 @@ func _restore_buff(entry) -> Buff:
 	b.stat        = _as_int(entry.get("stat", Buff.Stat.ATTACK))
 	b.amount      = _as_int(entry.get("amount", 0))
 	b.duration    = _as_int(entry.get("duration", 1))
+	b.fights_left = _as_int(entry.get("fights_left", 0))
 	b.icon        = Utils.load_texture(str(entry.get("icon", "")))
 	return b
 
@@ -495,9 +507,26 @@ func apply_state(data: Dictionary, gm) -> bool:
 			inventory.append(eq)
 	gm.inventory = inventory
 
+	# ── Cartes d'affinité ───────────────────────────────────────────
+	var cards: Array[AffinityCard] = []
+	for path in data.get("affinity_cards", []):
+		if str(path) != "" and ResourceLoader.exists(str(path)):
+			var c := load(str(path)) as AffinityCard
+			if c != null:
+				cards.append(c)
+	gm.affinity_cards = cards
+	gm.emit_signal("cards_changed")
+
 	# ── GameManager ─────────────────────────────────────────────────
 	# Une sauvegarde antérieure à ces compteurs repart de zéro.
 	gm.money     = _as_int(data.get("money", 0))
+	# Anciennes sauvegardes : les cristaux de combat étaient un objet du sac
+	# (« N Cristal »). Ils vont désormais au compteur de cristaux.
+	for i in range(gm.inventory.size() - 1, -1, -1):
+		var it: Equipment = gm.inventory[i]
+		if it != null and not (it is Potion) and it.name.ends_with(" Cristal"):
+			gm.money += max(1, it.number)
+			gm.inventory.remove_at(i)
 	var tutos = data.get("tutorials", {})
 	gm.tutorials = tutos.duplicate() if typeof(tutos) == TYPE_DICTIONARY else {}
 	gm.prisoners = _as_int(data.get("prisoners", 0))
@@ -541,6 +570,11 @@ func _apply_character(cd: CharacterData, d: Dictionary) -> void:
 		if b != null:
 			cd.buffs.append(b)
 	cd.acte_twice = _as_bool(d.get("acte_twice", false))
+	cd.fight_buffs.clear()
+	for entry in d.get("fight_buffs", []):
+		var fb := _restore_buff(entry)
+		if fb != null:
+			cd.fight_buffs.append(fb)
 
 	# Attirance tirée au début de la partie. Une sauvegarde d'avant cette
 	# fonctionnalité n'a pas les clés : on garde alors ce que dit le .tres.
@@ -602,6 +636,7 @@ func _reset_transient(cd: CharacterData) -> void:
 	cd.immobilized_turns = 0
 	cd.acte_twice = false
 	cd.buffs.clear()
+	cd.fight_buffs.clear()
 	cd.current_bark = null
 	for s in cd.skill_resources:
 		if s is Skill:
@@ -615,10 +650,13 @@ func _apply_room(room: RoomResource, d: Dictionary) -> void:
 	room.locked                       = _as_bool(d.get("locked", room.locked))
 	room.exploration_history_played   = _as_bool(d.get("exploration_history_played", false))
 	room.door_history_played          = _as_bool(d.get("door_history_played", false))
+	room.peeked                       = _as_bool(d.get("peeked", false))
+	room.chest_trap_state             = int(d.get("chest_trap_state", -1))
 	room.before_combat_history_played = _as_bool(d.get("before_combat_history_played", false))
 	room.post_combat_history_played   = _as_bool(d.get("post_combat_history_played", false))
 	room.interactable_used            = _as_bool(d.get("interactable_used", false))
 	room.interactable_opened          = _as_bool(d.get("interactable_opened", false))
+	room.interactable_dialogue_seen   = _as_bool(d.get("interactable_dialogue_seen", false))
 
 	var enc_path := str(d.get("encounter_path", ""))
 	if enc_path != "" and ResourceLoader.exists(enc_path):

@@ -24,7 +24,9 @@ metadata/_custom_type_script = "uid://tjywmaoy4ejj"
 script = ExtResource("1_skill")
 name = "bollas"
 descriptionName = "bollas"
-description = "Stuns a backline enemy and deals minor damage."
+description = "Deals 5 + ATK - DEF physical damage and stuns: the target skips its next turn.
+Target: 1 back-row enemy
+Accuracy 100% | Cooldown 4"
 icon = ExtResource("4_icon")
 attack_sound = ExtResource("6_sound")
 barkSkill = ""

@@ -13,6 +13,8 @@ icon = ExtResource("4_buff_icon")
 stat = 3
 amount = 6
 duration = 4
+fights_left = 0
+tier = 0
 
 [resource]
 script = ExtResource("1_potion")

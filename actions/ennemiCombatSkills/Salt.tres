@@ -23,13 +23,16 @@ uitexture = ExtResource("6_fl13x")
 affected_stat = 0
 amount = -10
 duration = 3
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [resource]
 script = ExtResource("7_chsun")
 name = "Salt"
 descriptionName = "Salt"
-description = "debuff att and add miss chance"
+description = "Deals 5 + ATK - DEF physical damage and ATK debuff -2 steps.
+Target: all heroes (one hit roll each)
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("6_psnns")
 barkSkill = ""
 required_position = 0

@@ -17,7 +17,9 @@ metadata/_custom_type_script = "uid://bp8u5at2ojgse"
 script = ExtResource("2_bcdhv")
 name = "Vitality"
 descriptionName = "Vitality"
-description = "heal a small amount"
+description = "Restores 20 stamina (+2 on a Maso).
+Target: 1 ally, you included
+Never misses | Cooldown 2"
 icon = ExtResource("5_f0lrn")
 barkSkill = ""
 required_position = 0

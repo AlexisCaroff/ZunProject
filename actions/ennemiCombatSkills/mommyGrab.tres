@@ -26,7 +26,9 @@ metadata/_custom_type_script = "uid://cnu1tkps1688s"
 script = ExtResource("9_u2hyo")
 name = "Mommy Grab"
 descriptionName = "Grab"
-description = "Grab"
+description = "A tentacle seizes the hero: the hero cannot act until the tentacle is destroyed. One tentacle at a time.
+Target: 1 hero (any row) | From: back row
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("8_cy45l")
 barkSkill = ""
 required_position = 2

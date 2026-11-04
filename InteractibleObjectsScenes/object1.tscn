@@ -34,7 +34,7 @@ is_Choice = true
 
 [node name="etiquette" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(170, -32)
+position = Vector2(206, 61)
 scale = Vector2(0.626316, 0.626316)
 texture = ExtResource("4_6te7v")
 

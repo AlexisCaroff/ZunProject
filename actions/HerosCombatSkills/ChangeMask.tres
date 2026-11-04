@@ -30,7 +30,9 @@ metadata/_custom_type_script = "uid://c0arbc0klbc6c"
 script = ExtResource("7_gnc4b")
 name = "ChangeMask"
 descriptionName = "ChangeMask"
-description = "Change skills and move"
+description = "Move to an empty ally position or swap places with an ally, then change mask: your skills become Acid Arrow, Sticky Net and Mitraille.
+Target: 1 ally (yourself to stay in place)
+Never misses | Cooldown 5 | Cost 5"
 icon = ExtResource("4_crp1g")
 barkSkill = ""
 required_position = 0

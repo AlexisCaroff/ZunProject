@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="5_o6ov4"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="6_8yx0u"]
 [ext_resource type="Texture2D" uid="uid://cds1jgu4rdn1e" path="res://UI/UI boxes/UI_fgwall_inquisition.png" id="6_gofun"]
-[ext_resource type="Texture2D" uid="uid://eqli6rl4sig3" path="res://UI/UI boxes/UI_camp_points.png" id="7_fctf2"]
+[ext_resource type="Texture2D" uid="uid://cnxub0g557exn" path="res://UI/box.png" id="8_fvmek"]
 [ext_resource type="Texture2D" uid="uid://b54elep5kk5sm" path="res://UI/UI boxes/UI_combat_portrait_frame.png" id="10_7h8sq"]
 [ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="10_gwj3x"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="10_orkqx"]
@@ -210,16 +210,16 @@ scale = Vector2(0.754297, 0.78)
 texture = ExtResource("6_gofun")
 
 [node name="Box2" type="Sprite2D" parent="."]
-position = Vector2(1707.5, 902)
-scale = Vector2(0.563359, 0.602)
-texture = ExtResource("7_fctf2")
+position = Vector2(1497, 52.7937)
+scale = Vector2(0.777558, 1.25645)
+texture = ExtResource("8_fvmek")
 
 [node name="campPointText" type="Label" parent="Box2"]
-offset_left = -124.832
-offset_top = -51.8686
-offset_right = 26.168
-offset_bottom = -7.86859
-scale = Vector2(1.64666, 1.64666)
+offset_left = -133.962
+offset_top = -19.9021
+offset_right = 17.0381
+offset_bottom = 24.098
+scale = Vector2(1.33865, 1.01883)
 theme_override_fonts/font = ExtResource("17_luaer")
 theme_override_font_sizes/font_size = 25
 text = "Camp points :"
@@ -228,11 +228,11 @@ autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="CampPoint" type="Label" parent="Box2"]
-offset_left = -130.706
-offset_top = -2.07478
-offset_right = 20.2936
-offset_bottom = 41.9252
-scale = Vector2(1.64666, 1.64666)
+offset_left = -14.7544
+offset_top = -19.9021
+offset_right = 136.245
+offset_bottom = 24.0979
+scale = Vector2(1.33865, 1.01883)
 theme_override_fonts/font = ExtResource("17_luaer")
 theme_override_font_sizes/font_size = 25
 text = "1"
@@ -428,10 +428,11 @@ scale = Vector2(2.1572, 2.1572)
 texture = ExtResource("15_udo4k")
 
 [node name="Button" type="Button" parent="."]
-offset_left = 1615.0
-offset_top = 979.0
-offset_right = 1868.0
-offset_bottom = 1082.0
+offset_left = 1682.0
+offset_top = 29.0
+offset_right = 1935.0
+offset_bottom = 132.0
+scale = Vector2(0.765017, 0.765017)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wdxk4")
 flat = true
 expand_icon = true

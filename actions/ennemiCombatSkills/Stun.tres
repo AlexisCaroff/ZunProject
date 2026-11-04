@@ -21,9 +21,10 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("4_0jruj")
 name = "Stun"
 uitexture = ExtResource("5_ngxvp")
-affected_stat = 2
+affected_stat = 7
 amount = 0
 duration = 1
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [sub_resource type="Resource" id="Resource_3plah"]
@@ -34,7 +35,9 @@ metadata/_custom_type_script = "uid://tjywmaoy4ejj"
 script = ExtResource("8_e11jp")
 name = "Stun"
 descriptionName = "Stun"
-description = "debuff att and add miss chance"
+description = "Deals 5 + ATK - DEF physical damage and stuns: the hero skips its next turn.
+Target: 1 hero (any row)
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("7_6x7cv")
 barkSkill = ""
 required_position = 0

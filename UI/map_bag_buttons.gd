@@ -18,7 +18,7 @@ class_name MapBagButtons
 # ════════════════════════════════════════════════════════════════════
 
 const ACTIVE := Color(1, 1, 1, 1)
-const INACTIVE := Color(0.55, 0.55, 0.55, 1)
+const INACTIVE := Color(0.8, 0.8, 0.8, 1)
 
 ## Noms des icônes présentes selon les scènes. La première trouvée porte
 ## l'icône du bouton ; les autres sont masquées.
@@ -83,6 +83,12 @@ static func raise(pair: Dictionary, z: int) -> void:
 static func ensure_box(button: Button, size_px: float = 81.0) -> void:
 	for n in button.find_children("*", "Sprite2D", true, false):
 		if (n as Sprite2D).texture == BOX_TEX:
+			# Cadre déjà posé dans la scène, souvent à z -1 pour passer sous
+			# l'icône : il tombait alors au rang du contour de la carte, qui
+			# le recouvrait. On le garde au rang du bouton, dessiné derrière.
+			if n.z_index < 0:
+				n.z_index = 0
+				n.show_behind_parent = true
 			return
 	var box := Sprite2D.new()
 	box.name = "Box"
@@ -108,6 +114,20 @@ static func add_hover(button: Button, factor: float = 1.15) -> void:
 		button.create_tween().tween_property(button, "scale", rest * factor, 0.15) 				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT))
 	button.mouse_exited.connect(func():
 		button.create_tween().tween_property(button, "scale", rest, 0.15) 				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT))
+
+
+## Bouton qui ouvre le menu personnages : grisé tant que le menu est fermé,
+## allumé quand il est ouvert (comme le bouton de la vue affichée).
+static func track_menu(button: CanvasItem, menu: Node) -> void:
+	if button == null or menu == null:
+		return
+	var layer := menu.get_node_or_null("CanvasLayer") as CanvasLayer
+	var refresh := func():
+		if is_instance_valid(button):
+			button.modulate = ACTIVE if (layer != null and layer.visible) else INACTIVE
+	refresh.call()
+	if layer != null:
+		layer.visibility_changed.connect(refresh)
 
 
 static func _texture_of(button: Button, names: Array) -> Texture2D:

@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="AffinityCard" load_steps=9 format=3 uid="uid://dlnr4oas5olgs"]
+
+[ext_resource type="Texture2D" uid="uid://dbuugeey6c5y4" path="res://UI/buffAtt.png" id="1_Tex"]
+[ext_resource type="Script" uid="uid://bsjqxhem5qtdg" path="res://actions/skillEffects/campSkilleffect/CampFightBuffEffect.gd" id="2_Scr"]
+[ext_resource type="Texture2D" uid="uid://blaxr6boo4hkf" path="res://UI/buffDeff.png" id="3_Tex"]
+[ext_resource type="Script" uid="uid://csjs6vf5actyx" path="res://scripts/cards/affinity_card.gd" id="4_Scr"]
+[ext_resource type="Script" uid="uid://brw6jmbngkbbu" path="res://scripts/camp/CampEffect.gd" id="5_Scr"]
+[ext_resource type="Texture2D" uid="uid://d24gv8aeirsdm" path="res://actions/actiontexture/UI icons/ICON_warrior_slash.png" id="6_Tex"]
+
+[sub_resource type="Resource" id="Res_1"]
+script = ExtResource("2_Scr")
+stat = 0
+amount = 3
+fights = 2
+weakest_only = true
+icon = ExtResource("1_Tex")
+
+[sub_resource type="Resource" id="Res_2"]
+script = ExtResource("2_Scr")
+stat = 1
+amount = 3
+fights = 2
+weakest_only = true
+icon = ExtResource("3_Tex")
+
+[resource]
+script = ExtResource("4_Scr")
+title = "Sparring"
+description = "The weakest in attack and the weakest in defense each gain +3 in that stat for the next 2 fights."
+cost = 1
+user_name = "All"
+target = 3
+icon = ExtResource("6_Tex")
+effects = Array[ExtResource("5_Scr")]([SubResource("Res_1"), SubResource("Res_2")])

@@ -28,7 +28,9 @@ metadata/_custom_type_script = "uid://cxxxcftffxxjh"
 script = ExtResource("2_2odx0")
 name = "TentacleGrab"
 descriptionName = "Tentacle Grab"
-description = "Inflige des dégâts à un ennemi"
+description = "Deals 10 + ATK - DEF physical damage and pulls a back-row hero to the front row (it swaps with the hero in front).
+Target: 1 hero; from the back row, front-row heroes only
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("4_2x4hl")
 barkSkill = ""
 required_position = 0

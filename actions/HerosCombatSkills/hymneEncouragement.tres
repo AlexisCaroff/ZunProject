@@ -19,7 +19,9 @@ metadata/_custom_type_script = "uid://c3dw018knk8mk"
 script = ExtResource("4_2l0hw")
 name = "Buff attack"
 descriptionName = "Attaque"
-description = "buff l'attaque du porteur"
+description = "All allies: ATK buff +3 steps.
+Target: the whole team, you included
+Never misses | Cooldown 2"
 icon = ExtResource("3_n05yo")
 barkSkill = ""
 required_position = 0

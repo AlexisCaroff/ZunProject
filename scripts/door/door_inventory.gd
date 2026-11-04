@@ -89,17 +89,21 @@ func _layout() -> void:
 
 	var grid_w: float = cell * cols + cell_separation * (cols - 1)
 	var grid_h: float = cell * max(1, rows) + cell_separation * (max(1, rows) - 1)
+	# Grille + colonne de compteurs centrées ensemble dans le panneau (au lieu
+	# d'être calées à gauche, ce qui laissait un vide à droite).
+	var block_w: float = grid_w + ((14.0 + reserved) if show_counters else 0.0)
+	var left: float = max(pad, (size.x - block_w) * 0.5)
 	grid.set_anchors_preset(Control.PRESET_TOP_LEFT)
-	grid.offset_left = pad
+	grid.offset_left = left
 	grid.offset_top = max(10.0, (size.y - grid_h) * 0.5 - 12.0)
 	grid.offset_right = grid.offset_left + grid_w
 	grid.offset_bottom = grid.offset_top + grid_h
 
 	if tooltip:
 		tooltip.set_anchors_preset(Control.PRESET_TOP_LEFT)
-		tooltip.offset_left = pad
+		tooltip.offset_left = left
 		tooltip.offset_top = grid.offset_bottom + 4.0
-		tooltip.offset_right = pad + grid_w + reserved
+		tooltip.offset_right = left + block_w
 		tooltip.offset_bottom = tooltip.offset_top + 30.0
 
 
@@ -122,7 +126,7 @@ func _build_counters() -> void:
 	col.offset_top = grid.offset_top + 6.0
 	col.offset_bottom = grid.offset_bottom
 
-	_money_label = _make_counter_row(col, MONEY_TEX, "Money")
+	_money_label = _make_counter_row(col, MONEY_TEX, "Crystals")
 	_prisoner_label = _make_counter_row(col, PRISONER_TEX, "Prisoners")
 
 	var gm := get_tree().root.get_node_or_null("GameManager") as GameManager
@@ -277,9 +281,9 @@ func _on_cell_hovered(index: int) -> void:
 		if it.number > 1:
 			label += " x%d" % it.number
 		if potions_usable and it is Potion:
-			label += "  —  click to drink"
+			label += " (click to drink)"
 		elif equip_enabled and not (it is Potion):
-			label += "  —  click to equip"
+			label += " (click to equip)"
 		tooltip.text = label
 
 
@@ -363,25 +367,7 @@ func _equip(item: Equipment) -> void:
 ## personnage (InvetoryUI.select_character), pour qu'un objet équipé d'ici
 ## compte immédiatement.
 static func recompute_stats(chara: CharacterData) -> void:
-	chara.max_stamina = chara.base_max_stamina
-	chara.max_horniness = chara.base_max_horniness
-	chara.max_stress = chara.base_max_stress
-	chara.attack = chara.base_attack
-	chara.defense = chara.base_defense
-	chara.initiative = chara.base_initiative
-	chara.willpower = chara.base_willpower
-	chara.evasion = chara.base_evasion
-	for eq in chara.equipped_items:
-		chara.attack += eq.attack_bonus
-		chara.defense += eq.defense_bonus
-		chara.max_horniness += eq.Max_lust_bonus
-		chara.max_stamina += eq.Max_stamina_bonus
-		chara.max_stress += eq.Max_Guilt_bonus
-		chara.willpower += eq.willpower_bonus
-		chara.evasion += eq.evasion_bonus
-		chara.initiative += eq.initiative_bonus
-	for buff in chara.buffs:
-		buff.apply_to(chara)
+	chara.recompute_stats()
 
 
 func _flash_tooltip(text: String) -> void:

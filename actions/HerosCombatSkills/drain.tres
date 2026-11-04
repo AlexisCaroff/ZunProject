@@ -26,7 +26,9 @@ metadata/_custom_type_script = "uid://bp8u5at2ojgse"
 script = ExtResource("6_jd58n")
 name = "Drain"
 descriptionName = "Drain"
-description = "Deal magic dmg and steal stamina"
+description = "Deals 20 + ATK - DEF magic damage, then you restore 20 stamina.
+Target: 1 enemy (any row), then yourself
+Accuracy 100% | Cooldown 4"
 icon = ExtResource("5_7oddx")
 attack_sound = ExtResource("2_pddxp")
 barkSkill = ""

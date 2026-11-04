@@ -17,7 +17,9 @@ metadata/_custom_type_script = "uid://devwsgwqxadac"
 script = ExtResource("5_53mw8")
 name = "Tentacle squishes"
 descriptionName = "Tentacle squishes"
-description = "dmg an ennemi grab"
+description = "The seized hero takes 20 + ATK - DEF physical damage and stays trapped.
+Target: the seized hero
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("4_786br")
 barkSkill = ""
 required_position = 0

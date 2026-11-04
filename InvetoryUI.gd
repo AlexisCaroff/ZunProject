@@ -189,29 +189,13 @@ func select_character(chara:CharacterData):
 		#print(eq.name)
 	KinksList.bbcode_enabled = true
 	KinksList.text = ""
-	chara.max_stamina = chara.base_max_stamina
-	chara.max_horniness = chara.base_max_horniness
-	chara.max_stress = chara.base_max_stress
-
-	chara.attack = chara.base_attack
-	chara.defense = chara.base_defense
-	chara.initiative = chara.base_initiative
-	chara.willpower = chara.base_willpower
-	chara.evasion = chara.base_evasion
-
-	for eq in chara.equipped_items:
-
-		chara.attack += eq.attack_bonus
-		chara.defense += eq.defense_bonus
-		chara.max_horniness += eq.Max_lust_bonus
-		chara.max_stamina += eq.Max_stamina_bonus
-		chara.max_stress += eq.Max_Guilt_bonus
-		chara.willpower += eq.willpower_bonus
-		chara.evasion += eq.evasion_bonus
-		chara.initiative += eq.initiative_bonus
-
-	for buff in chara.buffs:
-		buff.apply_to(chara)
+	# Stats finales (base + kinks + buffs + équipement). En combat, les buffs
+	# vivent sur le Character : c'est lui qui recalcule.
+	var combat_chara := _combat_character_for(chara)
+	if combat_chara != null:
+		combat_chara.update_stats()
+	else:
+		chara.recompute_stats()
 
 	for tag in chara.tags:
 		KinksList.text += tag + "\n"
@@ -269,7 +253,7 @@ func select_character(chara:CharacterData):
 
 
 		if skill != null:
-			skill_buttons[i].Actiontext = skill.descriptionName + "\n" + skill.description
+			skill_buttons[i].Actiontext = skill.tooltip_bbcode(19)
 			button.disabled = skill.can_use()
 			button.icon = skill.icon
 			skill_buttons[i].label = LabelAction
@@ -341,6 +325,7 @@ func position_label_under(button: Control):
 		return
 	# Forcer le recalcul de la taille au cas où le texte vient d'être changé
 	await get_tree().process_frame
+	_fit_label_height()
 
 	var btn_rect : Rect2 = button.get_global_rect()
 	var label_size : Vector2 = LabelAction.size
@@ -357,6 +342,32 @@ func position_label_under(button: Control):
 	target_pos.y = clamp(target_pos.y, 0, viewport_size.y - label_size.y)
 
 	LabelAction.global_position = target_pos
+
+
+## Le label (et son fond : carré noir + cadre) prend la hauteur du texte :
+## les descriptions de skills font plusieurs lignes.
+const LABEL_BASE_HEIGHT := 79.0
+
+func _fit_label_height() -> void:
+	var rtl := LabelAction as RichTextLabel
+	if rtl == null:
+		return
+	if not rtl.bbcode_enabled:
+		rtl.bbcode_enabled = true
+		rtl.scroll_active = false
+		rtl.text = rtl.text
+	var h := maxf(LABEL_BASE_HEIGHT, rtl.get_content_height() + 16.0)
+	rtl.size.y = h
+	var bg := rtl.get_node_or_null("ColorRect") as Control
+	if bg != null:
+		bg.size.y = h
+	var frame := rtl.get_node_or_null("UiConvoBox3") as Sprite2D
+	if frame != null:
+		if not frame.has_meta("base_scale_y"):
+			frame.set_meta("base_scale_y", frame.scale.y)
+		frame.position.y = h * 0.5
+		frame.scale.y = float(frame.get_meta("base_scale_y")) * h / LABEL_BASE_HEIGHT
+	rtl.set_pivot_offset(rtl.size / 2)
 
 
 func create_inventory_grid():

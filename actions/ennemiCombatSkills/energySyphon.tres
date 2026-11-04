@@ -23,7 +23,9 @@ metadata/_custom_type_script = "uid://bp8u5at2ojgse"
 script = ExtResource("5_c0ok3")
 name = "Chain"
 descriptionName = "Chain"
-description = "30 dmg"
+description = "Deals 30 + ATK - DEF physical damage.
+Target: 1 hero (any row)
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("4_xi680")
 barkSkill = ""
 required_position = 0

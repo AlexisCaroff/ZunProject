@@ -23,6 +23,11 @@ var gm: GameManager
 @export var colorDoorToExplor: Color
 @export var colorRoomFocus: Color
 @export var colorRoomExplored: Color
+## Opacité d'une salle seulement entrevue par un peek (pas encore explorée).
+@export_range(0.0, 1.0) var peeked_room_alpha: float = 0.5
+## Assombrissement d'une porte déjà franchie (ses deux salles explorées),
+## par rapport à une porte qui reste à explorer.
+@export_range(0.0, 1.0) var explored_door_darken: float = 0.5
 
 
 func _ready() -> void:
@@ -85,6 +90,10 @@ func _paint_rooms(room: RoomResource) -> Node2D:
 		var room_res = gm.get_room_by_id(salle.name)
 		if room_res and room_res.explored:
 			salle.self_modulate = colorRoomExplored
+		elif room_res and room_res.peeked:
+			var c := colorRoomExplored
+			c.a = peeked_room_alpha
+			salle.self_modulate = c
 		else:
 			salle.self_modulate = Color.BLACK
 		if salle.name == room.room_id:
@@ -97,13 +106,20 @@ func _paint_rooms(room: RoomResource) -> Node2D:
 ## la porte focus.
 func _paint_doors_default() -> void:
 	for thedoor: MapDoor in Doors:
-		var visible_door := false
+		var explored_count := 0
 		for roomname in thedoor.connectedRooms:
 			var room_res = gm.get_room_by_id(roomname)
 			if room_res and room_res.explored:
-				visible_door = true
-				break
-		thedoor.self_modulate = colorDoorToExplor if visible_door else Color.BLACK
+				explored_count += 1
+		if explored_count == 0:
+			# Aucune salle explorée de ce côté (salle inconnue ou seulement
+			# entrevue par un peek) : la porte reste invisible.
+			thedoor.self_modulate = Color(0, 0, 0, 0)
+		elif explored_count >= thedoor.connectedRooms.size():
+			# Porte entre deux salles explorées : déjà franchie, plus sombre.
+			thedoor.self_modulate = colorDoorToExplor.darkened(explored_door_darken)
+		else:
+			thedoor.self_modulate = colorDoorToExplor
 
 
 # ════════════════════════════════════════════════════════════════════
@@ -138,14 +154,16 @@ func peek_next_Room(room: RoomResource, _viewport = null):
 	for salle in Rooms:
 		if salle.name == room.room_id:
 			focusedRoom = salle
-			focusedRoom.self_modulate = colorRoomFocus
+			var c := colorRoomFocus
+			# Salle seulement entrevue : à demi visible, même en focus.
+			if not room.explored:
+				c.a = peeked_room_alpha
+			focusedRoom.self_modulate = c
 
+	# Portes : état normal (portes franchies assombries, portes d'une salle
+	# seulement entrevue cachées), seule la porte visée est surlignée.
+	_paint_doors_default()
 	for thedoor: MapDoor in Doors:
-		for roomname in thedoor.connectedRooms:
-			if roomname == room.room_id:
-				thedoor.self_modulate = colorDoorToExplor
-			if roomname == lastRoom:
-				thedoor.self_modulate = colorDoorToExplor
 		if lastRoom != "" and focusedRoom != null:
 			if focusedRoom.name in thedoor.connectedRooms and lastRoom in thedoor.connectedRooms:
 				thedoor.self_modulate = colorDoorFocus
@@ -177,6 +195,25 @@ func focus_door(room: RoomResource, _viewport = null):
 			thedoor.self_modulate = colorDoorFocus
 			target_pos = thedoor.position
 			break
+
+	# 3 bis. Aucune porte entre ces deux salles (on arrive d'une salle hors
+	# carte, ex. le combat du tutoriel) : la porte qui mène à la salle focus
+	# depuis une salle déjà explorée (ou depuis le départ, Salle0).
+	if target_pos == null and focusedRoom != null:
+		for thedoor: MapDoor in Doors:
+			if not (focusedRoom.name in thedoor.connectedRooms):
+				continue
+			var from_known := false
+			for roomname in thedoor.connectedRooms:
+				if roomname == focusedRoom.name:
+					continue
+				var r = gm.get_room_by_id(roomname)
+				if roomname == "Salle0" or (r != null and r.explored):
+					from_known = true
+			if from_known:
+				thedoor.self_modulate = colorDoorFocus
+				target_pos = thedoor.position
+				break
 
 	# 4. Tween caméra vers la porte focus, ou la salle si on n'a rien trouvé
 	if target_pos == null and focusedRoom != null:

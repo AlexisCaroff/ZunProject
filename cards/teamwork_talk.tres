@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="AffinityCard" load_steps=6 format=3 uid="uid://dwj7kgp4nxrud"]
+
+[ext_resource type="Texture2D" uid="uid://dt33aj7kc370x" path="res://UI/buffinitiative.png" id="1_Tex"]
+[ext_resource type="Script" uid="uid://bsjqxhem5qtdg" path="res://actions/skillEffects/campSkilleffect/CampFightBuffEffect.gd" id="2_Scr"]
+[ext_resource type="Script" uid="uid://csjs6vf5actyx" path="res://scripts/cards/affinity_card.gd" id="3_Scr"]
+[ext_resource type="Script" uid="uid://brw6jmbngkbbu" path="res://scripts/camp/CampEffect.gd" id="4_Scr"]
+
+[sub_resource type="Resource" id="Res_1"]
+script = ExtResource("2_Scr")
+stat = 2
+amount = 2
+fights = 2
+weakest_only = false
+icon = ExtResource("1_Tex")
+
+[resource]
+script = ExtResource("3_Scr")
+title = "Teamwork Talk"
+description = "The team gains +2 initiative for the next 2 fights."
+cost = 1
+user_name = "All"
+target = 3
+icon = ExtResource("1_Tex")
+effects = Array[ExtResource("4_Scr")]([SubResource("Res_1")])

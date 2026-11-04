@@ -35,4 +35,5 @@ scene = ExtResource("3_80usg")
 dialogue_file = "res://dialogue/dialogueEmpty.txt"
 choice_1 = SubResource("Resource_dmmkg")
 choice_2 = SubResource("Resource_c6sic")
+trap_mode = 1
 metadata/_custom_type_script = "uid://n028octb10a5"

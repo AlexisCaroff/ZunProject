@@ -24,7 +24,9 @@ metadata/_custom_type_script = "uid://devwsgwqxadac"
 script = ExtResource("2_skill")
 name = "Slime Digest"
 descriptionName = "Slime Digest"
-description = "Le héros englouti est digéré : dégâts automatiques chaque tour."
+description = "The swallowed hero takes 14 + ATK - DEF physical damage and +12 Lust (minus WILL), and stays trapped.
+Target: the swallowed hero
+Never misses | No cooldown"
 icon = ExtResource("5_icon")
 barkSkill = ""
 required_position = 0

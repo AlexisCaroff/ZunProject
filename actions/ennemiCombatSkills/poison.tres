@@ -27,7 +27,9 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("2_d53qb")
 name = "Poison"
 descriptionName = "Poison"
-description = "Poison an ennemi"
+description = "Deals 5 + ATK - DEF physical damage, then poison +1 step (stamina damage at the start of each of its turns).
+Target: 1 hero (any row)
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("4_dving")
 required_position = 0
 the_target_type = 0

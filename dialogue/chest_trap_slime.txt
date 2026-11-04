@@ -1,0 +1,4 @@
+{A} : Gah! Something slimy just lashed out of the chest!
+{B} : A slime... and it's already gone. It slithered off through a crack in the floor.
+{A} : [i]Wipes the goo away.[/i] Disgusting. At least it left the loot behind.
+{B} : Then let's grab what's inside before it comes back.

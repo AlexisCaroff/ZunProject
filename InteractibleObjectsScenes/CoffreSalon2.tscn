@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c66s1enb5m070"]
+[gd_scene load_steps=16 format=3 uid="uid://c66s1enb5m070"]
 
 [ext_resource type="Script" uid="uid://b2fldnbm4784m" path="res://InteractibleObjectsScenes/InteractableObject.gd" id="1_82peo"]
 [ext_resource type="Script" uid="uid://ha2eko5otag4" path="res://Items/ItemScripts/Equipement.gd" id="2_1uasi"]
@@ -7,9 +7,10 @@
 [ext_resource type="Script" uid="uid://b5vho57xy7r3r" path="res://scripts/InteractableChoice.gd" id="3_1uasi"]
 [ext_resource type="Texture2D" uid="uid://cqxak60gjmu3f" path="res://props/PROP_chest_empty.png" id="3_5n3dl"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="3_ib46f"]
-[ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="4_5n3dl"]
 [ext_resource type="Texture2D" uid="uid://dysu7tdjfd3hi" path="res://props/PROP_chest_full.png" id="4_08jjl"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="5_08jjl"]
+[ext_resource type="Texture2D" uid="uid://eqli6rl4sig3" path="res://UI/UI boxes/UI_camp_points.png" id="9_l7lad"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="11_drpdm"]
 
 [sub_resource type="Resource" id="Resource_l7lad"]
 script = ExtResource("3_1uasi")
@@ -39,6 +40,7 @@ script = ExtResource("2_ib46f")
 dialogue_file = "res://dialogue/dialogueTeste.txt"
 choice_1 = SubResource("Resource_l7lad")
 choice_2 = SubResource("Resource_drpdm")
+trap_mode = 2
 metadata/_custom_type_script = "uid://n028octb10a5"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6te7v"]
@@ -66,16 +68,25 @@ script = ExtResource("3_ib46f")
 is_Choice = true
 
 [node name="etiquette" type="Sprite2D" parent="."]
-position = Vector2(-249.063, -120)
-scale = Vector2(0.626316, 0.626316)
-texture = ExtResource("4_5n3dl")
-flip_h = true
+visible = false
+z_index = 1
+position = Vector2(239, -79)
+scale = Vector2(0.437382, 0.437382)
+texture = ExtResource("9_l7lad")
 
 [node name="Label" type="Label" parent="etiquette"]
-offset_left = -92.0
-offset_top = -23.0
-offset_right = 125.0
-offset_bottom = 30.0
+offset_left = -116.603
+offset_top = -57.1583
+offset_right = 177.397
+offset_bottom = 44.8417
 theme_override_fonts/font = ExtResource("5_08jjl")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 80
 text = "Investigate"
+
+[node name="UiDoorArrow" type="Sprite2D" parent="etiquette"]
+modulate = Color(0.357627, 0.218179, 0.113515, 1)
+z_index = -1
+position = Vector2(-326.946, 2.28633)
+rotation = 1.5708
+scale = Vector2(0.375101, 0.299222)
+texture = ExtResource("11_drpdm")

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="AffinityCard" load_steps=8 format=3 uid="uid://bj2m07gyt343"]
+
+[ext_resource type="Script" uid="uid://cwdlfpy6jfr4w" path="res://actions/skillEffects/campSkilleffect/CampHealEffet.gd" id="1_Scr"]
+[ext_resource type="Script" uid="uid://bycqaidmvoiqq" path="res://actions/skillEffects/campSkilleffect/CampAffinityEffect.gd" id="2_Scr"]
+[ext_resource type="Script" uid="uid://csjs6vf5actyx" path="res://scripts/cards/affinity_card.gd" id="3_Scr"]
+[ext_resource type="Script" uid="uid://brw6jmbngkbbu" path="res://scripts/camp/CampEffect.gd" id="4_Scr"]
+[ext_resource type="Texture2D" uid="uid://7t7u7bv1dsdg" path="res://actions/actiontexture/UI icons/ICON_camp_priestess_confession.png" id="5_Tex"]
+
+[sub_resource type="Resource" id="Res_1"]
+script = ExtResource("1_Scr")
+heal_target_stat = 1
+amount = 15
+
+[sub_resource type="Resource" id="Res_2"]
+script = ExtResource("2_Scr")
+amount = 10
+zealot_mult = 1.0
+neutral_mult = 0.0
+barbarian_mult = 0.0
+
+[resource]
+script = ExtResource("3_Scr")
+title = "Confession"
+description = "One ally loses 15 lust. Affinity +10 if they are a zealot."
+cost = 1
+user_name = "Priestess"
+target = 1
+icon = ExtResource("5_Tex")
+effects = Array[ExtResource("4_Scr")]([SubResource("Res_1"), SubResource("Res_2")])

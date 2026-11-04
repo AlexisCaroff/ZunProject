@@ -14,7 +14,9 @@ duration = 2
 script = ExtResource("2_skill")
 name = "Stone Wall"
 descriptionName = "Stone Wall"
-description = "Le Stone Slime se place devant un allié : pendant 2 tours, les attaques simples qui le visent tombent sur lui."
+description = "Guards an ally for 2 turns: single-target attacks aimed at it hit the Stone Slime instead.
+Target: 1 ally
+Never misses | Cooldown 3"
 icon = ExtResource("4_icon")
 barkSkill = ""
 required_position = 0

@@ -15,6 +15,7 @@ uitexture = ExtResource("3_tnww7")
 affected_stat = 5
 amount = 5
 duration = 3
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [sub_resource type="Resource" id="Resource_3h4no"]
@@ -28,7 +29,9 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("6_kauge")
 name = "Poison"
 descriptionName = "Horny Poison"
-description = "Aphrodisiac on an enemy"
+description = "Deals 5 + ATK - DEF physical damage, then Lust poison +1 step (Lust at the start of each of its turns).
+Target: 1 hero (any row) | From: back row
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("5_fmjc0")
 barkSkill = ""
 required_position = 2

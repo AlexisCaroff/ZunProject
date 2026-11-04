@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dg0coy6r6f1ww"]
+[gd_scene load_steps=41 format=3 uid="uid://dg0coy6r6f1ww"]
 
 [ext_resource type="Script" uid="uid://d12jn42j03tgg" path="res://GameManager.gd" id="1_60im0"]
 [ext_resource type="Resource" uid="uid://7dlbup10473y" path="res://lvl/donjonTestePorte.tres" id="2_awj4p"]
@@ -28,6 +28,17 @@
 [ext_resource type="Script" uid="uid://epu8n2lrsmtu" path="res://UI/save_button.gd" id="26_jh2my"]
 [ext_resource type="Script" uid="uid://bhsro7sspbgqw" path="res://UI/buttonQuit.gd" id="27_07by6"]
 [ext_resource type="PackedScene" path="res://UI/save_menu.tscn" id="28_kma2v"]
+[ext_resource type="Resource" uid="uid://cc8e6wnmf71nk" path="res://cards/dice_game.tres" id="card_dice_game"]
+[ext_resource type="Resource" uid="uid://bitha1ps6ye1t" path="res://cards/good_meal.tres" id="card_good_meal"]
+[ext_resource type="Resource" uid="uid://cbdsu4xfjiihq" path="res://cards/mystic_storyteller.tres" id="card_mystic_storyteller"]
+[ext_resource type="Resource" uid="uid://b5148u04qlbys" path="res://cards/poultice.tres" id="card_poultice"]
+[ext_resource type="Resource" uid="uid://bj2m07gyt343" path="res://cards/priestess_confession.tres" id="card_priestess_confession"]
+[ext_resource type="Resource" uid="uid://c7fgxafk8lev2" path="res://cards/priestess_sermon.tres" id="card_priestess_sermon"]
+[ext_resource type="Script" uid="uid://csjs6vf5actyx" path="res://scripts/cards/affinity_card.gd" id="card_script"]
+[ext_resource type="Resource" uid="uid://dlnr4oas5olgs" path="res://cards/sparring.tres" id="card_sparring"]
+[ext_resource type="Resource" uid="uid://dwj7kgp4nxrud" path="res://cards/teamwork_talk.tres" id="card_teamwork_talk"]
+[ext_resource type="Resource" uid="uid://lr7rcnd5jvnm" path="res://cards/warrior_gear_maintenance.tres" id="card_warrior_gear_maintenance"]
+[ext_resource type="Resource" uid="uid://b2e22cr7mipnv" path="res://cards/warrior_rowdy_story.tres" id="card_warrior_rowdy_story"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n5q86"]
 
@@ -41,6 +52,7 @@ inventory = Array[ExtResource("4_y4st3")]([ExtResource("5_8tqqo"), ExtResource("
 loot_table = ExtResource("9_6s4fx")
 characters = Array[ExtResource("10_elie0")]([ExtResource("11_nq4xm"), ExtResource("12_e3ly7"), ExtResource("13_um5rx"), ExtResource("14_hmybu")])
 taste_roll_scene = ExtResource("15_4hqhr")
+card_pool = Array[ExtResource("card_script")]([ExtResource("card_dice_game"), ExtResource("card_good_meal"), ExtResource("card_mystic_storyteller"), ExtResource("card_poultice"), ExtResource("card_priestess_confession"), ExtResource("card_priestess_sermon"), ExtResource("card_sparring"), ExtResource("card_teamwork_talk"), ExtResource("card_warrior_gear_maintenance"), ExtResource("card_warrior_rowdy_story")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -200

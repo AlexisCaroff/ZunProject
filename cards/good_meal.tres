@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AffinityCard" load_steps=6 format=3 uid="uid://bitha1ps6ye1t"]
+
+[ext_resource type="Script" uid="uid://cwdlfpy6jfr4w" path="res://actions/skillEffects/campSkilleffect/CampHealEffet.gd" id="1_Scr"]
+[ext_resource type="Script" uid="uid://csjs6vf5actyx" path="res://scripts/cards/affinity_card.gd" id="2_Scr"]
+[ext_resource type="Script" uid="uid://brw6jmbngkbbu" path="res://scripts/camp/CampEffect.gd" id="3_Scr"]
+[ext_resource type="Texture2D" uid="uid://c3jrt50dlc2fd" path="res://UI/Stamina.png" id="4_Tex"]
+
+[sub_resource type="Resource" id="Res_1"]
+script = ExtResource("1_Scr")
+heal_target_stat = 0
+amount = 15
+
+[resource]
+script = ExtResource("2_Scr")
+title = "A Good Meal"
+description = "The team regains 15 stamina."
+cost = 1
+user_name = "All"
+target = 3
+icon = ExtResource("4_Tex")
+effects = Array[ExtResource("3_Scr")]([SubResource("Res_1")])

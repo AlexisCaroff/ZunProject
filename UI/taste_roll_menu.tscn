@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c2xke2vhr5vbh"]
+[gd_scene load_steps=10 format=3 uid="uid://c2xke2vhr5vbh"]
 
 [ext_resource type="Script" uid="uid://dryux0nhgos43" path="res://UI/taste_roll_menu.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://di8781jnr3hw8" path="res://UI/UI boxes/UI_combat_victory.png" id="2_box"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://eqli6rl4sig3" path="res://UI/UI boxes/UI_camp_points.png" id="5_plate"]
 [ext_resource type="Texture2D" uid="uid://cy7cv0o62q2ed" path="res://UI/symbols/SYM_attracted_feminine.png" id="6_fem"]
 [ext_resource type="Texture2D" uid="uid://db1tpsdhxsc0d" path="res://UI/symbols/SYM_attracted_masculine.png" id="7_masc"]
-[ext_resource type="Texture2D" uid="uid://nmmbaqtaauac" path="res://UI/symbols/SYM_dice.png" id="8_dice"]
 [ext_resource type="Texture2D" uid="uid://b7mv4shvy4f80" path="res://UI/symbols/FX_title_glow.png" id="9_glow"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_focus"]
@@ -43,30 +42,6 @@ offset_right = 1503.0
 offset_bottom = 999.0
 mouse_filter = 2
 texture = ExtResource("2_box")
-
-[node name="TitleMain" type="Label" parent="CanvasLayer/Box"]
-layout_mode = 0
-offset_left = 337.0
-offset_top = 170.0
-offset_right = 737.0
-offset_bottom = 230.0
-theme_override_fonts/font = ExtResource("3_font")
-theme_override_font_sizes/font_size = 35
-text = "ROLL"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TitleSub" type="Label" parent="CanvasLayer/Box"]
-layout_mode = 0
-offset_left = 287.0
-offset_top = 204.0
-offset_right = 787.0
-offset_bottom = 260.0
-theme_override_fonts/font = ExtResource("3_font")
-theme_override_font_sizes/font_size = 34
-text = "character tastes"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Slots" type="Control" parent="CanvasLayer/Box"]
 anchors_preset = 0
@@ -130,21 +105,47 @@ text = "Masculine attracted"
 vertical_alignment = 1
 
 [node name="RollButton" type="Button" parent="CanvasLayer"]
-visible = false
-offset_left = 919.0
-offset_top = 344.0
-offset_right = 989.0
-offset_bottom = 414.0
+offset_left = 806.0
+offset_top = 263.0
+offset_right = 1108.0
+offset_bottom = 333.0
 tooltip_text = "Retirer tout au sort"
 theme_override_styles/focus = SubResource("StyleBoxEmpty_focus")
 flat = true
 script = ExtResource("4_button")
 hover_scale = Vector2(1.15, 1.15)
 
-[node name="Dice" type="Sprite2D" parent="CanvasLayer/RollButton"]
-position = Vector2(35, 35)
-scale = Vector2(0.55, 0.55)
-texture = ExtResource("8_dice")
+[node name="Plate" type="Sprite2D" parent="CanvasLayer/RollButton"]
+z_index = 1
+position = Vector2(148, 36.5)
+scale = Vector2(0.476336, 0.540373)
+texture = ExtResource("5_plate")
+
+[node name="TitleMain" type="Label" parent="CanvasLayer/RollButton"]
+z_index = 1
+layout_mode = 0
+offset_left = -52.0
+offset_top = -12.0
+offset_right = 348.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 35
+text = "ROLL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleSub" type="Label" parent="CanvasLayer/RollButton"]
+z_index = 1
+layout_mode = 0
+offset_left = -102.0
+offset_top = 22.0
+offset_right = 398.0
+offset_bottom = 78.0
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 34
+text = "character tastes"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BiButton" type="Button" parent="CanvasLayer"]
 offset_left = 1174.0

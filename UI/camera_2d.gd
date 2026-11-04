@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 	if shake_time < shake_duration:
 		shake_time += delta
 		var progress := shake_time / shake_duration
-		var decay := pow(1.0 - progress, 2) # Évite un arrêt trop brutal
+		var decay := pow(1.0 - progress, 2) 
 
 		var time = Time.get_ticks_msec() / 1000.0 * frequency
 		var x_offset = noise.get_noise_2d(time, 0.0)

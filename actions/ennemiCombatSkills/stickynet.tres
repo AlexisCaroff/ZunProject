@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bhhvdopw8nqlu" path="res://actions/actiontexture/vampire.png" id="4_j4j7o"]
 [ext_resource type="Texture2D" uid="uid://btvnbxbbjq1w4" path="res://UI/debuffDeff.png" id="5_coij5"]
 [ext_resource type="Texture2D" uid="uid://drpnss51hobsj" path="res://UI/debuffAtt.png" id="5_j4j7o"]
-[ext_resource type="Texture2D" uid="uid://c6qss13x88o50" path="res://actions/damageEffect/damageeffecttexture/hit.png" id="7_g6l6p"]
+[ext_resource type="Texture2D" uid="uid://qx0s5ypu8xhq" path="res://UI/star.png" id="7_df3d6"]
 [ext_resource type="PackedScene" uid="uid://dbup2xsc10i5v" path="res://actions/skillEffects/FX/Scene/stickynetTarget.tscn" id="10_df3d6"]
 
 [sub_resource type="Resource" id="Resource_coij5"]
@@ -22,6 +22,7 @@ uitexture = ExtResource("5_coij5")
 affected_stat = 1
 amount = -10
 duration = 3
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [sub_resource type="Resource" id="Resource_df3d6"]
@@ -31,22 +32,26 @@ uitexture = ExtResource("5_j4j7o")
 affected_stat = 0
 amount = -5
 duration = 3
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [sub_resource type="Resource" id="Resource_vgxbl"]
 script = ExtResource("3_4y5k8")
 name = "Stunn"
-uitexture = ExtResource("7_g6l6p")
+uitexture = ExtResource("7_df3d6")
 affected_stat = 7
 amount = 0
 duration = 1
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [resource]
 script = ExtResource("2_kcvw8")
 name = "Stickynet"
 descriptionName = "Stickynet"
-description = "Stickynet"
+description = "Stuns (the hero skips its next turn), DEF debuff -2 steps and ATK debuff -1 step.
+Target: 1 hero (any row) | From: back row
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("4_j4j7o")
 barkSkill = ""
 required_position = 2

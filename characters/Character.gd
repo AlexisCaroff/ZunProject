@@ -19,6 +19,11 @@ const MAX_EQUIPMENT = 2
 # ── État ──────────────────────────────────────────────────
 var taunted_by     : Character    = null
 var taunt_duration : int          = 0
+## Pose imposée par un kink à lust max (cf. LustBreak), tant que la lust
+## reste au max.
+var lust_pose_texture : Texture2D = null
+## captive à lust max : le prochain coup ennemi le capture (étourdi).
+var captive_exposed : bool = false
 var buffs          : Array[Buff]  = []
 var _current_slot  : PositionSlot = null
 var CharaScale     : Vector2      = Vector2(1.0, 1.0)
@@ -119,6 +124,12 @@ func _ready():
 	for buff in characterData.buffs:
 		add_buff(buff)
 	characterData.buffs.clear()
+	# Bonus de camp valables plusieurs combats : rejoués à chaque combat,
+	# sans limite de tours (décomptés en fin de combat par le CombatManager).
+	for fb in characterData.fight_buffs:
+		var b: Buff = fb.duplicate()
+		b.duration = 999
+		add_buff(b)
 	for buff in buffs:
 		buff.apply_to(self.characterData)
 
@@ -148,35 +159,8 @@ func update_stats():
 		StunParticule.remove()
 		StunParticule = null
 
-	characterData.max_stamina   = characterData.base_max_stamina
-	characterData.max_horniness = characterData.base_max_horniness
-	characterData.max_stress    = characterData.base_max_stress
-	characterData.attack        = characterData.base_attack
-	characterData.defense       = characterData.base_defense
-	characterData.initiative    = characterData.base_initiative
-	characterData.willpower     = characterData.base_willpower
-	characterData.evasion       = characterData.base_evasion
-	characterData.precision     = characterData.base_precision
-	characterData.immobilized   = false   # remis à false — le buff IMMOBILIZE le repose si actif
-
-	for tag in characterData.tags:
-		if tag == "sadist":
-			characterData.attack += 2
-		elif tag == "maso":
-			characterData.evasion = max(0, characterData.evasion - 2)
-
-	for buff in buffs:
-		buff.apply_to(self.characterData)
-
-	for eq in characterData.equipped_items:
-		characterData.attack        += eq.attack_bonus
-		characterData.defense       += eq.defense_bonus
-		characterData.max_horniness += eq.Max_lust_bonus
-		characterData.max_stamina   += eq.Max_stamina_bonus
-		characterData.max_stress    += eq.Max_Guilt_bonus
-		characterData.willpower     += eq.willpower_bonus
-		characterData.evasion       += eq.evasion_bonus
-		characterData.initiative    += eq.initiative_bonus
+	# Base + kinks + buffs de combat + équipement (CharacterData.recompute_stats).
+	characterData.recompute_stats(buffs)
 
 
 func get_equipement_cooldown_reduction_for(skill: Skill) -> int:
@@ -191,25 +175,53 @@ func get_equipement_cooldown_reduction_for(skill: Skill) -> int:
 
 
 func refresh_stats_from_equipment():
-	characterData.attack     = characterData.base_attack
-	characterData.defense    = characterData.base_defense
-	characterData.willpower  = characterData.base_willpower
-	characterData.evasion    = characterData.base_evasion
-	characterData.initiative = characterData.base_initiative
-	for eq in characterData.equipped_items:
-		characterData.attack     += eq.attack_bonus
-		characterData.defense    += eq.defense_bonus
-		characterData.willpower  += eq.willpower_bonus
-		characterData.evasion    += eq.evasion_bonus
-		characterData.initiative += eq.initiative_bonus
+	# Garde kinks et buffs en cours : seules les stats finales sont affichées.
+	characterData.recompute_stats(buffs)
 
 
 # ═══════════════════════════════════════════════════════════
 #  BUFFS
 # ═══════════════════════════════════════════════════════════
 
-func add_buff(buff: Buff):
-	var new_buff = buff.duplicate()
+## `source` : le personnage qui pose le buff. S'il le pose sur lui-même
+## pendant son propre tour, l'échelle ne baissera pas à la fin de ce tour.
+func add_buff(buff: Buff, source: Character = null):
+	var new_buff: Buff = buff.duplicate()
+	var self_cast: bool = source == self and combat_manager != null \
+			and combat_manager.get("current_character") == self
+
+	if new_buff.is_ladder():
+		var key := new_buff.ladder_key()
+		var dir := new_buff.direction()
+		for i in buffs.size():
+			var cur: Buff = buffs[i]
+			if cur.is_ladder() and cur.ladder_key() == key:
+				var lvl := Buff.next_level(cur.level, dir, new_buff.strength())
+				if lvl == 0:
+					remove_buff_at(i)   # buff et debuff se sont annulés
+				else:
+					# L'icône et le nom suivent le sens de l'échelle.
+					if signi(lvl) == dir:
+						cur.icon = new_buff.icon
+						cur.name = new_buff.name
+						cur.description = new_buff.description
+					cur.set_level(lvl)
+					cur.fresh = cur.fresh or self_cast
+					if i < buff_icons.size() and is_instance_valid(buff_icons[i]):
+						buff_icons[i].updatebuff(cur)
+				update_stats()
+				print("buff %s → niveau %d sur %s" % [key, lvl, characterData.Charaname])
+				return
+		new_buff.set_level(Buff.next_level(0, dir, new_buff.strength()))
+		new_buff.fresh = self_cast
+	else:
+		# État binaire : le dernier appliqué remplace le précédent.
+		var bkey := new_buff.binary_key()
+		for i in range(buffs.size() - 1, -1, -1):
+			if not buffs[i].is_ladder() and buffs[i].fights_left == 0 \
+					and new_buff.fights_left == 0 and buffs[i].binary_key() == bkey:
+				remove_buff_at(i)
+
 	buffs.append(new_buff)
 
 	# S'assure que buff_bar est résolu avant d'instancier l'icône
@@ -225,13 +237,25 @@ func add_buff(buff: Buff):
 	print("add buff " + buff.name + " to " + characterData.Charaname)
 
 
+## Fin du tour du personnage : chaque échelle perd un niveau (sauf celles
+## qu'il vient de monter lui-même), les états binaires perdent un tour.
 func update_buffs() -> void:
 	for i in range(buffs.size() - 1, -1, -1):
-		var buff = buffs[i]
-		buff.duration -= 1
-		if buff.duration <= 0:
-			remove_buff_at(i)
-		elif i < buff_icons.size() and is_instance_valid(buff_icons[i]):
+		var buff: Buff = buffs[i]
+		if buff.is_ladder():
+			if buff.fresh:
+				buff.fresh = false
+			else:
+				buff.set_level(buff.level - signi(buff.level))
+			if buff.level == 0:
+				remove_buff_at(i)
+				continue
+		else:
+			buff.duration -= 1
+			if buff.duration <= 0:
+				remove_buff_at(i)
+				continue
+		if i < buff_icons.size() and is_instance_valid(buff_icons[i]):
 			buff_icons[i].refresh()
 	# precision et immobilized sont recalculés par update_stats() via apply_to()
 	update_stats()
@@ -405,6 +429,8 @@ func end_turn():
 	CharaColor = Color(1.0, 1.0, 1.0, 1.0)
 	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", false)
 	update_buffs()
+	# Provocation subie : elle s'use à chaque tour du provoqué.
+	process_taunt()
 	resetVisuel()
 	reduce_cooldowns()
 	combat_manager.ui.update_ui_for_current_character(self)
@@ -465,7 +491,8 @@ func play_ai_turn(heroes: Array, enemies: Array):
 	for slot in targetPositions:
 		if slot.occupant:
 			slot.occupant.update_ui()
-	update_buffs()
+	# Les échelles de buffs baissent une seule fois, dans end_turn().
+	update_stats()
 	resetVisuel()
 
 
@@ -542,6 +569,12 @@ func take_damage(source: Character, stat: int, amount: int, typeMagic: bool, ski
 				damage = amount
 			for eq in characterData.equipped_items:
 				eq.on_receive_attack(self, source, damage)
+			# captive à lust max : le premier coup ennemi le capture.
+			if captive_exposed and source != null and source != self 					and source.characterData.is_player_controlled != characterData.is_player_controlled:
+				captive_exposed = false
+				characterData.stun = true
+				if combat_manager != null:
+					combat_manager.ui.log("%s is captured!" % characterData.Charaname)
 			if characterData.current_stamina > 0:
 				characterData.current_stamina = clamp(characterData.current_stamina - damage, 0, characterData.max_stamina)
 				if characterData.current_stamina == 0 and characterData.isOneshot:
@@ -608,7 +641,9 @@ func play_affinity_reaction(bark_text: String) -> void:
 	emit_signal("skill_animation_finished")
 
 
-func show_bark(text: String):
+## `wait` = temps rendu à l'appelant ; la bulle, elle, reste affichée sa
+## durée complète (Bark.display_time) même si l'appelant reprend avant.
+func show_bark(text: String, wait: float = 2.0):
 	if not characterData or characterData.bark_scene == null:
 		return
 	if current_bark and is_instance_valid(current_bark):
@@ -617,7 +652,7 @@ func show_bark(text: String):
 	add_child(current_bark)
 	current_bark.set_text(text)
 	current_bark.position = Vector2(-60, -240)
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(wait).timeout
 func show_outline():
 	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", true)
 
@@ -675,6 +710,11 @@ func resetVisuel():
  
 	if characterData and characterData.current_stamina > 0 and not attacking and not getattacked:
 		sprite.texture = characterData.portrait_texture
+		# Pose de kink à lust max (nu, masturbation) tant que la lust y reste.
+		if characterData.current_horniness < characterData.max_horniness:
+			lust_pose_texture = null
+		elif lust_pose_texture != null:
+			sprite.texture = lust_pose_texture
  
 	if characterData and characterData.current_stamina == 0:
 		sprite.texture = characterData.dead_portrait_texture

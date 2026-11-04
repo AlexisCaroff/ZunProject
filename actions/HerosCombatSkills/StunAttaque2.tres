@@ -26,16 +26,19 @@ metadata/_custom_type_script = "uid://tjywmaoy4ejj"
 script = ExtResource("7_x2y7g")
 name = "Stunned"
 uitexture = ExtResource("8_mf3j6")
-affected_stat = 2
-amount = 5
+affected_stat = 7
+amount = 0
 duration = 1
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [resource]
 script = ExtResource("10_c7xr0")
 name = "Shield Bash"
 descriptionName = "Shield Bash"
-description = "Stun one ennemy and deal some damage"
+description = "Deals 20 + ATK - DEF physical damage and stuns: the target skips its next turn.
+Target: 1 front-row enemy | From: front row
+Accuracy 100% | Cooldown 4"
 icon = ExtResource("9_so0iu")
 attack_sound = ExtResource("2_nafb2")
 barkSkill = ""

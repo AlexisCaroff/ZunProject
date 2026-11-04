@@ -44,7 +44,7 @@ var Tentescale : Vector2
 }
 var current_love_scene: Node = null
 ## Multiplicateur de cadence des animations dans la tente (images/seconde).
-@export var anim_speed_mult: float = 2.0
+@export var anim_speed_mult: float = 1.0
 ## Profondeur de la scène d'amour : au-dessus de toute l'interface du camp
 ## (objets, icônes de buff, fiche du personnage).
 const LOVE_SCENE_Z := 100
@@ -81,12 +81,13 @@ func startMasturbation(user:CharaCamp):
 	var folder_path = solo_folders[char_name]
 	var all_frames := load_textures_from_folder(folder_path)
 
-	if all_frames.size() < 4:
+	if all_frames.size() < 3:
 		print("❌ Pas assez d'images dans ", folder_path)
 		return
 
 	# 🔥 On retire les 2 dernières images
-	var frames := all_frames.slice(0, all_frames.size() - 4)
+	# Les 2 dernières images sont la fin de l'animation (cf. clic sur la tente).
+	var frames := all_frames.slice(0, all_frames.size() - 2)
 
 	love_sprite.visible = true
 	love_sprite.texture = null
@@ -193,12 +194,12 @@ func _on_tente_button_button_down() -> void:
 		var folder_path = solo_folders[char_name]
 		var all_frames := load_textures_from_folder(folder_path)
 
-		if all_frames.size() < 3:
+		if all_frames.size() < 2:
 			print("❌ Pas assez d'images pour final anim")
 			return
 
 # 🔥 On prend uniquement les 2 dernières
-		var frames := all_frames.slice(all_frames.size() - 3, all_frames.size())
+		var frames := all_frames.slice(all_frames.size() - 2, all_frames.size())
 		is_anim_zoom_playing =true
 		var campPosition = somoneInside.campposition
 	
@@ -264,8 +265,8 @@ func _on_tente_button_button_down() -> void:
 		
 		
 		var littlebuff := load("res://characters/kink/bigAttackBuff.tres")
-		twoInside[0].characterData.affinity[twoInside[1].characterData.Charaname] += 20
-		twoInside[1].characterData.affinity[twoInside[0].characterData.Charaname] += 20
+		twoInside[0].characterData.affinity[twoInside[1].characterData.Charaname] += 10
+		twoInside[1].characterData.affinity[twoInside[0].characterData.Charaname] += 10
 		print (twoInside[0].characterData.Charaname+" and "+ twoInside[1].characterData.Charaname +" love "+str(twoInside[1].characterData.affinity[twoInside[0].characterData.Charaname]))
 		if not love_scene_packed:
 			push_error("❌ Impossible de charger la scène : " + scene_path)
@@ -290,6 +291,7 @@ func masturbin_go_out():
 		somoneInside.campposition.visible=true
 		somoneInside.characterData.current_horniness= max(0, somoneInside.characterData.current_horniness - 20)
 		somoneInside.animate_heal(20,somoneInside,Color.HOT_PINK)
+		somoneInside.update_display()
 		somoneInside = null
 		love_sprite.visible = false
 		bounce_enabled=false
@@ -303,8 +305,8 @@ func loved_one_go_out():
 		chara.campposition.visible = true
 	for char in twoInside:
 		char.characterData.current_horniness= max(0, char.characterData.current_horniness - 20)
-	twoInside[0].characterData.affinity[twoInside[1].characterData.Charaname] += 20
-	twoInside[1].characterData.affinity[twoInside[0].characterData.Charaname] += 20
+	twoInside[0].characterData.affinity[twoInside[1].characterData.Charaname] += 10
+	twoInside[1].characterData.affinity[twoInside[0].characterData.Charaname] += 10
 	print (twoInside[0].characterData.Charaname+" and "+ twoInside[1].characterData.Charaname +" love "+str(twoInside[1].characterData.affinity[twoInside[0].characterData.Charaname]))
 	
 	await get_tree().process_frame
@@ -372,6 +374,10 @@ func load_textures_from_folder(path: String) -> Array[Texture2D]:
 		push_error("Dossier introuvable : " + path)
 		return textures
 
+	# L'éditeur liste « x.png » ET « x.png.import », un build seulement le
+	# .import : sans ce filtre chaque image était chargée deux fois dans
+	# l'éditeur (animations deux fois plus lentes qu'en build).
+	var seen := {}
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
 	while file_name != "":
@@ -382,7 +388,8 @@ func load_textures_from_folder(path: String) -> Array[Texture2D]:
 				real_name = file_name.trim_suffix(".import")
 			
 			var ext := real_name.get_extension().to_lower()
-			if ext in ["png", "jpg", "webp", "jpeg"]:
+			if ext in ["png", "jpg", "webp", "jpeg"] and not seen.has(real_name):
+				seen[real_name] = true
 				var tex := load(path + real_name) as Texture2D
 				if tex:
 					textures.append(tex)

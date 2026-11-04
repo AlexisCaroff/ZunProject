@@ -29,7 +29,9 @@ metadata/_custom_type_script = "uid://h6pwe3ibr1w5"
 script = ExtResource("6_v5euk")
 name = "sticky net"
 descriptionName = "sticky net"
-description = "debuff deff, remove ability to move "
+description = "DEF debuff -2 steps and immobilized (cannot move) for 2 turns.
+Target: all enemies (one hit roll each)
+Accuracy 100% | Cooldown 4"
 icon = ExtResource("7_v5euk")
 attack_sound = ExtResource("2_3nk5e")
 barkSkill = ""

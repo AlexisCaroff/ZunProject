@@ -12,6 +12,10 @@ class_name CharacterData
 ## Sprite affiché pendant que le personnage est posté devant la porte en
 ## mode peek. Null = on garde le sprite courant.
 @export var peek_texture: Texture2D
+## Poses à lust max (cf. LustBreak) : nu (exib), masturbation (degenerate).
+## Null = sprite normal.
+@export var naked_texture: Texture2D
+@export var masturbate_texture: Texture2D
 
 @export var Name : String = "name"
 @export var Charaname: String = "Classe"
@@ -128,6 +132,14 @@ var acte_twice : bool =false
 	""
 ]
 var buffs: Array[Buff] = []
+## Bonus valables plusieurs combats (Buff.fights_left) : rejoués au début de
+## chaque combat, décomptés à sa fin (CombatManager._consume_fight_buffs).
+var fight_buffs: Array[Buff] = []
+
+## Foi du personnage : certaines cartes d'affinité (sermon, confession)
+## touchent les zélotes et laissent les barbares indifférents.
+enum Faith { NEUTRAL, ZEALOT, BARBARIAN }
+@export var faith: Faith = Faith.NEUTRAL
 var current_bark: Bark = null
 @export var corrupted: bool  = false
 @export var inquisition :bool  = false
@@ -178,6 +190,99 @@ func roll_taste(bi_chance: float = 0.25) -> void:
 		set_taste(true, false)
 	else:
 		set_taste(false, true)
+
+
+# ════════════════════════════════════════════════════════════════════
+#  DÉTAIL DES STATS (infobulle) : base + kinks + équipement + buffs
+# ════════════════════════════════════════════════════════════════════
+
+## Bonus de stat apportés par les kinks — mêmes règles que le combat
+## (Character.update_stats).
+const KINK_STAT_BONUS := {
+	"sadist": {"attack": 2},
+	"maso": {"evasion": -2},
+}
+const _BUFF_STAT_OF := {"attack": 0, "defense": 1, "willpower": 3, "evasion": 4}
+const _STAT_LABEL := {"attack": "Attack", "defense": "Defense", "willpower": "Willpower", "evasion": "Evasion"}
+
+
+## Décompose une stat ("attack", "defense", "willpower", "evasion") :
+## { base, kinks, kink_names, equipment, buffs, total }. Les buffs sont ceux
+## posés hors combat (characterData.buffs : potions, camp…) ; en combat, le
+## Character passe les siens via `combat_buffs` (Character.buffs).
+func stat_breakdown(stat: String, combat_buffs = null) -> Dictionary:
+	var base := int(get("base_" + stat))
+	var kinks := 0
+	var kink_names: Array[String] = []
+	for t in tags:
+		if KINK_STAT_BONUS.has(t) and KINK_STAT_BONUS[t].has(stat):
+			kinks += int(KINK_STAT_BONUS[t][stat])
+			kink_names.append(t)
+	var equipment := 0
+	for eq in equipped_items:
+		if eq != null:
+			equipment += int(eq.get(stat + "_bonus"))
+	var buff_total := 0
+	if _BUFF_STAT_OF.has(stat):
+		var source: Array = combat_buffs if combat_buffs != null else buffs
+		for b in source:
+			if b != null and int(b.stat) == int(_BUFF_STAT_OF[stat]):
+				buff_total += int(b.amount)
+	return {
+		"base": base, "kinks": kinks, "kink_names": kink_names,
+		"equipment": equipment, "buffs": buff_total,
+		"total": base + kinks + equipment + buff_total,
+	}
+
+
+## Recalcule les stats finales (base + kinks + buffs + équipement) : la
+## seule règle de calcul, partagée par le combat, la porte, l'exploration,
+## le camp et le menu personnages. `source_buffs` = buffs de combat du
+## Character ; null = buffs posés hors combat (characterData.buffs).
+func recompute_stats(source_buffs = null) -> void:
+	max_stamina = base_max_stamina
+	max_horniness = base_max_horniness
+	max_stress = base_max_stress
+	attack = base_attack
+	defense = base_defense
+	initiative = base_initiative
+	willpower = base_willpower
+	evasion = base_evasion
+	precision = base_precision
+	immobilized = false   # remis à false — le buff IMMOBILIZE le repose si actif
+	for t in tags:
+		if KINK_STAT_BONUS.has(t):
+			for st in KINK_STAT_BONUS[t]:
+				set(st, int(get(st)) + int(KINK_STAT_BONUS[t][st]))
+	evasion = max(0, evasion)
+	for b in (source_buffs if source_buffs != null else buffs):
+		if b != null:
+			b.apply_to(self)
+	for eq in equipped_items:
+		if eq == null:
+			continue
+		attack += eq.attack_bonus
+		defense += eq.defense_bonus
+		max_horniness += eq.Max_lust_bonus
+		max_stamina += eq.Max_stamina_bonus
+		max_stress += eq.Max_Guilt_bonus
+		willpower += eq.willpower_bonus
+		evasion += eq.evasion_bonus
+		initiative += eq.initiative_bonus
+
+
+## Texte d'infobulle : la valeur finale puis chaque apport.
+func stat_tooltip(stat: String, combat_buffs = null) -> String:
+	var d := stat_breakdown(stat, combat_buffs)
+	var lines: Array[String] = ["%s: %d" % [_STAT_LABEL.get(stat, stat.capitalize()), d.total]]
+	lines.append("  Base: %d" % d.base)
+	var kink_txt := "  Kinks: %+d" % d.kinks
+	if not d.kink_names.is_empty():
+		kink_txt += " (%s)" % ", ".join(d.kink_names)
+	lines.append(kink_txt)
+	lines.append("  Equipment: %+d" % d.equipment)
+	lines.append("  Temporary buffs: %+d" % d.buffs)
+	return "\n".join(lines)
 
 
 ## Vrai si chaque membre de `team` a au moins un partenaire possible

@@ -6,8 +6,9 @@ class_name BuffRow
 # ════════════════════════════════════════════════════════════════════
 #
 #  Affiche les icônes des buffs et debuffs actifs du personnage
-#  sélectionné. Survoler une icône donne la statistique touchée, le
-#  montant et le nombre de tours restants.
+#  sélectionné. Survoler une icône affiche aussitôt le détail (statistique
+#  touchée, montant, tours restants) dans la même bulle que le détail des
+#  stats (UI/stat_hover.gd).
 #
 #  Deux usages :
 #   - la scène contient déjà un libellé « Buffs : » → on lui colle les
@@ -22,7 +23,7 @@ class_name BuffRow
 #  les potions les déposent et que CharaExplo les relit.
 
 ## Côté d'une icône de buff.
-const ICON_SIZE := 44.0
+const ICON_SIZE := 22.0
 ## Espace entre deux icônes. Les icônes sont rognées à leur dessin (cf.
 ## _trimmed), cet écart est donc l'espace réellement visible.
 const ICON_GAP := 2
@@ -38,6 +39,14 @@ const ROW_WIDTH := 460.0
 var title: Label
 var icons: HBoxContainer
 var empty_label: Label
+
+## Détail au survol : même bulle que le détail des stats (UI/stat_hover.gd).
+const STAT_HOVER := preload("res://UI/stat_hover.gd")
+const DETAIL_FONT := preload("res://UI/Euphorigenic.otf")
+const DETAIL_FONT_SIZE := 20
+const DETAIL_PAD := Vector2(14, 8)
+var _detail: Panel = null
+var _detail_text: Label = null
 
 
 ## Construit la ligne et l'accroche à `parent` (la racine de l'interface).
@@ -174,7 +183,10 @@ func show_for(source) -> void:
 	if source is Array:
 		list = source
 	elif source != null and source.get("buffs") != null:
-		list = source.buffs
+		list = source.buffs.duplicate()
+		# Bonus de camp « N prochains combats » (cartes d'affinité).
+		if source.get("fight_buffs") != null:
+			list.append_array(source.fight_buffs)
 	_fill(list)
 
 
@@ -200,14 +212,65 @@ func _fill(list: Array) -> void:
 		tex.custom_minimum_size = Vector2(w, ICON_SIZE)
 		tex.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		tex.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		# Seule l'icône capte la souris, pour l'infobulle.
+		# Seule l'icône capte la souris : détail immédiat au survol.
 		tex.mouse_filter = Control.MOUSE_FILTER_STOP
-		tex.tooltip_text = _describe(b as Buff)
+		var buff := b as Buff
+		tex.mouse_entered.connect(func(): _show_detail(tex, _describe(buff)))
+		tex.mouse_exited.connect(_hide_detail)
 		icons.add_child(tex)
 		shown += 1
 
 	if is_instance_valid(empty_label):
 		empty_label.visible = shown == 0
+	_hide_detail()
+
+
+## Le détail ne peut pas vivre dans la ligne (clip_contents la rogne) : il
+## est posé à côté, dans le parent, au-dessus de tout.
+func _ensure_detail() -> void:
+	if is_instance_valid(_detail) or get_parent() == null:
+		return
+	_detail = Panel.new()
+	_detail.name = "BuffDetail"
+	_detail.add_theme_stylebox_override("panel", STAT_HOVER.bubble_style())
+	_detail.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_detail.z_index = 60
+	_detail.z_as_relative = false
+	_detail.visible = false
+	_detail_text = Label.new()
+	_detail_text.add_theme_font_override("font", DETAIL_FONT)
+	_detail_text.add_theme_font_size_override("font_size", DETAIL_FONT_SIZE)
+	_detail_text.add_theme_color_override("font_color", Color.WHITE)
+	_detail_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_detail_text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_detail_text.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_detail_text.position = DETAIL_PAD
+	_detail.add_child(_detail_text)
+	get_parent().add_child(_detail)
+
+
+func _show_detail(icon: Control, text: String) -> void:
+	_ensure_detail()
+	if not is_instance_valid(_detail) or not is_instance_valid(icon):
+		return
+	_detail_text.text = text
+	var w := 0.0
+	var lines := text.split("\n")
+	for line in lines:
+		w = max(w, DETAIL_FONT.get_string_size(line, HORIZONTAL_ALIGNMENT_LEFT, -1, DETAIL_FONT_SIZE).x)
+	var text_size := Vector2(w + 4.0, lines.size() * DETAIL_FONT_SIZE * 1.3)
+	_detail_text.size = text_size
+	var box := text_size + DETAIL_PAD * 2.0
+	_detail.size = box
+	# Centré au-dessus de l'icône survolée.
+	_detail.global_position = icon.global_position + Vector2(
+			(icon.size.x - box.x) * 0.5, -box.y - 6.0)
+	STAT_HOVER.pop_in(_detail)
+
+
+func _hide_detail() -> void:
+	if is_instance_valid(_detail):
+		_detail.visible = false
 
 
 ## Icône réduite à sa zone réellement dessinée : les sources ont de larges
@@ -232,8 +295,8 @@ static func _trimmed(src: Texture2D) -> Texture2D:
 	return out
 
 
-## Texte de l'infobulle : « Attack +5 — 3 tours », précédé du nom du buff
-## quand il en porte un.
+## Texte du détail, comme sous les personnages : « Attack +5 » puis
+## « 3 turns », précédé du nom du buff quand il en porte un.
 func _describe(b: Buff) -> String:
 	var keys := Buff.Stat.keys()
 	var stat_name := "Effet"
@@ -243,7 +306,10 @@ func _describe(b: Buff) -> String:
 	var line := stat_name
 	if b.amount != 0:
 		line += " %+d" % b.amount
-	line += " — %d tours" % b.duration
+	if b.fights_left > 0:
+		line += "\n%d fights" % b.fights_left
+	else:
+		line += "\n%d turns" % b.duration
 
 	var out := line
 	if b.name != "" and b.name != "Buff":

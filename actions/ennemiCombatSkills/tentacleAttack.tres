@@ -9,16 +9,15 @@
 
 [sub_resource type="Resource" id="Resource_3q5jt"]
 script = ExtResource("2_2a5gp")
-MagicDMG = false
-amount = 18
-damage_target_stat = 0
 metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 
 [resource]
 script = ExtResource("2_bjxpp")
 name = "Tentacles Attack"
 descriptionName = "Tentacles Attack"
-description = "dmg an ennemi"
+description = "Deals 20 + ATK - DEF physical damage.
+Target: 1 front-row hero | From: front row
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("3_xuyw1")
 barkSkill = ""
 required_position = 1

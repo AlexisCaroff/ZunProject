@@ -89,3 +89,4 @@ corrupted = false
 inquisition = false
 immobilized = false
 immobilized_turns = 0
+faith = 0

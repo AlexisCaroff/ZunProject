@@ -19,7 +19,9 @@ metadata/_custom_type_script = "uid://c3dw018knk8mk"
 script = ExtResource("4_xfd55")
 name = "Buff attack"
 descriptionName = "Attaque"
-description = "buff your attack"
+description = "ATK buff +3 steps.
+Target: yourself
+Never misses | Cooldown 2"
 icon = ExtResource("3_yk0rw")
 barkSkill = ""
 required_position = 0

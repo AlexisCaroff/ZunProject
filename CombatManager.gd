@@ -261,6 +261,8 @@ var lust_hidden: bool = false
 var _lust_baseline: Dictionary = {}   # Character -> lust au début du combat
 ## L'ennemi déclencheur vient de jouer : dialogue au prochain tour.
 var _lust_trigger_pending: bool = false
+## Délai entre la fin de l'action du Spitter et l'ouverture du dialogue.
+@export var lust_tutorial_delay: float = 0.5
 
 
 func _setup_lust_tutorial() -> void:
@@ -282,8 +284,8 @@ func _apply_lust_visibility() -> void:
 			set_chara_ui_lust_visible(hero._current_slot.CharaUI, shown)
 	if ui:
 		# Culpabilité masquée avec la lust : elle apparaît en même temps.
-		for path in ["CanvasLayer/Horny3", "CanvasLayer/Horny2", "CanvasLayer/LustProgressBar",
-				"CanvasLayer/Guilt3", "CanvasLayer/Guilt2", "CanvasLayer/GuiltProgressBar"]:
+		for path in ["CanvasLayer/StatLustIcon", "CanvasLayer/Horny2", "CanvasLayer/LustProgressBar",
+				"CanvasLayer/StatGuiltIcon", "CanvasLayer/Guilt2", "CanvasLayer/GuiltProgressBar"]:
 			var n := ui.get_node_or_null(path) as CanvasItem
 			if n != null:
 				n.visible = shown
@@ -350,6 +352,10 @@ func _maybe_lust_tutorial() -> void:
 	_lust_trigger_pending = false
 
 	GameState.Pause = true
+	# Petite pause après l'attaque du Spitter, le temps de la voir, avant que
+	# le dialogue ne s'ouvre (le combat est déjà figé par Pause).
+	if lust_tutorial_delay > 0.0:
+		await get_tree().create_timer(lust_tutorial_delay).timeout
 	var hidden_uis: Array = []
 	for hero in heroes:
 		if is_instance_valid(hero):
@@ -442,6 +448,7 @@ func next_turn():
 		ui.update_turn_queue_ui(turn_queue)
 	ui.update_turn_queue_ui(turn_queue)
 	current_character = turn_queue.pop_front()
+	_turn_passed = false
 
 	for char in turn_queue:
 		char.resetVisuel()
@@ -481,30 +488,9 @@ func next_turn():
 		await end_currentChara_Turn()
 		return
 
-	# ── Horniness max ──
-	if current_character.characterData.current_horniness >= 100:
-		print("🚫 SKIP (horny): ", current_character.characterData.Charaname)
-		current_character.characterData.current_horniness = 100
-		ui.log(current_character.characterData.Charaname + " is too horny to fight")
-		# Disable les boutons même pour un héros (cohérence visuelle)
-		if current_character.characterData.is_player_controlled:
-			for button: Button in ui.skill_buttons:
-				button.disabled = true
-		await get_tree().create_timer(1.5).timeout
-		await end_currentChara_Turn()
-		return
-
-	# ── Grab (boss capture) ──
-	if current_character.characterData.grab == true:
-		print("🚫 SKIP (grabbed): ", current_character.characterData.Charaname)
-		ui.log(current_character.characterData.Charaname + " is grabbed")
-		if current_character.characterData.is_player_controlled:
-			for button: Button in ui.skill_buttons:
-				button.disabled = true
-		await end_currentChara_Turn()
-		return
-
 	# ── Stun / Surprise ──
+	# Avant la lust max : un personnage étourdi perd son tour, sans que
+	# ses kinks aient l'occasion de prendre le dessus.
 	# IMPORTANT : on traite le stun AVANT d'afficher le menu joueur,
 	# sinon l'UI flash brièvement pour rien.
 	if current_character.characterData.stun == true:
@@ -517,6 +503,32 @@ func next_turn():
 			for button: Button in ui.skill_buttons:
 				button.disabled = true
 		current_character.characterData.stun = false
+		await end_currentChara_Turn()
+		return
+
+	# ── Horniness max ──
+	if current_character.characterData.current_horniness >= 100:
+		print("🚫 SKIP (horny): ", current_character.characterData.Charaname)
+		current_character.characterData.current_horniness = 100
+		ui.log(current_character.characterData.Charaname + " is too horny to fight")
+		# Disable les boutons même pour un héros (cohérence visuelle)
+		if current_character.characterData.is_player_controlled:
+			for button: Button in ui.skill_buttons:
+				button.disabled = true
+		await get_tree().create_timer(0.6).timeout
+		# Un de ses kinks prend le dessus (cf. characters/LustBreak.gd).
+		await LustBreak.play(current_character, self)
+		await get_tree().create_timer(0.9).timeout
+		await end_currentChara_Turn()
+		return
+
+	# ── Grab (boss capture) ──
+	if current_character.characterData.grab == true:
+		print("🚫 SKIP (grabbed): ", current_character.characterData.Charaname)
+		ui.log(current_character.characterData.Charaname + " is grabbed")
+		if current_character.characterData.is_player_controlled:
+			for button: Button in ui.skill_buttons:
+				button.disabled = true
 		await end_currentChara_Turn()
 		return
 
@@ -695,25 +707,41 @@ func _check_defeat():
 		_show_defeat()
 
 
+## Fin de combat : chaque bonus « N prochains combats » perd un combat.
+func _consume_fight_buffs() -> void:
+	for hero in heroes:
+		if not is_instance_valid(hero) or hero.characterData == null:
+			continue
+		var list: Array[Buff] = hero.characterData.fight_buffs
+		for i in range(list.size() - 1, -1, -1):
+			list[i].fights_left -= 1
+			if list[i].fights_left <= 0:
+				list.remove_at(i)
+
+
 func _show_defeat():
+	_consume_fight_buffs()
 	ResultScreen_label.text = "Defeat !"
 	ResultScreen_label.visible=true
 	ResultScreen_label.modulate = Color(1, 1, 1, 1)
+	# Laisse le temps de lire « Defeat ! », puis retour au menu principal.
+	await get_tree().create_timer(2.5).timeout
+	var game_manager := get_tree().root.get_node_or_null("GameManager") as GameManager
+	if game_manager:
+		game_manager.return_to_start_menu()
 
 
 
 func _show_victory():
+	_consume_fight_buffs()
 
 	var victory_ui_scene = preload("res://UI/victory.tscn")
 	var victory_ui = victory_ui_scene.instantiate()
-	var cristal_item := Equipment.new()
-
-	cristal_item.name = (str(nb_crystaleloot)+" Cristal")
-	cristal_item.icon = cristal_texture
-	cristal_item.number = nb_crystaleloot
-	cristal_item.description = "Un cristal précieux obtenu en combat."
-	if nb_crystaleloot >0:
-		encounter.loots.append(cristal_item)
+	# Cristaux des démons vaincus : versés au compteur de cristaux (comme
+	# l'était l'or), plus d'objet occupant une case du sac. La « bourse »
+	# défile sur l'écran de victoire puis add_to_inventory la verse au compteur.
+	if nb_crystaleloot > 0:
+		encounter.loots.append(MoneyPouch.make(nb_crystaleloot, cristal_texture))
 	gm = get_tree().root.get_node("GameManager") as GameManager
 
 	# ── Butin aléatoire (potions) ────────────────────────────────────
@@ -723,7 +751,7 @@ func _show_victory():
 	for extra in gm.roll_loot(loot_bonus_rolls, loot_drop_chance):
 		encounter.loots.append(extra)
 
-	# ── Argent ───────────────────────────────────────────────────────
+	# ── Cristaux (ex-argent) ─────────────────────────────────────────
 	# Tiré au sort comme les potions. La bourse passe dans le butin pour
 	# que le joueur la voie défiler, mais add_to_inventory l'enverra au
 	# compteur sans lui donner de case.
@@ -736,6 +764,11 @@ func _show_victory():
 	# Ramassés automatiquement, sans passer par l'écran de butin.
 	gm.add_prisoners(nb_prisoners)
 	nb_prisoners = 0
+
+	# ── Carte d'affinité ─────────────────────────────────────────────
+	var card: AffinityCard = gm.roll_card(encounter)
+	if card != null:
+		victory_ui.pending_card = card
 
 	victory_ui.showLoot(encounter.loots, gm)
 
@@ -791,7 +824,8 @@ func _on_target_selected(targets: Array[PositionSlot]):
 
 			# ── 2. Effets après ───────────────────────────────────────
 			for slot in targets:
-				if slot.occupant != null:
+				# Move peut viser une position alliée vide (cf. PositionSlot).
+				if slot.occupant != null or PositionSlot.skill_moves(pending_skill):
 					await pending_skill.use(slot)
 					if slot.occupant != null:
 						slot.occupant.update_ui()
@@ -815,9 +849,10 @@ func _on_target_selected(targets: Array[PositionSlot]):
 
 			# ── 2. Effets après ───────────────────────────────────────
 			for slot in pending_skill.target1:
-				if slot.occupant != null:
+				if slot.occupant != null or PositionSlot.skill_moves(pending_skill):
 					await pending_skill.use(slot)
-					slot.occupant.update_ui()
+					if slot.occupant != null:
+						slot.occupant.update_ui()
 
 			for slot in targets:
 				if slot.occupant != null:
@@ -832,6 +867,7 @@ func _on_target_selected(targets: Array[PositionSlot]):
 			_clear_skill_button_outline()  # --- restore outline_width
 
 func stop_target_selection():
+	SkillPreview.clear(self)
 	for enemy in enemies:
 		enemy.set_targetable(false)
 		enemy.resetVisuel()
@@ -925,8 +961,16 @@ func flush_endTurn_affinity_reactions() -> void:
 		await reaction.call()
 	endTurn_affinity_reaction_queue.clear()
 
+## Vrai dès qu'un tour est passé, jusqu'au début du tour suivant (next_turn) :
+## des clics rapides sur le bouton ne doivent passer qu'un seul tour.
+var _turn_passed := false
+
 func PassButtonDown():
+	if _turn_passed:
+		return
 	if current_character and current_character.characterData.is_player_controlled:
+		_turn_passed = true
+		passButton.disabled = true
 		_clear_skill_button_outline()  # --- restore outline_width
 		ui.disableActionButton()
 
@@ -1001,9 +1045,29 @@ func _check_frontline_advance() -> void:
 ## Boss qui garde sa place quoi qu'il arrive. Mommy est posée sur deux slots
 ## arrière (cf. le spawn des ennemis) : l'avancer la décalait à l'écran et
 ## la mettait en front, où Mommy Grab (réservé au back) devient inutilisable.
+## La tentacule aussi : la ramener au premier rang cassait sa libération
+## (elle tient le héros capturé depuis son propre slot).
 func _is_anchored(character: Character) -> bool:
 	return is_instance_valid(character) and character.characterData != null \
-			and character.characterData.Charaname == "Mommy"
+			and character.characterData.Charaname in ["Mommy", "Tentacle"]
+
+
+## Pour le ciblage « premier rang » : un ennemi ancré (Mommy, tentacule)
+## compte comme au premier rang quand plus aucun autre ennemi ne l'occupe.
+## Il ne bouge pas pour autant — les slots avant restent libres pour les
+## Spitters que Mommy invoque.
+func reaches_as_front(enemy: Character) -> bool:
+	if not is_instance_valid(enemy) or enemy._current_slot == null:
+		return false
+	if enemy._current_slot.position_data.isFront:
+		return true
+	if not _is_anchored(enemy):
+		return false
+	for e in enemies:
+		if is_instance_valid(e) and not e.is_dead() and not _is_anchored(e) \
+				and e._current_slot != null and e._current_slot.position_data.isFront:
+			return false
+	return true
 
 
 func _advance_group_if_front_empty(positions: Array[PositionSlot], group: Array[Character]) -> void:

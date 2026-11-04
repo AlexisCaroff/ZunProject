@@ -29,6 +29,17 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 	#	print(skill.name)
 
 	var skill: Skill = usable_skills[randi() % usable_skills.size()]
+	return choose_target(owner, skill)
+
+
+## Cible(s) de `skill` pour `owner`, selon son the_target_type (et sa
+## portée, le taunt…). Utilisée aussi par les IA spécialisées une fois leur
+## compétence choisie : une compétence de soutien vise toujours l'équipe de
+## l'IA, jamais les héros. {} si aucune cible valide.
+func choose_target(owner: Character, skill: Skill) -> Dictionary:
+	var combat_manager = owner.combat_manager
+	var ennemisPositions: Array = combat_manager.enemy_positions
+	var herosPositions: Array   = combat_manager.hero_positions
 
 	# ── Helpers : slots vivants uniquement ───────────────────────────
 	# IMPORTANT : on exclut systématiquement les héros grab (.grab == true).

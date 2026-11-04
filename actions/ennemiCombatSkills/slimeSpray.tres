@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=10 format=3 uid="uid://dnm6o3wuw8ysw"]
+[gd_resource type="Resource" script_class="Skill" load_steps=11 format=3 uid="uid://dnm6o3wuw8ysw"]
 
+[ext_resource type="Texture2D" uid="uid://c3m2sa2rmcyut" path="res://characters/charatexture/demo characters/ENEMY_slimepile_hit.png" id="1_6osws"]
+[ext_resource type="PackedScene" uid="uid://bs3fpvadagy2e" path="res://actions/damageEffect/horny_particulesAttack.tscn" id="2_if2sg"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="2_skill"]
 [ext_resource type="Script" uid="uid://c3dw018knk8mk" path="res://actions/skillEffects/BuffEffect.gd" id="3_buff"]
 [ext_resource type="Script" uid="uid://bjsbovfjff2wo" path="res://actions/skillEffects/DamageEffect.gd" id="4_dmg"]
 [ext_resource type="Texture2D" uid="uid://yyl7yyr5j4rv" path="res://UI/poisonHorny.png" id="5_bufficon"]
 [ext_resource type="Texture2D" uid="uid://bw10cun1t2x4g" path="res://actions/actiontexture/poison.png" id="6_icon"]
-[ext_resource type="Texture2D" uid="uid://clvqybwb0fh7h" path="res://characters/charatexture/demo characters/ENEMY_slimepile_attack.png" id="7_image"]
 [ext_resource type="PackedScene" uid="uid://cqea4mekfk8gb" path="res://actions/skillEffects/FX/Scene/hit_standar.tscn" id="8_fx"]
 
 [sub_resource type="Resource" id="Resource_slimepoison"]
@@ -15,6 +16,7 @@ uitexture = ExtResource("5_bufficon")
 affected_stat = 5
 amount = 5
 duration = 3
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [sub_resource type="Resource" id="Resource_slimesplash"]
@@ -28,12 +30,14 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("2_skill")
 name = "Slime Spray"
 descriptionName = "Slime Spray"
-description = "Asperge toute l'équipe d'un mucus aphrodisiaque : +5 Lust par tour pendant 3 tours."
+description = "+10 Lust (minus target WILL), then Lust poison +1 step (Lust at the start of each of its turns).
+Target: all heroes (one hit roll each) | From: back row
+Accuracy 100% | Cooldown 3"
 icon = ExtResource("6_icon")
 barkSkill = ""
 required_position = 2
 range = 3
-ImageSkill = ExtResource("7_image")
+ImageSkill = ExtResource("1_6osws")
 the_target_type = 4
 effects = Array[Resource]([SubResource("Resource_slimepoison"), SubResource("Resource_slimesplash")])
 two_target_Type = false
@@ -51,8 +55,9 @@ duration = 0.3
 tags = Array[String]([])
 is_contact = false
 distance_contact = 0.0
+caster_effect_scene = ExtResource("2_if2sg")
 target_effect_scene = ExtResource("8_fx")
-caster_effect_anchor = 0
+caster_effect_anchor = 1
 target_effect_anchor = 1
 is_beneficial = false
 skip_target_return_anim = false

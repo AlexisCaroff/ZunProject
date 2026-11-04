@@ -1,0 +1,26 @@
+
+
+SADIST = I can't hold back... you'll do!
+SADIST_REACT = Ow! {name}, I'm on YOUR side!
+
+MASO = Hit me! All of you, come on!
+MASO_REACT = {name} dropped their guard!
+
+VOYEUR = Don't mind me... just looking...
+VOYEUR_REACT = Stop staring at us, {name}! Eyes on the enemy!
+
+EXIB = Look at me! Everyone, LOOK!
+EXIB_REACT = {name}, put your clothes back on! I can't focus like this...
+
+DEGRADER = Pathetic. Every one of you.
+DEGRADER_REACT = Why would you say that, {name}? ...Maybe you're right about us.
+
+DEGENERATE = Mmh... I can't wait anymore...
+DEGENERATE_REACT = {name}... is touching themselves? In the middle of a fight?!
+
+JAILOR = Hold still. You're mine now.
+JAILOR_REACT_SUCCESS = {name} tied me up! 
+JAILOR_REACT_FAIL = Keep your ropes off me, {name}!
+
+CAPTIVE = Someone... just take me...
+CAPTIVE_REACT = {name} is wide open! The next hit will capture them!

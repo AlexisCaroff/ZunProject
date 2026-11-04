@@ -50,6 +50,12 @@ var connected_rooms: Array[String]
 var exploration_history_played: bool = false
 ## Idem pour les autres histories (ajoute selon tes besoins).
 var door_history_played: bool = false
+## Salle vue par un peek depuis sa porte : la mini-carte la montre à demi
+## (opacité 50 %) tant qu'elle n'est pas explorée.
+var peeked: bool = false
+## Coffre piégé de la salle : -1 pas encore tiré, 0 sûr, 1 piégé (le slime
+## attend), 2 piège déjà déclenché. Cf. GameManager.roll_chest_traps().
+var chest_trap_state: int = -1
 var before_combat_history_played: bool = false
 var post_combat_history_played: bool = false
 
@@ -58,6 +64,9 @@ var post_combat_history_played: bool = false
 var interactable_used: bool = false
 ## True si l'interaction a fait passer le sprite à l'état "ouvert".
 var interactable_opened: bool = false
+## Le dialogue de l'objet interactif a déjà été joué : on passe directement
+## aux choix les fois suivantes (après un « leave »).
+var interactable_dialogue_seen: bool = false
 
 
 ## Reset complet de l'état runtime — à appeler au début d'une nouvelle
@@ -69,7 +78,10 @@ func reset_runtime_state() -> void:
 	CampDone = false
 	exploration_history_played = false
 	door_history_played = false
+	peeked = false
+	chest_trap_state = -1
 	before_combat_history_played = false
 	post_combat_history_played = false
 	interactable_used = false
 	interactable_opened = false
+	interactable_dialogue_seen = false

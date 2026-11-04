@@ -3,6 +3,8 @@ class_name Victory_UI
 @onready var itemsContainer = $VictoryBox/HBoxContainer
 @onready var continue_button = $ContinueButton
 @export var item_ui_scene: PackedScene = preload("res://UI/item_ui.tscn")
+## Carte d'affinité gagnée (posée par CombatManager._show_victory).
+var pending_card: AffinityCard = null
 
 func showLoot(items: Array[Equipment], gm:GameManager):
 	for i in min(gm.characters.size(), $HBoxContainer.get_child_count()):
@@ -31,16 +33,41 @@ func showLoot(items: Array[Equipment], gm:GameManager):
 		
 		gm.add_to_inventory(item)
 
+	# Carte d'affinité gagnée : montrée après le butin, puis mise en main.
+	if pending_card != null:
+		var slot := Control.new()
+		slot.custom_minimum_size = CardView.SIZE * 0.45
+		var view := CardView.make(pending_card, 0.45)
+		slot.add_child(view)
+		itemsContainer.add_child(slot)
+		view.modulate.a = 0.0
+		view.create_tween().tween_property(view, "modulate:a", 1.0, 0.3)
+		gm.add_card(pending_card)
+		pending_card = null
+
 
 
 	
+var _continuing: bool = false
+
 func _on_continue_pressed() -> void:
+	# Un seul passage : un second clic (ou un clic qui traverse le dialogue
+	# post-combat) relançait la suite en double.
+	if _continuing:
+		return
+	_continuing = true
+	continue_button.disabled = true
 	GameState.current_phase = GameStat.GamePhase.EXPLORATION
 
 	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
 	if not gm or not gm.current_room_Ressource:
 		push_error("GameManager introuvable ou current_room vide")
 		return
+	# La salle du combat, figée AVANT le dialogue : la suite ne doit pas
+	# dépendre de ce qui a pu changer pendant qu'il s'affichait.
+	var combat_room: RoomResource = gm.current_room_Ressource
+	print("🏁 Victoire dans ", combat_room.room_id, " → suite : ",
+			combat_room.after_combat_room_id if combat_room.after_combat_room_id != "" else "exploration")
 
 	
 	if gm.current_room_Ressource.Post_combat_scene_History != null \
@@ -55,7 +82,7 @@ func _on_continue_pressed() -> void:
 	# Combat du tutoriel : pas d'exploration, on enchaîne sur la porte de la
 	# salle suivante (Hall1). changedoor = true : le « retour » de cette
 	# porte reste la salle d'avant le combat (l'entrée du donjon).
-	var next_id: String = gm.current_room_Ressource.after_combat_room_id
+	var next_id: String = combat_room.after_combat_room_id
 	if next_id != "":
 		var next_room := gm.get_room_by_id(next_id)
 		if next_room:

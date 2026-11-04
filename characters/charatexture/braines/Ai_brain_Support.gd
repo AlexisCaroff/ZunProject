@@ -21,20 +21,15 @@ func decide_action(owner: Character, heroes: Array, enemies: Array) -> Dictionar
 			"target": target
 		}
 
-	# --- 2️⃣ Sinon, cherche une attaque contre les héros
-	var attack_skills: Array = usable_skills.filter(func(s): return s.Actiontype == "attack")
-	if not attack_skills.is_empty():
-		var attack_skill: Skill = attack_skills.pick_random()
-		var possible_targets: Array[Character] = heroes.filter(func(h): return not h.is_dead())
-		var Charatarget: Character = possible_targets.pick_random() if possible_targets.size() > 0 else null
-		var target :Array[PositionSlot]
-		target.append(Charatarget._current_slot)
-		#print("%s (AI Support) attaque %s avec %s" % [owner.name, target.name if target else "personne", attack_skill.descriptionName])
-		
-		return {
-			"skill": attack_skill,
-			"target": target
-		}
+	# --- 2️⃣ Sinon, une autre compétence. La cible suit son the_target_type
+	# (choose_target) : un buff « ALLY » comme Encouragement vise l'équipe
+	# de l'IA, une attaque « ENNEMY » vise les héros, à portée.
+	var other_skills: Array = usable_skills.filter(func(s): return s.Actiontype != "heal" and s.name != "move")
+	other_skills.shuffle()
+	for s in other_skills:
+		var action := choose_target(owner, s)
+		if not action.is_empty():
+			return action
 
 	# --- 3️⃣ Si rien d’autre n’est possible, fallback sur le comportement par défaut
 	print("%s (AI Support) n’a trouvé aucune action utile, fallback sur IA basique." % owner.characterData.Charaname)

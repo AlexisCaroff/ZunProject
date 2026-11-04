@@ -5,14 +5,14 @@
 [ext_resource type="Script" uid="uid://cy3v0dypme7n7" path="res://actions/skillEffects/Move.gd" id="2_clpgp"]
 [ext_resource type="Script" uid="uid://c0arbc0klbc6c" path="res://actions/skillEffects/ChangeSkill.gd" id="2_kovjd"]
 [ext_resource type="Texture2D" uid="uid://c12nmrfesundl" path="res://actions/actiontexture/UI icons/ICON_mystic_mask.png" id="4_lajaf"]
-[ext_resource type="Resource" uid="uid://duo5wcnmn0qo2" path="res://actions/HerosCombatSkills/vampire.tres" id="5_clsbb"]
+[ext_resource type="Resource" uid="uid://b18fn4cpfbvge" path="res://actions/HerosCombatSkills/drain.tres" id="5_clsbb"]
 [ext_resource type="Texture2D" uid="uid://chqvuss7wfueq" path="res://characters/charatexture/demo characters/HERO_mystic_cc_hit.png" id="6_lajaf"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="7_1l2vo"]
 [ext_resource type="Resource" uid="uid://dopuwtv1moav3" path="res://actions/HerosCombatSkills/Shield.tres" id="7_gcx06"]
 [ext_resource type="Texture2D" uid="uid://dsun64yr5mg5l" path="res://characters/charatexture/demo characters/HERO_mystic_cc_down.png" id="7_gxsuh"]
 [ext_resource type="Texture2D" uid="uid://he220dsml4k6" path="res://characters/charatexture/demo characters/HERO_mystic_cc_idle.png" id="8_gsybn"]
 [ext_resource type="Script" uid="uid://cpvgnrd2pjm2j" path="res://Skill.gd" id="9_rttfw"]
-[ext_resource type="Resource" uid="uid://dt03xlsrw1kdf" path="res://actions/HerosCombatSkills/MysticGrab.tres" id="13_lajaf"]
+[ext_resource type="Resource" uid="uid://b0gt00v7dl0u7" path="res://actions/HerosCombatSkills/MysticGrab2.tres" id="13_lajaf"]
 
 [sub_resource type="Resource" id="Resource_clsbb"]
 script = ExtResource("2_clpgp")
@@ -31,7 +31,9 @@ metadata/_custom_type_script = "uid://c0arbc0klbc6c"
 script = ExtResource("9_rttfw")
 name = "ChangeMask2"
 descriptionName = "ChangeMask2"
-description = "Change skills and move character"
+description = "Move to an empty ally position or swap places with an ally, then change mask: your skills become Harden, Drain and Tentacle Grab.
+Target: 1 ally (yourself to stay in place)
+Never misses | Cooldown 5 | Cost 5"
 icon = ExtResource("4_lajaf")
 barkSkill = ""
 required_position = 0

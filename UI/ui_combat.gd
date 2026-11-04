@@ -72,9 +72,279 @@ var bag_toggle: Button = null
 var showing_inventory: bool = false
 ## Boutons carte / sac côte à côte (cf. UI/map_bag_buttons.gd).
 var map_bag_buttons: Dictionary = {}
+var card_hand: CardHand = null
+
+
+# ════════════════════════════════════════════════════════════════════
+#  STATS DU PERSONNAGE ACTIF : même présentation qu'en exploration / porte
+# ════════════════════════════════════════════════════════════════════
+#  CombatInterface.tscn porte cette mise en page dans sa scène (modifiable
+#  dans l'éditeur). Les autres interfaces de combat qui partagent ce script
+#  la reçoivent par code (build_stat_layout) : positions de la porte,
+#  recalées sur le nom du personnage. Portrait, objets et kinks ne bougent pas.
+
+const STAT_HOVER := preload("res://UI/stat_hover.gd")
+const ICON_STAMINA := preload("res://UI/Stamina.png")
+const ICON_LUST := preload("res://UI/lustIcon.png")
+const ICON_GUILT := preload("res://UI/GuiltIcon.png")
+const ICON_ATTACK := preload("res://UI/attack.png")
+const ICON_DEF := preload("res://UI/buffDeff.png")
+const ICON_WILL := preload("res://UI/WillPowerIcon.png")
+const GOLD := Color(0.721569, 0.647059, 0.45098, 1)
+## Repère de la porte : son nom est en (266, 801).
+const DOOR_NAME_POS := Vector2(266, 801)
+
+var buff_row: BuffRow = null
+var _current_for_stats: Character = null
+
+
+func _setup_stat_layout() -> void:
+	var layer := get_node_or_null("CanvasLayer")
+	if layer == null:
+		return
+	# Interface déjà mise en page dans sa scène (CombatInterface.tscn) : on
+	# garde ses réglages tels quels. Les autres sont mises en page ici.
+	if layer.get_node_or_null("StatStaminaIcon") == null:
+		build_stat_layout(layer)
+	_wire_stat_layout(layer)
+	# Le CombatManager a pu masquer la lust (tutoriel) avant que les icônes
+	# créées ici existent : on réapplique.
+	if combat_manager != null and combat_manager.lust_hidden:
+		combat_manager._apply_lust_visibility()
+
+
+## Crée et place icônes, jauges et ligne « Buff: ». Appelée en jeu pour les
+## interfaces pas encore mises en page, et par tools/bake_combat_stats.gd
+## pour écrire cette mise en page dans une scène (n'utilise que get_node :
+## marche sur une scène instanciée hors de l'arbre).
+func build_stat_layout(layer: Node) -> void:
+	var name_lbl := layer.get_node_or_null("Charaname") as Control
+	if name_lbl == null:
+		return
+	var o: Vector2 = name_lbl.position - DOOR_NAME_POS
+
+	# Anciens libellés « Stamina: / Lust: / Guilt: » : remplacés par les icônes.
+	for n in ["Stamina3", "Horny3", "Guilt3"]:
+		var old := layer.get_node_or_null(n) as CanvasItem
+		if old != null:
+			old.visible = false
+
+	# Jauges épaisses, valeur écrite dedans.
+	var bars := [["StaminaProgressBar", 871.0], ["LustProgressBar", 913.0], ["GuiltProgressBar", 955.0]]
+	for b in bars:
+		var bar := layer.get_node_or_null(b[0]) as Control
+		if bar == null:
+			continue
+		bar.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		bar.position = Vector2(336, b[1]) + o
+		bar.size = Vector2(181, 16)
+		bar.scale = Vector2(1.00234, 1.40121)
+		bar.z_index = 7
+	var nums := [["Stamina2", Vector2(339.645, 868)], ["Horny2", Vector2(340.645, 910)],
+			["Guilt2", Vector2(339.645, 952)]]
+	for n in nums:
+		var lbl := layer.get_node_or_null(n[0]) as Control
+		if lbl == null:
+			continue
+		lbl.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		lbl.position = n[1] + o
+		lbl.size = Vector2(121, 55)
+		lbl.scale = Vector2.ONE
+		lbl.z_index = 8
+		if lbl is RichTextLabel:
+			lbl.add_theme_color_override("default_color", Color.WHITE)
+			lbl.add_theme_font_size_override("normal_font_size", 20)
+		elif lbl is Label:
+			lbl.add_theme_color_override("font_color", Color.WHITE)
+			lbl.add_theme_font_size_override("font_size", 20)
+
+	# Icônes des jauges (noms repris par le masquage de la lust du tutoriel).
+	_icon(layer, "StatStaminaIcon", ICON_STAMINA, Vector2(308.285, 884) + o, Vector2.ONE * 0.456722, Color(0.878431, 0.584314, 0.341176))
+	_icon(layer, "StatLustIcon", ICON_LUST, Vector2(307.645, 927) + o, Vector2.ONE * 0.439111, Color(0.933333, 0.109804, 0.72549))
+	_icon(layer, "StatGuiltIcon", ICON_GUILT, Vector2(304.285, 970.39) + o, Vector2(0.617867, 0.525407), Color(0.266667, 0.294118, 0.364706))
+
+	# Ligne Attaque / Défense / Volonté : icônes de même hauteur, alignées,
+	# valeur collée à droite de chacune.
+	var row_y := 1013.0 + o.y
+	var row := [
+		[_icon(layer, "StatAttackIcon", ICON_ATTACK, Vector2(305.645 + o.x, row_y), Vector2.ONE, Color(0.286, 0.576, 0.784)), "AttLabel2"],
+		[_icon(layer, "StatDefIcon", ICON_DEF, Vector2(415.645 + o.x, row_y), Vector2.ONE, Color.WHITE), "DefLabel2"],
+		[_icon(layer, "StatWillIcon", ICON_WILL, Vector2(543.645 + o.x, row_y), Vector2.ONE, Color(0.223, 0.534, 0.749)), "WillPower2"],
+	]
+	for p in row:
+		var icon: Sprite2D = p[0]
+		var k := 36.0 / float(icon.texture.get_height())
+		icon.scale = Vector2(k, k)
+		var lbl := layer.get_node_or_null(p[1]) as RichTextLabel
+		if lbl == null:
+			continue
+		lbl.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		lbl.scale = Vector2.ONE
+		lbl.size = Vector2(120, 40)
+		lbl.add_theme_font_size_override("normal_font_size", 25)
+		lbl.position = Vector2(icon.position.x + icon.texture.get_width() * k * 0.5 + 6.0, row_y - 15.0)
+		lbl.z_index = 8
+
+	# Libellé « Buff: » ; les icônes des buffs sont posées derrière en jeu.
+	var buffs_label := RichTextLabel.new()
+	buffs_label.name = "Buffs"
+	buffs_label.bbcode_enabled = true
+	buffs_label.scroll_active = false
+	buffs_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	buffs_label.text = "Buff: "
+	buffs_label.add_theme_color_override("default_color", GOLD)
+	buffs_label.add_theme_font_override("normal_font", preload("res://UI/Euphorigenic.otf"))
+	buffs_label.add_theme_font_size_override("normal_font_size", 25)
+	buffs_label.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	buffs_label.position = Vector2(291.645, 1036) + o
+	buffs_label.size = Vector2(341, 55)
+	buffs_label.z_index = 7
+	layer.add_child(buffs_label)
+
+
+## Partie dynamique, toujours faite en jeu : icônes des buffs et détail des
+## stats au survol (base + kinks + équipement + buffs de combat).
+func _wire_stat_layout(layer: Node) -> void:
+	var buffs_label := layer.get_node_or_null("Buffs") as Control
+	if buffs_label != null:
+		buff_row = BuffRow.create(layer, BuffRow.position_after(buffs_label), buffs_label, false, 8)
+	var hover = STAT_HOVER.new(layer)
+	for p in [["StatAttackIcon", AttLabel, "attack"], ["StatDefIcon", DefLabel, "defense"],
+			["StatWillIcon", WillPower, "willpower"]]:
+		var icon := layer.get_node_or_null(p[0]) as Sprite2D
+		if icon != null:
+			hover.attach(icon, p[1], _combat_stat_text.bind(p[2]))
+
+
+func _icon(layer: Node, n: String, tex: Texture2D, pos: Vector2, sc: Vector2, col: Color) -> Sprite2D:
+	var s := Sprite2D.new()
+	s.name = n
+	s.texture = tex
+	s.position = pos
+	s.scale = sc
+	s.modulate = col
+	s.z_index = 7
+	layer.add_child(s)
+	return s
+
+
+func _combat_stat_text(stat: String) -> String:
+	if _current_for_stats == null or not is_instance_valid(_current_for_stats):
+		return ""
+	return _current_for_stats.characterData.stat_tooltip(stat, _current_for_stats.buffs)
+
+
+## Lignes « Kinks : … » (cf. UI/kinks_label.gd) : personnage dont c'est le
+## tour (derrière son nom) et personnage survolé (panneau fiche).
+var kinks_current: RichTextLabel = null
+var kinks_hover: RichTextLabel = null
+
+
+## Infobulle des skills : fond sombre, hauteur ajustée au texte, posée
+## au-dessus de la rangée de boutons (cf. action_Button._fit_tip).
+func _setup_action_label() -> void:
+	var tip := labelAction as RichTextLabel
+	if tip == null:
+		return
+	if not tip.has_meta("tip_anchor"):
+		# Cachée tant qu'aucun bouton n'est survolé : avec son fond, une
+		# infobulle vide resterait affichée comme un rectangle sous les skills.
+		tip.visible = false
+		tip.text = ""
+		tip.bbcode_enabled = true
+		tip.scroll_active = false
+		tip.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		tip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		tip.size.x = 660
+		var style := STAT_HOVER.bubble_style()
+		style.set_content_margin_all(14)
+		tip.add_theme_stylebox_override("normal", style)
+	# Recalculé à chaque tour : la rangée peut avoir bougé.
+	var row: Rect2 = (skill_buttons[0] as Control).get_parent().get_global_rect()
+	tip.set_meta("tip_anchor", Vector2(row.get_center().x, row.position.y - 18))
+
+
+const PASS_TIP := "End Turn"
+var _pass_tip: Label = null
+
+## Infobulle du bouton de fin de tour : petite bulle noire (même style que
+## les autres survols), centrée au-dessus du bouton.
+func _on_pass_button_mouse_entered() -> void:
+	if _pass_tip == null:
+		_pass_tip = Label.new()
+		_pass_tip.text = PASS_TIP
+		_pass_tip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_pass_tip.z_as_relative = false
+		_pass_tip.z_index = 50
+		_pass_tip.add_theme_font_override("font", STAT_HOVER.FONT)
+		_pass_tip.add_theme_font_size_override("font_size", 24)
+		_pass_tip.add_theme_color_override("font_color", Color("#f2d38a"))
+		var style := STAT_HOVER.bubble_style()
+		style.content_margin_left = 14
+		style.content_margin_right = 14
+		style.content_margin_top = 6
+		style.content_margin_bottom = 6
+		_pass_tip.add_theme_stylebox_override("normal", style)
+		passButton.get_parent().add_child(_pass_tip)
+	_pass_tip.size = Vector2.ZERO
+	_pass_tip.size = _pass_tip.get_minimum_size()
+	var btn := passButton.get_global_rect()
+	_pass_tip.global_position = Vector2(btn.get_center().x - _pass_tip.size.x * 0.5,
+			btn.position.y - 12 - _pass_tip.size.y)
+	_pass_tip.visible = true
+
+
+const PASS_OUTLINE_SHADER := preload("res://characters/character_outline.gdshader")
+const PASS_HOVER_SCALE := 1.15
+const PASS_PRESS_SCALE := 0.88
+
+## Bouton de fin de tour : grossit au survol, contour blanc + rapetisse
+## pendant le clic (même contour que les skills sélectionnés).
+func _setup_pass_button_feedback() -> void:
+	var icon := passButton.get_node_or_null("UiClose") as CanvasItem
+	if icon != null:
+		var mat := ShaderMaterial.new()
+		mat.shader = PASS_OUTLINE_SHADER
+		mat.set_shader_parameter("enabled", false)
+		mat.set_shader_parameter("outline_color", Color.WHITE)
+		mat.set_shader_parameter("outline_width", 8.0)
+		mat.set_shader_parameter("outline_direction", Vector2.ZERO)
+		icon.material = mat
+	passButton.pivot_offset = passButton.size * 0.5
+	passButton.mouse_entered.connect(func(): _tween_pass_scale(PASS_HOVER_SCALE))
+	passButton.mouse_exited.connect(func():
+		_set_pass_outline(false)
+		_tween_pass_scale(1.0))
+	passButton.button_down.connect(func():
+		_set_pass_outline(true)
+		_tween_pass_scale(PASS_PRESS_SCALE, 0.08))
+	passButton.button_up.connect(func():
+		_set_pass_outline(false)
+		_tween_pass_scale(PASS_HOVER_SCALE if passButton.is_hovered() else 1.0))
+
+
+func _tween_pass_scale(factor: float, duration: float = 0.15) -> void:
+	passButton.create_tween().tween_property(passButton, "scale", Vector2.ONE * factor, duration) 			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+
+func _set_pass_outline(on: bool) -> void:
+	var icon := passButton.get_node_or_null("UiClose") as CanvasItem
+	if icon != null and icon.material is ShaderMaterial:
+		(icon.material as ShaderMaterial).set_shader_parameter("enabled", on)
+
+
+func _on_pass_button_mouse_exited() -> void:
+	if _pass_tip != null:
+		_pass_tip.visible = false
 
 
 func _ready():
+	_setup_stat_layout()
+	_setup_action_label()
+	kinks_current = KinksLabel.after_name(Charaname_panel)
+	var overmenu := get_node_or_null("CanvasLayer/overmenu")
+	if overmenu != null:
+		kinks_hover = KinksLabel.at(overmenu, Vector2(117, 158))
 	var current_character = combat_manager.get_current_character()
 	var gm: GameManager = get_tree().root.get_node("GameManager") as GameManager
 	await get_tree().process_frame
@@ -86,6 +356,9 @@ func _ready():
 
 	_setup_bag(gm)
 	charaPortraitButton.connect("button_down", showMenuPerso)
+	passButton.mouse_entered.connect(_on_pass_button_mouse_entered)
+	passButton.mouse_exited.connect(_on_pass_button_mouse_exited)
+	_setup_pass_button_feedback()
 	#MenuPerso.inventory_items = gm.inventory
 	#MenuPerso.update_inventory_ui()
 	log_panel.visible = false
@@ -137,6 +410,7 @@ func update_ui_for_current_character(character: Character):
 	update_equipment_icons(character)
 
 	Charaname_panel.text = character.characterData.Name
+	KinksLabel.show_for(kinks_current, character.characterData)
 	charaPortrait.texture = character.characterData.explorationPortrait
 
 	# Clear anciens signaux
@@ -144,13 +418,14 @@ func update_ui_for_current_character(character: Character):
 		for conn in button.pressed.get_connections():
 			button.pressed.disconnect(conn["callable"])
 
+	_setup_action_label()
 	for i in range(skill_buttons.size()):
 		var button = skill_buttons[i]
 		var skill = character.get_skill(i)
 		button.label =labelAction
 
 		if skill != null:
-			button.Actiontext = skill.descriptionName + "\n" + skill.description
+			button.Actiontext = skill.tooltip_bbcode()
 			button.disabled = !skill.can_use()
 			button.icon = skill.icon
 			var mat := ShaderMaterial.new()
@@ -176,12 +451,14 @@ func update_ui_for_current_character(character: Character):
 	DefLabel.bbcode_enabled = true
 	WillPower.bbcode_enabled = true
 	
-	AttLabel.text = "Attack: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
-		chara.attack, chara.base_attack, (chara.attack - chara.base_attack)]
-	DefLabel.text = "Defense: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
-		chara.defense, chara.base_defense, (chara.defense - chara.base_defense)]
-	WillPower.text = "Willpower: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
-		chara.willpower, chara.base_willpower, (chara.willpower - chara.base_willpower)]
+	# Présentation exploration / porte : l'icône dit la stat, le libellé ne
+	# porte que la valeur (déjà calculée par Character.update_stats).
+	_current_for_stats = character
+	AttLabel.text = " %d" % chara.attack
+	DefLabel.text = " %d" % chara.defense
+	WillPower.text = " %d" % chara.willpower
+	if buff_row != null:
+		buff_row.show_for(character.buffs)
 	
 	StaminaNumber.text = "%d / %d" % [
 		character.characterData.current_stamina,
@@ -250,6 +527,7 @@ func update_cooldown_bar(container: HBoxContainer, skill):
 func update_ui_for_overed_character(character: Character):
 
 	Charaname2.text = character.characterData.Name
+	KinksLabel.show_for(kinks_hover, character.characterData)
 	charaPortrait2.texture = character.characterData.explorationPortrait
 
 	for button in skills2:
@@ -261,7 +539,7 @@ func update_ui_for_overed_character(character: Character):
 		var skill = character.get_skill(i)
 
 		if skill != null:
-			button.Actiontext = skill.descriptionName + "\n" + skill.description
+			button.Actiontext = skill.tooltip_bbcode()
 			button.icon = skill.icon
 		else:
 			button.text = "—"
@@ -402,6 +680,22 @@ func _setup_bag(gm: GameManager) -> void:
 		chara_info.button_down.connect(func():
 			showing_inventory = false
 			_apply_map_inventory_view())
+
+	# Cartes d'affinité : consultables en combat, jouables seulement au camp.
+	var cards_area: Control = inventory_panel if inventory_panel != null 			else get_node_or_null("CanvasLayer/SubViewportContainer") as Control
+	card_hand = CardHand.install_hud(layer,
+			[map_bag_buttons.map, map_bag_buttons.bag, map_bag_buttons.get("chara")], cards_area)
+	map_bag_buttons.map.pressed.connect(card_hand.close)
+	map_bag_buttons.bag.pressed.connect(card_hand.close)
+	if map_bag_buttons.get("chara") != null:
+		map_bag_buttons.chara.button_down.connect(card_hand.close)
+	# Carte, sac et cartes : même rectangle (celui du sac), même cadre. Le
+	# cadre de la scène (ContourMap) devient transparent, ses boutons restent.
+	HudFrame.install(layer, bag_rect,
+			get_node_or_null("CanvasLayer/SubViewportContainer") as Control,
+			get_node_or_null("CanvasLayer/ContourMap") as CanvasItem, inventory_panel,
+			[map_bag_buttons.map, map_bag_buttons.bag, map_bag_buttons.get("chara"),
+			card_hand.toggle_button])
 
 	# Un objet ramassé pendant que le sac est ouvert doit s'y afficher.
 	if gm != null and not gm.inventory_changed.is_connected(_on_bag_inventory_changed):

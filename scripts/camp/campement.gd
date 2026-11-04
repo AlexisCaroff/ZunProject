@@ -15,6 +15,8 @@ class_name Campement
 @onready var horny = $Horny2
 @onready var hornyBar: ProgressBar = $LustProgressBar
 @onready var CharacterName = $Charaname
+## « Kinks : … » derrière le nom (cf. UI/kinks_label.gd).
+var kinks_line: RichTextLabel = null
 ## Décalage des icônes de buff posées derrière le libellé « Buff: ».
 @export var buffs_icons_nudge: Vector2 = Vector2.ZERO
 var buff_row: BuffRow = null
@@ -34,6 +36,13 @@ var DoorNumber:int =0
 var gm : GameManager
 var skillused : CampSkill =null
 var campPoints: int = 10
+## Stamina rendue à chaque héros en quittant le camp, si des points de camp
+## ont été dépensés.
+@export var exit_stamina_gain: int = 10
+## Temps laissé au gain de stamina pour s'afficher avant la sortie (s).
+@export var exit_feedback_delay: float = 1.2
+var _start_camp_points: int = 10
+var _leaving := false
 var campPointLabel 
 @export var codeActionButton = "res://scripts/camp/campActionButton.gd"
 var skillcampmode : bool = true
@@ -64,13 +73,9 @@ func _ready():
 				buffs_anchor, false, 20)
 	selected_chara = characters[0]
 	(selected_chara.sprite.material as ShaderMaterial).set_shader_parameter("enabled", true)
-# -------Heal chara----------------
-
-	for chara in characters:
-		chara.characterData.current_stamina = min(chara.characterData.max_stamina, chara.characterData.current_stamina + 10)
-		chara.animate_heal(10, chara)
-		chara.update_display()
-#--------------------------------------
+	# Plus de soin à l'arrivée : la stamina se regagne en quittant le camp,
+	# et seulement si des points de camp ont été dépensés (cf. _leave_camp).
+	_start_camp_points = campPoints
 	
 	if donjon_map:
 		donjon_map.focus_on_room(gm.current_room_Ressource,viewport)
@@ -80,11 +85,10 @@ func _ready():
 	campPointLabel = $Box2/CampPoint
 	campPointLabel.text= str(campPoints)
 	
-	mapButton.connect("button_down",toggleshowMap)
-	QuitmapButton.connect("button_down",toggleshowMap)
 	MenuPersoButton.connect("button_down",showMenuPerso)
 	if MenuPerso.has_signal("change_in_equipment"):
 		MenuPerso.change_in_equipment.connect(_on_character_equipment_changed)
+	_setup_bottom_hud()
 	if gm.tutorial_once("camp_first"):
 		_first_camp_intro()
 
@@ -138,6 +142,247 @@ func changeSelectedCharacter(occupant:CharaCamp):
 	show_chara_actions(occupant)
 	updateUICharacter(occupant.characterData)
 	occupant.animate_selected()
+	if card_hand != null:
+		card_hand.refresh_state()
+
+
+# ════════════════════════════════════════════════════════════════════
+#  CARTES D'AFFINITÉ (UI/cards/card_hand.gd)
+# ════════════════════════════════════════════════════════════════════
+#  Le personnage sélectionné joue la carte : on la glisse sur la cible.
+
+# ════════════════════════════════════════════════════════════════════
+#  COIN BAS-DROIT : même présentation qu'en exploration
+# ════════════════════════════════════════════════════════════════════
+#  Petite carte, sac d'équipe et cartes d'affinité se partagent la zone ;
+#  boutons carte / sac / fiche personnage / cartes alignés au-dessus.
+#  Construit en code (positions de l'exploration) : l'ancienne grande carte
+#  plein écran et son bouton de fermeture ne servent plus.
+
+const HUD_RECT := Rect2(1223, 776, 679, 292)
+const BAG_ICON := preload("res://UI/UI inventory/UI_inventory_button_bag.png")
+const MAP_ICON := preload("res://UI/UI boxes/UI_button_map_on.png")
+const ITEM_BOX := preload("res://UI/UI boxes/UI_combat_itembox.png")
+const MENU_ICON := preload("res://UI/UI boxes/charaIcon.png")
+
+var card_hand: CardHand = null
+var inventory_panel: DoorInventory = null
+var map_bag_buttons: Dictionary = {}
+## Vue affichée dans le coin : "map", "bag" ou "cards".
+var hud_view := "cards"
+
+
+func _setup_bottom_hud() -> void:
+	# ── Petite carte (comme l'exploration) ──
+	# Même placement de départ que l'exploration ; HudFrame la recale
+	# ensuite sur le rectangle commun (carte, sac, cartes).
+	var map_box := $SubViewportContainer as Control
+	viewport.size = Vector2i(690, 271)
+	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	if donjon_map:
+		donjon_map.position = Vector2(218, 140)
+		donjon_map.scale = Vector2(0.4, 0.4)
+	mapButton.visible = false
+	QuitmapButton.visible = false
+
+	# ── Boutons carte / sac (même bouton que l'exploration, dédoublé) ──
+	var toggle := Button.new()
+	toggle.name = "ToggleMapInventory"
+	toggle.flat = true
+	toggle.focus_mode = Control.FOCUS_NONE
+	toggle.offset_left = 1790
+	toggle.offset_top = 719
+	toggle.offset_right = 1894
+	toggle.offset_bottom = 823
+	toggle.z_as_relative = false
+	toggle.z_index = 10
+	var icon := Sprite2D.new()
+	icon.name = "IconBag"
+	icon.position = Vector2(52, 52)
+	icon.scale = Vector2(0.35, 0.35)
+	icon.texture = BAG_ICON
+	var box := Sprite2D.new()
+	box.texture = ITEM_BOX
+	box.show_behind_parent = true
+	box.position = Vector2(1.99515, 4.85217)
+	box.scale = Vector2(2.21487, 2.26929)
+	icon.add_child(box)
+	toggle.add_child(icon)
+	add_child(toggle)
+	map_bag_buttons = MapBagButtons.split(toggle, MAP_ICON, BAG_ICON, 88.0)
+	map_bag_buttons.map.pressed.connect(_show_hud.bind("map"))
+	map_bag_buttons.bag.pressed.connect(_show_hud.bind("bag"))
+
+	# ── Sac d'équipe ──
+	inventory_panel = DoorInventory.create_panel(HUD_RECT)
+	inventory_panel.columns = 7
+	inventory_panel.cell_size = Vector2(72, 72)
+	inventory_panel.cell_separation = 4
+	inventory_panel.visible = false
+	add_child(inventory_panel)
+	inventory_panel.set_target_provider(func():
+		return selected_chara.characterData if selected_chara != null else null)
+	inventory_panel.potion_used.connect(func(_p, _t): _refresh_after_bag())
+	inventory_panel.item_equipped.connect(func(_i, _t): _refresh_after_bag())
+	if not gm.inventory_changed.is_connected(_on_bag_changed):
+		gm.inventory_changed.connect(_on_bag_changed)
+
+	# ── Fiche personnages, à gauche du sac (comme à la porte) ──
+	var bag := map_bag_buttons.bag as Control
+	var menu_btn := Button.new()
+	menu_btn.name = "ButtonMenuPerso"
+	menu_btn.flat = true
+	menu_btn.focus_mode = Control.FOCUS_NONE
+	menu_btn.tooltip_text = "Characters"
+	menu_btn.offset_left = toggle.offset_left - 176.0
+	menu_btn.offset_top = toggle.offset_top
+	menu_btn.offset_right = toggle.offset_right - 176.0
+	menu_btn.offset_bottom = toggle.offset_bottom
+	menu_btn.z_as_relative = false
+	menu_btn.z_index = 10
+	var micon := Sprite2D.new()
+	micon.texture = MENU_ICON
+	micon.position = Vector2(52, 52)
+	micon.scale = Vector2.ONE * (56.0 / float(MENU_ICON.get_width()))
+	menu_btn.add_child(micon)
+	MapBagButtons.ensure_box(menu_btn)
+	MapBagButtons.add_hover(menu_btn)
+	menu_btn.pressed.connect(showMenuPerso)
+	add_child(menu_btn)
+	var old_menu := get_node_or_null("charaPortrait2") as CanvasItem
+	if old_menu != null:
+		old_menu.visible = false
+
+	# ── Cartes d'affinité : ouvertes par défaut, c'est ici qu'elles se jouent ──
+	card_hand = CardHand.install_hud(self, [map_bag_buttons.map, bag, menu_btn],
+			inventory_panel, true)
+	card_hand.visible = true
+	HudFrame.install(self, HUD_RECT, map_box, contourMap, inventory_panel,
+			[map_bag_buttons.map, bag, menu_btn, card_hand.toggle_button])
+	card_hand.refusal = card_refusal
+	card_hand.card_dropped.connect(_on_card_dropped)
+	card_hand.opened_changed.connect(func(open: bool):
+		if open:
+			_show_hud("cards")
+		elif hud_view == "cards":
+			_show_hud("map"))
+	_show_hud("cards")
+
+
+func _show_hud(view: String) -> void:
+	hud_view = view
+	var map_box := $SubViewportContainer as CanvasItem
+	map_box.visible = view == "map"
+	contourMap.visible = view == "map"
+	if inventory_panel != null:
+		inventory_panel.visible = view == "bag"
+		if view == "bag":
+			inventory_panel.refresh(gm.inventory)
+	if view != "cards" and card_hand != null:
+		card_hand.close()
+	if not map_bag_buttons.is_empty():
+		map_bag_buttons.map.modulate = MapBagButtons.ACTIVE if view == "map" else MapBagButtons.INACTIVE
+		map_bag_buttons.bag.modulate = MapBagButtons.ACTIVE if view == "bag" else MapBagButtons.INACTIVE
+
+
+func _on_bag_changed(_item = null) -> void:
+	if hud_view == "bag" and inventory_panel != null:
+		inventory_panel.refresh(gm.inventory)
+
+
+## Potion bue ou objet équipé depuis le sac : jauges et fiche à jour.
+func _refresh_after_bag() -> void:
+	for c in characters:
+		if c is CharaCamp:
+			c.update_display()
+	if selected_chara != null:
+		updateUICharacter(selected_chara.characterData)
+		update_equipment_icons(selected_chara.characterData)
+
+
+## Pourquoi `user` ne peut pas jouer `card` maintenant ("" = possible).
+func card_refusal(card: AffinityCard, user: CharaCamp = null) -> String:
+	if user == null:
+		user = selected_chara
+	if user == null:
+		return "Select a character first."
+	if not card.can_be_played_by(user.characterData):
+		return "Only the %s can play this card." % card.user_name
+	if card.cost > campPoints:
+		return "Not enough camp points."
+	return ""
+
+
+func _on_card_dropped(card: AffinityCard) -> void:
+	var target := _chara_under_mouse()
+	if target == null:
+		return   # lâchée dans le vide : rien ne se passe
+	play_card(card, target)
+
+
+func _chara_under_mouse() -> CharaCamp:
+	for c in characters:
+		if not (c is CharaCamp) or not is_instance_valid(c):
+			continue
+		var spr = c.sprite
+		if spr is Control:
+			if (spr as Control).get_global_rect().has_point(spr.get_global_mouse_position()):
+				return c
+		elif spr is Sprite2D:
+			if (spr as Sprite2D).get_rect().has_point(spr.get_local_mouse_position()):
+				return c
+	return null
+
+
+## Joue `card` : le personnage sélectionné en est l'auteur, `target` est le
+## personnage sur lequel la carte a été déposée.
+func play_card(card: AffinityCard, target: CharaCamp) -> void:
+	var user := selected_chara
+	var why := card_refusal(card, user)
+	if why != "":
+		if user != null:
+			user.say(why)
+		return
+	var targets: Array[CharaCamp] = []
+	match card.target:
+		AffinityCard.Target.SELF:
+			targets = [user]
+		AffinityCard.Target.OTHER_ALLY:
+			if target == user:
+				user.say("I should play this on someone else.")
+				return
+			targets = [target]
+		AffinityCard.Target.ANY_ALLY:
+			targets = [target]
+		_:
+			for c in characters:
+				if c is CharaCamp:
+					targets.append(c)
+
+	# Comme une capacité de camp : on sort les occupants de la tente.
+	if not TheTente.twoInside.is_empty():
+		TheTente.loved_one_go_out()
+	if TheTente.somoneInside != null:
+		TheTente.masturbin_go_out()
+
+	mark_camp_used()
+	campPoints -= card.cost
+	campPointLabel.text = str(campPoints)
+	gm.remove_card(card)
+	user.animate_selected()
+	for effect in card.effects:
+		if effect == null:
+			continue
+		for t in targets:
+			effect.apply(user, t)
+	for c in characters:
+		if c is CharaCamp:
+			c.update_display()
+	updateUICharacter(selected_chara.characterData)
+	refresh_buffs(selected_chara.characterData)
+	if MenuPerso.selected_character != null:
+		MenuPerso.select_character(MenuPerso.selected_character)
+	card_hand.refresh_state()
 	
 ## Redessine la ligne des buffs ; appelé aussi par CharaCamp.add_buff quand
 ## une action de camp en ajoute un au personnage affiché.
@@ -173,8 +418,12 @@ func select_character(chara: CharacterData) -> void:
 func updateUICharacter(character:CharacterData):
 	portraitCharaselect.texture = character.explorationPortrait
 	CharacterName.text = character.Name
+	if kinks_line == null:
+		kinks_line = KinksLabel.after_name(CharacterName)
+	KinksLabel.show_for(kinks_line, character)
 	# Même présentation qu'en exploration : l'icône dit la stat, le libellé
 	# ne porte que la valeur.
+	character.recompute_stats()
 	AttLabel.text = " %d" % character.attack
 	DefLabel.text = " %d" % character.defense
 	WillPowerLabel.text = " %d" % character.willpower
@@ -225,6 +474,14 @@ func updateUICharacter(character:CharacterData):
 	selected_chara.update_display()
 	MenuPerso.select_character(MenuPerso.selected_character)
 	
+## Le campement de la salle n'est consommé qu'ici, à la première capacité
+## utilisée : on peut entrer puis ressortir gratuitement tant qu'on n'a rien
+## fait (mauvais clic sur le feu de camp).
+func mark_camp_used() -> void:
+	if gm != null and gm.current_room_Ressource != null:
+		gm.current_room_Ressource.CampDone = true
+
+
 func After_camp_skill(skill: CampSkill):
 	campPoints -= skill.cost
 	
@@ -312,6 +569,48 @@ func _skill_is_romantic(skill: CampSkill) -> bool:
 	return false
 
 
+## Affinité minimale (du lanceur envers la cible) pour une action d'amour.
+## 0 = aucune condition d'affinité, seule l'attirance compte.
+@export var love_min_affinity: int = 0
+
+
+## Raison pour laquelle `target` refuse une action d'amour de `user`, dite
+## par `target` ; "" si rien ne s'y oppose.
+func love_refusal(user: CharaCamp, target: CharaCamp) -> String:
+	var u: CharacterData = user.characterData
+	var t: CharacterData = target.characterData
+	if not t.is_attracted_to(u):
+		return "Sorry, I'm not into %s." % _kind_plural(u)
+	if not u.is_attracted_to(t):
+		return "%s isn't into %s like me." % [u.Name, _kind_plural(t)]
+	if love_min_affinity > 0 and int(u.affinity.get(t.Charaname, 0)) < love_min_affinity:
+		return "We're not close enough yet."
+	return ""
+
+
+func _kind_plural(c: CharacterData) -> String:
+	match c.presentation:
+		CharacterData.Presentation.FEMININE:
+			return "women"
+		CharacterData.Presentation.MASCULINE:
+			return "men"
+	return "people like you"
+
+
+## Clic sur un personnage que l'action d'amour en cours ne peut pas viser :
+## il explique pourquoi dans une bulle (cf. CampPosition).
+func show_love_refusal(target: CharaCamp) -> bool:
+	# exitButton visible = on est bien en train de choisir une cible.
+	if skillused == null or not exitButton.visible or not _skill_is_romantic(skillused) \
+			or selected_chara == null or target == selected_chara:
+		return false
+	var reason := love_refusal(selected_chara, target)
+	if reason == "":
+		return false
+	target.say(reason)
+	return true
+
+
 func _on_camp_skill_pressed(skill: CampSkill, user: CharaCamp) -> void:
 	# Exemple d'utilisation simple selon le target_type
 	
@@ -334,7 +633,7 @@ func _on_camp_skill_pressed(skill: CampSkill, user: CharaCamp) -> void:
 			var romantic := _skill_is_romantic(skill)
 			for c in characters:
 				if c is CharaCamp and c != user:
-					if romantic and not user.characterData.is_compatible_with(c.characterData):
+					if romantic and love_refusal(user, c) != "":
 						continue
 					c.set_targetable(true)
 
@@ -386,7 +685,27 @@ func _on_exit_button_button_down() -> void:
 	exitButton.visible = false
 
 func _on_button_button_down() -> void:
+	_leave_camp()
 
+
+## Sortie du camp. Si des points de camp ont été dépensés, chaque héros
+## regagne de la stamina et on laisse le temps de voir le gain avant de
+## partir ; sinon la sortie est immédiate (et gratuite, cf. mark_camp_used).
+func _leave_camp() -> void:
+	if _leaving:
+		return
+	_leaving = true
+	if campPoints < _start_camp_points and exit_stamina_gain > 0:
+		for chara in characters:
+			if not (chara is CharaCamp):
+				continue
+			var cd: CharacterData = chara.characterData
+			cd.current_stamina = min(cd.max_stamina, cd.current_stamina + exit_stamina_gain)
+			chara.animate_heal(exit_stamina_gain, chara)
+			chara.update_display()
+		if selected_chara != null:
+			updateUICharacter(selected_chara.characterData)
+		await get_tree().create_timer(exit_feedback_delay).timeout
 	gm.return_to_exploration()
 func toggleshowMap():
 	var subviewport=$SubViewportContainer

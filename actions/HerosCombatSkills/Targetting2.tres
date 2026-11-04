@@ -12,9 +12,10 @@
 script = ExtResource("2_buff")
 name = "Target"
 uitexture = ExtResource("5_targeticon")
-affected_stat = 2
+affected_stat = 5
 amount = 2
 duration = 2
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [sub_resource type="Resource" id="Resource_target_defdown"]
@@ -24,6 +25,7 @@ uitexture = ExtResource("6_defficon")
 affected_stat = 1
 amount = -5
 duration = 3
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [sub_resource type="Resource" id="Resource_target_selfbuff"]
@@ -32,13 +34,16 @@ name = "buff Attack"
 affected_stat = 0
 amount = 5
 duration = 3
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [resource]
 script = ExtResource("1_skill")
 name = "targeting"
 descriptionName = "Weak Point"
-description = "Marks an enemy for 2 turns: skills used against them have reduced cooldowns"
+description = "Marks an enemy for 2 turns: a skill that damages it gets its cooldown reduced by 2. Also DEF debuff -1 step.
+Target: 1 enemy (any row)
+Accuracy 100% | Cooldown 2 | Cost 10"
 icon = ExtResource("3_icon")
 barkSkill = ""
 required_position = 0

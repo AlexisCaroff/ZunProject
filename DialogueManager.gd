@@ -84,7 +84,7 @@ func _ready():
 
 	if is_Choice:
 		if choix == null:
-			var choix_scene: PackedScene = preload("res://UI/Choix.tscn")
+			var choix_scene: PackedScene = preload("res://UI/choix.tscn")
 			choix = choix_scene.instantiate()
 			add_child(choix)
 			choix.Choice1.pressed.connect(_on_Choice1_button_down)

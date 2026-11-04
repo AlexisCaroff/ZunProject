@@ -13,7 +13,7 @@
 script = ExtResource("2_1rja0")
 name = "Target"
 uitexture = ExtResource("3_1rja0")
-affected_stat = 2
+affected_stat = 5
 amount = 2
 duration = 2
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
@@ -39,7 +39,9 @@ metadata/_custom_type_script = "uid://c3dw018knk8mk"
 script = ExtResource("4_p8nbi")
 name = "targeting"
 descriptionName = "Weak Point"
-description = "Marks an enemy for 2 turns: skills used against them have reduced cooldowns"
+description = "Marks an enemy for 2 turns: a skill that damages it gets its cooldown reduced by 2. Also DEF debuff -1 step.
+Target: 1 enemy (any row)
+Accuracy 100% | Cooldown 2 | Cost 10"
 icon = ExtResource("6_26ge4")
 barkSkill = ""
 required_position = 0

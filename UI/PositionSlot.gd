@@ -40,9 +40,16 @@ func Set_CharaUI():
 	CharaUI = $"charaCombatUI"
 
 func assign_character(character: Character, movetime:float):
+	# Lu AVANT l'attente : move_character_to réécrit _current_slot tout de suite.
+	var old_slot: PositionSlot = character._current_slot
 	await get_tree().process_frame
+	if not is_instance_valid(character):
+		return
 	shadow.modulate.a =0.349
 	occupant = character
+	# L'ancienne position ne doit plus afficher la barre de ce personnage.
+	if old_slot != null and old_slot != self and is_instance_valid(old_slot) 			and old_slot.occupant == character:
+		old_slot.release()
 	occupant.CharaScale = position_data.scale
 	if CharaUI == null :
 		CharaUI = $"charaCombatUI"
@@ -74,6 +81,8 @@ func assign_character(character: Character, movetime:float):
 	tween.parallel().tween_property(character, "global_position", self.global_position, movetime).set_delay(0.2)
 	tween.parallel().tween_property(character, "scale", position_data.scale, movetime).set_delay(0.2)
 	await tween.finished
+	if not is_instance_valid(character):
+		return
 	if character != null:
 		character.CharaScale= position_data.scale
 		character.global_position=self.global_position
@@ -81,9 +90,37 @@ func assign_character(character: Character, movetime:float):
 
 	if position_data.buff:
 		position_data.buff.apply(character, character)
-	CharaUI.visible=true
+	# Pendant le trajet, le personnage a pu repartir ailleurs ou mourir.
+	if occupant == character and not character.dead:
+		CharaUI.visible=true
 
 	shadow.modulate.a =0.3
+
+## Libère la position sans toucher au personnage (il est déjà ailleurs).
+func release() -> void:
+	occupant = null
+	if CharaUI != null:
+		CharaUI.visible = false
+	shadow.modulate.a = 0.1
+
+
+## Filet de sécurité : une position n'affiche une barre de vie que si elle
+## est réellement occupée par un personnage vivant qui s'y trouve encore.
+func _hide_stale_ui() -> void:
+	if CharaUI == null or not CharaUI.visible:
+		return
+	if occupant != null and not is_instance_valid(occupant):
+		occupant = null
+	if occupant == null:
+		CharaUI.visible = false
+		return
+	if occupant.dead:
+		release()
+		return
+	# Mommy occupe deux positions : seule la première est son _current_slot.
+	if occupant._current_slot != self and not combat_manager._is_anchored(occupant):
+		release()
+
 
 func remove_character():
 	if occupant:
@@ -93,7 +130,56 @@ func remove_character():
 	shadow.modulate.a =0.1
 
 
+## Vrai si la capacité contient un déplacement (Move) : elle peut alors
+## viser une position alliée vide, pas seulement échanger avec un allié.
+static func skill_moves(skill: Skill) -> bool:
+	if skill == null:
+		return false
+	for e in skill.effects:
+		if e is Move:
+			return true
+	return false
+
+
+## Position alliée vide que le héros actif peut rejoindre avec Move.
+func is_empty_move_target() -> bool:
+	if occupant != null or combat_manager == null or not is_instance_valid(combat_manager):
+		return false
+	if combat_manager.combat_state != combat_manager.CombatState.SELECTING_FIRST_TARGET:
+		return false
+	var skill: Skill = combat_manager.pending_skill
+	if not skill_moves(skill) or not skill.can_use():
+		return false
+	if not combat_manager.hero_positions.has(self):
+		return false
+	var cur: Character = combat_manager.current_character
+	if cur == null or not cur.characterData.is_player_controlled or cur.is_dead():
+		return false
+	if cur.characterData.get("immobilized") == true:
+		return false
+	return not combat_manager.is_animation_playing()
+
+
+# Surbrillance de l'ombre des positions vides atteignables.
+var _move_hint := false
+var _hovered := false
+
+func _process(_delta: float) -> void:
+	if combat_manager == null or not is_instance_valid(combat_manager):
+		return
+	_hide_stale_ui()
+	var hint := is_empty_move_target()
+	if hint:
+		shadow.modulate = Color(1.0, 0.85, 0.4, 0.85 if _hovered else 0.45)
+	elif _move_hint and occupant == null:
+		shadow.modulate = Color(1, 1, 1, 0.1)
+	_move_hint = hint
+
+
 func _on_button_button_down() -> void:
+	if is_empty_move_target():
+		combat_manager._on_target_selected(selfposition)
+		return
 	if occupant and occupant.is_targetable:
 		print("clic")
 		var skill = combat_manager.pending_skill
@@ -188,6 +274,7 @@ func _on_button_button_down() -> void:
 						combat_manager._on_target_selected(selfposition)
 
 func _on_button_mouse_entered() -> void:
+	_hovered = true
 	if occupant == null:
 		return
 	combat_manager.ui.update_ui_for_overed_character(occupant)
@@ -244,14 +331,44 @@ func _on_button_mouse_entered() -> void:
 							occupant.Higlight()
 	else :
 		occupant.Higlight()
+	_show_skill_preview()
 
+
+## Aperçu de la capacité en cours de ciblage au-dessus des cibles qu'un clic
+## ici toucherait (toutes pour une capacité de zone, cf. _on_button_button_down).
+func _show_skill_preview() -> void:
+	if not occupant.is_targetable or combat_manager.pending_skill == null:
+		return
+	var skill: Skill = combat_manager.pending_skill
+	var group := -1
+	match combat_manager.combat_state:
+		combat_manager.CombatState.SELECTING_FIRST_TARGET:
+			group = skill.the_target_type
+		combat_manager.CombatState.SELECTING_SECOND_TARGET:
+			group = skill.the_second_target_type
+		_:
+			return
+	var slots: Array = [self]
+	match group:
+		Skill.target_type.ALL_ALLY:
+			slots = combat_manager.hero_positions
+		Skill.target_type.ALL_ENNEMY:
+			slots = combat_manager.enemy_positions
+		Skill.target_type.EVERYONE_ALL:
+			slots = combat_manager.hero_positions + combat_manager.enemy_positions
+	var targets: Array = []
+	for slot in slots:
+		if slot != null and slot.occupant != null:
+			targets.append(slot.occupant)
+	SkillPreview.show_for(combat_manager, targets)
 
 
 func _on_button_mouse_exited() -> void:
-
+	_hovered = false
 	if occupant == null:
 		return
 
+	SkillPreview.clear(combat_manager)
 	occupant.resetHighlight()
 	if combat_manager.pending_skill:
 		var skill = combat_manager.pending_skill

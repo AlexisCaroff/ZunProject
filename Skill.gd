@@ -320,7 +320,7 @@ func select_targets(combat_manager:CombatManager):
 		target_type.ENNEMY:
 			var caster_is_front: bool = owner._current_slot.position_data.isFront
 			for enemy in combat_manager.enemies:
-				var enemy_is_front: bool = enemy._current_slot.position_data.isFront
+				var enemy_is_front: bool = combat_manager.reaches_as_front(enemy)
 				var reachable: bool = _can_reach_enemy(caster_is_front, enemy_is_front)
 				if reachable:
 					enemy.set_targetable(true)
@@ -341,7 +341,7 @@ func select_targets(combat_manager:CombatManager):
 		target_type.ALL_ENNEMY:
 			var caster_is_front: bool = owner._current_slot.position_data.isFront
 			for enemy in combat_manager.enemies:
-				var enemy_is_front: bool = enemy._current_slot.position_data.isFront
+				var enemy_is_front: bool = combat_manager.reaches_as_front(enemy)
 				enemy.set_targetable(_can_reach_enemy(caster_is_front, enemy_is_front))
 			for ally in combat_manager.heroes:
 				ally.set_targetable(false)
@@ -371,7 +371,7 @@ func select_targets(combat_manager:CombatManager):
 
 		target_type.FRONT_ENNEMY:
 			for enemy in combat_manager.enemies:
-				if enemy._current_slot.position_data.isFront:
+				if combat_manager.reaches_as_front(enemy):
 					enemy.set_targetable(true)
 				else:
 					enemy.set_targetable(false)
@@ -381,7 +381,7 @@ func select_targets(combat_manager:CombatManager):
 		target_type.EVERYONE:
 			var caster_is_front: bool = owner._current_slot.position_data.isFront
 			for enemy in combat_manager.enemies:
-				var enemy_is_front: bool = enemy._current_slot.position_data.isFront
+				var enemy_is_front: bool = combat_manager.reaches_as_front(enemy)
 				var reachable: bool = _can_reach_enemy(caster_is_front, enemy_is_front)
 				if reachable:
 					enemy.set_targetable(true)
@@ -424,7 +424,7 @@ func select_targets(combat_manager:CombatManager):
 					ally.target_selected.disconnect(combat_manager._on_target_selected)
 				ally.target_selected.connect(combat_manager._on_target_selected)
 			for enemy in combat_manager.enemies:
-				if enemy._current_slot.position_data.isFront:
+				if combat_manager.reaches_as_front(enemy):
 					enemy.set_targetable(true)
 					if enemy.target_selected.is_connected(combat_manager._on_target_selected):
 						enemy.target_selected.disconnect(combat_manager._on_target_selected)
@@ -489,7 +489,7 @@ func select_second_target(combat_manager:CombatManager):
 		second_target_type.FRONT_ENNEMY:
 			combat_manager.ui.log("Now select an ennemy to target")
 			for enemy in combat_manager.enemies:
-				if enemy._current_slot.position_data.isFront:
+				if combat_manager.reaches_as_front(enemy):
 					enemy.set_targetable(true)
 
 		# --- NOUVEAUX (second target) ---
@@ -521,7 +521,7 @@ func select_second_target(combat_manager:CombatManager):
 					ally.target_selected.disconnect(combat_manager._on_target_selected)
 				ally.target_selected.connect(combat_manager._on_target_selected)
 			for enemy in combat_manager.enemies:
-				if enemy._current_slot.position_data.isFront:
+				if combat_manager.reaches_as_front(enemy):
 					enemy.set_targetable(true)
 					if enemy.target_selected.is_connected(combat_manager._on_target_selected):
 						enemy.target_selected.disconnect(combat_manager._on_target_selected)
@@ -538,6 +538,17 @@ func end_turn(combat_manager):
 
 func has_tag(tag: String) -> bool:
 	return tag in tags
+
+## Infobulle (BBCode) : nom, ligne d'effet, puis cible et conditions en
+## plus discret. `description` est écrite sur ce modèle (une ligne par bloc).
+func tooltip_bbcode(name_size := 24) -> String:
+	var lines := description.split("\n")
+	var out := "[font_size=%d][color=#f2d38a]%s[/color][/font_size]" % [name_size, descriptionName]
+	if lines.size() > 0 and lines[0] != "":
+		out += "\n" + lines[0]
+	if lines.size() > 1:
+		out += "\n[color=#b5a993]%s[/color]" % "\n".join(lines.slice(1))
+	return "[center]%s[/center]" % out
 func _can_reach_enemy(caster_is_front: bool, target_is_front: bool) -> bool:
 	match range:
 		1:

@@ -70,8 +70,9 @@ const PORTRAIT_TEXTURE_PX := 256
 @export var go_rolling_scale: float = 0.85
 ## Taille du bouton une fois le tirage terminé.
 @export var go_ready_scale: float = 1.15
-## Taille du halo sous chaque portrait, relative au losange.
-@export var glow_size: float = 1.9
+## Taille du halo sous les résultats du tirage (les deux glyphes), en
+## multiple de la largeur qu'ils occupent ensemble.
+@export var glow_size: float = 2.2
 ## Opacité du halo au repos, une fois l'éclat initial retombé.
 @export_range(0.0, 1.0, 0.05) var glow_rest_alpha: float = 0.55
 ## Durée d'une respiration du halo au repos.
@@ -107,9 +108,9 @@ func _ready() -> void:
 
 	_build_slots()
 	_set_go_ready(false, true)
-	# Le menu s'ouvre en tirant tout seul : le joueur voit le hasard à
-	# l'œuvre, il n'a pas à le déclencher.
-	roll_all()
+	# Le tirage se lance en cliquant le titre « ROLL / character tastes »,
+	# qui pulse et se teinte d'ocre pour inviter au clic.
+	_setup_roll_title()
 
 
 # ════════════════════════════════════════════════════════════════════
@@ -142,21 +143,14 @@ func _make_slot(data: CharacterData) -> Dictionary:
 	root.custom_minimum_size = Vector2(slot_spacing.x, slot_spacing.y)
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	# ── Halo sous le portrait, allumé à la fin du tirage ────────────
-	# Premier enfant = dessiné derrière le cadre et le portrait.
-	var glow := TextureRect.new()
-	glow.name = "Glow"
-	glow.texture = GLOW_TEX
-	glow.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	glow.stretch_mode = TextureRect.STRETCH_SCALE
-	glow.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var glow_mat := CanvasItemMaterial.new()
-	glow_mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
-	glow.material = glow_mat
-	glow.modulate.a = 0.0
-	root.add_child(glow)
-	var glow_px := portrait_size * glow_size
-	_place(glow, Vector2.ONE * (portrait_size - glow_px) * 0.5, Vector2(glow_px, glow_px))
+	# ── Halos sous les glyphes d'attirance, allumés à la fin du tirage ──
+	# Un par glyphe, seul celui d'une attirance retenue s'allume. Premiers
+	# enfants = dessinés derrière le cadre, le portrait et les glyphes.
+	var half := Vector2.ONE * symbol_size * 0.5
+	var glows := {
+		"masc": _make_glow(root, symbol_offset + half),
+		"fem": _make_glow(root, symbol_offset + Vector2(symbol_gap, 0) + half),
+	}
 
 	# Le portrait d'exploration est déjà un losange avec son propre cadre :
 	# on l'affiche tel quel. Sinon on retombe sur l'ancien montage (cadre +
@@ -198,7 +192,7 @@ func _make_slot(data: CharacterData) -> Dictionary:
 		"fem": fem,
 		"masc": masc,
 		"portrait": portrait,
-		"glow": glow,
+		"glows": glows,
 		"done": false,
 	}
 	btn.pressed.connect(func(): _reroll_one(slot))
@@ -322,6 +316,7 @@ func _portrait_of(data: CharacterData) -> Texture2D:
 func roll_all() -> void:
 	if _rolling:
 		return
+	_stop_roll_invite()
 	_rolling = true
 	_set_controls_enabled(false)
 	_set_go_ready(false)
@@ -419,6 +414,108 @@ func _pop(slot: Dictionary) -> void:
 				.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 
+# ════════════════════════════════════════════════════════════════════
+#  TITRE « ROLL » CLIQUABLE
+# ════════════════════════════════════════════════════════════════════
+
+## Teinte vers laquelle les deux libellés du titre glissent en pulsant.
+@export var roll_invite_color: Color = Color(0.86, 0.62, 0.30)
+## Amplitude et durée d'une pulsation du titre.
+@export var roll_invite_scale: float = 1.06
+@export var roll_invite_time: float = 0.7
+
+var _invite_tween: Tween = null
+var _title_labels: Array[Label] = []
+
+
+## Le bouton RollButton est posé sur le titre « ROLL / character tastes » et
+## en reprend les deux libellés comme enfants : ils grossissent avec lui.
+func _setup_roll_title() -> void:
+	roll_button.visible = true
+	# La scène met désormais les deux libellés (et une plaque) DANS le
+	# bouton : on les y prend tels quels, sans rien déplacer.
+	for c in roll_button.get_children():
+		if c is Label:
+			_title_labels.append(c)
+			c.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if not _title_labels.is_empty():
+		roll_button.pivot_offset = roll_button.size * 0.5
+		roll_button.mouse_entered.connect(_pause_roll_invite)
+		roll_button.mouse_exited.connect(_resume_roll_invite)
+		_start_roll_invite()
+		return
+
+	# Ancienne mise en page : titre dans la boîte, bouton posé dessus.
+	for path in ["Box/TitleMain", "Box/TitleSub"]:
+		var l := get_node_or_null("CanvasLayer/" + path) as Label
+		if l != null:
+			_title_labels.append(l)
+	if _title_labels.is_empty():
+		return
+
+	var area := _title_labels[0].get_global_rect()
+	for l in _title_labels:
+		area = area.merge(l.get_global_rect())
+	area = area.grow(8.0)
+	roll_button.visible = true
+	roll_button.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	roll_button.global_position = area.position
+	roll_button.size = area.size
+	roll_button.pivot_offset = area.size * 0.5
+	roll_button.tooltip_text = "Roll the tastes"
+	var dice := roll_button.get_node_or_null("Dice") as CanvasItem
+	if dice != null:
+		dice.visible = false
+	for l in _title_labels:
+		l.reparent(roll_button, true)
+		l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	# Survol : le grossissement de lvl/button.gd prend la main, la pulsation
+	# s'interrompt ; elle reprend à la sortie tant qu'on n'a pas tiré.
+	roll_button.mouse_entered.connect(_pause_roll_invite)
+	roll_button.mouse_exited.connect(_resume_roll_invite)
+	_start_roll_invite()
+
+
+var _invite_active: bool = false
+
+func _start_roll_invite() -> void:
+	_invite_active = true
+	_resume_roll_invite()
+
+
+func _resume_roll_invite() -> void:
+	if not _invite_active:
+		return
+	if _invite_tween:
+		_invite_tween.kill()
+	_invite_tween = create_tween().set_loops()
+	_invite_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	var big := Vector2.ONE * roll_invite_scale
+	_invite_tween.tween_property(roll_button, "scale", big, roll_invite_time)
+	for l in _title_labels:
+		_invite_tween.parallel().tween_property(l, "modulate", roll_invite_color, roll_invite_time)
+	_invite_tween.tween_property(roll_button, "scale", Vector2.ONE, roll_invite_time)
+	for l in _title_labels:
+		_invite_tween.parallel().tween_property(l, "modulate", Color.WHITE, roll_invite_time)
+
+
+func _pause_roll_invite() -> void:
+	if _invite_tween:
+		_invite_tween.kill()
+		_invite_tween = null
+
+
+## Premier tirage lancé : plus besoin d'inviter au clic. Le titre reste
+## cliquable (nouveau tirage) et grossit toujours au survol.
+func _stop_roll_invite() -> void:
+	_invite_active = false
+	_pause_roll_invite()
+	roll_button.scale = Vector2.ONE
+	for l in _title_labels:
+		l.modulate = Color.WHITE
+
+
 func _spin_dice() -> void:
 	var icon := roll_button.get_node_or_null("Dice")
 	if icon == null:
@@ -437,6 +534,10 @@ func _spin_dice() -> void:
 func _on_make_them_bi() -> void:
 	if _rolling:
 		return
+	# Choix explicite : plus d'invitation à tirer, et « Let's go » ne
+	# relancera pas de tirage par-dessus.
+	_stop_roll_invite()
+	_set_go_ready(true)
 	for slot in _slots:
 		var data: CharacterData = slot["data"]
 		data.set_taste(true, true)
@@ -452,6 +553,10 @@ func _on_go() -> void:
 	if _closing:
 		return
 	_closing = true
+	# Jamais tiré (le tirage ne part plus tout seul) : on tire l'équipe en
+	# silence, pour que chacun ait au moins un partenaire possible.
+	if _invite_active:
+		CharacterData.roll_team(_slot_datas(), bi_chance)
 	for slot in _slots:
 		if not slot["done"]:
 			_finish_slot(slot)
@@ -496,42 +601,73 @@ func _set_go_ready(is_ready: bool, instant: bool = false) -> void:
 				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 
-## Halo sous le portrait : un éclat quand la case est figée, puis une lente
-## respiration. `on = false` l'éteint (nouveau tirage).
+func _make_glow(root: Control, center: Vector2) -> TextureRect:
+	var glow := TextureRect.new()
+	glow.name = "Glow"
+	glow.texture = GLOW_TEX
+	glow.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	glow.stretch_mode = TextureRect.STRETCH_SCALE
+	glow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var glow_mat := CanvasItemMaterial.new()
+	glow_mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+	glow.material = glow_mat
+	glow.modulate.a = 0.0
+	root.add_child(glow)
+	var px := symbol_size * glow_size
+	_place(glow, center - Vector2.ONE * px * 0.5, Vector2(px, px))
+	return glow
+
+
+## Halos des glyphes retenus : un éclat quand la case est figée, puis une
+## lente respiration. Les glyphes non retenus restent éteints. `on = false`
+## éteint tout (nouveau tirage).
 func _set_glow(slot: Dictionary, on: bool) -> void:
-	var glow: TextureRect = slot.get("glow")
-	if not is_instance_valid(glow):
+	var glows: Dictionary = slot.get("glows", {})
+	if glows.is_empty():
 		return
 	var old: Tween = slot.get("glow_tween")
 	if old:
 		old.kill()
-	var tween := create_tween()
+	var data: CharacterData = slot["data"]
+	var lit: Array = []
+	if on and data.attracted_to_masculine:
+		lit.append(glows["masc"])
+	if on and data.attracted_to_feminine:
+		lit.append(glows["fem"])
+
+	var tween := create_tween().set_parallel(true)
 	slot["glow_tween"] = tween
-	if not on:
-		tween.tween_property(glow, "modulate:a", 0.0, 0.15)
+	for g in glows.values():
+		if not (g in lit) and is_instance_valid(g):
+			tween.tween_property(g, "modulate:a", 0.0, 0.15)
+	if lit.is_empty():
 		return
 
-	glow.scale = Vector2.ONE * 0.5
-	glow.modulate.a = 0.0
 	# Éclat
-	tween.set_parallel(true)
-	tween.tween_property(glow, "scale", Vector2.ONE * 1.15, 0.3) \
-			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tween.tween_property(glow, "modulate:a", 1.0, 0.2)
-	tween.set_parallel(false)
-	tween.tween_property(glow, "scale", Vector2.ONE, 0.35) \
-			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tween.parallel().tween_property(glow, "modulate:a", glow_rest_alpha, 0.35)
+	for g in lit:
+		g.scale = Vector2.ONE * 0.5
+		g.modulate.a = 0.0
+		tween.tween_property(g, "scale", Vector2.ONE * 1.15, 0.3) \
+				.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tween.tween_property(g, "modulate:a", 1.0, 0.2)
+	tween.chain().tween_interval(0.0)
+	for g in lit:
+		tween.tween_property(g, "scale", Vector2.ONE, 0.35) \
+				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(g, "modulate:a", glow_rest_alpha, 0.35)
 	# Respiration, sans fin (le tween meurt avec le menu)
-	tween.tween_callback(func(): _breathe_glow(slot))
+	tween.chain().tween_callback(func(): _breathe_glow(slot, lit))
 
 
-func _breathe_glow(slot: Dictionary) -> void:
-	var glow: TextureRect = slot.get("glow")
-	if not is_instance_valid(glow):
-		return
+func _breathe_glow(slot: Dictionary, lit: Array) -> void:
 	var tween := create_tween().set_loops()
 	slot["glow_tween"] = tween
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(glow, "modulate:a", glow_rest_alpha * 0.55, glow_pulse_time * 0.5)
-	tween.tween_property(glow, "modulate:a", glow_rest_alpha, glow_pulse_time * 0.5)
+	tween.set_parallel(true)
+	for g in lit:
+		if is_instance_valid(g):
+			tween.tween_property(g, "modulate:a", glow_rest_alpha * 0.55, glow_pulse_time * 0.5)
+	tween.chain().tween_interval(0.0)
+	for g in lit:
+		if is_instance_valid(g):
+			tween.tween_property(g, "modulate:a", glow_rest_alpha, glow_pulse_time * 0.5)

@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfjofst08bmen"]
+[gd_scene load_steps=9 format=3 uid="uid://dfjofst08bmen"]
 
 [ext_resource type="Script" uid="uid://b2fldnbm4784m" path="res://InteractibleObjectsScenes/InteractableObject.gd" id="1_2ny35"]
 [ext_resource type="Texture2D" uid="uid://blc8cs2nww3vu" path="res://props/PROP_altar_empty.png" id="2_yuwx2"]
 [ext_resource type="Script" uid="uid://dniyvgmp5u0uw" path="res://DialogueManager.gd" id="3_4etqh"]
 [ext_resource type="Texture2D" uid="uid://d0eveb6tipw38" path="res://props/PROP_altar_full.png" id="3_hbhrn"]
-[ext_resource type="Texture2D" uid="uid://eg88xoq723o0" path="res://UI/label.png" id="4_hbhrn"]
+[ext_resource type="Texture2D" uid="uid://eqli6rl4sig3" path="res://UI/UI boxes/UI_camp_points.png" id="5_4etqh"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="5_q305l"]
+[ext_resource type="Texture2D" uid="uid://barodb5cn3gov" path="res://UI/arrow.png" id="7_hbhrn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6te7v"]
 
@@ -31,16 +32,24 @@ script = ExtResource("3_4etqh")
 is_Choice = true
 
 [node name="etiquette" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(170, -32)
-scale = Vector2(0.626316, 0.626316)
-texture = ExtResource("4_hbhrn")
+z_index = 1
+position = Vector2(217, -18)
+scale = Vector2(0.437382, 0.437382)
+texture = ExtResource("5_4etqh")
 
 [node name="Label" type="Label" parent="etiquette"]
-offset_left = -92.0
-offset_top = -23.0
-offset_right = 125.0
-offset_bottom = 30.0
+offset_left = -194.338
+offset_top = -57.1583
+offset_right = 99.6618
+offset_bottom = 44.8417
 theme_override_fonts/font = ExtResource("5_q305l")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 80
 text = "Investigate"
+
+[node name="UiDoorArrow" type="Sprite2D" parent="etiquette"]
+modulate = Color(0.357627, 0.218179, 0.113515, 1)
+z_index = -1
+position = Vector2(-326.946, 2.28633)
+rotation = 1.5708
+scale = Vector2(0.375101, 0.299222)
+texture = ExtResource("7_hbhrn")

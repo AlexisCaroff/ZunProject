@@ -19,7 +19,9 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("7_8ohna")
 name = "Charm"
 descriptionName = "Charm"
-description = "incrase horny"
+description = "+25 Lust (minus target WILL).
+Target: 1 hero (any row)
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("6_cswgh")
 barkSkill = ""
 required_position = 0

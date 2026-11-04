@@ -40,6 +40,7 @@ scene = ExtResource("8_37vjq")
 dialogue_file = "res://scripts/InteractableObjectResource.gd"
 choice_1 = SubResource("Resource_05the")
 choice_2 = SubResource("Resource_u06hx")
+trap_mode = 0
 metadata/_custom_type_script = "uid://n028octb10a5"
 
 [resource]
@@ -51,6 +52,11 @@ combat_scene = ExtResource("1_phmcn")
 exploration_scene = ExtResource("2_2flfs")
 encounter = ExtResource("3_kfvg1")
 CanCamp = false
+skip_door = false
+after_combat_room_id = ""
+lust_tutorial_after = ""
+lust_tutorial_skill = ""
+lust_tutorial_target = ""
 connected_room_ids = Array[String](["Corridor1"])
 blocked_room_ids = Array[String]([])
 explored = false

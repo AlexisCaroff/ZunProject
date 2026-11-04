@@ -70,6 +70,10 @@ offset = Vector2(0, -104.11)
 script = ExtResource("6_doorr_dungeon_")
 theskew = -0.05
 
+[node name="Name" parent="." index="10"]
+
+[node name="charaPortrait" parent="." index="13"]
+
 [node name="HeroPosition" parent="." index="15"]
 position = Vector2(679, 677)
 
@@ -142,6 +146,8 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
+[node name="Portraits" parent="." index="19"]
+
 [node name="DoorBg2" type="Sprite2D" parent="." index="21"]
 position = Vector2(1293, 42.4142)
 scale = Vector2(0.842488, 0.823097)
@@ -153,17 +159,18 @@ region_filter_clip_enabled = true
 [node name="MenuPerso" parent="." index="22"]
 visible = false
 
+[node name="charaPortrait2" parent="." index="23"]
+
+[node name="charaPortrait3" parent="charaPortrait2" index="0"]
+
 [node name="Items" parent="." index="24"]
-position = Vector2(1055, 886)
 
 [node name="Item1" parent="Items" index="0"]
-position = Vector2(229.667, 0)
 
 [node name="Button" parent="Items/Item1" index="1"]
 metadata/_edit_use_anchors_ = true
 
 [node name="Item2" parent="Items" index="1"]
-position = Vector2(229.667, 117.042)
 
 [node name="Button" parent="Items/Item2" index="0"]
 offset_right = 81.0
@@ -177,8 +184,44 @@ theme_override_fonts/bold_font = ExtResource("12_Euphorigenic")
 theme_override_font_sizes/normal_font_size = 15
 theme_override_font_sizes/bold_font_size = 20
 
+[node name="Buffs" parent="." index="25"]
+
+[node name="AttLabel" parent="." index="26"]
+
+[node name="DefLabel" parent="." index="27"]
+
+[node name="WillPower" parent="." index="28"]
+
+[node name="StaminaProgressBar" parent="." index="29"]
+
+[node name="LustProgressBar" parent="." index="30"]
+
+[node name="GuiltProgressBar" parent="." index="31"]
+
+[node name="Stamina" parent="." index="32"]
+
+[node name="Horny" parent="." index="33"]
+
+[node name="Guilt" parent="." index="34"]
+
+[node name="ExploSkillButton" parent="." index="35"]
+
 [node name="IconPriestessWhip" parent="ExploSkillButton" index="0"]
 visible = false
+
+[node name="ExploSkillButtonMove" parent="." index="36"]
+
+[node name="WillPowerIcon" parent="." index="39"]
+
+[node name="BuffDeff" parent="." index="40"]
+
+[node name="Attack" parent="." index="41"]
+
+[node name="GuiltIcon" parent="." index="42"]
+
+[node name="LustIcon" parent="." index="43"]
+
+[node name="Stamina2" parent="." index="44"]
 
 [connection signal="mouse_entered" from="moveButton" to="moveButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="moveButton" to="moveButton" method="_on_mouse_exited"]

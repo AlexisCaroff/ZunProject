@@ -17,7 +17,9 @@ metadata/_custom_type_script = "uid://bp8u5at2ojgse"
 script = ExtResource("5_bbd80")
 name = "Holy ray"
 descriptionName = "Holy ray"
-description = "heal for some amount"
+description = "Restores 20 stamina.
+Target: all allies, itself included
+Never misses | Cooldown 2"
 icon = ExtResource("4_kre7d")
 barkSkill = ""
 required_position = 0

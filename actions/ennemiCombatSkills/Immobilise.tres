@@ -42,7 +42,9 @@ metadata/_custom_type_script = "uid://2vsqpp6jqiow"
 script = ExtResource("5_ixvgo")
 name = "Immobilise"
 descriptionName = "Immobilise"
-description = "deal dmg , heal and reduce cooldown"
+description = "Deals 5 + ATK - DEF physical damage, +2 cooldown on one random skill, immobilized 1 turn. Then on itself: restores 20 stamina, cooldowns -2.
+Target: 1 hero (any row), then itself
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("5_mfcwu")
 barkSkill = ""
 required_position = 0

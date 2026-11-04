@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="AffinityCard" load_steps=8 format=3 uid="uid://b5148u04qlbys"]
+
+[ext_resource type="Script" uid="uid://cwdlfpy6jfr4w" path="res://actions/skillEffects/campSkilleffect/CampHealEffet.gd" id="1_Scr"]
+[ext_resource type="Script" uid="uid://bycqaidmvoiqq" path="res://actions/skillEffects/campSkilleffect/CampAffinityEffect.gd" id="2_Scr"]
+[ext_resource type="Script" uid="uid://csjs6vf5actyx" path="res://scripts/cards/affinity_card.gd" id="3_Scr"]
+[ext_resource type="Script" uid="uid://brw6jmbngkbbu" path="res://scripts/camp/CampEffect.gd" id="4_Scr"]
+[ext_resource type="Texture2D" uid="uid://v5w3ijq30q7q" path="res://actions/actiontexture/UI icons/ICON_priestess_vitality.png" id="5_Tex"]
+
+[sub_resource type="Resource" id="Res_1"]
+script = ExtResource("1_Scr")
+heal_target_stat = 0
+amount = 10
+
+[sub_resource type="Resource" id="Res_2"]
+script = ExtResource("2_Scr")
+amount = 5
+zealot_mult = 1.0
+neutral_mult = 1.0
+barbarian_mult = 1.0
+
+[resource]
+script = ExtResource("3_Scr")
+title = "Poultice"
+description = "One ally regains 10 stamina. Affinity +5."
+cost = 1
+user_name = "All"
+target = 1
+icon = ExtResource("5_Tex")
+effects = Array[ExtResource("4_Scr")]([SubResource("Res_1"), SubResource("Res_2")])

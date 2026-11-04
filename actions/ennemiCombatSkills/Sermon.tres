@@ -31,7 +31,9 @@ metadata/_custom_type_script = "uid://d34budn3ew6qb"
 script = ExtResource("5_hlfvf")
 name = "Sermon"
 descriptionName = "Sermon"
-description = "add guilt  and 30 stamina if 70% guilt or more"
+description = "+20 Guilt (minus target WILL). Heroes then above 50% Guilt also take 20 + ATK - DEF physical damage.
+Target: all heroes
+Never misses | Cooldown 2"
 icon = ExtResource("4_3bird")
 barkSkill = ""
 required_position = 0

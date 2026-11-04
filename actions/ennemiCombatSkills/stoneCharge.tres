@@ -17,7 +17,9 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("2_skill")
 name = "Stone Charge"
 descriptionName = "Stone Charge"
-description = "Le Stone Slime roule sur un héros de première ligne."
+description = "Deals 16 + ATK - DEF physical damage.
+Target: 1 front-row hero (melee: from the front row only)
+Accuracy 100% | Cooldown 1"
 icon = ExtResource("4_icon")
 barkSkill = ""
 required_position = 1

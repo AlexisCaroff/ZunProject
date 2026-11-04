@@ -29,6 +29,15 @@ var gm : GameManager
 @onready var menuPerso = $"../MenuPerso"
 @onready var bouton_menuPerso=$"../charaPortrait2/charaPortraitButton"
 @onready var NameLabel= $"../Name"
+## Même organisation que la porte : portrait du sélectionné dans le grand
+## cadre, colonne de portraits (charaPortraitFrame1..4) pour sélectionner,
+## et bloc Kinks entre les stats et les boutons de capacité.
+@onready var selected_portrait: TextureRect = get_node_or_null("../charaPortrait")
+@onready var kinks_block: RichTextLabel = get_node_or_null("../Kinks")
+## Composant de la colonne de portraits (préchargé : pas de dépendance au
+## cache des class_name).
+const PORTRAIT_COLUMN := preload("res://UI/portrait_column.gd")
+var portrait_entries: Array = []
 @onready var Stamina=$"../Stamina"
 @onready var Horny=$"../Horny"
 @onready var Guilt=$"../Guilt"
@@ -108,6 +117,8 @@ func _ready():
 		campButton.connect("button_down",go_to_campement)
 		campButton.connect("mouse_entered",campement_over)
 		campButton.connect("mouse_exited",campement_notover)
+		# Même contour au survol que les objets interactifs.
+		INTERACTABLE.setup_outline(campTexture)
 		if gm.current_room_Ressource.CampDone:
 			campButton.disabled=true
 			campTexture.texture=preload("res://camp_imgs/PROP_campfire_closed.png")
@@ -181,6 +192,8 @@ func _ready():
 
 	# --- Bascule carte / sac d'équipe, dans le coin bas-droit
 	_setup_map_inventory_toggle()
+	_setup_portrait_column()
+	_align_hud()
 
 const CAMP_FOUND_DIALOGUE := "res://dialogue/tuto/campFound.tres"
 
@@ -311,18 +324,24 @@ func selectCharacter(thechara: CharaExplo):
 		# characters.find() designait le mauvais portrait apres un echange.
 		_move_selectors_to_selected()
 		NameLabel.text=chara.Name
+		if selected_portrait != null:
+			selected_portrait.texture = chara.explorationPortrait
+		if kinks_block != null:
+			kinks_block.bbcode_enabled = true
+			if chara.tags.is_empty():
+				kinks_block.text = "Kinks: [color=AAAAAA][i]none[/i][/color]"
+			else:
+				kinks_block.text = "Kinks: %s" % ", ".join(chara.tags)
 		Def.bbcode_enabled = true
 		Att.bbcode_enabled = true
 		WillPower.bbcode_enabled = true
 		Stamina.bbcode_enabled = true
 		Guilt.bbcode_enabled = true
 		Horny.bbcode_enabled = true
-		Att.text = " %d [color=AAAAAA]" % [
-		chara.attack]
-		Def.text = " %d [color=AAAAAA] " % [
-		chara.defense]
-		WillPower.text = " %d [color=AAAAAA]" % [
-		chara.willpower]
+		# Valeur = base + kinks + équipement + buffs ; le détail au survol.
+		_show_stat(Att, chara, "attack")
+		_show_stat(Def, chara, "defense")
+		_show_stat(WillPower, chara, "willpower")
 
 		Stamina.text = "%d / %d" % [chara.current_stamina, chara.max_stamina]
 		StaminaProgressBar.max_value= chara.max_stamina
@@ -426,6 +445,10 @@ func _setup_map_inventory_toggle() -> void:
 	if toggle_map_inventory == null:
 		return
 	map_bag_buttons = MapBagButtons.split(toggle_map_inventory, null, null, 88.0)
+	# Le cadre des icônes est transparent au centre : sans fond opaque, le
+	# contour de la carte se voyait à travers (comme à la porte).
+	MapBagButtons.ensure_box(map_bag_buttons.map, BOX_PX)
+	MapBagButtons.ensure_box(map_bag_buttons.bag, BOX_PX)
 	map_bag_buttons.map.pressed.connect(_show_inventory.bind(false))
 	map_bag_buttons.bag.pressed.connect(_show_inventory.bind(true))
 	_apply_map_inventory_view()
@@ -492,8 +515,12 @@ func _on_button_2_button_down() -> void:
 	call_deferred("go_to_next_room")
 
 
+const INTERACTABLE := preload("res://InteractibleObjectsScenes/InteractableObject.gd")
+
 func go_to_campement() -> void:
-	gm.current_room_Ressource.CampDone=true
+	# Le campement n'est consommé qu'à la première capacité utilisée
+	# (Campement.mark_camp_used) : entrer puis ressortir sans rien faire
+	# (mauvais clic) le laisse disponible.
 	gm.go_to_campement()
 
 func sortie_du_camp():
@@ -516,6 +543,8 @@ func create_selector_sprite():
 	if !showselector:
 		selectorChara.modulate.a=0.0
 func campement_over():
+	if campButton != null and not campButton.disabled:
+		INTERACTABLE.set_outline(campTexture, true)
 	if !gm.current_room_Ressource.CampDone:
 		GoToCampement.scale= Vector2(0.0,0.0)
 		GoToCampement.visible=true
@@ -524,6 +553,7 @@ func campement_over():
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(GoToCampement,"scale",Vector2(1.0,1.0),0.3).set_delay(0.3)
 func campement_notover():
+	INTERACTABLE.set_outline(campTexture, false)
 	GoToCampement.visible=false
 func Door_over():
 	DoorTuto.scale= Vector2(0.0,0.0)
@@ -556,7 +586,164 @@ func load_interactable():
 ## personnage selectionne, en passant par son portrait et son slot courants
 ## plutot que par son index dans `characters`.
 ## `movetime` > 0 fait glisser les selecteurs au lieu de les teleporter.
+func _show_stat(label: RichTextLabel, chara: CharacterData, stat: String) -> void:
+	if label == null:
+		return
+	label.text = " %d" % chara.stat_breakdown(stat).total
+
+
+# ════════════════════════════════════════════════════════════════════
+#  ALIGNEMENTS DU HUD (faits en code : indépendants de la scène)
+# ════════════════════════════════════════════════════════════════════
+
+## Hauteur commune des icônes Attack / Défense / Volonté, à l'écran.
+@export var stat_icon_height: float = 36.0
+## Écart entre une icône de stat et sa valeur.
+@export var stat_label_gap: float = 6.0
+## Écart entre deux boutons du coin carte (même que carte / sac).
+@export var hud_button_spacing: float = 88.0
+
+
+const STAT_HOVER := preload("res://UI/stat_hover.gd")
+const BOX_PX := 81.0   # cadre des boutons sac / carte (cf. MapBagButtons)
+
+
+func _align_hud() -> void:
+	_align_menu_button()
+	_align_stat_row()
+	# Survol immédiat d'une stat (icône OU valeur) : détail + grossissement.
+	var hover = STAT_HOVER.new(get_parent())
+	for p in [["../Attack", Att, "attack"], ["../BuffDeff", Def, "defense"],
+			["../WillPowerIcon", WillPower, "willpower"]]:
+		hover.attach(get_node_or_null(p[0]), p[1], _stat_text.bind(p[2]))
+	_setup_cards()
+
+
+## Cartes d'affinité : consultables ici, jouables seulement au camp.
+var card_hand: CardHand = null
+
+func _setup_cards() -> void:
+	if map_bag_buttons.is_empty() or card_hand != null:
+		return
+	card_hand = CardHand.install_hud(get_parent(),
+			[map_bag_buttons.map, map_bag_buttons.bag, get_node_or_null("../charaPortrait2")],
+			inventory_panel)
+	map_bag_buttons.map.pressed.connect(card_hand.close)
+	map_bag_buttons.bag.pressed.connect(card_hand.close)
+	# Carte, sac et cartes : même rectangle, même cadre, boutons au-dessus.
+	HudFrame.install(get_parent(), HudFrame.rect_of(inventory_panel), map_container,
+			contour_map, inventory_panel, [map_bag_buttons.map, map_bag_buttons.bag,
+			get_node_or_null("../charaPortrait2"), card_hand.toggle_button])
+
+
+func _stat_text(stat: String) -> String:
+	if selected_character == null:
+		return ""
+	return selected_character.characterData.stat_tooltip(stat)
+
+
+## Bouton du menu personnage rangé avec les boutons sac et carte : même
+## ligne, même écart, à gauche du sac.
+func _align_menu_button() -> void:
+	var menu := get_node_or_null("../charaPortrait2") as Control
+	var bag := map_bag_buttons.get("bag") as Control
+	if menu == null or bag == null:
+		return
+	var bag_center := Vector2((bag.offset_left + bag.offset_right) * 0.5,
+			(bag.offset_top + bag.offset_bottom) * 0.5)
+	var center := bag_center - Vector2(hud_button_spacing, 0)
+	var w := menu.offset_right - menu.offset_left
+	var h := menu.offset_bottom - menu.offset_top
+	# Le bouton grandit depuis son centre (pivot) : c'est le centre du
+	# rectangle, pas son coin, qui doit tomber sur la ligne sac / carte.
+	menu.pivot_offset = Vector2(w, h) * 0.5
+	menu.offset_left = center.x - w * 0.5
+	menu.offset_top = center.y - h * 0.5
+	menu.offset_right = menu.offset_left + w
+	menu.offset_bottom = menu.offset_top + h
+	# Survol : +15 % comme sac et carte (son script visait une échelle
+	# absolue de 1.2 alors qu'il est à ~0.68 au repos).
+	if "hover_scale" in menu:
+		menu.hover_scale = menu.scale * 1.15
+	# Même rang que sac et carte : au-dessus du panneau du sac (z 8).
+	menu.z_as_relative = false
+	menu.z_index = 10
+	MapBagButtons.track_menu(menu, menuPerso)
+	# Même fond que les boutons sac et carte : le cadre d'objet, à la même
+	# taille à l'écran, centré sur l'icône.
+	var box := menu.get_node_or_null("charaPortrait3") as TextureRect
+	if box != null:
+		box.visible = true
+		# Au rang du bouton (dessiné derrière lui) et non un cran dessous :
+		# à z -1 il tombait au rang du contour de la carte, qui passait devant.
+		box.z_index = 0
+		box.show_behind_parent = true
+		box.scale = Vector2.ONE
+		var local := Vector2(BOX_PX, BOX_PX) / menu.scale
+		box.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		box.size = local
+		box.position = Vector2(w, h) * 0.5 - local * 0.5
+
+
+## Icônes de stats à la même hauteur et sur la même ligne, chaque valeur
+## collée à droite de son icône et centrée sur elle.
+func _align_stat_row() -> void:
+	var pairs := [["../Attack", Att], ["../BuffDeff", Def], ["../WillPowerIcon", WillPower]]
+	var icons: Array = []
+	var center_y := 0.0
+	for p in pairs:
+		var icon := get_node_or_null(p[0]) as Sprite2D
+		if icon == null or icon.texture == null or p[1] == null:
+			return
+		icons.append(icon)
+		center_y += icon.position.y
+	center_y /= float(icons.size())
+	for i in icons.size():
+		var icon: Sprite2D = icons[i]
+		var label: RichTextLabel = pairs[i][1]
+		var k := stat_icon_height / float(icon.texture.get_height())
+		icon.scale = Vector2(k, k)
+		icon.position.y = center_y
+		var half_w := icon.texture.get_width() * k * 0.5
+		var fsize := label.get_theme_font_size("normal_font_size")
+		var line_h := float(fsize) * 1.2
+		label.position = Vector2(icon.position.x + half_w + stat_label_gap, center_y - line_h * 0.5)
+
+
+# ── Colonne de portraits (charaPortraitFrame1..4) : clic = sélection ──
+func _setup_portrait_column() -> void:
+	var frames: Array = []
+	for i in 4:
+		frames.append(get_node_or_null("../charaPortraitFrame%d" % (i + 1)))
+	if frames.all(func(f): return f == null):
+		return
+	portrait_entries = PORTRAIT_COLUMN.build(frames, _on_portrait_frame_clicked)
+	_refresh_portrait_column()
+
+
+## Cadre i = position i de la formation. En mode déplacement,
+## selectCharacter fait l'échange, comme un clic sur un ancien portrait.
+func _on_portrait_frame_clicked(slot_index: int) -> void:
+	for c in characters:
+		if c != null and c.characterData.Chara_position == slot_index:
+			selectCharacter(c)
+			return
+
+
+func _refresh_portrait_column() -> void:
+	if portrait_entries.is_empty():
+		return
+	var by_slot: Array = [null, null, null, null]
+	for c in characters:
+		if c != null:
+			by_slot[clampi(c.characterData.Chara_position, 0, 3)] = c.characterData
+	var sel: CharacterData = selected_character.characterData if selected_character != null else null
+	PORTRAIT_COLUMN.refresh(portrait_entries, by_slot, sel)
+
+
 func _move_selectors_to_selected(movetime: float = 0.0) -> void:
+	# Appelé à chaque sélection et après chaque échange de places.
+	_refresh_portrait_column()
 	if selected_character == null:
 		return
 

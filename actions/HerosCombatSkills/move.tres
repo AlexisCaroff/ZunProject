@@ -12,7 +12,9 @@ metadata/_custom_type_script = "uid://cy3v0dypme7n7"
 script = ExtResource("4_2hsmt")
 name = "move"
 descriptionName = "Move"
-description = "Switch position"
+description = "Move to an empty ally position, or swap places with an ally. Impossible while immobilized.
+Target: 1 ally
+Never misses | No cooldown"
 icon = ExtResource("3_cbmw2")
 barkSkill = ""
 required_position = 0

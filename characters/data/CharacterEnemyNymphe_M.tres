@@ -73,7 +73,9 @@ metadata/_custom_type_script = "uid://c3dw018knk8mk"
 script = ExtResource("20_nhnm1")
 name = "Stickynet"
 descriptionName = "Stickynet"
-description = "Stickynet"
+description = "Stuns (the hero skips its next turn), DEF debuff -2 steps and ATK debuff -1 step.
+Target: 1 hero (any row) | From: back row
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("19_alt42")
 barkSkill = ""
 required_position = 2
@@ -115,7 +117,9 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("20_nhnm1")
 name = "Charm"
 descriptionName = "Charm"
-description = "incrase horny"
+description = "+25 Lust (minus target WILL).
+Target: 1 front-row hero (melee: from the front row only)
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("26_45l2a")
 barkSkill = ""
 required_position = 1
@@ -167,7 +171,9 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("20_nhnm1")
 name = "Poison"
 descriptionName = "Horny Poison"
-description = "Aphrodisiac on an enemy"
+description = "+10 Lust (minus target WILL), then Lust poison: +12 Lust at the start of each of its turns, for 3 turns.
+Target: 1 hero (any row)
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("30_0sbx8")
 barkSkill = ""
 required_position = 0

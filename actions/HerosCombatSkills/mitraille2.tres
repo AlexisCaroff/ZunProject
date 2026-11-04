@@ -19,7 +19,9 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("6_fq4on")
 name = "mitaille"
 descriptionName = "mitaille"
-description = "attack all ennemies"
+description = "Deals 5 + ATK - DEF magic damage.
+Target: all enemies (one hit roll each)
+Accuracy 100% | Cooldown 4"
 icon = ExtResource("5_e0qpi")
 attack_sound = ExtResource("2_qrpiw")
 barkSkill = ""

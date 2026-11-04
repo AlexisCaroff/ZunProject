@@ -8,4 +8,4 @@ func _ready() -> void:
 func remove():
 	await get_tree().create_timer(2.1)
 	print ("remove ParticulesS")
-	#queue_free()
+	queue_free()

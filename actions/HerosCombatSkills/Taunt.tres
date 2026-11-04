@@ -23,6 +23,7 @@ uitexture = ExtResource("5_v6fax")
 affected_stat = 8
 amount = 0
 duration = 1
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [sub_resource type="Resource" id="Resource_5uy07"]
@@ -37,13 +38,16 @@ uitexture = ExtResource("8_3o4k5")
 affected_stat = 1
 amount = 10
 duration = 3
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [resource]
 script = ExtResource("3_wwy36")
 name = "Taunt"
 descriptionName = "Roar"
-description = "Taunt one ennemi and reset 2 cooldowns on skills"
+description = "Taunts 1 enemy for 1 turn: it must attack you.
+Then on you: all cooldowns -2, DEF buff +2 steps.
+Target: 1 enemy (any row) | Accuracy 100% | Cooldown 5 | Cost 5"
 icon = ExtResource("6_v6fax")
 barkSkill = ""
 required_position = 0

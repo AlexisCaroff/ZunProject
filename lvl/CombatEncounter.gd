@@ -9,3 +9,10 @@ class_name CombatEncounter
 @export var loots: Array[Equipment] = []  
 @export var description: String = ""
 @export var imageEmbuscade: Texture2D
+
+@export_group("Cartes d'affinité")
+## Chance de gagner une carte à la victoire. < 0 = celle du GameManager.
+@export_range(-1.0, 1.0) var card_drop_chance: float = -1.0
+## Cartes que ce combat peut donner. Vide = la réserve du GameManager.
+@export var card_pool: Array[AffinityCard] = []
+@export_group("")

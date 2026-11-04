@@ -23,6 +23,10 @@ func _on_button_button_down() -> void:
 		campement.noCharacterSelected()
 		campement.exitButton.visible=false
 	else :
+		# Pendant une action d'amour, un personnage non ciblable dit pourquoi
+		# au lieu d'être sélectionné.
+		if campement.show_love_refusal(occupant):
+			return
 		campement.changeSelectedCharacter(occupant)
 func get_ui()-> CharaUi:
 	print("send " + ui.name)

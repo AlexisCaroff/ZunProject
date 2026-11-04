@@ -105,6 +105,7 @@ bark_scene = ExtResource("1_k2y3o")
 taunts = ["For the glory of ZUN !", "On your knees, wretches !"]
 reaction = ["", "", ""]
 affinityReaction = ["", "", ""]
+faith = 1
 corrupted = false
 inquisition = false
 immobilized = false

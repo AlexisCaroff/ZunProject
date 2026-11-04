@@ -17,7 +17,8 @@ var used:bool =false
 @export var effects: Array[CampEffect] = []   # une liste d’effets appliqués
 
 func use(user: CharaCamp, targets: Array[CharaCamp]):
-	
+	# Première capacité utilisée : le campement de la salle est consommé.
+	user.camp.mark_camp_used()
 	for effect in effects:
 		for target in targets:
 			effect.apply(user, target)

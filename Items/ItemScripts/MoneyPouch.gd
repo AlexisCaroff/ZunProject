@@ -11,8 +11,8 @@ class_name MoneyPouch
 #  butin ("+42"), puis GameManager.add_to_inventory() la reconnaît, verse
 #  `number` au compteur et ne lui donne AUCUNE case d'inventaire.
 #
-#  À ne pas confondre avec les cristaux de combat, qui restent un vrai
-#  objet occupant une case.
+#  La monnaie du jeu, ce sont les CRISTAUX : ceux des démons vaincus et
+#  ceux tirés au sort passent tous par ici (anciennement « Gold »).
 # ════════════════════════════════════════════════════════════════════
 
 const DEFAULT_ICON := "res://UI/UI boxes/UI_crystal.png"
@@ -22,8 +22,8 @@ const DEFAULT_ICON := "res://UI/UI boxes/UI_crystal.png"
 static func make(amount: int, icon_tex: Texture2D = null) -> MoneyPouch:
 	var pouch := MoneyPouch.new()
 	pouch.number = max(0, amount)
-	pouch.name = "%d Gold" % pouch.number
-	pouch.description = "De quoi graisser une patte."
+	pouch.name = "%d Crystal%s" % [pouch.number, "" if pouch.number == 1 else "s"]
+	pouch.description = "Precious crystals, the currency of the dungeon."
 	if icon_tex != null:
 		pouch.icon = icon_tex
 	elif ResourceLoader.exists(DEFAULT_ICON):

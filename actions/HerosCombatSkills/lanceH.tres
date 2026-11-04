@@ -18,7 +18,9 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("5_44474")
 name = "Spear"
 descriptionName = "Spear"
-description = "Inflict damage to an ennemi"
+description = "Deals 30 + ATK - DEF physical damage.
+Target: 1 enemy; from the back row, front-row enemies only
+Accuracy 100% | Cooldown 4"
 icon = ExtResource("4_fidb7")
 barkSkill = ""
 required_position = 0

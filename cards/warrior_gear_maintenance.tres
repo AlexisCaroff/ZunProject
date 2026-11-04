@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="AffinityCard" load_steps=11 format=3 uid="uid://lr7rcnd5jvnm"]
+
+[ext_resource type="Texture2D" uid="uid://dbuugeey6c5y4" path="res://UI/buffAtt.png" id="1_Tex"]
+[ext_resource type="Script" uid="uid://bkvdwvrmdt5aw" path="res://actions/skillEffects/Buff.gd" id="2_Scr"]
+[ext_resource type="Texture2D" uid="uid://blaxr6boo4hkf" path="res://UI/buffDeff.png" id="3_Tex"]
+[ext_resource type="Script" uid="uid://gi5vwildn2qs" path="res://actions/skillEffects/campSkilleffect/CampBuffEffet.gd" id="4_Scr"]
+[ext_resource type="Script" uid="uid://csjs6vf5actyx" path="res://scripts/cards/affinity_card.gd" id="5_Scr"]
+[ext_resource type="Script" uid="uid://brw6jmbngkbbu" path="res://scripts/camp/CampEffect.gd" id="6_Scr"]
+[ext_resource type="Texture2D" uid="uid://fv4bkev72oqw" path="res://actions/actiontexture/UI icons/ICON_camp_warrior_gear.png" id="7_Tex"]
+
+[sub_resource type="Resource" id="Res_1"]
+script = ExtResource("2_Scr")
+name = "Buff"
+description = "Effet temporaire sur les statistiques."
+icon = ExtResource("1_Tex")
+stat = 0
+amount = 4
+duration = 3
+fights_left = 0
+tier = 0
+
+[sub_resource type="Resource" id="Res_2"]
+script = ExtResource("2_Scr")
+name = "Buff"
+description = "Effet temporaire sur les statistiques."
+icon = ExtResource("3_Tex")
+stat = 1
+amount = 5
+duration = 3
+fights_left = 0
+tier = 0
+
+[sub_resource type="Resource" id="Res_3"]
+script = ExtResource("4_Scr")
+thebuffs = Array[ExtResource("2_Scr")]([SubResource("Res_1"), SubResource("Res_2")])
+
+[resource]
+script = ExtResource("5_Scr")
+title = "Gear Maintenance"
+description = "The team gains +4 attack and +5 defense for the first 3 turns of the next fight."
+cost = 1
+user_name = "Warrior"
+target = 3
+icon = ExtResource("7_Tex")
+effects = Array[ExtResource("6_Scr")]([SubResource("Res_3")])

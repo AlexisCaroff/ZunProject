@@ -16,7 +16,9 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("2_paqs2")
 name = "Attaque basique"
 descriptionName = "Attaque"
-description = "Inflige des dégâts à un ennemi."
+description = "Deals 20 + ATK - DEF physical damage.
+Target: 1 enemy (any row)
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("4_f3ma5")
 barkSkill = ""
 required_position = 0

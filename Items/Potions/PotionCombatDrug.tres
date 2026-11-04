@@ -14,6 +14,8 @@ icon = ExtResource("4_buff_icon")
 stat = 2
 amount = 4
 duration = 4
+fights_left = 0
+tier = 0
 
 [sub_resource type="Resource" id="Resource_fxghf"]
 script = ExtResource("3_buff")
@@ -23,6 +25,8 @@ icon = ExtResource("3_xbxjf")
 stat = 3
 amount = -5
 duration = 3
+fights_left = 0
+tier = 0
 metadata/_custom_type_script = "uid://bkvdwvrmdt5aw"
 
 [resource]

@@ -77,6 +77,9 @@ func _ready():
 		for room: RoomResource in donjon.rooms:
 			room.reset_runtime_state()
 	initialize_affinities(characters)
+	# Main de départ : prise dans l'état d'origine, donc rendue à chaque
+	# nouvelle partie.
+	affinity_cards.assign(starting_cards.filter(func(c): return c != null))
 	SaveManager.capture_pristine(self)
 
 	if save_menu:
@@ -128,6 +131,27 @@ func spawn_start_menu():
 	start_menu.game_manager = self
 	
 	
+## Défaite : ferme la partie en cours et revient au menu principal. « Start »
+## relancera une partie neuve (start_game remet tout à l'état d'origine).
+func return_to_start_menu() -> void:
+	await sceneTransition.fade_out()
+	if current_room_node and is_instance_valid(current_room_node):
+		current_room_node.queue_free()
+		current_room_node = null
+	if campement_node and is_instance_valid(campement_node):
+		campement_node.queue_free()
+		campement_node = null
+	if end:
+		end.visible = false
+	game_started = false
+	combat_just_ended = false
+	current_scene_kind = ""
+	GameState.current_phase = GameStat.GamePhase.EXPLORATION
+	await get_tree().process_frame
+	spawn_start_menu()
+	await sceneTransition.fade_in()
+
+
 func start_game():
 	if game_started:
 		return
@@ -251,6 +275,7 @@ func enter_room(room: RoomResource, changedoor: bool = false, skip_fade: bool = 
 
 
 func go_back() -> void:
+	print("↩️ go_back vers ", last_room_Ressource.room_id if last_room_Ressource else "?", " — appelé par : ", get_stack())
 	if last_room_Ressource == null:
 		push_warning("go_back : aucune salle précédente enregistrée.")
 		return
@@ -286,6 +311,76 @@ func get_room_by_id(room_id: String) -> RoomResource:
 		if r.room_id == room_id:
 			return r
 	return null
+
+
+# ════════════════════════════════════════════════════════════════════
+#  COFFRES PIÉGÉS
+# ════════════════════════════════════════════════════════════════════
+
+## Vrai si le coffre de `room` cache encore un slime. Le tirage de tout le
+## donjon se fait au premier appel de la partie (état -1 partout).
+func chest_is_trapped(room: RoomResource) -> bool:
+	if room == null:
+		return false
+	if room.chest_trap_state < 0:
+		roll_chest_traps()
+	# Un coffre ALWAYS l'est quoi qu'en dise un tirage antérieur (sauvegarde
+	# faite avant que le coffre ne passe en ALWAYS), tant qu'il n'a pas servi.
+	var data := room.interactable as InteractableObjectResource
+	if room.chest_trap_state == 0 and data != null and not room.interactable_used 			and data.trap_mode == InteractableObjectResource.TrapMode.ALWAYS:
+		room.chest_trap_state = 1
+	print("Coffre de %s piégé : %s" % [room.room_id, room.chest_trap_state == 1])
+	return room.chest_trap_state == 1
+
+
+## Tire les coffres piégés du donjon : chaque coffre RANDOM l'est avec
+## chest_trap_chance, les ALWAYS toujours, puis on corrige pour rester entre
+## min_trapped_chests et max_trapped_chests. Les coffres déjà ouverts ou
+## déjà déclenchés ne sont pas retirés.
+func roll_chest_traps() -> void:
+	if donjon == null:
+		return
+	var forced: Array[RoomResource] = []
+	var candidates: Array[RoomResource] = []
+	for r: RoomResource in donjon.rooms:
+		if r == null:
+			continue
+		if r.chest_trap_state >= 0:
+			if r.chest_trap_state > 0:
+				forced.append(r)   # déjà piégé / déclenché : compte dans les bornes
+			continue
+		var data := r.interactable as InteractableObjectResource
+		if data == null or r.interactable_used:
+			r.chest_trap_state = 0
+			continue
+		match data.trap_mode:
+			InteractableObjectResource.TrapMode.ALWAYS:
+				forced.append(r)
+				r.chest_trap_state = 1
+			InteractableObjectResource.TrapMode.RANDOM:
+				candidates.append(r)
+			_:
+				r.chest_trap_state = 0
+
+	candidates.shuffle()
+	var trapped: Array[RoomResource] = []
+	var safe: Array[RoomResource] = []
+	for r in candidates:
+		if randf() < donjon.chest_trap_chance:
+			trapped.append(r)
+		else:
+			safe.append(r)
+	var lo := maxi(donjon.min_trapped_chests, 0)
+	var hi := maxi(donjon.max_trapped_chests, lo)
+	while forced.size() + trapped.size() < lo and not safe.is_empty():
+		trapped.append(safe.pop_back())
+	while forced.size() + trapped.size() > hi and not trapped.is_empty():
+		safe.append(trapped.pop_back())
+	for r in trapped:
+		r.chest_trap_state = 1
+	for r in safe:
+		r.chest_trap_state = 0
+	print("Coffres piégés : ", (forced + trapped).map(func(r): return r.room_id))
 
 
 func go_to_connected_room(index: int):
@@ -390,6 +485,51 @@ func return_to_exploration():
 
 #------------------------------------------------------
 signal inventory_changed
+
+
+# ════════════════════════════════════════════════════════════════════
+#  CARTES D'AFFINITÉ (cf. scripts/cards/affinity_card.gd)
+# ════════════════════════════════════════════════════════════════════
+signal cards_changed
+## Cartes possédées (une même carte peut figurer plusieurs fois).
+var affinity_cards: Array[AffinityCard] = []
+## Réserve dans laquelle les combats tirent, sauf réserve propre au combat.
+@export var card_pool: Array[AffinityCard] = []
+## Chance de gagner une carte à chaque victoire (sauf réglage du combat).
+@export_range(0.0, 1.0) var card_drop_chance: float = 0.6
+## Cartes en main au début d'une nouvelle partie.
+@export var starting_cards: Array[AffinityCard] = []
+
+
+func add_card(card: AffinityCard) -> void:
+	if card == null:
+		return
+	affinity_cards.append(card)
+	emit_signal("cards_changed")
+
+
+func remove_card(card: AffinityCard) -> void:
+	var i := affinity_cards.find(card)
+	if i >= 0:
+		affinity_cards.remove_at(i)
+		emit_signal("cards_changed")
+
+
+## Carte gagnée à la victoire (ou null) : chance et réserve du combat si
+## elles sont réglées, sinon celles du GameManager.
+func roll_card(encounter = null) -> AffinityCard:
+	var chance := card_drop_chance
+	var pool: Array[AffinityCard] = card_pool
+	if encounter is CombatEncounter:
+		if encounter.card_drop_chance >= 0.0:
+			chance = encounter.card_drop_chance
+		if not encounter.card_pool.is_empty():
+			pool = encounter.card_pool
+	var usable := pool.filter(func(c): return c != null)
+	if usable.is_empty() or randf() >= chance:
+		return null
+	return usable.pick_random()
+
 ## Charge une scène arbitraire hors du flux salle-par-salle (branches du boss).
 ## Pas d'autosave ici : la scène chargée n'est pas celle référencée par la
 ## RoomResource, un chargement rejouerait donc le combat de la salle depuis son
@@ -470,7 +610,7 @@ func add_money(amount: int) -> void:
 		return
 	money = max(0, money + amount)
 	emit_signal("resources_changed", money, prisoners)
-	print("💰 %+d → %d gold" % [amount, money])
+	print("💎 %+d → %d crystals" % [amount, money])
 
 
 ## Ajoute des prisonniers ramenés d'un combat.

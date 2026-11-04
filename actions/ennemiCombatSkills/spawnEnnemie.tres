@@ -18,7 +18,9 @@ metadata/_custom_type_script = "uid://dh0x1pgx4tqgk"
 script = ExtResource("2_tmr80")
 name = "spawnEnnemi"
 descriptionName = "invocation"
-description = "Spawn a new Slim"
+description = "Summons 1 Spitter.
+Target: an ally slot
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("4_48h3l")
 barkSkill = ""
 required_position = 0

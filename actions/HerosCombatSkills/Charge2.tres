@@ -30,7 +30,9 @@ metadata/_custom_type_script = "uid://cxxxcftffxxjh"
 script = ExtResource("6_4x88j")
 name = "Charge"
 descriptionName = "Kick"
-description = "Inflict damage and push an enemy away"
+description = "Deals 20 + ATK - DEF physical damage and pushes the target to the back row (it swaps with the enemy behind).
+Target: 1 front-row enemy
+Accuracy 100% | Cooldown 4 | Cost 10"
 icon = ExtResource("5_lhwtk")
 attack_sound = ExtResource("2_ldml5")
 barkSkill = ""

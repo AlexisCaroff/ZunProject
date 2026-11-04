@@ -28,6 +28,8 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
 window/size/initial_position=Vector2i(-1920, 0)
+window/stretch/mode.web="canvas_items"
+window/stretch/aspect.web="keep"
 
 [filesystem]
 

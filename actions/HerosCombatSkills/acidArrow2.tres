@@ -19,7 +19,9 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("6_3undn")
 name = "Acid Arrow"
 descriptionName = "Acid Arrow"
-description = "Deal damages to one ennemi"
+description = "Deals 20 + ATK - DEF magic damage.
+Target: 1 enemy (any row)
+Accuracy 100% | Cooldown 4"
 icon = ExtResource("5_w7e57")
 attack_sound = ExtResource("2_neujj")
 barkSkill = ""

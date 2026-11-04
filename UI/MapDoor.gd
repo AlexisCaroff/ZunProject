@@ -25,9 +25,22 @@ func _ready():
 	button.connect("mouse_entered", Callable(self, "_on_mouse_entered"))
 	button.connect("mouse_exited", Callable(self, "_on_mouse_exited"))
 	button.connect("button_down", Callable(self, "_on_button_down"))
+## Porte atteignable depuis la carte : elle donne sur au moins une salle
+## déjà découverte. Les portes encore dans le noir ne mènent nulle part,
+## sinon un clic dessus permettait de sauter des salles.
+func is_reachable() -> bool:
+	if gm == null:
+		return false
+	for room in connectedRooms:
+		var r = gm.get_room_by_id(room)
+		if r != null and r.explored:
+			return true
+	return false
+
+
 func _on_mouse_entered():
 	if GameState.current_phase == GameStat.GamePhase.EXPLORATION or GameState.current_phase == GameStat.GamePhase.DOOR:
-		if not button.disabled:
+		if not button.disabled and is_reachable():
 			var tween = create_tween()
 			tween.tween_property(self, "scale", hover_scale, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		
@@ -42,9 +55,11 @@ func _on_mouse_exited():
 				tween.tween_property(obj, "self_modulate", normal_color, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 func _on_button_down():
+	if not is_reachable():
+		return
 	if GameState.current_phase == GameStat.GamePhase.EXPLORATION or GameState.current_phase == GameStat.GamePhase.DOOR:
 		for room in connectedRooms:
 			var theroom = gm.get_room_by_id(room)
-			if not theroom.explored:
+			if theroom != null and not theroom.explored:
 				gm.enter_room( theroom)
 		

@@ -22,6 +22,7 @@ uitexture = ExtResource("5_vipaf")
 affected_stat = 0
 amount = 0
 duration = 3
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [sub_resource type="Resource" id="Resource_qg1gn"]
@@ -31,13 +32,16 @@ uitexture = ExtResource("8_exsrh")
 affected_stat = 1
 amount = 10
 duration = 2
+tier = 0
 metadata/_custom_type_script = "uid://c3dw018knk8mk"
 
 [resource]
 script = ExtResource("8_u6rdn")
 name = "Shield"
 descriptionName = "Shield"
-description = "debuff att and add miss chance"
+description = "Taunts 1 hero for 1 turn: it must attack the Punisher. Then on itself: DEF buff +2 steps.
+Target: 1 hero (any row), then itself
+Accuracy 100% | Cooldown 2"
 icon = ExtResource("7_7i31r")
 barkSkill = ""
 required_position = 0

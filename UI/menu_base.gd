@@ -26,8 +26,8 @@ func _ready():
 	button_quit.pressed.connect(_on_quit_pressed)
 	
 	AudioManager.register_tracks(
-		[preload("res://Audio/Music/track_01.ogg"),
-		 preload("res://Audio/Music/track_02.ogg"), 
+		[preload("res://Audio/Music/Track_01.ogg"),
+		 preload("res://Audio/Music/Track_02.ogg"), 
 		preload("res://Audio/Music/boss01.ogg"), 
 		preload("res://Audio/Music/camp01.ogg"), 
 		preload("res://Audio/Music/dungeon01.ogg")],

@@ -70,7 +70,13 @@ var animation: bool=false
 @export var peek_slide_time: float = 0.45
 ## Temps de lecture entre l'arrivee du personnage devant la porte et
 ## l'ouverture de la vue de peek, qui masque toute la scene.
-@export var peek_start_delay: float = 0.3
+@export var peek_start_delay: float = 0.8
+## Petit zoom sur la porte pendant que le personnage s'en approche avant le
+## peek, puis dézoom au retour. 1 = pas de zoom.
+@export var peek_zoom: float = 1.15
+@export var peek_zoom_time: float = 0.6
+## Fondu des boutons de la scène quand on change de porte (flèches).
+@export var buttons_fade_time: float = 0.2
 var chara_nodes: Array[CharaExplo] = []
 var selected_node: CharaExplo = null
 var _peek_rest_position: Vector2 = Vector2.ZERO
@@ -116,15 +122,19 @@ var buff_row: BuffRow = null
 
 func _ready():
 	GameState.current_phase = GameStat.GamePhase.DOOR
-	Game_Manager = get_tree().root.get_node("GameManager") 
+	_ready_msec = Time.get_ticks_msec()
+	Game_Manager = get_tree().root.get_node("GameManager")
+	var door_dialogue: Node = null
 	if Game_Manager.current_room_Ressource.door_scene_History != null and not Game_Manager.current_room_Ressource.door_history_played:
 		print("find history Scene")
-		Game_Manager.show_history_scene(Game_Manager.current_room_Ressource.door_scene_History)
+		door_dialogue = Game_Manager.show_history_scene(Game_Manager.current_room_Ressource.door_scene_History)
 		Game_Manager.current_room_Ressource.door_history_played =true
 	# Didacticiel porte / peek (intro2) : à la première porte de la partie.
+	# Il est dessiné au-dessus du HUD (et donc des dialogues) : on attend
+	# que le dialogue de la porte soit refermé pour l'afficher.
 	var door_tuto := get_node_or_null("../Intro2") as CanvasItem
 	if door_tuto != null and Game_Manager.tutorial_once("door"):
-		door_tuto.visible = true
+		_show_tuto_after(door_tuto, door_dialogue)
 	characters=Game_Manager.characters
 	# Etat de repos identique a celui laisse par _on_mouse_exited (pivot au
 	# centre, echelle startsize) : sans ca le texte « saute » au premier survol.
@@ -189,11 +199,15 @@ func _ready():
 	
 	await get_tree().process_frame  # attendre que la frame d'instanciation soit finie
 	load_chara()
+	_setup_portrait_column()
+	_setup_stat_hover()
 		
 	if donjon_map:
 		donjon_map.focus_door(Game_Manager.current_room_Ressource, viewport)
 		#donjon_map.move_to_position(donjon_map.curentposition)
 	_setup_map_inventory_toggle()
+	_setup_character_menu()   # après : il se range à côté du bouton sac
+	_setup_cards()            # après : il se range à côté du bouton fiche
 	_setup_buff_row()
 	if move_button != null:
 		move_button.pressed.connect(_on_move_button_pressed)
@@ -236,6 +250,142 @@ func _unequip_item(item: Equipment, chara: CharacterData) -> void:
 	if gm_node != null:
 		gm_node.add_to_inventory(item)
 	DoorInventory.recompute_stats(chara)
+
+
+# ── Colonne de portraits (charaPortraitFrame1..4) : clic = sélection ──
+## Composant de la colonne de portraits (préchargé : pas de dépendance au
+## cache des class_name).
+const PORTRAIT_COLUMN := preload("res://UI/portrait_column.gd")
+var portrait_entries: Array = []
+var _ready_msec: int = 0
+
+func _show_tuto_after(tuto: CanvasItem, dialogue: Node) -> void:
+	if dialogue != null and is_instance_valid(dialogue):
+		await dialogue.history_finished
+	if is_instance_valid(tuto):
+		tuto.visible = true
+
+
+# ── Survol des stats (même composant qu'en exploration) ──
+const STAT_HOVER := preload("res://UI/stat_hover.gd")
+
+func _setup_stat_hover() -> void:
+	if not compact_stats:
+		return
+	var hover = STAT_HOVER.new(get_parent())
+	for p in [["../AttackIcon", Att, "attack"], ["../DefenceIcon", Def, "defense"],
+			["../WillPowerIcon", WillPower, "willpower"]]:
+		hover.attach(get_node_or_null(p[0]), p[1], _stat_text.bind(p[2]))
+
+
+func _stat_text(stat: String) -> String:
+	return selected_character.stat_tooltip(stat) if selected_character != null else ""
+
+
+# ── Menu personnages : bouton rangé avec sac et carte, menu créé par code ──
+const MENU_SCENE := preload("res://menu_Characters.tscn")
+const MENU_ICON := preload("res://UI/UI boxes/charaIcon.png")
+var menu_perso: Node = null
+
+func _setup_character_menu() -> void:
+	var bag := map_bag_buttons.get("bag") as Control
+	if bag == null:
+		return
+	menu_perso = MENU_SCENE.instantiate()
+	menu_perso.name = "MenuPerso"
+	menu_perso.characters = Game_Manager.characters
+	get_parent().add_child(menu_perso)
+	if menu_perso.has_method("hideMenu"):
+		menu_perso.hideMenu()
+	if menu_perso.has_signal("change_in_equipment"):
+		menu_perso.change_in_equipment.connect(func(_c): _refresh_selected())
+	if menu_perso.has_signal("potion_used"):
+		menu_perso.potion_used.connect(func(_p, _t): _refresh_selected())
+
+	# Bouton : même taille, même cadre et même écart que sac / carte.
+	var btn := Button.new()
+	btn.name = "ButtonMenuPerso"
+	btn.flat = true
+	btn.focus_mode = Control.FOCUS_NONE
+	btn.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	btn.tooltip_text = "Characters"
+	btn.z_index = bag.z_index
+	var w := bag.offset_right - bag.offset_left
+	var h := bag.offset_bottom - bag.offset_top
+	btn.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	btn.offset_left = bag.offset_left - 88.0
+	btn.offset_right = btn.offset_left + w
+	btn.offset_top = bag.offset_top
+	btn.offset_bottom = bag.offset_top + h
+	var icon := Sprite2D.new()
+	icon.name = "IconMenu"
+	icon.texture = MENU_ICON
+	icon.position = Vector2(w, h) * 0.5
+	icon.scale = Vector2.ONE * (56.0 / float(MENU_ICON.get_width()))
+	btn.add_child(icon)
+	MapBagButtons.ensure_box(btn)
+	MapBagButtons.add_hover(btn)
+	btn.pressed.connect(func():
+		if is_instance_valid(menu_perso) and menu_perso.has_method("showMenu"):
+			menu_perso.select_character(selected_character)
+			menu_perso.showMenu())
+	get_parent().add_child(btn)
+	MapBagButtons.track_menu(btn, menu_perso)
+
+
+## Cartes d'affinité : consultables ici, jouables seulement au camp.
+var card_hand: CardHand = null
+
+func _setup_cards() -> void:
+	if map_bag_buttons.is_empty():
+		return
+	card_hand = CardHand.install_hud(get_parent(),
+			[map_bag_buttons.map, map_bag_buttons.bag, get_parent().get_node_or_null("ButtonMenuPerso")],
+			inventory_panel)
+	map_bag_buttons.map.pressed.connect(card_hand.close)
+	map_bag_buttons.bag.pressed.connect(card_hand.close)
+	# Carte, sac et cartes : même rectangle, même cadre. Boutons au rang 9 :
+	# au-dessus des menus, sous la vue de peek (z 10).
+	HudFrame.install(get_parent(), HudFrame.rect_of(inventory_panel), map_container,
+			contour_map, inventory_panel, [map_bag_buttons.map, map_bag_buttons.bag,
+			get_parent().get_node_or_null("ButtonMenuPerso"), card_hand.toggle_button])
+
+
+## Équipement ou potion modifiés depuis le menu : la fiche se redessine.
+func _refresh_selected() -> void:
+	if selected_character == null:
+		return
+	if move_mode:
+		set_move_mode(false)
+	selectCharacter(selected_character)
+
+
+func _setup_portrait_column() -> void:
+	var frames: Array = []
+	for i in 4:
+		frames.append(get_node_or_null("../charaPortraitFrame%d" % (i + 1)))
+	if frames.all(func(f): return f == null):
+		return
+	portrait_entries = PORTRAIT_COLUMN.build(frames, _on_portrait_frame_clicked)
+	_refresh_portrait_column()
+
+
+## Cadre i = position i de la formation. En mode déplacement, selectCharacter
+## fait l'échange, comme un clic sur la silhouette.
+func _on_portrait_frame_clicked(slot_index: int) -> void:
+	for c in characters:
+		if c.Chara_position == slot_index:
+			selectCharacter(c)
+			return
+
+
+func _refresh_portrait_column() -> void:
+	if portrait_entries.is_empty():
+		return
+	var by_slot: Array = [null, null, null, null]
+	for c in characters:
+		by_slot[clampi(c.Chara_position, 0, 3)] = c
+	PORTRAIT_COLUMN.refresh(portrait_entries, by_slot, selected_character)
 
 
 ## Flèches de part et d'autre du portrait : personnage suivant / précédent,
@@ -398,17 +548,7 @@ func _on_button_down() -> void:
 			animation = false
 			disabled=false
 		if !locked:
-			
-			var cam : Camera =$"../Camera2D"
-			var pose = cam.base_position
-			pose.y -=120
-			
-			if doorLeft:
-				open_door(1.5)
-			Game_Manager.sceneTransition.fade_out(1.5)
-			await cam.zoom_to_position(pose,2.0,1.0 )
-			
-			call_deferred("_advance_in_room")
+			await _play_enter_animation()
 		else:
 			var UILocked = lockedUI.instantiate()
 			add_child(UILocked )
@@ -417,7 +557,56 @@ func _on_button_down() -> void:
 			disabled=false
 	
 
+## Zoom sur la porte pendant son ouverture, puis passage dans la salle.
+## Même durée pour l'ouverture, le zoom et le fondu : tout part ensemble.
+@export var enter_zoom: float = 1.5
+@export var enter_time: float = 1.5
+
+
+## Entrée (bouton ENTER) ou embuscade pendant le peek. Si la vue de peek est
+## ouverte, on la referme d'abord : l'ouverture de la porte doit se voir.
+func _play_enter_animation() -> void:
+	_close_peek_view()
+	var cam := _door_camera()
+	if doorLeft:
+		open_door(enter_time)
+	Game_Manager.sceneTransition.fade_out(enter_time)
+	if cam != null:
+		# Cible : le centre du bouton ENTER, c'est-à-dire la porte elle-même.
+		var target := global_position + size * 0.5
+		target.y -= 40
+		await cam.zoom_to_position(target, cam.baseZoom.x * enter_zoom, enter_time)
+	else:
+		await get_tree().create_timer(enter_time).timeout
+	call_deferred("_advance_in_room")
+
+
+## Ferme la vue de peek comme le bouton de sortie (lvl/buttonexitepeek.gd),
+## sans faire revenir le personnage ni dézoomer : on enchaîne sur l'entrée.
+func _close_peek_view() -> void:
+	if not peeking and not subViewportContainer.visible:
+		return
+	peeking = false
+	subViewportContainer.visible = false
+	sub_viewport.process_mode = Node.PROCESS_MODE_DISABLED
+	var exit_peek := get_node_or_null("../ExitPeek") as CanvasItem
+	if exit_peek != null:
+		exit_peek.visible = false
+	var pose1 := get_node_or_null("../pose1") as Node2D
+	if pose1 != null:
+		position = pose1.position
+	# La caméra est remise au cadrage normal à l'ouverture du peek ; on
+	# repart de là pour le zoom d'entrée.
+	_peek_zoom_snap(false)
+
+
 func _advance_in_room():
+	# La caméra active (celle du GameManager) survit au changement de scène :
+	# on annule le zoom d'entrée tant que l'écran est noir, sinon le combat
+	# ou l'exploration s'ouvriraient zoomés.
+	var cam := _door_camera()
+	if cam != null:
+		cam.reset(0.0)
 	
 	GameState.current_phase = GameStat.GamePhase.COMBAT
 	if not Game_Manager.current_room_Ressource:
@@ -442,6 +631,8 @@ func _advance_in_room():
 
 func startpeeking():
 	peek_scene.door = self
+	# La salle derrière la porte est entrevue : à demi révélée sur la carte.
+	Game_Manager.current_room_Ressource.peeked = true
 	donjon_map.peek_next_Room(Game_Manager.current_room_Ressource, viewport)
 	peek_scene.set_encounter(encounter_for_this_door)
 	GameState.current_phase = GameStat.GamePhase.PEEK
@@ -484,15 +675,7 @@ func _start_combat():
 		embuscadeUI.texture = encounter_for_this_door.imageEmbuscade
 		embuscadeUI.visible = true
 	await get_tree().create_timer(1.0).timeout
-	subViewportContainer.visible=false
-	var cam : Camera =$"../Camera2D"
-	var pose = cam.base_position
-	pose.y -=120
-	if doorLeft:
-		open_door(1.5)
-	Game_Manager.sceneTransition.fade_out(1.5)
-	await cam.zoom_to_position(pose,2.0,1.0 )
-	call_deferred("_advance_in_room")
+	await _play_enter_animation()
 	
 	
 func _on_left_pressed():
@@ -562,12 +745,13 @@ func selectCharacter(chara: CharacterData):
 		kinks.bbcode_enabled = true
 		if chara_portrait != null:
 			chara_portrait.texture = chara.explorationPortrait
+		_refresh_portrait_column()
 		_update_equipment_icons(chara)
 		if compact_stats:
 			# Présentation exploration / camp : l'icône dit la stat.
-			Att.text = " %d" % chara.attack
-			Def.text = " %d" % chara.defense
-			WillPower.text = " %d" % chara.willpower
+			for pair in [[Att, "attack"], [Def, "defense"], [WillPower, "willpower"]]:
+				var lbl: RichTextLabel = pair[0]
+				lbl.text = " %d" % chara.stat_breakdown(pair[1]).total
 		else:
 			Att.text = "Attack: %d [color=AAAAAA] [i](Base %d + Bonus %d)[/i][/color]" % [
 			chara.attack, chara.base_attack, (chara.attack - chara.base_attack)]
@@ -611,7 +795,28 @@ func open_door(duration:float):
 func _on_return_pressed() -> void:
 	if Game_Manager == null:
 		return
+	# Le bouton Retour est une large bande au milieu de l'écran : les clics
+	# qui font avancer un dialogue ou ferment un tutoriel ne doivent pas le
+	# déclencher (retour involontaire à la salle précédente).
+	if _screen_busy():
+		print("🔙 Retour ignoré (dialogue ou tutoriel à l'écran)")
+		return
+	print("🔙 Retour vers ", Game_Manager.last_room_Ressource.room_id if Game_Manager.last_room_Ressource else "?")
 	Game_Manager.go_back()
+
+
+func _screen_busy() -> bool:
+	if Time.get_ticks_msec() - _ready_msec < 800:
+		return true
+	if GameState.Pause:
+		return true
+	var tuto := get_node_or_null("../Intro2") as CanvasItem
+	if tuto != null and tuto.visible:
+		return true
+	for c in Game_Manager.get_children():
+		if c is HistorySceneOverlay:
+			return true
+	return false
 
 
 # ════════════════════════════════════════════════════════════════════
@@ -633,6 +838,8 @@ func on_peek_enter() -> void:
 	# reperes alignes. L'echelle n'est pas touchee — le marqueur n'en porte pas,
 	# l'appliquer ferait bondir le personnage a la taille d'exploration.
 	var target_pos: Vector2 = hero_root.to_local(peek_pose.global_position)
+	# Le zoom démarre avec le pas du personnage et dure jusqu'au peek.
+	_peek_zoom_in()
 	await _tween_chara(selected_node, target_pos, selected_node.scale)
 
 	# Une fois EN PLACE devant la porte, le personnage prend sa pose de peek.
@@ -643,6 +850,10 @@ func on_peek_enter() -> void:
 
 	if peek_start_delay > 0.0:
 		await get_tree().create_timer(peek_start_delay).timeout
+	# La vue de peek recouvre l'écran mais vit dans la scène : la caméra doit
+	# être revenue à la normale avant qu'elle n'apparaisse, sinon elle serait
+	# zoomée elle aussi. Le saut est invisible, la vue s'ouvre dans la foulée.
+	_peek_zoom_snap(false)
 
 
 func on_peek_exit() -> void:
@@ -653,7 +864,47 @@ func on_peek_exit() -> void:
 	if _peek_rest_texture != null:
 		selected_node.sprite.texture = _peek_rest_texture
 		_peek_rest_texture = null
+	# Sortie du peek : on repart du cadrage zoomé et on dézoome doucement,
+	# pendant que le personnage regagne sa place.
+	_peek_zoom_snap(true)
+	var cam := _door_camera()
+	if cam != null:
+		cam.reset(peek_zoom_time)
 	await _tween_chara(selected_node, _peek_rest_position, _peek_rest_scale)
+
+
+## Caméra du zoom de peek : celle qui est déjà active dans la scène, la même
+## que les autres zooms. On ne change pas la caméra active.
+func _door_camera() -> Camera:
+	return get_viewport().get_camera_2d() as Camera
+
+
+## Cadrage zoomé : entre le centre de l'écran et la porte, pour garder les
+## personnages en vue tout en rapprochant la porte.
+func _peek_zoom_target() -> Vector2:
+	var cam := _door_camera()
+	var door_center := global_position + size * 0.5
+	return cam.base_position.lerp(door_center, 0.5)
+
+
+func _peek_zoom_in() -> void:
+	var cam := _door_camera()
+	if cam == null or peek_zoom <= 1.0:
+		return
+	cam.zoom_to_position(_peek_zoom_target(), cam.baseZoom.x * peek_zoom, peek_zoom_time)
+
+
+## Place la caméra d'un coup : cadrage zoomé (true) ou normal (false).
+func _peek_zoom_snap(zoomed: bool) -> void:
+	var cam := _door_camera()
+	if cam == null or peek_zoom <= 1.0:
+		return
+	if zoomed:
+		cam.position = _peek_zoom_target()
+		cam.zoom = cam.baseZoom * peek_zoom
+	else:
+		cam.position = cam.base_position
+		cam.zoom = cam.baseZoom
 
 
 ## `duration` < 0 = celle du peek ; l'echange de places passe la sienne.
@@ -751,6 +1002,7 @@ func _slide_to_room(next_room: RoomResource, direction: int) -> void:
 	_sliding = true
 	left_button.disabled = true
 	right_button.disabled = true
+	_fade_out_scene_buttons()
 
 	var ui_root: Node = get_parent()            # instance doorInstance
 	var outer: Node = ui_root.get_parent()      # racine de la scene porte
@@ -799,6 +1051,17 @@ func _slide_to_room(next_room: RoomResource, direction: int) -> void:
 	# Sans await : enter_room vient de mettre CE noeud en file de suppression,
 	# reprendre la coroutine apres coup travaillerait sur une instance liberee.
 	Game_Manager.sceneTransition.fade_in(door_fade_time)
+
+
+## Boutons de la scène (ENTER, peek, flèches, retour) effacés en fondu au
+## début du glissement vers une autre porte : la porte suivante arrive avec
+## les siens.
+func _fade_out_scene_buttons() -> void:
+	var items: Array = [Doortext, peekButton, left_button, right_button, return_button]
+	var tween := create_tween().set_parallel(true)
+	for item in items:
+		if item is CanvasItem and is_instance_valid(item):
+			tween.tween_property(item, "modulate:a", 0.0, buttons_fade_time)
 
 
 ## L'instance de doorInstance dans une scene porte : c'est la seule a porter un
@@ -889,6 +1152,7 @@ func _swap_characters(a: CharaExplo, b: CharaExplo) -> void:
 
 	a.characterData.Chara_position = slot_b
 	b.characterData.Chara_position = slot_a
+	_refresh_portrait_column()
 
 	var portrait_a := _portrait_for_slot(slot_a)
 	var portrait_b := _portrait_for_slot(slot_b)

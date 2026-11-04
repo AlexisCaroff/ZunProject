@@ -31,7 +31,9 @@ metadata/_custom_type_script = "uid://bjsbovfjff2wo"
 script = ExtResource("1_skill")
 name = "Purify"
 descriptionName = "Purify"
-description = "Reduces all enemies’ attack and deals minor damage"
+description = "Deals 5 + ATK - DEF magic damage and ATK debuff -1 step.
+Target: all enemies (one hit roll each)
+Accuracy 100% | Cooldown 4"
 icon = ExtResource("5_icon")
 attack_sound = ExtResource("7_sound")
 barkSkill = ""

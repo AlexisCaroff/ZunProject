@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="CombatEncounter" load_steps=9 format=3 uid="uid://cbfjexgqn4it1"]
+[gd_resource type="Resource" script_class="CombatEncounter" load_steps=10 format=3 uid="uid://cbfjexgqn4it1"]
 
+[ext_resource type="Script" uid="uid://csjs6vf5actyx" path="res://scripts/cards/affinity_card.gd" id="1_rtttf"]
 [ext_resource type="PackedScene" path="res://characters/CharacterEnemyStoneSlime.tscn" id="2_rtttf"]
 [ext_resource type="PackedScene" uid="uid://5086yfcspq70" path="res://characters/CharacterEnemySlimePile.tscn" id="2_vipsv"]
 [ext_resource type="Texture2D" uid="uid://c8uxagkudf0xe" path="res://UI/doorebuscade/PEEK_scare_nymphM.png" id="4_p2gta"]
@@ -12,7 +13,10 @@
 [resource]
 script = ExtResource("7_1m0pg")
 enemy_scenes = Array[PackedScene]([ExtResource("8_thug"), ExtResource("2_rtttf"), ExtResource("2_vipsv"), ExtResource("4_r52qh")])
+enemy_slots = Array[int]([])
 loots = Array[ExtResource("5_r52qh")]([ExtResource("6_morhg")])
 description = ""
 imageEmbuscade = ExtResource("4_p2gta")
+card_drop_chance = -1.0
+card_pool = Array[ExtResource("1_rtttf")]([])
 metadata/_custom_type_script = "uid://dmxcru3ra8jg"

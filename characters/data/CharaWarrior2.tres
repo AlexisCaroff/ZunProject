@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=23 format=3 uid="uid://b42qgncyvuw0n"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=22 format=3 uid="uid://b42qgncyvuw0n"]
 
 [ext_resource type="Texture2D" uid="uid://c32ucvj4qas4v" path="res://characters/portraits/PORTRAIT_hero_warrior.png" id="1_l3gwv"]
 [ext_resource type="Texture2D" uid="uid://c18klaue4evao" path="res://characters/charatexture/demo characters/HERO_warrior_hit.png" id="2_0vjkw"]
 [ext_resource type="PackedScene" uid="uid://c02yu3qnsajyt" path="res://UI/bark.tscn" id="3_p32jx"]
 [ext_resource type="Script" uid="uid://dmwb4vh0ycukv" path="res://scripts/camp/CampSkill.gd" id="4_7r1bm"]
-[ext_resource type="Resource" uid="uid://do024kep0pxki" path="res://actions/CampSkill/EquipmentMaintenance.tres" id="5_pg16s"]
 [ext_resource type="Resource" uid="uid://chp0xw7w6j0l8" path="res://actions/CampSkill/masturbate.tres" id="6_6vwhk"]
 [ext_resource type="Resource" uid="uid://c00hfk3k1wy86" path="res://actions/CampSkill/dialogueWarrior.tres" id="7_s7alk"]
 [ext_resource type="Resource" uid="uid://bi4132h3ku3pk" path="res://actions/CampSkill/LoveEffectW.tres" id="8_l4ocr"]
@@ -80,7 +79,7 @@ max_durationIddle = 1.0
 min_scale = 0.95
 max_scale = 1.0
 corruption = 0
-camp_skill_resources = Array[ExtResource("4_7r1bm")]([ExtResource("5_pg16s"), ExtResource("6_6vwhk"), ExtResource("7_s7alk"), ExtResource("8_l4ocr")])
+camp_skill_resources = Array[ExtResource("4_7r1bm")]([ExtResource("6_6vwhk"), ExtResource("7_s7alk"), ExtResource("8_l4ocr")])
 bark_scene = ExtResource("3_p32jx")
 taunts = ["Is that all you've got?", "Bring it on !", "You fight like a wet noodle!"]
 reaction = ["Bring it on !", "Is that all you've got?", ""]
@@ -89,3 +88,4 @@ corrupted = false
 inquisition = false
 immobilized = false
 immobilized_turns = 0
+faith = 2
