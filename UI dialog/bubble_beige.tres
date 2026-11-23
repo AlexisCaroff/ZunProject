@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DialogueBubbleStyle" load_steps=2 format=3 uid="uid://pls3cw5llefv"]
+
+[ext_resource type="Script" uid="uid://1bhpnbkwtgb" path="res://UI dialog/dialogue_bubble_style.gd" id="1_lt7wn"]
+
+[resource]
+script = ExtResource("1_lt7wn")
+fill = Color(0.843137, 0.788235, 0.729412, 1)
+border = Color(0.517647, 0.407843, 0.313726, 1)
+text_color = Color(0.227451, 0.164706, 0.133333, 1)
+deco = Color(0.729412, 0.666667, 0.6, 1)
+name_fill = Color(0.647059, 0.556863, 0.462745, 1)
+name_border = Color(0.572549, 0.482353, 0.388235, 1)
+name_text = Color(0.964706, 0.92549, 0.87451, 1)

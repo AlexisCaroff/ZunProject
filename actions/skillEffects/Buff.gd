@@ -122,7 +122,8 @@ func set_level(lvl: int) -> void:
 
 
 ## Échelle en BBCode, le palier atteint mis en avant.
-func ladder_bbcode() -> String:
+## `vertical` : un palier par ligne, le plus haut en premier.
+func ladder_bbcode(vertical: bool = false) -> String:
 	var col := "#e070ff" if is_poison() else ("#ffffff" if level > 0 else "#ff7a6b")
 	var parts: Array[String] = []
 	for i in MAX_LEVEL:
@@ -134,6 +135,10 @@ func ladder_bbcode() -> String:
 			parts.append("[color=%s]%s[/color]" % [col, txt])
 		else:
 			parts.append("[color=#6b6359]%s[/color]" % txt)
+	if vertical:
+		parts.reverse()
+		return "
+".join(parts)
 	return "  ".join(parts)
 
 func apply_to(target: CharacterData) -> void:

@@ -233,7 +233,7 @@ func show_line():
 	if speaker in no_portrait_speakers:
 		# Tous les portraits en inactif, nom du speaker quand même affiché
 		_dim_all_portraits()
-		ui.set_text(_resolve_display_name(speaker), text)
+		ui.set_text(_resolve_display_name(speaker), text, speaker)
 		return
 
 	# ── Résolution slot + portrait ────────────────────────────────────
@@ -249,7 +249,7 @@ func show_line():
 			# Mode override : speaker absent de slot_overrides → fallback narrator
 			push_warning("DialogueManager : speaker '%s' absent de slot_overrides → affiché en mode narrator." % speaker)
 			_dim_all_portraits()
-			ui.set_text(_resolve_display_name(speaker), text)
+			ui.set_text(_resolve_display_name(speaker), text, speaker)
 			return
 
 	var speaker_index := participants.find(slot_name)
@@ -274,7 +274,7 @@ func show_line():
 		textures.append(tex)
 
 	ui.set_portraits_multi(textures, speaker_index)
-	ui.set_text(_resolve_display_name(speaker), text)
+	ui.set_text(_resolve_display_name(speaker), text, speaker)
 	_reposition_speaker(speaker_index)
 
 
@@ -301,7 +301,7 @@ func _on_Choice2_button_down() -> void:
 #  Helpers
 # ─────────────────────────────────────────────
 
-## Déplace le label Speaker pour le centrer sous le portrait actif.
+## Indique à la bulle quel portrait parle (queue + onglet du nom).
 ## En mode slot_layout, on utilise directement l'index de slot ; sinon
 ## on utilise le mapping par count des _LAYOUT_PORTRAIT_NAMES.
 func _reposition_speaker(speaker_index: int) -> void:
@@ -330,10 +330,9 @@ func _reposition_speaker(speaker_index: int) -> void:
 	var portrait := ui.get_node_or_null(node_name) as TextureRect
 	if portrait == null:
 		return
-
-	var center_x := portrait.position.x + portrait.size.x * portrait.scale.x * 0.5
-	var half_w := speaker_label.size.x * 0.5
-	speaker_label.position.x = center_x - half_w
+	# La bulle oriente sa queue (et place l'onglet du nom) vers ce portrait.
+	if ui.has_method("set_speaker_portrait"):
+		ui.set_speaker_portrait(portrait)
 
 
 ## Retourne le nom de slot d'un speaker (résout les alias)

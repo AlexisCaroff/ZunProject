@@ -1,0 +1,234 @@
+[gd_scene load_steps=16 format=3 uid="uid://df75ie3hkchko"]
+
+[ext_resource type="Script" uid="uid://cyd4bvc5drkv3" path="res://UI/cards/card_view.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://b1yugc6u18rln" path="res://UI/cards/img/silouetteNeutre.png" id="2_neutral"]
+[ext_resource type="Texture2D" uid="uid://c1gsy346im1od" path="res://UI/cards/img/silouetteother.png" id="3_other"]
+[ext_resource type="Texture2D" uid="uid://bvbprwx5fxa5n" path="res://UI/cards/img/silouetteSelfe.png" id="4_self"]
+[ext_resource type="Resource" uid="uid://uf5x5dpfh5ln" path="res://characters/data/CharaHunter2.tres" id="5_hunter"]
+[ext_resource type="Script" uid="uid://bx35gsfx53hqh" path="res://scripts/Characters/CharacterData.gd" id="5_ttve8"]
+[ext_resource type="Resource" uid="uid://cw65x7yfthrul" path="res://characters/data/CharaPriest.tres" id="6_priest"]
+[ext_resource type="Resource" uid="uid://b42qgncyvuw0n" path="res://characters/data/CharaWarrior2.tres" id="7_warrior"]
+[ext_resource type="Resource" uid="uid://c1xql2qyr4th5" path="res://actions/actiontexture/Mystic.tres" id="8_mystic"]
+[ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="9_title"]
+[ext_resource type="FontFile" uid="uid://dy4n8qboodyud" path="res://font/MarcellusSC-Regular.ttf" id="10_body"]
+
+[sub_resource type="StyleBoxFlat" id="Style_frame"]
+bg_color = Color(0.11, 0.075, 0.07, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.721569, 0.647059, 0.45098, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="Style_cost"]
+bg_color = Color(0.45, 0.16, 0.13, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.88, 0.55, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="Style_art"]
+bg_color = Color(0.2, 0.14, 0.12, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.505, 0.453, 0.316, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="Style_desc"]
+bg_color = Color(0.16, 0.11, 0.1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.505, 0.453, 0.316, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="CardView" type="Control"]
+custom_minimum_size = Vector2(240, 340)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 240.0
+offset_bottom = 340.0
+script = ExtResource("1_script")
+silhouette_neutral = ExtResource("2_neutral")
+silhouette_other = ExtResource("3_other")
+silhouette_self = ExtResource("4_self")
+portrait_sources = Array[ExtResource("5_ttve8")]([ExtResource("5_hunter"), ExtResource("6_priest"), ExtResource("7_warrior"), ExtResource("8_mystic")])
+
+[node name="Frame" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 340.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_frame")
+
+[node name="TopBand" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 240.0
+offset_bottom = 72.0
+mouse_filter = 2
+
+[node name="PortraitClip" type="Control" parent="TopBand"]
+clip_contents = true
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 76.0
+offset_bottom = 70.0
+mouse_filter = 2
+
+[node name="UserPortrait" type="TextureRect" parent="TopBand/PortraitClip"]
+layout_mode = 0
+offset_right = 68.0
+offset_bottom = 66.0
+mouse_filter = 2
+texture = ExtResource("2_neutral")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Targets" type="HBoxContainer" parent="TopBand"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 14.0
+offset_right = 180.0
+offset_bottom = 60.0
+mouse_filter = 2
+theme_override_constants/separation = -16
+alignment = 1
+
+[node name="T1" type="TextureRect" parent="TopBand/Targets"]
+custom_minimum_size = Vector2(34, 46)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_other")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="T2" type="TextureRect" parent="TopBand/Targets"]
+custom_minimum_size = Vector2(34, 46)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_other")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="T3" type="TextureRect" parent="TopBand/Targets"]
+custom_minimum_size = Vector2(34, 46)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_other")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="T4" type="TextureRect" parent="TopBand/Targets"]
+custom_minimum_size = Vector2(34, 46)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_self")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CostBadge" type="Panel" parent="TopBand"]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 11.0
+offset_right = 232.0
+offset_bottom = 59.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_cost")
+
+[node name="CostLabel" type="Label" parent="TopBand/CostBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("9_title")
+theme_override_font_sizes/font_size = 28
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BandLine" type="ColorRect" parent="TopBand"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 70.0
+offset_right = 236.0
+offset_bottom = 73.0
+mouse_filter = 2
+color = Color(0.721569, 0.647059, 0.45098, 1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 76.0
+offset_right = 230.0
+offset_bottom = 112.0
+theme_override_colors/font_color = Color(1, 0.88, 0.55, 1)
+theme_override_fonts/font = ExtResource("9_title")
+theme_override_font_sizes/font_size = 24
+text = "Card title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArtBox" type="Panel" parent="."]
+clip_contents = true
+layout_mode = 0
+offset_left = 14.0
+offset_top = 114.0
+offset_right = 226.0
+offset_bottom = 226.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_art")
+
+[node name="Art" type="TextureRect" parent="ArtBox"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 209.0
+offset_bottom = 109.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DescBox" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 232.0
+offset_right = 226.0
+offset_bottom = 330.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_desc")
+
+[node name="Desc" type="RichTextLabel" parent="DescBox"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 204.0
+offset_bottom = 92.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.95, 0.93, 0.88, 1)
+theme_override_fonts/normal_font = ExtResource("10_body")
+theme_override_font_sizes/normal_font_size = 15
+bbcode_enabled = true
+text = "[center]Effect description.[/center]"
+scroll_active = false

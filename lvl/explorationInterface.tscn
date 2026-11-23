@@ -1,6 +1,5 @@
-[gd_scene load_steps=53 format=3 uid="uid://badg2cpqmlnim"]
+[gd_scene load_steps=54 format=3 uid="uid://badg2cpqmlnim"]
 
-[ext_resource type="Texture2D" uid="uid://cds1jgu4rdn1e" path="res://UI/UI boxes/UI_fgwall_inquisition.png" id="1_d8pyn"]
 [ext_resource type="PackedScene" uid="uid://cl2ysrfuwgkhh" path="res://UI/mapDonjon1.tscn" id="4_e2h3q"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="6_0n6ar"]
 [ext_resource type="Script" uid="uid://tq0nr5tg2b3k" path="res://lvl/positionexplo.gd" id="7_4d4vg"]
@@ -40,6 +39,8 @@
 [ext_resource type="Texture2D" uid="uid://c1gp1kt7n8v64" path="res://UI/GuiltIcon.png" id="40_nvbu6"]
 [ext_resource type="Texture2D" uid="uid://mrdo8u7sgwwq" path="res://UI/lustIcon.png" id="41_gdhh8"]
 [ext_resource type="Texture2D" uid="uid://c3jrt50dlc2fd" path="res://UI/Stamina.png" id="42_2rhrc"]
+[ext_resource type="PackedScene" uid="uid://b324wrf08x8kv" path="res://UI/UI dashboard/ui_bg_bottom.tscn" id="bgb_1"]
+[ext_resource type="Texture2D" uid="uid://ckdnuqdfatnva" path="res://UI/UI dashboard/UI_bg_pillar.png" id="bgb_2"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="ex_euph"]
 [ext_resource type="Texture2D" uid="uid://b54elep5kk5sm" path="res://UI/UI boxes/UI_combat_portrait_frame.png" id="ex_frame"]
 
@@ -74,10 +75,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="exploUI" type="Sprite2D" parent="."]
-position = Vector2(960, 893.063)
-scale = Vector2(0.76, 0.78)
-texture = ExtResource("1_d8pyn")
+[node name="exploUI" parent="." instance=ExtResource("bgb_1")]
+position = Vector2(0, 30)
+
+[node name="UI_bgPillar" type="Sprite2D" parent="."]
+position = Vector2(128, 931)
+scale = Vector2(0.5, 0.473016)
+texture = ExtResource("bgb_2")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0
@@ -487,12 +491,12 @@ flat = true
 
 [node name="Items" type="Sprite2D" parent="."]
 z_index = 8
-position = Vector2(235, 997)
+position = Vector2(226, 981)
 scale = Vector2(0.782237, 0.782237)
 
 [node name="Item1" type="Sprite2D" parent="Items"]
 z_index = 8
-position = Vector2(-146.854, 0)
+position = Vector2(-126.56, 0)
 script = ExtResource("29_ijfhg")
 
 [node name="TextureRect" type="TextureRect" parent="Items/Item1"]
@@ -591,9 +595,9 @@ text = "Attack "
 [node name="DefLabel" type="RichTextLabel" parent="."]
 z_index = 6
 layout_mode = 0
-offset_left = 434.645
+offset_left = 411.742
 offset_top = 993.0
-offset_right = 780.645
+offset_right = 757.743
 offset_bottom = 1048.0
 theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
 theme_override_fonts/normal_font = ExtResource("ex_euph")
@@ -605,9 +609,9 @@ text = "Defence"
 [node name="WillPower" type="RichTextLabel" parent="."]
 z_index = 6
 layout_mode = 0
-offset_left = 562.645
+offset_left = 522.032
 offset_top = 992.0
-offset_right = 897.645
+offset_right = 857.032
 offset_bottom = 1047.0
 theme_override_colors/default_color = Color(0.721569, 0.647059, 0.45098, 1)
 theme_override_fonts/normal_font = ExtResource("ex_euph")
@@ -702,7 +706,7 @@ flat = true
 script = ExtResource("34_iv2bx")
 
 [node name="IconPriestessWhip" type="Sprite2D" parent="ExploSkillButton"]
-position = Vector2(50, 52.98)
+position = Vector2(8.18811, 52.98)
 scale = Vector2(0.831065, 0.866774)
 texture = ExtResource("33_d8pyn")
 
@@ -717,7 +721,7 @@ flat = true
 script = ExtResource("34_iv2bx")
 
 [node name="IconMove" type="Sprite2D" parent="ExploSkillButtonMove"]
-position = Vector2(50, 52.98)
+position = Vector2(8.18811, 52.98)
 scale = Vector2(0.831065, 0.866774)
 texture = ExtResource("32_hwivl")
 
@@ -789,12 +793,12 @@ texture = ExtResource("36_ersvk")
 
 [node name="WillPowerIcon" type="Sprite2D" parent="."]
 modulate = Color(0.222684, 0.533742, 0.748564, 1)
-position = Vector2(543.645, 1014.75)
+position = Vector2(503.032, 1014.75)
 scale = Vector2(0.2258, 0.2311)
 texture = ExtResource("37_j0o3j")
 
 [node name="BuffDeff" type="Sprite2D" parent="."]
-position = Vector2(415.645, 1014.75)
+position = Vector2(392.742, 1014.75)
 scale = Vector2(0.669, 0.669)
 texture = ExtResource("38_dip6q")
 
@@ -826,9 +830,9 @@ texture = ExtResource("42_2rhrc")
 z_index = 5
 layout_mode = 0
 offset_left = 87.0
-offset_top = 790.0
+offset_top = 799.0
 offset_right = 272.0
-offset_bottom = 966.0
+offset_bottom = 975.0
 mouse_filter = 2
 texture = ExtResource("ex_frame")
 expand_mode = 1

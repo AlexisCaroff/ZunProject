@@ -15,7 +15,8 @@ class_name AffinityCard
 ##  OTHER_ALLY  : un autre membre de l'équipe (à déposer sur lui)
 ##  ANY_ALLY    : n'importe quel membre, joueur compris
 ##  ALL         : toute l'équipe (déposer la carte sur n'importe qui)
-enum Target { SELF, OTHER_ALLY, ANY_ALLY, ALL }
+##  OTHERS      : le reste de l'équipe, sans le joueur de la carte
+enum Target { SELF, OTHER_ALLY, ANY_ALLY, ALL, OTHERS }
 
 ## Mot-clé de user_name : tout le monde peut jouer la carte.
 const ANYONE := "All"
@@ -50,4 +51,6 @@ func target_label() -> String:
 			return "One ally"
 		Target.ANY_ALLY:
 			return "One character"
+		Target.OTHERS:
+			return "The others"
 	return "Whole team"

@@ -1,16 +1,62 @@
-[gd_scene load_steps=13 format=3 uid="uid://bg44l1eibyvid"]
+[gd_scene load_steps=20 format=3 uid="uid://b5qq2iorv6ybe"]
 
 [ext_resource type="Script" uid="uid://2yw45k1rwvdf" path="res://DialogueUI.gd" id="1_6e3n1"]
 [ext_resource type="Texture2D" uid="uid://xbjwv5qg2xmp" path="res://characters/portraits/PORTRAIT_hero_hunter.png" id="2_om3t3"]
 [ext_resource type="Texture2D" uid="uid://dx8h5r3u15vy5" path="res://characters/portraits/PORTRAIT_hero_priestess.png" id="3_l3nt5"]
-[ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="3_om3t3"]
 [ext_resource type="Texture2D" uid="uid://c32ucvj4qas4v" path="res://characters/portraits/PORTRAIT_hero_warrior.png" id="4_l3nt5"]
 [ext_resource type="FontFile" uid="uid://dnslgqwusbs67" path="res://UI/Euphorigenic.otf" id="5_om3t3"]
-[ext_resource type="Texture2D" uid="uid://b6ydx3ktka8fh" path="res://UI/UI boxes/UI_convo_box.png" id="5_qtmt7"]
-[ext_resource type="Texture2D" uid="uid://daesb11yj6hl2" path="res://UI/UI boxes/UI_convo_name.png" id="7_y5125"]
-[ext_resource type="Texture2D" uid="uid://cwkldn58q4lyh" path="res://UI/UI boxes/UI_convo_name_Bkg.png" id="8_qn32y"]
+[ext_resource type="Shader" uid="uid://1ey1eaxuwp4a" path="res://UI dialog/recolor.gdshader" id="5_y5125"]
+[ext_resource type="Texture2D" uid="uid://c6wdabh13t1j2" path="res://UI dialog/UI dialog/UI_convo_deco.png" id="6_qn32y"]
+[ext_resource type="Texture2D" uid="uid://c3hl41niydywh" path="res://UI dialog/UI dialog/UI_convo_tail.png" id="7_5qnbt"]
+[ext_resource type="Texture2D" uid="uid://coqiugijafe2d" path="res://UI dialog/UI dialog/UI_convo_name.png" id="8_16ujg"]
+[ext_resource type="Texture2D" uid="uid://dcfimsbecei4w" path="res://UI dialog/UI dialog/Cercle.png" id="8_qn32y"]
 [ext_resource type="Texture2D" uid="uid://djk5rtb1m8cpd" path="res://UI/UI boxes/UI_click_left.png" id="10_5qnbt"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="11_y5125"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gkyvs"]
+shader = ExtResource("5_y5125")
+shader_parameter/src_a = Color(0.517647, 0.407843, 0.313726, 1)
+shader_parameter/src_b = Color(0.843137, 0.788235, 0.729412, 1)
+shader_parameter/dst_a = Color(0.517647, 0.407843, 0.313726, 1)
+shader_parameter/dst_b = Color(0.843137, 0.788235, 0.729412, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5qnbt"]
+shader = ExtResource("5_y5125")
+shader_parameter/src_a = Color(0, 0, 0, 1)
+shader_parameter/src_b = Color(0.843137, 0.788235, 0.729412, 1)
+shader_parameter/dst_a = Color(0, 0, 0, 1)
+shader_parameter/dst_b = Color(0.843137, 0.788235, 0.729412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpydh"]
+bg_color = Color(0.843137, 0.788235, 0.729412, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.517647, 0.407843, 0.313726, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwcgm"]
+shader = ExtResource("5_y5125")
+shader_parameter/src_a = Color(0, 0, 0, 1)
+shader_parameter/src_b = Color(0.729412, 0.666667, 0.6, 1)
+shader_parameter/dst_a = Color(0, 0, 0, 1)
+shader_parameter/dst_b = Color(0.729412, 0.666667, 0.6, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbce1"]
+atlas = ExtResource("6_qn32y")
+region = Rect2(483, 485, 52, 50)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0oxbx"]
+shader = ExtResource("5_y5125")
+shader_parameter/src_a = Color(0.572549, 0.482353, 0.388235, 1)
+shader_parameter/src_b = Color(0.647059, 0.556863, 0.462745, 1)
+shader_parameter/dst_a = Color(0.572549, 0.482353, 0.388235, 1)
+shader_parameter/dst_b = Color(0.647059, 0.556863, 0.462745, 1)
 
 [sub_resource type="FontVariation" id="FontVariation_y5125"]
 base_font = ExtResource("5_om3t3")
@@ -38,62 +84,166 @@ color = Color(0, 0, 0, 0.580392)
 
 [node name="Portrait3" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 202.708
-offset_top = 29.5206
-offset_right = 1566.71
-offset_bottom = 1393.52
+offset_left = 16.7283
+offset_top = 30.0
+offset_right = 1800.73
+offset_bottom = 1814.0
 scale = Vector2(0.58363, 0.58363)
 texture = ExtResource("2_om3t3")
 expand_mode = 1
 
 [node name="Portrait" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -74.7855
-offset_top = 29.5206
-offset_right = 1289.21
-offset_bottom = 1393.52
+offset_left = -334.567
+offset_top = 30.0
+offset_right = 1430.43
+offset_bottom = 1795.0
 scale = Vector2(0.58363, 0.58363)
 texture = ExtResource("3_l3nt5")
 expand_mode = 1
-
-[node name="Portrait2" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 1200.5
-offset_top = 29.5206
-offset_right = 2564.5
-offset_bottom = 1393.52
-scale = Vector2(0.58363, 0.58363)
-texture = ExtResource("3_l3nt5")
-expand_mode = 1
-flip_h = true
 
 [node name="Portrait4" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 862.001
-offset_top = 29.5206
-offset_right = 2226.0
-offset_bottom = 1393.52
+offset_left = 782.296
+offset_top = 30.0
+offset_right = 2557.3
+offset_bottom = 1805.0
 scale = Vector2(0.58363, 0.58363)
 texture = ExtResource("4_l3nt5")
 expand_mode = 1
 flip_h = true
 
-[node name="ColorRect3" type="ColorRect" parent="."]
+[node name="Portrait2" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 127.0
-offset_top = 836.0
-offset_right = 933.0
-offset_bottom = 878.0
-scale = Vector2(2.07695, 4.90172)
-color = Color(0, 0, 0, 0.89)
+offset_left = 1201.0
+offset_top = 30.0
+offset_right = 2971.0
+offset_bottom = 1800.0
+scale = Vector2(0.58363, 0.58363)
+texture = ExtResource("3_l3nt5")
+expand_mode = 1
+flip_h = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="BubbleTail" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_gkyvs")
 layout_mode = 0
-offset_left = 122.0
-offset_top = 831.0
-offset_right = 1804.0
-offset_bottom = 1040.0
-texture = ExtResource("5_qtmt7")
+offset_left = 495.946
+offset_top = 674.053
+offset_right = 945.946
+offset_bottom = 1075.05
+mouse_filter = 2
+texture = ExtResource("7_5qnbt")
+expand_mode = 1
+
+[node name="TailCache" type="TextureRect" parent="BubbleTail"]
+z_index = 1
+material = SubResource("ShaderMaterial_5qnbt")
+layout_mode = 0
+offset_left = 196.341
+offset_top = 196.804
+offset_right = 241.341
+offset_bottom = 227.804
+rotation = 0.28352
+scale = Vector2(2.65134, 3.29198)
+mouse_filter = 2
+texture = ExtResource("8_qn32y")
+expand_mode = 1
+
+[node name="TailCache2" type="TextureRect" parent="BubbleTail"]
+z_index = 1
+material = SubResource("ShaderMaterial_5qnbt")
+layout_mode = 0
+offset_left = 198.341
+offset_top = 200.804
+offset_right = 250.341
+offset_bottom = 238.804
+rotation = 0.28352
+scale = Vector2(2.65134, 3.29197)
+mouse_filter = 2
+texture = ExtResource("8_qn32y")
+expand_mode = 1
+
+[node name="Bubble" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 680.0
+offset_top = 900.0
+offset_right = 1240.0
+offset_bottom = 1035.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kpydh")
+
+[node name="DecoTopLeft" type="TextureRect" parent="Bubble"]
+material = SubResource("ShaderMaterial_wwcgm")
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 35.4
+offset_bottom = 32.5
+rotation = 1.5708
+pivot_offset = Vector2(11.7, 11.25)
+mouse_filter = 2
+texture = SubResource("AtlasTexture_fbce1")
+expand_mode = 1
+
+[node name="DecoTopRight" type="TextureRect" parent="Bubble"]
+material = SubResource("ShaderMaterial_wwcgm")
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -35.4
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = 32.5
+rotation = -1.5708
+pivot_offset = Vector2(11.7, 11.25)
+mouse_filter = 2
+texture = SubResource("AtlasTexture_fbce1")
+expand_mode = 1
+flip_h = true
+
+[node name="DecoBottomLeft" type="TextureRect" parent="Bubble"]
+material = SubResource("ShaderMaterial_wwcgm")
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -32.5
+offset_right = 35.4
+offset_bottom = -10.0
+pivot_offset = Vector2(11.7, 11.25)
+mouse_filter = 2
+texture = SubResource("AtlasTexture_fbce1")
+expand_mode = 1
+
+[node name="DecoBottomRight" type="TextureRect" parent="Bubble"]
+material = SubResource("ShaderMaterial_wwcgm")
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -35.4
+offset_top = -32.5
+offset_right = -12.0
+offset_bottom = -10.0
+pivot_offset = Vector2(11.7, 11.25)
+mouse_filter = 2
+texture = SubResource("AtlasTexture_fbce1")
+expand_mode = 1
+flip_h = true
+
+[node name="NameTab" type="NinePatchRect" parent="."]
+material = SubResource("ShaderMaterial_0oxbx")
+layout_mode = 0
+offset_left = 800.0
+offset_top = 850.0
+offset_right = 1195.0
+offset_bottom = 964.0
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("8_16ujg")
+region_rect = Rect2(287, 437, 395, 114)
+patch_margin_left = 80
+patch_margin_right = 70
 
 [node name="Speaker" type="Label" parent="."]
 z_index = 1
@@ -102,47 +252,12 @@ offset_left = 134.0
 offset_top = 760.0
 offset_right = 417.0
 offset_bottom = 823.0
-theme_override_colors/font_color = Color(0.646029, 0.646029, 0.646029, 1)
+theme_override_colors/font_color = Color(0.964706, 0.92549, 0.87451, 1)
 theme_override_fonts/font = ExtResource("5_om3t3")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 32
 text = "Priestr"
 horizontal_alignment = 1
-
-[node name="TextureRect3" type="TextureRect" parent="Speaker"]
-z_index = 1
-layout_mode = 0
-offset_left = -10.9976
-offset_top = -17.0653
-offset_right = 384.002
-offset_bottom = 126.935
-scale = Vector2(0.772711, 0.611977)
-texture = ExtResource("7_y5125")
-expand_mode = 1
-
-[node name="TextureRect4" type="TextureRect" parent="Speaker"]
-modulate = Color(0, 0, 0, 0.923)
-z_index = -1
-layout_mode = 0
-offset_left = -10.7671
-offset_top = -17.0653
-offset_right = 384.233
-offset_bottom = 126.935
-scale = Vector2(0.772711, 0.611977)
-texture = ExtResource("8_qn32y")
-expand_mode = 1
-
-[node name="indication" type="Label" parent="."]
-layout_mode = 0
-offset_left = 841.008
-offset_top = 1003.7
-offset_right = 1162.01
-offset_bottom = 1051.7
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_om3t3")
-theme_override_font_sizes/font_size = 20
-text = "(left clic to continue )"
-horizontal_alignment = 1
-autowrap_mode = 3
+vertical_alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
@@ -150,6 +265,7 @@ offset_left = 208.612
 offset_top = 814.0
 offset_right = 1698.61
 offset_bottom = 1039.0
+theme_override_colors/default_color = Color(0.227451, 0.164706, 0.133333, 1)
 theme_override_fonts/normal_font = ExtResource("5_om3t3")
 theme_override_fonts/italics_font = SubResource("FontVariation_y5125")
 theme_override_font_sizes/italics_font_size = 35
@@ -158,7 +274,8 @@ bbcode_enabled = true
 text = "Teste dialogue
 bka ku kughdskg khsfmupzk 
 jhgfslkjfnmsfjhk"
-vertical_alignment = 1
+fit_content = true
+scroll_active = false
 
 [node name="UiClickLeft" type="TextureRect" parent="."]
 layout_mode = 0

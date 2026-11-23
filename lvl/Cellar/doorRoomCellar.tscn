@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://v5sa3ky4nk8q"]
 
 [ext_resource type="Texture2D" uid="uid://x40hxdvvq7st" path="res://scenes/BG doors demo/DOOR_dungeon_cellar.png" id="1_rmb0j"]
-[ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="2_0ggyt"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="3_vicq3"]
 [ext_resource type="PackedScene" uid="uid://c8vf5b7mjdmmf" path="res://lvl/doorInstance.tscn" id="4_8a4cs"]
+[ext_resource type="PackedScene" uid="uid://b324wrf08x8kv" path="res://UI/UI dashboard/ui_bg_bottom.tscn" id="bgb_1"]
 
 [node name="Door" type="Control"]
 layout_mode = 3
@@ -32,10 +32,8 @@ position = Vector2(1333.31, 542)
 scale = Vector2(0.781352, 0.79562)
 texture = ExtResource("1_rmb0j")
 
-[node name="exploUI" type="Sprite2D" parent="."]
-position = Vector2(1333.81, 541)
-scale = Vector2(0.782573, 0.789781)
-texture = ExtResource("2_0ggyt")
+[node name="exploUI" parent="." instance=ExtResource("bgb_1")]
+position = Vector2(0, 30)
 
 [node name="atmosphere" parent="." instance=ExtResource("3_vicq3")]
 position = Vector2(19, 447)

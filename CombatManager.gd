@@ -515,10 +515,12 @@ func next_turn():
 		if current_character.characterData.is_player_controlled:
 			for button: Button in ui.skill_buttons:
 				button.disabled = true
+		# Lust montée au max hors d'un coup (objet, effet…) : l'écran
+		# d'extase n'a pas encore été vu, on le montre avant.
+		await current_character.check_ecstasy()
 		await get_tree().create_timer(0.6).timeout
 		# Un de ses kinks prend le dessus (cf. characters/LustBreak.gd).
 		await LustBreak.play(current_character, self)
-		await get_tree().create_timer(0.9).timeout
 		await end_currentChara_Turn()
 		return
 

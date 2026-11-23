@@ -24,3 +24,6 @@ JAILOR_REACT_FAIL = Keep your ropes off me, {name}!
 
 CAPTIVE = Someone... just take me...
 CAPTIVE_REACT = {name} is wide open! The next hit will capture them!
+
+# Écran d'extase (UI/ecstasy_overlay.gd), quand un héros atteint sa lust max.
+LOST_CONTROL = {name} lost control

@@ -1,16 +1,10 @@
 extends RefCounted
 class_name LustBreak
 
-# ════════════════════════════════════════════════════════════════════
+
 #  PERTE DE CONTRÔLE À LUST MAX
-# ════════════════════════════════════════════════════════════════════
-#  Un héros à lust max ne peut pas agir : à la place, à chacun de ces tours
-#  passés, un de ses kinks prend le dessus (tiré au hasard parmi ceux qui
-#  ont un effet). Chaque effet nuit à l'équipe et coûte de l'affinité.
-#
-#  Réglages : constantes ci-dessous. Textures optionnelles dans
-#  CharacterData : naked_texture (exib), masturbate_texture (degenerate).
-# ════════════════════════════════════════════════════════════════════
+
+
 
 ## Affinité perdue par chaque allié touché envers le héros en rut.
 const AFFINITY_LOSS := 10
@@ -31,14 +25,11 @@ const MASO_TAUNT_TURNS := 1
 
 const KINKS := ["sadist", "maso", "voyeur", "exib", "degrader", "degenerate", "jailor", "captive"]
 
-## Répliques : un fichier texte par langue, texts/lust_barks_<langue>.txt
-## (lust_barks_en.txt par défaut). Une ligne « CLÉ = texte » ; clés : <KINK>
-## pour le héros en rut, <KINK>_REACT pour l'allié qui réagit. {name} = nom
-## du héros en rut.
+
+## pour le héros en rut, <KINK>_REACT pour l'allié qui réagit. {name} = nom du héros en rut.
 const BARKS_FILE := "res://texts/lust_barks_%s.txt"
-## Délai avant l'effet / la réaction suivante. La bulle reste affichée
-## sa durée normale (cf. Bark.display_time) : seul l'enchaînement accélère.
-const REACTION_DELAY := 0.6
+
+const BARK_READ_TIME := 1.8
 
 ## Répliques chargées, par langue : { "en": { CLÉ: texte } }.
 static var _barks: Dictionary = {}
@@ -62,7 +53,7 @@ static func play(chara: Character, cm: CombatManager) -> void:
 		return
 	var kink: String = kinks.pick_random()
 	print("💗 Lust break: ", chara.characterData.Charaname, " → ", kink)
-	await chara.show_bark(line(kink.to_upper()), REACTION_DELAY)
+	await _say(chara, line(kink.to_upper()))
 	match kink:
 		"sadist": await _sadist(chara, cm)
 		"maso": await _maso(chara, cm)
@@ -90,12 +81,12 @@ static func _lose_affinity(victim: Character, culprit: Character) -> void:
 	victim.reduce_affinity(culprit, AFFINITY_LOSS)
 
 
-## Réplique d'un allié qui explique ce qui vient de se passer (clé du
-## fichier de répliques, cf. BARKS_FILE).
+## Réplique d'un allié qui explique ce qui vient de se passer 
 static func _react(speaker: Character, culprit: Character, key: String) -> void:
 	if speaker == null or not is_instance_valid(speaker):
 		return
-	await speaker.show_bark(line(key, culprit.characterData.Charaname), REACTION_DELAY)
+	
+	speaker.show_bark(line(key, culprit.characterData.Charaname), 0.0, BARK_READ_TIME)
 
 
 ## Texte d'une réplique dans la langue courante (repli : anglais, puis la clé).
@@ -113,7 +104,7 @@ static func _lines(lang: String) -> Dictionary:
 	return _barks[lang]
 
 
-## Lit un fichier « CLÉ = texte ». Lignes vides et commençant par # ignorées.
+
 static func _load_barks(path: String) -> Dictionary:
 	var out := {}
 	if not FileAccess.file_exists(path):
@@ -128,6 +119,11 @@ static func _load_barks(path: String) -> Dictionary:
 			continue
 		out[l.substr(0, eq).strip_edges()] = l.substr(eq + 1).strip_edges()
 	return out
+
+
+
+static func _say(speaker: Character, text: String) -> void:
+	await speaker.show_bark(text, -1.0, BARK_READ_TIME)
 
 
 static func _pick(list: Array) -> Character:
@@ -164,7 +160,7 @@ static func _maso(chara: Character, cm: CombatManager) -> void:
 	await _react(_pick(_allies(chara, cm)), chara, "MASO_REACT")
 
 
-## voyeur : les alliés le surprennent ; l'un d'eux le gifle.
+## voyeur : les alliés le surprennent et l'un d'eux le gifle.
 static func _voyeur(chara: Character, cm: CombatManager) -> void:
 	var allies := _allies(chara, cm)
 	if allies.is_empty():
@@ -177,7 +173,7 @@ static func _voyeur(chara: Character, cm: CombatManager) -> void:
 	await _react(slapper, chara, "VOYEUR_REACT")
 
 
-## exib : se dénude, les alliés s'échauffent.
+## exib : se dénude, les allié sont horny
 static func _exib(chara: Character, cm: CombatManager) -> void:
 	chara.lust_pose_texture = chara.characterData.get("naked_texture")
 	chara.resetVisuel()
@@ -188,7 +184,7 @@ static func _exib(chara: Character, cm: CombatManager) -> void:
 	await _react(_pick(_allies(chara, cm)), chara, "EXIB_REACT")
 
 
-## degrader : humilie les alliés (guilt).
+## degrader : guilt les alliés .
 static func _degrader(chara: Character, cm: CombatManager) -> void:
 	cm.ui.log("%s insults the party" % chara.characterData.Charaname)
 	for h in _allies(chara, cm):
@@ -197,7 +193,7 @@ static func _degrader(chara: Character, cm: CombatManager) -> void:
 	await _react(_pick(_allies(chara, cm)), chara, "DEGRADER_REACT")
 
 
-## degenerate : se masturbe (pose gardée tant qu'il est à lust max).
+## degenerate : se masturbe (sprite gardée tant qu'il est à lust max ?) a remplacer par anim
 static func _degenerate(chara: Character, cm: CombatManager) -> void:
 	chara.lust_pose_texture = chara.characterData.get("masturbate_texture")
 	chara.resetVisuel()
@@ -208,7 +204,7 @@ static func _degenerate(chara: Character, cm: CombatManager) -> void:
 	await _react(_pick(_allies(chara, cm)), chara, "DEGENERATE_REACT")
 
 
-## jailor : tente d'étourdir un allié.
+## jailor : tente stun allié.
 static func _jailor(chara: Character, cm: CombatManager) -> void:
 	var allies := _allies(chara, cm)
 	if allies.is_empty():

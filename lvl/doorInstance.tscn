@@ -1,8 +1,7 @@
-[gd_scene load_steps=51 format=3 uid="uid://c8vf5b7mjdmmf"]
+[gd_scene load_steps=52 format=3 uid="uid://c8vf5b7mjdmmf"]
 
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="4_p7mg6"]
 [ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="5_am67h"]
-[ext_resource type="Texture2D" uid="uid://cds1jgu4rdn1e" path="res://UI/UI boxes/UI_fgwall_inquisition.png" id="6_5vfpr"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="7_828wa"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="8_i4gph"]
 [ext_resource type="Texture2D" uid="uid://dbkhml7dwqu64" path="res://UI/UI boxes/UI_door_arrow.png" id="9_jb1p8"]
@@ -33,6 +32,8 @@
 [ext_resource type="Texture2D" uid="uid://5u3lacixetkm" path="res://UI/UI inventory/UI_inventory_button_map.png" id="44_mapicon"]
 [ext_resource type="Script" uid="uid://bb01afuki8pgo" path="res://UI/buttonBasic.gd" id="45_movebtn"]
 [ext_resource type="Texture2D" uid="uid://ckki2ygke5r3x" path="res://actions/actiontexture/UI icons/ICON_move.png" id="46_moveicon"]
+[ext_resource type="PackedScene" uid="uid://b324wrf08x8kv" path="res://UI/UI dashboard/ui_bg_bottom.tscn" id="bgb_1"]
+[ext_resource type="Texture2D" uid="uid://ckdnuqdfatnva" path="res://UI/UI dashboard/UI_bg_pillar.png" id="bgb_2"]
 [ext_resource type="Texture2D" uid="uid://2whv8qtlghmo" path="res://UI/attack.png" id="dp_attack"]
 [ext_resource type="Texture2D" uid="uid://blaxr6boo4hkf" path="res://UI/buffDeff.png" id="dp_def"]
 [ext_resource type="Texture2D" uid="uid://b54elep5kk5sm" path="res://UI/UI boxes/UI_combat_portrait_frame.png" id="dp_frame"]
@@ -85,10 +86,13 @@ rotation = 3.25064
 scale = Vector2(1.27378, 1.72154)
 texture = ExtResource("5_am67h")
 
-[node name="exploUI" type="Sprite2D" parent="."]
-position = Vector2(960, 888)
-scale = Vector2(0.75, 0.8)
-texture = ExtResource("6_5vfpr")
+[node name="exploUI" parent="." instance=ExtResource("bgb_1")]
+position = Vector2(0, 30)
+
+[node name="UI_bgPillar" type="Sprite2D" parent="."]
+position = Vector2(128.5, 931)
+scale = Vector2(0.5, 0.473016)
+texture = ExtResource("bgb_2")
 
 [node name="charaPortrait" type="TextureRect" parent="."]
 z_index = 6

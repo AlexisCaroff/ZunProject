@@ -39,10 +39,6 @@ scale = Vector2(1.3404, 1.72265)
 skew = 0.01116
 texture = ExtResource("4_gradiant")
 
-[node name="exploUI" parent="." index="4"]
-position = Vector2(961, 894.102)
-scale = Vector2(0.75, 0.78)
-
 [node name="ColorRect" type="ColorRect" parent="." index="5"]
 layout_mode = 0
 offset_left = 1120.0

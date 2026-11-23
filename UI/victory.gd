@@ -42,12 +42,46 @@ func showLoot(items: Array[Equipment], gm:GameManager):
 		itemsContainer.add_child(slot)
 		view.modulate.a = 0.0
 		view.create_tween().tween_property(view, "modulate:a", 1.0, 0.3)
+		var won := pending_card
+		view.mouse_entered.connect(func(): _show_card_zoom(won, view))
+		view.mouse_exited.connect(_hide_card_zoom)
 		gm.add_card(pending_card)
 		pending_card = null
 
 
 
 	
+# ── Carte agrandie au survol ──────────────────────────────────────────
+## Échelle de la carte agrandie (même taille que l'aperçu de la main).
+const CARD_ZOOM := 0.85
+var _card_zoom: CardView = null
+
+func _show_card_zoom(card: AffinityCard, from: Control) -> void:
+	_hide_card_zoom()
+	_card_zoom = CardView.make(card, CARD_ZOOM)
+	_card_zoom.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_card_zoom.top_level = true
+	_card_zoom.z_index = 100
+	add_child(_card_zoom)
+	# À droite de la petite carte, centrée verticalement sur elle, sans
+	# sortir de l'écran.
+	var big := CardView.SIZE * CARD_ZOOM
+	var small := from.get_global_rect()
+	var screen := get_viewport_rect().size
+	var pos := Vector2(small.end.x + 16.0, small.get_center().y - big.y * 0.5)
+	pos.x = clampf(pos.x, 8.0, screen.x - big.x - 8.0)
+	pos.y = clampf(pos.y, 8.0, screen.y - big.y - 8.0)
+	_card_zoom.global_position = pos
+	_card_zoom.modulate.a = 0.0
+	_card_zoom.create_tween().tween_property(_card_zoom, "modulate:a", 1.0, 0.12)
+
+
+func _hide_card_zoom() -> void:
+	if is_instance_valid(_card_zoom):
+		_card_zoom.queue_free()
+	_card_zoom = null
+
+
 var _continuing: bool = false
 
 func _on_continue_pressed() -> void:
@@ -56,6 +90,7 @@ func _on_continue_pressed() -> void:
 	if _continuing:
 		return
 	_continuing = true
+	_hide_card_zoom()
 	continue_button.disabled = true
 	GameState.current_phase = GameStat.GamePhase.EXPLORATION
 

@@ -29,7 +29,6 @@
 [ext_resource type="Resource" uid="uid://cmfdbxt7xktta" path="res://actions/HerosCombatSkills/Ennemi_attaque_basique.tres" id="26_twjx6"]
 [ext_resource type="Resource" uid="uid://1nlu038uhsvj" path="res://actions/HerosCombatSkills/move.tres" id="27_ibx7i"]
 [ext_resource type="Script" uid="uid://cslp2covnt48e" path="res://characters/animiddle.gd" id="28_tgyd1"]
-[ext_resource type="Texture2D" uid="uid://cds1jgu4rdn1e" path="res://UI/UI boxes/UI_fgwall_inquisition.png" id="29_qx47d"]
 [ext_resource type="Texture2D" uid="uid://beba0lu5r7bxr" path="res://actions/actiontexture/SkillImage/Hero_Hunter_meditation.png" id="29_vn84m"]
 [ext_resource type="Script" uid="uid://d0dr3qg6ronr0" path="res://UI/image_action.gd" id="30_awrpq"]
 [ext_resource type="Texture2D" uid="uid://b54elep5kk5sm" path="res://UI/UI boxes/UI_combat_portrait_frame.png" id="30_junmr"]
@@ -60,6 +59,7 @@
 [ext_resource type="Texture2D" uid="uid://2whv8qtlghmo" path="res://UI/attack.png" id="56_uqdvq"]
 [ext_resource type="Texture2D" uid="uid://blaxr6boo4hkf" path="res://UI/buffDeff.png" id="57_3i4o3"]
 [ext_resource type="Texture2D" uid="uid://cfdyo8xe6oc4d" path="res://UI/WillPowerIcon.png" id="58_5g2vc"]
+[ext_resource type="PackedScene" uid="uid://b324wrf08x8kv" path="res://UI/UI dashboard/ui_bg_bottom.tscn" id="bgb_1"]
 
 [sub_resource type="Resource" id="Resource_i1s1q"]
 script = ExtResource("16_113pv")
@@ -652,10 +652,8 @@ script = ExtResource("32_a5bh2")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
-[node name="UiFgwallInquisition" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(958.681, 893.75)
-scale = Vector2(0.751812, 0.771222)
-texture = ExtResource("29_qx47d")
+[node name="UiBgBottom" parent="CanvasLayer" instance=ExtResource("bgb_1")]
+position = Vector2(0, 30)
 
 [node name="UiCombatPortraitFrame" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(141.5, 878.25)

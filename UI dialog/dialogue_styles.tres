@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DialogueStyleSet" load_steps=5 format=3 uid="uid://qjs1phcff3l8"]
+
+[ext_resource type="Resource" uid="uid://pls3cw5llefv" path="res://UI dialog/bubble_beige.tres" id="1_4aw77"]
+[ext_resource type="Script" uid="uid://dhgy3j2do7qtd" path="res://UI dialog/dialogue_style_set.gd" id="2_lxpj7"]
+[ext_resource type="Script" uid="uid://1bhpnbkwtgb" path="res://UI dialog/dialogue_bubble_style.gd" id="3_nduqu"]
+[ext_resource type="Resource" uid="uid://de2waoesa6oxu" path="res://UI dialog/bubble_corrupted.tres" id="4_nkrcn"]
+
+[resource]
+script = ExtResource("2_lxpj7")
+default_style = ExtResource("1_4aw77")
+speaker_styles = Dictionary[String, ExtResource("3_nduqu")]({
+"Broodmother": ExtResource("4_nkrcn")
+})

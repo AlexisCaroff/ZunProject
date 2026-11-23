@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://c2150tcvfc600" path="res://UI/doorIcon.png" id="21_oqrt4"]
 [ext_resource type="Script" uid="uid://cuh71b6fau11a" path="res://lvl/button.gd" id="22_8xuef"]
 [ext_resource type="Texture2D" uid="uid://df6e4btmrj1i8" path="res://props/campFire.png" id="23_lcr6n"]
+[ext_resource type="PackedScene" path="res://UI/UI dashboard/ui_bg_bottom.tscn" id="bgb_1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qg4ur"]
 
@@ -56,10 +57,8 @@ texture = ExtResource("1_yhi7b")
 [node name="atmosphere" parent="." instance=ExtResource("2_l34ca")]
 position = Vector2(2, 352)
 
-[node name="exploUI" type="Sprite2D" parent="."]
-position = Vector2(959, 539.5)
-scale = Vector2(0.780945, 0.787591)
-texture = ExtResource("3_gvkw5")
+[node name="exploUI" parent="." instance=ExtResource("bgb_1")]
+position = Vector2(0, 30)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0

@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://2llog1d26keq" path="res://scenes/BG doors demo/DOOR_dungeon_hall_blocked.png" id="1_fxx36"]
 [ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="4_aajs2"]
-[ext_resource type="Texture2D" uid="uid://cuswjsu7sgbym" path="res://UI/exploration.png" id="5_dms26"]
 [ext_resource type="PackedScene" uid="uid://dxnw2d4wwdegc" path="res://vfx/atmosphere.tscn" id="6_gfvcg"]
 [ext_resource type="FontFile" uid="uid://dbsxp2y5aoq5q" path="res://carolingia.ttf" id="7_j106f"]
 [ext_resource type="Texture2D" uid="uid://c2cptlhr6pvg5" path="res://actions/actiontexture/axe.png" id="8_1oilk"]
@@ -28,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://ckptii1qana10" path="res://UI/contourMap.png" id="28_cue1u"]
 [ext_resource type="Texture2D" uid="uid://bpgas6hnffbe0" path="res://UI/sideButton.png" id="29_ycave"]
 [ext_resource type="Texture2D" uid="uid://ctkoy8ysbicta" path="res://UI/iconMap.png" id="30_vvtbq"]
+[ext_resource type="PackedScene" uid="uid://b324wrf08x8kv" path="res://UI/UI dashboard/ui_bg_bottom.tscn" id="bgb_1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_crknv"]
 
@@ -64,10 +64,8 @@ rotation = -3.03255
 scale = Vector2(1.27378, 1.72154)
 texture = ExtResource("4_aajs2")
 
-[node name="exploUI" type="Sprite2D" parent="."]
-position = Vector2(961, 541)
-scale = Vector2(0.782573, 0.789781)
-texture = ExtResource("5_dms26")
+[node name="exploUI" parent="." instance=ExtResource("bgb_1")]
+position = Vector2(0, 30)
 
 [node name="atmosphere" parent="." instance=ExtResource("6_gfvcg")]
 position = Vector2(19, 447)

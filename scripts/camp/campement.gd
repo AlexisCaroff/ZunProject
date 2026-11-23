@@ -354,6 +354,10 @@ func play_card(card: AffinityCard, target: CharaCamp) -> void:
 			targets = [target]
 		AffinityCard.Target.ANY_ALLY:
 			targets = [target]
+		AffinityCard.Target.OTHERS:
+			for c in characters:
+				if c is CharaCamp and c != user:
+					targets.append(c)
 		_:
 			for c in characters:
 				if c is CharaCamp:

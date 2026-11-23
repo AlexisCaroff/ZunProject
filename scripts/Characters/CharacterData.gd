@@ -16,6 +16,9 @@ class_name CharacterData
 ## Null = sprite normal.
 @export var naked_texture: Texture2D
 @export var masturbate_texture: Texture2D
+## Écran d'extase à lust max (UI/ecstasy_overlay.gd). Null = image
+## res://FX Ecstasy/ECSTASY_<nom en minuscules>.png.
+@export var ecstasy_texture: Texture2D
 
 @export var Name : String = "name"
 @export var Charaname: String = "Classe"

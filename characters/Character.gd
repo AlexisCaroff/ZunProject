@@ -543,6 +543,23 @@ func isdead():
 	print(characterData.Charaname + " is dead")
 
 
+## Vrai tant que l'écran d'extase a été montré et que la lust est restée
+## au max : il ne se rejoue qu'après être redescendu sous le max.
+var _ecstasy_shown := false
+
+## Écran « <Nom> lost control » quand un héros atteint sa lust max.
+func check_ecstasy() -> void:
+	if characterData == null or not characterData.is_player_controlled or dead:
+		return
+	if characterData.current_horniness < characterData.max_horniness:
+		_ecstasy_shown = false
+		return
+	if _ecstasy_shown:
+		return
+	_ecstasy_shown = true
+	await EcstasyOverlay.play(characterData, get_tree())
+
+
 func take_damage(source: Character, stat: int, amount: int, typeMagic: bool, skillused: Skill = null) -> void:
 	var damage := 0
 	for buff in buffs:
@@ -621,6 +638,10 @@ func take_damage(source: Character, stat: int, amount: int, typeMagic: bool, ski
 
 	shake_camera(20.0)
 	update_ui()
+	# Lust max atteinte (par ce coup, ou pour l'attaquant sadist/degrader).
+	await check_ecstasy()
+	if source != null and source != self and is_instance_valid(source):
+		await source.check_ecstasy()
 
 	# Certains ennemis réagissent au fait d'encaisser : la pile de Slimes
 	# recrache le héros qu'elle a avalé une fois passée sous 50 % de PV.
@@ -643,15 +664,22 @@ func play_affinity_reaction(bark_text: String) -> void:
 
 ## `wait` = temps rendu à l'appelant ; la bulle, elle, reste affichée sa
 ## durée complète (Bark.display_time) même si l'appelant reprend avant.
-func show_bark(text: String, wait: float = 2.0):
+## `wait` < 0 : attendre que la bulle ait complètement disparu.
+## `display_time` > 0 : durée de lecture de cette bulle (sinon celle de la scène).
+func show_bark(text: String, wait: float = 2.0, display_time: float = -1.0):
 	if not characterData or characterData.bark_scene == null:
 		return
 	if current_bark and is_instance_valid(current_bark):
 		current_bark.queue_free()
 	current_bark = characterData.bark_scene.instantiate()
+	if display_time > 0.0:
+		current_bark.display_time = display_time
 	add_child(current_bark)
 	current_bark.set_text(text)
 	current_bark.position = Vector2(-60, -240)
+	if wait < 0.0:
+		await current_bark.tree_exited
+		return
 	await get_tree().create_timer(wait).timeout
 func show_outline():
 	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", true)
@@ -698,7 +726,39 @@ func _show_hit_texture() -> void:
 		if characterData.dead_portrait_texture != null:
 			sprite.texture = characterData.dead_portrait_texture
 		return
-	sprite.texture = characterData.Hit_texture
+	show_hit_pose()
+
+
+## Durée de la pose « touché ».
+const HIT_POSE_TIME := 0.5
+var _hit_pose_token := 0
+
+## Pose « touché » pendant HIT_POSE_TIME, puis retour à la pose normale
+## (portrait, pose de kink à lust max, ou portrait K.O.). Un nouveau coup
+## pendant ce temps relance le compteur.
+func show_hit_pose() -> void:
+	if characterData == null or characterData.current_stamina <= 0:
+		return
+	if characterData.Hit_texture != null:
+		sprite.texture = characterData.Hit_texture
+	_hit_pose_token += 1
+	var token := _hit_pose_token
+	await get_tree().create_timer(HIT_POSE_TIME).timeout
+	if not is_instance_valid(self) or token != _hit_pose_token:
+		return
+	if characterData.Hit_texture != null and sprite.texture != characterData.Hit_texture:
+		return  # une autre pose a déjà pris la place (attaque, etc.)
+	_restore_pose()
+
+
+func _restore_pose() -> void:
+	if characterData.current_stamina <= 0:
+		if characterData.dead_portrait_texture != null:
+			sprite.texture = characterData.dead_portrait_texture
+		return
+	sprite.texture = characterData.portrait_texture
+	if characterData.current_horniness >= characterData.max_horniness and lust_pose_texture != null:
+		sprite.texture = lust_pose_texture
 
 
 func resetVisuel():
@@ -781,8 +841,7 @@ func animate_get_horny(damage: int, source: Character = null):
 func animate_take_damage(damage: int, source: Character, _usedSkill: Skill = null):
 	emit_signal("skill_animation_started")
 	await get_tree().create_timer(0.2).timeout
-	if characterData.current_stamina > 0:
-		sprite.texture = characterData.Hit_texture
+	show_hit_pose()
 	var effect_instance = DamageEffectScene.instantiate()
 	get_tree().current_scene.add_child(effect_instance)
 	effect_instance.global_position = global_position + Vector2(50, -140)
@@ -971,7 +1030,7 @@ func animate_attack(targets: Array, skill: Skill) -> void:
 	if show_hit:
 		for tgt: Character in targets:
 			if tgt != self and tgt.characterData.current_stamina > 0:
-				tgt.sprite.texture = tgt.characterData.Hit_texture
+				tgt.show_hit_pose()
 
 	# ── VFX caster ───────────────────────────────────────────
 	_spawn_vfx(current_skill.caster_effect_scene, current_skill.caster_effect_anchor)

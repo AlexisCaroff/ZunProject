@@ -1,163 +1,106 @@
+@tool
 extends Control
 class_name CardView
 
 # ════════════════════════════════════════════════════════════════════
-#  DESSIN D'UNE CARTE D'AFFINITÉ (généré en code, pas d'illustration requise)
+#  CARTE D'AFFINITÉ — scène res://UI/cards/card_view.tscn
 # ════════════════════════════════════════════════════════════════════
-#  Toujours construite à sa taille réelle (SIZE) puis réduite par `scale` :
-#  la petite carte de l'inventaire et la grande carte d'aperçu ont ainsi
-#  exactement la même mise en page.
+#  Toute la mise en page (positions, tailles, polices, couleurs) se règle
+#  dans la scène. Le script ne fait que remplir les nœuds avec la carte :
 #
-#      ┌─(coût)──────────────┐
-#      │       Titre         │
-#      │  [portrait / art]   │
-#      │  Joueur · Cible     │
-#      │  Description…       │
-#      └─────────────────────┘
+#      ┌──────────────────────────────┐
+#      │ [joueur]  [cibles]  (coût)   │  TopBand
+#      ├──────────────────────────────┤
+#      │            Titre             │  Title
+#      │       [ illustration ]       │  ArtBox/Art
+#      │  Description de l'effet…     │  DescBox/Desc
+#      └──────────────────────────────┘
+#
+#  Toujours construite à sa taille réelle (SIZE) puis réduite par `scale` :
+#  la petite carte de l'inventaire et la grande d'aperçu ont la même mise
+#  en page. Aperçu dans l'éditeur : mets une carte (.tres) dans `card`.
 
+const SCENE_PATH := "res://UI/cards/card_view.tscn"
 const SIZE := Vector2(240, 340)
 const TITLE_FONT := preload("res://UI/Euphorigenic.otf")
 const BODY_FONT := preload("res://font/MarcellusSC-Regular.ttf")
 const GOLD := Color(0.721569, 0.647059, 0.45098, 1)
 const GOLD_BRIGHT := Color(1.0, 0.88, 0.55, 1)
 
-var card: AffinityCard
+## Carte affichée (aussi pour l'aperçu dans l'éditeur).
+@export var card: AffinityCard:
+	set(value):
+		card = value
+		if is_node_ready():
+			refresh()
+
+@export_group("Silhouettes")
+## Joueur « tout le monde » et cible « un personnage au choix ».
+@export var silhouette_neutral: Texture2D
+## Un autre membre du groupe.
+@export var silhouette_other: Texture2D
+## Le joueur de la carte lui-même.
+@export var silhouette_self: Texture2D
+
+@export_group("Portraits")
+## Où chercher le portrait du joueur quand GameManager n'est pas là
+## (éditeur). En jeu, les personnages de GameManager passent d'abord.
+@export var portrait_sources: Array[CharacterData] = []
+## Taille mini / maxi de la police du titre (réduite si le titre est long).
+@export var title_font_min := 14
+
+@onready var _frame_panel: Panel = $Frame
+@onready var _user_portrait: TextureRect = $TopBand/PortraitClip/UserPortrait
+@onready var _targets: HBoxContainer = $TopBand/Targets
+@onready var _cost_label: Label = $TopBand/CostBadge/CostLabel
+@onready var _title: Label = $Title
+@onready var _art: TextureRect = $ArtBox/Art
+@onready var _desc: RichTextLabel = $DescBox/Desc
+
 var _frame: StyleBoxFlat
+var _frame_border := 4
+var _title_size := 24
 
 
 static func make(the_card: AffinityCard, card_scale: float = 1.0) -> CardView:
-	var v := CardView.new()
+	var v: CardView = (load(SCENE_PATH) as PackedScene).instantiate()
 	v.card = the_card
 	v.scale = Vector2.ONE * card_scale
-	v._build()
 	return v
 
 
-func _build() -> void:
+func _ready() -> void:
 	custom_minimum_size = SIZE
 	size = SIZE
-	mouse_filter = Control.MOUSE_FILTER_STOP
+	# StyleBox propre à cette carte (set_selected la modifie).
+	var sb := _frame_panel.get_theme_stylebox("panel") as StyleBoxFlat
+	if sb != null:
+		_frame_border = sb.border_width_top
+		if not Engine.is_editor_hint():
+			_frame = sb.duplicate()
+			_frame_panel.add_theme_stylebox_override("panel", _frame)
+	_title_size = _title.get_theme_font_size("font_size")
+	refresh()
 
-	var bg := Panel.new()
-	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	bg.size = SIZE
-	_frame = StyleBoxFlat.new()
-	_frame.bg_color = Color(0.11, 0.075, 0.07, 1)
-	_frame.border_color = GOLD
-	_frame.set_border_width_all(4)
-	_frame.set_corner_radius_all(14)
-	bg.add_theme_stylebox_override("panel", _frame)
-	add_child(bg)
 
-	var title := Label.new()
-	title.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	title.text = card.title if card != null else "?"
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	title.position = Vector2(54, 8)
-	title.size = Vector2(SIZE.x - 66, 48)
-	title.add_theme_font_override("font", TITLE_FONT)
-	title.add_theme_font_size_override("font_size", 24)
-	title.add_theme_color_override("font_color", GOLD_BRIGHT)
-	add_child(title)
-
-	# Art : illustration, sinon portrait du joueur, sinon l'icône d'effet.
-	var art_box := Panel.new()
-	art_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	art_box.position = Vector2(16, 58)
-	art_box.size = Vector2(SIZE.x - 32, 140)
-	var art_style := StyleBoxFlat.new()
-	art_style.bg_color = Color(0.2, 0.14, 0.12, 1)
-	art_style.border_color = GOLD.darkened(0.3)
-	art_style.set_border_width_all(2)
-	art_style.set_corner_radius_all(8)
-	art_box.add_theme_stylebox_override("panel", art_style)
-	add_child(art_box)
-	var art := TextureRect.new()
-	art.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	art.position = Vector2(4, 4)
-	art.size = art_box.size - Vector2(8, 8)
-	art.texture = _art_texture()
-	art_box.add_child(art)
-	if art.texture == null:
-		var all := Label.new()
-		all.text = "Everyone"
-		all.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		all.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		all.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		all.size = art_box.size
-		all.add_theme_font_override("font", TITLE_FONT)
-		all.add_theme_font_size_override("font_size", 30)
-		all.add_theme_color_override("font_color", GOLD)
-		art_box.add_child(all)
-
-	# Petite icône d'effet dans le coin de l'art.
-	if card != null and card.icon != null and card.illustration != null:
-		var ic := TextureRect.new()
-		ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		ic.texture = card.icon
-		ic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		ic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		ic.size = Vector2(40, 40)
-		ic.position = art_box.position + art_box.size - Vector2(44, 44)
-		add_child(ic)
-
-	var who := Label.new()
-	who.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	who.text = _who_text()
-	who.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	who.position = Vector2(12, 202)
-	who.size = Vector2(SIZE.x - 24, 26)
-	who.add_theme_font_override("font", BODY_FONT)
-	who.add_theme_font_size_override("font_size", 15)
-	who.add_theme_color_override("font_color", Color(0.75, 0.72, 0.66))
-	add_child(who)
-
-	var desc := RichTextLabel.new()
-	desc.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	desc.bbcode_enabled = true
-	desc.scroll_active = false
-	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	desc.text = "[center]%s[/center]" % (card.description if card != null else "")
-	desc.position = Vector2(14, 230)
-	desc.size = Vector2(SIZE.x - 28, SIZE.y - 240)
-	desc.add_theme_font_override("normal_font", BODY_FONT)
-	desc.add_theme_font_size_override("normal_font_size", 16)
-	desc.add_theme_color_override("default_color", Color(0.95, 0.93, 0.88))
-	add_child(desc)
-
-	# Pastille de coût dans le coin haut-gauche (à l'intérieur : la grille
-	# défilante de l'inventaire rognerait une pastille qui déborde).
-	var cost := Panel.new()
-	cost.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	cost.position = Vector2(6, 6)
-	cost.size = Vector2(46, 46)
-	var cs := StyleBoxFlat.new()
-	cs.bg_color = Color(0.45, 0.16, 0.13, 1)
-	cs.border_color = GOLD_BRIGHT
-	cs.set_border_width_all(3)
-	cs.set_corner_radius_all(23)
-	cost.add_theme_stylebox_override("panel", cs)
-	add_child(cost)
-	var cl := Label.new()
-	cl.text = str(card.cost) if card != null else "?"
-	cl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	cl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	cl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	cl.size = cost.size
-	cl.add_theme_font_override("font", TITLE_FONT)
-	cl.add_theme_font_size_override("font_size", 28)
-	cl.add_theme_color_override("font_color", Color.WHITE)
-	cost.add_child(cl)
+## Remplit la carte. Sans carte (scène ouverte seule), garde les textes
+## d'exemple de la scène.
+func refresh() -> void:
+	if card == null:
+		return
+	_title.text = card.title
+	_fit_title()
+	_desc.text = "[center]%s[/center]" % card.description
+	_cost_label.text = str(card.cost)
+	_art.texture = card.illustration if card.illustration != null else card.icon
+	_user_portrait.texture = _user_texture()
+	_fill_targets()
 
 
 func set_selected(on: bool) -> void:
 	if _frame != null:
 		_frame.border_color = GOLD_BRIGHT if on else GOLD
-		_frame.set_border_width_all(6 if on else 4)
+		_frame.set_border_width_all(_frame_border + 2 if on else _frame_border)
 
 
 ## Carte grisée : pas jouable maintenant (mauvais personnage, trop chère…).
@@ -165,31 +108,61 @@ func set_dimmed(on: bool) -> void:
 	modulate = Color(0.55, 0.55, 0.55, 1) if on else Color.WHITE
 
 
-func _art_texture() -> Texture2D:
-	if card == null:
-		return null
-	if card.illustration != null:
-		return card.illustration
-	if not card.is_for_anyone():
-		var cd := _user_data()
-		if cd != null and cd.explorationPortrait != null:
-			return cd.explorationPortrait
-	return card.icon
+# ── Bandeau ─────────────────────────────────────────────────────────
+
+## Silhouettes des cibles, de gauche à droite.
+func target_icons() -> Array[Texture2D]:
+	var o := silhouette_other
+	match card.target:
+		AffinityCard.Target.SELF:
+			return [silhouette_self]
+		AffinityCard.Target.OTHER_ALLY:
+			return [o]
+		AffinityCard.Target.ANY_ALLY:
+			return [silhouette_neutral]
+		AffinityCard.Target.OTHERS:
+			return [o, o, o]
+	return [o, o, o, silhouette_self]   # ALL : tout le groupe
 
 
-func _who_text() -> String:
-	if card == null:
-		return ""
-	var who := "Anyone" if card.is_for_anyone() else card.user_name
-	return "%s  ·  %s" % [who, card.target_label()]
+func _fill_targets() -> void:
+	var icons := target_icons()
+	var slots := _targets.get_children()
+	for i in slots.size():
+		var slot := slots[i] as TextureRect
+		if slot == null:
+			continue
+		slot.visible = i < icons.size()
+		if slot.visible:
+			slot.texture = icons[i]
+
+
+func _user_texture() -> Texture2D:
+	if card.is_for_anyone():
+		return silhouette_neutral
+	var cd := _user_data()
+	if cd != null and cd.explorationPortrait != null:
+		return cd.explorationPortrait
+	return silhouette_neutral
 
 
 func _user_data() -> CharacterData:
+	var pool: Array = []
 	var tree := Engine.get_main_loop() as SceneTree
-	var gm: Node = tree.root.get_node_or_null("GameManager") if tree != null else null
-	if gm == null:
-		return null
-	for cd in gm.characters:
+	var gm: Node = tree.root.get_node_or_null("GameManager") if tree != null and tree.root != null else null
+	if gm != null:
+		pool.append_array(gm.characters)
+	pool.append_array(portrait_sources)
+	for cd in pool:
 		if cd != null and cd.Charaname == card.user_name:
 			return cd
 	return null
+
+
+## Réduit la police du titre jusqu'à ce qu'il tienne sur une ligne.
+func _fit_title() -> void:
+	var font := _title.get_theme_font("font")
+	var fs := _title_size
+	while fs > title_font_min and font.get_string_size(_title.text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x > _title.size.x - 4.0:
+		fs -= 1
+	_title.add_theme_font_size_override("font_size", fs)

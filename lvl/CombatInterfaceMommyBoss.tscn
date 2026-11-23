@@ -53,6 +53,7 @@
 [ext_resource type="Texture2D" uid="uid://bbx8fyrak3d05" path="res://actions/actiontexture/UI icons/UI_time.png" id="50_7v6gp"]
 [ext_resource type="Texture2D" uid="uid://m2rdnwpyir8i" path="res://UI/gradiant.png" id="51_7bjlm"]
 [ext_resource type="Texture2D" uid="uid://dmtf3xuwjker5" path="res://UI/UI boxes/UI_initiative_chain_link.png" id="52_th258"]
+[ext_resource type="PackedScene" path="res://UI/UI dashboard/ui_bg_bottom.tscn" id="bgb_1"]
 
 [sub_resource type="Resource" id="Resource_i1s1q"]
 script = ExtResource("12_08or7")
@@ -602,10 +603,7 @@ script = ExtResource("27_01ymj")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
-[node name="UiFgwallInquisition" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(958.681, 893.75)
-scale = Vector2(0.751812, 0.771222)
-texture = ExtResource("28_tn15x")
+[node name="UiBgBottom" parent="CanvasLayer" instance=ExtResource("bgb_1")]
 
 [node name="UiCombatPortraitFrame" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(141.5, 878.25)

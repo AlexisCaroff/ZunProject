@@ -25,6 +25,8 @@ var offset : Vector2 = Vector2.ZERO
 var _hovering := false
 var _tip: PanelContainer = null
 var _tip_text: RichTextLabel = null
+## Colonne de droite : l'échelle, un palier par ligne.
+var _tip_ladder: RichTextLabel = null
 var _badge: Label = null
 
 
@@ -99,7 +101,6 @@ func _describe() -> String:
 		else:
 			effect = "%s %+d" % [STAT_LABEL.get(buff.stat, "Stat"), buff.amount]
 		out += "\n[color=%s]%s[/color]" % [col, effect]
-		out += "\n[font_size=16]%s[/font_size]" % buff.ladder_bbcode()
 	else:
 		if buff.fights_left > 0:
 			out += "\n[color=#b5a993]%d fights[/color]" % buff.fights_left
@@ -113,13 +114,39 @@ func _show_tip() -> void:
 	if _tip == null or buff == null:
 		return
 	_tip_text.text = _describe()
+	var ladder := buff.is_ladder()
+	_tip_ladder.visible = ladder
+	if ladder:
+		_tip_ladder.text = "[right][font_size=16]%s[/font_size][/right]" % buff.ladder_bbcode(true)
+	# Largeurs mesurées sur le texte (pas de retour à la ligne).
+	_fit_width(_tip_text, 120.0 if not ladder else 0.0)
+	if ladder:
+		_fit_width(_tip_ladder, 0.0)
+	_tip.size = Vector2.ZERO
 	_tip.reset_size()
-	var w: float = max(_tip_text.get_content_width(), 120.0) + 24.0
-	_tip_text.custom_minimum_size = Vector2(w - 24.0, 0)
-	_tip.reset_size()
-	_tip.size = Vector2(w, _tip_text.get_content_height() + 16.0)
+	_tip.size = _tip.get_combined_minimum_size()
 	_tip.position = Vector2(texture.size.x * 0.5 - _tip.size.x * 0.5, -_tip.size.y - 6.0)
 	STAT_HOVER.pop_in(_tip)
+
+
+func _fit_width(label: RichTextLabel, min_w: float) -> void:
+	label.custom_minimum_size = Vector2.ZERO
+	label.size = Vector2.ZERO
+	label.custom_minimum_size = Vector2(max(label.get_content_width(), min_w), 0)
+
+
+func _make_tip_label() -> RichTextLabel:
+	var l := RichTextLabel.new()
+	l.bbcode_enabled = true
+	l.fit_content = true
+	l.scroll_active = false
+	l.autowrap_mode = TextServer.AUTOWRAP_OFF
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	l.add_theme_font_override("normal_font", FONT)
+	l.add_theme_font_override("bold_font", FONT)
+	l.add_theme_font_size_override("normal_font_size", 15)
+	l.add_theme_font_size_override("bold_font_size", 15)
+	return l
 
 
 func _build_tip() -> void:
@@ -135,17 +162,16 @@ func _build_tip() -> void:
 	style.content_margin_top = 8
 	style.content_margin_bottom = 8
 	_tip.add_theme_stylebox_override("panel", style)
-	_tip_text = RichTextLabel.new()
-	_tip_text.bbcode_enabled = true
-	_tip_text.fit_content = true
-	_tip_text.scroll_active = false
-	_tip_text.autowrap_mode = TextServer.AUTOWRAP_OFF
-	_tip_text.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_tip_text.add_theme_font_override("normal_font", FONT)
-	_tip_text.add_theme_font_override("bold_font", FONT)
-	_tip_text.add_theme_font_size_override("normal_font_size", 15)
-	_tip_text.add_theme_font_size_override("bold_font_size", 15)
-	_tip.add_child(_tip_text)
+	# Description à gauche, échelle verticale à droite.
+	var row := HBoxContainer.new()
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_theme_constant_override("separation", 14)
+	_tip_text = _make_tip_label()
+	_tip_text.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	row.add_child(_tip_text)
+	_tip_ladder = _make_tip_label()
+	row.add_child(_tip_ladder)
+	_tip.add_child(row)
 	add_child(_tip)
 
 
