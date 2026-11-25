@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://y4hc3usjv2j7"
-path="res://.godot/imported/FX_hunter_meditate_over.png-c102a3afcc958e38a620846867bbee43.ctex"
+path.bptc="res://.godot/imported/FX_hunter_meditate_over.png-c102a3afcc958e38a620846867bbee43.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://actions/skillEffects/FX/FX_hunter_meditate_over.png"
-dest_files=["res://.godot/imported/FX_hunter_meditate_over.png-c102a3afcc958e38a620846867bbee43.ctex"]
+dest_files=["res://.godot/imported/FX_hunter_meditate_over.png-c102a3afcc958e38a620846867bbee43.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

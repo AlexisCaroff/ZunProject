@@ -30,8 +30,7 @@ script = ExtResource("7_exwrj")
 name = "Paddle Push"
 descriptionName = "Paddle Push"
 description = "Pushes the hero to the back row (it swaps with the hero behind), then deals 20 + ATK - DEF physical damage.
-Target: 1 front-row hero
-Accuracy 100% | Cooldown 2"
+Target: hero | Range: 1 | From: any row"
 icon = ExtResource("6_snq88")
 barkSkill = ""
 required_position = 0

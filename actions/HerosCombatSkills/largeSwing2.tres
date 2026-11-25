@@ -20,8 +20,8 @@ script = ExtResource("6_ynqil")
 name = "Large swing"
 descriptionName = "Heavy swing"
 description = "Deals 20 + ATK - DEF physical damage.
-Target: 1 front-row enemy | From: front row
-Accuracy 100% | Cooldown 4 | Cost 4"
+Target: enemy | Range: 1
+Cost 4"
 icon = ExtResource("5_b5v2w")
 attack_sound = ExtResource("2_gqpxp")
 barkSkill = ""

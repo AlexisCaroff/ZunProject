@@ -31,8 +31,7 @@ script = ExtResource("2_skill")
 name = "Slime Throw"
 descriptionName = "Slime Throw"
 description = "Deals 11 + ATK - DEF magic damage, then Lust poison +1 step (Lust at the start of each of its turns).
-Target: 1 hero (any row)
-Accuracy 100% | Cooldown 1"
+Target: hero | Range: 3"
 icon = ExtResource("6_icon")
 barkSkill = ""
 required_position = 0

@@ -36,8 +36,7 @@ script = ExtResource("1_skill")
 name = "bollas"
 descriptionName = "bollas"
 description = "Deals 5 + ATK - DEF physical damage and stuns: the target skips its next turn.
-Target: 1 back-row enemy
-Accuracy 100% | Cooldown 4"
+Target: back-row enemy | Range: 3"
 icon = ExtResource("4_icon")
 attack_sound = ExtResource("6_sound")
 barkSkill = ""

@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cyy6b634yl0ja"
-path="res://.godot/imported/SCENE_CAMP_MxH.png-245490a67e621009dba73a43268a05b6.ctex"
+path.bptc="res://.godot/imported/SCENE_CAMP_MxH.png-245490a67e621009dba73a43268a05b6.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://LoveScene/SCENE_CAMP_MxH.png"
-dest_files=["res://.godot/imported/SCENE_CAMP_MxH.png-245490a67e621009dba73a43268a05b6.ctex"]
+dest_files=["res://.godot/imported/SCENE_CAMP_MxH.png-245490a67e621009dba73a43268a05b6.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

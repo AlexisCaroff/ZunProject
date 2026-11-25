@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cenn85dchs0nq"
-path="res://.godot/imported/FX_grab_addict002.png-f8efe7b7029d2ab71653436d8e666a64.ctex"
+path.bptc="res://.godot/imported/FX_grab_addict002.png-f8efe7b7029d2ab71653436d8e666a64.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://actions/skillEffects/FX/FX_grab_addict002.png"
-dest_files=["res://.godot/imported/FX_grab_addict002.png-f8efe7b7029d2ab71653436d8e666a64.ctex"]
+dest_files=["res://.godot/imported/FX_grab_addict002.png-f8efe7b7029d2ab71653436d8e666a64.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

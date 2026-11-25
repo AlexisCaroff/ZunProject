@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c8oumnotxps83"
-path="res://.godot/imported/ENEMY_nymph_F_hit.png-1b468d1e1c3caf03f7d59674ba0abdc9.ctex"
+path.bptc="res://.godot/imported/ENEMY_nymph_F_hit.png-1b468d1e1c3caf03f7d59674ba0abdc9.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/charatexture/demo characters/ENEMY_nymph_F_hit.png"
-dest_files=["res://.godot/imported/ENEMY_nymph_F_hit.png-1b468d1e1c3caf03f7d59674ba0abdc9.ctex"]
+dest_files=["res://.godot/imported/ENEMY_nymph_F_hit.png-1b468d1e1c3caf03f7d59674ba0abdc9.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

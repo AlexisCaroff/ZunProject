@@ -30,8 +30,7 @@ script = ExtResource("5_cscgs")
 name = "Tentacles Attack"
 descriptionName = "Tentacles Attack"
 description = "Deals 15 + ATK - DEF physical damage and pulls a back-row hero to the front row (it swaps with the hero in front).
-Target: 1 hero (any row)
-Accuracy 100% | Cooldown 2"
+Target: hero | Range: 3"
 icon = ExtResource("4_6g65u")
 barkSkill = ""
 required_position = 0

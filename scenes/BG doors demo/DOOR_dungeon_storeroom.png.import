@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ego82bs05hdc"
-path="res://.godot/imported/DOOR_dungeon_storeroom.png-9b997c4f20286765dd59fb7bf467dfdf.ctex"
+path.bptc="res://.godot/imported/DOOR_dungeon_storeroom.png-9b997c4f20286765dd59fb7bf467dfdf.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://scenes/BG doors demo/DOOR_dungeon_storeroom.png"
-dest_files=["res://.godot/imported/DOOR_dungeon_storeroom.png-9b997c4f20286765dd59fb7bf467dfdf.ctex"]
+dest_files=["res://.godot/imported/DOOR_dungeon_storeroom.png-9b997c4f20286765dd59fb7bf467dfdf.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

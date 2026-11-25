@@ -19,8 +19,7 @@ script = ExtResource("4_mane8")
 name = "exorcisme"
 descriptionName = "exorcisme"
 description = "Deals 20 + ATK - DEF magic damage.
-Target: 1 enemy (any row)
-Accuracy 100% | Cooldown 4"
+Target: enemy | Range: 3"
 icon = ExtResource("5_7i8lj")
 barkSkill = ""
 required_position = 0

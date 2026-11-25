@@ -23,7 +23,7 @@ name = "Shield"
 descriptionName = "Harden"
 description = "DEF buff +3 steps.
 Target: yourself
-Never misses | Cooldown 2"
+Never misses"
 icon = ExtResource("5_gk65l")
 barkSkill = ""
 required_position = 0

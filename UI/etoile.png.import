@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://2xyreu4glom"
-path="res://.godot/imported/etoile.png-060dc538bc4de0e947875926c2606f75.ctex"
+path.bptc="res://.godot/imported/etoile.png-060dc538bc4de0e947875926c2606f75.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://UI/etoile.png"
-dest_files=["res://.godot/imported/etoile.png-060dc538bc4de0e947875926c2606f75.ctex"]
+dest_files=["res://.godot/imported/etoile.png-060dc538bc4de0e947875926c2606f75.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

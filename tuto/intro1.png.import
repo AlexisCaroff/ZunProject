@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b5cqyywvqxjb8"
-path="res://.godot/imported/intro1.png-35cf1d9d176c5d102173df9ce43592be.ctex"
+path.bptc="res://.godot/imported/intro1.png-35cf1d9d176c5d102173df9ce43592be.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://tuto/intro1.png"
-dest_files=["res://.godot/imported/intro1.png-35cf1d9d176c5d102173df9ce43592be.ctex"]
+dest_files=["res://.godot/imported/intro1.png-35cf1d9d176c5d102173df9ce43592be.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

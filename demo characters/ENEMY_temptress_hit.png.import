@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cfuf3ebx3fb5y"
-path="res://.godot/imported/ENEMY_temptress_hit.png-ee5c58b5b36c6df453335bda259a6aad.ctex"
+path.bptc="res://.godot/imported/ENEMY_temptress_hit.png-ee5c58b5b36c6df453335bda259a6aad.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://demo characters/ENEMY_temptress_hit.png"
-dest_files=["res://.godot/imported/ENEMY_temptress_hit.png-ee5c58b5b36c6df453335bda259a6aad.ctex"]
+dest_files=["res://.godot/imported/ENEMY_temptress_hit.png-ee5c58b5b36c6df453335bda259a6aad.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -32,8 +32,8 @@ script = ExtResource("9_rttfw")
 name = "ChangeMask2"
 descriptionName = "ChangeMask2"
 description = "Move to an empty ally position or swap places with an ally, then change mask: your skills become Harden, Drain and Tentacle Grab.
-Target: 1 ally (yourself to stay in place)
-Never misses | Cooldown 5 | Cost 5"
+Target: ally (yourself to stay in place)
+Never misses | Cost 5"
 icon = ExtResource("4_lajaf")
 barkSkill = ""
 required_position = 0

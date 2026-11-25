@@ -20,8 +20,7 @@ script = ExtResource("5_nar82")
 name = "Charm"
 descriptionName = "Charm"
 description = "+25 Lust (minus target WILL).
-Target: 1 front-row hero (melee: from the front row only)
-Accuracy 100% | Cooldown 2"
+Target: hero | Range: 1"
 icon = ExtResource("4_ngyod")
 barkSkill = ""
 required_position = 1

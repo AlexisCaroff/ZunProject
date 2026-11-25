@@ -28,8 +28,7 @@ script = ExtResource("2_d53qb")
 name = "Poison"
 descriptionName = "Poison"
 description = "Deals 5 + ATK - DEF physical damage, then poison +1 step (stamina damage at the start of each of its turns).
-Target: 1 hero (any row)
-Accuracy 100% | Cooldown 2"
+Target: hero | Range: 3"
 icon = ExtResource("4_dving")
 required_position = 0
 the_target_type = 0

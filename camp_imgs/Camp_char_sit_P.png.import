@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://syna5wlhhue4"
-path="res://.godot/imported/Camp_char_sit_P.png-cd15a0d6569414e4196b508e9744c187.ctex"
+path.bptc="res://.godot/imported/Camp_char_sit_P.png-cd15a0d6569414e4196b508e9744c187.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://camp_imgs/Camp_char_sit_P.png"
-dest_files=["res://.godot/imported/Camp_char_sit_P.png-cd15a0d6569414e4196b508e9744c187.ctex"]
+dest_files=["res://.godot/imported/Camp_char_sit_P.png-cd15a0d6569414e4196b508e9744c187.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

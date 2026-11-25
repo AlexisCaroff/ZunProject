@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b72rv8qoighv3"
-path="res://.godot/imported/PROP_tent_back.png-9774ef133a8fcb0437e3ea244146583f.ctex"
+path.bptc="res://.godot/imported/PROP_tent_back.png-9774ef133a8fcb0437e3ea244146583f.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://props/PROP_tent_back.png"
-dest_files=["res://.godot/imported/PROP_tent_back.png-9774ef133a8fcb0437e3ea244146583f.ctex"]
+dest_files=["res://.godot/imported/PROP_tent_back.png-9774ef133a8fcb0437e3ea244146583f.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

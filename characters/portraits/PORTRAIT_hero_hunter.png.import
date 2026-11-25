@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://xbjwv5qg2xmp"
-path="res://.godot/imported/PORTRAIT_hero_hunter.png-700098e9dc807b1902c2c332ad60ba7d.ctex"
+path.bptc="res://.godot/imported/PORTRAIT_hero_hunter.png-700098e9dc807b1902c2c332ad60ba7d.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/portraits/PORTRAIT_hero_hunter.png"
-dest_files=["res://.godot/imported/PORTRAIT_hero_hunter.png-700098e9dc807b1902c2c332ad60ba7d.ctex"]
+dest_files=["res://.godot/imported/PORTRAIT_hero_hunter.png-700098e9dc807b1902c2c332ad60ba7d.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

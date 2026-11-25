@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b3stvq6r8gbr5"
-path="res://.godot/imported/FX_charge.png-e19540bfda74c6c458581ca23c488187.ctex"
+path.bptc="res://.godot/imported/FX_charge.png-e19540bfda74c6c458581ca23c488187.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://actions/skillEffects/FX/FX_charge.png"
-dest_files=["res://.godot/imported/FX_charge.png-e19540bfda74c6c458581ca23c488187.ctex"]
+dest_files=["res://.godot/imported/FX_charge.png-e19540bfda74c6c458581ca23c488187.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

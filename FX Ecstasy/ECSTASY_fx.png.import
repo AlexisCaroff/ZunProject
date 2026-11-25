@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cb84my70m8i52"
-path="res://.godot/imported/ECSTASY_fx.png-2d88b83e18947f2a6de3b5a4b780cd22.ctex"
+path.bptc="res://.godot/imported/ECSTASY_fx.png-2d88b83e18947f2a6de3b5a4b780cd22.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://FX Ecstasy/ECSTASY_fx.png"
-dest_files=["res://.godot/imported/ECSTASY_fx.png-2d88b83e18947f2a6de3b5a4b780cd22.ctex"]
+dest_files=["res://.godot/imported/ECSTASY_fx.png-2d88b83e18947f2a6de3b5a4b780cd22.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

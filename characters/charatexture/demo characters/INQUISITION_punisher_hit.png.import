@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c6wwcw5lllh44"
-path="res://.godot/imported/INQUISITION_punisher_hit.png-6f5c389b63cd8d86c01cb1fe8d997b41.ctex"
+path.bptc="res://.godot/imported/INQUISITION_punisher_hit.png-6f5c389b63cd8d86c01cb1fe8d997b41.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/charatexture/demo characters/INQUISITION_punisher_hit.png"
-dest_files=["res://.godot/imported/INQUISITION_punisher_hit.png-6f5c389b63cd8d86c01cb1fe8d997b41.ctex"]
+dest_files=["res://.godot/imported/INQUISITION_punisher_hit.png-6f5c389b63cd8d86c01cb1fe8d997b41.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dfbm6mf8pdux7"
-path="res://.godot/imported/ENEMY_slime_down.png-f56cf08d4caae4642a66b106492e1313.ctex"
+path.bptc="res://.godot/imported/ENEMY_slime_down.png-f56cf08d4caae4642a66b106492e1313.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/charatexture/demo characters/ENEMY_slime_down.png"
-dest_files=["res://.godot/imported/ENEMY_slime_down.png-f56cf08d4caae4642a66b106492e1313.ctex"]
+dest_files=["res://.godot/imported/ENEMY_slime_down.png-f56cf08d4caae4642a66b106492e1313.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

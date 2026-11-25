@@ -31,8 +31,8 @@ script = ExtResource("7_gnc4b")
 name = "ChangeMask"
 descriptionName = "ChangeMask"
 description = "Move to an empty ally position or swap places with an ally, then change mask: your skills become Acid Arrow, Sticky Net and Mitraille.
-Target: 1 ally (yourself to stay in place)
-Never misses | Cooldown 5 | Cost 5"
+Target: ally (yourself to stay in place)
+Never misses | Cost 5"
 icon = ExtResource("4_crp1g")
 barkSkill = ""
 required_position = 0

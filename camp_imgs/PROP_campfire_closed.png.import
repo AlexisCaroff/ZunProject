@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cn8jxb5t07ydy"
-path="res://.godot/imported/PROP_campfire_closed.png-5bc8621b3e58399d5ed3ed4ac5cc2603.ctex"
+path.bptc="res://.godot/imported/PROP_campfire_closed.png-5bc8621b3e58399d5ed3ed4ac5cc2603.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://camp_imgs/PROP_campfire_closed.png"
-dest_files=["res://.godot/imported/PROP_campfire_closed.png-5bc8621b3e58399d5ed3ed4ac5cc2603.ctex"]
+dest_files=["res://.godot/imported/PROP_campfire_closed.png-5bc8621b3e58399d5ed3ed4ac5cc2603.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -23,8 +23,7 @@ script = ExtResource("2_devca")
 name = "euphoria"
 descriptionName = "Euphoria"
 description = "ATK buff +3 steps.
-Target: itself
-Accuracy 100% | Cooldown 2"
+Target: itself"
 icon = ExtResource("3_hmtly")
 barkSkill = ""
 required_position = 0

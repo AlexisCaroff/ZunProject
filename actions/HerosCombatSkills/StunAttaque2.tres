@@ -37,8 +37,7 @@ script = ExtResource("10_c7xr0")
 name = "Shield Bash"
 descriptionName = "Shield Bash"
 description = "Deals 20 + ATK - DEF physical damage and stuns: the target skips its next turn.
-Target: 1 front-row enemy | From: front row
-Accuracy 100% | Cooldown 4"
+Target: enemy | Range: 1"
 icon = ExtResource("9_so0iu")
 attack_sound = ExtResource("2_nafb2")
 barkSkill = ""

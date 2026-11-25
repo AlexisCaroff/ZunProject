@@ -30,7 +30,7 @@ name = "hymne d’encouragement"
 descriptionName = "hymne d’encouragement"
 description = "All allies: cooldowns -2 and ATK buff +3 steps.
 Target: all allies, itself included
-Never misses | Cooldown 2 | Cost 5"
+Never misses | Cost 5"
 icon = ExtResource("6_8vcuv")
 barkSkill = ""
 required_position = 0

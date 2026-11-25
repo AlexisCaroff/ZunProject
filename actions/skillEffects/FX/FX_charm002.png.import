@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bqld236ladj18"
-path="res://.godot/imported/FX_charm002.png-59470e5acec2d6ebb12f45dc41683989.ctex"
+path.bptc="res://.godot/imported/FX_charm002.png-59470e5acec2d6ebb12f45dc41683989.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://actions/skillEffects/FX/FX_charm002.png"
-dest_files=["res://.godot/imported/FX_charm002.png-59470e5acec2d6ebb12f45dc41683989.ctex"]
+dest_files=["res://.godot/imported/FX_charm002.png-59470e5acec2d6ebb12f45dc41683989.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

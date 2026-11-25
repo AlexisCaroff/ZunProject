@@ -30,7 +30,7 @@ name = "Hymn"
 descriptionName = "Hymn"
 description = "All allies: cooldowns -2 and ATK buff +1 step.
 Target: the whole team, you included
-Never misses | Cooldown 2 | Cost 5"
+Never misses | Cost 5"
 icon = ExtResource("7_ioqbf")
 barkSkill = ""
 required_position = 0

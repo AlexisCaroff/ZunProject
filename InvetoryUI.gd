@@ -856,13 +856,14 @@ func update_cooldown_bar(container: HBoxContainer, skill):
 	if max_cd <= 0:
 		return
 	var charged : int = max_cd-current_cd
-	for i in range(max_cd):
+	# Un effet peut allonger la recharge au-delà du maximum : un point par tour.
+	for i in range(maxi(max_cd, current_cd)):
 		var rect = ColorRect.new()
 		rect.custom_minimum_size = Vector2(5, 5)
 		rect.color = Color(0.2,0.2,0.2)
 
 		# Si ce tour est déjà "récupéré", on le met orange
-		if i <= charged :
+		if i < charged :
 			rect.color = Color(0.64,0.56,0.36)
 		container.add_child(rect)
 func _on_inventory_changed(item: Equipment):

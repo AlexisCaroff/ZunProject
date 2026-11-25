@@ -19,8 +19,7 @@ script = ExtResource("5_lnpoj")
 name = "Chain"
 descriptionName = "Chain"
 description = "Deals 30 + ATK - DEF physical damage.
-Target: 1 hero (any row)
-Accuracy 100% | Cooldown 2"
+Target: hero | Range: 3"
 icon = ExtResource("4_4yv71")
 barkSkill = ""
 required_position = 0

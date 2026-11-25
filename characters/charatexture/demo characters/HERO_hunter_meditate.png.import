@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d10pe1ndd4h8n"
-path="res://.godot/imported/HERO_hunter_meditate.png-c404d2b64ce91812b865ff78b43af774.ctex"
+path.bptc="res://.godot/imported/HERO_hunter_meditate.png-c404d2b64ce91812b865ff78b43af774.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/charatexture/demo characters/HERO_hunter_meditate.png"
-dest_files=["res://.godot/imported/HERO_hunter_meditate.png-c404d2b64ce91812b865ff78b43af774.ctex"]
+dest_files=["res://.godot/imported/HERO_hunter_meditate.png-c404d2b64ce91812b865ff78b43af774.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

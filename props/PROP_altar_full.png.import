@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0eveb6tipw38"
-path="res://.godot/imported/PROP_altar_full.png-01c379b4a0cdb05ab3039e1c79e0f63a.ctex"
+path.bptc="res://.godot/imported/PROP_altar_full.png-01c379b4a0cdb05ab3039e1c79e0f63a.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://props/PROP_altar_full.png"
-dest_files=["res://.godot/imported/PROP_altar_full.png-01c379b4a0cdb05ab3039e1c79e0f63a.ctex"]
+dest_files=["res://.godot/imported/PROP_altar_full.png-01c379b4a0cdb05ab3039e1c79e0f63a.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

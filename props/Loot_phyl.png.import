@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://u0gyc4v1iroh"
-path="res://.godot/imported/Loot_phyl.png-136cf04a95108a267343dc19217b6dfa.ctex"
+path.bptc="res://.godot/imported/Loot_phyl.png-136cf04a95108a267343dc19217b6dfa.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://props/Loot_phyl.png"
-dest_files=["res://.godot/imported/Loot_phyl.png-136cf04a95108a267343dc19217b6dfa.ctex"]
+dest_files=["res://.godot/imported/Loot_phyl.png-136cf04a95108a267343dc19217b6dfa.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

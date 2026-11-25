@@ -41,10 +41,10 @@ color = Color(0, 0, 0, 1)
 [node name="CloseButton" type="Button" parent="CanvasLayer"]
 z_index = 60
 z_as_relative = false
-offset_left = 1754.0
-offset_top = 831.0
-offset_right = 1886.0
-offset_bottom = 922.0
+offset_left = 1800.0
+offset_top = 25.0
+offset_right = 1896.0
+offset_bottom = 115.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7ogad")
 flat = true
 script = ExtResource("6_7ogad")

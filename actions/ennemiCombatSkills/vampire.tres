@@ -22,8 +22,7 @@ script = ExtResource("2_vmp0o")
 name = "vapiric whipe"
 descriptionName = "Drain"
 description = "Deals 10 + ATK - DEF physical damage and +2 cooldown on one random skill of the hero.
-Target: 1 hero (any row) | From: front row
-Accuracy 100% | Cooldown 2"
+Target: hero | Range: 3 | From: front row"
 icon = ExtResource("4_w0udk")
 barkSkill = ""
 required_position = 1

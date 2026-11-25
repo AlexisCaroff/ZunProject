@@ -47,7 +47,7 @@ name = "Taunt"
 descriptionName = "Roar"
 description = "Taunts 1 enemy for 1 turn: it must attack you.
 Then on you: all cooldowns -2, DEF buff +2 steps.
-Target: 1 enemy (any row) | Accuracy 100% | Cooldown 5 | Cost 5"
+Target: enemy | Range: 3 | Cost 5"
 icon = ExtResource("6_v6fax")
 barkSkill = ""
 required_position = 0

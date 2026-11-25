@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c53br7sri7d6b"
-path="res://.godot/imported/FX_slash_down.png-44940a98c1a4c697e5864cc32fe30b57.ctex"
+path.bptc="res://.godot/imported/FX_slash_down.png-44940a98c1a4c697e5864cc32fe30b57.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://actions/skillEffects/FX/FX_slash_down.png"
-dest_files=["res://.godot/imported/FX_slash_down.png-44940a98c1a4c697e5864cc32fe30b57.ctex"]
+dest_files=["res://.godot/imported/FX_slash_down.png-44940a98c1a4c697e5864cc32fe30b57.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://3fho5jhfv8x7"
-path="res://.godot/imported/FX_addict_rave_bubble.png-1ae9b245a3cd941debdcdbf377c56785.ctex"
+path.bptc="res://.godot/imported/FX_addict_rave_bubble.png-1ae9b245a3cd941debdcdbf377c56785.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://actions/skillEffects/FX/FX_addict_rave_bubble.png"
-dest_files=["res://.godot/imported/FX_addict_rave_bubble.png-1ae9b245a3cd941debdcdbf377c56785.ctex"]
+dest_files=["res://.godot/imported/FX_addict_rave_bubble.png-1ae9b245a3cd941debdcdbf377c56785.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

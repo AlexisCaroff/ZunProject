@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cb71xhxo6m683"
-path="res://.godot/imported/HERO_warrior_kick.png-74189e19a04f8c228d1ac5a7ccde9c01.ctex"
+path.bptc="res://.godot/imported/HERO_warrior_kick.png-74189e19a04f8c228d1ac5a7ccde9c01.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://demo characters/HERO_warrior_kick.png"
-dest_files=["res://.godot/imported/HERO_warrior_kick.png-74189e19a04f8c228d1ac5a7ccde9c01.ctex"]
+dest_files=["res://.godot/imported/HERO_warrior_kick.png-74189e19a04f8c228d1ac5a7ccde9c01.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

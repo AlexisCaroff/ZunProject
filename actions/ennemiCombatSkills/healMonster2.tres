@@ -17,8 +17,8 @@ script = ExtResource("5_qpiaq")
 name = "Heal"
 descriptionName = "Heal"
 description = "Restores 20 stamina.
-Target: 1 ally, itself included
-Never misses | Cooldown 2"
+Target: ally, itself included
+Never misses"
 icon = ExtResource("4_wfvog")
 barkSkill = ""
 required_position = 0

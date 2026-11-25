@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b47drk7l2ocqu"
-path="res://.godot/imported/FX_syphon_target.png-5e710980a3a2fa1f42fa1e3a87217f2f.ctex"
+path.bptc="res://.godot/imported/FX_syphon_target.png-5e710980a3a2fa1f42fa1e3a87217f2f.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://actions/skillEffects/FX/FX_syphon_target.png"
-dest_files=["res://.godot/imported/FX_syphon_target.png-5e710980a3a2fa1f42fa1e3a87217f2f.ctex"]
+dest_files=["res://.godot/imported/FX_syphon_target.png-5e710980a3a2fa1f42fa1e3a87217f2f.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://corbcjlk4wrqs"
-path="res://.godot/imported/ENEMY_addict_euphoria.png-e876502580538011bfe71f9ad86d8671.ctex"
+path.bptc="res://.godot/imported/ENEMY_addict_euphoria.png-e876502580538011bfe71f9ad86d8671.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://demo characters/ENEMY_addict_euphoria.png"
-dest_files=["res://.godot/imported/ENEMY_addict_euphoria.png-e876502580538011bfe71f9ad86d8671.ctex"]
+dest_files=["res://.godot/imported/ENEMY_addict_euphoria.png-e876502580538011bfe71f9ad86d8671.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

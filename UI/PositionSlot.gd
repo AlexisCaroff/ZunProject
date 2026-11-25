@@ -56,6 +56,7 @@ func assign_character(character: Character, movetime:float):
 		print("charaUI is null")
 	occupant.hornyJauge =CharaUI.HornyBar
 	occupant.hp_Jauge=CharaUI.HPProgressBar
+	occupant.LustProgressBar=CharaUI.LustProgressBar
 	occupant.attach_buff_bar(CharaUI.get_buff_bar())
 	if occupant.characterData.is_player_controlled and combat_manager != null \
 			and combat_manager.get("lust_hidden") == true:
@@ -75,6 +76,9 @@ func assign_character(character: Character, movetime:float):
 		await ready
 
 	character._current_slot = self
+	# Les jauges de cette position montraient l'occupant précédent : on les
+	# remplit avec celui qui arrive (après un échange, chacun les siennes).
+	character.update_ui()
 	#print(character.Charaname,"→ current_slot défini à ", self.name)
 
 	var tween = get_tree().create_tween()

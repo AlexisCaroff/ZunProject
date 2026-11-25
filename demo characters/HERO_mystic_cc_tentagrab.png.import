@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c2b35no4g7tky"
-path="res://.godot/imported/HERO_mystic_cc_tentagrab.png-22bd08312441e624e75deb96c6554e2e.ctex"
+path.bptc="res://.godot/imported/HERO_mystic_cc_tentagrab.png-22bd08312441e624e75deb96c6554e2e.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://demo characters/HERO_mystic_cc_tentagrab.png"
-dest_files=["res://.godot/imported/HERO_mystic_cc_tentagrab.png-22bd08312441e624e75deb96c6554e2e.ctex"]
+dest_files=["res://.godot/imported/HERO_mystic_cc_tentagrab.png-22bd08312441e624e75deb96c6554e2e.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

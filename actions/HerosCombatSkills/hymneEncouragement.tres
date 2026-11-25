@@ -21,7 +21,7 @@ name = "Buff attack"
 descriptionName = "Attaque"
 description = "All allies: ATK buff +3 steps.
 Target: the whole team, you included
-Never misses | Cooldown 2"
+Never misses"
 icon = ExtResource("3_n05yo")
 barkSkill = ""
 required_position = 0

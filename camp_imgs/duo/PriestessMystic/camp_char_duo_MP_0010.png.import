@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dyjaf31xdbvdi"
-path="res://.godot/imported/camp_char_duo_MP_0010.png-3b166e62cdd7d58607840a3361e455e4.ctex"
+path.bptc="res://.godot/imported/camp_char_duo_MP_0010.png-3b166e62cdd7d58607840a3361e455e4.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://camp_imgs/duo/PriestessMystic/camp_char_duo_MP_0010.png"
-dest_files=["res://.godot/imported/camp_char_duo_MP_0010.png-3b166e62cdd7d58607840a3361e455e4.ctex"]
+dest_files=["res://.godot/imported/camp_char_duo_MP_0010.png-3b166e62cdd7d58607840a3361e455e4.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

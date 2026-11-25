@@ -19,8 +19,7 @@ script = ExtResource("2_tmr80")
 name = "spawnEnnemi"
 descriptionName = "invocation"
 description = "Summons 1 Spitter.
-Target: an ally slot
-Accuracy 100% | Cooldown 2"
+Target: an ally slot"
 icon = ExtResource("4_48h3l")
 barkSkill = ""
 required_position = 0

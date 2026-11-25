@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwag18576qdi3"
-path="res://.godot/imported/INQUISITION_inquisitor_heal.png-0e379a46ae5a5224b53e30d36b11b6c2.ctex"
+path.bptc="res://.godot/imported/INQUISITION_inquisitor_heal.png-0e379a46ae5a5224b53e30d36b11b6c2.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/charatexture/demo characters/INQUISITION_inquisitor_heal.png"
-dest_files=["res://.godot/imported/INQUISITION_inquisitor_heal.png-0e379a46ae5a5224b53e30d36b11b6c2.ctex"]
+dest_files=["res://.godot/imported/INQUISITION_inquisitor_heal.png-0e379a46ae5a5224b53e30d36b11b6c2.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

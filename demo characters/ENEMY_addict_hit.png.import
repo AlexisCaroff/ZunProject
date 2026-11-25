@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bcdk4tjg3i770"
-path="res://.godot/imported/ENEMY_addict_hit.png-cc5c93f5d53537d5c664fb9d98a5d4d8.ctex"
+path.bptc="res://.godot/imported/ENEMY_addict_hit.png-cc5c93f5d53537d5c664fb9d98a5d4d8.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://demo characters/ENEMY_addict_hit.png"
-dest_files=["res://.godot/imported/ENEMY_addict_hit.png-cc5c93f5d53537d5c664fb9d98a5d4d8.ctex"]
+dest_files=["res://.godot/imported/ENEMY_addict_hit.png-cc5c93f5d53537d5c664fb9d98a5d4d8.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

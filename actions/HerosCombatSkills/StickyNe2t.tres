@@ -30,8 +30,7 @@ script = ExtResource("9_8lnek")
 name = "sticky net"
 descriptionName = "sticky net"
 description = "DEF debuff -2 steps and immobilized (cannot move) for 2 turns.
-Target: all enemies (one hit roll each)
-Accuracy 100% | Cooldown 4"
+Target: all enemies (one hit roll each) | Range: 3"
 icon = ExtResource("8_kecnh")
 attack_sound = ExtResource("2_u4587")
 barkSkill = ""

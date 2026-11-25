@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://qfml2ojbw0gr"
-path="res://.godot/imported/ENEMY_thugF_idle.png-13e2ba802d11d722fd427418c69c1ea7.ctex"
+path.bptc="res://.godot/imported/ENEMY_thugF_idle.png-13e2ba802d11d722fd427418c69c1ea7.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/charatexture/demo characters/ENEMY_thugF_idle.png"
-dest_files=["res://.godot/imported/ENEMY_thugF_idle.png-13e2ba802d11d722fd427418c69c1ea7.ctex"]
+dest_files=["res://.godot/imported/ENEMY_thugF_idle.png-13e2ba802d11d722fd427418c69c1ea7.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

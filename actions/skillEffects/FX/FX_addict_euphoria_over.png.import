@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dodxlfnxpy7ju"
-path="res://.godot/imported/FX_addict_euphoria_over.png-42f02a55b6441a9b53d89f795558ce7c.ctex"
+path.bptc="res://.godot/imported/FX_addict_euphoria_over.png-42f02a55b6441a9b53d89f795558ce7c.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://actions/skillEffects/FX/FX_addict_euphoria_over.png"
-dest_files=["res://.godot/imported/FX_addict_euphoria_over.png-42f02a55b6441a9b53d89f795558ce7c.ctex"]
+dest_files=["res://.godot/imported/FX_addict_euphoria_over.png-42f02a55b6441a9b53d89f795558ce7c.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

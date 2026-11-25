@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2x4k2dmryeik"
-path="res://.godot/imported/camp_char_solo_H_0005.png-f53072840c2f7ffd2c1e6b6881083ebe.ctex"
+path.bptc="res://.godot/imported/camp_char_solo_H_0005.png-f53072840c2f7ffd2c1e6b6881083ebe.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://camp_imgs/solo/Hunter/camp_char_solo_H_0005.png"
-dest_files=["res://.godot/imported/camp_char_solo_H_0005.png-f53072840c2f7ffd2c1e6b6881083ebe.ctex"]
+dest_files=["res://.godot/imported/camp_char_solo_H_0005.png-f53072840c2f7ffd2c1e6b6881083ebe.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -31,8 +31,7 @@ script = ExtResource("5_1pcf5")
 name = "hook"
 descriptionName = "Tentacle grabe"
 description = "Deals 20 + ATK - DEF physical damage and pulls a back-row enemy to the front row (it swaps with the enemy in front).
-Target: 1 enemy (any row)
-Accuracy 100% | Cooldown 4"
+Target: enemy | Range: 3"
 icon = ExtResource("4_obqb0")
 barkSkill = ""
 required_position = 0

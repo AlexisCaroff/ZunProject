@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c3hl41niydywh" path="res://UI dialog/UI dialog/UI_convo_tail.png" id="7_5qnbt"]
 [ext_resource type="Texture2D" uid="uid://coqiugijafe2d" path="res://UI dialog/UI dialog/UI_convo_name.png" id="8_16ujg"]
 [ext_resource type="Texture2D" uid="uid://dcfimsbecei4w" path="res://UI dialog/UI dialog/Cercle.png" id="8_qn32y"]
-[ext_resource type="Texture2D" uid="uid://djk5rtb1m8cpd" path="res://UI/UI boxes/UI_click_left.png" id="10_5qnbt"]
+[ext_resource type="Texture2D" uid="uid://d1x0t0774gvww" path="res://UI/UI inventory/UI_inventory_nameplate_right.png" id="11_qn32y"]
 [ext_resource type="Script" uid="uid://devdej4xpva2i" path="res://UI/camera_2d.gd" id="11_y5125"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gkyvs"]
@@ -276,14 +276,15 @@ bka ku kughdskg khsfmupzk
 jhgfslkjfnmsfjhk"
 fit_content = true
 scroll_active = false
+horizontal_alignment = 1
 
 [node name="UiClickLeft" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 1677.75
-offset_top = 924.978
-offset_right = 1776.75
-offset_bottom = 1023.98
-texture = ExtResource("10_5qnbt")
+offset_left = 1679.0
+offset_top = 932.0
+offset_right = 1730.0
+offset_bottom = 976.0
+texture = ExtResource("11_qn32y")
 expand_mode = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

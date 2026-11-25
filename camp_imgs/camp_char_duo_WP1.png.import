@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://rua5yjoj256n"
-path="res://.godot/imported/camp_char_duo_WP1.png-a38ebde72bf3c7afb6971b2ad4dc7265.ctex"
+path.bptc="res://.godot/imported/camp_char_duo_WP1.png-a38ebde72bf3c7afb6971b2ad4dc7265.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://camp_imgs/camp_char_duo_WP1.png"
-dest_files=["res://.godot/imported/camp_char_duo_WP1.png-a38ebde72bf3c7afb6971b2ad4dc7265.ctex"]
+dest_files=["res://.godot/imported/camp_char_duo_WP1.png-a38ebde72bf3c7afb6971b2ad4dc7265.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

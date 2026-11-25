@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ug68mavdjvov"
-path="res://.godot/imported/camp_char_duo_WP_0002.png-3153585bc55a1bec30ce029f3965635c.ctex"
+path.bptc="res://.godot/imported/camp_char_duo_WP_0002.png-3153585bc55a1bec30ce029f3965635c.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://camp_imgs/duo/PriestessWarrior/camp_char_duo_WP_0002.png"
-dest_files=["res://.godot/imported/camp_char_duo_WP_0002.png-3153585bc55a1bec30ce029f3965635c.ctex"]
+dest_files=["res://.godot/imported/camp_char_duo_WP_0002.png-3153585bc55a1bec30ce029f3965635c.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

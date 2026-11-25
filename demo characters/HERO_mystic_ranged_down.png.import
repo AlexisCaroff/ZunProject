@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ewngnhxbwvp6"
-path="res://.godot/imported/HERO_mystic_ranged_down.png-f254b98008ea485f1731cf19a7325988.ctex"
+path.bptc="res://.godot/imported/HERO_mystic_ranged_down.png-f254b98008ea485f1731cf19a7325988.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://demo characters/HERO_mystic_ranged_down.png"
-dest_files=["res://.godot/imported/HERO_mystic_ranged_down.png-f254b98008ea485f1731cf19a7325988.ctex"]
+dest_files=["res://.godot/imported/HERO_mystic_ranged_down.png-f254b98008ea485f1731cf19a7325988.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

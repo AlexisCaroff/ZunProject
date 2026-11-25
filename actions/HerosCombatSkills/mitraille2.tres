@@ -20,8 +20,7 @@ script = ExtResource("6_fq4on")
 name = "mitaille"
 descriptionName = "mitaille"
 description = "Deals 5 + ATK - DEF magic damage.
-Target: all enemies (one hit roll each)
-Accuracy 100% | Cooldown 4"
+Target: all enemies (one hit roll each) | Range: 3"
 icon = ExtResource("5_e0qpi")
 attack_sound = ExtResource("2_qrpiw")
 barkSkill = ""

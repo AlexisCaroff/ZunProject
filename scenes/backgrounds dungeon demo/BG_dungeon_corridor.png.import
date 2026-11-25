@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://768cfl5yiljq"
-path="res://.godot/imported/BG_dungeon_corridor.png-20b19922b00e9818cdfe7de601066ec3.ctex"
+path.bptc="res://.godot/imported/BG_dungeon_corridor.png-20b19922b00e9818cdfe7de601066ec3.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://scenes/backgrounds dungeon demo/BG_dungeon_corridor.png"
-dest_files=["res://.godot/imported/BG_dungeon_corridor.png-20b19922b00e9818cdfe7de601066ec3.ctex"]
+dest_files=["res://.godot/imported/BG_dungeon_corridor.png-20b19922b00e9818cdfe7de601066ec3.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

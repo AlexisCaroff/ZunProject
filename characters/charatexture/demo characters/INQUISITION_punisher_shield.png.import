@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bgwids84xh2rv"
-path="res://.godot/imported/INQUISITION_punisher_shield.png-e1f0ddaa19d2c20807cd8d7658828101.ctex"
+path.bptc="res://.godot/imported/INQUISITION_punisher_shield.png-e1f0ddaa19d2c20807cd8d7658828101.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/charatexture/demo characters/INQUISITION_punisher_shield.png"
-dest_files=["res://.godot/imported/INQUISITION_punisher_shield.png-e1f0ddaa19d2c20807cd8d7658828101.ctex"]
+dest_files=["res://.godot/imported/INQUISITION_punisher_shield.png-e1f0ddaa19d2c20807cd8d7658828101.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

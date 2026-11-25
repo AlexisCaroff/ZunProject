@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://derpl2e86srxw"
-path="res://.godot/imported/PORTRAIT_boss_broodM.png-4c2f53fc1f784af4a903453e1b0b78aa.ctex"
+path.bptc="res://.godot/imported/PORTRAIT_boss_broodM.png-4c2f53fc1f784af4a903453e1b0b78aa.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/portraits/PORTRAIT_boss_broodM.png"
-dest_files=["res://.godot/imported/PORTRAIT_boss_broodM.png-4c2f53fc1f784af4a903453e1b0b78aa.ctex"]
+dest_files=["res://.godot/imported/PORTRAIT_boss_broodM.png-4c2f53fc1f784af4a903453e1b0b78aa.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

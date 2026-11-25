@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cosc7cywt28ww"
-path="res://.godot/imported/BOSS_broodM_tent_fg.png-9adc8702b944b1a5eebfeb7a30f1dd8d.ctex"
+path.bptc="res://.godot/imported/BOSS_broodM_tent_fg.png-9adc8702b944b1a5eebfeb7a30f1dd8d.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/boss assets/BOSS_broodM_tent_fg.png"
-dest_files=["res://.godot/imported/BOSS_broodM_tent_fg.png-9adc8702b944b1a5eebfeb7a30f1dd8d.ctex"]
+dest_files=["res://.godot/imported/BOSS_broodM_tent_fg.png-9adc8702b944b1a5eebfeb7a30f1dd8d.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

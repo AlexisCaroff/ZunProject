@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cxlrqm8ur6etv"
-path="res://.godot/imported/FX_net_pink002.png-cb13912adda3ad986138e69b9e180d7b.ctex"
+path.bptc="res://.godot/imported/FX_net_pink002.png-cb13912adda3ad986138e69b9e180d7b.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://actions/skillEffects/FX/FX_net_pink002.png"
-dest_files=["res://.godot/imported/FX_net_pink002.png-cb13912adda3ad986138e69b9e180d7b.ctex"]
+dest_files=["res://.godot/imported/FX_net_pink002.png-cb13912adda3ad986138e69b9e180d7b.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -32,8 +32,7 @@ script = ExtResource("6_rvxo8")
 name = "Poison"
 descriptionName = "Horny Poison"
 description = "+10 Lust (minus target WILL), then Lust poison +3 steps (Lust at the start of each of its turns).
-Target: 1 hero (any row)
-Accuracy 100% | Cooldown 2"
+Target: hero | Range: 3"
 icon = ExtResource("5_n6mpd")
 barkSkill = ""
 required_position = 0

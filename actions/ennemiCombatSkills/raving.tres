@@ -17,8 +17,7 @@ script = ExtResource("2_jt8n7")
 name = "Raving"
 descriptionName = "Raving"
 description = "+20 Guilt (minus target WILL).
-Target: all heroes (one hit roll each)
-Accuracy 100% | Cooldown 2"
+Target: all heroes (one hit roll each) | Range: 3"
 icon = ExtResource("3_hcnd1")
 barkSkill = ""
 required_position = 0

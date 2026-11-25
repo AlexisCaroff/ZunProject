@@ -114,14 +114,14 @@ const STYLES_PATH := "res://UI dialog/dialogue_styles.tres"
 @export var bubble_center_x := 945.0
 @export var bubble_bottom := 1020.0
 @export var bubble_min_width := 560.0
-@export var bubble_max_width := 1300.0
+@export var bubble_max_width := 900.0
 @export var bubble_min_height := 130.0
 ## Marges intérieures autour du texte.
 @export var text_padding := Vector2(46, 30)
-## Place réservée à droite du texte pour l'icône « clic ».
-@export var click_room := 52.0
-@export var click_icon_size := 56.0
-## Retrait de l'icône depuis le coin bas-droit (laisse la déco visible).
+## Marge Icône
+@export var click_room := 12.0
+@export var click_icon_size := 26.0
+## Retrait de l'icône depuis le coin bas-droit .
 @export var click_icon_inset := Vector2(46, 12)
 
 @export_group("Queue")
@@ -288,9 +288,13 @@ func _layout_bubble() -> void:
 	dialogue_text.custom_minimum_size = Vector2.ZERO
 	dialogue_text.size = Vector2(4000, 10)
 	var natural_w := dialogue_text.get_content_width()
-	var extra := text_padding.x * 2.0 + click_room
+	var side := text_padding.x + click_room
+	var extra := side * 2.0
 	var text_w := clampf(natural_w + 4.0, bubble_min_width - extra, bubble_max_width - extra)
 	dialogue_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	dialogue_text.size = Vector2(text_w, 10)
+	# Après retour à la ligne, la bulle se resserre sur la ligne la plus longue.
+	text_w = clampf(dialogue_text.get_content_width() + 4.0, bubble_min_width - extra, text_w)
 	dialogue_text.size = Vector2(text_w, 10)
 	var text_h := dialogue_text.get_content_height()
 
@@ -298,7 +302,7 @@ func _layout_bubble() -> void:
 	var box_pos := Vector2(bubble_center_x - box_size.x * 0.5, bubble_bottom - box_size.y)
 	_bubble.position = box_pos
 	_bubble.size = box_size
-	dialogue_text.position = box_pos + Vector2(text_padding.x, (box_size.y - text_h) * 0.5)
+	dialogue_text.position = box_pos + Vector2(side, (box_size.y - text_h) * 0.5)
 	dialogue_text.size = Vector2(text_w, text_h)
 
 	if _click != null:

@@ -18,8 +18,7 @@ script = ExtResource("2_vyqw8")
 name = "Charm"
 descriptionName = "Charm"
 description = "+55 Lust (minus target WILL).
-Target: 1 hero (any row)
-Accuracy 100% | Cooldown 2"
+Target: hero | Range: 3"
 icon = ExtResource("1_lqogb")
 barkSkill = ""
 required_position = 0

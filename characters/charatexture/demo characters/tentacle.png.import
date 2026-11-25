@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://kysl4qntumom"
-path="res://.godot/imported/tentacle.png-d0fc5fadebdea36071b8138bfde00e89.ctex"
+path.bptc="res://.godot/imported/tentacle.png-d0fc5fadebdea36071b8138bfde00e89.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/charatexture/demo characters/tentacle.png"
-dest_files=["res://.godot/imported/tentacle.png-d0fc5fadebdea36071b8138bfde00e89.ctex"]
+dest_files=["res://.godot/imported/tentacle.png-d0fc5fadebdea36071b8138bfde00e89.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

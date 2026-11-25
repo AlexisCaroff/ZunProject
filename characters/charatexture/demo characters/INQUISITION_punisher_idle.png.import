@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://deg5h8trputmj"
-path="res://.godot/imported/INQUISITION_punisher_idle.png-b94ebc61193382aef668894591644bca.ctex"
+path.bptc="res://.godot/imported/INQUISITION_punisher_idle.png-b94ebc61193382aef668894591644bca.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/charatexture/demo characters/INQUISITION_punisher_idle.png"
-dest_files=["res://.godot/imported/INQUISITION_punisher_idle.png-b94ebc61193382aef668894591644bca.ctex"]
+dest_files=["res://.godot/imported/INQUISITION_punisher_idle.png-b94ebc61193382aef668894591644bca.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

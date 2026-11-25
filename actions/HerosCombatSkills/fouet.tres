@@ -20,8 +20,7 @@ script = ExtResource("4_7e8mt")
 name = "Whip"
 descriptionName = "Whip"
 description = "Ally: removes 15 Lust. Enemy: 20 + ATK - DEF physical damage.
-Target: 1 ally, or 1 front-row enemy. 
-Accuracy 100% | Cooldown 4"
+Target: ally or enemy | Range: 1 (on enemies)"
 icon = ExtResource("5_qyifb")
 barkSkill = ""
 required_position = 0

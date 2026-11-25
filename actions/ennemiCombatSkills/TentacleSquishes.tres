@@ -18,8 +18,7 @@ script = ExtResource("5_53mw8")
 name = "Tentacle squishes"
 descriptionName = "Tentacle squishes"
 description = "The seized hero takes 20 + ATK - DEF physical damage and stays trapped.
-Target: the seized hero
-Accuracy 100% | Cooldown 2"
+Target: the seized hero"
 icon = ExtResource("4_786br")
 barkSkill = ""
 required_position = 0

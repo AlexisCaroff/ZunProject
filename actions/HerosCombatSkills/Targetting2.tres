@@ -42,8 +42,8 @@ script = ExtResource("1_skill")
 name = "targeting"
 descriptionName = "Weak Point"
 description = "Marks an enemy for 2 turns: a skill that damages it gets its cooldown reduced by 2. Also DEF debuff -1 step.
-Target: 1 enemy (any row)
-Accuracy 100% | Cooldown 2 | Cost 10"
+Target: enemy | Range: 3
+Cost 10"
 icon = ExtResource("3_icon")
 barkSkill = ""
 required_position = 0

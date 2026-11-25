@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d3cqeaaoy0ub1"
-path="res://.godot/imported/ENEMY_addict_rave.png-521c3fae2a3dd8ff533b68d642d50527.ctex"
+path.bptc="res://.godot/imported/ENEMY_addict_rave.png-521c3fae2a3dd8ff533b68d642d50527.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/charatexture/demo characters/ENEMY_addict_rave.png"
-dest_files=["res://.godot/imported/ENEMY_addict_rave.png-521c3fae2a3dd8ff533b68d642d50527.ctex"]
+dest_files=["res://.godot/imported/ENEMY_addict_rave.png-521c3fae2a3dd8ff533b68d642d50527.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -17,8 +17,7 @@ script = ExtResource("2_skill")
 name = "Slime Swallow"
 descriptionName = "Slime Swallow"
 description = "Swallows the hero: it cannot act until the slime dies.
-Target: 1 front-row hero (melee: from the front row only)
-Accuracy 100% | Cooldown 4"
+Target: hero | Range: 1"
 icon = ExtResource("6_icon")
 barkSkill = ""
 required_position = 1

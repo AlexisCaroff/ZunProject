@@ -31,8 +31,7 @@ script = ExtResource("7_chsun")
 name = "Salt"
 descriptionName = "Salt"
 description = "Deals 5 + ATK - DEF physical damage and ATK debuff -2 steps.
-Target: all heroes (one hit roll each)
-Accuracy 100% | Cooldown 2"
+Target: all heroes (one hit roll each) | Range: 3"
 icon = ExtResource("6_psnns")
 barkSkill = ""
 required_position = 0

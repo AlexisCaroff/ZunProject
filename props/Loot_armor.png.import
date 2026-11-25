@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://lls03omooujv"
-path="res://.godot/imported/Loot_armor.png-aeedadb6ae275aef998bb6422b7c8695.ctex"
+path.bptc="res://.godot/imported/Loot_armor.png-aeedadb6ae275aef998bb6422b7c8695.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://props/Loot_armor.png"
-dest_files=["res://.godot/imported/Loot_armor.png-aeedadb6ae275aef998bb6422b7c8695.ctex"]
+dest_files=["res://.godot/imported/Loot_armor.png-aeedadb6ae275aef998bb6422b7c8695.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmqb6esnqr2uv"
-path="res://.godot/imported/FX_priestess_heal_over.png-92b9d0fde9e4a9fd81d1bf6085156a11.ctex"
+path.bptc="res://.godot/imported/FX_priestess_heal_over.png-92b9d0fde9e4a9fd81d1bf6085156a11.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://actions/skillEffects/FX/FX_priestess_heal_over.png"
-dest_files=["res://.godot/imported/FX_priestess_heal_over.png-92b9d0fde9e4a9fd81d1bf6085156a11.ctex"]
+dest_files=["res://.godot/imported/FX_priestess_heal_over.png-92b9d0fde9e4a9fd81d1bf6085156a11.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

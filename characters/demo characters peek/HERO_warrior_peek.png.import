@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dlt7q57qwfk2"
-path="res://.godot/imported/HERO_warrior_peek.png-90c4d82878106f6dccaa73ac22f7fc9a.ctex"
+path.bptc="res://.godot/imported/HERO_warrior_peek.png-90c4d82878106f6dccaa73ac22f7fc9a.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/demo characters peek/HERO_warrior_peek.png"
-dest_files=["res://.godot/imported/HERO_warrior_peek.png-90c4d82878106f6dccaa73ac22f7fc9a.ctex"]
+dest_files=["res://.godot/imported/HERO_warrior_peek.png-90c4d82878106f6dccaa73ac22f7fc9a.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

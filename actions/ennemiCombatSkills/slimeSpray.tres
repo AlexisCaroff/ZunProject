@@ -31,8 +31,7 @@ script = ExtResource("2_skill")
 name = "Slime Spray"
 descriptionName = "Slime Spray"
 description = "+10 Lust (minus target WILL), then Lust poison +1 step (Lust at the start of each of its turns).
-Target: all heroes (one hit roll each) | From: back row
-Accuracy 100% | Cooldown 3"
+Target: all heroes (one hit roll each) | Range: 3 | From: back row"
 icon = ExtResource("6_icon")
 barkSkill = ""
 required_position = 2

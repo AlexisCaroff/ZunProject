@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://53ph3h8bppij"
-path="res://.godot/imported/UI_bg_band.png-1e92763edf86a2f40acd6b91df4d1758.ctex"
+path.bptc="res://.godot/imported/UI_bg_band.png-1e92763edf86a2f40acd6b91df4d1758.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://UI/UI dashboard/UI_bg_band.png"
-dest_files=["res://.godot/imported/UI_bg_band.png-1e92763edf86a2f40acd6b91df4d1758.ctex"]
+dest_files=["res://.godot/imported/UI_bg_band.png-1e92763edf86a2f40acd6b91df4d1758.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

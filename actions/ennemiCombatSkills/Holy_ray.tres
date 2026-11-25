@@ -19,7 +19,7 @@ name = "Holy ray"
 descriptionName = "Holy ray"
 description = "Restores 20 stamina.
 Target: all allies, itself included
-Never misses | Cooldown 2"
+Never misses"
 icon = ExtResource("4_kre7d")
 barkSkill = ""
 required_position = 0

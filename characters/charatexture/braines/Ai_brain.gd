@@ -128,6 +128,10 @@ func choose_target(owner: Character, skill: Skill) -> Dictionary:
 		# Le 5e slot ennemi est le slot « capturé » du boss (grab) : jamais une
 		# destination de déplacement.
 		var move_pool: Array = ennemisPositions.slice(0, 4)
+		# Tout est en recharge mais il est déjà dans la bonne rangée : il passe
+		# plutôt que de partir là où il ne pourrait plus attaquer ensuite.
+		if not _useful_in_other_row(owner):
+			return {}
 		var move_target_slots: Array = []
 		# Cherche la première skill d'attaque pour connaître la position requise
 		var attack_skill: Skill = null
@@ -221,3 +225,20 @@ func _filter_by_range(skill: Skill, slots: Array, owner: Character) -> Array:
 			2: return caster_is_front or target_is_front
 		return true
 	)
+
+
+## Une capacité de `owner` exige-t-elle l'autre rangée, ou s'utilise-t-elle
+## de partout ? (portée 1 contre les héros = première ligne, cf. Skill.can_use)
+func _useful_in_other_row(owner: Character) -> bool:
+	var in_front: bool = owner._current_slot.position_data.isFront
+	for s in owner.skills:
+		if s.name == "move":
+			continue
+		var melee: bool = s.range == 1 and s.the_target_type in [
+			Skill.target_type.ENNEMY, Skill.target_type.ALL_ENNEMY,
+			Skill.target_type.FRONT_ENNEMY, Skill.target_type.BACK_ENNEMY]
+		var front_only: bool = melee or s.required_position == Skill.position_requirement.FRONT
+		var back_only: bool = s.required_position == Skill.position_requirement.BACK
+		if front_only and not in_front or back_only and in_front or not (front_only or back_only):
+			return true
+	return false

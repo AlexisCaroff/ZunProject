@@ -18,8 +18,8 @@ script = ExtResource("2_bcdhv")
 name = "Vitality"
 descriptionName = "Vitality"
 description = "Restores 20 stamina (+2 on a Maso).
-Target: 1 ally, you included
-Never misses | Cooldown 2"
+Target: ally, you included
+Never misses"
 icon = ExtResource("5_f0lrn")
 barkSkill = ""
 required_position = 0

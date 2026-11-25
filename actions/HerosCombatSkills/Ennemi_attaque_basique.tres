@@ -17,8 +17,7 @@ script = ExtResource("2_paqs2")
 name = "Attaque basique"
 descriptionName = "Attaque"
 description = "Deals 20 + ATK - DEF physical damage.
-Target: 1 enemy (any row)
-Accuracy 100% | Cooldown 2"
+Target: enemy | Range: 3"
 icon = ExtResource("4_f3ma5")
 barkSkill = ""
 required_position = 0

@@ -50,8 +50,7 @@ script = ExtResource("2_kcvw8")
 name = "Stickynet"
 descriptionName = "Stickynet"
 description = "Stuns (the hero skips its next turn), DEF debuff -2 steps and ATK debuff -1 step.
-Target: 1 hero (any row) | From: back row
-Accuracy 100% | Cooldown 2"
+Target: hero | Range: 3 | From: back row"
 icon = ExtResource("4_j4j7o")
 barkSkill = ""
 required_position = 2

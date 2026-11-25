@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2mgmchi27co1"
-path="res://.godot/imported/camp_char_solo_W_climax_0002.png-4828f8bc352877f8fc223c40a359ba92.ctex"
+path.bptc="res://.godot/imported/camp_char_solo_W_climax_0002.png-4828f8bc352877f8fc223c40a359ba92.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://camp_imgs/solo/Warrior/camp_char_solo_W_climax_0002.png"
-dest_files=["res://.godot/imported/camp_char_solo_W_climax_0002.png-4828f8bc352877f8fc223c40a359ba92.ctex"]
+dest_files=["res://.godot/imported/camp_char_solo_W_climax_0002.png-4828f8bc352877f8fc223c40a359ba92.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

@@ -32,8 +32,8 @@ script = ExtResource("5_hlfvf")
 name = "Sermon"
 descriptionName = "Sermon"
 description = "+20 Guilt (minus target WILL). Heroes then above 50% Guilt also take 20 + ATK - DEF physical damage.
-Target: all heroes
-Never misses | Cooldown 2"
+Target: all heroes | Range: 3
+Never misses"
 icon = ExtResource("4_3bird")
 barkSkill = ""
 required_position = 0

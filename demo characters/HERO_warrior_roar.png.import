@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://671t08whsq1e"
-path="res://.godot/imported/HERO_warrior_roar.png-505f16e6f0cd4aefb4ba1f11d93ad9f2.ctex"
+path.bptc="res://.godot/imported/HERO_warrior_roar.png-505f16e6f0cd4aefb4ba1f11d93ad9f2.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://demo characters/HERO_warrior_roar.png"
-dest_files=["res://.godot/imported/HERO_warrior_roar.png-505f16e6f0cd4aefb4ba1f11d93ad9f2.ctex"]
+dest_files=["res://.godot/imported/HERO_warrior_roar.png-505f16e6f0cd4aefb4ba1f11d93ad9f2.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

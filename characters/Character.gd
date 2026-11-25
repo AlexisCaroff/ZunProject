@@ -393,7 +393,8 @@ func can_act() -> bool:
 
 func reduce_cooldowns() -> void:
 	for skill in skills:
-		if skill.current_cooldown > 0:
+		# Le tour où la capacité a servi ne compte pas dans sa recharge.
+		if skill.current_cooldown > 0 and skill.used_turn != turncount:
 			skill.current_cooldown -= 1
 
 
@@ -485,6 +486,9 @@ func play_ai_turn(heroes: Array, enemies: Array):
 	# ── 2. Effets après ──────────────────────────────────────
 	for thetarget in targetPositions:
 		targetPositions[0] = await current_skill.use(thetarget)
+
+	# Recharge comme pour les héros (le coût en stamina reste réservé à eux).
+	current_skill.start_cooldown()
 
 	await combat_manager.flush_startSkills_affinity_reaction()
 

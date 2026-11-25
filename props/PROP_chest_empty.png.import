@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cqxak60gjmu3f"
-path="res://.godot/imported/PROP_chest_empty.png-4a047e8057944210d5f576fd3bd4b71c.ctex"
+path.bptc="res://.godot/imported/PROP_chest_empty.png-4a047e8057944210d5f576fd3bd4b71c.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://props/PROP_chest_empty.png"
-dest_files=["res://.godot/imported/PROP_chest_empty.png-4a047e8057944210d5f576fd3bd4b71c.ctex"]
+dest_files=["res://.godot/imported/PROP_chest_empty.png-4a047e8057944210d5f576fd3bd4b71c.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

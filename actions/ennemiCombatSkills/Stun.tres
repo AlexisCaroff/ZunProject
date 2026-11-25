@@ -36,8 +36,7 @@ script = ExtResource("8_e11jp")
 name = "Stun"
 descriptionName = "Stun"
 description = "Deals 5 + ATK - DEF physical damage and stuns: the hero skips its next turn.
-Target: 1 hero (any row)
-Accuracy 100% | Cooldown 2"
+Target: hero | Range: 3"
 icon = ExtResource("7_6x7cv")
 barkSkill = ""
 required_position = 0

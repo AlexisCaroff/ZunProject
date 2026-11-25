@@ -40,8 +40,7 @@ script = ExtResource("8_u6rdn")
 name = "Shield"
 descriptionName = "Shield"
 description = "Taunts 1 hero for 1 turn: it must attack the Punisher. Then on itself: DEF buff +2 steps.
-Target: 1 hero (any row), then itself
-Accuracy 100% | Cooldown 2"
+Target: hero, then itself | Range: 3"
 icon = ExtResource("7_7i31r")
 barkSkill = ""
 required_position = 0

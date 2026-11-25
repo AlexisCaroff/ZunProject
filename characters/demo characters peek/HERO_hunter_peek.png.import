@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://burkm7br8hoys"
-path="res://.godot/imported/HERO_hunter_peek.png-b80447dcd863550cd3d91b2c6b9647f7.ctex"
+path.bptc="res://.godot/imported/HERO_hunter_peek.png-b80447dcd863550cd3d91b2c6b9647f7.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/demo characters peek/HERO_hunter_peek.png"
-dest_files=["res://.godot/imported/HERO_hunter_peek.png-b80447dcd863550cd3d91b2c6b9647f7.ctex"]
+dest_files=["res://.godot/imported/HERO_hunter_peek.png-b80447dcd863550cd3d91b2c6b9647f7.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

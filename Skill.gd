@@ -74,6 +74,8 @@ var target2 : Array[PositionSlot]
 @export var tags: Array[String] = []
 var combatManager : CombatManager
 var reducecost : int=0
+## Tour du lanceur (Character.turncount) où la capacité a servi.
+var used_turn : int = -1
 var skill_effect_overridden := false
 @export var is_contact: bool = false
 @export var distance_contact:float = 0.0
@@ -209,10 +211,29 @@ func _redirect_to_protector(target: PositionSlot) -> PositionSlot:
 
 func pay_cost():
 	owner.characterData.current_stamina-= cost
-	if cooldown > 0:
-		current_cooldown = max(cooldown-reducecost,0)
-		reducecost =0
+	start_cooldown()
 	owner.update_ui()
+
+
+## Lance la recharge : « cooldown N » = N tours pleins du lanceur sans la
+## capacité. Le tour d'utilisation ne compte pas (cf. used_turn, lu par
+## Character.reduce_cooldowns).
+func start_cooldown() -> void:
+	if cooldown <= 0:
+		return
+	current_cooldown = max(cooldown - reducecost, 0)
+	reducecost = 0
+	used_turn = owner.turncount
+	# Change Mask vient de remplacer les capacités du lanceur (dont celle-ci) :
+	# la recharge passe à sa version dans le nouveau jeu.
+	if not owner.skills.has(self):
+		for s in owner.skills:
+			for e in s.effects + s.second_effects:
+				if e is ChangeSkill:
+					s.current_cooldown = current_cooldown
+					s.used_turn = used_turn
+					break
+
 
 func _apply_effect(target: PositionSlot, effects_array: Array[Resource] = effects) -> PositionSlot:
 	var heallovedOnesTrigger: bool = false

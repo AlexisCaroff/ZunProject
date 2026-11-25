@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bcwub0gbogsfq"
-path="res://.godot/imported/ENEMY_slimepile_idle.png-80693736e15fce062462783487406265.ctex"
+path.bptc="res://.godot/imported/ENEMY_slimepile_idle.png-80693736e15fce062462783487406265.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/charatexture/demo characters/ENEMY_slimepile_idle.png"
-dest_files=["res://.godot/imported/ENEMY_slimepile_idle.png-80693736e15fce062462783487406265.ctex"]
+dest_files=["res://.godot/imported/ENEMY_slimepile_idle.png-80693736e15fce062462783487406265.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

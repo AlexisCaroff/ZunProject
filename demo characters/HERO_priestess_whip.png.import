@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c88pm0dgw73og"
-path="res://.godot/imported/HERO_priestess_whip.png-33ed70ada8e7c46a5f73bf6a81aa0b31.ctex"
+path.bptc="res://.godot/imported/HERO_priestess_whip.png-33ed70ada8e7c46a5f73bf6a81aa0b31.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://demo characters/HERO_priestess_whip.png"
-dest_files=["res://.godot/imported/HERO_priestess_whip.png-33ed70ada8e7c46a5f73bf6a81aa0b31.ctex"]
+dest_files=["res://.godot/imported/HERO_priestess_whip.png-33ed70ada8e7c46a5f73bf6a81aa0b31.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

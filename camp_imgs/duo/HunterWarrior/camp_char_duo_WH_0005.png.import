@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://pgkpn107colj"
-path="res://.godot/imported/camp_char_duo_WH_0005.png-19b16ad723cb575e7305a69455997bf0.ctex"
+path.bptc="res://.godot/imported/camp_char_duo_WH_0005.png-19b16ad723cb575e7305a69455997bf0.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://camp_imgs/duo/HunterWarrior/camp_char_duo_WH_0005.png"
-dest_files=["res://.godot/imported/camp_char_duo_WH_0005.png-19b16ad723cb575e7305a69455997bf0.ctex"]
+dest_files=["res://.godot/imported/camp_char_duo_WH_0005.png-19b16ad723cb575e7305a69455997bf0.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

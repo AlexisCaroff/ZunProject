@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://pr22bo0pqixy"
-path="res://.godot/imported/DOOR_caught_addict.png-c58de9c47b4d91e035a89bc92f8ed1d2.ctex"
+path.bptc="res://.godot/imported/DOOR_caught_addict.png-c58de9c47b4d91e035a89bc92f8ed1d2.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://UI/doorebuscade/DOOR_caught_addict.png"
-dest_files=["res://.godot/imported/DOOR_caught_addict.png-c58de9c47b4d91e035a89bc92f8ed1d2.ctex"]
+dest_files=["res://.godot/imported/DOOR_caught_addict.png-c58de9c47b4d91e035a89bc92f8ed1d2.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

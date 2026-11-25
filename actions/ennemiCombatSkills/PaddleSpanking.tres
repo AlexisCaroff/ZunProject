@@ -26,8 +26,7 @@ script = ExtResource("6_ytx18")
 name = "Paddle Spank"
 descriptionName = "Paddle Spank"
 description = "Deals 20 + ATK - DEF physical damage and +15 Guilt (minus target WILL).
-Target: 1 front-row hero
-Accuracy 100% | Cooldown 2"
+Target: hero | Range: 1 | From: any row"
 icon = ExtResource("5_3cms5")
 barkSkill = ""
 required_position = 0

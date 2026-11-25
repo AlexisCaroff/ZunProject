@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqiwmaugg2jig"
-path="res://.godot/imported/FX_stab.png-9b5a8c365c81b8e904efd71c01075e8c.ctex"
+path.bptc="res://.godot/imported/FX_stab.png-9b5a8c365c81b8e904efd71c01075e8c.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://actions/skillEffects/FX/FX_stab.png"
-dest_files=["res://.godot/imported/FX_stab.png-9b5a8c365c81b8e904efd71c01075e8c.ctex"]
+dest_files=["res://.godot/imported/FX_stab.png-9b5a8c365c81b8e904efd71c01075e8c.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

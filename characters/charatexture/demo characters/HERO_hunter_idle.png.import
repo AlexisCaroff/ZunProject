@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ysjg7rf1ovm5"
-path="res://.godot/imported/HERO_hunter_idle.png-a5e821ac058430aa9d0c22947fd6592f.ctex"
+path.bptc="res://.godot/imported/HERO_hunter_idle.png-a5e821ac058430aa9d0c22947fd6592f.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/charatexture/demo characters/HERO_hunter_idle.png"
-dest_files=["res://.godot/imported/HERO_hunter_idle.png-a5e821ac058430aa9d0c22947fd6592f.ctex"]
+dest_files=["res://.godot/imported/HERO_hunter_idle.png-a5e821ac058430aa9d0c22947fd6592f.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

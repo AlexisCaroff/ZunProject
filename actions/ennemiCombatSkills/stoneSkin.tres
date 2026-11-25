@@ -22,7 +22,7 @@ name = "Stone Skin"
 descriptionName = "Stone Skin"
 description = "DEF buff +2 steps.
 Target: itself
-Never misses | Cooldown 4"
+Never misses"
 icon = ExtResource("5_icon")
 barkSkill = ""
 required_position = 0
